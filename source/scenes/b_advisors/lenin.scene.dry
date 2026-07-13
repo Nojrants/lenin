@@ -1,6 +1,6 @@
 title: Vladimir Lenin
 is-pinned-card: true
-tags: advisor, cabinet
+tags: advisor, sovnarkom
 card-image: img/portraits/b/lenin.jpg
 view-if: lenin_advisor = 1 and player_party = "b"
 new-page: true 
