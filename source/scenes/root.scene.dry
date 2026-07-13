@@ -817,7 +817,7 @@ Q.timers = [//m_party
             'b_enemies', 'b_fundraising', 'b_ideology',
             'b_inter_party_relationships', 'b_media',
             'b_organizing', 'b_party_unity', 'b_shuffle_leadership',
-            'b_reunify', 'b_workers_militias',
+            'b_reunify', 'b_workers_militias', 'party_congress',
             //k_party
             'k_enemies', 'k_fundraising', 'k_ideology',
             'k_inter_party_relationships', 'k_media',
