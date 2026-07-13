@@ -40,10 +40,7 @@ Q.party_name_map = {"m": "Menshevik",
         "sr": "SR",
         "k": "Kadet"};
 
-Q.m_is_player = 0;
-Q.sr_is_player = 0;
 Q.b_is_player = 1;
-Q.k_is_player = 0;
 
 Q.player_in_exco = 1;
 Q.player_in_gov = 1;
@@ -61,15 +58,9 @@ Q.player3_party = "";
 Q.player4_party = "";
 
 // party resources
-Q.b_resources = 2;
-Q.m_resources = 2;
-Q.k_resources = 3;
-Q.sr_resources = 2;
+Q.b_resources = 10;
 // party dues
 Q.b_dues = 2;
-Q.m_dues = 2;
-Q.k_dues = 3;
-Q.sr_dues = 2;
 
 // difficulty-affected modifiers
 // dissent thresholds for party split
@@ -91,27 +82,26 @@ Q.ipr_change = 6;
 // overall dissent reduces every increase in party support.
 Q.b_dissent = 0.05;
 Q.b_dissent_percent = 5;
-Q.m_dissent = 0.1;
-Q.m_dissent_percent = 10;
-Q.kadet_dissent = 0.05;
-Q.kadet_dissent_percent = 5;
-Q.sr_dissent = 0.15;
-Q.sr_dissent_percent = 15;
 
 // factions
 // bolshevik internals
 // leadership: 1 = moderate internationalists, 2 = leninists
-Q.b_leadership = 1;
-Q.b_factions = ['leninist', 'center', 'moderate'];
-Q.leninist_strength = 20;
-Q.leninist_dissent = 10;
-Q.center_strength = 60;
-Q.center_dissent = 0;
+Q.b_leadership = 2;
+Q.b_factions = ['leninite', 'moderate', 'leftcom'];
+
+Q.leninite_strength = 20;
+Q.leninite_dissent = 10;
+Q.leninite_split = 0;
+
 Q.moderate_strength = 20;
 Q.moderate_dissent = 10;
 Q.moderate_split = 0;
-Q.leninist_split = 0;
-// moderates can't split unless Menshevik-Internationalists are leading, but Leninists can split to become the Communist Party.
+
+Q.leftcom_strength = 20;
+Q.leftcom_dissent = 10;
+Q.leftcom_split = 0;
+
+
 Q.b_war_policy = 2;
 Q.b_industrial_policy = 1;
 Q.b_prov_gov_policy = 3;
@@ -121,82 +111,6 @@ Q.b_nationality_policy = 2;
 // organizations among the workers and soldiers...
 Q.b_workers_org = 1;
 Q.b_soldiers_org = 1;
-
-// menshevik internals
-Q.m_factions = ['social_patriot', 'defensist', 'internationalist'];
-// unity is the group led by Plekhanov, the "social patriots"
-// leadership for all soviet parties can be either internationalist or defensist.
-// defensist = 0, internationalist = 1
-Q.m_leadership = 0;
-// taking a nonaligned position...
-Q.m_independent = 0;
-Q.social_patriot_strength = 20;
-Q.social_patriot_dissent = 30;
-Q.defensist_strength = 80;
-Q.defensist_dissent = 10;
-Q.internationalist_strength = 30;
-Q.internationalist_dissent = 35;
-Q.defensist_split = 0;
-Q.internationalist_split = 0;
-// -1 = expansionist, 0 = social patriot, 1 = revolutionary defensist, 2 = internationalist, 3 = revolutionary defeatist
-// less is more pro-war
-Q.m_war_policy = 1;
-// rural policy is actually two different things: how farming should be done (communal, private, collective, state-owned) and what should be done with large estates/state property (no change, voluntary sale, compensated seizures, uncompensated seizures)
-// agricultural policy: -1 = Stolypin privatization, 0 = voluntary privatization, 1 = communal farming, 2 = state farming, 3 = collective farming
-// land policy: -2 = no policy, -1 = no change, 0 = voluntary sales, 1 = compensated seizures, 2 = uncompensated seizures
-Q.m_land_policy = -2;
-Q.m_agricultural_policy = -2;
-// nationality policies:
-// 0 = russian unity, 1 = national personal autonomy, 2 = federalism, 3 = self-determination
-Q.m_nationality_policy = 1;
-// -1 = laissez-faire, 0 = trade unions, 1 = worker supervision, 2 = syndicalism, 3 = state ownership
-// more is more left-wing
-Q.m_industrial_policy = 0;
-// -1 = liberal coalition, 0 = democratic coalition, 1 = external support, 2 = opposition, 3 = socialist coalition, 4 = armed overthrow
-Q.m_prov_gov_policy = 1;
-Q.m_workers_org = 1;
-Q.m_soldiers_org = 0;
-
-// sr internals
-// sr leadership is defensist
-Q.sr_leadership = 0;
-// taking a nonaligned position...
-Q.sr_independent = 0;
-Q.sr_factions = ['left_sr', 'center_sr', 'right_sr'];
-Q.left_sr_strength = 20;
-Q.left_sr_dissent = 40;
-Q.center_sr_strength = 30;
-Q.center_sr_dissent = 20;
-Q.right_sr_strength = 50;
-Q.right_sr_dissent = 10;
-Q.left_sr_split = 0;
-Q.right_sr_split = 0;
-// policies
-Q.sr_war_policy = 1;
-Q.sr_land_policy = 2;
-Q.sr_agricultural_policy = 1;
-Q.sr_nationality_policy = 2;
-Q.sr_prov_gov_policy = 1;
-Q.sr_industrial_policy = 0;
-Q.sr_workers_org = 0;
-Q.sr_soldiers_org = 1;
-Q.sr_rural_org = 1;
-
-// kadet internals
-// 0 = National liberal, 1 = Left-liberal
-Q.k_leadership = 0;
-Q.k_factions = ['left_kadet', 'right_kadet'];
-Q.left_kadet_strength = 50;
-Q.left_kadet_dissent = 10;
-Q.right_kadet_strength = 50;
-Q.right_kadet_dissent = 10;
-// 3 = expansionist/annexationist
-Q.k_war_policy = -1;
-Q.k_industrial_policy = -1;
-Q.k_prov_gov_policy = -1;
-Q.k_land_policy = 0;
-Q.k_agricultural_policy = 0;
-Q.k_nationality_policy = 0;
 
 
 // inter-party relations
@@ -390,10 +304,10 @@ if (Q.soldier_hunger < 0) {
 ////////////////////// Provisional government
 // party names are shortened in these variables solely for convenience (bc they show up everywhere)
 // governments don't necessarily have to be the provisional government
-Q.k_in_gov = 1;
+Q.k_in_gov = 0;
 Q.m_in_gov = 0;
 Q.sr_in_gov = 0;
-Q.b_in_gov = 0;
+Q.b_in_gov = 1;
 // splinter parties - Left-SR and Right-SR
 Q.left_sr_in_gov = 0;
 Q.right_sr_in_gov = 0;
@@ -410,10 +324,10 @@ Q.in_socialist_coalition = 0;
 
 Q.prime_minister = "Lenin";
 Q.prime_minister_party = "Bolshevik"
-Q.agriculture_minister = "Shingarev";
-Q.agriculture_minister_party = "Kadet";
+Q.agriculture_minister = "Milyutin";
+Q.agriculture_minister_party = "Bolshevik";
 Q.justice_minister = "Kerensky";
-Q.justice_minister_party = "Trudovik";
+Q.justice_minister_party = "Bolshevik";
 Q.interior_minister = "Lvov";
 Q.interior_minister_party = "Independent";
 Q.finance_minister = "Tereshchenko";
