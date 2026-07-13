@@ -408,8 +408,8 @@ Q.democrats_in_gov = 0;
 // are we currently in an all-socialist coalition?
 Q.in_socialist_coalition = 0;
 
-Q.prime_minister = "Lvov";
-Q.prime_minister_party = "Independent"
+Q.prime_minister = "Lenin";
+Q.prime_minister_party = "Bolshevik"
 Q.agriculture_minister = "Shingarev";
 Q.agriculture_minister_party = "Kadet";
 Q.justice_minister = "Kerensky";
