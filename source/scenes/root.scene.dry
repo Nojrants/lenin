@@ -853,6 +853,7 @@ Q.timers = [//m_party
             'mass_demobilization',
             ];
 Q.advisor_action_timer = 0;
+Q.party_congress_timer = 0;
 
 Q.prov_gov_policies_timer = 3;
 Q.food_shortages_timer = 2;
