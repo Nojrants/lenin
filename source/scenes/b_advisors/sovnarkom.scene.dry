@@ -11,3 +11,7 @@ Council of People's Commissars
   
 - #cabinet
 - @back: Return to main
+
+@back
+on-arrival: last_cabinet_action = 0
+go-to: root
