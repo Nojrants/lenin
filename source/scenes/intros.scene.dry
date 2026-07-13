@@ -4,74 +4,36 @@ go-to: intro_menu
 face-image: img/womens_day.jpg
 audio: shuffle music/WorkersMarseillaise.ogg music/TchaikovskyQuartet.mp3 music/AyUchniem.mp3 music/SwetitMiesiatz.mp3 music/EchTyDolia.mp3 music/LongingforOurCountry.mp3 music/OdessaMama.mp3 music/VolgaBoatmen.ogg music/LomirSichIberbeiten.mp3 music/Internationale.ogg music/WorkersMarseillaise.ogg music/Kalinka.mp3 music/DearFriends.mp3 music/Dubinushka.mp3
 
-= The Revolution of February 1917
+= October Revolution
 
-On International Women's Day, 1917, mass marches of hungry women filled the streets of Petrograd, the capital city of the Russian Empire. They demanded bread and peace, and the end of the Tsarist autocracy. Workers joined the protests, and the marches grew to a general strike shutting the entire city. Soldiers were ordered to suppress the marches with force; they refused, turning against their officers instead.
-
-Now, the hated Tsar Nicholas II has abdicated, and a new Provisional Government has been formed among Duma representatives. Meanwhile, the striking workers and mutinous soldiers of Petrograd have organized the Soviet, a committee of socialist workers' representatives that is somewhere between a coordinating body and a government.
-
-It seems that for now, anything is possible. The established order is gone. A new world is ready to be built.
+Event Text
 
 @intro_menu
 
-- @abdication_of_the_tsar
-- @petrograd_soviet
-- @provisional_government
-- @order_number_1
-- @war_conduct
-- @what_now
+- @all_power_to_the_soviets
 
 
-@abdication_of_the_tsar
-title: The Abdication of the Tsar
+@all_power_to_the_soviets
+title: All Power to the Soviets
 view-if: abdi_seen < n_players
-go-to: intro_menu
+go-to: 2nd_soviet
 on-arrival: abdi_seen += 1
 
-= The Abdication of the Tsar
+= All Power to the Soviets
 
-The Tsar has been convinced that his abdication is the only way to save Russia from civil war, and thus has abdicated in favor of his brother, Grand Duke Michael. However, Grand Duke Michael also sees the position as tsar to be untenable, and thus has refused to take the crown
+Event Text
 
-Now, the reign of the Tsar is over, and power is vested in the Provisional Government.
+@2nd_soviet
+go-to: 2nd_soviet_menu
 
-@petrograd_soviet
-title: The Petrograd Soviet
-view-if: ps_seen < n_players
-go-to: intro_menu
-on-arrival: ps_seen += 1
+Event Text 
 
-= The Petrograd Soviet
+@2nd_soviet_menu
 
-The Petrograd Soviet of Workers' and Soldiers' Deputies is an elected council comprised of representatives of workers and soldiers throughout the city. Organized in the wake of the general strike and the breakdown of the established order, it harkens back to the Petrograd Soviet of 1905, which functioned as an alternative government in the city during the revolution.
-
-The leaders of the Soviet, mostly Social Democrat and SR intellectuals, have organized an Executive Committee, and elected the Menshevik Nikolai Chkheidze as the chairman. They see its goal as ending the general strike and advocating for the workers and soldiers, acting as a watchdog over the bourgeois Provisional Government. They command the workers and soldiers to go back to work, and to obey the Provisional Government insofar as it does not disobey the directives of the Soviet.
-
-
-@order_number_1
-title: Restoring Order to the Army
-view-if: o1_seen < n_players
-go-to: o1_soviet if player_party = "sr" or player_party = "m"; o1_b if player_party = "b"; o1_k if player_party = "k"
-on-arrival: o1_seen = 1
-
-= Restoring Order to the Army
-
-The army is in revolt. Soldiers in Petrograd have largely shaken off their officers and commanders, and are currently answering to no higher authority except ad-hoc committees of soldiers. The unrest is spreading in the army, and might soon reach the front.
-
-@o1_soviet
-go-to: o1_soviet_menu
-
-# Source for Order Number 1: the full text is at https://www.marxists.org/history/ussr/government/1917/03/01.htm
-
-To restore order to the army, the Petrograd Soviet is considering issuing an order to the soldiers of the city garrison, promising certain concessions in exchange for obeying their officers and the Provisional Government.
-
-Which points should be included in the order?
-
-@o1_soviet_menu
-
-- @o1_committees: There will be elected soldiers' committees, which will control the distribution of weapons.
-- @o1_address: Soldiers can no longer be verbally abused by the officers, and they must be addressed by respectful terms.
-- @o1_rights: Soldiers will have the same rights as ordinary citizens when off-duty, including the right to participate in elections.
-- @o1_issue: This should be enough; issue the order!
+- @2nd_soviet_bolshevik: Bolshevik government.
+- @2nd_soviet_homogenous: All-socialist government. 
+- @o1_rights: 
+- @o1_issue:
 
 
 @o1_committees
