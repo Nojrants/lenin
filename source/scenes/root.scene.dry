@@ -2,8 +2,6 @@ title: Root Scene
 new-page: true
 go-to: post_event if started = 1; start_menu if started = 0
 
-# TODO: do that thing that we did before...
-
 @start_menu
 new-page: true
 go-to: start_menu_2
@@ -25,7 +23,7 @@ Q.started = 1;
 // time elapsed (in months)
 Q.time = 1;
 Q.year = 1917;
-Q.month = 3;
+Q.month = 11;
 Q.week = 1;
 // how many actions have been taken this week?
 Q.week_actions = 0;
@@ -35,8 +33,8 @@ Q.month_actions = 0;
 // 0 = normal difficulty, 1 = hard mode, 2 = hard mode no saves
 Q.difficulty = 0;
 Q.historical_mode = 0;
-Q.player_party_name = "Menshevik";
-Q.player_party = "m";
+Q.player_party_name = "Bolsheviks";
+Q.player_party = "b";
 Q.party_name_map = {"m": "Menshevik",
         "b": "Bolshevik",
         "sr": "SR",
@@ -44,7 +42,7 @@ Q.party_name_map = {"m": "Menshevik",
 
 Q.m_is_player = 1;
 Q.sr_is_player = 0;
-Q.b_is_player = 0;
+Q.b_is_player = 1;
 Q.k_is_player = 0;
 
 Q.player_in_exco = 1;
@@ -85,7 +83,7 @@ Q.sr_support_change = 6;
 Q.m_discipline_change = 5;
 Q.sr_discipline_change = 5;
 // maximum numbers of advisors
-Q.max_advisors = 4;
+Q.max_advisors = 6;
 // inter-party relations changes
 Q.ipr_change = 6;
 
