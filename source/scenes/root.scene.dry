@@ -1063,7 +1063,7 @@ Select a party:
 
 @hard_mode
 title: Single Player (Hard)
-on-arrival: difficulty = 1; m_resources = 2; sr_resources = 2; k_resources = 2; b_resources = 0; b_dues = 0; m_split_threshold = 50; sr_split_threshold = 50; m_support_change = 5; sr_support_change = 5; m_discipline_change = 4; sr_discipline_change = 4; max_advisors = 3; ipr_change = 5; unrest_modifier = 0.7
+on-arrival: difficulty = 1; m_resources = 2; sr_resources = 2; k_resources = 2; b_resources = 0; b_dues = 0; m_split_threshold = 50; sr_split_threshold = 50; m_support_change = 5; sr_support_change = 5; m_discipline_change = 4; sr_discipline_change = 4; max_advisors = 6; ipr_change = 5; unrest_modifier = 0.7
 go-to: party_selection
 
 Select a party:
