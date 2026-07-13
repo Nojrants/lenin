@@ -1049,7 +1049,7 @@ Difficulty affects starting resources and inter-party relations, as well as how 
 
 @easy_mode
 title: Single Player (Easy)
-on-arrival: difficulty = -1; m_resources = 4; sr_resources = 4; k_resources = 5; b_resources = 4; m_dues = 3; sr_dues = 3; b_dues = 3; m_k_relation = 50; m_sr_relation = 62; sr_k_relation = 50; m_split_threshold = 65; sr_split_threshold = 65; m_support_change = 10; sr_support_change = 10; m_discipline_change = 8; sr_discipline_change = 8; max_advisors = 5; ipr_change = 8; unrest_modifier = 1.6
+on-arrival: difficulty = -1; m_resources = 4; sr_resources = 4; k_resources = 5; b_resources = 4; m_dues = 3; sr_dues = 3; b_dues = 3; m_k_relation = 50; m_sr_relation = 62; sr_k_relation = 50; m_split_threshold = 65; sr_split_threshold = 65; m_support_change = 10; sr_support_change = 10; m_discipline_change = 8; sr_discipline_change = 8; max_advisors = 6; ipr_change = 8; unrest_modifier = 1.6
 go-to: party_selection
 
 Select a party:
