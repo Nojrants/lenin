@@ -9,6 +9,7 @@ new-page: true
 
 Council of People's Commissars
   
+- #advisor
 - @back: Return to main
 
 @back
