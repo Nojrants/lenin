@@ -40,13 +40,13 @@ Q.party_name_map = {"m": "Menshevik",
         "sr": "SR",
         "k": "Kadet"};
 
-Q.m_is_player = 1;
+Q.m_is_player = 0;
 Q.sr_is_player = 0;
 Q.b_is_player = 1;
 Q.k_is_player = 0;
 
 Q.player_in_exco = 1;
-Q.player_in_gov = 0;
+Q.player_in_gov = 1;
 Q.player_in_soviet = 1;
 
 // multiplayer stuff
@@ -55,7 +55,7 @@ Q.n_players = 1;
 // the player ID of the next player
 Q.next_player = 0;
 
-Q.player1_party = "m";
+Q.player1_party = "b";
 Q.player2_party = "";
 Q.player3_party = "";
 Q.player4_party = "";
@@ -1014,15 +1014,15 @@ Q.rodzianko_advisor = 0; // Mikhail Rodzianko
 
 
 // bolshevik advisors
-Q.stasova_advisor = 1; // Elena Stasova
-Q.shliapnikov_advisor = 1; // Alexander Shliapnikov
-Q.lenin_advisor = 0; // Vladimir Lenin - April week 1
-Q.stalin_advisor = 0; // Josef Stalin - April week 1
-Q.kamenev_advisor = 0; // Lev Kamenev - April week 1
-Q.zinoviev_advisor = 0; // Grigory Zinoviev - April week 1
-Q.sverdlov_advisor = 0; // Yakov Sverdlov - April week 1
+Q.lenin_advisor = 1; 
+Q.sverdlov_advisor = 1; 
+Q.trotsky_advisor = 1;
+Q.stalin_advisor = 1; // Josef Stalin - April week 1
+Q.kamenev_advisor = 1; // Lev Kamenev - April week 1
+Q.zinoviev_advisor = 1; // Grigory Zinoviev - April week 1
 Q.kollontai_advisor = 0; // Alexandra Kollontai - April week 1
-Q.trotsky_advisor = 0;
+Q.stasova_advisor = 0; // Elena Stasova
+Q.shliapnikov_advisor = 0; // Alexander Shliapnikov
 
 // Records of stats
 Q.soviet_support_records = [];
