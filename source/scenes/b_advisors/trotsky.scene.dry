@@ -1,6 +1,6 @@
 title: Leon Trotsky
 is-pinned-card: true
-tags: advisor
+tags: advisor, sovnarkom
 card-image: img/portraits/b/trotsky.jpg
 view-if: trotsky_advisor = 1 and player_party = "b"
 new-page: true 
