@@ -77,7 +77,7 @@ All items from our agenda have been cleared.
 title: Demand a Party Congress
 subtitle: Begin planning to hold a congress of the RCP(b). 
 unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?][? if party_congress_timer > 0 : [+ party_congress_timer +] months before next advisor action. ?]
-choose-if: advisor_action_timer == 0
+choose-if: advisor_action_timer = 0
 on-arrival: advisor_action_timer = 1; party_congress_timer -=10; time_to_election = 8
 call: set_next_election_time
 
