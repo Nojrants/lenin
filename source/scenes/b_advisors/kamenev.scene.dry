@@ -1,6 +1,6 @@
 title: Lev Kamenev
 is-pinned-card: true
-tags: advisor
+tags: advisor, sovnarkom
 card-image: img/portraits/b/kamenev.jpg
 view-if: kamenev_advisor = 1 and player_party = "b"
 new-page: true 
