@@ -2,9 +2,9 @@ title: Agriculture and Land Reform
 new-page: true
 is-card: true
 on-arrival: agricultural_policy_timer += 3; week_actions += 1
-view-if: agricultural_policy_timer == 0 and ((player_party = "k" and k_in_gov and (prime_minister_party = "Kadet" or agriculture_minister_party = "Kadet" or agriculture_minister_party = "Independent" or agriculture_minister_party = "Progressive" or agriculture_minister_party = "Octobrist" or agriculture_minister_party = "Trudovik" or agriculture_minister_party = "Popular Socialist")) or (player_party = "sr" and sr_in_gov and (prime_minister_party = "SR" or agriculture_minister_party = "SR" or agriculture_minister_party = "Trudovik" or agriculture_minister_party = "Popular Socialist")) or (player_party = "m" and m_in_gov and (prime_minister_party = "Menshevik" or agriculture_minister_party = "Menshevik")) or (player_party = "b" and b_in_gov and agriculture_minister_party = "Bolshevik"))
+view-if: agricultural_policy_timer == 0 and (player_party = "b" and b_in_gov and agriculture_minister_party = "Bolshevik")
 card-image: img/peasant_2.jpg
-tags: prov_gov
+tags: prov_gov, cabinet
 
 = Agricultural Policy
 
