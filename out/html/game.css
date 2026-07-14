@@ -161,10 +161,10 @@ ul.choices a {
   text-decoration: none;
 }
 blockquote {
-  margin: 0.75em 2em;
+  margin: 1em 2em;
 }
 blockquote.attribution {
-  margin-left: 2.25em;
+  margin-left: 3em;
 }
 blockquote + blockquote.attribution {
   margin-top: -0.7em;
