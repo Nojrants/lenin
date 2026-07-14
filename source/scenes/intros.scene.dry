@@ -71,7 +71,7 @@ Q.nationalities_minister_party = "Bolshevik";
 
 
 @2nd_soviet_homogenous
-choose-if: if player_party = "m"
+choose-if: player_party = "m"
 unavailable-subtitle: Lenin will not allow this. 
 
 
