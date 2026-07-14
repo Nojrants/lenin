@@ -5,13 +5,35 @@ card-image: img/portraits/b/lenin.jpg
 view-if: lenin_advisor = 1 and player_party = "b"
 new-page: true 
 
+Q.lenin_auc = 6
+Q.lenin_adm = 4
+Q.lenin_idea = 5
+Q.lenin_mil = 2
+Q.lenin_eco = 4
+Q.lenin_par = 4
+Q.lenin_dip = 3
+Q.lenin_nat = 3
+Q.lenin_cult = 2
+
 = Vladimir Lenin
 
 Vladimir Lenin is the undisputed leader of the Bolshevik party, and its chief theoretician and organizer.
 
-Stats:
->Auctoritas: <div class="box b"> </div>
+>**Auctoritas:** [? if lenin_auc = 6 : <div class="box b"> </div><div class="box b"> </div><div class="box b"> </div><div class="box b"> </div><div class="box b"> </div><div class="box b"> </div> ?][? if lenin_auc = 5 : <div class="box b"> </div><div class="box b"> </div><div class="box b"> </div><div class="box b"> </div><div class="box b"> </div> ?]
 
+>**Administration:** <div class="box b"> </div><div class="box b"> </div><div class="box b"> </div><div class="box b"> </div>
+
+>**Ideologism:** <div class="box b"> </div><div class="box b"> </div><div class="box b"> </div><div class="box b"> </div><div class="box b"> </div>
+
+Q.lenin_spec = "";
+[? if lenin_mil >= 4 : lenin_spec += 'Military' ?]
+[? if lenin_eco >= 4 : lenin_spec += ', Economics' ?]
+[? if lenin_par >= 4 : lenin_spec += ', Party Organization' ?]
+[? if lenin_dip >= 4 : lenin_spec += ', Diplomacy' ?]
+[? if lenin_nat >= 4 : lenin_spec += ', Nationalities' ?]
+[? if lenin_cult >= 4 : lenin_spec += ', Culture' ?]
+
+>**Specialties:** [+ lenin_spec +]
 
 # actions: organizing (same as card), agitation against the provisional government, 
 
