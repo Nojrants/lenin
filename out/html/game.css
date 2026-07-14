@@ -186,7 +186,7 @@ blockquote + blockquote.attribution {
   margin: 0 auto;
 }
 .tools {
-  padding: 5.6em;
+  padding: 0.6em;
   width: 24rem;
   color: var(--text-color);
   background-color: var(--content-bg-color);
@@ -198,7 +198,7 @@ blockquote + blockquote.attribution {
 }
 .tools.right {
   float: right;
-  right: 0.4em;
+  right: 1.4em;
 }
 #qualities {
   text-indent: 0;
