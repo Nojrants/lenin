@@ -12,9 +12,6 @@ October Revolution Event Text
 
 - @all_power_to_the_soviets
 
-
-
-
 @all_power_to_the_soviets
 title: All Power to the Soviets
 view-if: abdi_seen < n_players
@@ -34,6 +31,38 @@ Q.rightist_relation = 0;
 
 abdi_seen += 1
 
+// the state of the party
+// overall dissent reduces every increase in party support.
+Q.b_dissent = 0.05;
+Q.b_dissent_percent = 5;
+
+// factions
+// bolshevik internals
+// leadership: 1 = moderate internationalists, 2 = leninists
+Q.b_leadership = 2;
+Q.b_factions = ['leninist', 'moderate', 'leftcom'];
+
+Q.leninist_strength = 40;
+Q.leninist_dissent = 0;
+Q.leninist_split = 0;
+
+Q.moderate_strength = 20;
+Q.moderate_dissent = 5;
+Q.moderate_split = 0;
+
+Q.leftcom_strength = 5;
+Q.leftcom_dissent = 0;
+Q.leftcom_split = 0;
+
+Q.b_war_policy = 2;
+Q.b_industrial_policy = 1;
+Q.b_prov_gov_policy = 3;
+Q.b_land_policy = 2;
+Q.b_agricultural_policy = 2;
+Q.b_nationality_policy = 2;
+// organizations among the workers and soldiers...
+Q.b_workers_org = 1;
+Q.b_soldiers_org = 1;
 !}
 
 = All Power to the Soviets
@@ -53,6 +82,9 @@ With the Congress at our command, we must decide the composition of a new provis
 
 @2nd_soviet_bolshevik
 on-arrival:{!
+
+A proposal consisting solely of Bolshevik members is put forth. Already incensed by our actions thus far, most Mensheviks and Socialist-Revolutionaries walk out of the congress in protest. Moderates and Bolshevik sympathizers are displeased but hold their tongues.  
+
 Q.prime_minister = "Lenin";
 Q.prime_minister_party = "Bolshevik"
 Q.deputy_pm = "Vacant";
@@ -89,10 +121,18 @@ centre_sr_relation -= 10;
 right_relation -= 20;
 ns_relation -= 15;
 k_relation -= 5;
+k_relation -= 5;
+leninist_strength += 5;
+moderate_strength -= 5;
+moderate_dissent += 5;
+leftcom_strength += 2;
 !}
 
 @2nd_piecemeal
 on-arrival:{!
+
+A composition is proposed reserving the key seats for the Bolsheviks, though offering some minor positions the other parties. The leaders of the Mensheviks and Socialist-Revolutionaries refuse to take any of these vacancies out of principle. Nonetheless, the gesture placates some moderate congressgoers, including from among our own party.
+
 sdi_relation += 0;
 left_m_relation -= 5;
 centre_m_relation -= 5;
@@ -101,6 +141,11 @@ lsr_relation += 0;
 centre_sr_relation -= 5;
 right_relation -= 5;
 ns_relation -= 10;
+leninist_strength += 2;
+leninist_dissent += 2;
+moderate_strength += 5;
+moderate_dissent -= 5;
+leftcom_dissent += 5;
 !}
 
 @2nd_soviet_homogenous
