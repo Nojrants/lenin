@@ -29,7 +29,7 @@ Q.ns_relation = 35;
 Q.k_relation = 5;
 Q.rightist_relation = 0;
 
-abdi_seen += 1
+abdi_seen += 1;
 
 // the state of the party
 // overall dissent reduces every increase in party support.
@@ -86,7 +86,7 @@ on-arrival:{!
 Q.prime_minister = "Lenin";
 Q.prime_minister_party = "Bolshevik"
 Q.deputy_pm = "Vacant";
-Q.deputy_pm_party = ""
+Q.deputy_pm_party = "";
 Q.foreign_minister = "Trotsky";
 Q.foreign_minister_party = "Bolshevik";
 Q.war_minister = "Krylenko";
@@ -154,5 +154,3 @@ A composition is proposed reserving the key seats for the Bolsheviks, though off
 choose-if: player_party = "m"
 unavailable-subtitle: Lenin will not allow this. 
 
-
-!}
