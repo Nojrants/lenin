@@ -854,6 +854,7 @@ Q.timers = [//m_party
             ];
 Q.advisor_action_timer = 0;
 Q.party_congress_timer = 0;
+Q.labor_unrest_timer = 1;
 
 Q.prov_gov_policies_timer = 3;
 Q.food_shortages_timer = 2;
