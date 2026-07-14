@@ -128,7 +128,7 @@ Internal dissent:
 
 >> **Others:** [+ other_soviet +]%
 
->> **[? if defensist_split: Menshevik-Defensists:** [+ defensist_soviet_votes_dec +]% ?]
+>> [? if defensist_split: Menshevik-Defensists: [+ defensist_soviet_votes_dec +]% ?]
 
 [? if internationalist_split: Menshevik-Internationalists: [+ internationalist_soviet_votes_dec +]% ?]
 [? if right_sr_split: Right-SRs: [+ right_sr_soviet_votes_dec +]% ?]
