@@ -162,21 +162,6 @@ Resources:
 
 @politics
 title: Politics
-on-arrival: {!
-Q.sdi_relation = 40;
-Q.left_m_relation = 35;
-Q.centre_m_relation = 30;
-Q.right_m_relation = 15;
-
-Q.lsr_relation = 55;
-Q.centre_sr_relation = 35;
-Q.right_sr_relation = 20;
-
-Q.anarchist_relation = 55;
-Q.ns_relation = 35;
-Q.k_relation = 5;
-Q.rightist_relation = 0;
-!}
 
 = Inter-party Relationships
 
