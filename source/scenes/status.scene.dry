@@ -107,65 +107,54 @@ Internal dissent:
 
 **Parties in government:** [+ governing_parties_str +]
 
-# Coalition dissent???
 
-Budget: [+ budget +]
 
 [? if not ca_election_held: Constituent Assembly elections: [? if ca_scheduled: Week [+ next_election_week +], [+ next_election_month : month +] [+ next_election_year +] ?] [? if not ca_scheduled: Not scheduled ?] ?]
 
 [? if ca_election_held: Constituent Assembly convocation: Week [+ ca_week +], [+ ca_month : month +] [+ ca_year +] ?]
 
-= Petrograd Soviet
+= Central Executive Committee
 
-Chair: [+ soviet_chair +] ([+ soviet_chair_party +])
+>**Chair: ** [+ prime_minister +] [?if prime_minister_party=="Bolshevik": (<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>)?]
 
-Executive committee: [+ exco_parties_str +]
+>**Composition:**
+>> **Mensheviks:** [+ m_soviet +]%
 
-Overal composition:
-Mensheviks: [+ m_soviet +]%
-Bolsheviks: [+ b_soviet +]%
-SRs: [+ sr_soviet +]%
-Anarchists: [+ anarchist_soviet +]%
-Others: [+ other_soviet +]%
-[? if defensist_split: Menshevik-Defensists: [+ defensist_soviet_votes_dec +]% ?]
+>> **Bolsheviks:** [+ b_soviet +]%
+
+>> **SRs:** [+ sr_soviet +]%
+
+>> **Anarchists:** [+ anarchist_soviet +]%
+
+>> **Others:** [+ other_soviet +]%
+
+>> **[? if defensist_split: Menshevik-Defensists:** [+ defensist_soviet_votes_dec +]% ?]
+
 [? if internationalist_split: Menshevik-Internationalists: [+ internationalist_soviet_votes_dec +]% ?]
 [? if right_sr_split: Right-SRs: [+ right_sr_soviet_votes_dec +]% ?]
 [? if left_sr_split: Left-SRs: [+ left_sr_soviet_votes_dec +]% ?]
 
-= Peace
+= Support
 
-War progress: [+ war_progress : war_score +]
+>War weariness: [+ war_weariness : war_weariness +]
 
-[? if not is_armistice and not is_peace and armistice_progress: Armistice negotiations: [+ armistice_progress +] ?]
+>Soldier unrest: [+ soldier_unrest : war_weariness +]
 
-[? if is_armistice: We are currently in an armistice. ?]
+>Rural unrest: [+ rural_unrest : war_weariness +]
 
-[? if is_armistice and not is_peace: Peace negotiations: [+ central_negotiations +]?]
+>Labor unrest: [+ labor_unrest : war_weariness +]
 
-[? if allied_victory: The Central Powers have sued for a ceasefire. The war is over. ?]
 
-War weariness: [+ war_weariness : war_weariness +]
-
-Soldier unrest: [+ soldier_unrest : war_weariness +]
-
-= Land
-
-Land reform policy: [+ land_reform : land_reform +]
-
-Land reform progress: [+ land_reform_progress : land_reform_progress +]
-
-Rural unrest: [+ rural_unrest : war_weariness +]
-
-= Bread
+= Statistics
 
 # Real income (% of 1913): [+ income +]%
-Monthly inflation: [+ monthly_inflation +]% ([+ inflation +]% annually)
+> **Monthly inflation:** [+ monthly_inflation +]% ([+ inflation +]% annually)
 
-Hunger: [+ hunger : hunger +]
+> **Hunger:** [+ hunger : hunger +]
 
-Unemployment: [+ unemployed +]%
+> **Unemployment:** [+ unemployed +]%
 
-Labor unrest: [+ labor_unrest : war_weariness +]
+
 
 
 
