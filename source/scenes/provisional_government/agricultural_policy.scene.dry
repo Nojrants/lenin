@@ -4,7 +4,7 @@ is-card: true
 on-arrival: agricultural_policy_timer += 3; week_actions += 1
 view-if: agricultural_policy_timer == 0 and (player_party = "b" and b_in_gov and agriculture_minister_party = "Bolshevik")
 card-image: img/peasant_2.jpg
-tags: prov_gov, cabinet
+tags: prov_gov, sovnarkom
 
 = Agricultural Policy
 
