@@ -163,57 +163,50 @@ Resources:
 @politics
 title: Politics
 on-arrival: {!
-Q.m_relation = 0;
-Q.b_relation = 0;
-Q.sr_relation = 0;
-Q.k_relation = 0;
-switch (Q.player_party) {
-    case 'b':
-        Q.b_relation = -1;
-        Q.m_relation = Q.m_b_relation;
-        Q.k_relation = Q.b_k_relation;
-        Q.sr_relation = Q.b_sr_relation;
-        break;
-    case 'm':
-        Q.m_relation = -1;
-        Q.b_relation = Q.m_b_relation;
-        Q.k_relation = Q.m_k_relation;
-        Q.sr_relation = Q.m_sr_relation;
-        break;
-    case 'sr':
-        Q.sr_relation = -1;
-        Q.b_relation = Q.b_sr_relation;
-        Q.m_relation = Q.m_sr_relation;
-        Q.k_relation = Q.sr_k_relation;
-        break;
-    case 'k':
-        Q.k_relation = -1;
-        Q.b_relation = Q.b_k_relation;
-        Q.m_relation = Q.m_k_relation;
-        Q.sr_relation = Q.sr_k_relation;
-        break;
-}
-!}
+Q.sdi_relations = 40;
+Q.left_m_relation = 35;
+Q.centre_m_relation = 30;
+Q.right_m_relation = 15;
+Q.unity_relation = 15
 
-# TODO: inter-party relationships
+Q.lsr_relation = 55;
+Q.centre_sr_relation = 35;
+Q.right_relation = 20;
+
+Q.anarchist_relation = 55;
+Q.ns_relation = 35;
+Q.k_relation = 5;
+Q.rightist_relation = 0;
+!}
 
 = Inter-party Relationships
 
-[? if player_party != "m": Mensheviks: [+ m_relation : relationships +] ?]
-[? if player_party != "m": </br> Leadership: [+ m_leadership : m_leadership +] ?]
+>**Anarchists:** [+ anarchist_relation : relationships +]
 
-[? if player_party != "b": Bolsheviks: [+ b_relation : relationships +] ?]
-[? if player_party != "b": </br> Leadership: [+ b_leadership : b_leadership +] ?]
+>**SD-Internationalists:** [+ sdi_relation : relationships +]
 
+>**Mensheviks:** [+ ((left_m_relation + centre_m_relation + right_m_relation)/3) : relationships +]
+>>**Internationalist:** [+ m_relation : relationships +]
 
-[? if player_party != "sr": SRs: [+ sr_relation : relationships +] ?]
-[? if player_party != "sr": </br> Leadership: [+ sr_leadership : sr_leadership +] ?]
+>>**Centre:** [+ m_relation : relationships +]
 
+>>**Defencist:** [+ m_relation : relationships +]
 
-[? if player_party != "k": Kadets: [+ k_relation : relationships +] ?]
-[? if player_party != "k": </br> Leadership: [+ k_leadership : k_leadership +] ?]
+>**Unity:** [+ unity_relation : relationships +]
 
-[? if player_party == "k": Conservatives: [+ k_conservative_relation : relationships +] ?]
+>**Popular-Socialists:** [+ ns_relation : relationships +]
+
+>**Left SRs:** [+ lsr_relation : relationships +]
+
+>**Socialist-Revolutionaries:** [+ ((centre_sr_relation + right_sr_relation)/2) : relationships +]
+>>**Centre:** [+ centre_sr_relation : relationships +]
+
+>>**Right:** [+ right_sr_relation : relationships +]
+
+>**Kadets:** [+ k_relation : relationships +]
+
+>**Kadets:** [+ rightist_relation : relationships +]
+
 
 = Internal factions
 
