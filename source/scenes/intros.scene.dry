@@ -78,7 +78,7 @@ k_relation -= 5;
 
 @2nd_piecemeal
 on-arrival:{!
-sdi_relation += 0;
+sdi_relation += 90;
 left_m_relation -= 5;
 centre_m_relation -= 5;
 right_m_relation -= 5;
