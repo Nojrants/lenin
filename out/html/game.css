@@ -161,10 +161,10 @@ ul.choices a {
   text-decoration: none;
 }
 blockquote {
-  margin: 1em 2em;
+  margin: 0.75em 2em;
 }
 blockquote.attribution {
-  margin-left: 3em;
+  margin-left: 2.25em;
 }
 blockquote + blockquote.attribution {
   margin-top: -0.7em;
@@ -180,7 +180,7 @@ blockquote + blockquote.attribution {
 #tools_wrapper {
   position: absolute;
   width: 100%;
-  max-width: 89em;
+  max-width: 85em;
   left: 0;
   right: 0;
   margin: 0 auto;
