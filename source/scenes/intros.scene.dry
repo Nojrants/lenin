@@ -146,7 +146,6 @@ leninist_dissent += 2;
 moderate_strength += 5;
 moderate_dissent -= 5;
 leftcom_dissent += 5;
-!}
 
 @2nd_soviet_homogenous
 choose-if: player_party = "m"
