@@ -1,7 +1,7 @@
 title: [+ month : month +] Crisis
 subtitle: The people are outraged about the Provisional Government's war policy...
 new-page: true
-view-if: ((allied_demands_seen = 1 and not allied_demands_rejected) or k_is_player = 0) and april_days_seen = 0 and ((month = 4 and week >= 3) or month > 4)
+view-if: 
 on-arrival: april_days_seen += 1; b_k_relation -= 10; b_threat += 1; workers_b += 5*(1-b_dissent); soldiers_b += 5*(1-b_dissent);
 max-visits: 1
 face-image: img/womens_day.jpg
