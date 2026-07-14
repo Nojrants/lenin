@@ -83,8 +83,6 @@ With the Congress at our command, we must decide the composition of a new provis
 @2nd_soviet_bolshevik
 on-arrival:{!
 
-A proposal consisting solely of Bolshevik members is put forth. Already incensed by our actions thus far, most Mensheviks and Socialist-Revolutionaries walk out of the congress in protest. Moderates and Bolshevik sympathizers are displeased but hold their tongues.  
-
 Q.prime_minister = "Lenin";
 Q.prime_minister_party = "Bolshevik"
 Q.deputy_pm = "Vacant";
@@ -126,12 +124,13 @@ leninist_strength += 5;
 moderate_strength -= 5;
 moderate_dissent += 5;
 leftcom_strength += 2;
+!}
+
+A proposal consisting solely of Bolshevik members is put forth. Already incensed by our actions thus far, most Mensheviks and Socialist-Revolutionaries walk out of the congress in protest. Moderates and Bolshevik sympathizers are displeased but hold their tongues.  
 
 
 @2nd_piecemeal
 on-arrival:{!
-
-A composition is proposed reserving the key seats for the Bolsheviks, though offering some minor positions the other parties. The leaders of the Mensheviks and Socialist-Revolutionaries refuse to take any of these vacancies out of principle. Nonetheless, the gesture placates some moderate congressgoers, including from among our own party.
 
 sdi_relation += 0;
 left_m_relation -= 5;
@@ -146,6 +145,10 @@ leninist_dissent += 2;
 moderate_strength += 5;
 moderate_dissent -= 5;
 leftcom_dissent += 5;
+!}
+
+A composition is proposed reserving the key seats for the Bolsheviks, though offering some minor positions the other parties. The leaders of the Mensheviks and Socialist-Revolutionaries refuse to take any of these vacancies out of principle. Nonetheless, the gesture placates some moderate congressgoers, including from among our own party.
+
 
 @2nd_soviet_homogenous
 choose-if: player_party = "m"
