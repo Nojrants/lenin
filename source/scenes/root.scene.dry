@@ -87,11 +87,11 @@ Q.b_dissent_percent = 5;
 // bolshevik internals
 // leadership: 1 = moderate internationalists, 2 = leninists
 Q.b_leadership = 2;
-Q.b_factions = ['leninite', 'moderate', 'leftcom'];
+Q.b_factions = ['leninist', 'moderate', 'leftcom'];
 
-Q.leninite_strength = 20;
-Q.leninite_dissent = 10;
-Q.leninite_split = 0;
+Q.leninist_strength = 20;
+Q.leninist_dissent = 10;
+Q.leninist_split = 0;
 
 Q.moderate_strength = 20;
 Q.moderate_dissent = 10;
@@ -347,7 +347,7 @@ Q.k_in_soviet = 0;
 // executive committee
 Q.m_in_exco = 1;
 Q.sr_in_exco = 1;
-Q.b_in_exco = 0;
+Q.b_in_exco = 1;
 Q.k_in_exco = 0;
 
 // Soviet coalitions
@@ -517,13 +517,10 @@ Q.loyal_troops_militancy = 0;
 // somewhat arbitrary number...
 // 50 = baseline level of crime
 Q.crime = 75;
-// rural unrest is what leads to land seizures.
-Q.rural_unrest = 75;
-// labor unrest is what leads to strikes
-Q.labor_unrest = 75;
-// Soldier unrest is what leads to military disorder.
-Q.soldier_unrest = 75;
-// modifier for unrest suppression difficulty - higher means it's easier to reduce unrest.
+Q.rural_unrest = 50;
+Q.labor_unrest = 50;
+Q.union_unrest = 50;
+Q.soldier_unrest = 50;
 Q.unrest_modifier = 1;
 
 // bolshevik threat
