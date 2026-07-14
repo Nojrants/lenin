@@ -167,7 +167,7 @@ blockquote.attribution {
   margin-left: 3em;
 }
 blockquote + blockquote.attribution {
-  margin-top: 0em;
+  margin-top: -0.5em;
 }
 /* This is mostly copied from undum. */
 #mid_panel {
