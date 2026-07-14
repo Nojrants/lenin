@@ -163,7 +163,7 @@ Resources:
 @politics
 title: Politics
 on-arrival: {!
-Q.sdi_relations = 40;
+Q.sdi_relation = 40;
 Q.left_m_relation = 35;
 Q.centre_m_relation = 30;
 Q.right_m_relation = 15;
@@ -186,11 +186,11 @@ Q.rightist_relation = 0;
 >**SD-Internationalists:** [+ sdi_relation : relationships +]
 
 >**Mensheviks:** [+ ((left_m_relation + centre_m_relation + right_m_relation)/3) : relationships +]
->>**Internationalist:** [+ m_relation : relationships +]
+>>**Internationalist:** [+ left_m_relation : relationships +]
 
->>**Centre:** [+ m_relation : relationships +]
+>>**Centre:** [+ m_centre_relation : relationships +]
 
->>**Defencist:** [+ m_relation : relationships +]
+>>**Defencist:** [+ m_right_relation : relationships +]
 
 >**Unity:** [+ unity_relation : relationships +]
 
@@ -205,7 +205,7 @@ Q.rightist_relation = 0;
 
 >**Kadets:** [+ k_relation : relationships +]
 
->**Kadets:** [+ rightist_relation : relationships +]
+>**Rightists:** [+ rightist_relation : relationships +]
 
 
 = Internal factions
