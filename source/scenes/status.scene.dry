@@ -80,7 +80,7 @@ Internal dissent:
 
 = Sovnarkom
 
->**Chair:** [+ prime_minister +] ([?if prime_minister_party=="Bolshevik":<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>?])
+>**Chair:** [+ prime_minister +] -# ([?if prime_minister_party=="Bolshevik":<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>?])
 >>**Deputy:** *Kamenev* (<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>)
 
 >>**Test:** *Kamenev* (<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>)
