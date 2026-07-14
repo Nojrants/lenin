@@ -79,9 +79,9 @@ Internal dissent:
 [? if player_party == "b": [+ b_dissent_percent : dissent +] ?]
 
 = [+ government_form : government_form +]
-
-Chair: [+ prime_minister +] ([?if prime_minister_party=="Bolshevik":<span style="color: var(--bolshevik-color);">**[+ prime_minister_party +]**</span>?])
-
+Sovnarkom
+>**Chair:** **[+ prime_minister +]** ([?if prime_minister_party=="Bolshevik":<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">[+ prime_minister_party +]</span>?])
+>>**Deputy:** *test*
 
 Parties in government: [+ governing_parties_str +]
 
