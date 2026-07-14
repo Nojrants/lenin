@@ -81,11 +81,29 @@ Internal dissent:
 = Sovnarkom
 
 >**Chair:** [+ prime_minister +] ([?if prime_minister_party=="Bolshevik":<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>?])
->>**Deputy:** *Kamenev* (<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>)
+>>**Deputy:** [+ deputy_pm +] ([?if deputy_pm_party=="Bolshevik":<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>?])
 
->>**Test:** *Kamenev* (<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>)
+>>**Foreign Affairs:** [+ foreign_minister +] ([?if foreign_minister_party=="Bolshevik":<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>?])
 
->>**Test:** *Kamenev* (<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>)
+>>**Military:** [+ war_minister +] ([?if war_minister_party=="Bolshevik":<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>?])
+
+>>**Enlightenment:** [+ education_minister +] ([?if education_minister_party=="Bolshevik":<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>?])
+
+>>**Internal Affairs:** [+ interior_minister +] ([?if interior_minister_party=="Bolshevik":<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>?])
+
+>>**Railways:** [+ transport_minister +] ([?if transport_minister_party=="Bolshevik":<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>?])
+
+>>**Trade:** [+ trade_minister +] ([?if trade_minister_party=="Bolshevik":<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>?])
+
+>>**Finance:** [+ finance_minister +] ([?if finance_minister_party=="Bolshevik":<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>?])
+
+>>**Justice:** [+ justice_minister +] ([?if justice_minister_party=="Bolshevik":<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>?])
+
+>>**Agriculture:** [+ agriculture_minister +] ([?if agriculture_minister_party=="Bolshevik":<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>?])
+
+>>**Food Supply:** [+ food_minister +] ([?if food_minister_party=="Bolshevik":<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>?])
+
+>>**Nationalities:** [+ nationalities_minister +] ([?if nationalities_minister_party=="Bolshevik":<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>?])
 
 **Parties in government:** [+ governing_parties_str +]
 
