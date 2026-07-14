@@ -162,11 +162,11 @@ ul.choices a {
 }
 blockquote {
   margin: 1em 2em;
-  margin-bottom: 0.5em;
+  margin-bottom: -0.5em;
 }
 blockquote.attribution {
   margin-left: 3em;
-  margin-bottom: 0.5em;
+  margin-bottom: -0.5em;
 }
 blockquote + blockquote.attribution {
   margin-top: -1em;
