@@ -78,14 +78,14 @@ k_relation -= 5;
 
 @2nd_piecemeal
 on-arrival:{!
-Q.sdi_relation += 0;
-Q.left_m_relation -= 5;
-Q.centre_m_relation -= 5;
-Q.right_m_relation -= 5;
-Q.lsr_relation += 0;
-Q.centre_sr_relation -= 5;
-Q.right_relation -= 5;
-Q.ns_relation -= 10;
+sdi_relation += 0;
+left_m_relation -= 5;
+centre_m_relation -= 5;
+right_m_relation -= 5;
+lsr_relation += 0;
+centre_sr_relation -= 5;
+right_relation -= 5;
+ns_relation -= 10;
 !}
 
 @2nd_soviet_homogenous
