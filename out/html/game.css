@@ -162,14 +162,12 @@ ul.choices a {
 }
 blockquote {
   margin: 1em 2em;
-  margin-bottom: -0.5em;
 }
 blockquote.attribution {
   margin-left: 3em;
-  margin-bottom: -0.5em;
 }
 blockquote + blockquote.attribution {
-  margin-top: -1em;
+  margin-top: 0em;
 }
 /* This is mostly copied from undum. */
 #mid_panel {
