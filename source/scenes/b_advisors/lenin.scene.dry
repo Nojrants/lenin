@@ -22,11 +22,11 @@ title: Speak at Rallies
 subtitle: Promote the Bolshevik cause before the masses. 
 choose-if: advisor_action_timer = 0
 unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] weeks before next advisor action. ?]
-on-arrival: advisor_action_timer = 1; leninist_strength += 5; b_dissent -= 0.02;
+on-arrival: advisor_action_timer = 1; leninist_strength += 5*(1-b_dissent); b_dissent -= 0.02;
 
 @polemics
-title: Polemics
-subtitle: Argue with the Mensheviks over the working class.
+title: Party Press
+subtitle: Engage in polemics in the party press. 
 unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] weeks before next advisor action. ?]
 choose-if: advisor_action_timer <= 0
 on-arrival: advisor_action_timer = 1; workers_m -= 3; soldiers_m -= 3; workers_b += 4*(1-b_dissent); soldiers_b += 4*(1-b_dissent);
