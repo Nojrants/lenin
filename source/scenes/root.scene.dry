@@ -324,28 +324,28 @@ Q.in_socialist_coalition = 0;
 
 Q.prime_minister = "Lenin";
 Q.prime_minister_party = "Bolshevik"
+Q.foreign_minister = "Trotsky";
+Q.foreign_minister_party = "Bolshevik";
+Q.war_minister = "Krylenko";
+Q.war_minister_party = "Bolshevik";
+Q.education_minister = "Lunacharsky";
+Q.education_minister_party = "Bolshevik";
+Q.interior_minister = "Rykov";
+Q.interior_minister_party = "Bolshevik";
+Q.transport_minister = "*Vacant*";
+Q.transport_minister_party = "";
+Q.trade_minister = "Nogin";
+Q.trade_minister_party = "Bolshevik";
+Q.finance_minister = "Vacant";
+Q.finance_minister_party = "";
+Q.justice_minister = "Oppokov";
+Q.justice_minister_party = "Bolshevik";
 Q.agriculture_minister = "Milyutin";
 Q.agriculture_minister_party = "Bolshevik";
-Q.justice_minister = "Kerensky";
-Q.justice_minister_party = "Bolshevik";
-Q.interior_minister = "Lvov";
-Q.interior_minister_party = "Independent";
-Q.finance_minister = "Tereshchenko";
-Q.finance_minister_party = "Independent";
-Q.war_minister = "Trotsky";
-Q.war_minister_party = "Bolshevik";
-Q.foreign_minister = "Milyukov";
-Q.foreign_minister_party = "Kadet";
-Q.transport_minister = "Nekrasov";
-Q.transport_minister_party = "Kadet";
-// minister of trade and industry
-Q.trade_minister = "Konovalov";
-Q.trade_minister_party = "Progressive";
-// at the start, food and agriculture are the same, but there will be a separate food minister.
-Q.food_minister = "Shingarev";
-Q.food_minister_party = "Kadet";
-Q.education_minister = "Oldenburg";
-Q.education_minister_party = "Kadet";
+Q.food_minister = "Teodorovich";
+Q.food_minister_party = "Bolshevik";
+Q.nationalities_minister = "Stalin";
+Q.nationalities_minister_party = "Bolshevik";
 
 // government efficacy - affects efficacy of actions. 
 Q.prov_gov_efficacy = 0.7;
