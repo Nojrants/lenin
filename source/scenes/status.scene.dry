@@ -80,7 +80,7 @@ Internal dissent:
 
 = [+ government_form : government_form +]
 
-Chair: [+ prime_minister +] ([?if president_party=="Bolshevik":<span style="color: var(--bolshevik-color);">**[+ prime_minister_party +]**</span>?])
+Chair: [+ prime_minister +] ([?if president_party=="Bolshevik":<span style="color: #D81C00;">**[+ prime_minister_party +]**</span>?])
 
 
 Parties in government: [+ governing_parties_str +]
