@@ -945,8 +945,8 @@ Q.soviet_support_records = [];
 Q.economic_records = [];
 
 !}
-
-set-bg: img/map_2.jpg
-new-page: true
 go-to: intros
+
+
+
 
