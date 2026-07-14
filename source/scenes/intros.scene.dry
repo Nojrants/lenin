@@ -6,11 +6,13 @@ audio: shuffle music/WorkersMarseillaise.ogg music/TchaikovskyQuartet.mp3 music/
 
 = October Revolution
 
-Event Text
+October Revolution Event Text
 
 @intro_menu
 
 - @all_power_to_the_soviets
+
+
 
 
 @all_power_to_the_soviets
@@ -21,17 +23,18 @@ on-arrival: abdi_seen += 1
 
 = All Power to the Soviets
 
-Event Text
+All Power to the Soviets
 
 @2nd_soviet
 go-to: 2nd_soviet_menu
 
-Event Text 
+With the Congress at our command, we must decide the composition of a new provisional government.
 
 @2nd_soviet_menu
 
-- @2nd_soviet_bolshevik: Bolshevik government.
-- @2nd_soviet_homogenous: All-socialist government. 
+- @2nd_soviet_bolshevik: Form an exclusively Bolshevik government.
+- @2nd_piecemeal: Offer some piecemeal concessions to sympathetic groups. 
+- @2nd_soviet_homogenous: Form a genuinely all-socialist government. 
 
 @2nd_soviet_bolshevik
 on-arrival:{!
@@ -64,7 +67,13 @@ Q.nationalities_minister_party = "Bolshevik";
 
 !}
 
+@2nd_piecemeal
+
+
 @2nd_soviet_homogenous
+choose-if: if player_party = "m"
+unavailable-subtitle: Lenin will not allow this. 
+
 
 @o1_soviet_menu
 
