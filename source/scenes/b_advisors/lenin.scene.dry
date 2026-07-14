@@ -14,6 +14,8 @@ Q.lenin_par = 4;
 Q.lenin_dip = 3;
 Q.lenin_nat = 3;
 Q.lenin_cult = 2;
+Q.lenin_spec = "";
+
 
 = Vladimir Lenin
 
@@ -25,13 +27,12 @@ Vladimir Lenin is the undisputed leader of the Bolshevik party, and its chief th
 
 >**Ideologism:** <div class="box b"> </div><div class="box b"> </div><div class="box b"> </div><div class="box b"> </div><div class="box b"> </div>
 
-Q.lenin_spec = "";
-[? if lenin_mil >= 4 : lenin_spec += 'Military' ?];
-[? if lenin_eco >= 4 : lenin_spec += ', Economics' ?];
-[? if lenin_par >= 4 : lenin_spec += ', Party Organization' ?];
-[? if lenin_dip >= 4 : lenin_spec += ', Diplomacy' ?];
-[? if lenin_nat >= 4 : lenin_spec += ', Nationalities' ?];
-[? if lenin_cult >= 4 : lenin_spec += ', Culture' ?];
+[? if lenin_mil >= 4 : lenin_spec += 'Military' ?]
+[? if lenin_eco >= 4 : lenin_spec += ', Economics' ?]
+[? if lenin_par >= 4 : lenin_spec += ', Party Organization' ?]
+[? if lenin_dip >= 4 : lenin_spec += ', Diplomacy' ?]
+[? if lenin_nat >= 4 : lenin_spec += ', Nationalities' ?]
+[? if lenin_cult >= 4 : lenin_spec += ', Culture' ?]
 
 >**Specialties:** [+ lenin_spec +]
 
