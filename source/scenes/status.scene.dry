@@ -75,8 +75,6 @@ Position: [+ position +]
 Resources:
 [? if player_party == "b": [+ b_resources +] ?]
 
-Internal dissent:
-[? if player_party == "b": [+ b_dissent_percent : dissent +] ?]
 
 = Sovnarkom
 
@@ -136,13 +134,15 @@ Internal dissent:
 
 = Support
 
->War weariness: [+ war_weariness : war_weariness +]
+>**Party dissent:** [? if player_party == "b": [+ b_dissent_percent : dissent +] ?]
 
->Soldier unrest: [+ soldier_unrest : war_weariness +]
+>**War weariness:** [+ war_weariness : war_weariness +]
 
->Rural unrest: [+ rural_unrest : war_weariness +]
+>**Soldier unrest:** [+ soldier_unrest : war_weariness +]
 
->Labor unrest: [+ labor_unrest : war_weariness +]
+>**Rural unrest:** [+ rural_unrest : war_weariness +]
+
+>**Labor unrest:** [+ labor_unrest : war_weariness +]
 
 
 = Statistics
