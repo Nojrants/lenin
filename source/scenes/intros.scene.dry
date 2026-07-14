@@ -65,10 +65,34 @@ Q.food_minister_party = "Bolshevik";
 Q.nationalities_minister = "Stalin";
 Q.nationalities_minister_party = "Bolshevik";
 
+sdi_relation -= 5;
+left_m_relation -= 10;
+centre_m_relation -= 15;
+right_m_relation -= 5;
+
+lsr_relation -= 5;
+centre_sr_relation -= 10;
+right_relation -= 20;
+
+ns_relation -= 15;
+k_relation -= 5;
+
 !}
 
 @2nd_piecemeal
 
+on-arrival:{!
+Q.sdi_relation += 0;
+Q.left_m_relation -= 5;
+Q.centre_m_relation -= 5;
+Q.right_m_relation -= 5;
+
+Q.lsr_relation += 0;
+Q.centre_sr_relation -= 5;
+Q.right_relation -= 5;
+Q.ns_relation -= 10;
+
+!}
 
 @2nd_soviet_homogenous
 choose-if: player_party = "m"
