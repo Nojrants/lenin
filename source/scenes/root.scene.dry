@@ -115,18 +115,23 @@ Q.b_soldiers_org = 1;
 
 // inter-party relations
 // triangle:
-// m -> b -> sr -> k
-Q.m_b_relation = 40;
+
+Q.m_b_relation = 35;
+Q.b_sr_relation = 40;
+Q.b_k_relation = 10;
+Q.b_left_sr_relation = 55;
+Q.b_conservative_relation = 0;
+
+
 Q.m_sr_relation = 55;
 Q.m_k_relation = 40;
-Q.b_sr_relation = 35;
-Q.b_k_relation = 20;
 Q.sr_k_relation = 40;
-
-// only kadets have relations with the conservative factions
 Q.k_conservative_relation = 50;
 
-// minor parties: popular_socialists, trudoviks, octobrists, 
+
+
+
+
 
 // The state of Russia/////////////////////////////////
 
@@ -359,10 +364,10 @@ Q.in_anti_bolshevik_coalition = 0;
 Q.soviet_coalition_dissent = 0;
 
 // splinter parties
-Q.internationalist_in_exco = 0;
-Q.defensist_in_exco = 0;
-Q.left_sr_in_exco = 0;
-Q.right_sr_in_exco = 0;
+Q.internationalist_in_exco = 1;
+Q.defensist_in_exco = 1;
+Q.left_sr_in_exco = 1;
+Q.right_sr_in_exco = 1;
 Q.communist_in_exco = 0;
 
 Q.soviet_chair = "Chkheidze";
