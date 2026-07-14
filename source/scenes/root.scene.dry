@@ -322,33 +322,6 @@ Q.democrats_in_gov = 0;
 // are we currently in an all-socialist coalition?
 Q.in_socialist_coalition = 0;
 
-Q.prime_minister = "Lenin";
-Q.prime_minister_party = "Bolshevik"
-Q.deputy_pm = "Vacant";
-Q.deputy_pm_party = ""
-Q.foreign_minister = "Trotsky";
-Q.foreign_minister_party = "Bolshevik";
-Q.war_minister = "Krylenko";
-Q.war_minister_party = "Bolshevik";
-Q.education_minister = "Lunacharsky";
-Q.education_minister_party = "Bolshevik";
-Q.interior_minister = "Rykov";
-Q.interior_minister_party = "Bolshevik";
-Q.transport_minister = "Vacant";
-Q.transport_minister_party = "";
-Q.trade_minister = "Nogin";
-Q.trade_minister_party = "Bolshevik";
-Q.finance_minister = "Vacant";
-Q.finance_minister_party = "";
-Q.justice_minister = "Oppokov";
-Q.justice_minister_party = "Bolshevik";
-Q.agriculture_minister = "Milyutin";
-Q.agriculture_minister_party = "Bolshevik";
-Q.food_minister = "Teodorovich";
-Q.food_minister_party = "Bolshevik";
-Q.nationalities_minister = "Stalin";
-Q.nationalities_minister_party = "Bolshevik";
-
 // government efficacy - affects efficacy of actions. 
 Q.prov_gov_efficacy = 0.7;
 
