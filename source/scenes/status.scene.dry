@@ -79,11 +79,11 @@ Internal dissent:
 [? if player_party == "b": [+ b_dissent_percent : dissent +] ?]
 
 = Sovnarkom
-
-><nowrap>**Chair:** [+ prime_minister +] ([?if prime_minister_party=="Bolshevik":<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>?])</nowrap>
->>**Deputy:** *Kamenev* <span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>
->>[**Test:** *Test* <span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span> // + <newline>
-**Test:** *Test* <span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span> // + <newline>]
+**Chair:** [+ prime_minister +] ([?if prime_minister_party=="Bolshevik":<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>?])
+>**Deputy:** *Kamenev* (<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>)
+>**Test:** *Kamenev* (<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>)
+- **Deputy:** *Kamenev* (<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>)
+* **Deputy:** *Kamenev* (<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>)
 
 Parties in government: [+ governing_parties_str +]
 
