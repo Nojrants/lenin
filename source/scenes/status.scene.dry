@@ -167,7 +167,6 @@ Q.sdi_relation = 40;
 Q.left_m_relation = 35;
 Q.centre_m_relation = 30;
 Q.right_m_relation = 15;
-Q.unity_relation = 15
 
 Q.lsr_relation = 55;
 Q.centre_sr_relation = 35;
@@ -188,11 +187,9 @@ Q.rightist_relation = 0;
 >**Mensheviks:** [+ ((left_m_relation + centre_m_relation + right_m_relation)/3) : relationships +]
 >>**Internationalist:** [+ left_m_relation : relationships +]
 
->>**Centre:** [+ m_centre_relation : relationships +]
+>>**Centre:** [+ centre_m_relation : relationships +]
 
->>**Defencist:** [+ m_right_relation : relationships +]
-
->**Unity:** [+ unity_relation : relationships +]
+>>**Defencist:** [+ right_m_relation : relationships +]
 
 >**Popular-Socialists:** [+ ns_relation : relationships +]
 
