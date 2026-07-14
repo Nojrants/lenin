@@ -4,13 +4,13 @@ is-special: true
 on-arrival: {!
 Q.position = "";
 if (Q.player_party == 'b') {
-    if (Q.b_in_exco) {
-        Q.position = 'Soviet Executive Committee';
-        if (Q.b_in_gov) {
-            Q.position += ', in government';
+    if (Q.b_in_gov) {
+        Q.position = '';
+        if (Q.b_in_exco) {
+            Q.position += 'Bolsheviks';
         }
     } else if (Q.b_in_gov) {
-        Q.position = 'in government';
+        Q.position = 'Bolsheviks';
     } else {
         Q.position = 'in opposition';
     }
@@ -64,16 +64,28 @@ Q.exco_parties_str = Q.exco_parties.join(", ");
 Q.monthly_inflation_disp = Q.monthly_inflation.toFixed(1);
 Q.inflation_disp = Q.inflation.toFixed(1);
 Q.unemployed_disp = Q.unemployed.toFixed(1);
+Q.income = 18
+Q.expenditure = -20
+
+Q.democraticity = 35
+Q.unrest = 20
+
 !}
 
-= [+ player_party_name +] Status
+= Vitals
 
-Week [+ week +], [+ month : month +] [+ year +]
+**Week [+ week +], [+ month : month +] [+ year +]**
 
-Position: [+ position +]
+>**Ruling Group:** [+ position +]
 
-Resources:
-[? if player_party == "b": [+ b_resources +] ?]
+>**Democraticity:** [+ democraticity +]
+
+>**Unrest:** [+ unrest +]
+
+>**Resources:** [? if player_party == "b": [+ b_resources +] ?]
+>>**Income:** [+ income +]
+
+>>**Expenditure:** [+ expenditure +]
 
 
 = Sovnarkom
