@@ -3,18 +3,7 @@ new-page: true
 is-special: true
 on-arrival: {!
 Q.position = "";
-if (Q.player_party == 'm') {
-    if (Q.m_in_exco) {
-        Q.position = 'Soviet Executive Committee';
-        if (Q.m_in_gov) {
-            Q.position += ', in government';
-        }
-    } else if (Q.m_in_gov) {
-        Q.position = 'in government';
-    } else {
-        Q.position = 'in opposition';
-    }
-} else if (Q.player_party == 'b') {
+if (Q.player_party == 'b') {
     if (Q.b_in_exco) {
         Q.position = 'Soviet Executive Committee';
         if (Q.b_in_gov) {
@@ -24,23 +13,6 @@ if (Q.player_party == 'm') {
         Q.position = 'in government';
     } else {
         Q.position = 'in opposition';
-    }
-} else if (Q.player_party == 'sr') {
-    if (Q.sr_in_exco) {
-        Q.position = 'Soviet Executive Committee';
-        if (Q.sr_in_gov) {
-            Q.position += ', in government';
-        }
-    } else if (Q.sr_in_gov) {
-        Q.position = 'in government';
-    } else {
-        Q.position = 'in opposition';
-    }
-} else if (Q.player_party == 'k') {
-    if (Q.k_in_gov) {
-        Q.position += 'in government';
-    } else {
-        Q.position = 'in oppsition';
     }
 }
 
@@ -100,21 +72,16 @@ Week [+ week +], [+ month : month +] [+ year +]
 
 Position: [+ position +]
 
-Party resources available:
+Resources:
 [? if player_party == "b": [+ b_resources +] ?]
-[? if player_party == "m": [+ m_resources +] ?]
-[? if player_party == "k": [+ k_resources +] ?]
-[? if player_party == "sr": [+ sr_resources +] ?]
 
 Internal dissent:
 [? if player_party == "b": [+ b_dissent_percent : dissent +] ?]
-[? if player_party == "m": [+ m_dissent_percent : dissent +] ?]
-[? if player_party == "k": [+ k_dissent_percent : dissent +] ?]
-[? if player_party == "sr": [+ sr_dissent_percent : dissent +] ?]
 
 = [+ government_form : government_form +]
 
-Prime Minister: [+ prime_minister +] ([+ prime_minister_party +])
+Chair: [+ prime_minister +] ([?if president_party=="Bolshevik":<span style="color: var(--bolshevik-color);">**[+ prime_minister_party +]**</span>?])
+
 
 Parties in government: [+ governing_parties_str +]
 
