@@ -323,7 +323,7 @@ Q.democrats_in_gov = 0;
 Q.in_socialist_coalition = 0;
 
 Q.prime_minister = "Lenin";
-Q.prime_minister_party = "Bolshevik"
+Q.prime_minister_party = "RCP(b)"
 Q.agriculture_minister = "Milyutin";
 Q.agriculture_minister_party = "Bolshevik";
 Q.justice_minister = "Kerensky";
