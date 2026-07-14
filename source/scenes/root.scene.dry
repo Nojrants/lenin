@@ -839,10 +839,10 @@ Q.enemy_reinforcements_timer = 0
 // constituent assembly election
 Q.election_type = "ca";
 Q.ca_progress = 0;
-Q.ca_scheduled = 0;
-Q.next_election_year = 1918;
-Q.next_election_month = 12;
-Q.next_election_week = 0;
+Q.ca_scheduled = 1;
+Q.next_election_year = 1917;
+Q.next_election_month = 11;
+Q.next_election_week = 3;
 Q.next_election_time = 100;
 Q.time_to_election = 100;
 
