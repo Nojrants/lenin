@@ -643,43 +643,43 @@ Q.minority_parties = ['ukrainian_sr', 'alash', 'musavat', 'dashnak', 'jewish_soc
 
 // Support for party by social group
 // they don't have to sum to 100 since the electoral calculations will be normalized.
-Q.workers_b = 10;
-Q.workers_m = 50;
+Q.workers_b = 60;
+Q.workers_m = 5;
 Q.workers_sr = 30;
-Q.workers_k = 2;
-Q.workers_conservative = 1;
-Q.workers_popular_socialist = 2;
-Q.workers_anarchist = 5;
-Q.workers_other = 3;
-Q.workers_none = 10;
+Q.workers_k = 0;
+Q.workers_conservative = 0;
+Q.workers_popular_socialist = 1;
+Q.workers_anarchist = 15;
+Q.workers_other = 5;
+Q.workers_none = 20;
 
-Q.workers_pro_prov_gov = 85;
+Q.workers_pro_prov_gov = 65;
 Q.workers_pro_soviet = 95;
 
-Q.middle_b = 5;
-Q.middle_m = 10;
+Q.middle_b = 0;
+Q.middle_m = 1;
 Q.middle_sr = 10;
-Q.middle_k = 40;
+Q.middle_k = 80;
 Q.middle_conservative = 10;
-Q.middle_popular_socialist = 5;
-Q.middle_anarchist = 1;
+Q.middle_popular_socialist = 1;
+Q.middle_anarchist = 0;
 Q.middle_other = 15;
-Q.middle_none = 10;
+Q.middle_none = 5;
 
-Q.middle_pro_prov_gov = 85;
-Q.middle_pro_soviet = 40;
+Q.middle_pro_prov_gov = 5;
+Q.middle_pro_soviet = 10;
 
-Q.peasants_b = 5;
-Q.peasants_m = 5;
-Q.peasants_sr = 55;
-Q.peasants_k= 5;
-Q.peasants_conservative = 10;
-Q.peasants_popular_socialist = 10;
+Q.peasants_b = 20;
+Q.peasants_m = 1;
+Q.peasants_sr = 65;
+Q.peasants_k= 1;
+Q.peasants_conservative = 1;
+Q.peasants_popular_socialist = 1;
 Q.peasants_anarchist = 5;
 Q.peasants_other = 10;
 Q.peasants_none = 10;
 
-Q.peasants_pro_prov_gov = 65;
+Q.peasants_pro_prov_gov = 45;
 Q.peasants_pro_soviet = 70;
 
 Q.underclass_b = 15;
@@ -690,37 +690,37 @@ Q.underclass_conservative = 0;
 Q.underclass_popular_socialist = 5;
 Q.underclass_anarchist = 15;
 Q.underclass_other = 5;
-Q.underclass_none = 30;
+Q.underclass_none = 80;
 
-Q.underclass_pro_prov_gov = 60;
-Q.underclass_pro_soviet = 70;
+Q.underclass_pro_prov_gov = 50;
+Q.underclass_pro_soviet = 60;
 
-Q.soldiers_b = 10;
-Q.soldiers_m = 20;
+Q.soldiers_b = 60;
+Q.soldiers_m = 2;
 Q.soldiers_sr = 40;
 Q.soldiers_k = 5;
 Q.soldiers_conservative = 2;
-Q.soldiers_popular_socialist = 5;
+Q.soldiers_popular_socialist = 1;
 Q.soldiers_anarchist = 6;
 Q.soldiers_other = 10;
 Q.soldiers_none = 10;
 
 // this rises a lot due to Order Number 1
-Q.soldiers_pro_prov_gov = 50;
-Q.soldiers_pro_soviet = 60;
+Q.soldiers_pro_prov_gov = 65;
+Q.soldiers_pro_soviet = 95;
 
 Q.elites_b = 0;
 Q.elites_m = 2;
 Q.elites_sr = 2;
-Q.elites_k = 40;
+Q.elites_k = 50;
 Q.elites_conservative = 25;
 Q.elites_popular_socialist = 5;
 Q.elites_anarchist = 0;
 Q.elites_other = 12;
 Q.elites_none = 10;
 
-Q.elites_pro_prov_gov = 70;
-Q.elites_pro_soviet = 10;
+Q.elites_pro_prov_gov = 0;
+Q.elites_pro_soviet = 5;
 
 // minority party support:
 // based on the numbers
@@ -741,7 +741,7 @@ Q.others_turkic_turkic_muslim_parties = 30;
 Q.others_turkic_muslim_socialists = 20;
 Q.others_cossacks = 20;
 
-Q.minorities_pro_prov_gov = 80;
+Q.minorities_pro_prov_gov = 40;
 Q.minorities_pro_soviet = 60;
 
 // Provisional government
