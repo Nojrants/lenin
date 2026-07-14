@@ -9,6 +9,10 @@ new-page: true
 
 Vladimir Lenin is the undisputed leader of the Bolshevik party, and its chief theoretician and organizer.
 
+Stats:
+>Auctoritas: <div class="box b"> </div>
+
+
 # actions: organizing (same as card), agitation against the provisional government, 
 
 - @attend_rallies
