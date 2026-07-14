@@ -126,7 +126,7 @@ leninist_strength += 5;
 moderate_strength -= 5;
 moderate_dissent += 5;
 leftcom_strength += 2;
-!}
+
 
 @2nd_piecemeal
 on-arrival:{!
