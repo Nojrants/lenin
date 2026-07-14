@@ -907,9 +907,9 @@ Q.rodzianko_advisor = 0; // Mikhail Rodzianko
 // bolshevik advisors
 Q.sovnarkom_advisor = 1; 
 Q.lenin_advisor = 1; 
-Q.sverdlov_advisor = 1; 
-Q.trotsky_advisor = 1;
-Q.stalin_advisor = 1; // Josef Stalin - April week 1
+Q.sverdlov_advisor = 0; 
+Q.trotsky_advisor = 0;
+Q.stalin_advisor = 0; // Josef Stalin - April week 1
 Q.kamenev_advisor = 0; // Lev Kamenev - April week 1
 Q.zinoviev_advisor = 0; // Grigory Zinoviev - April week 1
 Q.kollontai_advisor = 0; // Alexandra Kollontai - April week 1
