@@ -47,8 +47,8 @@ body.dark-mode .tools {
 header, #content, footer {
   color: var(--text-color);
   max-width: 700px;
-  margin-left: 50px;
-  margin-right: auto;
+  position: relative;
+  left: 100px;
   overflow: auto;
 }
 #content {
