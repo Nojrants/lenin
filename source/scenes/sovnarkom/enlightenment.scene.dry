@@ -34,31 +34,31 @@ title: Recruit administrative staff.
 
 @rabfaki
 title: Found a network of worker educational centres. 
-subtitle: -2 budget
-choose-if: budget >= 2
-unavailable-subtitle: We lack the necessary resources. 
-on-arrival: 
+subtitle: -2 resources, +0.5 expenditure
+choose-if: resources >= 2
+unavailable-subtitle: -2 resources - We lack the necessary resources. 
+on-arrival: resources -= 5; enlightenment_expend += 0.5;
 
 @found_party_schools
 title: Found a party school to train the next generation of Bolshevik leaders. 
-subtitle: -2 budget
-choose-if: budget >= 2
-unavailable-subtitle: We lack the necessary resources. 
-on-arrival: 
+subtitle: -2 resources
+choose-if: resources >= 2; enlightenment_expend += 0.25
+unavailable-subtitle: -2 resources - We lack the necessary resources. 
+on-arrival: party_school = 1;
 
 
 @sponsor_colleges
 title: Sponsor creation of new universities
-subtitle: -2 budget
-choose-if: budget >= 2
-unavailable-subtitle: We lack the necessary resources. 
+subtitle: -2 resources; enlightenment_expend += 0.25
+choose-if: resources >= 2
+unavailable-subtitle: -2 resources - We lack the necessary resources. 
 on-arrival: 
 
 @recruit_party_educators
 title: Recruit Bolsheviks to teach seminars at the party schools. 
-subtitle: -1 budget
-choose-if: budget >=1
-unavailable-subtitle: We lack the necessary resources. 
+subtitle: -1 resources
+choose-if: resources >=1
+unavailable-subtitle: -1 resources - We lack the necessary resources. 
 on-arrival: 
 
 @negotiate_professors
