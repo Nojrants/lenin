@@ -74,10 +74,10 @@ Q.democraticity = 35
 
 **Week [+ week +], [+ month : month +] [+ year +]**
 
-**Ruling Group:** [+ position +]
->**Stability:** [+ instability +]
+>**Ruling Group:** [+ position +]
+>>**Stability:** [+ instability +]
 
->**Democraticity:** [+ democraticity +]
+>>**Democraticity:** [+ democraticity +]
 
 >**Resources:** [? if player_party == "b": [+ b_resources +] ?]
 >>**Income:** [+ income +]
