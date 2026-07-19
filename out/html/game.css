@@ -46,7 +46,7 @@ body.dark-mode .tools {
 }
 header, #content, footer {
   color: var(--text-color);
-  max-width: 640px;
+  max-width: 600px;
   margin: 0 auto;
   overflow: auto;
 }
@@ -173,7 +173,7 @@ blockquote + blockquote.attribution {
 }
 /* This is mostly copied from undum. */
 #mid_panel {
-  margin: 0 20rem;
+  margin: 0 22rem;
 }
 #page {
   margin: 0 auto;
@@ -189,7 +189,7 @@ blockquote + blockquote.attribution {
 }
 .tools {
   padding: 0.6em;
-  width: 20rem;
+  width: 22rem;
   color: var(--text-color);
   background-color: var(--content-bg-color);
   box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.2);
