@@ -10,22 +10,22 @@ tags: sovnarkom
 
 Following the revolution, there have been reports of increasing crime and disorder. Inflation has driven more theft. Prisoners have been released from jails. The new militias have not yet replaced the functions of the tsarist police. And there is always the threat of counter-revolution and Black Hundredism.
 
+
+- @internal_recruitment
+- @counterrevolutionary_measures
+- @investigation
+- @internal_election
 - @abolish_police
 - @create_cheka
-- @recruit_chekists
-- @strengthen_cheka
-- @recruit_militias
-- @militia_efficacy
-- @target_reactionaries
 - @anti_crime
-- @rev_tribunals
-- @on_sight
-- @concentration_camps
 - @orphanages
-- @investigation
 - @root: We do not need new policy.
 - @easy_discard
 - @cancel_advisor_action
+
+@internal_cancel
+title: Cancel action
+go-to: internal_affairs
 
 @abolish_police
 title: Dismantle the imperial police system.
@@ -42,6 +42,22 @@ subtitle: -1 budget
 choose-if: cheka_founded = 0 and imperial_police = 1 and city_militia_strength >= 15 and city_militias > 0 and instability >= 60
 on-arrival: cheka_founded = 1; budget -= 1; cheka = 5; instability += 5; cheka_strength = 5;  cheka_militancy = 0.2; city_militia_strength -= 5; moderate_dissent += 5; intelligentsia_unrest += 5; elite_unrest += 5; crime -= 5; leninist_strength += 5;
 
+
+
+@internal_recruitment
+title: Recruitment
+go-to: internal_recruitment_menu
+
+@internal_recruitment_menu
+
+- @recruit_chekists
+- @strengthen_cheka
+- @recruit_militias
+- @militia_efficacy
+- @recruit_election_officials
+- @internal_cancel
+
+
 @recruit_chekists
 title: Recruit additional secret police. 
 subtitle: -1 budget
@@ -53,8 +69,6 @@ title: Build up the secret police apparatus.
 subtitle: -1 budget
 view-if: cheka_founded = 1 
 on-arrival: cheka_strength += 8*(efficacy_internal); cheka_militancy += 0.05*efficacy_internal; budget -= 1; 
-
-
 
 @recruit_militias
 title: Strengthen the militias.
@@ -96,13 +110,25 @@ We have sent the rural militias to suppress peasant land seizures.
 
 
 
-@target_reactionaries
-title: Persecute reactionaries, counterrevolutionaries, and dissidents. 
-unavailable-subtitle: Our secret police forces are not effective enough. 
-choose-if: (city_militias >= 1 and city_militia_strength >= 5) or cheka >= 5
-on-arrival: elite_unrest += 10; elites -= 0.1; elite_strength -= 5; middle_unrest += 1; middle -= 0.05; middle_strength -= 2; intelligentsia -= 0.1; intelligentsia_unrest += 2; intelligentsia_strength -= 2; instability += 5; clergy -= 0.05; clergy_unrest += 5;
 
-We have arrested members of the former elite identified to be sympathetic to counterrevolution. 
+
+@internal_election
+title: Election Monitoring
+go-to: internal_election_menu
+
+@internal_election_menu
+
+- @recruit_election_officials
+- @internal_cancel
+
+@recruit_election_officials
+title: Recruit election monitoring officers. 
+subtitle: -1 budget
+on-arrival: election_officials += 1; election_power += 5;
+
+
+
+
 
 @anti_crime
 title: Use the militias to combat crime.
@@ -112,6 +138,21 @@ view-if: crime >= 30
 on-arrival: crime -= 6*city_militias*unrest_modifier; prov_gov_legitimacy += city_militias*3
 
 We have deployed the city militias to increase security and combat crime in Petrograd and other major cities.
+
+
+
+
+@counterrevolutionary_measures
+title:Anti-counterrevolution Measures
+go-to: counterrevolutionary_measures_menu
+
+@counterrevolutionary_measures_menu
+
+- @rev_tribunals
+- @on_sight
+- @concentration_camps
+- @internal_cancel
+
 
 @rev_tribunals
 title: Establish revolutionary tribunals. 
@@ -152,10 +193,12 @@ What should we turn our attention to?
 
 - @investigate_factories
 - @investigate_army_failings
-- @investigate_reactionaries
+- @investigate_dissidents
+- @target_reactionaries
 - @investigate_church
 - @investigate_party_abuses
-- @cancel_advisor_action
+- @internal_cancel
+
 
 @investigate_factories
 title: Sweep industrial centres for signs of sabotage and disloyalty 
@@ -167,7 +210,7 @@ title: Conduct an audit regarding military failures on the frontlines.
 subtitle: -1 budget
 on-arrival: budget -= 1;
 
-@investigate_reactionaries
+@investigate_dissidents
 title: Monitor the activities of reactionary elements. 
 subtitle: -1 budget
 on-arrival: budget -= 1; elite_strength -= 5; middle_strength -= 2; clergy_strength -= 2; 
@@ -182,7 +225,13 @@ title: Look into supposed instances of abuse by Bolshevik members.
 subtitle: -1 budget
 on-arrival: budget -= 1; worker_unrest -= 6; peasant_unrest -= 6; middle_unrest -= 4; elite_unrest -= 2; democraticity += 2; 
 
+@target_reactionaries
+title: Persecute reactionaries, counterrevolutionaries, and dissidents. 
+unavailable-subtitle: Our secret police forces are not effective enough. 
+choose-if: (city_militias >= 1 and city_militia_strength >= 5) or cheka >= 5
+on-arrival: elite_unrest += 10; elites -= 0.1; elite_strength -= 5; middle_unrest += 1; middle -= 0.05; middle_strength -= 2; intelligentsia -= 0.1; intelligentsia_unrest += 2; intelligentsia_strength -= 2; instability += 5; clergy -= 0.05; clergy_unrest += 5;
 
+We have arrested members of the former elite identified to be sympathetic to counterrevolution. 
 
 
 
