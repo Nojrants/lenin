@@ -65,18 +65,20 @@ Q.monthly_inflation_disp = Q.monthly_inflation.toFixed(1);
 Q.inflation_disp = Q.inflation.toFixed(1);
 Q.unemployed_disp = Q.unemployed.toFixed(1);
 
-Q.internal_expend = 2;
-Q.foreignaffairs_expend = 1;
-Q.military_expend = 9;
-Q.enlightmenet_expend = 1;
-Q.railways_expend = 2;
-Q.trade_expend = 1;
-Q.finance_expend = 2;
-Q.justice_expend = 1;
-Q.agriculture_expend = 2;
-Q.foodsupply_expend = 3;
-Q.nationalities_expend = 1;
-Q.welfare_expend = 1;
+Q.government_functions = (
+    (Q.internal_expend = 2;
+    (Q.foreignaffairs_expend = 1;
+    (Q.military_expend = 9;
+    (Q.enlightmenet_expend = 1;
+    (Q.railways_expend = 2;
+    (Q.trade_expend = 1;
+    (Q.finance_expend = 2;
+    (Q.justice_expend = 1;
+    (Q.agriculture_expend = 2;
+    (Q.foodsupply_expend = 3;
+    (Q.nationalities_expend = 1;
+    (Q.welfare_expend = 1;
+);
 
 Q.loans_high = 8;
 Q.loans_med = 4;
@@ -96,17 +98,7 @@ Q.interest = (
 Q.expenditure = Math.round(
     Q.interest +
     Q.internal_expend +
-    Q.foreignaffairs_expend +
-    Q.military_expend +
-    Q.enlightmenet_expend +
-    Q.railways_expend +
-    Q.trade_expend +
-    Q.finance_expend +
-    Q.justice_expend +
-    Q.agriculture_expend +
-    Q.foodsupply_expend +
-    Q.nationalities_expend +
-    Q.welfare_expend
+    Q.government_functions
 );
 
 Q.taxation = 5;
