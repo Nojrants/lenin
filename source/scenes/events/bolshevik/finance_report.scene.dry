@@ -1,0 +1,135 @@
+title: Financial Report
+subtitle: Monthly accounting
+new-page: true
+view-if: timer_report = 0
+on-arrival: time_report = 4; 
+tags: event
+
+= Financial Report
+
+The current state of our finances. 
+
+**Current treasury:** [+ resources +]
+
+**Revenue:** [+ income +]
+
+>Taxation: [+ taxation +]
+
+>Customs: [+ customs +]
+
+>Railways: [+ railway_revenue +]
+
+>State Monopolies: [+ monopolies +]
+
+>State Enterprises: [+ enterprises_revenue +]
+
+---  
+
+**Expenditure:** [+ expenditure +]
+
+>Government Functions: [+ government_functions +]
+
+>>Foreign Affairs: [+ foreignaffairs_expend +]
+
+>>Military: [+ military_expend +]
+
+>>Enlightenment: [+ enlightmenet_expend +]
+
+>>Internal Affairs: [+ internal_expend +]
+
+>>Railways: [+ railways_expend +]
+
+>>Trade: [+ trade_expend +]
+
+>>Finance: [+ finance_expend +]
+
+>>Justice: [+ justice_expend +]
+
+>>Agriculture: [+ agriculture_expend +]
+
+>>Food Supply: [+ foodsupply_expend +]
+
+>>Nationalities: [+ nationalities_expend +]
+
+>>Welfare: [+ welfare_expend +]
+
+>Interest payments: [+ interest +]
+
+>Indemnities: [+ indemnities +]
+
+- @budget_balancing
+- @report_accept
+
+@budget_balancing
+title: Balance the budget
+subtitle: As our expenditure exceeds our available resources, we will have to make up the difference somehow. 
+view-if: expenditure > (income + resources)
+go-to: budget_balancing_menu
+
+
+@budget_balancing_menu
+
+- @issue_currency
+- @bank_advances
+- @emergency_bonds
+- @emergency_loans
+
+
+@issue_currency
+title: Issue additional currency. 
+choose-if: state_bank = 1
+unavailable-subtitle: We lack control over the banks. 
+subtitle: +5 resources
+on-arrival: resources += 5
+go-to: financial_report
+
+@bank_advances
+title: Borrow from the State Bank.
+choose-if: state_bank = 1
+unavailable-subtitle: We lack control over the banks. 
+subtitle: +5 resources
+on-arrival: resources += 5; bank_advances += 5; 
+go-to: financial_report
+
+
+@emergency_bonds
+title: Issue emergency bonds
+subtitle: +5 resources
+on-arrival: {!
+  bond_rate += (bonds > 90) ? 1.0
+             : (bonds > 60) ? 0.75
+             : (bonds < 30) ? 0.25
+             : 0.5;
+  bonds += 5;
+  resources += 5;
+!}
+go-to: financial_report
+
+
+
+@emergency_loans
+title: Seek-out foreign loans
+go-to: emergency_loans_menu
+
+@emergency_loans_menu
+
+- @cancel_loans
+
+@cancel_loans
+title: Cancel action
+go-to: budget_balancing_menu
+
+  
+
+@report_accept
+title: Accept the report. 
+choose-if: expenditure < (income + resources)
+unavailable-subtitle: We haven't balanced the budget. 
+on-arrival: resources += (income - expenditures)
+go-to: root
+
+  
+
+
+
+  
