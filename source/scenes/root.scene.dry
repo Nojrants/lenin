@@ -516,7 +516,9 @@ Q.war_progress = Q.northern_progress + Q.western_progress + Q.southwestern_progr
 
 // Militias
 
-city_militias = 2; 
+Q.city_militias = 2; 
+Q.election_officials = 1;
+Q.election_power = 35;
 
 // 100k
 Q.workers_militia_parties = ['m', 'b', 'sr'];
