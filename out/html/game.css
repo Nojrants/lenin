@@ -46,7 +46,8 @@ body.dark-mode .tools {
 }
 header, #content, footer {
   color: var(--text-color);
-  max-width: 650px;
+  max-width: 640px;
+  margin: 0 auto;
   overflow: auto;
 }
 #content {
@@ -172,21 +173,23 @@ blockquote + blockquote.attribution {
 }
 /* This is mostly copied from undum. */
 #mid_panel {
-  margin-left: 26rem;
-  margin-right: 2rem;
+  margin: 0 20rem;
 }
 #page {
   margin: 0 auto;
   position: relative;
 }
 #tools_wrapper {
-    position: absolute;
-    right: calc(100% + 50px);
-    width: 24rem;
+  position: absolute;
+  width: 100%;
+  max-width: 85em;
+  left: 0;
+  right: 5em;
+  margin: 0 auto;
 }
 .tools {
   padding: 0.6em;
-  width: 22rem;
+  width: 20rem;
   color: var(--text-color);
   background-color: var(--content-bg-color);
   box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.2);
@@ -459,7 +462,7 @@ img {
       margin-left: 0.4em;
   }
   #mid_panel {
-      margin: 0;
+      margin-right: 0.4em;
   }
 }
 /* mobile: move the stat box to the top if the screen is too small,
