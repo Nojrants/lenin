@@ -93,7 +93,7 @@ Q.interest = (
     Q.indemnities
 );
 
-Q.expenditure = (
+Q.expenditure = Math.round(
     Q.interest +
     Q.internal_expend +
     Q.foreignaffairs_expend +
@@ -115,7 +115,7 @@ Q.customs = 2;
 Q.railway_revenue = 1;
 Q.enterprises_revenue = 1;
 
-Q.income = (
+Q.income = Math.round(
     Q.taxation +
     Q.monopolies +
     Q.customs +
@@ -123,7 +123,7 @@ Q.income = (
     Q.enterprises_revenue
 );
 
-Q.debt = (
+Q.debt = Math.round(
     Q.loans_high +
     Q.loans_med +
     Q.loans_low +
