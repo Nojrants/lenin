@@ -29,7 +29,7 @@ title: Cancel action
 go-to: internal_affairs
 
 @internal_null
-title: ------------------------------------
+title: ------------------------------------------------------------------------
 go-to: internal_affairs
 
 @abolish_police
