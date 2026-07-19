@@ -81,7 +81,7 @@ choose-if: state_bank = 1
 unavailable-subtitle: We lack control over the banks. 
 subtitle: +5 resources
 on-arrival: resources += 5
-go-to: financial_report
+go-to: finance_report
 
 @bank_advances
 title: Borrow from the State Bank.
@@ -89,7 +89,7 @@ choose-if: state_bank = 1
 unavailable-subtitle: We lack control over the banks. 
 subtitle: +5 resources
 on-arrival: resources += 5; bank_advances += 5; 
-go-to: financial_report
+go-to: finance_report
 
 
 @emergency_bonds
@@ -103,7 +103,7 @@ on-arrival: {!
   bonds += 5;
   resources += 5;
 !}
-go-to: financial_report
+go-to: finance_report
 
 
 
