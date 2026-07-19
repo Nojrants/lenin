@@ -180,12 +180,9 @@ blockquote + blockquote.attribution {
   position: relative;
 }
 #tools_wrapper {
-  position: absolute;
-  width: 100%;
-  max-width: 70em;
-  left: 0;
-  right: 5em;
-  margin: 0 auto;
+    position: absolute;
+    right: calc(100% + 50px);
+    width: 24rem;
 }
 .tools {
   padding: 0.6em;
@@ -462,7 +459,7 @@ img {
       margin-left: 0.4em;
   }
   #mid_panel {
-      margin-right: 0.4em;
+      margin: 0;
   }
 }
 /* mobile: move the stat box to the top if the screen is too small,
