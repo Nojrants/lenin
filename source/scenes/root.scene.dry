@@ -471,7 +471,11 @@ Q.southwestern_progress = 1;
 Q.romanian_progress = -1;
 Q.caucasus_progress = 1;
 Q.war_progress = Q.northern_progress + Q.western_progress + Q.southwestern_progress + Q.romanian_progress + Q.caucasus_progress;
+
+
 // Militias
+
+city_militias = 1; 
 
 // 100k
 Q.workers_militia_parties = ['m', 'b', 'sr'];
