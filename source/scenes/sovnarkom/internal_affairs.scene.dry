@@ -15,6 +15,7 @@ Following the revolution, there have been reports of increasing crime and disord
 - @counterrevolutionary_measures
 - @investigation
 - @internal_election
+- @internal_null
 - @abolish_police
 - @create_cheka
 - @anti_crime
@@ -25,6 +26,10 @@ Following the revolution, there have been reports of increasing crime and disord
 
 @internal_cancel
 title: Cancel action
+go-to: internal_affairs
+
+@internal_null
+title: 
 go-to: internal_affairs
 
 @abolish_police
