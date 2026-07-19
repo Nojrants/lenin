@@ -154,7 +154,7 @@ Q.democraticity = 35;
 
 >>**Democraticity:** [+ democraticity +]
 
->**Resources:** [? if player_party == "b": [+ b_resources +] ?]
+>**Resources:** [+ resources +]
 >>**Income:** [+ income +]
 
 >>**Expenditure:** [+ expenditure +]
