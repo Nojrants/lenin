@@ -863,6 +863,7 @@ Q.timers = [//m_party
             'enemy_reinforcements',
             'german_offensive',
             'mass_demobilization',
+            'report',
             ];
 Q.advisor_action_timer = 0;
 Q.party_congress_timer = 0;
