@@ -68,19 +68,15 @@ Q.income = 18
 Q.expenditure = -20
 
 Q.democraticity = 35
-Q.unrest = 20
-
 !}
 
 = Vitals
 
 **Week [+ week +], [+ month : month +] [+ year +]**
 
->**Ruling Group:** [+ position +]
-
+**Ruling Group:** [+ position +]
+>**Stability:** [+ instability +]
 >**Democraticity:** [+ democraticity +]
-
->**Unrest:** [+ unrest +]
 
 >**Resources:** [? if player_party == "b": [+ b_resources +] ?]
 >>**Income:** [+ income +]
