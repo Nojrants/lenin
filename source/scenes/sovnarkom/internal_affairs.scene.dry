@@ -1,0 +1,138 @@
+title: Internal Security
+new-page: true
+is-card: true
+on-arrival: internal_security_timer += 2; week_actions += 1
+view-if: internal_security_timer == interior_minister_party = "Bolshevik"
+card-image: img/militias.jpg
+tags: sovnarkom
+
+= Internal Security
+
+Q.imperial_police = 0;
+Q.cheka_founded = 0;
+Q.efficacy_internal = 1;
+
+Following the revolution, there have been reports of increasing crime and disorder. Inflation has driven more theft. Prisoners have been released from jails. The new militias have not yet replaced the functions of the tsarist police. And there is always the threat of counter-revolution and Black Hundredism.
+
+- @abolish_police
+- @create_cheka
+- @militias
+- @recruit_militias
+- @militia_efficacy
+- @target_bolsheviks
+- @anti_crime
+- @rural_militias
+- @rural_militias_2
+- @rural_suppress
+- @investigate_reactionaries
+- @root: We do not need new policy.
+- @easy_discard
+- @cancel_advisor_action
+
+@abolish_police
+title: Dismantle the imperial police system.
+subtitle: Reform the militia system to remove vestiges from the imperial era, and purge known reactionary officers from service. 
+view-if: imperial_police = 0
+on-arrival: imperial_police = 1; city_militia_strength -= 5; city_militia_militancy += 0.05; city_militias -= 5; worker_unrest -= 5; 
+
+We implement a series of reforms replacing the imperial police system fully and purging reactionary officers. 
+
+@create_cheka
+title: Create an extraordinary commission to combat counterrevolutionary activity. 
+subtitle: -1 budget
+view-if: cheka_founded = 0 and imperial_police = 1 and city_militia_strength >= 15 and city_militias > 0 and instability >= 60
+on-arrival: cheka_founded = 1; budget -= 1; cheka = 5; instability += 5; cheka_strength = 5;  cheka_militancy = 0.2; city_militia_strength -= 5; moderate_dissent += 5; intelligentsia_unrest += 5; elite_unrest += 5; crime -= 5; leninist_strength += 5;
+
+@recruit_chekists
+title: Recruit additional secret police. 
+subtitle: -1 budget
+view-if: cheka_founded = 1
+on-arrival: cheka_strength += 5*(efficacy_internal); cheka_militancy += 0.02*efficacy_internal; budget -= 1; cheka += 1
+
+@strengthen_cheka
+title: Recruit additional secret police. 
+subtitle: -1 budget
+view-if: cheka_founded = 1 
+on-arrival: cheka_strength += 8*(efficacy_internal); cheka_militancy += 0.05*efficacy_internal; budget -= 1; 
+
+
+
+
+@militias
+title: Strengthen the city militias.
+subtitle: Replacing the old police forces, the city militias are volunteer citizen's organizations that enforce the law and maintain order.
+view-if: city_militias = 0
+on-arrival: city_militia_strength += 5; city_militia_militancy += 0.02; city_militias += 1
+
+We have strengthened the city militias.
+
+@recruit_militias
+title: Strengthen the city militias.
+subtitle: -1 budget
+view-if: city_militias >= 1 and city_militias <= 10
+on-arrival: city_militia_strength += 8*(prov_gov_efficacy); city_militia_militancy += 0.02*prov_gov_efficacy; budget -= 1; city_militias += 1
+
+We have further strengthened the city militias.
+
+@militia_efficacy
+title: Improve the effectiveness and loyalty of the city militias.
+view-if: city_militias >= 1 and city_militias <= 10
+on-arrival: city_militias += 1; city_militia_k_loyalty += 6*prov_gov_efficacy if k_in_gov; city_militia_sr_loyalty += 4*prov_gov_efficacy if sr_in_gov; city_militia_m_loyalty += 4*prov_gov_efficacy if m_in_gov; city_militia_militancy += 0.02*prov_gov_efficacy
+
+We are trying to make the city militias more effective, and more responsive to the Provisional Government.
+
+@rural_militias
+title: Form rural militias.
+subtitle: We need to maintain order in the countryside. -1 budget
+on-arrival: rural_militia_strength += 15; rural_militia_militancy = 0.5 if rural_militia_militancy = 0; budget -= 1
+
+We have formed a new body of rural militias to maintain order in the countryside.
+
+@rural_militias_2
+title: Continue building up our rural militias.
+subtitle: We need to maintain order in the countryside. -1 budget
+on-arrival: rural_militia_strength += 10*prov_gov_efficacy; rural_militia_militancy += 0.1*prov_gov_efficacy; budget -= 1
+
+We have increased the size and strength of our rural milita.
+
+@rural_suppress
+title: Use the rural militias to suppress peasant unrest in the countryside.
+subtitle: This may upset the left-SRs.
+view-if: rural_militia_strength >= 10
+on-arrival: rural_unrest -= rural_militia_strength*rural_militia_militancy*unrest_modifier; left_sr_dissent += 10 if sr_in_gov and sr_leadership = 0; sr_coalition_dissent += 1 if sr_leadership = 1; left_sr_coalition_dissent += 1; land_seizures_timer += 1; coup_progress -= 1
+
+We have sent the rural militias to suppress peasant land seizures.
+
+# TODO: investigate Bolsheviks
+
+@investigate_bolsheviks
+title: Investigate the Bolsheviks and anarchists
+
+
+@target_bolsheviks
+title: Persecute the Bolsheviks, anarchists, and other malcontents.
+unavailable-subtitle: Our city militias are not effective enough.
+view-if: b_threat >= 1 and player_party != "b" and not b_in_gov
+choose-if: city_militias >= 1
+on-arrival: workers_b -= 8*prov_gov_efficacy; soldiers_b -= 8*prov_gov_efficacy; b_threat -= 1; m_b_relation -= 15 if m_in_gov; b_sr_relation -= 15 if sr_in_gov; b_k_relation -= 15 if k_in_gov; mrc_timer += 1 if mrc_timer > 0; bolshevik_coup_timer += 1 if bolshevik_coup_timer > 0
+
+We have arrested some of the Bolsheviks who organized riots in the city, and forced others into exile.
+
+
+@anti_crime
+title: Use the militias to combat crime.
+unavailable-subtitle: Our city militias are not effective enough.
+choose-if: city_militias >= 1
+view-if: crime >= 30
+on-arrival: crime -= 6*city_militias*unrest_modifier; prov_gov_legitimacy += city_militias*3
+
+We have deployed the city militias to increase security and combat crime in Petrograd and other major cities.
+
+@investigate_reactionaries
+title: Investigate right-wing and counterrevolutionary movements.
+view-if: player_party != "k"
+unavailable-subtitle: [? if city_militias < 1 : Our city militias are not effective enough. ?]
+choose-if: city_militias >= 1
+on-arrival: coup_progress -= city_militias; capital_flight_progress -= city_militias; k_coalition_dissent += 1; prov_gov_legitimacy += city_militias*2;
+
+Many members of the bourgeois and aristocratic classes are disillusioned with the revolution, and some are even discussing measures to overthrow the revolutionary government and replace it with a dictatorship or restored monarchy. There are rumors of sympathy towards the Germans, and plots to leave Petrograd open to German invasion. Our investigators have identified and thwarted some of this organizing.
