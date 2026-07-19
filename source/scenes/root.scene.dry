@@ -569,6 +569,9 @@ Q.cheka_militancy = 0;
 Q.cheka_loyalty = 0;
 
 
+Q.party_school = 0;
+
+
 
 
 // bolshevik threat
