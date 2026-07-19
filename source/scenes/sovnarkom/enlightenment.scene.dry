@@ -31,6 +31,8 @@ go-to: enlightenment
 
 @enlightenment_recruitment
 title: Recruit administrative staff.
+on-arrival: enlightenment_expend += 0.1; 
+
 
 @rabfaki
 title: Found a network of worker educational centres. 
