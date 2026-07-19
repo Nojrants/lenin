@@ -29,7 +29,7 @@ Following the revolution, there have been reports of increasing crime and disord
 
 @abolish_police
 title: Dismantle the imperial police system.
-subtitle: Reform the militia system to remove vestiges from the imperial era, and purge known reactionary officers from service. 
+subtitle: Reform the militia system to remove vestiges of the imperial era, and purge known reactionary officers from service. 
 view-if: imperial_police = 0
 on-arrival: imperial_police = 1; city_militia_strength -= 5; city_militia_militancy += 0.05; worker_unrest -= 5; elite_strength -= 2;
 
@@ -57,12 +57,11 @@ on-arrival: cheka_strength += 8*(efficacy_internal); cheka_militancy += 0.05*eff
 
 
 @recruit_militias
-title: Strengthen the city militias.
+title: Strengthen the militias.
 subtitle: -1 budget
-view-if: city_militias >= 1 and city_militias <= 10
 on-arrival: city_militia_strength += 8*(prov_gov_efficacy); city_militia_militancy += 0.02*prov_gov_efficacy; budget -= 1; city_militias += 1
 
-We have further strengthened the city militias.
+We have further strengthened the militias.
 
 @militia_efficacy
 title: Improve the effectiveness and loyalty of the city militias.
