@@ -109,6 +109,7 @@ title: Persecute reactionaries, counterrevolutionaries, and dissidents.
 unavailable-subtitle: Our secret police forces are not effective enough. 
 choose-if: (city_militias >= 1 and city_militia_strength >= 5) or or cheka >= 5
 on-arrival: elite_unrest += 10; elites -= 0.1; elite_strength -= 5; middle_unrest += 1; middle -= 0.05; middle_strength -= 2; intelligentsia -= 0.1; intelligentsia_unrest += 2; intelligentsia_strength -= 2; instability += 5; clergy -= 0.05; clergy_unrest += 5;
+
 We have arrested members of the former elite identified to be sympathetic to counterrevolution. 
 
 @anti_crime
