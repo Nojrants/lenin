@@ -1,7 +1,7 @@
 title: Revolutionary Revelry
 subtitle: The Revolution has arrived!
 new-page: true
-view-if: year = 1917 and month = 11 and week = 1
+view-if: year = 1917 and month = 11
 max-visits: 1
 face-image: img/womens_day.jpg
 tags: event
