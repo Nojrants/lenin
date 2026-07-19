@@ -45,7 +45,7 @@ on-arrival: cheka_founded = 1; budget -= 1; cheka = 5; instability += 5; cheka_s
 
 
 @internal_recruitment
-title: Recruitment
+title: RECRUITMENT
 go-to: internal_recruitment_menu
 
 @internal_recruitment_menu
@@ -113,7 +113,7 @@ We have sent the rural militias to suppress peasant land seizures.
 
 
 @internal_election
-title: Election Monitoring
+title: ELECTIONS
 go-to: internal_election_menu
 
 @internal_election_menu
@@ -143,7 +143,7 @@ We have deployed the city militias to increase security and combat crime in Petr
 
 
 @counterrevolutionary_measures
-title:Anti-counterrevolution Measures
+title:ANTI-COUNTERREVOLUTION
 go-to: counterrevolutionary_measures_menu
 
 @counterrevolutionary_measures_menu
@@ -180,7 +180,7 @@ choose-if: imperial_police = 1 and city_militias >= 2 and cheka >= 1 and budget 
 on-arrival: budget -= 3; expenditure += 1; crime -= 5*(efficacy_internal); worker_unrest -= 10; underclass_unrest -= 15; underclass -= 1; workers += 1; intelligentsia_unrest -= 5; instability -= 5; 
 
 @investigation
-title: Investigations
+title: INVESTIGATIONS
 subtitle: We can redirect the attention of the secret police to a particular question. 
 unavailable-subtitle: We lack the secret policing apparatus for this. 
 choose-if: cheka >= 1
