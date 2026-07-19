@@ -116,14 +116,13 @@ We have deployed the city militias to increase security and combat crime in Petr
 @rev_tribunals
 title: Establish revolutionary tribunals. 
 subtitle: -1 budget 
-choose-if: city_militias >= 1 and instability >= 50
+view-if: city_militias >= 1 and instability >= 50
 on-arrival: crime -= 5; democraticity -= 5; instability += 5; elite_unrest += 10; elites -= 0.05; elite_strength -= 5; worker_unrest -= 3; peasant_unrest -= 5; intelligentsia_unrest += 2; underclass_unrest -= 5; underclass_strength += 5;
 
 @on_sight
 title: Declare execution without trial for the worst acts of counterrevolution. 
 subtitle: The situation calls for drastic measures. 
 view-if: cheka >= 1 and instability >= 60
-choose-if: cheka >= 1 and instability >= 60
 on-arrival: crime -= 5; democraticity -= 5; instability += 5; elite_unrest += 10; elites -= 0.05; elite_strength -= 5; peasant_strength -= 5; intelligentsia_unrest += 2; underclass_unrest -= 5; underclass_strength += 5;
 
 @concentration_camps
