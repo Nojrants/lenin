@@ -1,0 +1,68 @@
+title: Enlightenment
+new-page: true
+is-card: true
+on-arrival: education_policy_timer += 2; week_actions += 1
+view-if: education_policy_timer == 0 and education_minister_party = "Bolshevik"
+card-image: img/education.jpg
+tags: sovnarkom
+
+= Enlightenment
+
+Text
+
+- @enlightenment_recruitment
+- @rabfaki
+- @found_party_schools
+- @sponsor_colleges
+- @recruit_party_educators
+- @negotiate_professors
+- @intellectual_rations
+- @root: We do not need new policy.
+- @easy_discard
+- @cancel_advisor_action
+
+@enlightenment_cancel
+title: Cancel action
+go-to: enlightenment
+
+@enlightenment_null
+title: ------------------------------------------------------------------------
+go-to: enlightenment
+
+@rabfaki
+title: Found a network of worker educational centres. 
+subtitle: -2 budget
+choose-if: budget >= 2
+unavailable-subtitle: We lack the necessary resources. 
+on-arrival: 
+
+@found_party_schools
+title: Found a party school to train the next generation of Bolshevik leaders. 
+subtitle: -2 budget
+choose-if: budget >= 2
+unavailable-subtitle: We lack the necessary resources. 
+on-arrival: 
+
+
+@sponsor_colleges
+title: Sponsor creation of new universities
+subtitle: -2 budget
+choose-if: budget >= 2
+unavailable-subtitle: We lack the necessary resources. 
+on-arrival: 
+
+@recruit_party_educators
+title: Recruit Bolsheviks to teach seminars at the party schools. 
+subtitle: -1 budget
+choose-if: budget >=1
+unavailable-subtitle: We lack the necessary resources. 
+on-arrival: 
+
+@negotiate_professors
+title: Initiate negotiations with the bourgeois professors.
+
+@intellectual_rations
+title: Evaluate our level of rations granted to intellectuals. 
+
+
+
