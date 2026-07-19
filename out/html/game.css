@@ -1,5 +1,7 @@
 body {
   --bolshevik-color: #D81C00;
+  --bolshevik-moderate-color: #D83934;
+  --lsr-color: #317037;
   --bg-color: #f3f3e3;
   --border-color: #000;
   --content-bg-color: #f3f3f3;
@@ -182,7 +184,7 @@ blockquote + blockquote.attribution {
   width: 100%;
   max-width: 85em;
   left: 0;
-  right: 0;
+  right: 5em;
   margin: 0 auto;
 }
 .tools {
