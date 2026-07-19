@@ -14,7 +14,6 @@ October Revolution Event Text
 
 @all_power_to_the_soviets
 title: All Power to the Soviets
-view-if: abdi_seen < n_players
 go-to: 2nd_soviet
 on-arrival: {!
 Q.sdi_relation = 40;
@@ -28,8 +27,6 @@ Q.anarchist_relation = 55;
 Q.ns_relation = 35;
 Q.k_relation = 5;
 Q.rightist_relation = 0;
-
-abdi_seen += 1;
 
 // the state of the party
 // overall dissent reduces every increase in party support.
@@ -67,12 +64,14 @@ Q.b_soldiers_org = 1;
 
 = All Power to the Soviets
 
-All Power to the Soviets
+All power to the soviets. 
 
 @2nd_soviet
 go-to: 2nd_soviet_menu
 
-With the Congress at our command, we must decide the composition of a new provisional government.
+Having seized power from the Provisional Government, we must now decide on a replacement. Though some assumed the Soviet Executive would simply absorb the functions of the government, the Bolsheviks have arranged for the creation of a "temporary" auxiliary organ to perform similar duties: the **Council of People's Commissars** (Sovnarkom). 
+
+There is general support among the delegates and parties, including from a sizeable minority of our own party (**Bolshevik Moderates**), for the creation of a broad socialist coalition government. However, the **Leninists** of our party view this as untenable, and have successfully strongarmed the Bolshevik Moderates into going along with this (at least as a start). Hypothetically, we could offer a handful of seats to sympathetic non-Bolshevik leaders, but it's unlikely any would accept. Even the Left SRs, though sympathetic to our actions in general, have announced they will stand firm on an all-socialist government. Therefore, Lenin is prepared to present a list for an exclusively Bolshevik composition. 
 
 @2nd_soviet_menu
 
@@ -126,7 +125,15 @@ moderate_dissent += 5;
 leftcom_strength += 2;
 !}
 
-A proposal consisting solely of Bolshevik members is put forth. Already incensed by our actions thus far, most Mensheviks and Socialist-Revolutionaries walk out of the congress in protest. Moderates and Bolshevik sympathizers are displeased but hold their tongues.  
+Sovnarkom is declared as a temporary provisional government until the convocation of the Constituent Assembly. 
+
+A proposal consisting solely of Bolshevik members is put forth for Sovnarkom's inaugural composition. 
+
+Already incensed by our actions thus far, most Mensheviks and Socialist-Revolutionaries have walked out by this point. Moderates and Bolshevik sympathizers are displeased but hold their tongues.  
+
+Boris Avilov, on behalf of the remaining Menshevik Internationalists present, remarks that an exclusively Bolshevik government will surely struggle to govern and gain legitimacy, nor will it be recognized by the Allied Powers, making peace all the more difficult. Nonetheless, his counter proposal is voted down. 
+
+A representative of the country's largest and most influential union, the All-Russian Union of Railway Workers (**Vikzhel**), announces the union stands firmly in opposition to "seizure of power by any one party", implying the union will act if an amicable arrangement isn't negotiated. 
 
 
 @2nd_piecemeal
@@ -151,6 +158,6 @@ A composition is proposed reserving the key seats for the Bolsheviks, though off
 
 
 @2nd_soviet_homogenous
-choose-if: player_party = "m"
+choose-if: player_party != "b"
 unavailable-subtitle: Lenin will not allow this. 
 
