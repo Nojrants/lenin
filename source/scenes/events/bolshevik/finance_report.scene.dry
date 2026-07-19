@@ -2,7 +2,7 @@ title: Financial Report
 subtitle: Monthly accounting
 new-page: true
 view-if: timer_report = 0
-on-arrival: time_report = 4; 
+on-arrival: timer_report = 4; 
 tags: event
 
 = Financial Report
@@ -22,8 +22,6 @@ The current state of our finances.
 >State Monopolies: [+ monopolies +]
 
 >State Enterprises: [+ enterprises_revenue +]
-
----  
 
 **Expenditure:** [+ expenditure +]
 
@@ -56,6 +54,7 @@ The current state of our finances.
 >Interest payments: [+ interest +]
 
 >Indemnities: [+ indemnities +]
+
 
 - @budget_balancing
 - @report_accept
