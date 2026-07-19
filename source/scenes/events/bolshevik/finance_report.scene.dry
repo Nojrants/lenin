@@ -94,7 +94,11 @@ go-to: finance_report
 @emergency_bonds
 title: Issue emergency bonds
 subtitle: +5 resources
-on-arrival: resources += 5;
+on-arrival: {!
+    Q.bonds += 5;
+    Q.resources += 5;
+    Q.bond_rate += (Q.bonds > 90) ? 1.0 : (Q.bonds > 60) ? 0.75 : (Q.bonds < 30) ? 0.25 : 0.5;
+!}
 go-to: finance_report
 
 
