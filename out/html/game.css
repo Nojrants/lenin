@@ -46,7 +46,7 @@ body.dark-mode .tools {
 }
 header, #content, footer {
   color: var(--text-color);
-  max-width: 540px;
+  max-width: 640px;
   margin: 0 auto;
   overflow: auto;
 }
@@ -163,10 +163,10 @@ ul.choices a {
   text-decoration: none;
 }
 blockquote {
-  margin: 1em 2em;
+  margin: 1em 1em;
 }
 blockquote.attribution {
-  margin-left: 3em;
+  margin-left: 2em;
 }
 blockquote + blockquote.attribution {
   margin-top: -0.7em;
