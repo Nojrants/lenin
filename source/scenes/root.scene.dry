@@ -58,7 +58,7 @@ Q.player3_party = "";
 Q.player4_party = "";
 
 // party resources
-Q.b_resources = 10;
+Q.resources = 10;
 // party dues
 Q.b_dues = 2;
 
