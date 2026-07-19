@@ -173,8 +173,8 @@ blockquote + blockquote.attribution {
 }
 /* This is mostly copied from undum. */
 #mid_panel {
-  margin-left: 26rem;
-  margin-right: 1rem;
+  max-width: 540px;
+  margin: 0 auto;
 }
 #page {
   margin: 0 auto;
@@ -196,8 +196,8 @@ blockquote + blockquote.attribution {
   box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.2);
 }
 .tools.left {
-  float: left;
-  left: 0.4em;
+  position: absolute;
+  right: calc(50% + 290px);
 }
 .tools.right {
   float: right;
