@@ -103,15 +103,56 @@ Q.leftcom_split = 0;
 
 Q.instability = 50;
 Q.crime = 75;
-Q.elite_unrest = 70;
-Q.middle_unrest = 40;
-Q.kulak_unrest = 30;
-Q.intelligentsia_unrest = 30;
-Q.rural_unrest = 30;
-Q.labor_unrest = 40;
 Q.union_unrest = 30;
-Q.soldier_unrest = 30;
 Q.unrest_modifier = 1;
+
+
+Q.elites = 2;
+Q.elite_unrest = 70;
+Q.elite_strength = 60; 
+
+Q.middle = 5;
+Q.middle_unrest = 40;
+Q.elite_middle = 50; 
+
+Q.clergy = 0.5
+Q.clergy_unrest = 60;
+Q.clergy_strength = 40;
+
+Q.workers = 5;
+Q.labor_unrest = 40;
+Q.labor_strength = 50;
+
+Q.peasants = 67;
+Q.peasant_unrest = 30;
+Q.peasant_strength = 50;
+
+Q.kulaks = 5;
+Q.kulak_unrest = 50;
+Q.kulak_strength = 60;
+
+
+Q.intelligentsia = 2;
+Q.intelligentsia_unrest = 30;
+Q.intelligentsia_strength = 50;
+
+Q.soldiers = 8;
+Q.soldiers_unrest = 30;
+Q.soldiers_strength = 90; 
+
+Q.underclass = 5.5;
+Q.underclass_unrest = 70;
+Q.underclass_strength = 30;
+
+
+
+
+
+
+
+
+
+
 
 Q.imperial_police = 0;
 Q.cheka_founded = 0;
@@ -558,14 +599,6 @@ Q.is_peace = 0;
 
 // Demographics ////////////////////////////////////
 
-
-// Proportion of different social groups nationally (based mostly on the 1897 Russian census with some fudging)
-Q.workers = 20; // 
-Q.middle = 8; //
-Q.peasants = 60; // 
-Q.soldiers = 8; //
-Q.underclass = 6;
-Q.elites = 2;
 
 // ethnic demographics nationally - loosely based on 1897 census, but most Polish are in German-occupied territories
 // sources: https://stat1897.histcensus.asu.ru/en/data/
