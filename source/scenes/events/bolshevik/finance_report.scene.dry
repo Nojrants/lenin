@@ -121,7 +121,7 @@ go-to: budget_balancing_menu
 title: Accept the report. 
 choose-if: expenditure < (income + resources)
 unavailable-subtitle: We haven't balanced the budget. 
-on-arrival: resources += (income - expenditures)
+on-arrival: (Q.resources += (Q.income - Q.expenditure));
 go-to: root
 
   
