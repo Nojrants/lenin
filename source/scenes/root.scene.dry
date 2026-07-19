@@ -518,7 +518,7 @@ Q.loyal_troops_militancy = 0;
 
 Q.cheka = 0;
 Q.cheka_strength = 0;
-Q.cheka_militia_militancy = 0;
+Q.cheka_militancy = 0;
 Q.rural_militia_loyalty = 0;
 
 
