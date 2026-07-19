@@ -181,12 +181,7 @@ blockquote + blockquote.attribution {
   position: relative;
 }
 #tools_wrapper {
-  position: absolute;
-  width: 100%;
-  max-width: 95em;
-  left: 0;
-  right: 0;
-  margin: 0 auto;
+  max-width: 58rem;
 }
 .tools {
   padding: 0.6em;
