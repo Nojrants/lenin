@@ -101,6 +101,20 @@ Q.leftcom_strength = 20;
 Q.leftcom_dissent = 10;
 Q.leftcom_split = 0;
 
+Q.instability = 50;
+Q.crime = 75;
+Q.elite_unrest = 70;
+Q.middle_unrest = 40;
+Q.kulak_unrest = 30;
+Q.intelligentsia_unrest = 30;
+Q.rural_unrest = 30;
+Q.labor_unrest = 40;
+Q.union_unrest = 30;
+Q.soldier_unrest = 30;
+Q.unrest_modifier = 1;
+
+
+
 
 Q.b_war_policy = 2;
 Q.b_industrial_policy = 1;
@@ -499,15 +513,7 @@ Q.loyal_troops_strength = 0;
 Q.loyal_troops_militancy = 0;
 
 
-// crime and punishment
-// somewhat arbitrary number...
-// 50 = baseline level of crime
-Q.crime = 75;
-Q.rural_unrest = 50;
-Q.labor_unrest = 50;
-Q.union_unrest = 50;
-Q.soldier_unrest = 50;
-Q.unrest_modifier = 1;
+
 
 // bolshevik threat
 Q.b_threat = 0;
