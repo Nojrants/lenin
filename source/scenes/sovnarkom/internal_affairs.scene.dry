@@ -1,4 +1,4 @@
-title: Internal Security
+title: Internal Affairs
 new-page: true
 is-card: true
 on-arrival: internal_security_timer += 2; week_actions += 1
@@ -6,7 +6,7 @@ view-if: internal_security_timer == 0 and interior_minister_party = "Bolshevik"
 card-image: img/militias.jpg
 tags: sovnarkom
 
-= Internal Security
+= Internal Affairs
 
 Following the revolution, there have been reports of increasing crime and disorder. Inflation has driven more theft. Prisoners have been released from jails. The new militias have not yet replaced the functions of the tsarist police. And there is always the threat of counter-revolution and Black Hundredism.
 
