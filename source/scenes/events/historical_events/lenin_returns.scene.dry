@@ -1,7 +1,7 @@
 title: Lenin Return
 subtitle: Vladimir Lenin returns from Switzerland.
 new-page: true
-view-if: year = 1917 and month = 4 and week = 1 and player_party = "b"
+view-if: year = 1917 and month = 11 and week = 1
 on-arrival: lenin_available = 1; lenin_advisor = 1; zinoviev_available = 1; leninist_strength += 30
 tags: event
 max-visits: 1
