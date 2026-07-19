@@ -1,5 +1,5 @@
 body {
-  --bolshevik-color: #D81C00;
+  --bolshevik-color: #A8191B;
   --bolshevik-moderate-color: #D83934;
   --lsr-color: #317037;
   --bg-color: #f3f3e3;
@@ -173,26 +173,30 @@ blockquote + blockquote.attribution {
 }
 /* This is mostly copied from undum. */
 #mid_panel {
-  max-width: 540px;
-  margin: 0 auto;
+  margin: 0 20rem;
 }
 #page {
   margin: 0 auto;
   position: relative;
 }
 #tools_wrapper {
-  max-width: 58rem;
+  position: absolute;
+  width: 100%;
+  max-width: 85em;
+  left: 0;
+  right: 5em;
+  margin: 0 auto;
 }
 .tools {
   padding: 0.6em;
-  width: 24rem;
+  width: 20rem;
   color: var(--text-color);
   background-color: var(--content-bg-color);
   box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.2);
 }
 .tools.left {
-  position: absolute;
-  right: calc(50% + 290px);
+  float: left;
+  left: 0.4em;
 }
 .tools.right {
   float: right;
