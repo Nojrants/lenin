@@ -86,10 +86,10 @@ Q.bonds = 30;
 Q.bond_rate = 5; 
 Q.indemnities = 0;
 
-Q.interest = (loans_high * 0.08) + (loans_med * 0.06) + (loans_low * 0.04) + (bonds * (bond_rate / 100)) + indemnities;
+Q.interest = ((loans_high * 0.08) + (loans_med * 0.06) + (loans_low * 0.04) + (bonds * (bond_rate / 100)) + indemnities);
 
 
-Q.expenditure = interest + internal_expend + foreignaffairs_expend + military_expend + enlightmenet_expend + internal_expend + railways_expend + trade_expend + finance_expend + justice_expend + agriculture_expend + foodsupply_expend + nationalities_expend + welfare_expend; 
+Q.expenditure = (interest + internal_expend + foreignaffairs_expend + military_expend + enlightmenet_expend + internal_expend + railways_expend + trade_expend + finance_expend + justice_expend + agriculture_expend + foodsupply_expend + nationalities_expend + welfare_expend); 
 
 Q.taxation = 5;
 Q.monopolies = 2; 
@@ -97,9 +97,9 @@ Q.customs = 2;
 Q.railway_revenue = 1;
 Q.enterprises_revenue = 1;
 
-Q.income = taxation + monopolies + customs + railway_revenue + enterprises_revenue;
+Q.income = (taxation + monopolies + customs + railway_revenue + enterprises_revenue);
 
-Q.debt = loans_high + loans_med + loans_low + bonds;
+Q.debt = (loans_high + loans_med + loans_low + bonds);
 
 Q.democraticity = 35;
 
