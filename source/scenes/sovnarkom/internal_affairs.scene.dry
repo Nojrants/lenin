@@ -16,9 +16,6 @@ Following the revolution, there have been reports of increasing crime and disord
 - @strengthen_cheka
 - @recruit_militias
 - @militia_efficacy
-- @rural_militias
-- @rural_militias_2
-- @rural_suppress
 - @target_reactionaries
 - @anti_crime
 - @rev_tribunals
@@ -34,7 +31,7 @@ Following the revolution, there have been reports of increasing crime and disord
 title: Dismantle the imperial police system.
 subtitle: Reform the militia system to remove vestiges from the imperial era, and purge known reactionary officers from service. 
 view-if: imperial_police = 0
-on-arrival: imperial_police = 1; city_militia_strength -= 5; city_militia_militancy += 0.05; city_militias -= 5; worker_unrest -= 5; elite_strength -= 2;
+on-arrival: imperial_police = 1; city_militia_strength -= 5; city_militia_militancy += 0.05; worker_unrest -= 5; elite_strength -= 2;
 
 We implement a series of reforms replacing the imperial police system fully and purging reactionary officers. 
 
@@ -124,14 +121,16 @@ choose-if: city_militias >= 1 and instability >= 50
 on-arrival: crime -= 5; democraticity -= 5; instability += 5; elite_unrest += 10; elites -= 0.05; elite_strength -= 5; worker_unrest -= 3; peasant_unrest -= 5; intelligentsia_unrest += 2; underclass_unrest -= 5; underclass_strength += 5;
 
 @on_sight
-title: Declare execution without trial for the worst counterrevolutionary agitators. 
+title: Declare execution without trial for the worst acts of counterrevolution. 
 subtitle: The situation calls for drastic measures. 
+view-if: cheka >= 1 and instability >= 60
 choose-if: cheka >= 1 and instability >= 60
 on-arrival: crime -= 5; democraticity -= 5; instability += 5; elite_unrest += 10; elites -= 0.05; elite_strength -= 5; peasant_strength -= 5; intelligentsia_unrest += 2; underclass_unrest -= 5; underclass_strength += 5;
 
 @concentration_camps
 title: Establish network of concentration camps. 
 subtitle: -3 budget
+view-if: cheka >= 1 and instability >= 60
 choose-if: city_militias >= 1 and instability >= 60 and cheka_founded = 1 and cheka > 1 and cheka_strength >= 10
 on-arrival: budget -= 3; crime -= 5; democraticity -= 5; instability += 10; elite_unrest += 10; elites -= 0.1; elite_strength -= 10; intelligentsia_unrest += 5; intelligentsia -= 0.1; intelligentsia_strength -= 5; underclass_unrest -= 5; worker_strength -= 5; peasant_strength -= 2; kulak_strength -= 1; clergey_strength -= 5; 
 
@@ -143,8 +142,9 @@ choose-if: imperial_police = 1 and city_militias >= 2 and cheka >= 1 and budget 
 on-arrival: budget -= 3; expenditure += 1; crime -= 5*(efficacy_internal); worker_unrest -= 10; underclass_unrest -= 15; underclass -= 1; workers += 1; intelligentsia_unrest -= 5; instability -= 5; 
 
 @investigation
-title: investigations
+title: Investigations
 subtitle: We can redirect the attention of the secret police to a particular question. 
+unavailable-subtitle: We lack the secret policing apparatus for this. 
 choose-if: cheka >= 1
 go-to: investigation_menu
 
