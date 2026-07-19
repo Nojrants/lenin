@@ -12,15 +12,16 @@ Following the revolution, there have been reports of increasing crime and disord
 
 - @abolish_police
 - @create_cheka
+- @recruit_chekists
+- @strengthen_cheka
 - @militias
 - @recruit_militias
 - @militia_efficacy
-- @target_bolsheviks
-- @anti_crime
 - @rural_militias
 - @rural_militias_2
 - @rural_suppress
-- @investigate_reactionaries
+- @target_reactionaries
+- @anti_crime
 - @root: We do not need new policy.
 - @easy_discard
 - @cancel_advisor_action
