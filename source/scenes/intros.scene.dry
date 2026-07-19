@@ -125,9 +125,7 @@ moderate_dissent += 5;
 leftcom_strength += 2;
 !}
 
-Sovnarkom is declared as a temporary provisional government until the convocation of the Constituent Assembly. 
-
-A proposal consisting solely of Bolshevik members is put forth for Sovnarkom's inaugural composition. 
+Sovnarkom is declared as a temporary provisional government until the convocation of the Constituent Assembly. A proposal consisting solely of Bolshevik members is put forth for Sovnarkom's inaugural composition. 
 
 Already incensed by our actions thus far, most Mensheviks and Socialist-Revolutionaries have walked out by this point. Moderates and Bolshevik sympathizers are displeased but hold their tongues.  
 
@@ -152,9 +150,42 @@ leninist_dissent += 2;
 moderate_strength += 5;
 moderate_dissent -= 5;
 leftcom_dissent += 5;
+
+Q.prime_minister = "Lenin";
+Q.prime_minister_party = "Bolshevik"
+Q.deputy_pm = "Vacant";
+Q.deputy_pm_party = "";
+Q.foreign_minister = "Trotsky";
+Q.foreign_minister_party = "Bolshevik";
+Q.war_minister = "Krylenko";
+Q.war_minister_party = "Bolshevik";
+Q.education_minister = "Lunacharsky";
+Q.education_minister_party = "Bolshevik";
+Q.interior_minister = "Rykov";
+Q.interior_minister_party = "Bolshevik";
+Q.transport_minister = "Vacant";
+Q.transport_minister_party = "";
+Q.trade_minister = "Nogin";
+Q.trade_minister_party = "Bolshevik";
+Q.finance_minister = "Vacant";
+Q.finance_minister_party = "";
+Q.justice_minister = "Oppokov";
+Q.justice_minister_party = "Bolshevik";
+Q.agriculture_minister = "Milyutin";
+Q.agriculture_minister_party = "Bolshevik";
+Q.food_minister = "Teodorovich";
+Q.food_minister_party = "Bolshevik";
+Q.nationalities_minister = "Stalin";
+Q.nationalities_minister_party = "Bolshevik";
 !}
 
-A composition is proposed reserving the key seats for the Bolsheviks, though offering some minor positions the other parties. The leaders of the Mensheviks and Socialist-Revolutionaries refuse to take any of these vacancies out of principle. Nonetheless, the gesture placates some moderate congressgoers, including from among our own party.
+Sovnarkom is declared as a temporary provisional government until the convocation of the Constituent Assembly. A composition is proposed reserving the key seats for the Bolsheviks, though offering some minor positions the other parties. 
+
+The leaders of the other major parties refuse to take any of these vacancies out of principle. Nonetheless, the gesture is taken as a sign of good will by moderates, including from among our own party.
+
+Boris Avilov, on behalf of the remaining Menshevik Internationalists present, remarks that an exclusively Bolshevik government will surely struggle to govern and gain legitimacy, and will fail to be recognized by the Allied Powers, making peace all the more difficult. Nonetheless, his counter proposal is voted down. 
+
+A representative of the country's largest and most influential union, the All-Russian Union of Railway Workers (**Vikzhel**), announces the union stands firmly in opposition to "seizure of power by any one party", implying the union will act if an amicable arrangement isn't negotiated. 
 
 
 @2nd_soviet_homogenous
