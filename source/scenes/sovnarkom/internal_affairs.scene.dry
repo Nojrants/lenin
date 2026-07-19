@@ -127,7 +127,7 @@ on-arrival: crime -= 5; democraticity -= 5; instability += 5; elite_unrest += 10
 title: Declare execution without trial for the worst counterrevolutionary agitators. 
 subtitle: The situation calls for drastic measures. 
 choose-if: cheka >= 1 and instability >= 60
-on-arrival: crime -= 5; democraticity -= 5; instability += 5; elite_unrest += 10; elites -= 0.05; elite_strength -= 5; worker_unrest -= 2; peasant_unrest -= 1-; intelligentsia_unrest += 2; underclass_unrest -= 5; underclass_strength += 5;
+on-arrival: crime -= 5; democraticity -= 5; instability += 5; elite_unrest += 10; elites -= 0.05; elite_strength -= 5; peasant_strength -= 5; intelligentsia_unrest += 2; underclass_unrest -= 5; underclass_strength += 5;
 
 @concentration_camps
 title: Establish network of concentration camps. 
