@@ -1,0 +1,25 @@
+title: Revolutionary Revelry
+subtitle: The Revolution has arrived!
+new-page: true
+view-if: year = 1917 and month = 11 and week = 1
+max-visits: 1
+face-image: img/womens_day.jpg
+tags: event
+
+= Revolutionary Revelry
+
+The Revolution is upon us! We have seized control over the Winter Palace and arrested the Provisional Government, leading to a wave of enthusiasm in the streets. In the chaos, many have taken to looting valuables from the Winter Palace—in particular there is great interest in the former imperial wine cellar.  
+  
+- @revelry_celebrate: Let the workers celebrate! 
+- @revelry_reject: Put an end to the disorderly conduct. 
+
+@revelry_celebrate
+on-arrival: moderate_dissent += 2; crime += 5; elite_unrest += 5; middle_unrest += 5; intelligentsia_unrest += 2; labor_unrest -= 15; soldier_unrest -= 5; instability += 5; 
+
+With a new government taking the helm, there is renewed hope for Russia's future, especially among workers in the big cities. Though in the capital, the celebration spirals into drunken debauchery, leading to the destruction of some government property, increased hooliganism, and apprehension about Bolshevik leadership among non-partakers. 
+
+@revelry_reject
+on-arrival: moderate_dissent -= 2; instability += 5; 
+
+We attempt to rein in the disorderly conduct, though it's not clear how much the order is heeded. 
+
