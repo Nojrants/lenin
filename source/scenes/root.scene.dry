@@ -113,6 +113,10 @@ Q.union_unrest = 30;
 Q.soldier_unrest = 30;
 Q.unrest_modifier = 1;
 
+Q.imperial_police = 0;
+Q.cheka_founded = 0;
+Q.efficacy_internal = 1;
+
 
 
 
