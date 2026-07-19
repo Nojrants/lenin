@@ -35,8 +35,9 @@ We implement a series of reforms replacing the imperial police system fully and 
 
 @create_cheka
 title: Create an extraordinary commission to combat counterrevolutionary activity. 
+unavailable-subtitle: We lack the necessary administrative capacity and strength for this. 
 subtitle: -1 budget
-view-if: cheka_founded = 0 and imperial_police = 1 and city_militia_strength >= 15 and city_militias > 0 and instability >= 60
+choose-if: cheka_founded = 0 and imperial_police = 1 and city_militia_strength >= 15 and city_militias > 0 and instability >= 60
 on-arrival: cheka_founded = 1; budget -= 1; cheka = 5; instability += 5; cheka_strength = 5;  cheka_militancy = 0.2; city_militia_strength -= 5; moderate_dissent += 5; intelligentsia_unrest += 5; elite_unrest += 5; crime -= 5; leninist_strength += 5;
 
 @recruit_chekists
@@ -77,6 +78,8 @@ on-arrival: city_militias += 1; city_militia_k_loyalty += 6*prov_gov_efficacy if
 
 We are trying to make the city militias more effective, and more responsive to the Provisional Government.
 
+
+
 @rural_militias
 title: Form rural militias.
 subtitle: We need to maintain order in the countryside. -1 budget
@@ -99,21 +102,14 @@ on-arrival: rural_unrest -= rural_militia_strength*rural_militia_militancy*unres
 
 We have sent the rural militias to suppress peasant land seizures.
 
-# TODO: investigate Bolsheviks
-
-@investigate_bolsheviks
-title: Investigate the Bolsheviks and anarchists
 
 
-@target_bolsheviks
-title: Persecute the Bolsheviks, anarchists, and other malcontents.
-unavailable-subtitle: Our city militias are not effective enough.
-view-if: b_threat >= 1 and player_party != "b" and not b_in_gov
-choose-if: city_militias >= 1
-on-arrival: workers_b -= 8*prov_gov_efficacy; soldiers_b -= 8*prov_gov_efficacy; b_threat -= 1; m_b_relation -= 15 if m_in_gov; b_sr_relation -= 15 if sr_in_gov; b_k_relation -= 15 if k_in_gov; mrc_timer += 1 if mrc_timer > 0; bolshevik_coup_timer += 1 if bolshevik_coup_timer > 0
-
-We have arrested some of the Bolsheviks who organized riots in the city, and forced others into exile.
-
+@target_reactionaries
+title: Persecute reactionaries, counterrevolutionaries, and dissidents. 
+unavailable-subtitle: Our secret police forces are not effective enough. 
+choose-if: (city_militias >= 1 and city_militia_strength >= 5) or or cheka >= 5
+on-arrival: elite_unrest += 10; elites -= 0.1; elite_strength -= 5; middle_unrest += 1; middle -= 0.05; middle_strength -= 2; intelligentsia -= 0.1; intelligentsia_unrest += 2; intelligentsia_strength -= 2; instability += 5; clergy -= 0.05; clergy_unrest += 5;
+We have arrested members of the former elite identified to be sympathetic to counterrevolution. 
 
 @anti_crime
 title: Use the militias to combat crime.
@@ -124,11 +120,4 @@ on-arrival: crime -= 6*city_militias*unrest_modifier; prov_gov_legitimacy += cit
 
 We have deployed the city militias to increase security and combat crime in Petrograd and other major cities.
 
-@investigate_reactionaries
-title: Investigate right-wing and counterrevolutionary movements.
-view-if: player_party != "k"
-unavailable-subtitle: [? if city_militias < 1 : Our city militias are not effective enough. ?]
-choose-if: city_militias >= 1
-on-arrival: coup_progress -= city_militias; capital_flight_progress -= city_militias; k_coalition_dissent += 1; prov_gov_legitimacy += city_militias*2;
 
-Many members of the bourgeois and aristocratic classes are disillusioned with the revolution, and some are even discussing measures to overthrow the revolutionary government and replace it with a dictatorship or restored monarchy. There are rumors of sympathy towards the Germans, and plots to leave Petrograd open to German invasion. Our investigators have identified and thwarted some of this organizing.
