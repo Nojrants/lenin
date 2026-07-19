@@ -8,10 +8,6 @@ tags: sovnarkom
 
 = Internal Security
 
-Q.imperial_police = 0;
-Q.cheka_founded = 0;
-Q.efficacy_internal = 1;
-
 Following the revolution, there have been reports of increasing crime and disorder. Inflation has driven more theft. Prisoners have been released from jails. The new militias have not yet replaced the functions of the tsarist police. And there is always the threat of counter-revolution and Black Hundredism.
 
 - @abolish_police
