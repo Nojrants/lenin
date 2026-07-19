@@ -2,7 +2,7 @@ title: Internal Security
 new-page: true
 is-card: true
 on-arrival: internal_security_timer += 2; week_actions += 1
-view-if: internal_security_timer == interior_minister_party = "Bolshevik"
+view-if: internal_security_timer == 0 and interior_minister_party = "Bolshevik"
 card-image: img/militias.jpg
 tags: sovnarkom
 
