@@ -37,7 +37,7 @@ We implement a series of reforms replacing the imperial police system fully and 
 
 @create_cheka
 title: Create an extraordinary commission to combat counterrevolutionary activity. 
-unavailable-subtitle: We lack the necessary administrative capacity and strength for this. 
+unavailable-subtitle: We lack the necessary administrative capacity and strength.
 subtitle: -1 budget
 choose-if: cheka_founded = 0 and imperial_police = 1 and city_militia_strength >= 15 and city_militias > 0 and instability >= 60
 on-arrival: cheka_founded = 1; budget -= 1; cheka = 5; instability += 5; cheka_strength = 5;  cheka_militancy = 0.2; city_militia_strength -= 5; moderate_dissent += 5; intelligentsia_unrest += 5; elite_unrest += 5; crime -= 5; leninist_strength += 5;
