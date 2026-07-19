@@ -128,8 +128,7 @@ on-arrival: crime -= 5; democraticity -= 5; instability += 5; elite_unrest += 10
 @concentration_camps
 title: Establish network of concentration camps. 
 subtitle: -3 budget
-view-if: cheka >= 1 and instability >= 60
-choose-if: city_militias >= 1 and instability >= 60 and cheka_founded = 1 and cheka > 1 and cheka_strength >= 10
+view-if: city_militias >= 1 and instability >= 60 and cheka_founded = 1 and cheka > 1 and cheka_strength >= 10
 on-arrival: budget -= 3; crime -= 5; democraticity -= 5; instability += 10; elite_unrest += 10; elites -= 0.1; elite_strength -= 10; intelligentsia_unrest += 5; intelligentsia -= 0.1; intelligentsia_strength -= 5; underclass_unrest -= 5; worker_strength -= 5; peasant_strength -= 2; kulak_strength -= 1; clergey_strength -= 5; 
 
 @orphanages
@@ -156,7 +155,7 @@ What should we turn our attention to?
 - @investigate_reactionaries
 - @investigate_church
 - @investigate_party_abuses
-- @root: No new policy is needed.
+- @cancel_advisor_action
 
 @investigate_factories
 title: Sweep industrial centres for signs of sabotage and disloyalty 
