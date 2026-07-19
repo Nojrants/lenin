@@ -85,6 +85,7 @@ Q.loans_med = 4;
 Q.loans_low = 4;
 Q.bonds = 30;
 Q.bond_rate = 5; 
+Q.bank_advances = 0;
 Q.indemnities = 0;
 
 Q.interest = (
@@ -92,6 +93,7 @@ Q.interest = (
     (Q.loans_med * 0.06) +
     (Q.loans_low * 0.04) +
     (Q.bonds * (Q.bond_rate / 100)) +
+    (Q.bank_advances * 0.02) +
 );
 
 Q.expenditure = Math.round(
@@ -118,7 +120,8 @@ Q.debt = Math.round(
     Q.loans_high +
     Q.loans_med +
     Q.loans_low +
-    Q.bonds
+    Q.bonds +
+    Q.bank_advances
 );
 
 
