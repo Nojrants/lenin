@@ -82,7 +82,7 @@ Q.unemployed_disp = Q.unemployed.toFixed(1);
 
 >>**Expenditure:** [+ expenditure +]
 
-**Public debt:** [+ publicdebt +]
+**Public debt:** [+ loans_high + loans_med + loans_low + bonds + bank_advances +]
 
 loans_high: [+ loans_high +]
 
