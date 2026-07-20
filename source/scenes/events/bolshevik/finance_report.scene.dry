@@ -2,7 +2,7 @@ title: Financial Report
 subtitle: Monthly accounting
 new-page: true
 view-if: report_timer = 0
-on-arrival: report_timer = 4; 
+on-arrival: report_timer = 4; expenditure = ((loans_high * 0.08) + (loans_med * 0.06) + (loans_low * 0.04) + (bonds * (bond_rate / 100)) + (bank_advances * 0.02)); income = taxation + monopolies + customs + railway_revenue + enterprises_revenue;
 tags: event
 
 = Financial Report
@@ -51,7 +51,7 @@ The current state of our finances.
 
 >>    Welfare: [+ welfare_expend +]
 
->>Interest payments: [+ interest +]
+>>Interest payments: [+ (loans_high * 0.08) + (loans_med * 0.06) + (loans_low * 0.04) + (bonds * (bond_rate / 100)) + (bank_advances * 0.02) +]
 
 >>Indemnities: [+ indemnities +]
 
