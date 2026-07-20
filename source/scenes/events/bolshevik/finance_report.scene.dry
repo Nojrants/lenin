@@ -104,7 +104,7 @@ go-to: finance_report
 @emergency_bonds
 title: Issue emergency bonds
 subtitle: +5 resources
-on-arrival: bonds += 5; resources += 5; instability += 0.5; taxation += 100; monthly_inflation += (1.2 * (instability/50)); 
+on-arrival: bonds += 5; resources += 5; instability += 0.5; monthly_inflation += (1.2 * (instability/50)); [? if (Q.bonds >= 90) : bond_rate += 1 ?]; [? if ((Q.bonds < 90) and (Q.bonds > 60)): bond_rate += 0.5 ?]; [? if (Q.bonds < 60) : bond_rate += 0.25 ?]; 
 go-to: finance_report
 
 
