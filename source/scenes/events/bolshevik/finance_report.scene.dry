@@ -98,7 +98,7 @@ on-arrival: {!
     Q.instability += 0.25;
     Q.debt += 5;
     );
-!}
+
 go-to: finance_report
 
 
