@@ -116,7 +116,7 @@ on-arrival: {!
     Q.instability += 0.5;
     Q.bond_rate += (Q.bonds > 90) ? 1.0 : (Q.bonds > 60) ? 0.75 : (Q.bonds < 30) ? 0.25 : 0.5;
     Q.monthly_inflation += (1.2 * (instability/50));
-    Q.publicdebt = (loans_high + loans_med + loans_low + bonds + bank_advances);
+    Q.publicdebt = (Q.loans_high + Q.loans_med + Q.loans_low + Q.bonds + Q.bank_advances);
 !}
 go-to: finance_report
 
