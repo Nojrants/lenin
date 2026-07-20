@@ -201,6 +201,15 @@ Q.bonding_capacity = 4;
 
 // Economic and social quality of life
 
+Q.debt = Math.round(
+    Q.loans_high +
+    Q.loans_med +
+    Q.loans_low +
+    Q.bonds +
+    Q.bank_advances
+);
+
+
 // 96% inflation 
 // source for inflation number: table 2 of https://warwick.ac.uk/fac/soc/economics/staff/mharrison/public/rgwr_postprint.pdf
 // annualized from a 5.8% montly inflation rate
