@@ -96,12 +96,7 @@ on-arrival: {!
     bank_advances += 5; 
     Q.monthly_inflation += (1.2 * (instability/25));
     Q.instability += 0.25;
-    Q.debt = Math.round(
-        Q.loans_high +
-        Q.loans_med +
-        Q.loans_low +
-        Q.bonds +
-        Q.bank_advances
+    Q.debt += 5;
     );
 !}
 go-to: finance_report
