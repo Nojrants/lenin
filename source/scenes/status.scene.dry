@@ -82,8 +82,17 @@ Q.unemployed_disp = Q.unemployed.toFixed(1);
 
 >>**Expenditure:** [+ expenditure +]
 
->>**Public debt:** [+ publicdebt +]
+**Public debt:** [+ publicdebt +]
 
+loans_high: [+ loans_high +]
+
+loans_med: [+ loans_med +]
+
+loans_low: [+ loans_low +]
+
+bonds: [+ bonds +]
+
+bank_advances: [+ bank_advances +]
 
 
 = Sovnarkom
