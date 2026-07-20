@@ -262,7 +262,13 @@ Q.income = Math.round(
     Q.enterprises_revenue
 );
 
-Q.publicdebt = (loans_high + loans_med + loans_low + bonds + bank_advances);
+Q.publicdebt = (
+        Q.loans_high +
+        Q.loans_med +
+        Q.loans_low +
+        Q.bonds +
+        Q.bank_advances
+);
 
 
 
