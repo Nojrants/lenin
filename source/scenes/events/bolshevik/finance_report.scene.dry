@@ -51,7 +51,7 @@ The current state of our finances.
 
 >>    Welfare: [+ welfare_expend +]
 
->>Interest payments: [+ ((loans_high * 0.08) + (loans_med * 0.06) + (loans_low * 0.04) + (bonds * (bond_rate / 100)) + (bank_advances * 0.02)) +]
+>>Interest payments: [+ interest +]
 
 >>Indemnities: [+ indemnities +]
 
