@@ -1,8 +1,8 @@
 title: Financial Report
 subtitle: Monthly accounting
 new-page: true
-view-if: timer_report = 0
-on-arrival: timer_report = 4; 
+view-if: report_timer = 0
+on-arrival: report_timer = 4; 
 tags: event
 
 = Financial Report
