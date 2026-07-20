@@ -39,29 +39,29 @@ title: Found a network of worker educational centres.
 subtitle: -2 resources, +0.5 expenditure
 choose-if: resources >= 2
 unavailable-subtitle: -2 resources - We lack the necessary resources. 
-on-arrival: resources -= 5; enlightenment_expend += 0.5;
+on-arrival: resources -= 2; enlightenment_expend += 0.5;
 
 @found_party_schools
 title: Found a party school to train the next generation of Bolshevik leaders. 
 subtitle: -2 resources
-choose-if: resources >= 2; enlightenment_expend += 0.25
+choose-if: resources >= 2
 unavailable-subtitle: -2 resources - We lack the necessary resources. 
-on-arrival: party_school = 1;
+on-arrival: party_school = 1; resouces -= 2; enlightenment_expend += 0.25;
 
 
 @sponsor_colleges
 title: Sponsor creation of new universities
-subtitle: -2 resources; enlightenment_expend += 0.25
+subtitle: -2 resources
 choose-if: resources >= 2
 unavailable-subtitle: -2 resources - We lack the necessary resources. 
-on-arrival: 
+on-arrival: enlightenment_expend += 0.25
 
 @recruit_party_educators
 title: Recruit Bolsheviks to teach seminars at the party schools. 
 subtitle: -1 resources
 choose-if: resources >=1
 unavailable-subtitle: -1 resources - We lack the necessary resources. 
-on-arrival: 
+on-arrival: resources -= 1
 
 @negotiate_professors
 title: Initiate negotiations with the bourgeois professors.
