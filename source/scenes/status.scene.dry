@@ -84,6 +84,8 @@ Q.unemployed_disp = Q.unemployed.toFixed(1);
 
 >>**Public debt:** [+ debt +]
 
+Bonds: [+ bonds +]
+
 
 
 = Sovnarkom
