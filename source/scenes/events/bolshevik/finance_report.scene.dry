@@ -96,7 +96,7 @@ on-arrival: {!
     bank_advances += 5; 
     Q.monthly_inflation += (1.2 * (instability/25));
     Q.instability += 0.25;
-    Q.debt += 5;
+    Q.publicdebt = Q.bonds;
 !}
 
 go-to: finance_report
