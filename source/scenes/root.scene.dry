@@ -161,6 +161,7 @@ Q.efficacy_internal = 1;
 
 
 
+
 Q.b_war_policy = 2;
 Q.b_industrial_policy = 1;
 Q.b_prov_gov_policy = 3;
@@ -261,7 +262,7 @@ Q.income = Math.round(
     Q.enterprises_revenue
 );
 
-Q.debt = Math.round(
+Q.publicdebt = Math.round(
     Q.loans_high +
     Q.loans_med +
     Q.loans_low +
