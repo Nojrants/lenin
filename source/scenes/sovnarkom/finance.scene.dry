@@ -11,9 +11,9 @@ For the past few years, the Tsarist regime has been printing money and taking lo
 
 Current tax levels:
 
->Income Tax: [+ income_tax : taxation +] - Current Revenue: [+ income_tax +]
+>**Income Tax:** [+ income_tax : taxation +]
 
->Wealth Tax: [+ wealth_tax_rate : taxation +]
+>**Wealth Tax:** [+ wealth_tax_rate : taxation +]
 
 >Business Tax: [+ business_tax_rate : taxation +]
 
@@ -23,13 +23,13 @@ Current tax levels:
 - @finance_null
 - @seize_banks
 - @repudiate_loans
-- @root: Do not change fiscal_policy
+- @root: Do not change finance
 - @easy_discard
 - @cancel_advisor_action
 
 
 @finance_null
-title: ---------------------------------------------------------------------------
+title: ----------------------------------------------------------------------------------------------
 go-to: finance
 
 
@@ -54,7 +54,7 @@ go-to: finance
   
 
 @taxation
-title: Taxation
+title: TAXATION
 
 - @adjust_income_taxes
 - @raise_income_taxes
@@ -66,28 +66,28 @@ title: Taxation
 - @finance_return
 
 @raise_income_taxes
-title: Raise income taxes across the board. 
+title:         – Raise across the board.
 on-arrival: income_tax_rate_1 += 0.5; income_tax_rate_2 += 0.5; income_tax_rate_3 += 0.5; income_tax_rate_4 += 0.5; income_tax_rate_5 += 0.5; capital_flight_progress += 0.5; capital_flight_progress += 1 if income_tax_rate_1 >= 2.5; elite_unrest += 2.5; middle_unrest += 2.5; labor_unrest += 5; peasant_unrest += 5; kulak_unrest += 5; monthly_inflation -= 0.2;
 
 Our tax increases hurts the livelihoods of workers and the middle class, and cuts into business confidence.
 
 @lower_income_taxes
-title: Cut income taxes across the board. 
+title:         – Cut across the board.
 on-arrival: income_tax_rate_1 -= 0.5; income_tax_rate_2 -= 0.5; income_tax_rate_3 -= 0.5; income_tax_rate_4 -= 0.5; income_tax_rate_5 -= 0.5; capital_flight_progress -= 1; elite_unrest -= 5; middle_unrest -= 5; labor_unrest -= 5; peasant_unrest -= 5; kulak_unrest -= 5; monthly_inflation += 0.2;
 
 @adjust_income_taxes
-title: Adjust current income tax brackets. 
+title: Income Tax – Adjust current brackets. 
 
->Income Tax: [+ income_tax : taxation +] - Current Revenue: [+ income_tax +]
->>Bracket One: [+ income_tax_rate_1 +]
+>**Income Tax:** [+ income_tax : taxation +]
+>>**Bracket One:** [+ income_tax_rate_1 +]
 
->>Bracket Two: [+ income_tax_rate_2 +]
+>>**Bracket Two:** [+ income_tax_rate_2 +]
 
->>Bracket Three: [+ income_tax_rate_3 +]
+>>**Bracket Three:** [+ income_tax_rate_3 +]
 
->>Bracket Four: [+ income_tax_rate_4 +]
+>>**Bracket Four:** [+ income_tax_rate_4 +]
 
->>Bracket Five: [+ income_tax_rate_5 +]
+>>**Bracket Five:** [+ income_tax_rate_5 +]
 
 - @raise_bracket1
 - @lower_bracket1
@@ -206,9 +206,9 @@ title: BANKING
 title: Issue additional currency. 
 choose-if: state_bank = 1
 unavailable-subtitle: We lack control over the banks. 
-subtitle: +4 resources
+subtitle: +5 resources
 on-arrival: {!
-    resources += 4;
+    resources += 5;
     Q.monthly_inflation += (1.2 * (instability/12.5));
     Q.instability += 1;
 !}
@@ -217,18 +217,18 @@ on-arrival: {!
 title: Borrow from the State Bank.
 choose-if: state_bank = 1
 unavailable-subtitle: We lack control over the banks. 
-subtitle: +4 resources
+subtitle: +5 resources
 on-arrival: {!
-    resources += 4;
+    resources += 5;
     bank_advances += 5; 
     Q.monthly_inflation += (1.2 * (instability/25));
     Q.instability += 0.25;
 !}
 
 @finance_issue_bonds
-title: Issue emergency bonds.
-subtitle: +4 resources
-on-arrival: bonds += 4; resources += 4; instability += 0.5; monthly_inflation += (1.1 * (instability/50)); bond_rate += 1 if bonds > 90; bond_rate += 0.5 if ((bonds < 90) and (bonds > 60)); bond_rate += 0.25 if bonds < 60; 
+title: Issue government bonds.
+subtitle: +5 resources
+on-arrival: bonds += 5; resources += 5; instability += 0.5; monthly_inflation += (1.1 * (instability/50)); bond_rate += 1 if bonds > 90; bond_rate += 0.5 if ((bonds < 90) and (bonds > 60)); bond_rate += 0.25 if bonds < 60; 
 
 @pay_off_loans
 title: Repay our outstanding loans.
