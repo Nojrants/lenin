@@ -13,43 +13,37 @@ The current state of our finances.
 
 >**Revenue:** [+ income +]
 
->>Taxation: [+ taxation +]
+>>Taxation: [+ (income_tax + property_tax + business_tax + monopolies + customes) +]
 
->>Customs: [+ customs +]
-
->>Railways: [+ railway_revenue +]
-
->>State Monopolies: [+ monopolies +]
-
->>State Enterprises: [+ enterprises_revenue +]
+>>Enterprises: [+ (railway_revenue + enterprises_revenue) +]
 
 >**Expenditure:** [+ expenditure +]
 
 >>Government Functions: [+ government_functions +]
 
->>    Foreign Affairs: [+ foreignaffairs_expend +]
+>> — Foreign Affairs: [+ foreignaffairs_expend +]
 
->>    Military: [+ military_expend +]
+>> — Military: [+ military_expend +]
 
->>    Enlightenment: [+ enlightmenet_expend +]
+>> — Enlightenment: [+ enlightmenet_expend +]
 
->>    Internal Affairs: [+ internal_expend +]
+>> — Internal Affairs: [+ internal_expend +]
 
->>    Railways: [+ railways_expend +]
+>> — Railways: [+ railways_expend +]
 
->>    Trade: [+ trade_expend +]
+>> — Trade: [+ trade_expend +]
 
->>    Finance: [+ finance_expend +]
+>> — Finance: [+ finance_expend +]
 
->>    Justice: [+ justice_expend +]
+>> — Justice: [+ justice_expend +]
 
->>    Agriculture: [+ agriculture_expend +]
+>> — Agriculture: [+ agriculture_expend +]
 
->>    Food Supply: [+ foodsupply_expend +]
+>> — Food Supply: [+ foodsupply_expend +]
 
->>    Nationalities: [+ nationalities_expend +]
+>> — Nationalities: [+ nationalities_expend +]
 
->>    Welfare: [+ welfare_expend +]
+>> — Welfare: [+ welfare_expend +]
 
 >>Interest payments: [+ interest +]
 
