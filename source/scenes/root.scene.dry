@@ -41,7 +41,6 @@ Q.party_name_map = {"m": "Menshevik",
         "k": "Kadet"};
 
 Q.b_is_player = 1;
-
 Q.player_in_exco = 1;
 Q.player_in_gov = 1;
 Q.player_in_soviet = 1;
@@ -101,38 +100,52 @@ Q.leftcom_strength = 20;
 Q.leftcom_dissent = 10;
 Q.leftcom_split = 0;
 
+
+// state of the country 
 Q.instability = 50;
-Q.crime = 75;
-Q.union_unrest = 30;
+Q.democraticity = 45;
+Q.crime = 70;
 Q.unrest_modifier = 1;
+Q.imperial_police = 0;
+Q.cheka_founded = 0;
+Q.banks_seized = 0; 
+Q.repudiation = 0;
 
 
 Q.elites = 2;
-Q.elite_unrest = 70;
+Q.elite_unrest = 65;
 Q.elite_strength = 60; 
+Q.elites_wealth = 40;
+Q.elite_business = 25; 
 
 Q.middle = 5;
 Q.middle_unrest = 40;
-Q.elite_middle = 50; 
+Q.middle_strength = 50; 
+Q.middle_wealth = 25;
+Q.middle_business = 75; 
 
 Q.clergy = 0.5
+Q.clergy_wealth = 5;
 Q.clergy_unrest = 60;
 Q.clergy_strength = 40;
 
 Q.workers = 5;
+Q.labor_wealth = 8;
 Q.labor_unrest = 40;
 Q.labor_strength = 50;
 
 Q.peasants = 67;
+Q.peasant_wealth = 15;
 Q.peasant_unrest = 30;
 Q.peasant_strength = 50;
 
 Q.kulaks = 5;
-Q.kulak_unrest = 50;
+Q.kulak_wealth = 5;
+Q.kulak_unrest = 30;
 Q.kulak_strength = 60;
 
-
 Q.intelligentsia = 2;
+Q.intelligentsia_wealth = 2;
 Q.intelligentsia_unrest = 30;
 Q.intelligentsia_strength = 50;
 
@@ -145,73 +158,58 @@ Q.underclass_unrest = 70;
 Q.underclass_strength = 30;
 
 
+Q.unionists = 1500000;
+Q.union_unrest = 30;
+Q.union_strength = 30;
+
+Q.vikhzel_unrest = 40;
+Q.vikhzel_strength = 40;
+
+Q.party_membership = 350000;
+
+Q.kremlin_communists = 200;
+Q.kremlin_unrest = 10;
+Q.kremlin_strength = 50;
+
+Q.redarmy_communists = 0;
+Q.redarmy_unrest = 0;
+Q.redarmy_strength = 0;
+
+Q.bourgeois_specialists = 10000;
+Q.bourgeois_specialist_unrest = 50;
+Q.bourgeois_specialist_strength = 50;
+
+Q.red_specialists = 500;
+Q.red_specialist_unrest = 10;
+Q.red_specialist_strength = 10;
+
+Q.apparatchiki = 0;
+Q.apparatchiki_unrest = 0;
+Q.apparatchiki_strength = 0;
+
+Q.provincials = 10000;
+Q.provincial_unrest = 20;
+Q.provincial_strength = 40;
 
 
+// starting financials
 
-
-
-
-
-
-
-Q.imperial_police = 0;
-Q.cheka_founded = 0;
-Q.efficacy_internal = 1;
-
-
-
-
-
-Q.b_war_policy = 2;
-Q.b_industrial_policy = 1;
-Q.b_prov_gov_policy = 3;
-Q.b_land_policy = 2;
-Q.b_agricultural_policy = 2;
-Q.b_nationality_policy = 2;
-// organizations among the workers and soldiers...
-Q.b_workers_org = 1;
-Q.b_soldiers_org = 1;
-
-
-
-// The state of Russia/////////////////////////////////
-
-// government
-// The form of government: Prov Gov, Sov Gov, Constituent Assembly, Dictatorship
-// 0 = Provisional Government, 1 = Soviet Government, 2 = Constitutional Government, 3 = Directorate, 4 = Dictatorship, 5 = One-Party Soviet Government
-Q.government_form = 0;
-
-
-// Provisional government budget
-// each budget unit is ~= 1% of national income or about 120 million 1913 rubles (or about 800 million 1917 rubles)
-Q.budget = 0;
-// debt as % of GDP - based on 1913 rubles income (table A3 of Markevich and Harrison), plus debt statistics from Table 6.4 of Gatrell Russia's First World War
-// income = 12033
-// long-term domestic debt from 1914-1916 = 7762 million rubles
-Q.domestic_debt = 65;
-// foreign debt from 1914-1916 = 5887 million rubles
-Q.foreign_debt = 49;
-// how much bonding capacity is left...
-Q.bonding_capacity = 4;
-
-// military are already incorporated into the budget balance (1200 million rubles/month at start, increasing with increased salaries (see table 6.4)) 
-
-
-
-Q.internal_expend = 2;
-Q.foreignaffairs_expend = 1;
-Q.military_expend = 9;
-Q.enlightmenet_expend = 1;
+Q.sovnarkom_expend = 0.25;
+Q.internal_expend = 1;
+Q.foreignaffairs_expend = 0.5;
+Q.military_expend = 10;
+Q.enlightmenet_expend = 0.5;
 Q.railways_expend = 2;
-Q.trade_expend = 1;
-Q.finance_expend = 2;
-Q.justice_expend = 1;
+Q.trade_expend = 0.5;
+Q.finance_expend = 1;
+Q.justice_expend = 0.5;
 Q.agriculture_expend = 2;
 Q.foodsupply_expend = 3;
-Q.nationalities_expend = 1;
-Q.welfare_expend = 1;
+Q.nationalities_expend = 0.5;
+Q.welfare_expend = 0;
 
 Q.government_functions = (
+    Q.sovnarkom_expend +
     Q.internal_expend +
     Q.foreignaffairs_expend +
     Q.military_expend +
@@ -225,6 +223,44 @@ Q.government_functions = (
     Q.nationalities_expend +
     Q.welfare_expend
 );
+
+Q.efficacy_finance = 0.6;
+Q.efficacy_foreign = 0.6;
+Q.efficacy_military = 0.5;  
+Q.efficacy_enlightenment = 0.7;
+Q.efficacy_internal = 0.6;
+Q.efficacy_railways = 0.6;
+Q.efficacy_trade = 0.6;
+Q.efficacy_justice = 0.6;
+Q.efficacy_agriculture = 0.6;
+Q.efficacy_foodsupply = 0.6;
+Q.efficacy_nationalities = 0.5;
+Q.efficacy_welfare = 0.5;
+
+Q.income_tax_rate_1 = 1.5;
+Q.income_tax_rate_2 = 1.25;
+Q.income_tax_rate_3 = 1;
+Q.income_tax_rate_4 = 0.75;
+Q.income_tax_rate_5 = 0.5;
+Q.wealth_tax_rate = 1;
+Q.business_tax_rate = 1;
+
+Q.income_tax_efficacy = 0.3; 
+Q.wealth_tax_efficacy = 0.5; 
+Q.business_tax_efficacy = 0.7; 
+
+Q.income_tax_1 = ((((Q.elites*(75 - ((Q.elite_unrest/10) * (Q.elite_strength/100)))/100)) + ((Q.middle*(6.25 - ((Q.middle_unrest/10) * (Q.middle_strength/100)))/100))) * Q.income_tax_rate_1);
+Q.income_tax_2 = ((((Q.elites*(25 - ((Q.elite_unrest/10) * (Q.elite_strength/100)))/400)) + ((Q.middle*(25 - ((Q.middle_unrest/10) * (Q.middle_strength/100)))/400)) + ((Q.intelligentsia*(12.5 - ((Q.intelligentsia_unrest/10) * (Q.intelligentsia_strength/100)))/400))) * Q.income_tax_rate_2);
+Q.income_tax_3 = ((((Q.middle*(68.75 - ((Q.middle_unrest/10) * (Q.middle_strength/100)))/600)) + ((Q.intelligentsia*(50 - ((Q.intelligentsia_unrest/10) * (Q.intelligentsia_strength/100)))/600)) + ((Q.kulaks*(25 - ((Q.kulak_unrest/10) * (Q.middle_strength/100)))/600))) * Q.income_tax_rate_3);
+Q.income_tax_4 = ((((Q.kulaks*(75 - ((Q.kulak_unrest/10) * (Q.middle_strength/100)))/1000))) + (((Q.workers*(75 - ((Q.labor_unrest/10) * (Q.labor_strength/100)))/1000))) * Q.income_tax_rate_4);
+Q.income_tax_5 = ((((Q.peasants*(75 - ((Q.peasant_unrest/10) * (Q.peasant_strength/100)))/3000)) + (((Q.workers*(25 - ((Q.labor_unrest/10) * (Q.labor_strength/100)))/3000)))) * Q.income_tax_rate_5);
+
+Q.income_tax = (Q.income_tax_1 + Q.income_tax_2 + Q.income_tax_3 + Q.income_tax_4 + Q.income_tax_5) * ((((Q.income_tax_efficacy/4*3) + (Q.finance_efficacy/4)) * 100)/100);
+
+
+Q.property_tax = (((((Q.elites*(100 - ((Q.elite_unrest/10) * (Q.elite_strength/100)))/100)*(Q.elite_wealth/50)) + ((Q.middle*(100 - ((Q.middle_unrest/10) * (Q.middle_strength/100)))/100)*(Q.middle_wealth/500)) + ((Q.intelligentsia*(75 - ((Q.intelligentsia_unrest/10) * (Q.intelligentsia_strength/100)))/100)*(Q.intelligentsia_wealth/500)) + ((Q.kulaks*(75 - ((Q.kulak_unrest/10) * (Q.kulak_strength/100)))/100)*(Q.kulak_wealth/5000)) + ((Q.workers*(100 - ((Q.labor_unrest/10) * (Q.labor_strength/100)))/100)*(Q.labor_wealth/2500)) + ((Q.peasants*(75 - ((Q.peasant_unrest/10) * (Q.peasant_strength/100)))/100)*(Q.peasant_wealth/7500))) * Q.property_tax_rate) * ((((Q.wealth_tax_efficacy/4*3) + (Q.finance_efficacy/4)) * 100)/100);
+
+Q.business_tax = (((Q.elites*(100 - ((Q.elite_unrest/10) * (Q.elite_strength/100)))/100)*(Q.elite_business/50)) + ((Q.middle*(100 - ((Q.middle_unrest/10) * (Q.middle_strength/100)))/100)*(Q.middle_business/500))) * ((((Q.business_tax_efficacy/4*3) + (Q.finance_efficacy/4)) * 100)/100);
 
 Q.loans_high = 8;
 Q.loans_med = 4;
@@ -248,21 +284,22 @@ Q.expenditure = Math.round(
     Q.government_functions
 );
 
-Q.taxation = 5;
 Q.monopolies = 2;
 Q.customs = 2;
 Q.railway_revenue = 1;
 Q.enterprises_revenue = 1;
 
 Q.income = Math.round(
-    Q.taxation +
+    Q.income_tax +
+    Q.property_tax +
+    Q.business_tax +
     Q.monopolies +
     Q.customs +
     Q.railway_revenue +
     Q.enterprises_revenue
 );
 
-Q.publicdebt = (
+Q.publicdebt = Math.round(
     Q.loans_high +
     Q.loans_med +
     Q.loans_low +
@@ -271,7 +308,36 @@ Q.publicdebt = (
 );
 
 
-Q.democraticity = 35;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Q.b_war_policy = 2;
+Q.b_industrial_policy = 1;
+Q.b_prov_gov_policy = 3;
+Q.b_land_policy = 2;
+Q.b_agricultural_policy = 2;
+Q.b_nationality_policy = 2;
+// organizations among the workers and soldiers...
+Q.b_workers_org = 1;
+Q.b_soldiers_org = 1;
+
+// government
+// The form of government: Prov Gov, Sov Gov, Constituent Assembly, Dictatorship
+// 0 = Provisional Government, 1 = Soviet Government, 2 = Constitutional Government, 3 = Directorate, 4 = Dictatorship, 5 = One-Party Soviet Government
+Q.government_form = 0;
+
+
 
 
 // 96% inflation 
@@ -283,9 +349,9 @@ Q.inflation = Math.round(1000*(Q.inflation - 1))/10;
 
 // nationalization + syndicalization of industries
 // percentage of industries nationalized
-Q.industries_nationalized = 10;
+Q.industries_nationalized = 15;
 // percentage of industries controlled by workers
-Q.industries_syndicalized = 1;
+Q.industries_syndicalized = 35;
 
 // availability of consumer goods (out of 100 - pre-war levels)
 // TODO: this is currently unused
@@ -655,12 +721,14 @@ Q.rev_progress = 0;
 
 // Foreign relations ////////////////////////////////
 
-Q.west_relation = 60;
-Q.usa_relation = 60;
-Q.west_loan_cap = 10;
-Q.west_loans = 5;
-Q.usa_loans = 1;
-Q.usa_loan_cap = 5;
+Q.uk_relation = 50;
+Q.france_relation = 50;
+Q.usa_relation = 55;
+Q.italy_relation = 45;
+Q.japan_relation = 45; 
+Q.germany_relation = 5;
+Q.austria_relation = 5;
+Q.ottoman_relation = 5;
 
 // negotiations for a general peace
 Q.general_negotiations = 0;
