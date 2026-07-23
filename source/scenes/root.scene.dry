@@ -249,18 +249,6 @@ Q.income_tax_efficacy = 0.3;
 Q.wealth_tax_efficacy = 0.5; 
 Q.business_tax_efficacy = 0.7; 
 
-Q.income_tax_1 = ((((Q.elites*(75 - ((Q.elite_unrest/10) * (Q.elite_strength/100)))/100)) + ((Q.middle*(6.25 - ((Q.middle_unrest/10) * (Q.middle_strength/100)))/100))) * Q.income_tax_rate_1);
-Q.income_tax_2 = ((((Q.elites*(25 - ((Q.elite_unrest/10) * (Q.elite_strength/100)))/400)) + ((Q.middle*(25 - ((Q.middle_unrest/10) * (Q.middle_strength/100)))/400)) + ((Q.intelligentsia*(12.5 - ((Q.intelligentsia_unrest/10) * (Q.intelligentsia_strength/100)))/400))) * Q.income_tax_rate_2);
-Q.income_tax_3 = ((((Q.middle*(68.75 - ((Q.middle_unrest/10) * (Q.middle_strength/100)))/600)) + ((Q.intelligentsia*(50 - ((Q.intelligentsia_unrest/10) * (Q.intelligentsia_strength/100)))/600)) + ((Q.kulaks*(25 - ((Q.kulak_unrest/10) * (Q.middle_strength/100)))/600))) * Q.income_tax_rate_3);
-Q.income_tax_4 = ((((Q.kulaks*(75 - ((Q.kulak_unrest/10) * (Q.middle_strength/100)))/1000))) + (((Q.workers*(75 - ((Q.labor_unrest/10) * (Q.labor_strength/100)))/1000))) * Q.income_tax_rate_4);
-Q.income_tax_5 = ((((Q.peasants*(75 - ((Q.peasant_unrest/10) * (Q.peasant_strength/100)))/3000)) + (((Q.workers*(25 - ((Q.labor_unrest/10) * (Q.labor_strength/100)))/3000)))) * Q.income_tax_rate_5);
-
-Q.income_tax = (Q.income_tax_1 + Q.income_tax_2 + Q.income_tax_3 + Q.income_tax_4 + Q.income_tax_5) * ((((Q.income_tax_efficacy/4*3) + (Q.efficacy_finance/4)) * 100)/100);
-
-
-Q.property_tax = (((((Q.elites*(100 - ((Q.elite_unrest/10) * (Q.elite_strength/100)))/100)*(Q.elite_wealth/50)) + ((Q.middle*(100 - ((Q.middle_unrest/10) * (Q.middle_strength/100)))/100)*(Q.middle_wealth/500)) + ((Q.intelligentsia*(75 - ((Q.intelligentsia_unrest/10) * (Q.intelligentsia_strength/100)))/100)*(Q.intelligentsia_wealth/500)) + ((Q.kulaks*(75 - ((Q.kulak_unrest/10) * (Q.kulak_strength/100)))/100)*(Q.kulak_wealth/5000)) + ((Q.workers*(100 - ((Q.labor_unrest/10) * (Q.labor_strength/100)))/100)*(Q.labor_wealth/2500)) + ((Q.peasants*(75 - ((Q.peasant_unrest/10) * (Q.peasant_strength/100)))/100)*(Q.peasant_wealth/7500))) * Q.wealth_tax_rate) * ((((Q.wealth_tax_efficacy/4*3) + (Q.efficacy_finance/4)) * 100)/100);
-
-Q.business_tax = (((Q.elites*(100 - ((Q.elite_unrest/10) * (Q.elite_strength/100)))/100)*(Q.elite_business/50)) + ((Q.middle*(100 - ((Q.middle_unrest/10) * (Q.middle_strength/100)))/100)*(Q.middle_business/500))) * ((((Q.business_tax_efficacy/4*3) + (Q.efficacy_finance/4)) * 100)/100);
 
 Q.loans_high = 8;
 Q.loans_med = 4;
