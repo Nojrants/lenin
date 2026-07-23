@@ -453,7 +453,7 @@ Q.customs = 2;
 Q.railway_revenue = 1;
 Q.enterprises_revenue = 1;
 
-Q.income = 1 + Math.round(
+Q.income = Math.round(
     Q.income_tax +
     Q.property_tax +
     Q.business_tax +
@@ -462,6 +462,15 @@ Q.income = 1 + Math.round(
     Q.railway_revenue +
     Q.enterprises_revenue
 );
+
+console.log(Q.income_tax);
+console.log(Q.property_tax);
+console.log(Q.business_tax);
+console.log(Q.monopolies);
+console.log(Q.customs);
+console.log(Q.railway_revenue);
+console.log(Q.enterprises_revenue);
+console.log(Q.income);
 
 Q.publicdebt = Math.round(
     Q.loans_high +
