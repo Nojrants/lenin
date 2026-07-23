@@ -353,6 +353,7 @@ Q.publicdebt = Math.round(
     Q.bank_advances
 );
 
+Q.resources = Math.round(Q.resources); 
 
 // inflation
 Q.inflation = Math.pow(1+0.01*Q.monthly_inflation, 12);
