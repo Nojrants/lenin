@@ -158,6 +158,7 @@ Q.property_tax = (((((Q.elites*(100 - ((Q.elite_unrest/10) * (Q.elite_strength/1
 
 Q.business_tax = (((Q.elites*(100 - ((Q.elite_unrest/10) * (Q.elite_strength/100)))/100)*(Q.elite_business/50)) + ((Q.middle*(100 - ((Q.middle_unrest/10) * (Q.middle_strength/100)))/100)*(Q.middle_business/500))) * ((((Q.business_tax_efficacy/4*3) + (Q.finance_efficacy/4)) * 100)/100);
 
+
 Q.interest = (
     (Q.loans_high * 0.08) +
     (Q.loans_med * 0.06) +
