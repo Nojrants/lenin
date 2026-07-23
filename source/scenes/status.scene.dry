@@ -78,13 +78,11 @@ Q.unemployed_disp = Q.unemployed.toFixed(1);
 >>**Democraticity:** [+ democraticity +]
 
 >**Resources:** [+ resources +]
->>**Income:** [+ taxation + monopolies + customs + railway_revenue + enterprises_revenue +]
+>>**Income:** [+ income +]
 
 >>**Expenditure:** [+ expenditure +]
 
->**Public debt:** [+ loans_high + loans_med + loans_low + bonds + bank_advances +]
-
-[+ bond_rate +]
+>**Public debt:** [+ publicdebt +]
 
 = Sovnarkom
 
