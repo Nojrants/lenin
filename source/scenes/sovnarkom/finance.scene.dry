@@ -33,13 +33,13 @@ title: -------------------------------------------------------------------------
 go-to: finance
 
 
-seize_banks
+@seize_banks
 title: Seize the banks!
 subtitle: Nationalize banks to allow us full control over fiscal policy. 
 view-if: banks_seized = 0;
 on-arrival: banks_seized = 1; resources += 3; elite_unrest += 5; middle_unrest += 5; instability += 5; capital_flight_progress += 0.5;
 
-repudiate_loans
+@repudiate_loans
 title: Repudiate all outstanding loans.
 subtitle: This will free-up resources but substantially impact our foreign relations. 
 view-if: repudiation = 0;
