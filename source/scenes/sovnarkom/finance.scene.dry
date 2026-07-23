@@ -1,0 +1,279 @@
+title: Finance
+new-page: true
+is-card: true
+on-arrival: fiscal_policy_timer += 2; week_actions += 1
+view-if: fiscal_policy_timer == 0 and finance_minister_party = "Bolshevik"
+tags: sovnarkom
+
+= Fiscal Policy
+
+For the past few years, the Tsarist regime has been printing money and taking loans from the western allies to finance the war, leading to spiraling inflation. We must bring our fiscal affairs back into balance somehow. Taxation, bonds, and controlling the budget are potential levers.
+
+Current tax levels:
+
+>Income Tax: [+ income_tax : taxation +] - Current Revenue: [+ income_tax +]
+
+>Wealth Tax: [+ wealth_tax_rate : taxation +]
+
+>Business Tax: [+ business_tax_rate : taxation +]
+
+- @taxation
+- @banking
+- @administration
+- @finance_null
+- @seize_banks
+- @repudiate_loans
+- @root: Do not change fiscal_policy
+- @easy_discard
+- @cancel_advisor_action
+
+
+@finance_null
+title: ---------------------------------------------------------------------------
+go-to: finance
+
+
+seize_banks
+title: Seize the banks!
+subtitle: Nationalize banks to allow us full control over fiscal policy. 
+view-if: banks_seized = 0;
+on-arrival: banks_seized = 1; resources += 3; elite_unrest += 5; middle_unrest += 5; instability += 5; capital_flight_progress += 0.5;
+
+repudiate_loans
+title: Repudiate all outstanding loans.
+subtitle: This will free-up resources but substantially impact our foreign relations. 
+view-if: repudiation = 0;
+choose-if: loans >= 0; 
+unavailable-subtitle: We have no outstanding loans. 
+on-arrival: repudiation = 1; loans = 0; bonds = 0; uk_relation -= 35; france_relation -= 40; usa_relation -= 35; italy_relation -= 30; japan_relation -= 30; germany_relation -= 5; austria_relation -= 5; ottoman_relation -= 5; instability += 10; monthly_inflation += 0.5; capital_flight_progress += 1; 
+
+@finance_return
+title: Cancel action
+go-to: finance
+
+  
+
+@taxation
+title: Taxation
+
+- @adjust_income_taxes
+- @raise_income_taxes
+- @lower_income_taxes
+- @raise_wealth_tax
+- @lower_wealth_tax
+- @raise_business_tax
+- @lower_business_tax
+- @finance_return
+
+@raise_income_taxes
+title: Raise income taxes across the board. 
+on-arrival: income_tax_rate_1 += 0.5; income_tax_rate_2 += 0.5; income_tax_rate_3 += 0.5; income_tax_rate_4 += 0.5; income_tax_rate_5 += 0.5; capital_flight_progress += 0.5; capital_flight_progress += 1 if income_tax_rate_1 >= 2.5; elite_unrest += 2.5; middle_unrest += 2.5; labor_unrest += 5; peasant_unrest += 5; kulak_unrest += 5; monthly_inflation -= 0.2;
+
+Our tax increases hurts the livelihoods of workers and the middle class, and cuts into business confidence.
+
+@lower_income_taxes
+title: Cut income taxes across the board. 
+on-arrival: income_tax_rate_1 -= 0.5; income_tax_rate_2 -= 0.5; income_tax_rate_3 -= 0.5; income_tax_rate_4 -= 0.5; income_tax_rate_5 -= 0.5; capital_flight_progress -= 1; elite_unrest -= 5; middle_unrest -= 5; labor_unrest -= 5; peasant_unrest -= 5; kulak_unrest -= 5; monthly_inflation += 0.2;
+
+@adjust_income_taxes
+title: Adjust current income tax brackets. 
+
+>Income Tax: [+ income_tax : taxation +] - Current Revenue: [+ income_tax +]
+>>Bracket One: [+ income_tax_rate_1 +]
+
+>>Bracket Two: [+ income_tax_rate_2 +]
+
+>>Bracket Three: [+ income_tax_rate_3 +]
+
+>>Bracket Four: [+ income_tax_rate_4 +]
+
+>>Bracket Five: [+ income_tax_rate_5 +]
+
+- @raise_bracket1
+- @lower_bracket1
+- @raise_bracket2
+- @lower_bracket2
+- @raise_bracket3
+- @lower_bracket3
+- @raise_bracket4
+- @lower_bracket4
+- @raise_bracket5
+- @lower_bracket5
+- @finish_adjusting
+
+@raise_bracket1
+title: Raise taxation rate of Bracket One 
+on-arrival: income_tax_rate_1 += 0.25; capital_flight_progress += 0.25; elite_unrest += 2.5; middle_unrest += 2.5; monthly_inflation -= 0.05;
+go-to: adjust_income_taxes
+
+@lower_bracket1
+title: Lower taxation rate of Bracket One 
+choose-if: income_tax_rate_1 >= 0.25
+unavailable-subtitle: Already set to zero. 
+on-arrival: income_tax_rate_1 -= 0.25; capital_flight_progress -= 0.25; elite_unrest -= 2.5; middle_unrest -= 2.5; monthly_inflation += 0.05;
+go-to: adjust_income_taxes
+
+@raise_bracket2
+title: Raise taxation rate of Bracket Two 
+on-arrival: income_tax_rate_2 += 0.25; capital_flight_progress += 0.25; elite_unrest += 2.5; middle_unrest += 2.5; monthly_inflation -= 0.05;
+go-to: adjust_income_taxes
+
+@lower_bracket2
+title: Lower taxation rate of Bracket Two 
+choose-if: income_tax_rate_2 >= 0.25
+unavailable-subtitle: Already set to zero. 
+on-arrival: income_tax_rate_2 -= 0.25; capital_flight_progress -= 0.25; elite_unrest -= 2.5; middle_unrest -= 2.5; monthly_inflation += 0.05;
+go-to: adjust_income_taxes
+
+@raise_bracket3
+title: Raise taxation rate of Bracket Three 
+on-arrival: income_tax_rate_3 += 0.25; capital_flight_progress += 0.25; middle_unrest += 2.5; kulak_unrest += 1; monthly_inflation -= 0.05;
+go-to: adjust_income_taxes
+
+@lower_bracket3
+title: Lower taxation rate of Bracket Three 
+choose-if: income_tax_rate_3 >= 0.25
+unavailable-subtitle: Already set to zero. 
+on-arrival: income_tax_rate_3 -= 0.25; capital_flight_progress -= 0.25; middle_unrest -= 2.5; kulak_unrest -= 1; monthly_inflation += 0.05;
+go-to: adjust_income_taxes
+
+@raise_bracket4
+title: Raise taxation rate of Bracket Four 
+on-arrival: income_tax_rate_4 += 0.25; middle_unrest += 2.5; labor_unrest += 10; monthly_inflation -= 0.05;
+go-to: adjust_income_taxes
+
+@lower_bracket4
+title: Lower taxation rate of Bracket Four 
+choose-if: income_tax_rate_4 >= 0.25
+unavailable-subtitle: Already set to zero. 
+on-arrival: income_tax_rate_4 -= 0.25; middle_unrest -= 2.5; labor_unrest -= 10; monthly_inflation += 0.05;
+go-to: adjust_income_taxes
+
+@raise_bracket5
+title: Raise taxation rate of Bracket Five 
+on-arrival: income_tax_rate_5 += 0.25; labor_unrest += 5; peasant_unrest += 5; monthly_inflation -= 0.05;
+go-to: adjust_income_taxes
+
+@lower_bracket5
+title: Lower taxation rate of Bracket Five 
+choose-if: income_tax_rate_5 >= 0.25
+unavailable-subtitle: Already set to zero. 
+on-arrival: income_tax_rate_5 -= 0.25; labor_unrest -= 5; peasant_unrest -= 5; monthly_inflation += 0.05;
+go-to: adjust_income_taxes
+
+@finish_adjusting
+title: Finish making adjustments 
+go-to: finance
+
+  
+@raise_wealth_tax
+on-arrival: wealth_tax_rate += 0.5; capital_flight_progress += 0.5; capital_flight_progress += 1 if wealth_tax_rate >= 2; elite_unrest += 10; middle_unrest += 5; labor_unrest -= 5; monthly_inflation -= 0.2;
+
+We have raised taxes on wealth. 
+
+@lower_wealth_tax
+on-arrival: wealth_tax_rate -= 0.5; capital_flight_progress -= 0.5; elite_unrest -= 10; middle_unrest -= 5; labor_unrest += 5; monthly_inflation += 0.2;
+
+We have lowered taxes on wealth. 
+
+@raise_business_tax
+on-arrival: business_tax_rate += 0.5; capital_flight_progress += 0.5; capital_flight_progress += 1 if business_tax_rate >= 2; elite_unrest += 5; middle_unrest += 5; labor_unrest -= 5; monthly_inflation -= 0.2;
+
+We have raised taxes on business profits. 
+
+@lower_business_tax
+on-arrival: business_tax_rate -= 0.5; capital_flight_progress -= 0.5; elite_unrest -= 5; middle_unrest -= 5; labor_unrest += 5; monthly_inflation += 0.2;
+
+We have lowered taxes on business profits. 
+
+
+
+
+@banking
+title: BANKING
+
+- @finance_issue_currency
+- @finance_bank_advances
+- @finance_issue_bonds
+- @pay_off_loans
+- @finance_return
+
+@finance_issue_currency
+title: Issue additional currency. 
+choose-if: state_bank = 1
+unavailable-subtitle: We lack control over the banks. 
+subtitle: +4 resources
+on-arrival: {!
+    resources += 4;
+    Q.monthly_inflation += (1.2 * (instability/12.5));
+    Q.instability += 1;
+!}
+
+@finance_bank_advances
+title: Borrow from the State Bank.
+choose-if: state_bank = 1
+unavailable-subtitle: We lack control over the banks. 
+subtitle: +4 resources
+on-arrival: {!
+    resources += 4;
+    bank_advances += 5; 
+    Q.monthly_inflation += (1.2 * (instability/25));
+    Q.instability += 0.25;
+!}
+
+@finance_issue_bonds
+title: Issue emergency bonds.
+subtitle: +4 resources
+on-arrival: bonds += 4; resources += 4; instability += 0.5; monthly_inflation += (1.1 * (instability/50)); bond_rate += 1 if bonds > 90; bond_rate += 0.5 if ((bonds < 90) and (bonds > 60)); bond_rate += 0.25 if bonds < 60; 
+
+@pay_off_loans
+title: Repay our outstanding loans.
+choose-if: loans >= 1
+unavailable-subtitle: We have no loans to repay. 
+
+
+
+
+@administration
+title: ADMINISTRATION
+
+- @discipline
+- @raise_salaries
+- @finance_improve_admin
+- @finance_hire_staff
+- @finance_corruption
+- @finance_return
+
+@discipline
+title: Practice budget discipline
+subtitle: Cut salaries and benefits across the government. 
+unavailable-subtitle: There is nothing left to cut.
+choose-if: finance_efficacy > 0.25
+on-arrival: efficacy_finance -= 0.1; efficacy_foreign -= 0.1; efficacy_military -= 0.1; efficacy_enlightenment -= 0.1; efficacy_internal -= 0.1; efficacy_railways -= 0.1; efficacy_trade -= 0.1; efficacy_justice -= 0.1; efficacy_agriculture -= 0.1; efficacy_foodsupply -= 0.1; efficacy_nationalities -= 0.1; efficacy_welfare -= 0.1; foreignaffairs_expend -= 0.25; military_expend -= 0.25; enlightmenet_expend -= 0.25; railways_expend -= 0.25; trade_expend -= 0.25; finance_expend -= 0.25; justice_expend -= 0.25; agriculture_expend -= 0.25; foodsupply_expend -= 0.25; nationalities_expend -= 0.25; welfare_expend -= 0.25; monthly_inflation -= 0.1; 
+
+Cutting the budget hurts the workers and middle class, and also reduces the morale of the soldiers and railroad workers, two of the largest groups of government employees. This makes them less effective at their jobs.
+
+@raise_salaries
+title: Raise salary rates
+subtitle: Raise salaries for government employees.
+on-arrival: efficacy_finance += 0.15 if efficacy_finance < 1; efficacy_foreign += 0.15 if efficacy_foreign < 1; efficacy_military += 0.15 if efficacy_military < 1; efficacy_enlightenment += 0.15 if efficacy_enlightenment < 1; efficacy_internal += 0.15 if efficacy_internal < 1; efficacy_railways += 0.15 if efficacy_railways < 1; efficacy_trade += 0.15 if efficacy_trade < 1; efficacy_justice += 0.15 if efficacy_justice < 1; efficacy_agriculture -= += 0.15 if efficacy_agriculture < 1; efficacy_foodsupply += 0.15 if efficacy_foodsupply < 1; efficacy_nationalities += 0.15 if efficacy_nationalitiese < 1; efficacy_welfare += 0.15 if efficacy_welfare < 1; foreignaffairs_expend += 0.25; military_expend += 0.25; enlightmenet_expend += 0.25; railways_expend += 0.25; trade_expend += 0.25; finance_expend += 0.25; justice_expend += 0.25; agriculture_expend += 0.25; foodsupply_expend += 0.25; nationalities_expend += 0.25; welfare_expend += 0.25; monthly_inflation += 0.05; capital_flight_progress -= 0.5; 
+
+@finance_improve_admin
+title: Streamline department
+subtitle: Cut waste and inefficiencies, increase labor intensity
+on-arrival: efficacy_finance += 0.1 if efficacy_finance < 1; 
+
+@finance_hire_staff
+title: Hire administrative personnel
+subtitle: -0.5 resources
+on-arrival: efficacy_finance += 0.2 if efficacy_finance < 1; finance_expend += 0.25; resources -= 0.5;
+
+@finance_corruption
+title: Root-out departmental corruption. 
+subtitle: -0.5 resources
+on-arrival: efficacy_finance += 0.1 if efficacy_finance < 1; resources -= 0.5;
+
+
+
+
+
