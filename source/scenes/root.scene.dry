@@ -115,7 +115,7 @@ Q.repudiation = 0;
 Q.elites = 2;
 Q.elite_unrest = 65;
 Q.elite_strength = 60; 
-Q.elites_wealth = 40;
+Q.elite_wealth = 40;
 Q.elite_business = 25; 
 
 Q.middle = 5;
