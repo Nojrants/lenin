@@ -80,8 +80,6 @@ Q.unemployed_disp = Q.unemployed.toFixed(1);
 >**Resources:** [+ resources +]
 >>**Income:** [+ income +]
 
-Income Tax: [+ income_tax +]
-
 >>**Expenditure:** [+ expenditure +]
 
 >**Public debt:** [+ publicdebt +]
