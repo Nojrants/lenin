@@ -102,64 +102,183 @@ title: Income Tax – Adjust current brackets.
 - @finish_adjusting
 
 @raise_bracket1
-title: 🔼 Bracket One 
+title: ▲ Bracket One 
+new-page: true
 on-arrival: income_tax_rate_1 += 0.25; capital_flight_progress += 0.25; elite_unrest += 2.5; middle_unrest += 2.5; monthly_inflation -= 0.05;
 go-to: adjust_income_taxes
 
+>**Income Tax:** [+ income_tax : taxation +]
+>>**Bracket One:** [+ income_tax_rate_1 +]
+
+>>**Bracket Two:** [+ income_tax_rate_2 +]
+
+>>**Bracket Three:** [+ income_tax_rate_3 +]
+
+>>**Bracket Four:** [+ income_tax_rate_4 +]
+
+>>**Bracket Five:** [+ income_tax_rate_5 +]
+
 @lower_bracket1
-title: 🔽 Bracket One
+title: 🔻 Bracket One
+new-page: true
 choose-if: income_tax_rate_1 >= 0.25
 unavailable-subtitle: Already set to zero. 
 on-arrival: income_tax_rate_1 -= 0.25; capital_flight_progress -= 0.25; elite_unrest -= 2.5; middle_unrest -= 2.5; monthly_inflation += 0.05;
 go-to: adjust_income_taxes
 
+>**Income Tax:** [+ income_tax : taxation +]
+>>**Bracket One:** [+ income_tax_rate_1 +]
+
+>>**Bracket Two:** [+ income_tax_rate_2 +]
+
+>>**Bracket Three:** [+ income_tax_rate_3 +]
+
+>>**Bracket Four:** [+ income_tax_rate_4 +]
+
+>>**Bracket Five:** [+ income_tax_rate_5 +]
+
 @raise_bracket2
-title: 🔼 Bracket Two 
+title: ▲ Bracket Two 
+new-page: true
 on-arrival: income_tax_rate_2 += 0.25; capital_flight_progress += 0.25; elite_unrest += 2.5; middle_unrest += 2.5; monthly_inflation -= 0.05;
 go-to: adjust_income_taxes
 
+>**Income Tax:** [+ income_tax : taxation +]
+>>**Bracket One:** [+ income_tax_rate_1 +]
+
+>>**Bracket Two:** [+ income_tax_rate_2 +]
+
+>>**Bracket Three:** [+ income_tax_rate_3 +]
+
+>>**Bracket Four:** [+ income_tax_rate_4 +]
+
+>>**Bracket Five:** [+ income_tax_rate_5 +]
+
 @lower_bracket2
-title: 🔽 Bracket Two 
+title: 🔻 Bracket Two 
+new-page: true
 choose-if: income_tax_rate_2 >= 0.25
 unavailable-subtitle: Already set to zero. 
 on-arrival: income_tax_rate_2 -= 0.25; capital_flight_progress -= 0.25; elite_unrest -= 2.5; middle_unrest -= 2.5; monthly_inflation += 0.05;
 go-to: adjust_income_taxes
 
+>**Income Tax:** [+ income_tax : taxation +]
+>>**Bracket One:** [+ income_tax_rate_1 +]
+
+>>**Bracket Two:** [+ income_tax_rate_2 +]
+
+>>**Bracket Three:** [+ income_tax_rate_3 +]
+
+>>**Bracket Four:** [+ income_tax_rate_4 +]
+
+>>**Bracket Five:** [+ income_tax_rate_5 +]
+
 @raise_bracket3
-title: 🔼 Bracket Three 
+title: ▲ Bracket Three 
+new-page: true
 on-arrival: income_tax_rate_3 += 0.25; capital_flight_progress += 0.25; middle_unrest += 2.5; kulak_unrest += 1; monthly_inflation -= 0.05;
 go-to: adjust_income_taxes
 
+>**Income Tax:** [+ income_tax : taxation +]
+>>**Bracket One:** [+ income_tax_rate_1 +]
+
+>>**Bracket Two:** [+ income_tax_rate_2 +]
+
+>>**Bracket Three:** [+ income_tax_rate_3 +]
+
+>>**Bracket Four:** [+ income_tax_rate_4 +]
+
+>>**Bracket Five:** [+ income_tax_rate_5 +]
+
 @lower_bracket3
-title: 🔽 Bracket Three 
+title: 🔻 Bracket Three 
+new-page: true
 choose-if: income_tax_rate_3 >= 0.25
 unavailable-subtitle: Already set to zero. 
 on-arrival: income_tax_rate_3 -= 0.25; capital_flight_progress -= 0.25; middle_unrest -= 2.5; kulak_unrest -= 1; monthly_inflation += 0.05;
 go-to: adjust_income_taxes
 
+>**Income Tax:** [+ income_tax : taxation +]
+>>**Bracket One:** [+ income_tax_rate_1 +]
+
+>>**Bracket Two:** [+ income_tax_rate_2 +]
+
+>>**Bracket Three:** [+ income_tax_rate_3 +]
+
+>>**Bracket Four:** [+ income_tax_rate_4 +]
+
+>>**Bracket Five:** [+ income_tax_rate_5 +]
+
 @raise_bracket4
-title: 🔼 Bracket Four 
+title: ▲ Bracket Four 
+new-page: true
 on-arrival: income_tax_rate_4 += 0.25; middle_unrest += 2.5; labor_unrest += 10; monthly_inflation -= 0.05;
 go-to: adjust_income_taxes
 
+>**Income Tax:** [+ income_tax : taxation +]
+>>**Bracket One:** [+ income_tax_rate_1 +]
+
+>>**Bracket Two:** [+ income_tax_rate_2 +]
+
+>>**Bracket Three:** [+ income_tax_rate_3 +]
+
+>>**Bracket Four:** [+ income_tax_rate_4 +]
+
+>>**Bracket Five:** [+ income_tax_rate_5 +]
+
 @lower_bracket4
-title: 🔽 Bracket Four 
+title: 🔻 Bracket Four 
+new-page: true
 choose-if: income_tax_rate_4 >= 0.25
 unavailable-subtitle: Already set to zero. 
 on-arrival: income_tax_rate_4 -= 0.25; middle_unrest -= 2.5; labor_unrest -= 10; monthly_inflation += 0.05;
 go-to: adjust_income_taxes
 
+>**Income Tax:** [+ income_tax : taxation +]
+>>**Bracket One:** [+ income_tax_rate_1 +]
+
+>>**Bracket Two:** [+ income_tax_rate_2 +]
+
+>>**Bracket Three:** [+ income_tax_rate_3 +]
+
+>>**Bracket Four:** [+ income_tax_rate_4 +]
+
+>>**Bracket Five:** [+ income_tax_rate_5 +]
+
 @raise_bracket5
-title: 🔼 Bracket Five 
+title: ▲ Bracket Five 
+new-page: true
 on-arrival: income_tax_rate_5 += 0.25; labor_unrest += 5; peasant_unrest += 5; monthly_inflation -= 0.05;
 go-to: adjust_income_taxes
 
+>**Income Tax:** [+ income_tax : taxation +]
+>>**Bracket One:** [+ income_tax_rate_1 +]
+
+>>**Bracket Two:** [+ income_tax_rate_2 +]
+
+>>**Bracket Three:** [+ income_tax_rate_3 +]
+
+>>**Bracket Four:** [+ income_tax_rate_4 +]
+
+>>**Bracket Five:** [+ income_tax_rate_5 +]
+
 @lower_bracket5
-title: 🔽 Bracket Five 
+title: 🔻 Bracket Five 
 choose-if: income_tax_rate_5 >= 0.25
 unavailable-subtitle: Already set to zero. 
 on-arrival: income_tax_rate_5 -= 0.25; labor_unrest -= 5; peasant_unrest -= 5; monthly_inflation += 0.05;
 go-to: adjust_income_taxes
+
+>**Income Tax:** [+ income_tax : taxation +]
+>>**Bracket One:** [+ income_tax_rate_1 +]
+
+>>**Bracket Two:** [+ income_tax_rate_2 +]
+
+>>**Bracket Three:** [+ income_tax_rate_3 +]
+
+>>**Bracket Four:** [+ income_tax_rate_4 +]
+
+>>**Bracket Five:** [+ income_tax_rate_5 +]
 
 @finish_adjusting
 title: Finish making adjustments 
@@ -167,25 +286,25 @@ go-to: finance
 
   
 @raise_wealth_tax
-title: Raise wealth taxes.
+title: Wealth Tax — Raise
 on-arrival: wealth_tax_rate += 0.5; capital_flight_progress += 0.5; capital_flight_progress += 1 if wealth_tax_rate >= 2; elite_unrest += 10; middle_unrest += 5; labor_unrest -= 5; monthly_inflation -= 0.2;
 
 We have raised taxes on wealth. 
 
 @lower_wealth_tax
-title: Lower wealth taxes.
+title: Wealth Tax — Lower
 on-arrival: wealth_tax_rate -= 0.5; capital_flight_progress -= 0.5; elite_unrest -= 10; middle_unrest -= 5; labor_unrest += 5; monthly_inflation += 0.2;
 
 We have lowered taxes on wealth. 
 
 @raise_business_tax
-title: Raise business taxes
+title: Business Tax — Raise
 on-arrival: business_tax_rate += 0.5; capital_flight_progress += 0.5; capital_flight_progress += 1 if business_tax_rate >= 2; elite_unrest += 5; middle_unrest += 5; labor_unrest -= 5; monthly_inflation -= 0.2;
 
 We have raised taxes on business profits. 
 
 @lower_business_tax
-title: Lower business taxes
+title: Business Tax — Lower
 on-arrival: business_tax_rate -= 0.5; capital_flight_progress -= 0.5; elite_unrest -= 5; middle_unrest -= 5; labor_unrest += 5; monthly_inflation += 0.2;
 
 We have lowered taxes on business profits. 
