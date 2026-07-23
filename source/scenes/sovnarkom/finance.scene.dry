@@ -167,21 +167,25 @@ go-to: finance
 
   
 @raise_wealth_tax
+title: Raise wealth taxes.
 on-arrival: wealth_tax_rate += 0.5; capital_flight_progress += 0.5; capital_flight_progress += 1 if wealth_tax_rate >= 2; elite_unrest += 10; middle_unrest += 5; labor_unrest -= 5; monthly_inflation -= 0.2;
 
 We have raised taxes on wealth. 
 
 @lower_wealth_tax
+title: Lower wealth taxes.
 on-arrival: wealth_tax_rate -= 0.5; capital_flight_progress -= 0.5; elite_unrest -= 10; middle_unrest -= 5; labor_unrest += 5; monthly_inflation += 0.2;
 
 We have lowered taxes on wealth. 
 
 @raise_business_tax
+title: Raise business taxes
 on-arrival: business_tax_rate += 0.5; capital_flight_progress += 0.5; capital_flight_progress += 1 if business_tax_rate >= 2; elite_unrest += 5; middle_unrest += 5; labor_unrest -= 5; monthly_inflation -= 0.2;
 
 We have raised taxes on business profits. 
 
 @lower_business_tax
+title: Lower business taxes
 on-arrival: business_tax_rate -= 0.5; capital_flight_progress -= 0.5; elite_unrest -= 5; middle_unrest -= 5; labor_unrest += 5; monthly_inflation += 0.2;
 
 We have lowered taxes on business profits. 
