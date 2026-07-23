@@ -124,7 +124,7 @@ Q.middle_strength = 50;
 Q.middle_wealth = 25;
 Q.middle_business = 75; 
 
-Q.clergy = 0.5
+Q.clergy = 0.5;
 Q.clergy_wealth = 5;
 Q.clergy_unrest = 60;
 Q.clergy_strength = 40;
