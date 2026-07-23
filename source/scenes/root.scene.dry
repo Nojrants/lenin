@@ -453,7 +453,7 @@ Q.customs = 2;
 Q.railway_revenue = 1;
 Q.enterprises_revenue = 1;
 
-Q.income = Math.round(
+Q.income = (
     Q.income_tax +
     Q.property_tax +
     Q.business_tax +
