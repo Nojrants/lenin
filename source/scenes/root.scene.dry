@@ -295,7 +295,7 @@ Q.income_tax_3 =
     +
     (
         Q.kulaks *
-        (25 - ((Q.kulak_unrest / 10) * (Q.middle_strength / 100))) / 600
+        (25 - ((Q.kulak_unrest / 10) * (Q.kulak_strength / 100))) / 600
     )
 ) * Q.income_tax_rate_3;
 
@@ -303,7 +303,7 @@ Q.income_tax_4 =
 (
     (
         Q.kulaks *
-        (75 - ((Q.kulak_unrest / 10) * (Q.middle_strength / 100))) / 1000
+        (75 - ((Q.kulak_unrest / 10) * (Q.kulak_strength / 100))) / 1000
     )
     +
     (
