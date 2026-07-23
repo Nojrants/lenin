@@ -1,0 +1,68 @@
+title: Sovnarkom
+new-page: true
+is-card: true
+on-arrival: week_actions += 1
+view-if: prime_minister_party = "Bolshevik"
+tags: sovnarkom
+
+= Sovnarkom
+
+The Council of People's Commissars (Sovnarkom). 
+
+- @sovnarkom_menu : COMMISSARIATS
+- @sovnarkom_administration
+- @sovnarkom_null
+- @cut_officialdom
+- @root: Do not change policy
+- @easy_discard
+- @cancel_advisor_action
+
+@sovnarkom_null
+title: -------------------------------------------------------------------------------------------------
+go-to: sovnarkom_chair
+
+@sovnarkom_return
+title: Cancel action
+go-to: sovnarkom_chair
+
+  
+@sovnarkom_menu
+  
+#sovnarkom
+
+@sovnarkom_administration
+title: ADMINISTRATION
+
+- @found_admin_department
+- @found_littlesov
+- @sovnarkom_hirestaff
+- @sovnarkom_return
+  
+@found_admin_department
+title: Found a Sovnarkom Admin Department. 
+subtitle: -1 resources - We need a permanent staff seeing to administrative matters. 
+view-if: admin_founded = 0
+on-arrival: admin_founded = 1; resources -= 1; sovnarkom_expend += 0.25; efficacy_sovnarkom += 0.2 if efficacy_sovnarkom < 1; efficacy_finance += 0.1 if efficacy_finance < 1; efficacy_foreign += 0.1 if efficacy_foreign < 1; efficacy_military += 0.1 if efficacy_military < 1; efficacy_enlightenment += 0.1 if efficacy_enlightenment < 1; efficacy_internal += 0.1 if efficacy_internal < 1; efficacy_railways += 0.1 if efficacy_railways < 1; efficacy_trade += 0.1 if efficacy_trade < 1; efficacy_justice += 0.1 if efficacy_justice < 1; efficacy_agriculture += 0.1 if efficacy_agriculture < 1; efficacy_foodsupply += 0.1 if efficacy_foodsupply < 1; efficacy_nationalities += 0.1 if efficacy_nationalities < 1; efficacy_welfare += 0.1 if efficacy_welfare < 1; 
+
+@found_littlesov
+title: Found a "Little Sovnarkom" council
+subtitle: -0.5 resources - We need an auxiliary council to oversee minor issues. 
+view-if: littlesov_founded = 0
+on-arrival: littlesov_founded = 1; reources -= 0.5; 
+
+@sovnarkom_hirestaff
+title: Hire administrative staff. 
+subtitle: -0.5 resources
+choose-if: admin_founded = 1
+unavailable-subtitle: We lack an administrative department. 
+on-arrival: reources -= 0.5; efficacy_sovnarkom += 0.1 if efficacy_sovnarkom < 1;
+
+
+
+
+@cut_officialdom
+title: Eliminate government "officialdom".
+subtitle: Cut unnecessary privileges and reduce all salaries to worker' wages.
+on-arrival: efficacy_sovnarkom += 0.1 if efficacy_sovnarkom < 1; efficacy_finance -= 0.05; efficacy_foreign -= 0.05; efficacy_military -= 0.05; efficacy_enlightenment -= 0.05; efficacy_internal -= 0.05; efficacy_railways -= 0.05; efficacy_trade -= 0.05; efficacy_justice -= 0.05; efficacy_agriculture -= 0.05; efficacy_foodsupply -= 0.05; efficacy_nationalities -= 0.05; efficacy_welfare -= 0.05; sovnarkom_expend -= 0.25; foreignaffairs_expend -= 0.5; military_expend -= 0.5; enlightmenet_expend -= 0.5; railways_expend -= 0.5; trade_expend -= 0.5; finance_expend -= 0.5; justice_expend -= 0.5; agriculture_expend -= 0.5; foodsupply_expend -= 0.5; nationalities_expend -= 0.5; welfare_expend -= 0.5; monthly_inflation -= 0.1; labor_unrest -= 5; intelligentsia_unrest -= 5; 
+
+
