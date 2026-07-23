@@ -36,14 +36,14 @@ go-to: finance
 @seize_banks
 title: Seize the banks!
 subtitle: Nationalize banks to allow us full control over fiscal policy. 
-view-if: banks_seized = 0;
+view-if: banks_seized = 0
 on-arrival: banks_seized = 1; resources += 3; elite_unrest += 5; middle_unrest += 5; instability += 5; capital_flight_progress += 0.5;
 
 @repudiate_loans
 title: Repudiate all outstanding loans.
 subtitle: This will free-up resources but substantially impact our foreign relations. 
-view-if: repudiation = 0;
-choose-if: loans >= 0; 
+view-if: repudiation = 0
+choose-if: loans >= 0
 unavailable-subtitle: We have no outstanding loans. 
 on-arrival: repudiation = 1; loans = 0; bonds = 0; uk_relation -= 35; france_relation -= 40; usa_relation -= 35; italy_relation -= 30; japan_relation -= 30; germany_relation -= 5; austria_relation -= 5; ottoman_relation -= 5; instability += 10; monthly_inflation += 0.5; capital_flight_progress += 1; 
 
