@@ -66,13 +66,13 @@ title: TAXATION
 - @finance_return
 
 @raise_income_taxes
-title:         – Raise across the board.
+title: – Raise across the board.
 on-arrival: income_tax_rate_1 += 0.5; income_tax_rate_2 += 0.5; income_tax_rate_3 += 0.5; income_tax_rate_4 += 0.5; income_tax_rate_5 += 0.5; capital_flight_progress += 0.5; capital_flight_progress += 1 if income_tax_rate_1 >= 2.5; elite_unrest += 2.5; middle_unrest += 2.5; labor_unrest += 5; peasant_unrest += 5; kulak_unrest += 5; monthly_inflation -= 0.2;
 
 Our tax increases hurts the livelihoods of workers and the middle class, and cuts into business confidence.
 
 @lower_income_taxes
-title:         – Cut across the board.
+title: – Cut across the board.
 on-arrival: income_tax_rate_1 -= 0.5; income_tax_rate_2 -= 0.5; income_tax_rate_3 -= 0.5; income_tax_rate_4 -= 0.5; income_tax_rate_5 -= 0.5; capital_flight_progress -= 1; elite_unrest -= 5; middle_unrest -= 5; labor_unrest -= 5; peasant_unrest -= 5; kulak_unrest -= 5; monthly_inflation += 0.2;
 
 @adjust_income_taxes
@@ -102,60 +102,60 @@ title: Income Tax – Adjust current brackets.
 - @finish_adjusting
 
 @raise_bracket1
-title: Raise taxation rate of Bracket One 
+title: 🔼 Bracket One 
 on-arrival: income_tax_rate_1 += 0.25; capital_flight_progress += 0.25; elite_unrest += 2.5; middle_unrest += 2.5; monthly_inflation -= 0.05;
 go-to: adjust_income_taxes
 
 @lower_bracket1
-title: Lower taxation rate of Bracket One 
+title: 🔽 Bracket One
 choose-if: income_tax_rate_1 >= 0.25
 unavailable-subtitle: Already set to zero. 
 on-arrival: income_tax_rate_1 -= 0.25; capital_flight_progress -= 0.25; elite_unrest -= 2.5; middle_unrest -= 2.5; monthly_inflation += 0.05;
 go-to: adjust_income_taxes
 
 @raise_bracket2
-title: Raise taxation rate of Bracket Two 
+title: 🔼 Bracket Two 
 on-arrival: income_tax_rate_2 += 0.25; capital_flight_progress += 0.25; elite_unrest += 2.5; middle_unrest += 2.5; monthly_inflation -= 0.05;
 go-to: adjust_income_taxes
 
 @lower_bracket2
-title: Lower taxation rate of Bracket Two 
+title: 🔽 Bracket Two 
 choose-if: income_tax_rate_2 >= 0.25
 unavailable-subtitle: Already set to zero. 
 on-arrival: income_tax_rate_2 -= 0.25; capital_flight_progress -= 0.25; elite_unrest -= 2.5; middle_unrest -= 2.5; monthly_inflation += 0.05;
 go-to: adjust_income_taxes
 
 @raise_bracket3
-title: Raise taxation rate of Bracket Three 
+title: 🔼 Bracket Three 
 on-arrival: income_tax_rate_3 += 0.25; capital_flight_progress += 0.25; middle_unrest += 2.5; kulak_unrest += 1; monthly_inflation -= 0.05;
 go-to: adjust_income_taxes
 
 @lower_bracket3
-title: Lower taxation rate of Bracket Three 
+title: 🔽 Bracket Three 
 choose-if: income_tax_rate_3 >= 0.25
 unavailable-subtitle: Already set to zero. 
 on-arrival: income_tax_rate_3 -= 0.25; capital_flight_progress -= 0.25; middle_unrest -= 2.5; kulak_unrest -= 1; monthly_inflation += 0.05;
 go-to: adjust_income_taxes
 
 @raise_bracket4
-title: Raise taxation rate of Bracket Four 
+title: 🔼 Bracket Four 
 on-arrival: income_tax_rate_4 += 0.25; middle_unrest += 2.5; labor_unrest += 10; monthly_inflation -= 0.05;
 go-to: adjust_income_taxes
 
 @lower_bracket4
-title: Lower taxation rate of Bracket Four 
+title: 🔽 Bracket Four 
 choose-if: income_tax_rate_4 >= 0.25
 unavailable-subtitle: Already set to zero. 
 on-arrival: income_tax_rate_4 -= 0.25; middle_unrest -= 2.5; labor_unrest -= 10; monthly_inflation += 0.05;
 go-to: adjust_income_taxes
 
 @raise_bracket5
-title: Raise taxation rate of Bracket Five 
+title: 🔼 Bracket Five 
 on-arrival: income_tax_rate_5 += 0.25; labor_unrest += 5; peasant_unrest += 5; monthly_inflation -= 0.05;
 go-to: adjust_income_taxes
 
 @lower_bracket5
-title: Lower taxation rate of Bracket Five 
+title: 🔽 Bracket Five 
 choose-if: income_tax_rate_5 >= 0.25
 unavailable-subtitle: Already set to zero. 
 on-arrival: income_tax_rate_5 -= 0.25; labor_unrest -= 5; peasant_unrest -= 5; monthly_inflation += 0.05;
