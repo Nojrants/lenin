@@ -2,7 +2,7 @@ title: High Inflation
 subtitle: Workers are seeing their purchasing power decline.
 view-if: inflation >= 25 and high_inflation_timer = 0
 new-page: true
-on-arrival: capital_flight_progress += 1; industry *= 0.99; high_inflation_timer = 12 if inflation >= 25; high_inflation_timer = 8 if inflation >= 50; high_inflation_timer = 4 if inflation >= 90; prov_gov_legitimacy -= 3; labor_unrest += 2 if labor_unrest < 70; food_sold -= 0.002; coup_progress += 1; crime_rate += 3 if crime_rate < 50
+on-arrival: capital_flight_progress += 0.5; industry *= 0.99; high_inflation_timer = 12 if inflation >= 25; high_inflation_timer = 8 if inflation >= 50; high_inflation_timer = 4 if inflation >= 90; labor_unrest += 2; food_sold -= 0.002; crime_rate += 3;
 tags: event
 
 = High Inflation
@@ -11,54 +11,51 @@ Prices are spiralling out of control, and everyone across Russia is seeing their
 
 Is there anything we can do?
 
+- @organize_expropriations
+- @raise_taxes
 - @soviet_control
 - @price_controls
 - @austerity
 - @campaign
 - @nothing: Nothing can be done.
 
-@soviet_control
-title: The Soviet should impose a regime of price and wage controls.
-subtitle: If the Provisional Government is unable or unwilling, the Soviet must play a larger role in organizing the economy.
-view-if: (player_party = "m" and m_in_exco) or (player_party = "sr" and sr_in_exco) or (player_party = "b" and b_in_exco)
-unavailable-subtitle: The Soviet does not yet have the efficacy for this policy.
-choose-if: soviet_efficacy >= 0.7
-on-arrival: monthly_inflation -= 0.3;
+@organize_expropriations
+title: Organize a round of expropriations from the capitalists! 
+choose-if: elite_wealth > 5
+unavailable-subtitle: There is nothing left to expropriate. 
+on-arrival: (elite_wealth -= 2 and resources += 1) if elite_wealth >= 30; (elite_wealth -= 2 and resources += 1) if elite_wealth >= 20; (elite_wealth -= 1 and resources += 1) if elite_wealth >= 10; (middle_wealth -= 2 and resources += 1) if middle_wealth >= 20; capital_flight_progress += 0.5; elite_unrest += 5; middle_unrest += 2.5; labor_unrest -= 5; peasant_unrest -= 5; kulak_unrest -= 5; intelligentsia_unrest += 2; monthly_inflation -= 0.1; instability += 3;
 
-We use the influence of the Soviet to coordinate action on prices.
+@raise_taxes 
+title: Raise current taxation rates across the board. 
+choose-if: finance_minister_party = "Bolshevik"
+unavailable-subtitle: We don't control financial policy. 
+on-arrival: wealth_tax_rate += 0.5; business_tax_rate += 0.5; income_tax_rate_1 += 0.5; income_tax_rate_2 += 0.5; income_tax_rate_3 += 0.5; income_tax_rate_4 += 0.5; income_tax_rate_5 += 0.5; capital_flight_progress += 0.5; capital_flight_progress += 1 if income_tax_rate_1 >= 2.5; elite_unrest += 2.5; middle_unrest += 2.5; labor_unrest += 5; peasant_unrest += 5; kulak_unrest += 5; monthly_inflation -= 0.2;
+
+@slash_welfare
+title: Cut funding for welfare programs.  
+choose-if: welfare_minister_party = "Bolshevik"
+unavailable-subtitle: We don't control welfare  policy. 
+on-arrival: wealth_tax_rate += 0.5; business_tax_rate += 0.5; income_tax_rate_1 += 0.5; income_tax_rate_2 += 0.5; income_tax_rate_3 += 0.5; income_tax_rate_4 += 0.5; income_tax_rate_5 += 0.5; capital_flight_progress += 0.5; capital_flight_progress += 1 if income_tax_rate_1 >= 2.5; elite_unrest += 2.5; middle_unrest += 2.5; labor_unrest += 5; peasant_unrest += 5; kulak_unrest += 5; monthly_inflation -= 0.2; efficacy_welfare -= 0.1; 
+
+@austerity
+title: Impose a program of full austerity.
+subtitle: Raise taxes, cut government spending.
+view-if: prime_minister_party = "Bolshevik" or finance_minister_party = "Bolshevik"
+on-arrival: resources += 1; wealth_tax_rate += 0.25; business_tax_rate += 0.25; income_tax_rate_1 += 0.25; income_tax_rate_2 += 0.25; income_tax_rate_3 += 0.25; income_tax_rate_4 += 0.25; income_tax_rate_5 += 0.25; capital_flight_progress += 0.25; elite_unrest += 2.5; middle_unrest += 2.5; labor_unrest += 5; peasant_unrest += 5; kulak_unrest += 5; monthly_inflation -= 0.5; efficacy_finance -= 0.1; efficacy_foreign -= 0.1; efficacy_military -= 0.1; efficacy_enlightenment -= 0.1; efficacy_internal -= 0.1; efficacy_railways -= 0.1; efficacy_trade -= 0.1; efficacy_justice -= 0.1; efficacy_agriculture -= 0.1; efficacy_foodsupply -= 0.1; efficacy_nationalities -= 0.1; efficacy_welfare -= 0.1; foreignaffairs_expend -= 0.25; military_expend -= 0.25; enlightmenet_expend -= 0.25; railways_expend -= 0.25; trade_expend -= 0.25; finance_expend -= 0.25; justice_expend -= 0.25; agriculture_expend -= 0.25; foodsupply_expend -= 0.25; nationalities_expend -= 0.25; welfare_expend -= 0.25; train_capacity *= 0.999; monthly_inflation -= 0.5 if monthly_inflation >= 5; monthly_inflation -= 0.4 if monthly_inflation >= 4; 
+
+Our program of austerity severely hurts the workers, middle class, and soldiers.
 
 @price_controls
 title: Impose price controls and rationing on basic necessities.
 subtitle: This may simply push trade to the black market.
-view-if: (player_party = "m" and m_in_gov) or (player_party = "sr" and sr_in_gov) or (player_party = "k" and k_in_gov)
-on-arrival: monthly_inflation -= 0.4 if prov_gov_efficacy >= 0.7; monthly_inflation -= 0.2 if prov_gov_efficacy < 0.7; food_sold -= 0.001;
+unavailable-subtitle: We don't control financial policy. 
+choose-if: finance_minister_party = "Bolshevik"
+on-arrival: monthly_inflation -= 0.4; food_sold -= 0.001;
 
 Price controls and rationing can reduce prices for some goods, but it only further depresses the amount of grain sold by peasants.
 
 
-@austerity
-title: Impose a program of austerity.
-subtitle: Raise taxes, cut government spending.
-view-if: (player_party = "m" and m_in_gov) or (player_party = "sr" and sr_in_gov) or (player_party = "k" and k_in_gov)
-on-arrival: budget += 2; middle_none += 5; workers_none += 5; soldiers_none += 5;  workers_m -= 3; workers_sr -= 3; workers_k -= 3; middle_m -= 3; middle_sr -= 3; middle_k -= 3; soldiers_m -= 5; soldiers_sr -= 5; soldiers_k -= 5; train_capacity *= 0.999; morale -= 0.04; benefits -= 1; monthly_inflation -= 0.5 if monthly_inflation >= 5; monthly_inflation -= 0.4 if monthly_inflation >= 4; prov_gov_efficacy -= 0.06; labor_unrest += 1
-
-Our program of austerity severely hurts the workers, middle class, and soldiers.
-
-
-# the soviet should impose a regime of price and wage controls. The soviet must play a larger role in organizing the economy, if the provisional government is unwilling.
-# impose price controls
-# immediate cuts to government disbursements and non-military expenses.
-# raise income taxes, including taxes for middle-income workers.
-# call on workers to cease striking
-
 @nothing
-on-arrival: workers_b += 3*(1-b_dissent) if not b_is_player
+on-arrival: labor_unrest += 2.5; peasant_unrest += 2.5; instability += 1; 
 
 There is nothing we can do about this.
-
-@campaign
-title: Campaign against the ineptitude of the Provisional Government!
-view-if: player_party = "b"
-on-arrival: workers_b += 4*(1-b_dissent)
-
-We use the issue of inflation to campaign against the Provisional Government.
