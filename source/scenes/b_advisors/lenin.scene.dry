@@ -5,18 +5,6 @@ card-image: img/portraits/b/lenin.jpg
 view-if: lenin_advisor = 1 and player_party = "b"
 new-page: true 
 
-Q.lenin_auc = 6;
-Q.lenin_adm = 4;
-Q.lenin_idea = 5;
-Q.lenin_mil = 2;
-Q.lenin_eco = 4;
-Q.lenin_par = 4;
-Q.lenin_dip = 3;
-Q.lenin_nat = 3;
-Q.lenin_cult = 2;
-Q.lenin_spec = "";
-
-
 = Vladimir Lenin
 
 Vladimir Lenin is the undisputed leader of the Bolshevik party, and its chief theoretician and organizer.
