@@ -110,7 +110,8 @@ Q.imperial_police = 0;
 Q.cheka_founded = 0;
 Q.banks_seized = 0; 
 Q.repudiation = 0;
-
+Q.admin_founded = 0;
+Q.littlesov_founded = 0;
 
 Q.elites = 2;
 Q.elite_unrest = 65;
@@ -224,6 +225,7 @@ Q.government_functions = (
     Q.welfare_expend
 );
 
+Q.efficacy_sovnarkom = 0.7;
 Q.efficacy_finance = 0.6;
 Q.efficacy_foreign = 0.6;
 Q.efficacy_military = 0.5;  
@@ -1178,6 +1180,7 @@ Q.timers = [//m_party
             'german_offensive',
             'mass_demobilization',
             'report',
+            'sovnarkom',
             ];
 Q.advisor_action_timer = 0;
 Q.party_congress_timer = 0;
@@ -1267,6 +1270,19 @@ Q.zinoviev_advisor = 0; // Grigory Zinoviev - April week 1
 Q.kollontai_advisor = 0; // Alexandra Kollontai - April week 1
 Q.stasova_advisor = 0; // Elena Stasova
 Q.shliapnikov_advisor = 0; // Alexander Shliapnikov
+
+Q.lenin_auc = 6;
+Q.lenin_adm = 4;
+Q.lenin_idea = 5;
+Q.lenin_mil = 2;
+Q.lenin_eco = 4;
+Q.lenin_par = 4;
+Q.lenin_dip = 3;
+Q.lenin_nat = 3;
+Q.lenin_cult = 2;
+Q.lenin_spec = "";
+
+
 
 // Records of stats
 Q.soviet_support_records = [];
