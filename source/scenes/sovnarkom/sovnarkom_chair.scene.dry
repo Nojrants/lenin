@@ -63,7 +63,7 @@ on-arrival: reources -= 0.5; efficacy_sovnarkom += 0.1 if efficacy_sovnarkom < 1
 @cut_officialdom
 title: Eliminate government "officialdom".
 subtitle: Cut unnecessary privileges and reduce all salaries to worker' wages.
-max-visits: 1
-on-arrival: efficacy_sovnarkom += 0.1 if efficacy_sovnarkom < 1; efficacy_finance -= 0.05; efficacy_foreign -= 0.05; efficacy_military -= 0.05; efficacy_enlightenment -= 0.05; efficacy_internal -= 0.05; efficacy_railways -= 0.05; efficacy_trade -= 0.05; efficacy_justice -= 0.05; efficacy_agriculture -= 0.05; efficacy_foodsupply -= 0.05; efficacy_nationalities -= 0.05; efficacy_welfare -= 0.05; sovnarkom_expend -= 0.25; foreignaffairs_expend -= 0.5; military_expend -= 0.5; enlightmenet_expend -= 0.5; railways_expend -= 0.5; trade_expend -= 0.5; finance_expend -= 0.5; justice_expend -= 0.5; agriculture_expend -= 0.5; foodsupply_expend -= 0.5; nationalities_expend -= 0.5; welfare_expend -= 0.5; monthly_inflation -= 0.1; labor_unrest -= 5; intelligentsia_unrest -= 5; 
+view-if: officialdom = 0; 
+on-arrival: officialdom = 1; efficacy_sovnarkom += 0.1 if efficacy_sovnarkom < 1; efficacy_finance -= 0.05; efficacy_foreign -= 0.05; efficacy_military -= 0.05; efficacy_enlightenment -= 0.05; efficacy_internal -= 0.05; efficacy_railways -= 0.05; efficacy_trade -= 0.05; efficacy_justice -= 0.05; efficacy_agriculture -= 0.05; efficacy_foodsupply -= 0.05; efficacy_nationalities -= 0.05; efficacy_welfare -= 0.05; sovnarkom_expend -= 0.25; foreignaffairs_expend -= 0.5; military_expend -= 0.5; enlightmenet_expend -= 0.5; railways_expend -= 0.5; trade_expend -= 0.5; finance_expend -= 0.5; justice_expend -= 0.5; agriculture_expend -= 0.5; foodsupply_expend -= 0.5; nationalities_expend -= 0.5; welfare_expend -= 0.5; monthly_inflation -= 0.1; labor_unrest -= 5; intelligentsia_unrest -= 5; 
 
 
