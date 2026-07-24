@@ -13,6 +13,7 @@ The Council of People's Commissars (Sovnarkom).
 - @sovnarkom_administration
 - @sovnarkom_null
 - @cut_officialdom
+- @found_welfare
 - @root: Do not change policy
 - @easy_discard
 - @cancel_advisor_action
@@ -78,7 +79,8 @@ go-to: welfare_commissar_menu
 We need to select a people's commsisar to head the commissariat. 
 
 - @select_kollontai
-- @select_kollontai
+- @select_vinokurov
+- @select_milyutin
 
 @select_kollontai
 title: Alexandra Kollontai
