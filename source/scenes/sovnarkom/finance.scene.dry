@@ -213,7 +213,7 @@ title: BANKING
 
 @finance_issue_currency
 title: Issue additional currency. 
-choose-if: state_bank = 1
+choose-if: banks_seized = 1
 unavailable-subtitle: We lack control over the banks. 
 subtitle: +5 resources
 on-arrival: {!
@@ -224,7 +224,7 @@ on-arrival: {!
 
 @finance_bank_advances
 title: Borrow from the State Bank.
-choose-if: state_bank = 1
+choose-if: banks_seized = 1
 unavailable-subtitle: We lack control over the banks. 
 subtitle: +5 resources
 on-arrival: {!
