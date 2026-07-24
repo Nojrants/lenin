@@ -141,7 +141,7 @@ if (Q.justice_expend < 0.25) Q.justice_expend = 0.25;
 if (Q.agriculture_expend < 0.25) Q.agriculture_expend = 0.25;
 if (Q.foodsupply_expend < 0.25) Q.foodsupply_expend = 0.25;
 if (Q.nationalities_expend < 0.25) Q.nationalities_expend = 0.25;
-if (Q.welfare_expend < 0.25) Q.welfare_expend = 0.25;
+if (Q.welfare_expend < 0.25 && welfare_founded = 1) Q.welfare_expend = 0.25;
 
 Q.government_functions = (
     Q.sovnarkom_expend +
