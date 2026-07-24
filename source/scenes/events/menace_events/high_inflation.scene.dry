@@ -23,7 +23,7 @@ Is there anything we can do?
 title: Organize a round of expropriations from the capitalists! 
 choose-if: elite_wealth > 5
 unavailable-subtitle: There is nothing left to expropriate. 
-on-arrival: (elite_wealth -= 2 and resources += 1) if elite_wealth >= 30; (elite_wealth -= 2 and resources += 1) if elite_wealth >= 20; (elite_wealth -= 1 and resources += 1) if elite_wealth >= 10; (middle_wealth -= 2 and resources += 1) if middle_wealth >= 20; capital_flight_progress += 0.5; elite_unrest += 5; middle_unrest += 2.5; labor_unrest -= 5; peasant_unrest -= 5; kulak_unrest -= 5; intelligentsia_unrest += 2; monthly_inflation -= 0.1; instability += 3;
+on-arrival: elite_wealth -= 2 if elite_wealth >= 30; resources += 1 if elite_wealth >= 30; elite_wealth -= 2 if elite_wealth >= 20; resources += 1 if elite_wealth >= 20; elite_wealth -= 1 if elite_wealth >= 10; resources += 1 if elite_wealth >= 10; middle_wealth -= 2 if middle_wealth >= 20; resources += 1 if middle_wealth >= 20; capital_flight_progress += 0.5; elite_unrest += 5; middle_unrest += 2.5; labor_unrest -= 5; peasant_unrest -= 5; kulak_unrest -= 5; intelligentsia_unrest += 2; monthly_inflation -= 0.1; instability += 3;
 
 @raise_taxes 
 title: Raise current taxation rates across the board. 
