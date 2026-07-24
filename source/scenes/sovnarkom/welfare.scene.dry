@@ -62,7 +62,7 @@ on-arrival: efficacy_welfare += 0.1 if efficacy_welfare < 1; resources -= 0.5;
 
 @found_worker_insurance
 title: Found a system of mandatory worker insurance.
-subtitle: Sick pay and disability for workers - financed through employer and state contributions. 
+subtitle: Sick pay and disability - financed through employer and state contributions. 
 choose-if: worker_insurance_founded = 0 and efficacy_welfare > 0.3
 view-if: worker_insurance_founded = 0
 unavailable-subtitle: We lack the administrative capabilities and/or funds. 
@@ -94,7 +94,7 @@ on-arrival: elderly_founded = 1; resources -= 0.5; welfare_expend += 0.5; labor_
 
 @found_maternity
 title: Declare a series of new maternity benefits. 
-subtitle: Paid maternity leave, job protection, and expanded medical care for mothers. 
+subtitle: Paid maternity leave, job protection, and expanded medical support.
 choose-if: maternity_founded = 0
 view-if: maternity_founded = 0
 on-arrival: maternity_founded = 1; welfare_expend += 0.25; labor_unrest -= 5; underclass_unrest -= 5; intelligentsia_unrest -= 5; 
