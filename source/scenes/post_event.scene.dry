@@ -129,6 +129,19 @@ if (Q.unemployed <= 1) {
 
 
 
+if (Q.sovnarkom_expend < 0.25) Q.sovnarkom_expend = 0.25;
+if (Q.internal_expend < 0.25) Q.internal_expend = 0.25;
+if (Q.foreignaffairs_expend < 0.25) Q.foreignaffairs_expend = 0.25;
+if (Q.military_expend < 0.25) Q.military_expend = 0.25;
+if (Q.enlightmenet_expend < 0.25) Q.enlightmenet_expend = 0.25;
+if (Q.railways_expend < 0.25) Q.railways_expend = 0.25;
+if (Q.trade_expend < 0.25) Q.trade_expend = 0.25;
+if (Q.finance_expend < 0.25) Q.finance_expend = 0.25;
+if (Q.justice_expend < 0.25) Q.justice_expend = 0.25;
+if (Q.agriculture_expend < 0.25) Q.agriculture_expend = 0.25;
+if (Q.foodsupply_expend < 0.25) Q.foodsupply_expend = 0.25;
+if (Q.nationalities_expend < 0.25) Q.nationalities_expend = 0.25;
+if (Q.welfare_expend < 0.25) Q.welfare_expend = 0.25;
 
 Q.government_functions = (
     Q.sovnarkom_expend +
