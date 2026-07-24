@@ -102,9 +102,9 @@ Q.leftcom_split = 0;
 
 
 // state of the country 
-Q.instability = 50;
+Q.instability = 40;
 Q.democraticity = 45;
-Q.crime = 70;
+Q.crime = 60;
 Q.unrest_modifier = 1;
 Q.imperial_police = 0;
 Q.cheka_founded = 0;
@@ -113,7 +113,14 @@ Q.repudiation = 0;
 Q.admin_founded = 0;
 Q.littlesov_founded = 0;
 Q.officialdom = 0;
-Q.welfare_founded = 0
+Q.welfare_founded = 0;
+Q.worker_insurance_founded = 0;
+Q.unemployment_founded = 0;
+Q.invalids_founded = 0; 
+Q.elderly_founded = 0; 
+Q.maternity_founded = 0; 
+Q.widows_founded = 0;
+Q.nurseries_founded = 0; 
 
 Q.elites = 2;
 Q.elite_unrest = 65;
