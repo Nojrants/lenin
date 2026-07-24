@@ -1,1 +1,122 @@
+title: Welfare
+new-page: true
+is-card: true
+on-arrival: social_policy_timer += 2; week_actions += 1
+view-if: social_policy_timer == 0 and welfare_minister_party = "Bolshevik"
+tags: sovnarkom
+
+= Welfare 
+
+- @welfare_programs
+- @welfare_administration
+- @welfare_null
+- @found_worker_insurance
+- @found_unemployment
+- @found_war_invalids
+- @found_elderly
+- @found_maternity
+- @found_widows
+- @found_nurseries 
+- @root: Do not change welfare
+- @easy_discard
+- @cancel_advisor_action
+
+
+@welfare_null
+title: -------------------------------------------------------------------------------------------------
+go-to: welfare
+
+@welfare_return
+title: Cancel action
+go-to: welfare
+
+  
+
+@welfare_programs
+title: CURRENT PROGRAMS
+
+@welfare_administration
+title: ADMINISTRATION
+
+- @welfare_improve_admin
+- @welfare_hire_staff
+- @welfare_corruption
+- @welfare_return
+
+@welfare_improve_admin
+title: Streamline department
+subtitle: Cut waste and inefficiencies, increase labor intensity
+on-arrival: efficacy_welfare += 0.1 if efficacy_welfare < 1; 
+
+@welfare_hire_staff
+title: Hire administrative personnel
+subtitle: -0.5 resources
+on-arrival: efficacy_welfare += 0.2 if efficacy_welfare < 1; welfare_expend += 0.25; resources -= 0.5;
+
+@welfare_corruption
+title: Root-out departmental corruption. 
+subtitle: -0.5 resources 
+on-arrival: efficacy_welfare += 0.1 if efficacy_welfare < 1; resources -= 0.5;
+
+
+
+@found_worker_insurance
+title: Found a system of mandatory worker insurance.
+subtitle: Sick pay and disability for workers - financed through employer and state contributions. 
+choose-if: worker_insurance_founded = 0 and efficacy_welfare > 0.3
+view-if: worker_insurance_founded = 0
+unavailable-subtitle: We lack the administrative capabilities and/or funds. 
+on-arrival: worker_insurance_founded = 1; welfare_expend += 0.25; labor_unrest -= 15; 
+
+@found_unemployment
+title: Found an assistance program for the unemployed. 
+subtitle: -0.5 resources - Cash assistance for the unemployed.
+choose-if: unemployment_founded = 0 and resources >= 0.5 and efficacy_welfare > 0.5
+view-if: worker_insurance_founded = 0
+unavailable-subtitle: We lack the administrative capabilities and/or funds. 
+on-arrival: unemployment_founded = 1; resources -= 0.5; welfare_expend += 0.5; labor_unrest -= 15; underclass_unrest -= 10; 
+
+@found_war_invalids
+title: Found an assistance program for war invalids.   
+subtitle: -1 resources - Cash assistance for those wounded or disabled from war. 
+choose-if: invalids_founded = 0 and resources >= 1 and efficacy_welfare > 0.7
+view-if: worker_insurance_founded = 0
+unavailable-subtitle: We lack the administrative capabilities and/or funds. 
+on-arrival: invalids_founded = 1; resources -= 1; welfare_expend += 1; labor_unrest -= 5; underclass_unrest -= 5; soldiers_unrest -= 15;
+
+@found_elderly
+title: Found a system of pensions for the elderly 
+subtitle: -0.5 resources - Focusing on retired workers, veterans, and dependents. 
+choose-if: elderly_founded = 0 and resources >= 0.5 and efficacy_welfare > 0.7
+view-if: elderly_founded = 0
+unavailable-subtitle: We lack the administrative capabilities and/or funds. 
+on-arrival: elderly_founded = 1; resources -= 0.5; welfare_expend += 0.5; labor_unrest -= 5; underclass_unrest -= 5; soldiers_unrest -= 5; middle_unrest -= 5; intelligentsia_unrest -= 5; 
+
+@found_maternity
+title: Declare a series of new maternity benefits. 
+subtitle: Paid maternity leave, job protection, and expanded medical care for mothers. 
+choose-if: maternity_founded = 0
+view-if: maternity_founded = 0
+on-arrival: maternity_founded = 1; welfare_expend += 0.25; labor_unrest -= 5; underclass_unrest -= 5; intelligentsia_unrest -= 5; 
+
+@found_widows
+title: Found an assistance program for widows and orphans. 
+subtitle: -1 resources - Pensions and food assistance. 
+choose-if: widows_founded = 0 and resources >= 1 and efficacy_welfare > 0.7 
+view-if: widows_founded = 0
+unavailable-subtitle: We lack the administrative capabilities and/or funds. 
+on-arrival: widows_founded = 1; welfare_expend += 0.25; labor_unrest -= 5; underclass_unrest -= 5; intelligentsia_unrest -= 5; 
+
+@found_nurseries
+title: Found a system of nurseries and childcare facilities. 
+subtitle: -2 resources 
+choose-if: nurseries_founded = 0 and resources >= 2 and efficacy_welfare > 0.9
+view-if: nurseries_founded = 0
+unavailable-subtitle: We lack the administrative capabilities and/or funds. 
+on-arrival: nurseries_founded = 1; welfare_expend += 1; resources -= 2; labor_unrest -= 10; underclass_unrest -= 5; intelligentsia_unrest -= 5; middle_unrest -= 5; 
+
+
+
+
+
 
