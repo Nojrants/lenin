@@ -73,11 +73,7 @@ title: Issue additional currency.
 choose-if: banks_seized = 1
 unavailable-subtitle: We lack control over the banks. 
 subtitle: +5 resources
-on-arrival: {!
-    resources += 5;
-    Q.monthly_inflation += (1.2 * (instability/12.5));
-    Q.instability += 1;
-!}
+on-arrival: resources += 5; monthly_inflation += (1.2 * (instability/12.5)); instability += 1;
 go-to: finance_report
 
 @bank_advances
@@ -85,13 +81,7 @@ title: Borrow from the State Bank.
 choose-if: banks_seized = 1
 unavailable-subtitle: We lack control over the banks. 
 subtitle: +5 resources
-on-arrival: {!
-    resources += 5;
-    bank_advances += 5; 
-    Q.monthly_inflation += (1.2 * (instability/25));
-    Q.instability += 0.25;
-!}
-
+on-arrival: resources += 5; bank_advances += 5; monthly_inflation += (1.2 * (instability/25)); instability += 0.25;
 go-to: finance_report
 
 
