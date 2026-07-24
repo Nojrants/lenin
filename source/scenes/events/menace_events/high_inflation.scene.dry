@@ -13,10 +13,9 @@ Is there anything we can do?
 
 - @organize_expropriations
 - @raise_taxes
-- @soviet_control
-- @price_controls
+- @slash_welfare
 - @austerity
-- @campaign
+- @price_controls
 - @nothing: Nothing can be done.
 
 @organize_expropriations
@@ -33,8 +32,8 @@ on-arrival: wealth_tax_rate += 0.5; business_tax_rate += 0.5; income_tax_rate_1 
 
 @slash_welfare
 title: Cut funding for welfare programs.  
-choose-if: welfare_minister_party = "Bolshevik"
-unavailable-subtitle: We don't control welfare  policy. 
+choose-if: welfare_minister_party = "Bolshevik" and welfare_expend >= 0.5; 
+unavailable-subtitle: We don't control welfare policy. 
 on-arrival: wealth_tax_rate += 0.5; business_tax_rate += 0.5; income_tax_rate_1 += 0.5; income_tax_rate_2 += 0.5; income_tax_rate_3 += 0.5; income_tax_rate_4 += 0.5; income_tax_rate_5 += 0.5; capital_flight_progress += 0.5; capital_flight_progress += 1 if income_tax_rate_1 >= 2.5; elite_unrest += 2.5; middle_unrest += 2.5; labor_unrest += 5; peasant_unrest += 5; kulak_unrest += 5; monthly_inflation -= 0.2; efficacy_welfare -= 0.1; 
 
 @austerity
