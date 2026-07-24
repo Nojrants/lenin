@@ -1,7 +1,7 @@
 title: Chairman
 new-page: true
 is-card: true
-view-if: sovnarkom_timer == 0; prime_minister_party = "Bolshevik"
+view-if: sovnarkom_timer == 0 and prime_minister_party = "Bolshevik"
 on-arrival: week_actions += 1; sovnarkom_timer += 2
 tags: sovnarkom
 
@@ -9,7 +9,7 @@ tags: sovnarkom
 
 The Council of People's Commissars (Sovnarkom). 
 
-- @sovnarkom_menu : COMMISSARIATS
+- @sovnarkom_menu
 - @sovnarkom_administration
 - @sovnarkom_null
 - @cut_officialdom
@@ -27,6 +27,7 @@ go-to: sovnarkom_chair
 
   
 @sovnarkom_menu
+title: COMMISSARIATS
 go-to: sovnarkom
 
 @sovnarkom_administration
