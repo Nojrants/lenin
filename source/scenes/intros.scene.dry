@@ -108,6 +108,8 @@ Q.food_minister = "Teodorovich";
 Q.food_minister_party = "Bolshevik";
 Q.nationalities_minister = "Stalin";
 Q.nationalities_minister_party = "Bolshevik";
+Q.welfare_minister = "";
+Q.welfare_minister_party = "";
 
 sdi_relation -= 5;
 left_m_relation -= 10;
@@ -177,6 +179,8 @@ Q.food_minister = "Teodorovich";
 Q.food_minister_party = "Bolshevik";
 Q.nationalities_minister = "Stalin";
 Q.nationalities_minister_party = "Bolshevik";
+Q.welfare_minister = "";
+Q.welfare_minister_party = "";
 !}
 
 Sovnarkom is declared as a temporary provisional government until the convocation of the Constituent Assembly. A composition is proposed reserving the key seats for the Bolsheviks, though offering some minor positions the other parties. 
