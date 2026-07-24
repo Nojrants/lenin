@@ -113,6 +113,7 @@ Q.repudiation = 0;
 Q.admin_founded = 0;
 Q.littlesov_founded = 0;
 Q.officialdom = 0;
+Q.welfare_founded = 0
 
 Q.elites = 2;
 Q.elite_unrest = 65;
