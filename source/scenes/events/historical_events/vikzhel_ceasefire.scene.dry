@@ -117,7 +117,7 @@ on-arrival: influence += 8; disarm_workers = 1;
 go-to: menu
 
 @pledge_ca
-title: Pledge to follow through with elections to the Constituent Assembly and respect their result. 
+title: Pledge to follow through with and respect the elections to the Constituent Assembly.
 tags: vikzhel_offers
 view-if: pledge_ca != 1
 on-arrival: influence += 1; pledge_ca = 1;
