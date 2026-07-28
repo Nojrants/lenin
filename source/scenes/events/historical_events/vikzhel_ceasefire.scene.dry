@@ -20,22 +20,22 @@ Yet at the same time, the precariousness of the Bolshevik position has only hard
 title: We refuse to be blackmailed by counterrevolutionaries! 
 subtitle: Reject the offer to attend the conference. 
 on-arrival: {!
-sdi_relation -= 5;
-left_m_relation -= 5;
-centre_m_relation -= 5;
-right_m_relation -= 10; 
-lsr_relation -= 5;
-centre_sr_relation -= 10;
-right_sr_relation -= 10;
-ns_relation -= 10;
-democraticity -= 1;
-instability += 4;  
-moderate_dissent += 10; 
-leninist_dissent -= 5;
-leftcom_dissent -= 5;
-vikzhel_unrest += 20; 
-right_sr_strength += 2;
-right_m_strength += 2; 
+Q.sdi_relation -= 5;
+Q.left_m_relation -= 5;
+Q.centre_m_relation -= 5;
+Q.right_m_relation -= 10; 
+Q.lsr_relation -= 5;
+Q.centre_sr_relation -= 10;
+Q.right_sr_relation -= 10;
+Q.ns_relation -= 10;
+Q.democraticity -= 1;
+Q.instability += 4;  
+Q.moderate_dissent += 10; 
+Q.leninist_dissent -= 5;
+Q.leftcom_dissent -= 5;
+Q.vikzhel_unrest += 20; 
+Q.right_sr_strength += 2;
+Q.right_m_strength += 2; 
 !}
 
 Our refusal to cooperate entirely shocks the other parties, seemingly proving the right socialists correct after all—more than likely compromise will be impossible from here on out. Likewise, we receive immense condemnation from various interest groups, and even some members of our own party.
@@ -447,23 +447,23 @@ go-to: menu
 title: It seems we can't come to an agreement. 
 new-page: true
 on-arrival: {!
-sdi_relation -= 5;
-left_m_relation -= 5;
-centre_m_relation -= 5;
-right_m_relation -= 10; 
-lsr_relation -= 5;
-centre_sr_relation -= 10;
-right_sr_relation -= 10;
-ns_relation -= 10;
-democraticity -= 1;
-instability += 4;  
-moderate_dissent += 10; 
-leninist_dissent -= 5;
-leninist_strength += 5; 
-leftcom_dissent -= 5;
-vikzhel_unrest += 20; 
-right_sr_strength += 2;
-right_m_strength += 2; 
+Q.sdi_relation -= 5;
+Q.left_m_relation -= 5;
+Q.centre_m_relation -= 5;
+Q.right_m_relation -= 10; 
+Q.lsr_relation -= 5;
+Q.centre_sr_relation -= 10;
+Q.right_sr_relation -= 10;
+Q.ns_relation -= 10;
+Q.democraticity -= 1;
+Q.instability += 4;  
+Q.moderate_dissent += 10; 
+Q.leninist_dissent -= 5;
+Q.leninist_strength += 5; 
+Q.leftcom_dissent -= 5;
+Q.vikzhel_unrest += 20; 
+Q.right_sr_strength += 2;
+Q.right_m_strength += 2; 
 !}
 
 = Negotiations Collapse
@@ -504,25 +504,25 @@ The Leninists push for breaking off talks entirely, though its possible we could
 @break_talks
 title: Break-off negotiations. 
 on-arrival: {!
-sdi_relation -= 10;
-left_m_relation -= 10;
-centre_m_relation -= 10;
-right_m_relation -= 15; 
-lsr_relation -= 10;
-centre_sr_relation -= 15;
-right_sr_relation -= 15;
-ns_relation -= 15;
+Q.sdi_relation -= 10;
+Q.left_m_relation -= 10;
+Q.centre_m_relation -= 10;
+Q.right_m_relation -= 15; 
+Q.lsr_relation -= 10;
+Q.centre_sr_relation -= 15;
+Q.right_sr_relation -= 15;
+Q.ns_relation -= 15;
 
-democraticity -= 2;
-instability += 6;  
-vikzhel_unrest += 20; 
+Q.democraticity -= 2;
+Q.instability += 6;  
+Q.vikzhel_unrest += 20; 
 
-moderate_dissent += 10; 
-leninist_dissent -= 5;
-leftcom_dissent -= 5;
+Q.moderate_dissent += 10; 
+Q.leninist_dissent -= 5;
+Q.leftcom_dissent -= 5;
 
-right_sr_strength += 5;
-right_m_strength += 5; 
+Q.right_sr_strength += 5;
+Q.right_m_strength += 5; 
 !}
 
 Our sudden renegation on the agreement and breaking-off of negotiations entirely shocks the other parties, seemingly proving the right socialists correct after all—more than likely compromise will be impossible from here on out. Likewise, we receive immense condemnation from various interest groups, and even some members of our own party.
@@ -537,10 +537,29 @@ Vikzhel immediately unleashes a full-scale strike across the railway network, an
 @reopen_negotiations
 title: Reopen negotiations, presenting the Party's minimum demands as an "ultimatum". 
 on-arrival: {!
-influence = (10 + (left_m_relation / 10 ) - (instability / 20));
-truce_offer = 0;
-go-to: menu2
+Q.influence = (10 + (left_m_relation / 10 ) - (instability / 20));
+Q.truce_offer = 0;
+Q.CEC_membership = 0;
+Q.CEC_rebalance = 0;
+Q.socialist_coalition = 0;
+Q.subordinate = 0;
+Q.restructure = 0;
+Q.drop_chair = 0;
+Q.drop_foreign = 0;
+Q.drop_military = 0;
+Q.drop_enlightenment = 0;
+Q.drop_internal = 0;
+Q.drop_railways = 0;
+Q.drop_trade = 0;
+Q.drop_finance = 0;
+Q.drop_labor = 0;
+Q.drop_justice = 0;
+Q.drop_agriculture = 0;
+Q.drop_foodsupply = 0;
+Q.drop_nationalities = 0;
+Q.drop_welfare = 0;
 !}
+go-to: menu2
 
 Reneging on our earlier verbal agreement aggravates the other parties, strengthening the obstinence of many right socialists. Though the more time stalls, news of anti-Bolshevik military defeats weakens their negotiating power. The Left-SRs meanwhile issue a formal statement criticizing inflexibility within the Bolshevik camp. 
 
