@@ -18,8 +18,9 @@ on-arrival: moderate_dissent += 2; crime += 5; elite_unrest += 5; middle_unrest 
 
 With a new government taking the helm, there is renewed hope for Russia's future, especially among workers in the big cities. Though in the capital, the celebration spirals into drunken debauchery, leading to the destruction of some government property, increased hooliganism, and apprehension about Bolshevik leadership among non-partakers. 
 
+
 @revelry_reject
-on-arrival: moderate_dissent -= 2; instability += 5; 
+on-arrival: moderate_strength += 2; moderate_dissent -= 2; instability += 3; left_m_relation += 5;
 
 We attempt to rein in the disorderly conduct, though it's not clear how much the order is heeded. 
 
