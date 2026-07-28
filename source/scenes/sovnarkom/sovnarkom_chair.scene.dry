@@ -2,7 +2,7 @@ title: Chairman
 new-page: true
 is-card: true
 view-if: sovnarkom_timer == 0 and prime_minister_party = "Bolshevik"
-on-arrival: week_actions += 1; sovnarkom_timer == 2
+on-arrival: week_actions += 1; sovnarkom_timer = 2;
 tags: sovnarkom
 
 = Sovnarkom
