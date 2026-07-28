@@ -119,6 +119,9 @@ Q.unemployed_disp = Q.unemployed.toFixed(1);
 
 
 
+
+
+
 [? if not ca_election_held: Constituent Assembly elections: [? if ca_scheduled: Week [+ next_election_week +], [+ next_election_month : month +] [+ next_election_year +] ?] [? if not ca_scheduled: Not scheduled ?] ?]
 
 [? if ca_election_held: Constituent Assembly convocation: Week [+ ca_week +], [+ ca_month : month +] [+ ca_year +] ?]
@@ -174,6 +177,49 @@ Q.unemployed_disp = Q.unemployed.toFixed(1);
 
 @politics
 title: Politics
+
+leninist_strength   :   [+ leninist_strength +]<br>
+leninist_dissent    :   [+ leninist_dissent +]<br>
+leninist_split      :   [+ leninist_split +]<br>
+moderate_strength   :   [+ moderate_strength +]<br>
+moderate_dissent    :   [+ moderate_dissent +]<br>
+moderate_split      :   [+ moderate_split +]<br>
+leftcom_strength    :   [+ leftcom_strength +]<br>
+leftcom_dissent     :   [+ leftcom_dissent +]<br>
+leftcom_split       :   [+ leftcom_split +]<br>
+
+sdi_relation        :   [+ sdi_relation +]<br>
+sdi_strength        :   [+ sdi_strength +]<br>
+   
+left_m_relation =   :   [+ left_m_relation +]<br>
+left_m_strength =   :   [+ left_m_strength +]<br>
+
+centre_m_relation   :   [+ centre_m_relation +]<br>
+centre_m_strength   :   [+ centre_m_strength +]<br>
+
+right_m_relation    :   [+ right_m_relation +]<br>
+right_m_strength    :   [+ right_m_strength +]<br>
+
+lsr_relation        :   [+ lsr_relation +]<br>
+lsr_strength        :   [+ lsr_strength +]<br>
+ 
+centre_sr_relatio   :   [+ centre_sr_relation +]<br>
+centre_sr_strengt   :   [+ centre_sr_strength +]<br>
+
+right_sr_relation   :   [+ right_sr_relation +]<br>
+right_sr_strength   :   [+ right_sr_strength +]<br>
+
+anarchist_relatio   :   [+ anarchist_relation +]<br>
+anarchist_strengt   :   [+ anarchist_strength +]<br>
+
+ns_relation         :   [+ ns_relation +]<br>
+ns_strength         :   [+ ns_strength +]<br>
+
+k_relation          :   [+ k_relation +]<br>
+k_strength          :   [+ k_strength +]<br>
+
+rightist_relation   :   [+ rightist_relation +]<br>
+rightist_strength   :   [+ rightist_strength +]<br>
 
 = Inter-party Relationships
 
@@ -452,49 +498,5 @@ Relations with the West: [+ west_relation : relationships +]
 
 [? if is_armistice: Peace negotiations: [+ central_negotiations +]?]
 
-@testing
-title: Testing
 
-leninist_strength   :   [+ leninist_strength +]<br>
-leninist_dissent    :   [+ leninist_dissent +]<br>
-leninist_split      :   [+ leninist_split +]<br>
-moderate_strength   :   [+ moderate_strength +]<br>
-moderate_dissent    :   [+ moderate_dissent +]<br>
-moderate_split      :   [+ moderate_split +]<br>
-leftcom_strength    :   [+ leftcom_strength +]<br>
-leftcom_dissent     :   [+ leftcom_dissent +]<br>
-leftcom_split       :   [+ leftcom_split +]<br>
-
-sdi_relation        :   [+ sdi_relation +]<br>
-sdi_strength        :   [+ sdi_strength +]<br>
-   
-left_m_relation =   :   [+ left_m_relation +]<br>
-left_m_strength =   :   [+ left_m_strength +]<br>
-
-centre_m_relation   :   [+ centre_m_relation +]<br>
-centre_m_strength   :   [+ centre_m_strength +]<br>
-
-right_m_relation    :   [+ right_m_relation +]<br>
-right_m_strength    :   [+ right_m_strength +]<br>
-
-lsr_relation        :   [+ lsr_relation +]<br>
-lsr_strength        :   [+ lsr_strength +]<br>
- 
-centre_sr_relatio   :   [+ centre_sr_relation +]<br>
-centre_sr_strengt   :   [+ centre_sr_strength +]<br>
-
-right_sr_relation   :   [+ right_sr_relation +]<br>
-right_sr_strength   :   [+ right_sr_strength +]<br>
-
-anarchist_relatio   :   [+ anarchist_relation +]<br>
-anarchist_strengt   :   [+ anarchist_strength +]<br>
-
-ns_relation         :   [+ ns_relation +]<br>
-ns_strength         :   [+ ns_strength +]<br>
-
-k_relation          :   [+ k_relation +]<br>
-k_strength          :   [+ k_strength +]<br>
-
-rightist_relation   :   [+ rightist_relation +]<br>
-rightist_strength   :   [+ rightist_strength +]<br>
 
