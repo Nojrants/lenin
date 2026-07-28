@@ -152,8 +152,7 @@ on-arrival: foreign_minister = "Ioffe"; foreign_minister_party = "Bolshevik";
 
 @keep_foreign
 title: Cancel action. 
-subtitle: [? foreign_minister != "": Keep [+ foreign_minister +] in place. ?]
-
+subtitle: [?if foreign_minister != "": Keep [+ foreign_minister +] in place. ?]
 
 
 
