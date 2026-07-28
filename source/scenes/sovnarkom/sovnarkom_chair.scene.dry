@@ -136,6 +136,7 @@ title: Georgy Chicherin
 subtitle: Highly qualified diplomat, polyglot, and negotiator. 
 view-if: foreign_minister != "Chicherin" 
 on-arrival: foreign_minister = "Chicherin"; foreign_minister_party = "Bolshevik";
+go-to: sovnarkom_composition
 
 @foreign_ioffe
 title: Adolph Ioffe
