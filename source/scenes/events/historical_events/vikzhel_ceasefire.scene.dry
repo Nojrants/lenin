@@ -13,14 +13,30 @@ Surprisingly, Vikzhel's demands are echoed by the Petrograd Peasants' Soviet, Pe
 
 Yet at the same time, the precariousness of the Bolshevik position has only hardened the intransigence of many moderate socialists, with some right Mensheviks and SRs going so far as to demand Lenin and Trotsky be barred from any future cabinet, or for the Bolsheviks to be excluded from the all-socialist government entirely. For as much as the Leninists refuse to work with the other parties, the other parties have grown just as obtuse, making the search for an amicable solution all the more difficult. 
 
-
-- @refuse_vikzhel
 - @accept_vikzhel
+- @refuse_vikzhel
 
 @refuse_vikzhel
 title: We refuse to be blackmailed by counterrevolutionaries! 
 subtitle: Reject the offer to attend the conference. 
-on-arrival:
+on-arrival: {!
+sdi_relation -= 5;
+left_m_relation -= 5;
+centre_m_relation -= 5;
+right_m_relation -= 10; 
+lsr_relation -= 5;
+centre_sr_relation -= 10;
+right_sr_relation -= 10;
+ns_relation -= 10;
+democraticity -= 1;
+instability += 4;  
+moderate_dissent += 10; 
+leninist_dissent -= 5;
+leftcom_dissent -= 5;
+vikzhel_unrest += 20; 
+right_sr_strength += 2;
+right_m_strength += 2; 
+!}
 
 Our refusal to cooperate entirely shocks the other parties, seemingly proving the right socialists correct after all—more than likely compromise will be impossible from here on out. Likewise, we receive immense condemnation from various interest groups, and even some members of our own party.
 
@@ -50,17 +66,6 @@ Though talks initially stall, several days of arguing (and news of anti-Bolshevi
 - @null2
 - @accept_offer
 - @reject_offer
-
-
-@accept_offer
-title: Agree to the offer. 
-unavailable-subtitle: The other parties will not accept the current offer. 
-choose-if: influence > 50
-go-to: reaction
-
-@reject_offer
-title: It seems we can't come to an agreement. 
-go-to: reaction
 
 @null
 title: ------------------------------------------------------------------------
@@ -433,5 +438,435 @@ on-arrival: drop_welfare = 0; influence -= 1;
 go-to: menu
 
 
-@reaction
-title: Reaction
+
+
+
+
+
+@reject_offer
+title: It seems we can't come to an agreement. 
+new-page: true
+on-arrival: {!
+sdi_relation -= 5;
+left_m_relation -= 5;
+centre_m_relation -= 5;
+right_m_relation -= 10; 
+lsr_relation -= 5;
+centre_sr_relation -= 10;
+right_sr_relation -= 10;
+ns_relation -= 10;
+democraticity -= 1;
+instability += 4;  
+moderate_dissent += 10; 
+leninist_dissent -= 5;
+leninist_strength += 5; 
+leftcom_dissent -= 5;
+vikzhel_unrest += 20; 
+right_sr_strength += 2;
+right_m_strength += 2; 
+!}
+
+= Negotiations Collapse
+
+Unable to come to an agreement, we're forced to walk away from the negotiations. The other parties express their strong condemnation, as do a number of other interest groups and organizations. The Bolshevik Moderates lament the failure, though are no less passionate about the need for cooperation.
+
+Lenin criticizes the entire endeavor, using the failure of talks to prove his point that compromise is impossible. This will likely serve as a rallying cry for the Leninist position going forward. 
+
+Vikzhel immediately unleashes a full-scale strike across the railway network, and many other prominent unions and enterprises decide to join them. 
+
+
+
+
+
+title: Agree to the offer. 
+unavailable-subtitle: The other parties will not accept the current offer. 
+choose-if: influence > 50
+new-page: true
+
+= Tentative Offer
+
+After days of tough negotiations, there is a viable offer on the table. Some Bolshevik newspapers even preemptively acclaim the formation of a new coalition government. 
+
+Lenin however is absolutely furious that we have even entertained such a prospect—especially upon reading the proposed terms. In a heated party meeting, he berates the Party negotiators and outright accuses them of treason. So strongly does he feel about this, he declares he'd sooner let the Party split over the issue, or "go to the sailors" and crush this notion by force. 
+
+The Leninists push for breaking off talks entirely, though its possible we could cautiously reopen negotiations. If so, it's now clear that anything less than this would be a non-starter: 
+
+• Recognition of the inviolability of the decrees/actions of the 2nd Soviet Congress.<br>
+• Recognition of the CEC (that this Congress created) as the coutnry's sole supreme authority.<br>
+• Exclusivity in the CEC only to groups previously represented in the soviets (i.e. no expanded "People's Council").<br>
+• Lenin and Trotsky must remain in government.<br>
+• The Bolsheviks must retain a preponderance of government posts (~75%).
+
+- @reopen_negotiations
+- @break_talks
+
+
+@break_talks
+title: Break-off negotiations. 
+on-arrival: {!
+sdi_relation -= 10;
+left_m_relation -= 10;
+centre_m_relation -= 10;
+right_m_relation -= 15; 
+lsr_relation -= 10;
+centre_sr_relation -= 15;
+right_sr_relation -= 15;
+ns_relation -= 15;
+
+democraticity -= 2;
+instability += 6;  
+vikzhel_unrest += 20; 
+
+moderate_dissent += 10; 
+leninist_dissent -= 5;
+leftcom_dissent -= 5;
+
+right_sr_strength += 5;
+right_m_strength += 5; 
+!}
+
+Our sudden renegation on the agreement and breaking-off of negotiations entirely shocks the other parties, seemingly proving the right socialists correct after all—more than likely compromise will be impossible from here on out. Likewise, we receive immense condemnation from various interest groups, and even some members of our own party.
+
+Though on the other hand, Lenin's argument against cooperation carries some sway in the working-class districts of the capital, with workers' councils agreeing that they cannot compromise the values and gains of the October Revolution. 
+
+Vikzhel immediately unleashes a full-scale strike across the railway network, and many other prominent unions and enterprises decide to join them. 
+
+
+
+
+@reopen_negotiations
+title: Reopen negotiations, presenting the Party's minimum demands as an "ultimatum". 
+on-arrival: {!
+influence = (10 + (left_m_relation / 10 ) - (instability / 20));
+truce_offer = 0;
+go-to: menu2
+!}
+
+Reneging on our earlier verbal agreement aggravates the other parties, strengthening the obstinence of many right socialists. Though the more time stalls, news of anti-Bolshevik military defeats weakens their negotiating power. The Left-SRs meanwhile issue a formal statement criticizing inflexibility within the Bolshevik camp. 
+
+
+@menu2
+
+- #vikzhel_offers2
+- @null3
+- #vikzhel_cancel2
+- @null4
+- @accept_offer2
+- @reject_offer2
+
+@null3
+title: ------------------------------------------------------------------------
+go-to: menu2
+
+@null4
+title: ------------------------------------------------------------------------
+go-to: menu2
+
+
+
+@declare_truce2
+title: Declare a military truce between Bolshevik and counterrevolutionary armed groups. 
+tags: vikzhel_offers2
+view-if: truce_offer != 1
+on-arrival: influence += 2; truce_offer = 1;
+go-to: menu2
+
+
+@affirm_CEC_membership2
+title: Affirm the right of all socialist parties to participate in the CEC. 
+subtitle: Although many parties walked out at the Congress, they will still be represented. 
+tags: vikzhel_offers2
+view-if: CEC_membership != 1
+on-arrival: influence += 3; CEC_membership = 1;
+go-to: menu2
+
+@CEC_rebalance2
+title: Rebalance the composition of the CEC to more fairly represent other groups. 
+subtitle: A composition of 40% Bolsheviks, 40% Defencists, 20% Internationalists has been floated.  
+tags: vikzhel_offers2
+view-if: CEC_rebalance != 1
+on-arrival: influence += 6; CEC_rebalance = 1;
+go-to: menu2
+
+@socialist_coalition2
+title: Agree in principle to the formation of a pan-socialist coalition government. 
+tags: vikzhel_offers2
+view-if: socialist_coalition != 1
+on-arrival: influence += 2; socialist_coalition = 1;
+go-to: menu2
+
+
+@subordinate2
+title: Affirm that the government will be subordinate to the multi-party CEC. 
+tags: vikzhel_offers2
+view-if: subordinate != 1
+on-arrival: influence += 1; subordinate = 1;
+go-to: menu2
+
+@restructure2
+title: Allow for the possibility of socialist Petrograd City Duma representatives being added to the CEC. 
+subtitle: This is technically more than Lenin allowed, but far less than originally discussed. 
+tags: vikzhel_offers2
+view-if: restructure != 1
+on-arrival: influence += 8; restructure = 1;
+go-to: menu2
+
+
+
+@drop_chair2
+title: Cede control of the Sovnarkom chairmanship. 
+subtitle: Lenin would surely not allow this. 
+view-if: drop_chair != 1
+tags: vikzhel_offers2
+on-arrival: drop_chair = 1; influence += 7;
+go-to: menu2
+
+@drop_foreign2
+title: Drop the Foreign Affairs Commissariat. 
+subtitle: Lenin would surely not allow this. 
+view-if: drop_foreign != 1
+tags: vikzhel_offers2
+on-arrival: drop_foreign = 1; influence += 5;
+go-to: menu2
+
+
+@drop_military2
+title: Drop the War Commissariat. 
+view-if: drop_military != 1
+tags: vikzhel_offers2
+on-arrival: drop_military = 1; influence += 4;
+go-to: menu2
+
+@drop_enlightenment2
+title: Drop the Enlightenment Commissariat. 
+subtitle: We are expected to keep this position. 
+view-if: drop_enlightenment != 1
+tags: vikzhel_offers2
+on-arrival: drop_enlightenment = 1; influence += 1;
+go-to: menu2
+
+@drop_internal2
+title: Drop the Internal Affairs Commissariat. 
+view-if: drop_internal != 1
+tags: vikzhel_offers2
+on-arrival: drop_internal = 1; influence += 3;
+go-to: menu2
+
+@drop_railways2
+title: Drop the Railways Commissariat. 
+view-if: drop_railways != 1
+tags: vikzhel_offers
+on-arrival: drop_railways = 1; influence += 2;
+go-to: menu2
+
+@drop_trade2
+title: Drop the Trade Commissariat.
+subtitle: We are expected to keep this position.  
+view-if: drop_trade != 1
+tags: vikzhel_offers2
+on-arrival: drop_trade = 1; influence += 1;
+go-to: menu2
+
+@drop_finance2
+title: Drop the Finance Commissariat.
+view-if: drop_finance != 1
+tags: vikzhel_offers2
+on-arrival: drop_finance = 1; influence += 2;
+go-to: menu2
+
+@drop_labor2
+title: Drop the Labor Commissariat.
+subtitle: We are expected to keep this position. 
+view-if: drop_labor != 1
+tags: vikzhel_offers2
+on-arrival: drop_labor = 1; influence += 1;
+go-to: menu2
+
+@drop_justice2
+title: Drop the Justice Commissariat. 
+view-if: drop_justice != 1
+tags: vikzhel_offers2
+on-arrival: drop_justice = 1; influence += 2;
+go-to: menu2
+
+@drop_agriculture2
+title: Drop the Agriculture Commissariat.
+view-if: drop_agriculture != 1
+tags: vikzhel_offers2
+on-arrival: drop_agriculture = 1; influence += 2;
+go-to: menu2
+
+@drop_foodsupply2
+title: Drop the Food Supply Commissariat.
+view-if: drop_foodsupply != 1
+tags: vikzhel_offers2
+on-arrival: drop_foodsupply = 1; influence += 2;
+go-to: menu2
+
+@drop_nationalities2
+title: Drop the Nationalities Commissariat.
+view-if: drop_nationalities != 1
+tags: vikzhel_offers2
+on-arrival: drop_nationalities = 1; influence += 1;
+go-to: menu2
+
+@drop_welfare2
+title: Drop the Welfare Commissariat.
+subtitle: We are expected to keep this position. 
+view-if: drop_welfare != 1 and welfare_founded = 1
+tags: vikzhel_offers2
+on-arrival: drop_welfare = 1; influence += 1;
+go-to: menu2
+
+
+
+
+
+
+
+@cancel_truce2
+title: Cancel the offer of a military truce. 
+tags: vikzhel_cancel2
+view-if: truce_offer = 1
+on-arrival: influence -= 2; truce_offer = 0;
+go-to: menu2
+
+
+@cancel_affirm_CEC_membership2
+title: Cancel the affirmation that all parties will be represented in the CEC. 
+tags: vikzhel_cancel2
+view-if: CEC_membership = 1
+on-arrival: influence -= 3; CEC_membership = 0;
+go-to: menu2
+
+@cancel_CEC_rebalance2
+title: Cancel the offer to rebalance the CEC composition. 
+tags: vikzhel_cancel2
+view-if: CEC_rebalance = 1
+on-arrival: influence -= 5; CEC_rebalance = 0;
+go-to: menu2
+
+@cancel_subordinate2
+title: Cancel our affirmation that the government will be subordinate to the CEC. 
+tags: vikzhel_cancel2
+view-if: subordinate = 1
+on-arrival: influence -= 1; subordinate = 0;
+go-to: menu2
+
+
+
+@chair2
+title: Cancel the offer to give up the Sovnarkom Chairmanship. 
+view-if: drop_chair = 1
+tags: vikzhel_cancel2
+on-arrival: drop_chair = 0; influence -= 7;
+go-to: menu2
+
+@foreign2
+title: Cancel our offer to give up the Foreign Affairs Commissariat. 
+view-if: drop_foreign = 1
+tags: vikzhel_cancel2
+on-arrival: drop_foreign = 0; influence -= 7;
+go-to: menu2
+
+
+@military2
+title: Cancel our offer to give up the War Commissariat. 
+view-if: drop_military = 1
+tags: vikzhel_cancel2
+on-arrival: drop_military = 0; influence -= 5;
+go-to: menu2
+
+@enlightenment2
+title: Cancel our offer to give up the Enlightenment Commissariat. 
+view-if: drop_enlightenment = 1
+tags: vikzhel_cancel2
+on-arrival: drop_enlightenment = 0; influence -= 2;
+go-to: menu2
+
+@internal2
+title: Cancel our offer to give up the Internal Affairs Commissariat. 
+view-if: drop_internal = 1
+tags: vikzhel_cancel2
+on-arrival: drop_internal = 0; influence -= 4;
+go-to: menu2
+
+@railways2
+title: Cancel our offer to give up the Railways Commissariat. 
+view-if: drop_railways = 1
+tags: vikzhel_cancel2
+on-arrival: drop_railways = 0; influence -= 3;
+go-to: menu2
+
+@trade2
+title: Cancel our offer to give up the Trade Commissariat.
+view-if: drop_trade = 1
+tags: vikzhel_cancel2
+on-arrival: drop_trade = 0; influence -= 2;
+go-to: menu2
+
+@finance2
+title: Cancel our offer to give up the Finance Commissariat.
+view-if: drop_finance = 1
+tags: vikzhel_cancel2
+on-arrival: drop_finance = 0; influence -= 3;
+go-to: menu2
+
+@labor2
+title: Cancel our offer to give up the Labor Commissariat.
+view-if: drop_labor = 1
+tags: vikzhel_cancel2
+on-arrival: drop_labor = 0; influence -= 2;
+go-to: menu2
+
+@justice2
+title: Cancel our offer to give up the Justice Commissariat. 
+view-if: drop_justice = 1
+tags: vikzhel_cancel2
+on-arrival: drop_justice = 0; influence -= 3;
+go-to: menu2
+
+@agriculture2
+title: Cancel our offer to give up the Agriculture Commissariat.
+view-if: drop_agriculture = 1
+tags: vikzhel_cancel2
+on-arrival: drop_agriculture = 0; influence -= 3;
+go-to: menu2
+
+@foodsupply2
+title: Cancel our offer to give up the Food Supply Commissariat.
+view-if: drop_foodsupply = 1
+tags: vikzhel_cancel2
+on-arrival: drop_foodsupply = 0; influence -= 3;
+go-to: menu2
+
+@nationalities2
+title: Cancel our offer to give up the Nationalities Commissariat.
+view-if: drop_nationalities = 1
+tags: vikzhel_cancel2
+on-arrival: drop_nationalities = 0; influence -= 2;
+go-to: menu2
+
+@welfare2
+title: Cancel our offer to give up the Welfare Commissariat.
+view-if: drop_welfare = 1
+tags: vikzhel_cancel2
+on-arrival: drop_welfare = 0; influence -= 1;
+go-to: menu2
+
+
+
+@accept_offer2
+title: Agree to the offer. 
+unavailable-subtitle: The other parties will not accept the current offer. 
+choose-if: influence > 50
+
+@reject_offer2
+title: It seems we can't come to an agreement. 
+
+
+
+
+
+
+
