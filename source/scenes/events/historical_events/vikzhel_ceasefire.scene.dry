@@ -1,11 +1,11 @@
-title: Calls for a ceasefire!
+title: Vikzhel calls for negotiations!
 new-page: true
 view-if: year = 1917 and month = 11 and week = 2
 max-visits: 1
 face-image: 
 tags: event
 
-= Calls for a Ceasefire
+= Vikzhel Negotiations 
 
 The leaders of Vikzhel have called a conference of all "democratic" groups in the capital, for the intentions of negotiating a mutually acceptable and inclusive socialist coalition government. This comes off the heels of Vikzhel's protest at the 2nd Soviet Congress, and after a week of pleas in the press for an immediate "ceasefire" between the Bolshevik and anti-Bolshevik forces, issued by the Left-SRs, Menshevik Internationalists, various unions, and other self-described "neutral" factions. Unless all parties cease their conflict and begin serious negotiations, Vikzhel has pledged to call a nationwide railway strike, which has the potential to cripple our transportation capabilities. 
 
@@ -37,6 +37,8 @@ new-page: true
 on-arrival: influence = (10 + (left_m_relation / 10 ) - (instability / 20));
 go-to: menu
 
+= Vikzhel Negotiations 
+
 Though talks initially stall, several days of arguing (and news of anti-Bolshevik military failures) wear down the most ardent anti-Bolshevik representatives. Though the promises we make here won't be binding until signed-off on by the Party, we are in a position to potentially reach a compromise. 
 
 
@@ -53,7 +55,7 @@ Though talks initially stall, several days of arguing (and news of anti-Bolshevi
 @accept_offer
 title: Agree to the offer. 
 unavailable-subtitle: The other parties will not accept the current offer. 
-choose-if: influence > 25
+choose-if: influence > 30
 go-to: reaction
 
 @reject_offer
@@ -90,7 +92,7 @@ title: Rebalance the composition of the CEC to more fairly represent other group
 subtitle: A composition of 40% Bolsheviks, 40% Defencists, 20% Internationalists has been floated.  
 tags: vikzhel_offers
 view-if: CEC_rebalance != 1
-on-arrival: influence += 5; CEC_rebalance = 1;
+on-arrival: influence += 6; CEC_rebalance = 1;
 go-to: menu
 
 @socialist_coalition
@@ -111,7 +113,7 @@ go-to: menu
 title: Agree to disband and disarm workers' miliitas.  
 tags: vikzhel_offers
 view-if: disarm_workers != 1
-on-arrival: influence += 7; disarm_workers = 1;
+on-arrival: influence += 8; disarm_workers = 1;
 go-to: menu
 
 @pledge_ca
@@ -133,14 +135,14 @@ title: Restructure the CEC into a "Provisional People's Council".
 subtitle: This will consist of representatives from the current CEC, city duma, Peasants' Soviet Executive, Central Trade Union Council, and Vikzhel. 
 tags: vikzhel_offers
 view-if: restructure != 1
-on-arrival: influence += 7; restructure = 1;
+on-arrival: influence += 8; restructure = 1;
 go-to: menu
 
 @bar_lenin
 title: Preclude Lenin and Trotsky from any cabinet-level positions.  
 tags: vikzhel_offers
 view-if: bar_lenin != 1
-on-arrival: influence += 7; bar_lenin = 1;
+on-arrival: influence += 8; bar_lenin = 1;
 go-to: menu
 
 
@@ -159,7 +161,7 @@ title: Drop the Foreign Affairs Commissariat.
 subtitle: Right-SR Nikolai Avksentsiev is desired for this position. 
 view-if: drop_foreign != 1
 tags: vikzhel_offers
-on-arrival: drop_foreign = 1; influence += 7;
+on-arrival: drop_foreign = 1; influence += 5;
 go-to: menu
 
 
@@ -167,7 +169,7 @@ go-to: menu
 title: Drop the War Commissariat. 
 view-if: drop_military != 1
 tags: vikzhel_offers
-on-arrival: drop_military = 1; influence += 5;
+on-arrival: drop_military = 1; influence += 4;
 go-to: menu
 
 @drop_enlightenment
@@ -175,21 +177,21 @@ title: Drop the Enlightenment Commissariat.
 subtitle: We are expected to keep this position. 
 view-if: drop_enlightenment != 1
 tags: vikzhel_offers
-on-arrival: drop_enlightenment = 1; influence += 2;
+on-arrival: drop_enlightenment = 1; influence += 1;
 go-to: menu
 
 @drop_internal
 title: Drop the Internal Affairs Commissariat. 
 view-if: drop_internal != 1
 tags: vikzhel_offers
-on-arrival: drop_internal = 1; influence += 4;
+on-arrival: drop_internal = 1; influence += 3;
 go-to: menu
 
 @drop_railways
 title: Drop the Railways Commissariat. 
 view-if: drop_railways != 1
 tags: vikzhel_offers
-on-arrival: drop_railways = 1; influence += 3;
+on-arrival: drop_railways = 1; influence += 2;
 go-to: menu
 
 @drop_trade
@@ -197,14 +199,14 @@ title: Drop the Trade Commissariat.
 subtitle: We are expected to keep this position.  
 view-if: drop_trade != 1
 tags: vikzhel_offers
-on-arrival: drop_trade = 1; influence += 2;
+on-arrival: drop_trade = 1; influence += 1;
 go-to: menu
 
 @drop_finance
 title: Drop the Finance Commissariat.
 view-if: drop_finance != 1
 tags: vikzhel_offers
-on-arrival: drop_finance = 1; influence += 3;
+on-arrival: drop_finance = 1; influence += 2;
 go-to: menu
 
 @drop_labor
@@ -212,38 +214,44 @@ title: Drop the Labor Commissariat.
 subtitle: We are expected to keep this position. 
 view-if: drop_labor != 1
 tags: vikzhel_offers
-on-arrival: drop_labor = 1; influence += 2;
+on-arrival: drop_labor = 1; influence += 1;
 go-to: menu
 
 @drop_justice
 title: Drop the Justice Commissariat. 
 view-if: drop_justice != 1
 tags: vikzhel_offers
-on-arrival: drop_justice = 1; influence += 3;
+on-arrival: drop_justice = 1; influence += 2;
 go-to: menu
 
 @drop_agriculture
 title: Drop the Agriculture Commissariat.
 view-if: drop_agriculture != 1
 tags: vikzhel_offers
-on-arrival: drop_agriculture = 1; influence += 3;
+on-arrival: drop_agriculture = 1; influence += 2;
 go-to: menu
 
 @drop_foodsupply
 title: Drop the Food Supply Commissariat.
 view-if: drop_foodsupply != 1
 tags: vikzhel_offers
-on-arrival: drop_foodsupply = 1; influence += 3;
+on-arrival: drop_foodsupply = 1; influence += 2;
 go-to: menu
 
 @drop_nationalities
 title: Drop the Nationalities Commissariat.
 view-if: drop_nationalities != 1
 tags: vikzhel_offers
-on-arrival: drop_nationalities = 1; influence += 2;
+on-arrival: drop_nationalities = 1; influence += 1;
 go-to: menu
 
-
+@drop_welfare
+title: Drop the Welfare Commissariat.
+subtitle: We are expected to keep this position. 
+view-if: drop_welfare != 1 and welfare_founded = 1
+tags: vikzhel_offers
+on-arrival: drop_welfare = 1; influence += 1;
+go-to: menu
 
 
 
@@ -261,7 +269,6 @@ go-to: menu
 
 @cancel_affirm_CEC_membership
 title: Cancel the affirmation that all parties will be represented in the CEC. 
-subtitle: Although many parties walked out at the Congress, they will still be represented. 
 tags: vikzhel_cancel
 view-if: CEC_membership = 1
 on-arrival: influence -= 3; CEC_membership = 0;
@@ -416,6 +423,13 @@ title: Cancel our offer to give up the Nationalities Commissariat.
 view-if: drop_nationalities = 1
 tags: vikzhel_cancel
 on-arrival: drop_nationalities = 0; influence -= 2;
+go-to: menu
+
+@drop_welfare
+title: Cancel our offer to give up the Welfare Commissariat.
+view-if: drop_welfare = 1
+tags: vikzhel_offers
+on-arrival: drop_welfare = 0; influence -= 1;
 go-to: menu
 
 
