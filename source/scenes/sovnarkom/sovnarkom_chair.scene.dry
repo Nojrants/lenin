@@ -210,7 +210,12 @@ Who should we replace [+ education_minister +] with?
 
 @enlightenment_lunacharsky
 title: Anatoly Lunacharsky
-subtitle: 
+subtitle: {!
+>Moderate — Experienced cultural theorist, intellectual, and artist. 
+>>Overall skill: ★★★★
+
+>>Suitability: ★★★★★
+!}
 view-if: education_minister != "Lunacharsky" 
 on-arrival: education_minister = "Lunacharsky"; education_minister_party = "Bolshevik";
 go-to: sovnarkom_composition
