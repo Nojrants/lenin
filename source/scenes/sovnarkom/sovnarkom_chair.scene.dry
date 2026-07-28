@@ -106,10 +106,7 @@ go-to: welfare
 title: APPOINT/REMOVE COMMISSARS
 new-page: true
 
-- @foreign
-- @military
-- @enlightenment
-- @labor
+- #sovnarkom_appointments
 - @cancel_composition
 
 @cancel_composition
@@ -119,6 +116,7 @@ go-to: sovnarkom_chair
 
 @foreign
 title: Foreign Affairs — [+ foreign_minister +]
+tag: sovnarkom_appointments
 
 Who should we replace [+ foreign_minister +] with? 
 
@@ -173,7 +171,7 @@ Suitability: ★★★★
 tags: foreign_candidates 
 view-if: foreign_minister != "Martov"
 choose-if: foreign_minister != "Martov" and left_m_relation > 60 and m_in_gov = 1
-unavailable-subtitle: [?if m_in_gov != 1: We haven't assented to Menshevik participation in government. ?][?if left_m_relation <= 60: Martov would not accept this. ?]
+unavailable-subtitle: Menshevik Int. — RSDLP founding member and reknown Menshevik leader.<br>[?if m_in_gov != 1: We haven't assented to Menshevik participation in government. ?]<br>[?if left_m_relation <= 60: Martov would not accept this. ?]
 on-arrival: foreign_minister = "Martov"; foreign_minister_party = "Menshevik"; left_m_relation += 10
 go-to: sovnarkom_composition
 
@@ -185,6 +183,7 @@ go-to: sovnarkom_composition
 
 @military
 title: Military — [+ war_minister +]
+tag: sovnarkom_appointments
 
 Who should we replace [+ war_minister +] with? 
 
@@ -248,6 +247,7 @@ go-to: sovnarkom_composition
 
 @enlightenment
 title: Enlightenment — [+ education_minister +]
+tag: sovnarkom_appointments
 
 Who should we replace [+ education_minister +] with? 
 
@@ -275,7 +275,7 @@ go-to: sovnarkom_composition
 @enlightenment_bogdanov
 title: Alexander Bogdanov
 subtitle: {!
-Vperedist — Leading Bolshevik theoretician until his falling out with Lenin; strong proponent of "proletarian culture". A controversial choice.<br>
+Vperedist — Leading Bolshevik theoretician until his falling out with Lenin; strong proponent of "proletarian culture".  A controversial choice.<br>
 Overall skill: ★★★★★<br>
 Suitability: ★★★★★
 !}
@@ -286,11 +286,52 @@ go-to: sovnarkom_composition
 
 
 
+@finance
+title: Finance — [+ finance_minister +]
+tag: sovnarkom_appointments
+
+[?if finance_minister != "": Who should we replace [+ finance_minister +] with? ?]
+[?if finance_minister == "": Who should we fill the vacancy with ?]
+
+- #finance_candidates
+- @keep_finance
+
+@finance_skvortsov
+title: Ivan Skvortsov-Stepanov
+subtitle: {!
+Left — Former elementary school teacher.<br>
+Overall skill: ★☆<br>
+Suitability: ★★☆
+!}
+tags: finance_candidates
+view-if: finance_minister != "Skvortsov" 
+on-arrival: finance_minister = "Skvortsov"; labor_minister_party = "Bolshevik";
+go-to: sovnarkom_composition
+
+@finance_sokolnikov
+title: Grigory Sokolnikov
+subtitle: {!
+Leninist — Doctorate in economics.<br>
+Overall skill: ★★★★<br>
+Suitability: ★★★★★
+!}
+tags: finance_candidates
+view-if: finance_minister != "Sokolnikov" 
+on-arrival: finance_minister = "Sokolnikov"; labor_minister_party = "Bolshevik";
+go-to: sovnarkom_composition
+
+@keep_finance
+title: Cancel action.
+subtitle: [?if finance_minister != "Vacant": Keep [+ finance_minister +] in place. ?]
+go-to: sovnarkom_composition
+
+
 
 
 
 @labor
 title: Labor — [+ labor_minister +]
+tag: sovnarkom_appointments
 
 [?if labor_minister != "": Who should we replace [+ labor_minister +] with? ?]
 [?if labor_minister == "": Who should we fill the vacancy with ?]
