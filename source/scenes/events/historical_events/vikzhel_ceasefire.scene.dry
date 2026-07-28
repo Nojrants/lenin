@@ -33,6 +33,7 @@ Vikzhel immediately unleashes a full-scale strike across the railway network, an
 @accept_vikzhel
 title: There is no harm in hearing them out...
 subtitle: Send representatives to the conference. 
+new-page: true
 on-arrival: influence = (10 + (left_m_relation / 10 ) - (instability / 20));
 go-to: menu
 
@@ -42,7 +43,9 @@ Though talks initially stall, several days of arguing (and news of anti-Bolshevi
 @menu
 
 - #vikzhel_offers
+- @null
 - #vikzhel_cancel
+- @null2
 - @accept_offer
 - @reject_offer
 
@@ -57,7 +60,13 @@ go-to: reaction
 title: It seems we can't come to an agreement. 
 go-to: reaction
 
+@null
+title: ------------------------------------------------------------------------
+go-to: menu
 
+@null2
+title: ------------------------------------------------------------------------
+go-to: menu
 
 
 @declare_truce
