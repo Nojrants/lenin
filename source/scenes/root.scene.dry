@@ -172,8 +172,8 @@ Q.unionists = 1500000;
 Q.union_unrest = 30;
 Q.union_strength = 30;
 
-Q.vikhzel_unrest = 40;
-Q.vikhzel_strength = 40;
+Q.vikzhel_unrest = 40;
+Q.vikzhel_strength = 40;
 
 Q.party_membership = 350000;
 
