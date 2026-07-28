@@ -128,6 +128,7 @@ title: Leon Trotsky
 subtitle: Internationally-reknown and experienced organizer. 
 view-if: foreign_minister != "Trotsky" 
 on-arrival: foreign_minister = "Trotsky"; foreign_minister_party = "Bolshevik";
+go-to: sovnarkom_composition
 
 @foreign_chicherin
 title: Georgy Chicherin
@@ -140,10 +141,11 @@ title: Adolph Ioffe
 subtitle: 
 view-if: foreign_minister != "Ioffe" 
 on-arrival: foreign_minister = "Ioffe"; foreign_minister_party = "Bolshevik";
+go-to: sovnarkom_composition
 
 @keep_foreign
 title: Cancel action. 
-subtitle: [?if foreign_minister != "": Keep [+ foreign_minister +] in place. ?]
+subtitle: [?if foreign_minister != "Vacant": Keep [+ foreign_minister +] in place. ?]
 go-to: sovnarkom_composition
 
 
@@ -163,28 +165,32 @@ title: Leon Trotsky
 subtitle: Internationally-reknown and experienced organizer. 
 view-if: war_minister != "Trotsky" 
 on-arrival: war_minister = "Trotsky"; war_minister_party = "Bolshevik";
+go-to: sovnarkom_composition
 
 @military_krylenko
 title: Nikolai Krylenko 
 subtitle: Veteran of the Russian Army and soldier-agitator; holds a law degree. 
 view-if: war_minister != "Krylenko" 
 on-arrival: war_minister = "Krylenko"; war_minister_party = "Bolshevik";
+go-to: sovnarkom_composition
 
 @military_dybenko
 title: Pavel Dybenko
 subtitle: Veteran of the Baltic Fleet. 
 view-if: war_minister != "Dybenko" 
 on-arrival: war_minister = "Dybenko"; war_minister_party = "Bolshevik";
+go-to: sovnarkom_composition
 
 @military_podvoisky
 title: Nikolai Podvoisky
 subtitle: Old-school Bolshevik militant; led armed forces during October Revolution. 
 view-if: war_minister != "Podvoisky" 
 on-arrival: war_minister = "Podvoisky"; war_minister_party = "Bolshevik";
+go-to: sovnarkom_composition
 
 @keep_war
 title: Cancel action. 
-subtitle: [?if war_minister != "": Keep [+ war_minister +] in place. ?]
+subtitle: [?if war_minister != "Vacant": Keep [+ war_minister +] in place. ?]
 go-to: sovnarkom_composition
 
 
@@ -202,10 +208,11 @@ title: Anatoly Luncharsky
 subtitle: 
 view-if: education_minister != "Luncharsky" 
 on-arrival: education_minister = "Luncharsky"; education_minister_party = "Bolshevik";
+go-to: sovnarkom_composition
 
 @keep_enlightenment
 title: Cancel action. 
-subtitle: [?if education_minister != "": Keep [+ education_minister +] in place. ?]
+subtitle: [?if education_minister != "Vacant": Keep [+ education_minister +] in place. ?]
 go-to: sovnarkom_composition
 
 
@@ -226,10 +233,11 @@ title: Alexander Shliapnikov
 subtitle: 
 view-if: labor_minister != "Shliapnikov" 
 on-arrival: labor_minister = "Shliapnikov"; labor_minister_party = "Bolshevik";
+go-to: sovnarkom_composition
 
 @keep_labor
 title: Cancel action.
-subtitle: [?if labor_minister != "": Keep [+ labor_minister +] in place. ?]
+subtitle: [?if labor_minister != "Vacant": Keep [+ labor_minister +] in place. ?]
 go-to: sovnarkom_composition
 
 
