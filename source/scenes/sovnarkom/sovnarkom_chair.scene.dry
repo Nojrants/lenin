@@ -230,10 +230,10 @@ go-to: sovnarkom_composition
 @enlightenment_bogdanov
 title: Alexander Bogdanov
 subtitle: {!
->Vperedist — Leading Bolshevik theoretician until his falling out with Lenin; strong proponent of "proletarian culture". A controversial choice. 
->>Overall skill: ★★★★★
+Vperedist — Leading Bolshevik theoretician until his falling out with Lenin; strong proponent of "proletarian culture". A controversial choice. 
+//Overall skill: ★★★★★
 
->>Suitability: ★★★★★
+//Suitability: ★★★★★
 !}
 tags: enlightenment_candidates
 view-if: education_minister != "Bogdanov" 
