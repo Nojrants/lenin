@@ -489,7 +489,7 @@ After days of tough negotiations, there is a viable offer on the table. Some Bol
 
 Lenin however is absolutely furious that we have even entertained such a prospect—especially upon reading the proposed terms. In a heated party meeting, he berates the Party negotiators and outright accuses them of treason. So strongly does he feel about this, he declares he'd sooner let the Party split over the issue, or "go to the sailors" and crush this notion by force. 
 
-The Leninists push for breaking off talks entirely, though its possible we could cautiously reopen negotiations. If so, it's now clear that anything less than this would be a non-starter: <br>
+The Leninists push for breaking off talks entirely, though its possible we could cautiously reopen negotiations. If so, it's now clear that anything less than this would be a non-starter: <br><br>
 • Recognition of the inviolability of the decrees/actions of the 2nd Soviet Congress.<br>
 • Recognition of the CEC as the coutnry's sole supreme authority.<br>
 • CEC membership only to groups previously represented in the soviets<br>‎ ‎ ‎ (i.e. no expanded "People's Council").<br>
@@ -535,6 +535,7 @@ Vikzhel immediately unleashes a full-scale strike across the railway network, an
 
 @reopen_negotiations
 title: Reopen negotiations, presenting the Party's minimum requirements to the others as an "ultimatum". 
+go-to: menu2
 on-arrival: {!
 Q.influence = (10 + (left_m_relation / 10 ) - (instability / 20));
 Q.truce_offer = 0;
@@ -558,7 +559,6 @@ Q.drop_foodsupply = 0;
 Q.drop_nationalities = 0;
 Q.drop_welfare = 0;
 !}
-go-to: menu2
 
 Reneging on our earlier verbal agreement aggravates the other parties, strengthening the obstinence of many right socialists. Though the more time stalls, news of anti-Bolshevik military defeats weakens their negotiating power. The Left-SRs meanwhile issue a formal statement criticizing inflexibility within the Bolshevik camp. 
 
