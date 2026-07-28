@@ -461,14 +461,17 @@ Vikzhel immediately unleashes a full-scale strike across the railway network, an
 @accept_offer
 title: Agree to the offer. 
 unavailable-subtitle: The other parties will not accept the current offer. 
-choose-if: influence > 50
+choose-if: influence > 40
 new-page: true
+on-arrival: lenin_anger = 1 if (commissariats_held < 10 or disarm_workers = 1 or bar_lenin = 1 or drop_chair = 1 or drop_foreign = 1);
 
 = Tentative Offer
 
 After days of tough negotiations, there is a viable offer on the table. Some Bolshevik newspapers even preemptively acclaim the formation of a new coalition government. 
 
-Lenin however is absolutely furious that we have even entertained such a prospect—especially upon reading the proposed terms. In a heated party meeting, he berates the Party negotiators and outright accuses them of treason. So strongly does he feel about this, he declares he'd sooner let the Party split over the issue, or "go to the sailors" and crush this notion by force. 
+[?if lenin_anger = 1: Lenin however is absolutely furious that we have even entertained such a prospect—especially upon reading the proposed terms. In a heated party meeting, he berates the Party negotiators and outright accuses them of treason. So strongly does he feel about this, he declares he'd sooner let the Party split over the issue, or "go to the sailors" and crush this notion by force. ?]
+
+[?if lenin_anger = 1: Lenin however is absolutely furious that we have even entertained such a prospect—though the measured agreement is at least some consolation. ?]
 
 The Leninists push for breaking off talks entirely, though its possible we could cautiously reopen negotiations. If so, it's now clear that anything less than this would be a non-starter: <br><br>
 • Recognition of the inviolability of the decrees/actions of the 2nd Soviet Congress.<br>
@@ -500,7 +503,6 @@ title: Reopen negotiations, presenting the Party's minimum requirements to the o
 go-to: menu2
 new-page: true
 on-arrival: commissariats_held = 14; influence = (10 + (left_m_relation / 3) + (moderate_strength / 10) - (instability / 10)); truce_offer = 0; CEC_membership = 0; CEC_rebalance = 0; socialist_coalition = 0; subordinate = 0; restructure = 0; drop_chair = 0; drop_foreign = 0; drop_military = 0; drop_enlightenment = 0; drop_internal = 0; drop_railways = 0; drop_trade = 0; drop_finance = 0; drop_labor = 0; drop_justice = 0; drop_agriculture = 0; drop_foodsupply = 0; drop_posts = 0; drop_nationalities = 0; drop_welfare = 0;
-
 
 Reneging on our earlier verbal agreement aggravates the other parties, strengthening the obstinence of many right socialists. Though the more time stalls, news of anti-Bolshevik military defeats weakens their negotiating power. The Left-SRs meanwhile issue a formal statement criticizing inflexibility within the Bolshevik camp. 
 
@@ -706,6 +708,13 @@ view-if: subordinate = 1
 on-arrival: influence -= 1; subordinate = 0;
 go-to: menu2
 
+@cancel_restructure2
+title: Cancel our offer to allow Petrograd City Duma representatives. 
+tags: vikzhel_cancel2
+view-if: restructure = 1
+on-arrival: influence -= 8; restructure = 0;
+go-to: menu2
+
 
 
 @chair2
@@ -819,10 +828,17 @@ go-to: menu2
 @accept_offer2
 title: Agree to the offer. 
 unavailable-subtitle: The other parties will not accept the current offer. 
-choose-if: influence > 50
+choose-if: influence > 40
+new-page: true
+on-arrival: lenin_anger += 1 if (commissariats_held < 10 or disarm_workers = 1 or bar_lenin = 1 or drop_chair = 1 or drop_foreign = 1);
+
+= Tentative Offer
+
+
 
 @reject_offer2
 title: It seems we can't come to an agreement. 
+new-page: true
 
 
 
