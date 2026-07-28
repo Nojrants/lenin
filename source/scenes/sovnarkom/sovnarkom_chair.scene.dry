@@ -332,7 +332,9 @@ go-to: sovnarkom_composition
 @labor
 title: Labor — [+ labor_minister +]
 tags: sovnarkom_appointments
+
 [?if labor_minister != "": Who should we replace [+ labor_minister +] with? ?]
+
 [?if labor_minister == "": Who should we fill the vacancy with ?]
 
 - @labor_shliapnikov
