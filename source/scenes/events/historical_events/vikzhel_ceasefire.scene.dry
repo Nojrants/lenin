@@ -524,14 +524,6 @@ view-if: CEC_membership != 1
 on-arrival: influence += 3; CEC_membership = 1;
 go-to: menu2
 
-@CEC_rebalance2
-title: Rebalance the composition of the CEC to more fairly represent other groups. 
-subtitle: A composition of 40% Bolsheviks, 40% Defencists, 20% Internationalists has been floated.  
-tags: vikzhel_offers2
-view-if: CEC_rebalance != 1
-on-arrival: influence += 6; CEC_rebalance = 1;
-go-to: menu2
-
 @socialist_coalition2
 title: Agree in principle to the formation of a pan-socialist coalition government. 
 tags: vikzhel_offers2
@@ -681,13 +673,6 @@ title: Cancel the affirmation that all parties will be represented in the CEC.
 tags: vikzhel_cancel2
 view-if: CEC_membership = 1
 on-arrival: influence -= 3; CEC_membership = 0;
-go-to: menu2
-
-@cancel_CEC_rebalance2
-title: Cancel the offer to rebalance the CEC composition. 
-tags: vikzhel_cancel2
-view-if: CEC_rebalance = 1
-on-arrival: influence -= 5; CEC_rebalance = 0;
 go-to: menu2
 
 @cancel_subordinate2
