@@ -127,24 +127,24 @@ title: Foreign Affairs — [+ foreign_minister +]
 
 Who should we replace [+ foreign_minister +] with? 
 
-- @trotsky
-- @chicherin
-- @ioffe
+- @foreign_trotsky
+- @foreign_chicherin
+- @foreign_ioffe
 - @keep_foreign
 
-@trotsky
+@foreign_trotsky
 title: Leon Trotsky
 subtitle: Internationally-reknown and experienced organizer. 
 view-if: foreign_minister != "Trotsky" 
 on-arrival: foreign_minister = "Trotsky"; foreign_minister_party = "Bolshevik";
 
-@chicherin
+@foreign_chicherin
 title: Georgy Chicherin
 subtitle: Highly qualified diplomat, polyglot, and negotiator. 
 view-if: foreign_minister != "Chicherin" 
 on-arrival: foreign_minister = "Chicherin"; foreign_minister_party = "Bolshevik";
 
-@ioffe
+@foreign_ioffe
 title: Adolph Ioffe
 subtitle: 
 view-if: foreign_minister != "Ioffe" 
@@ -160,30 +160,31 @@ title: Military — [+ war_minister +]
 
 Who should we replace [+ war_minister +] with? 
 
-- @trotsky
-- @krylenko
-- @dybenko
+- @military_trotsky
+- @military_krylenko
+- @military_dybenko
+- @military_podvoisky
 - @keep_war
 
-@trotsky
+@military_trotsky
 title: Leon Trotsky
 subtitle: Internationally-reknown and experienced organizer. 
 view-if: war_minister != "Trotsky" 
 on-arrival: war_minister = "Trotsky"; war_minister_party = "Bolshevik";
 
-@krylenko
+@military_krylenko
 title: Nikolai Krylenko 
 subtitle: Veteran of the Russian Army and soldier-agitator; holds a law degree. 
 view-if: war_minister != "Krylenko" 
 on-arrival: war_minister = "Krylenko"; war_minister_party = "Bolshevik";
 
-@dybenko
+@military_dybenko
 title: Pavel Dybenko
 subtitle: Veteran of the Baltic Fleet. 
 view-if: war_minister != "Dybenko" 
 on-arrival: war_minister = "Dybenko"; war_minister_party = "Bolshevik";
 
-@podvoisky
+@military_podvoisky
 title: Nikolai Podvoisky
 subtitle: Old-school Bolshevik militant; led armed forces during October Revolution. 
 view-if: war_minister != "Podvoisky" 
@@ -200,10 +201,10 @@ title: Enlightenment — [+ education_minister +]
 
 Who should we replace [+ education_minister +] with? 
 
-- @luncharsky
+- @enlightenment_luncharsky
 - @keep_enlightenment
 
-@luncharsky
+@enlightenment_luncharsky
 title: Anatoly Luncharsky
 subtitle: 
 view-if: education_minister != "Luncharsky" 
@@ -223,10 +224,10 @@ title: Labor — [+ labor_minister +]
 [? labor_minister != "" : Who should we replace [+ labor_minister +] with? ?]
 [? labor_minister = "" : Who should we fill the vacancy with ?]
 
-- @shliapnikov
+- @labor_shliapnikov
 - @keep_labor
 
-@Shliapnikov
+@labor_shliapnikov
 title: Alexander Shliapnikov
 subtitle: 
 view-if: labor_minister != "Shliapnikov" 
