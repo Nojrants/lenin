@@ -116,7 +116,7 @@ go-to: sovnarkom_chair
 
 @foreign
 title: Foreign Affairs — [+ foreign_minister +]
-tag: sovnarkom_appointments
+tags: sovnarkom_appointments
 
 Who should we replace [+ foreign_minister +] with? 
 
@@ -183,7 +183,7 @@ go-to: sovnarkom_composition
 
 @military
 title: Military — [+ war_minister +]
-tag: sovnarkom_appointments
+tags: sovnarkom_appointments
 
 Who should we replace [+ war_minister +] with? 
 
@@ -247,7 +247,7 @@ go-to: sovnarkom_composition
 
 @enlightenment
 title: Enlightenment — [+ education_minister +]
-tag: sovnarkom_appointments
+tags: sovnarkom_appointments
 
 Who should we replace [+ education_minister +] with? 
 
@@ -288,7 +288,7 @@ go-to: sovnarkom_composition
 
 @finance
 title: Finance — [+ finance_minister +]
-tag: sovnarkom_appointments
+tags: sovnarkom_appointments
 
 [?if finance_minister != "": Who should we replace [+ finance_minister +] with? ?]
 [?if finance_minister == "": Who should we fill the vacancy with ?]
@@ -331,8 +331,7 @@ go-to: sovnarkom_composition
 
 @labor
 title: Labor — [+ labor_minister +]
-tag: sovnarkom_appointments
-
+tags: sovnarkom_appointments
 [?if labor_minister != "": Who should we replace [+ labor_minister +] with? ?]
 [?if labor_minister == "": Who should we fill the vacancy with ?]
 
