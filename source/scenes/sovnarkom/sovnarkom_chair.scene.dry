@@ -184,7 +184,7 @@ on-arrival: war_minister = "Podvoisky"; war_minister_party = "Bolshevik";
 
 @keep_war
 title: Cancel action. 
-subtitle: [?if war_minister != "": Keep [+ war_minister +] in place. ?][? war_minister == "": Leave the position vacant. ?] 
+subtitle: [?if war_minister != "": Keep [+ war_minister +] in place. ?]
 go-to: sovnarkom_composition
 
 
@@ -205,7 +205,7 @@ on-arrival: education_minister = "Luncharsky"; education_minister_party = "Bolsh
 
 @keep_enlightenment
 title: Cancel action. 
-subtitle: [?if education_minister != "": Keep [+ education_minister +] in place. ?][? education_minister == "": Leave the position vacant. ?] 
+subtitle: [?if education_minister != "": Keep [+ education_minister +] in place. ?]
 go-to: sovnarkom_composition
 
 
@@ -229,7 +229,7 @@ on-arrival: labor_minister = "Shliapnikov"; labor_minister_party = "Bolshevik";
 
 @keep_labor
 title: Cancel action.
-subtitle: [?if labor_minister != "": Keep [+ labor_minister +] in place. ?][? labor_minister == "": Leave the position vacant. ?] 
+subtitle: [?if labor_minister != "": Keep [+ labor_minister +] in place. ?]
 go-to: sovnarkom_composition
 
 
