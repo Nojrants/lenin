@@ -100,6 +100,40 @@ Q.leftcom_strength = 20;
 Q.leftcom_dissent = 10;
 Q.leftcom_split = 0;
 
+// Other Parties
+Q.sdi_relation = 40;
+Q.sdi_strength = 5;
+
+Q.left_m_relation = 35;
+Q.left_m_strength = 10;
+
+Q.centre_m_relation = 30;
+Q.centre_m_strength = 25;
+
+Q.right_m_relation = 15;
+Q.right_m_strength = 20;
+
+Q.lsr_relation = 55;
+Q.lsr_strength = 20;
+
+Q.centre_sr_relation = 35;
+Q.centre_sr_strength = 65;
+
+Q.right_sr_relation = 20;
+Q.right_sr_strength = 40;
+
+Q.anarchist_relation = 55;
+Q.anarchist_strength = 10;
+
+Q.ns_relation = 35;
+Q.ns_strength = 10;
+
+Q.k_relation = 5;
+Q.k_strength = 15;
+
+Q.rightist_relation = 0;
+Q.rightist_strength = 5;
+
 
 // state of the country 
 Q.instability = 40;
