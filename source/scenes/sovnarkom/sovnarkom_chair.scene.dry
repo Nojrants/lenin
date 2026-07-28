@@ -122,30 +122,59 @@ title: Foreign Affairs — [+ foreign_minister +]
 
 Who should we replace [+ foreign_minister +] with? 
 
-- @foreign_trotsky
-- @foreign_chicherin
-- @foreign_ioffe
+- #foreign_candidates
 - @keep_foreign
 
 @foreign_trotsky
 title: Leon Trotsky
-subtitle: Internationally-reknown and experienced organizer. 
+subtitle: {!
+Internationally-reknown and experienced organizer.<br>
+Overall skill: ★★★★★<br>
+Suitability: ★★★☆
+!}
+tags: foreign_candidates
 view-if: foreign_minister != "Trotsky" 
 on-arrival: foreign_minister = "Trotsky"; foreign_minister_party = "Bolshevik";
 go-to: sovnarkom_composition
 
 @foreign_chicherin
 title: Georgy Chicherin
-subtitle: Highly qualified diplomat, polyglot, and negotiator. 
+subtitle: {!
+Highly qualified diplomat, polyglot, and negotiator.<br>
+Overall skill: ★★★★★<br>
+Suitability: ★★★★★
+!}
+tags: foreign_candidates 
 view-if: foreign_minister != "Chicherin" 
+choose-if: foreign_minister != "Chicherin" and chicherin_available = 1
+unavailable-subtitle: Chicherin is currently imprisoned by the British. 
 on-arrival: foreign_minister = "Chicherin"; foreign_minister_party = "Bolshevik";
 go-to: sovnarkom_composition
 
 @foreign_ioffe
 title: Adolph Ioffe
-subtitle: 
+subtitle: {!
+Follower of Trotsky with some diplomatic experience.<br>
+Overall skill: ★★<br>
+Suitability: ★★★
+!}
+tags: foreign_candidates 
 view-if: foreign_minister != "Ioffe" 
 on-arrival: foreign_minister = "Ioffe"; foreign_minister_party = "Bolshevik";
+go-to: sovnarkom_composition
+
+@foreign_martov
+title: Iulius Martov
+subtitle: {!
+Menshevik Int. — RSDLP founding member and reknown Menshevik leader. 
+Overall skill: ★★★★★<br>
+Suitability: ★★★★
+!}
+tags: foreign_candidates 
+view-if: foreign_minister != "Martov"
+choose-if: foreign_minister != "Martov" and left_m_relation > 60 and m_in_gov = 1
+unavailable-subtitle: [?if m_in_gov != 1: We haven't assented to Menshevik participation in government. ?][?if left_m_relation <= 60: Martov would not accept this. ?]
+on-arrival: foreign_minister = "Martov"; foreign_minister_party = "Menshevik"; left_m_relation += 10
 go-to: sovnarkom_composition
 
 @keep_foreign
@@ -159,36 +188,53 @@ title: Military — [+ war_minister +]
 
 Who should we replace [+ war_minister +] with? 
 
-- @military_trotsky
-- @military_krylenko
-- @military_dybenko
-- @military_podvoisky
+- #military_candidates
 - @keep_war
 
 @military_trotsky
 title: Leon Trotsky
-subtitle: Internationally-reknown and experienced organizer. 
+subtitle: {!
+Internationally-reknown and experienced organizer.<br>
+Overall skill: ★★★★★<br>
+Suitability: ★★★★★
+!}
+tags: military_candidates 
 view-if: war_minister != "Trotsky" 
 on-arrival: war_minister = "Trotsky"; war_minister_party = "Bolshevik";
 go-to: sovnarkom_composition
 
 @military_krylenko
 title: Nikolai Krylenko 
-subtitle: Veteran of the Russian Army and soldier-agitator; holds a law degree. 
+subtitle: {!
+Veteran of the Russian Army and soldier-agitator; holds a law degree.<br>
+Overall skill: ★★★<br>
+Suitability: ★★★★
+!} 
+tags: military_candidates 
 view-if: war_minister != "Krylenko" 
 on-arrival: war_minister = "Krylenko"; war_minister_party = "Bolshevik";
 go-to: sovnarkom_composition
 
 @military_dybenko
 title: Pavel Dybenko
-subtitle: Veteran of the Baltic Fleet. 
+subtitle: {!
+Veteran of the Baltic Fleet.<br>
+Overall skill: ★★<br>
+Suitability: ★★★★
+!}
+tags: military_candidates 
 view-if: war_minister != "Dybenko" 
 on-arrival: war_minister = "Dybenko"; war_minister_party = "Bolshevik";
 go-to: sovnarkom_composition
 
 @military_podvoisky
 title: Nikolai Podvoisky
-subtitle: Old-school Bolshevik militant; led armed forces during October Revolution. 
+subtitle: {!
+Old-school Bolshevik militant; led red guards during October Revolution.<br>
+Overall skill: ★★★<br>
+Suitability: ★★★★
+!} 
+tags: military_candidates 
 view-if: war_minister != "Podvoisky" 
 on-arrival: war_minister = "Podvoisky"; war_minister_party = "Bolshevik";
 go-to: sovnarkom_composition
@@ -229,8 +275,8 @@ go-to: sovnarkom_composition
 @enlightenment_bogdanov
 title: Alexander Bogdanov
 subtitle: {!
-Vperedist — Leading Bolshevik theoretician until his falling out with Lenin; strong proponent of "proletarian culture". A controversial choice. \n 
-Overall skill: ★★★★★ \n
+Vperedist — Leading Bolshevik theoretician until his falling out with Lenin; strong proponent of "proletarian culture". A controversial choice.<br>
+Overall skill: ★★★★★<br>
 Suitability: ★★★★★
 !}
 tags: enlightenment_candidates
@@ -254,7 +300,11 @@ title: Labor — [+ labor_minister +]
 
 @labor_shliapnikov
 title: Alexander Shliapnikov
-subtitle: 
+subtitle: {!
+Left — Popular and skilled trade union organizer.<br>
+Overall skill: ★★★★<br>
+Suitability: ★★★★
+!}
 view-if: labor_minister != "Shliapnikov" 
 on-arrival: labor_minister = "Shliapnikov"; labor_minister_party = "Bolshevik";
 go-to: sovnarkom_composition
