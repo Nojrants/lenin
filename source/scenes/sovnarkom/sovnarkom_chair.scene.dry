@@ -104,6 +104,7 @@ go-to: welfare
 
 @sovnarkom_composition
 title: APPOINT/REMOVE COMMISSARS
+new-page: true
 
 - @foreign
 - @military
