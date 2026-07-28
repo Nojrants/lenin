@@ -477,7 +477,7 @@ Vikzhel immediately unleashes a full-scale strike across the railway network, an
 
 
 
-
+@accept_offer
 title: Agree to the offer. 
 unavailable-subtitle: The other parties will not accept the current offer. 
 choose-if: influence > 50
