@@ -242,7 +242,7 @@ go-to: menu
 
 
 
-@declare_truce
+@cancel_truce
 title: Cancel the offer of a military truce. 
 tags: vikzhel_cancel
 view-if: truce_offer = 1
@@ -250,7 +250,7 @@ on-arrival: influence -= 2; truce_offer = 0;
 go-to: menu
 
 
-@affirm_CEC_membership
+@cancel_affirm_CEC_membership
 title: Cancel the affirmation that all parties will be represented in the CEC. 
 subtitle: Although many parties walked out at the Congress, they will still be represented. 
 tags: vikzhel_cancel
@@ -258,56 +258,56 @@ view-if: CEC_membership = 1
 on-arrival: influence -= 3; CEC_membership = 0;
 go-to: menu
 
-@CEC_rebalance
+@cancel_CEC_rebalance
 title: Cancel the offer to rebalance the CEC composition. 
 tags: vikzhel_cancel
 view-if: CEC_rebalance = 1
 on-arrival: influence -= 5; CEC_rebalance = 0;
 go-to: menu
 
-@socialist_coalition
+@cancel_socialist_coalition
 title: Cancel our pledge to support an all-socialist government. 
 tags: vikzhel_cancel
 view-if: socialist_coalition = 1
 on-arrival: influence -= 2; socialist_coalition = 0;
 go-to: menu
 
-@exclude_privileged
+@cancel_exclude_privileged
 title: Cancel our pledge to exclude members of privilege. 
 tags: vikzhel_cancel
 view-if: exclude_privileged = 1
 on-arrival: influence -= 1; exclude_privileged = 0;
 go-to: menu
 
-@disarm_workers
+@cancel_disarm_workers
 title: Cancel our offer to disarm the workers' militias. 
 tags: vikzhel_cancel
 view-if: disarm_workers = 1
 on-arrival: influence -= 7; disarm_workers = 0;
 go-to: menu
 
-@pledge_ca
+@cancel_pledge_ca
 title: Cancel our pledge to respect the Constituent Assembly. 
 tags: vikzhel_cancel
 view-if: pledge_ca = 1
 on-arrival: influence -= 1; pledge_ca = 0;
 go-to: menu
 
-@subordinate
+@cancel_subordinate
 title: Cancel our affirmation that the government will be subordinate to the CEC. 
 tags: vikzhel_cancel
 view-if: subordinate = 1
 on-arrival: influence -= 1; subordinate = 0;
 go-to: menu
 
-@restructure
+@cancel_restructure
 title: Cancel our offer to restructure the CEC into the Provisional People's Council. 
 tags: vikzhel_cancel
 view-if: restructure = 1
 on-arrival: influence -= 7; restructure = 0;
 go-to: menu
 
-@bar_lenin
+@cancel_bar_lenin
 title: Cancel our offer to preclude Lenin and Trotsky. 
 tags: vikzhel_cancel
 view-if: bar_lenin = 1
