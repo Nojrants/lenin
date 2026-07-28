@@ -425,7 +425,7 @@ tags: vikzhel_cancel
 on-arrival: drop_nationalities = 0; influence -= 2;
 go-to: menu
 
-@drop_welfare
+@welfare
 title: Cancel our offer to give up the Welfare Commissariat.
 view-if: drop_welfare = 1
 tags: vikzhel_offers
