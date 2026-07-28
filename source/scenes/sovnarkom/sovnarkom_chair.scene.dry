@@ -110,8 +110,11 @@ new-page: true
 - @military
 - @enlightenment
 - @labor
-- @sovnarkom_chair: Stop changing composition. 
+- @cancel_composition
 
+@cancel_composition
+title: Stop changing composition. 
+go-to: sovnarkom_chair
 
 
 @foreign
