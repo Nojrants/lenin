@@ -205,8 +205,13 @@ title: Enlightenment — [+ education_minister +]
 
 Who should we replace [+ education_minister +] with? 
 
-- @enlightenment_lunacharsky
+- #enlightenment_candidates
 - @keep_enlightenment
+
+@keep_enlightenment
+title: Cancel action. 
+subtitle: [?if education_minister != "Vacant": Keep [+ education_minister +] in place. ?]
+go-to: sovnarkom_composition
 
 @enlightenment_lunacharsky
 title: Anatoly Lunacharsky
@@ -216,14 +221,25 @@ subtitle: {!
 
 >>Suitability: ★★★★★
 !}
+tags: enlightenment_candidates
 view-if: education_minister != "Lunacharsky" 
 on-arrival: education_minister = "Lunacharsky"; education_minister_party = "Bolshevik";
 go-to: sovnarkom_composition
 
-@keep_enlightenment
-title: Cancel action. 
-subtitle: [?if education_minister != "Vacant": Keep [+ education_minister +] in place. ?]
+
+@enlightenment_bogdanov
+title: Alexander Bogdanov
+subtitle: {!
+>Vperedist — Leading Bolshevik theoretician until his falling out with Lenin; strong proponent of "proletarian culture". A controversial choice. 
+>>Overall skill: ★★★★★
+
+>>Suitability: ★★★★★
+!}
+tags: enlightenment_candidates
+view-if: education_minister != "Bogdanov" 
+on-arrival: education_minister = "Bogdanov"; education_minister_party = "Bolshevik";
 go-to: sovnarkom_composition
+
 
 
 
