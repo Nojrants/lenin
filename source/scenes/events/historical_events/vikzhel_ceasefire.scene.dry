@@ -50,7 +50,7 @@ Vikzhel immediately unleashes a full-scale strike across the railway network, an
 title: There is no harm in hearing them out...
 subtitle: Send representatives to the conference. 
 new-page: true
-on-arrival: influence = (10 + (left_m_relation / 10 ) - (instability / 20)); console.log("truce_offer =", truce_offer);
+on-arrival: influence = (10 + (left_m_relation / 10 ) - (instability / 20)); console.log("truce_offer =", Q.truce_offer);
 go-to: menu
 
 = Vikzhel Negotiations 
@@ -80,7 +80,7 @@ go-to: menu
 title: Declare a military truce between Bolshevik and counterrevolutionary armed groups. 
 tags: vikzhel_offers
 view-if: truce_offer != 1
-on-arrival: influence += 2; truce_offer = 1; console.log("truce_offer =", truce_offer);
+on-arrival: influence += 2; truce_offer = 1; console.log("truce_offer =", Q.truce_offer);
 go-to: menu
 
 
@@ -560,7 +560,7 @@ drop_agriculture = 0;
 drop_foodsupply = 0;
 drop_nationalities = 0;
 drop_welfare = 0;
-console.log("truce_offer =", truce_offer);
+console.log("truce_offer =", Q.truce_offer);
 !}
 
 Reneging on our earlier verbal agreement aggravates the other parties, strengthening the obstinence of many right socialists. Though the more time stalls, news of anti-Bolshevik military defeats weakens their negotiating power. The Left-SRs meanwhile issue a formal statement criticizing inflexibility within the Bolshevik camp. 
@@ -589,7 +589,7 @@ go-to: menu2
 title: Declare a military truce between Bolshevik and counterrevolutionary armed groups. 
 tags: vikzhel_offers2
 view-if: truce_offer != 1
-on-arrival: influence += 2; truce_offer = 1; console.log("truce_offer =", truce_offer);
+on-arrival: influence += 2; truce_offer = 1; console.log("truce_offer =", Q.truce_offer);
 go-to: menu2
 
 
@@ -749,7 +749,7 @@ go-to: menu2
 title: Cancel the offer of a military truce. 
 tags: vikzhel_cancel2
 view-if: truce_offer = 1
-on-arrival: influence -= 2; truce_offer = 0; console.log("truce_offer =", truce_offer);
+on-arrival: influence -= 2; truce_offer = 0; console.log("truce_offer =", Q.truce_offer);
 go-to: menu2
 
 
