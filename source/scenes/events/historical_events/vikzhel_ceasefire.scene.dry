@@ -428,7 +428,7 @@ go-to: menu
 @welfare
 title: Cancel our offer to give up the Welfare Commissariat.
 view-if: drop_welfare = 1
-tags: vikzhel_offers
+tags: vikzhel_cancel
 on-arrival: drop_welfare = 0; influence -= 1;
 go-to: menu
 
