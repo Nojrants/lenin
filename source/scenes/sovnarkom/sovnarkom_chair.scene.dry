@@ -151,7 +151,8 @@ view-if: foreign_minister != "Ioffe"
 on-arrival: foreign_minister = "Ioffe"; foreign_minister_party = "Bolshevik";
 
 @keep_foreign
-title: [? foreign_minister != "": Keep [+ foreign_minister +] in place. ?][? foreign_minister == "": Leave the position vacant. ?] 
+title: Cancel action. 
+subtitle: [? foreign_minister != "": Keep [+ foreign_minister +] in place. ?][? foreign_minister == "": Leave the position vacant. ?] 
 go-to: sovnarkom_composition
 
 
