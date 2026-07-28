@@ -55,7 +55,7 @@ Though talks initially stall, several days of arguing (and news of anti-Bolshevi
 @accept_offer
 title: Agree to the offer. 
 unavailable-subtitle: The other parties will not accept the current offer. 
-choose-if: influence > 30
+choose-if: influence > 50
 go-to: reaction
 
 @reject_offer
