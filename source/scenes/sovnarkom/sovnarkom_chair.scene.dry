@@ -170,25 +170,25 @@ Who should we replace [+ war_minister +] with?
 title: Leon Trotsky
 subtitle: Internationally-reknown and experienced organizer. 
 view-if: war_minister != "Trotsky" 
-on-arrival: war_minister = "Trotsky"; war_minister_party = "Bolshevik";
+on-arrival: war_minister == "Trotsky"; war_minister_party == "Bolshevik";
 
 @military_krylenko
 title: Nikolai Krylenko 
 subtitle: Veteran of the Russian Army and soldier-agitator; holds a law degree. 
 view-if: war_minister != "Krylenko" 
-on-arrival: war_minister = "Krylenko"; war_minister_party = "Bolshevik";
+on-arrival: war_minister == "Krylenko"; war_minister_party == "Bolshevik";
 
 @military_dybenko
 title: Pavel Dybenko
 subtitle: Veteran of the Baltic Fleet. 
 view-if: war_minister != "Dybenko" 
-on-arrival: war_minister = "Dybenko"; war_minister_party = "Bolshevik";
+on-arrival: war_minister == "Dybenko"; war_minister_party == "Bolshevik";
 
 @military_podvoisky
 title: Nikolai Podvoisky
 subtitle: Old-school Bolshevik militant; led armed forces during October Revolution. 
 view-if: war_minister != "Podvoisky" 
-on-arrival: war_minister = "Podvoisky"; war_minister_party = "Bolshevik";
+on-arrival: war_minister == "Podvoisky"; war_minister_party == "Bolshevik";
 
 @keep_war
 title: [? war_minister != "" : Keep [+ war_minister +] in place. ?][? war_minister == "" : Leave the position vacant. ?] 
@@ -208,7 +208,7 @@ Who should we replace [+ education_minister +] with?
 title: Anatoly Luncharsky
 subtitle: 
 view-if: education_minister != "Luncharsky" 
-on-arrival: education_minister = "Luncharsky"; education_minister_party = "Bolshevik";
+on-arrival: education_minister == "Luncharsky"; education_minister_party == "Bolshevik";
 
 @keep_enlightenment
 title: [? education_minister != "" : Keep [+ education_minister +] in place. ?][? education_minister == "" : Leave the position vacant. ?] 
@@ -231,7 +231,7 @@ title: Labor — [+ labor_minister +]
 title: Alexander Shliapnikov
 subtitle: 
 view-if: labor_minister != "Shliapnikov" 
-on-arrival: labor_minister = "Shliapnikov"; labor_minister_party = "Bolshevik";
+on-arrival: labor_minister == "Shliapnikov"; labor_minister_party == "Bolshevik";
 
 @keep_labor
 title: [? labor_minister != "" : Keep [+ labor_minister +] in place. ?][? labor_minister == "" : Leave the position vacant. ?] 
