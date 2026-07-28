@@ -33,7 +33,7 @@ Vikzhel immediately unleashes a full-scale strike across the railway network, an
 title: There is no harm in hearing them out...
 subtitle: Send representatives to the conference. 
 new-page: true
-on-arrival: influence = (10 + (left_m_relation / 3) + (moderate_strength / 10) - (instability / 10)); 
+on-arrival: commissariats_held = 14; influence = (10 + (left_m_relation / 3) + (moderate_strength / 10) - (instability / 10)); 
 go-to: menu
 
 = Vikzhel Negotiations 
@@ -143,7 +143,7 @@ title: Cede control of the Sovnarkom chairmanship.
 subtitle: Viktor Chernov of the SRs is desired for this position. 
 view-if: drop_chair != 1
 tags: vikzhel_offers
-on-arrival: drop_chair = 1; influence += 7;
+on-arrival: drop_chair = 1; influence += 7; commissariats_held -= 1;
 go-to: menu
 
 @drop_foreign
@@ -151,7 +151,7 @@ title: Drop the Foreign Affairs Commissariat.
 subtitle: Right-SR Nikolai Avksentsiev is desired for this position. 
 view-if: drop_foreign != 1
 tags: vikzhel_offers
-on-arrival: drop_foreign = 1; influence += 5;
+on-arrival: drop_foreign = 1; influence += 5; commissariats_held -= 1;
 go-to: menu
 
 
@@ -159,7 +159,7 @@ go-to: menu
 title: Drop the War Commissariat. 
 view-if: drop_military != 1
 tags: vikzhel_offers
-on-arrival: drop_military = 1; influence += 4;
+on-arrival: drop_military = 1; influence += 4; commissariats_held -= 1;
 go-to: menu
 
 @drop_enlightenment
@@ -167,21 +167,21 @@ title: Drop the Enlightenment Commissariat.
 subtitle: We are expected to keep this position. 
 view-if: drop_enlightenment != 1
 tags: vikzhel_offers
-on-arrival: drop_enlightenment = 1; influence += 1;
+on-arrival: drop_enlightenment = 1; influence += 1; commissariats_held -= 1;
 go-to: menu
 
 @drop_internal
 title: Drop the Internal Affairs Commissariat. 
 view-if: drop_internal != 1
 tags: vikzhel_offers
-on-arrival: drop_internal = 1; influence += 3;
+on-arrival: drop_internal = 1; influence += 3; commissariats_held -= 1;
 go-to: menu
 
 @drop_railways
 title: Drop the Railways Commissariat. 
 view-if: drop_railways != 1
 tags: vikzhel_offers
-on-arrival: drop_railways = 1; influence += 2;
+on-arrival: drop_railways = 1; influence += 2; commissariats_held -= 1;
 go-to: menu
 
 @drop_trade
@@ -189,14 +189,14 @@ title: Drop the Trade Commissariat.
 subtitle: We are expected to keep this position.  
 view-if: drop_trade != 1
 tags: vikzhel_offers
-on-arrival: drop_trade = 1; influence += 1;
+on-arrival: drop_trade = 1; influence += 1; commissariats_held -= 1;
 go-to: menu
 
 @drop_finance
 title: Drop the Finance Commissariat.
 view-if: drop_finance != 1
 tags: vikzhel_offers
-on-arrival: drop_finance = 1; influence += 2;
+on-arrival: drop_finance = 1; influence += 2; commissariats_held -= 1;
 go-to: menu
 
 @drop_labor
@@ -204,35 +204,42 @@ title: Drop the Labor Commissariat.
 subtitle: We are expected to keep this position. 
 view-if: drop_labor != 1
 tags: vikzhel_offers
-on-arrival: drop_labor = 1; influence += 1;
+on-arrival: drop_labor = 1; influence += 1; commissariats_held -= 1;
 go-to: menu
 
 @drop_justice
 title: Drop the Justice Commissariat. 
 view-if: drop_justice != 1
 tags: vikzhel_offers
-on-arrival: drop_justice = 1; influence += 2;
+on-arrival: drop_justice = 1; influence += 2; commissariats_held -= 1;
 go-to: menu
 
 @drop_agriculture
 title: Drop the Agriculture Commissariat.
 view-if: drop_agriculture != 1
 tags: vikzhel_offers
-on-arrival: drop_agriculture = 1; influence += 2;
+on-arrival: drop_agriculture = 1; influence += 2; commissariats_held -= 1;
 go-to: menu
 
 @drop_foodsupply
 title: Drop the Food Supply Commissariat.
 view-if: drop_foodsupply != 1
 tags: vikzhel_offers
-on-arrival: drop_foodsupply = 1; influence += 2;
+on-arrival: drop_foodsupply = 1; influence += 2; commissariats_held -= 1;
+go-to: menu
+
+@drop_posts
+title: Drop the Posts & Telegrams Commissariat.
+view-if: drop_posts != 1
+tags: vikzhel_offers
+on-arrival: drop_posts = 1; influence += 1; commissariats_held -= 1;
 go-to: menu
 
 @drop_nationalities
 title: Drop the Nationalities Commissariat.
 view-if: drop_nationalities != 1
 tags: vikzhel_offers
-on-arrival: drop_nationalities = 1; influence += 1;
+on-arrival: drop_nationalities = 1; influence += 1; commissariats_held -= 1;
 go-to: menu
 
 @drop_welfare
@@ -240,7 +247,7 @@ title: Drop the Welfare Commissariat.
 subtitle: We are expected to keep this position. 
 view-if: drop_welfare != 1 and welfare_founded = 1
 tags: vikzhel_offers
-on-arrival: drop_welfare = 1; influence += 1;
+on-arrival: drop_welfare = 1; influence += 1; commissariats_held -= 1;
 go-to: menu
 
 
@@ -327,14 +334,14 @@ go-to: menu
 title: Cancel the offer to give up the Sovnarkom Chairmanship. 
 view-if: drop_chair = 1
 tags: vikzhel_cancel
-on-arrival: drop_chair = 0; influence -= 7;
+on-arrival: drop_chair = 0; influence -= 7; commissariats_held += 1;
 go-to: menu
 
 @foreign
 title: Cancel our offer to give up the Foreign Affairs Commissariat. 
 view-if: drop_foreign = 1
 tags: vikzhel_cancel
-on-arrival: drop_foreign = 0; influence -= 7;
+on-arrival: drop_foreign = 0; influence -= 7; commissariats_held += 1;
 go-to: menu
 
 
@@ -342,14 +349,14 @@ go-to: menu
 title: Cancel our offer to give up the War Commissariat. 
 view-if: drop_military = 1
 tags: vikzhel_cancel
-on-arrival: drop_military = 0; influence -= 5;
+on-arrival: drop_military = 0; influence -= 5; commissariats_held += 1;
 go-to: menu
 
 @enlightenment
 title: Cancel our offer to give up the Enlightenment Commissariat. 
 view-if: drop_enlightenment = 1
 tags: vikzhel_cancel
-on-arrival: drop_enlightenment = 0; influence -= 2;
+on-arrival: drop_enlightenment = 0; influence -= 2; commissariats_held += 1;
 go-to: menu
 
 @internal
@@ -363,7 +370,7 @@ go-to: menu
 title: Cancel our offer to give up the Railways Commissariat. 
 view-if: drop_railways = 1
 tags: vikzhel_cancel
-on-arrival: drop_railways = 0; influence -= 3;
+on-arrival: drop_railways = 0; influence -= 3; commissariats_held += 1;
 go-to: menu
 
 @trade
@@ -377,49 +384,56 @@ go-to: menu
 title: Cancel our offer to give up the Finance Commissariat.
 view-if: drop_finance = 1
 tags: vikzhel_cancel
-on-arrival: drop_finance = 0; influence -= 3;
+on-arrival: drop_finance = 0; influence -= 3; commissariats_held += 1;
 go-to: menu
 
 @labor
 title: Cancel our offer to give up the Labor Commissariat.
 view-if: drop_labor = 1
 tags: vikzhel_cancel
-on-arrival: drop_labor = 0; influence -= 2;
+on-arrival: drop_labor = 0; influence -= 2; commissariats_held += 1;
 go-to: menu
 
 @justice
 title: Cancel our offer to give up the Justice Commissariat. 
 view-if: drop_justice = 1
 tags: vikzhel_cancel
-on-arrival: drop_justice = 0; influence -= 3;
+on-arrival: drop_justice = 0; influence -= 3; commissariats_held += 1;
 go-to: menu
 
 @agriculture
 title: Cancel our offer to give up the Agriculture Commissariat.
 view-if: drop_agriculture = 1
 tags: vikzhel_cancel
-on-arrival: drop_agriculture = 0; influence -= 3;
+on-arrival: drop_agriculture = 0; influence -= 3; commissariats_held += 1;
 go-to: menu
 
 @foodsupply
 title: Cancel our offer to give up the Food Supply Commissariat.
 view-if: drop_foodsupply = 1
 tags: vikzhel_cancel
-on-arrival: drop_foodsupply = 0; influence -= 3;
+on-arrival: drop_foodsupply = 0; influence -= 3; commissariats_held += 1;
+go-to: menu
+
+@posts
+title: Cancel our offer to give up the Posts & Telegrams Commissariat.
+view-if: drop_posts = 1
+tags: vikzhel_cancel
+on-arrival: drop_posts = 0; influence -= 2; commissariats_held += 1;
 go-to: menu
 
 @nationalities
 title: Cancel our offer to give up the Nationalities Commissariat.
 view-if: drop_nationalities = 1
 tags: vikzhel_cancel
-on-arrival: drop_nationalities = 0; influence -= 2;
+on-arrival: drop_nationalities = 0; influence -= 2; commissariats_held += 1;
 go-to: menu
 
 @welfare
 title: Cancel our offer to give up the Welfare Commissariat.
 view-if: drop_welfare = 1
 tags: vikzhel_cancel
-on-arrival: drop_welfare = 0; influence -= 1;
+on-arrival: drop_welfare = 0; influence -= 1; commissariats_held += 1;
 go-to: menu
 
 
@@ -485,7 +499,7 @@ Vikzhel immediately unleashes a full-scale strike across the railway network, an
 title: Reopen negotiations, presenting the Party's minimum requirements to the others as an "ultimatum". 
 go-to: menu2
 new-page: true
-on-arrival: influence = (10 + (left_m_relation / 3) + (moderate_strength / 10) - (instability / 10)); truce_offer = 0; CEC_membership = 0; CEC_rebalance = 0; socialist_coalition = 0; subordinate = 0; restructure = 0; drop_chair = 0; drop_foreign = 0; drop_military = 0; drop_enlightenment = 0; drop_internal = 0; drop_railways = 0; drop_trade = 0; drop_finance = 0; drop_labor = 0; drop_justice = 0; drop_agriculture = 0; drop_foodsupply = 0; drop_nationalities = 0; drop_welfare = 0;
+on-arrival: commissariats_held = 14; influence = (10 + (left_m_relation / 3) + (moderate_strength / 10) - (instability / 10)); truce_offer = 0; CEC_membership = 0; CEC_rebalance = 0; socialist_coalition = 0; subordinate = 0; restructure = 0; drop_chair = 0; drop_foreign = 0; drop_military = 0; drop_enlightenment = 0; drop_internal = 0; drop_railways = 0; drop_trade = 0; drop_finance = 0; drop_labor = 0; drop_justice = 0; drop_agriculture = 0; drop_foodsupply = 0; drop_posts = 0; drop_nationalities = 0; drop_welfare = 0;
 
 
 Reneging on our earlier verbal agreement aggravates the other parties, strengthening the obstinence of many right socialists. Though the more time stalls, news of anti-Bolshevik military defeats weakens their negotiating power. The Left-SRs meanwhile issue a formal statement criticizing inflexibility within the Bolshevik camp. 
@@ -557,7 +571,7 @@ title: Cede control of the Sovnarkom chairmanship.
 subtitle: Lenin would surely not allow this. 
 view-if: drop_chair != 1
 tags: vikzhel_offers2
-on-arrival: drop_chair = 1; influence += 7;
+on-arrival: drop_chair = 1; influence += 7; commissariats_held -= 1;
 go-to: menu2
 
 @drop_foreign2
@@ -565,7 +579,7 @@ title: Drop the Foreign Affairs Commissariat.
 subtitle: Lenin would surely not allow this. 
 view-if: drop_foreign != 1
 tags: vikzhel_offers2
-on-arrival: drop_foreign = 1; influence += 5;
+on-arrival: drop_foreign = 1; influence += 5; commissariats_held -= 1;
 go-to: menu2
 
 
@@ -573,7 +587,7 @@ go-to: menu2
 title: Drop the War Commissariat. 
 view-if: drop_military != 1
 tags: vikzhel_offers2
-on-arrival: drop_military = 1; influence += 4;
+on-arrival: drop_military = 1; influence += 4; commissariats_held -= 1;
 go-to: menu2
 
 @drop_enlightenment2
@@ -581,21 +595,21 @@ title: Drop the Enlightenment Commissariat.
 subtitle: We are expected to keep this position. 
 view-if: drop_enlightenment != 1
 tags: vikzhel_offers2
-on-arrival: drop_enlightenment = 1; influence += 1;
+on-arrival: drop_enlightenment = 1; influence += 1; commissariats_held -= 1;
 go-to: menu2
 
 @drop_internal2
 title: Drop the Internal Affairs Commissariat. 
 view-if: drop_internal != 1
 tags: vikzhel_offers2
-on-arrival: drop_internal = 1; influence += 3;
+on-arrival: drop_internal = 1; influence += 3; commissariats_held -= 1;
 go-to: menu2
 
 @drop_railways2
 title: Drop the Railways Commissariat. 
 view-if: drop_railways != 1
 tags: vikzhel_offers2
-on-arrival: drop_railways = 1; influence += 2;
+on-arrival: drop_railways = 1; influence += 2; commissariats_held -= 1;
 go-to: menu2
 
 @drop_trade2
@@ -603,14 +617,14 @@ title: Drop the Trade Commissariat.
 subtitle: We are expected to keep this position.  
 view-if: drop_trade != 1
 tags: vikzhel_offers2
-on-arrival: drop_trade = 1; influence += 1;
+on-arrival: drop_trade = 1; influence += 1; commissariats_held -= 1;
 go-to: menu2
 
 @drop_finance2
 title: Drop the Finance Commissariat.
 view-if: drop_finance != 1
 tags: vikzhel_offers2
-on-arrival: drop_finance = 1; influence += 2;
+on-arrival: drop_finance = 1; influence += 2; commissariats_held -= 1;
 go-to: menu2
 
 @drop_labor2
@@ -618,35 +632,42 @@ title: Drop the Labor Commissariat.
 subtitle: We are expected to keep this position. 
 view-if: drop_labor != 1
 tags: vikzhel_offers2
-on-arrival: drop_labor = 1; influence += 1;
+on-arrival: drop_labor = 1; influence += 1; commissariats_held -= 1;
 go-to: menu2
 
 @drop_justice2
 title: Drop the Justice Commissariat. 
 view-if: drop_justice != 1
 tags: vikzhel_offers2
-on-arrival: drop_justice = 1; influence += 2;
+on-arrival: drop_justice = 1; influence += 2; commissariats_held -= 1;
 go-to: menu2
 
 @drop_agriculture2
 title: Drop the Agriculture Commissariat.
 view-if: drop_agriculture != 1
 tags: vikzhel_offers2
-on-arrival: drop_agriculture = 1; influence += 2;
+on-arrival: drop_agriculture = 1; influence += 2; commissariats_held -= 1;
 go-to: menu2
 
 @drop_foodsupply2
 title: Drop the Food Supply Commissariat.
 view-if: drop_foodsupply != 1
 tags: vikzhel_offers2
-on-arrival: drop_foodsupply = 1; influence += 2;
+on-arrival: drop_foodsupply = 1; influence += 2; commissariats_held -= 1;
+go-to: menu2
+
+@drop_posts2
+title: Drop the Posts & Telegrams Commissariat.
+view-if: drop_posts != 1
+tags: vikzhel_offers2
+on-arrival: drop_posts = 1; influence += 1; commissariats_held -= 1;
 go-to: menu2
 
 @drop_nationalities2
 title: Drop the Nationalities Commissariat.
 view-if: drop_nationalities != 1
 tags: vikzhel_offers2
-on-arrival: drop_nationalities = 1; influence += 1;
+on-arrival: drop_nationalities = 1; influence += 1; commissariats_held -= 1;
 go-to: menu2
 
 @drop_welfare2
@@ -654,7 +675,7 @@ title: Drop the Welfare Commissariat.
 subtitle: We are expected to keep this position. 
 view-if: drop_welfare != 1 and welfare_founded = 1
 tags: vikzhel_offers2
-on-arrival: drop_welfare = 1; influence += 1;
+on-arrival: drop_welfare = 1; influence += 1; commissariats_held -= 1;
 go-to: menu2
 
 
@@ -691,14 +712,14 @@ go-to: menu2
 title: Cancel the offer to give up the Sovnarkom Chairmanship. 
 view-if: drop_chair = 1
 tags: vikzhel_cancel2
-on-arrival: drop_chair = 0; influence -= 7;
+on-arrival: drop_chair = 0; influence -= 7; commissariats_held += 1;
 go-to: menu2
 
 @foreign2
 title: Cancel our offer to give up the Foreign Affairs Commissariat. 
 view-if: drop_foreign = 1
 tags: vikzhel_cancel2
-on-arrival: drop_foreign = 0; influence -= 7;
+on-arrival: drop_foreign = 0; influence -= 7; commissariats_held += 1;
 go-to: menu2
 
 
@@ -706,84 +727,91 @@ go-to: menu2
 title: Cancel our offer to give up the War Commissariat. 
 view-if: drop_military = 1
 tags: vikzhel_cancel2
-on-arrival: drop_military = 0; influence -= 5;
+on-arrival: drop_military = 0; influence -= 5; commissariats_held += 1;
 go-to: menu2
 
 @enlightenment2
 title: Cancel our offer to give up the Enlightenment Commissariat. 
 view-if: drop_enlightenment = 1
 tags: vikzhel_cancel2
-on-arrival: drop_enlightenment = 0; influence -= 2;
+on-arrival: drop_enlightenment = 0; influence -= 2; commissariats_held += 1;
 go-to: menu2
 
 @internal2
 title: Cancel our offer to give up the Internal Affairs Commissariat. 
 view-if: drop_internal = 1
 tags: vikzhel_cancel2
-on-arrival: drop_internal = 0; influence -= 4;
+on-arrival: drop_internal = 0; influence -= 4; commissariats_held += 1;
 go-to: menu2
 
 @railways2
 title: Cancel our offer to give up the Railways Commissariat. 
 view-if: drop_railways = 1
 tags: vikzhel_cancel2
-on-arrival: drop_railways = 0; influence -= 3;
+on-arrival: drop_railways = 0; influence -= 3; commissariats_held += 1;
 go-to: menu2
 
 @trade2
 title: Cancel our offer to give up the Trade Commissariat.
 view-if: drop_trade = 1
 tags: vikzhel_cancel2
-on-arrival: drop_trade = 0; influence -= 2;
+on-arrival: drop_trade = 0; influence -= 2; commissariats_held += 1;
 go-to: menu2
 
 @finance2
 title: Cancel our offer to give up the Finance Commissariat.
 view-if: drop_finance = 1
 tags: vikzhel_cancel2
-on-arrival: drop_finance = 0; influence -= 3;
+on-arrival: drop_finance = 0; influence -= 3; commissariats_held += 1;
 go-to: menu2
 
 @labor2
 title: Cancel our offer to give up the Labor Commissariat.
 view-if: drop_labor = 1
 tags: vikzhel_cancel2
-on-arrival: drop_labor = 0; influence -= 2;
+on-arrival: drop_labor = 0; influence -= 2; commissariats_held += 1;
 go-to: menu2
 
 @justice2
 title: Cancel our offer to give up the Justice Commissariat. 
 view-if: drop_justice = 1
 tags: vikzhel_cancel2
-on-arrival: drop_justice = 0; influence -= 3;
+on-arrival: drop_justice = 0; influence -= 3; commissariats_held += 1;
 go-to: menu2
 
 @agriculture2
 title: Cancel our offer to give up the Agriculture Commissariat.
 view-if: drop_agriculture = 1
 tags: vikzhel_cancel2
-on-arrival: drop_agriculture = 0; influence -= 3;
+on-arrival: drop_agriculture = 0; influence -= 3; commissariats_held += 1;
 go-to: menu2
 
 @foodsupply2
 title: Cancel our offer to give up the Food Supply Commissariat.
 view-if: drop_foodsupply = 1
 tags: vikzhel_cancel2
-on-arrival: drop_foodsupply = 0; influence -= 3;
+on-arrival: drop_foodsupply = 0; influence -= 3; commissariats_held += 1;
+go-to: menu2
+
+@posts2
+title: Cancel our offer to give up the Posts & Telegrams Commissariat.
+view-if: drop_posts = 1
+tags: vikzhel_cancel2
+on-arrival: drop_posts = 0; influence -= 2; commissariats_held += 1;
 go-to: menu2
 
 @nationalities2
 title: Cancel our offer to give up the Nationalities Commissariat.
 view-if: drop_nationalities = 1
 tags: vikzhel_cancel2
-on-arrival: drop_nationalities = 0; influence -= 2;
+on-arrival: drop_nationalities = 0; influence -= 2; commissariats_held += 1;
 go-to: menu2
 
 @welfare2
 title: Cancel our offer to give up the Welfare Commissariat.
 view-if: drop_welfare = 1
 tags: vikzhel_cancel2
-on-arrival: drop_welfare = 0; influence -= 1;
+on-arrival: drop_welfare = 0; influence -= 1; commissariats_held += 1;
 go-to: menu2
 
 
