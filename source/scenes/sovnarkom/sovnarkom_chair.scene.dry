@@ -118,7 +118,7 @@ title: APPOINT/REMOVE COMMISSARS
 - @foodsupply
 - @nationalities
 - @welfare
-- go-to: sovnarkom_chair : Stop changing composition. 
+- @sovnarkom_chair : Stop changing composition. 
 
 
 
