@@ -216,10 +216,9 @@ go-to: sovnarkom_composition
 @enlightenment_lunacharsky
 title: Anatoly Lunacharsky
 subtitle: {!
->Moderate — Experienced cultural theorist, intellectual, and artist. 
->>Overall skill: ★★★★
-
->>Suitability: ★★★★★
+Moderate — Experienced cultural theorist, intellectual, and artist.<br> 
+Overall skill: ★★★★<br>
+Suitability: ★★★★★
 !}
 tags: enlightenment_candidates
 view-if: education_minister != "Lunacharsky" 
@@ -230,10 +229,8 @@ go-to: sovnarkom_composition
 @enlightenment_bogdanov
 title: Alexander Bogdanov
 subtitle: {!
-Vperedist — Leading Bolshevik theoretician until his falling out with Lenin; strong proponent of "proletarian culture". A controversial choice. 
-
-Overall skill: ★★★★★
-
+Vperedist — Leading Bolshevik theoretician until his falling out with Lenin; strong proponent of "proletarian culture". A controversial choice. \n 
+Overall skill: ★★★★★ \n
 Suitability: ★★★★★
 !}
 tags: enlightenment_candidates
