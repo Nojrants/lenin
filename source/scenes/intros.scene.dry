@@ -113,20 +113,20 @@ Q.nationalities_minister_party = "Bolshevik";
 Q.welfare_minister = "";
 Q.welfare_minister_party = "";
 
-sdi_relation -= 5;
-left_m_relation -= 10;
-centre_m_relation -= 15;
-right_m_relation -= 5;
-lsr_relation -= 5;
-centre_sr_relation -= 10;
-right_relation -= 20;
-ns_relation -= 15;
-k_relation -= 5;
-k_relation -= 5;
-leninist_strength += 5;
-moderate_strength -= 5;
-moderate_dissent += 5;
-leftcom_strength += 2;
+Q.sdi_relation -= 5;
+Q.left_m_relation -= 10;
+Q.centre_m_relation -= 15;
+Q.right_m_relation -= 5;
+Q.lsr_relation -= 5;
+Q.centre_sr_relation -= 10;
+Q.right_relation -= 20;
+Q.ns_relation -= 15;
+Q.k_relation -= 5;
+Q.k_relation -= 5;
+Q.leninist_strength += 5;
+Q.moderate_strength -= 5;
+Q.moderate_dissent += 5;
+Q.leftcom_strength += 2;
 !}
 
 Sovnarkom is declared as a temporary provisional government until the convocation of the Constituent Assembly. A proposal consisting solely of Bolshevik members is put forth for Sovnarkom's inaugural composition. 
@@ -140,21 +140,6 @@ A representative of the country's largest and most influential union, the All-Ru
 
 @2nd_piecemeal
 on-arrival:{!
-
-sdi_relation += 0;
-left_m_relation -= 5;
-centre_m_relation -= 5;
-right_m_relation -= 5;
-lsr_relation += 0;
-centre_sr_relation -= 5;
-right_relation -= 5;
-ns_relation -= 10;
-leninist_strength += 2;
-leninist_dissent += 2;
-moderate_strength += 5;
-moderate_dissent -= 5;
-leftcom_dissent += 5;
-
 Q.prime_minister = "Lenin";
 Q.prime_minister_party = "Bolshevik"
 Q.deputy_pm = "Vacant";
@@ -185,6 +170,20 @@ Q.nationalities_minister = "Stalin";
 Q.nationalities_minister_party = "Bolshevik";
 Q.welfare_minister = "";
 Q.welfare_minister_party = "";
+
+Q.sdi_relation += 0;
+Q.left_m_relation -= 5;
+Q.centre_m_relation -= 5;
+Q.right_m_relation -= 5;
+Q.lsr_relation += 0;
+Q.centre_sr_relation -= 5;
+Q.right_relation -= 5;
+Q.ns_relation -= 10;
+Q.leninist_strength += 2;
+Q.leninist_dissent += 2;
+Q.moderate_strength += 5;
+Q.moderate_dissent -= 5;
+Q.leftcom_dissent += 5;
 !}
 
 Sovnarkom is declared as a temporary provisional government until the convocation of the Constituent Assembly. A composition is proposed reserving the key seats for the Bolsheviks, though offering some minor positions the other parties. 
