@@ -33,7 +33,7 @@ Vikzhel immediately unleashes a full-scale strike across the railway network, an
 title: There is no harm in hearing them out...
 subtitle: Send representatives to the conference. 
 new-page: true
-on-arrival: influence = (10 + (left_m_relation / 10 ) - (instability / 20)); 
+on-arrival: influence = (10 + (left_m_relation / 5) + (moderate_strength / 10) - (instability / 10)); 
 go-to: menu
 
 = Vikzhel Negotiations 
@@ -42,6 +42,8 @@ Though talks initially stall, several days of arguing (and news of anti-Bolshevi
 
 
 @menu
+
+[+ influence +]
 
 - #vikzhel_offers
 - @null
@@ -60,7 +62,7 @@ go-to: menu
 
 
 @declare_truce
-title: Declare a military truce between Bolshevik and counterrevolutionary armed groups. 
+title: Declare a military truce between Bolshevik and counterrevolutionary groups. 
 tags: vikzhel_offers
 view-if: truce_offer != 1
 on-arrival: influence += 2; truce_offer = 1;
@@ -483,13 +485,15 @@ Vikzhel immediately unleashes a full-scale strike across the railway network, an
 title: Reopen negotiations, presenting the Party's minimum requirements to the others as an "ultimatum". 
 go-to: menu2
 new-page: true
-on-arrival: influence = (10 + (left_m_relation / 10 ) - (instability / 20)); truce_offer = 0; CEC_membership = 0; CEC_rebalance = 0; socialist_coalition = 0; subordinate = 0; restructure = 0; drop_chair = 0; drop_foreign = 0; drop_military = 0; drop_enlightenment = 0; drop_internal = 0; drop_railways = 0; drop_trade = 0; drop_finance = 0; drop_labor = 0; drop_justice = 0; drop_agriculture = 0; drop_foodsupply = 0; drop_nationalities = 0; drop_welfare = 0;
+on-arrival: influence = (10 + (left_m_relation / 5) + (moderate_strength / 10) - (instability / 10)); truce_offer = 0; CEC_membership = 0; CEC_rebalance = 0; socialist_coalition = 0; subordinate = 0; restructure = 0; drop_chair = 0; drop_foreign = 0; drop_military = 0; drop_enlightenment = 0; drop_internal = 0; drop_railways = 0; drop_trade = 0; drop_finance = 0; drop_labor = 0; drop_justice = 0; drop_agriculture = 0; drop_foodsupply = 0; drop_nationalities = 0; drop_welfare = 0;
 
 
 Reneging on our earlier verbal agreement aggravates the other parties, strengthening the obstinence of many right socialists. Though the more time stalls, news of anti-Bolshevik military defeats weakens their negotiating power. The Left-SRs meanwhile issue a formal statement criticizing inflexibility within the Bolshevik camp. 
 
 
 @menu2
+
+[+ influence +]
 
 - #vikzhel_offers2
 - @null3
@@ -509,7 +513,7 @@ go-to: menu2
 
 
 @declare_truce2
-title: Declare a military truce between Bolshevik and counterrevolutionary armed groups. 
+title: Declare a military truce between Bolshevik and counterrevolutionary groups. 
 tags: vikzhel_offers2
 view-if: truce_offer != 1
 on-arrival: influence += 2; truce_offer = 1;
@@ -518,7 +522,6 @@ go-to: menu2
 
 @affirm_CEC_membership2
 title: Affirm the right of all socialist parties to participate in the CEC. 
-subtitle: Although many parties walked out at the Congress, they will still be represented. 
 tags: vikzhel_offers2
 view-if: CEC_membership != 1
 on-arrival: influence += 3; CEC_membership = 1;
