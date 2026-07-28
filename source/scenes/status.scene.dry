@@ -111,6 +111,8 @@ Q.unemployed_disp = Q.unemployed.toFixed(1);
 
 >>**Food Supply: ** [+ food_minister +] [?if food_minister_party=="Bolshevik": (<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>)?]
 
+>>**Posts/Telegrams: ** [+ posts_minister +] [?if food_minister_party=="Bolshevik": (<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>)?]
+
 >>**Nationalities: ** [+ nationalities_minister +] [?if nationalities_minister_party=="Bolshevik": (<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>)?]
 
 >>[?if welfare_minister != "": **Welfare:** [+ welfare_minister +] [?if welfare_minister_party=="Bolshevik": (<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>)?] ?]
