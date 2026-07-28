@@ -200,14 +200,14 @@ title: Enlightenment — [+ education_minister +]
 
 Who should we replace [+ education_minister +] with? 
 
-- @enlightenment_luncharsky
+- @enlightenment_lunacharsky
 - @keep_enlightenment
 
-@enlightenment_luncharsky
-title: Anatoly Luncharsky
+@enlightenment_lunacharsky
+title: Anatoly Lunacharsky
 subtitle: 
-view-if: education_minister != "Luncharsky" 
-on-arrival: education_minister = "Luncharsky"; education_minister_party = "Bolshevik";
+view-if: education_minister != "Lunacharsky" 
+on-arrival: education_minister = "Lunacharsky"; education_minister_party = "Bolshevik";
 go-to: sovnarkom_composition
 
 @keep_enlightenment
