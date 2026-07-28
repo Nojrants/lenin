@@ -50,14 +50,14 @@ on-arrival: admin_founded = 1; resources -= 1; sovnarkom_expend += 0.25; efficac
 title: Found a "Little Sovnarkom" council
 subtitle: -0.5 resources - We need an auxiliary council to oversee minor issues. 
 view-if: littlesov_founded = 0
-on-arrival: littlesov_founded = 1; reources -= 0.5; 
+on-arrival: littlesov_founded = 1; resources -= 0.5; 
 
 @sovnarkom_hirestaff
 title: Hire administrative staff. 
 subtitle: -0.5 resources
 choose-if: admin_founded = 1
 unavailable-subtitle: We lack an administrative department. 
-on-arrival: reources -= 0.5; efficacy_sovnarkom += 0.1 if efficacy_sovnarkom < 1;
+on-arrival: resources -= 0.5; efficacy_sovnarkom += 0.1 if efficacy_sovnarkom < 1;
 
 
 
@@ -222,7 +222,7 @@ go-to: sovnarkom_composition
 title: Labor — [+ labor_minister +]
 
 [? labor_minister != "" : Who should we replace [+ labor_minister +] with? ?]
-[? labor_minister = "" : Who should we fill the vacancy with ?]
+[? labor_minister == "" : Who should we fill the vacancy with ?]
 
 - @labor_shliapnikov
 - @keep_labor
