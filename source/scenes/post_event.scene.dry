@@ -127,7 +127,7 @@ if (Q.unemployed <= 1) {
     Q.unemployed = 1;
 }
 
-
+Q.efficacy_finance = Q.leaders[Q.finance_minister].finance_skill;
 
 if (Q.sovnarkom_expend < 0.25) Q.sovnarkom_expend = 0.25;
 if (Q.internal_expend < 0.25) Q.internal_expend = 0.25;
