@@ -53,7 +53,7 @@ on-arrival: food_production = (food_production * (1 - ((60/50)*0.03))); leftcom_
 Such rhetoric intensifies conflict in the countryside, which our provincial forces and supporters take advantage of.  
 
 @profiteers
-title: The profiteers, [? if bagmen_active = 1 : bagmen, ?], kulaks, and petty-bourgeois looters. 
+title: The profiteers, [? if bagmen_active = 1 : bagmen, ?] kulaks, and petty-bourgeois looters. 
 on-arrival: food_production = (food_production * (1 - ((60/50)*0.04))); food_sold = (food_sold * 0.95); leftcom_strength += 1*(1-b_dissent); leninist_strength += 4*(1-b_dissent); instability += 3; crime += 5; middle_unrest += 5; middle_strength -= 2; kulak_unrest += 8; intelligentsia_unrest += 1; labor_unrest -= 4; peasant_unrest -= 5; underclass_unrest -= 2; kulak_strength -= 2; soldiers_unrest -= 3; soldiers_unrest += 7 if bagmen_active = 1; bagmen_unrest += 5; bagmen_strength -= 5; underclass_strength -= 2; provincial_strength += 3; union_unrest -= 3; union_strength += 2.5; 
 
 
