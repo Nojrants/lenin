@@ -123,7 +123,10 @@ Q.right_sr_relation = 20;
 Q.right_sr_strength = 40;
 
 Q.anarchist_relation = 55;
-Q.anarchist_strength = 10;
+Q.anarchist_strength = 5;
+
+Q.maximalist_relation = 55;
+Q.maximalist_strength = 5;
 
 Q.ns_relation = 35;
 Q.ns_strength = 10;
@@ -234,6 +237,10 @@ Q.apparatchiki_strength = 0;
 Q.provincials = 10000;
 Q.provincial_unrest = 20;
 Q.provincial_strength = 40;
+
+Q.bagmen = 0;
+Q.bagmen_unrest = 0;
+Q.bagmen_strength = 0;
 
 
 // starting financials
