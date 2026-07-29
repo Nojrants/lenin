@@ -47,7 +47,27 @@ title: SRs — Can we repair relations with them as a whole?
 subtitle: -1 party funds
 choose-if: b_resources >= 1 and sr_legal = 1
 unavailable-subtitle: [?if b_resources < 1: -1 party funds — We lack the resources for this. ?][?if sr_legal != 1: We have banned these parties. ?]
-on-arrival: b_resources -= 1; moderate_dissent -= 3; moderate_strength += 3; leninist_dissent += 3; leftcom_dissent += 2; lsr_relation += 3*(1-b_dissent); centre_sr_relation += (3 + Math.max(0,(6*(1-b_dissent)) - Math.max(0,(leninist_strength/moderate_strength)) + Math.max(0,(moderate_strength/leninist_strength)))); right_sr_relation += (3 + Math.max(0,(4*(1-b_dissent)) - Math.max(0,(leninist_strength/moderate_strength)) + Math.max(0,(moderate_strength/leninist_strength)))); right_sr_strength -= 3; 
+on-arrival:{!
+Q.b_resources -= 1;
+Q.moderate_dissent -= 3;
+Q.moderate_strength += 3;
+Q.leninist_dissent += 3;
+Q.leftcom_dissent += 2;
+Q.lsr_relation += 3 * (1 - Q.b_dissent);
+Q.centre_sr_relation += 3 + Math.max(
+    0,
+    (6 * (1 - Q.b_dissent))
+    - Math.max(0, (Q.leninist_strength / Q.moderate_strength))
+    + Math.max(0, (Q.moderate_strength / Q.leninist_strength))
+);
+Q.right_sr_relation += 3 + Math.max(
+    0,
+    (4 * (1 - Q.b_dissent))
+    - Math.max(0, (Q.leninist_strength / Q.moderate_strength))
+    + Math.max(0, (Q.moderate_strength / Q.leninist_strength))
+);
+Q.right_sr_strength -= 3;
+!}
 
 Appealing to the SRs is unexpected, but welcome by those in favor of conciliationism on either side. [? if leninist_strength >= moderate_strength : The influence of Lenin however makes it difficult for us to make further in-roads. ?]
 
