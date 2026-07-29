@@ -82,7 +82,7 @@ title: Rebalance the composition of the CEC to more fairly represent other group
 subtitle: A composition of 40% Bolsheviks, 40% Defencists, 20% Internationalists has been floated.  
 tags: vikzhel_offers
 view-if: CEC_rebalance != 1
-on-arrival: influence += 6; CEC_rebalance = 1;
+on-arrival: influence += 5; CEC_rebalance = 1;
 go-to: menu
 
 @socialist_coalition
