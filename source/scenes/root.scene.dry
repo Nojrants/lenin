@@ -59,6 +59,7 @@ Q.player4_party = "";
 // party resources
 Q.resources = 10;
 // party dues
+Q.b_resources = 5;
 Q.b_dues = 2;
 
 // difficulty-affected modifiers
