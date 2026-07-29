@@ -81,8 +81,9 @@ Q.party_membership_display = (Q.party_membership * 1000).toLocaleString();
 >**Resources:** [+ resources +]
 >>**Income:** [+ income +]
 
->>**Expenditure:** [+ expenditure +]<br>
->**Public debt:** [+ publicdebt +]
+>>**Expenditure:** [+ expenditure +]
+
+>>**Public debt:** [+ publicdebt +]
 
 >**Party membership:** [+ party_membership_display +]
 >>**Party funds:** [+ b_resources +]
