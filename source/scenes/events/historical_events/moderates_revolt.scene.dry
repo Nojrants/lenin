@@ -1,7 +1,7 @@
 title: Revolt of the Bolshevik Moderates
 subtitle: They have issued their ultimatum. 
 new-page: true
-view-if: year = 1917 and month = 11 and week = 2 and moderate_strength > 20 and moderate_dissent > 20 and lenin_anger >= 1
+view-if: year = 1917 and month = 11 and week >= 2 and moderate_strength > 20 and moderate_dissent > 20 and lenin_anger >= 1
 max-visits: 1
 tags: event
 
