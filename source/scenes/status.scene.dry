@@ -65,6 +65,7 @@ Q.monthly_inflation_disp = Q.monthly_inflation.toFixed(1);
 Q.inflation_disp = Q.inflation.toFixed(1);
 Q.unemployed_disp = Q.unemployed.toFixed(1);
 
+Q.party_membership_display = (Q.party_membership * 1000).toLocaleString();
 
 !}
 
@@ -72,16 +73,19 @@ Q.unemployed_disp = Q.unemployed.toFixed(1);
 
 **Week [+ week +], [+ month : month +] [+ year +]**
 
->**Ruling Group:** [+ position +]
->>**Instability:** [+ instability +]<br>
+>**Ruling group:** [+ position +]
+>>**Instability:** [+ instability +]
+
 >>**Democraticity:** [+ democraticity +]
 
 >**Resources:** [+ resources +]
->>**Income:** [+ income +]<br>
->>**Expenditure:** [+ expenditure +]<br>
->**Public debt:** [+ publicdebt +]<br>
+>>**Income:** [+ income +]
 
->**Party funds:** [+ b_resources +]
+>>**Expenditure:** [+ expenditure +]<br>
+>**Public debt:** [+ publicdebt +]
+
+>**Party membership:** [+ party_membership_display +]
+>>**Party funds:** [+ b_resources +]
 
 = Sovnarkom
 
