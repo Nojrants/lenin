@@ -89,7 +89,6 @@ Q.sr_legal = 1;
 Q.lsr_legal = 1;
 Q.anarchists_legal = 1;
 
-
 // factions
 // bolshevik internals
 // leadership: 1 = moderate internationalists, 2 = leninists
