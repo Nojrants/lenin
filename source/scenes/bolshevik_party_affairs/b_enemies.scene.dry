@@ -1,6 +1,6 @@
 title: Choosing Our Enemies
 new-page: true
-view-if: b_enemies_timer <= 0 and month < 9
+view-if: b_enemies_timer <= 0
 on-arrival: b_enemies_timer = 6; week_actions += 1
 is-card: true
 card-image: img/soviet_leaders.jpg
@@ -8,35 +8,94 @@ tags: b_party
 
 = Choosing Our Enemies
 
-In our media and campaign materials, who should we consider our primary enemies?
+In our media and campaign materials, who should we focus our attention on?
 
 - @bourgeois
 - @counterrevolutionaries
-- @mensheviks
+- @bourgeois_intellectuals
+- @profiteers
+- @vermin
+- @clergy
+- @germans
 - @imperialists
+- @mensheviks
+- @concilators
+- @defencists
 - @easy_discard
 - @cancel_advisor_action
 
-@counterrevolutionaries
-title: Counterrevolutionary forces, Black Hundreds, [? if kornilov_affair_seen : Kornilovites, ?] and the like.
-on-arrival: workers_m += 3*(1-b_dissent); b_b_relation += 3*(1-b_dissent); internationalist_dissent -= 2; defensist_dissent -= 2;
-
-Attacking counterrevolutionary forces is a longstanding theme in Social Democratic propaganda.
-
 @bourgeois
-title: The Kadets and other bourgeois parties.
-on-arrival: b_k_relation -= 8; internationalist_dissent -= 4; internationalist_strength += 5*(1-b_dissent); social_patriot_dissent += 5; defensist_dissent += 4; b_b_relation += 5*(1-b_dissent); soviet_cooperation -= 0.05;
+title: The burzhooi, the rich, and their hangers-on. 
+on-arrival: capital_flight += 0.5; leftcom_strength += 1*(1-b_dissent); leninist_strength += 2*(1-b_dissent); k_relation -= 1; rightist_relation -= 5; instability += 1; elite_unrest += 5; middle_unrest += 2.5; kulak_unrest += 2.5; intelligentsia_unrest += 1; bourgeois_specialist_unrest += 5; labor_unrest -= 5; peasant_unrest -= 5; underclass_unrest -= 5; provincial_unrest -= 5; provincial_strength += 5; 
 
-Attacking the Kadets is certainly popular among the Bolshevik base.
 
-@mensheviks
-title: Mensheviks and SRs, the bourgeois socialists.
-on-arrival: m_b_relation -= 8; b_sr_relation -= 8; workers_m -= (5+b_workers_org)*(1-b_dissent); workers_sr -= (5+b_workers_org)*(1-b_dissent); soldiers_m -= (5+b_soldiers_org)*(1-b_dissent); soldiers_sr -= (5+b_soldiers_org)*(1-b_dissent);
+Attacking the old capitalists elites or their lackeys is certainly popular among our base. 
 
-Attacking the bourgeois socialists reduces their standing among the working class and the soldiers.
+
+@counterrevolutionaries
+title: Counterrevolutionaries, reactionaries, [? if white_movement_seen = 1 : White-Guardists, ?] and Black Hundreds.
+on-arrival: k_relation -= 1; rightist_relation -= 2; instability += 2; capital_flight += 0.125; elite_unrest += 5; intelligentsia_unrest += 1; bourgeois_specialist_unrest += 2; labor_unrest -= 4; peasant_unrest -= 2; underclass_unrest -= 2; redarmy_unrest -= 5; provincial_unrest -= 2; provincial_strength += 2; soldiers_unrest -= 5; 
+
+Decrying the threat of counterrevolutionary forces is a powerful rallying cry. 
+
+
+@bourgeois_intellectuals
+title: The bourgeois intellectuals, elitists, and old society types. 
+on-arrival: k_relation -= 1; rightist_relation -= 3; leftcom_strength += 1*(1-b_dissent); intelligentsia_unrest += 5; bourgeois_specialist_unrest += 10; bourgeois_specialists_strength -= 5; bourgeois_specialists = (bourgeois_specialists * 0.95); capital_flight += 0.125; red_specialist_unrest -= 5; red_specialist_strength += 5; labor_unrest -= 4; peasant_unrest -= 2; underclass_unrest -= 2;
+
+Attacking the intelligentsia destabilizes pre-existing institutions, though it satisfies many rising progressives and radicals. 
+
+
+@vermin
+title: The vermin, parasites, idlers, and hooligans. 
+on-arrival: food_production = (food_production * (1 - ((60/50)*0.03))); leftcom_strength += 1*(1-b_dissent); leninist_strength += 2*(1-b_dissent); instability += 3; elite_unrest += 2.5; middle_unrest += 2.5; kulak_unrest += 2.5; intelligentsia_unrest += 2; bourgeois_specialist_unrest += 5; labor_unrest -= 5; peasant_unrest -= 8; underclass_unrest += 5;  underclass_strength -= 5; provincial_unrest -= 8; provincial_strength += 8; union_unrest += 3; 
+
+Such rhetoric intensifies conflict in the countryside, which our provincial forces and supporters take advantage of.  
+
+@profiteers
+title: The profiteers, [? if bagmen_active = 1 : bagmen, ?], kulaks, and petty-bourgeois looters. 
+on-arrival: food_production = (food_production * (1 - ((60/50)*0.04))); food_sold = (food_sold * 0.95); leftcom_strength += 1*(1-b_dissent); leninist_strength += 4*(1-b_dissent); instability += 3; crime += 5; middle_unrest += 5; middle_strength -= 2; kulak_unrest += 8; intelligentsia_unrest += 1; labor_unrest -= 4; peasant_unrest -= 5; underclass_unrest -= 2; kulak_strength -= 2; soldiers_unrest -= 3; soldiers_unrest += 7 if bagmen_active = 1; bagmen_unrest += 5; bagmen_strength -= 5; underclass_strength -= 2; provincial_strength += 3; union_unrest -= 3; union_strength += 2.5; 
+
+
+Such rhetoric reinvigorates our base, though exacerbates tensions with small business owners, wealthier peasants, 
+
+@clergy
+title: The clergy, the obscurantists, and their superstitions. 
+on-arrival: leftcom_strength += 3*(1-b_dissent); leninist_strength += 5*(1-b_dissent); instability += 2; clergy_unrest += 10; clergy_strength -= (5*(1 - b_dissent)); intelligentsia_unrest -= 5; bourgeois_specialist_unrest += 3; red_specialist_unrest -= 2; labor_unrest -= 2; 
+
+Attacking Russia's old religious institutions is popular among our base, though polarizing for most others. 
+
+@germans
+title: The German warmongers, and their saboteurs and spies. 
+on-arrival: leftcom_strength += 8*(1-b_dissent); leninist_strength += 1*(1-b_dissent); instability += 1; labor_unrest -= 3; peasant_unrest -= 3; underclass_unrest -= 3; germany_relation -= 10; austria_relation -= 2; ottoman_relation -= 2; uk_relation += 5; france_relation += 5; war_weariness += 2;
+
+Attacking the German invaders resonates well with most everyday people. 
 
 @imperialists
 title: The imperialist powers - Britain and France primarily.
-on-arrival: b_k_relation -= 10; war_weariness += 5; prov_gov_legitimacy -= 5; leninist_strength += 8;
+on-arrival: leftcom_strength += 4*(1-b_dissent); leninist_strength += 3*(1-b_dissent); labor_unrest -= 3; peasant_unrest -= 3; underclass_unrest -= 3; uk_relation -= 10; france_relation -= 10; war_weariness += 2; soldiers_unrest -= 5; 
 
-Attacking the "Allies" raises doubts about the Provisional Government's policy, and reduces its legitimacy.
+Attacking the foreign imperialists appeals to our base, and all those exhausted of continued war. 
+
+
+@mensheviks
+title: Mensheviks, SRs, and all "socialists" in the service of the bourgeoisie.  
+on-arrival: sdi_relation -= 2; left_m_relation -= 5; centre_m_relation -= 5; right_m_relation -= 5; centre_sr_relation -= 5; right_sr_relation -= 5; ns_relation -= 5; k_relation -= 2; rightist_relation -= 2; sdi_strength -= ((1+b_workers_org)*(1-b_dissent) - (sdi_strength / 50)); left_m_strength -= ((2+b_workers_org)*(1-b_dissent) - (left_m_strength / 50)); centre_m_strength -= ((2+b_workers_org)*(1-b_dissent) - (centre_m_strength / 50)); right_m_strength -= ((2+b_workers_org)*(1-b_dissent) - (right_m_strength / 50)); centre_sr_strength -= ((2+b_workers_org)*(1-b_dissent) - (centre_sr_strength / 50)); right_sr_strength -= ((2+b_workers_org)*(1-b_dissent) - (right_sr_strength / 50)); ns_strength -= ((2+b_workers_org)*(1-b_dissent) - (ns_strength / 50)); 
+
+
+Attacking the other socialist parties reduces their standing among the working class and the soldiers.
+
+
+@concilators
+title: Conciliators, compromisers, and collaborators. 
+on-arrival: moderate_dissent += 6; moderate_strength -= 3; leftcom_strength += 2*(1-b_dissent); leninist_strength += 6*(1-b_dissent); sdi_relation -= 5; left_m_relation -= 5; centre_m_relation -= 2; right_m_relation -= 2; lsr_relation -= 5; centre_sr_relation -= 2; right_sr_relation -= 2; ns_relation -= 5; k_relation -= 2; rightist_relation -= 2; sdi_strength -= ((2+b_workers_org)*(1-b_dissent) - (sdi_strength / 50)); left_m_strength -= ((2+b_workers_org)*(1-b_dissent) - (left_m_strength / 50)); centre_m_strength -= ((1+b_workers_org)*(1-b_dissent) - (centre_m_strength / 50)); right_m_strength -= ((0+b_workers_org)*(1-b_dissent) - (right_m_strength / 50)); centre_sr_strength -= ((1+b_workers_org)*(1-b_dissent) - (centre_sr_strength / 50)); right_sr_strength -= ((0+b_workers_org)*(1-b_dissent) - (right_sr_strength / 50)); ns_strength -= ((0+b_workers_org)*(1-b_dissent) - (ns_strength / 50)); 
+
+
+Attacking the prospects of compromise with other groups galvanizes our primary base, though hurting our standing with all moderate forces. 
+
+@defencists
+title: Defencists, patriots, and expansionists. 
+on-arrival: leftcom_strength += 4*(1-b_dissent); leninist_strength += 2*(1-b_dissent); soldiers_unrest -= 6; labor_unrest -= 3; peasant_unrest -= 3; underclass_unrest -= 3; uk_relation += 2; france_relation += 2; war_weariness += 4; sdi_relation += 5; left_m_relation += 5; centre_m_relation -= 2; right_m_relation -= 5; lsr_relation += 5; centre_sr_relation -= 2; right_sr_relation -= 5; ns_relation -= 5; k_relation -= 5; rightist_relation -= 5; centre_m_strength -= ((1+b_workers_org)*(1-b_dissent) - (centre_m_strength / 50)); right_m_strength -= ((2+b_workers_org)*(1-b_dissent) - (right_m_strength / 50)); centre_sr_strength -= ((1+b_workers_org)*(1-b_dissent) - (centre_sr_strength / 50)); right_sr_strength -= ((2+b_workers_org)*(1-b_dissent) - (right_sr_strength / 50)); ns_strength -= ((2+b_workers_org)*(1-b_dissent) - (ns_strength / 50)); k_strength -= ((0+b_workers_org)*(1-b_dissent) - (k_strength / 50)); rightist_strength -= ((0+b_workers_org)*(1-b_dissent) - (rightist_strength / 50)); 
+
+
+Attacking the proponents of imperialist war angers the right-wings of the various parties, though fellow internationalists welcome this. 
