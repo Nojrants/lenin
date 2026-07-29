@@ -858,7 +858,7 @@ new-page: true
 @accept_second
 title: The Central Committee approves the agreement. 
 unavailable-subtitle: There is not enough support for this. 
-choose-if: lenin_anger = 0; 
+choose-if: lenin_anger = 0
 new-page: true
 on-arrival: commissariats_promised = commissariats_held; commissariats_held = 14; 
 go-to: cabinet_negotiations
