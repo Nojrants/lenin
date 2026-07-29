@@ -82,6 +82,14 @@ Q.ipr_change = 6;
 Q.b_dissent = 0.05;
 Q.b_dissent_percent = 5;
 
+Q.parties_legal = 1; 
+Q.kadets_legal = 1;
+Q.mensheviks_legal = 1;
+Q.sr_legal = 1;
+Q.lsr_legal = 1;
+Q.anarchists_legal = 1;
+
+
 // factions
 // bolshevik internals
 // leadership: 1 = moderate internationalists, 2 = leninists
