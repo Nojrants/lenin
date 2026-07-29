@@ -33,7 +33,7 @@ Vikzhel immediately unleashes a full-scale strike across the railway network, an
 title: There is no harm in hearing them out...
 subtitle: Send representatives to the conference. 
 new-page: true
-on-arrival: commissariats_held = 14; influence = (10 + (left_m_relation / 3) + (moderate_strength / 10) - (instability / 10)); 
+on-arrival: commissariats_held = 14; influence = (10 + (left_m_relation / 3) + (moderate_strength / 10) - (instability / 10)); lenin_anger = 0; 
 go-to: menu
 
 = Vikzhel Negotiations 
@@ -469,9 +469,9 @@ on-arrival: lenin_anger = 1 if (commissariats_held < 10 or disarm_workers = 1 or
 
 After days of tough negotiations, there is a viable offer on the table. Some Bolshevik newspapers even preemptively acclaim the formation of a new coalition government. 
 
-[?if lenin_anger = 1: Lenin however is absolutely furious that we have even entertained such a prospect—especially upon reading the proposed terms. In a heated party meeting, he berates the Party negotiators and outright accuses them of treason. So strongly does he feel about this, he declares he'd sooner let the Party split over the issue, or "go to the sailors" and crush this notion by force. ?]
+[?if lenin_anger = 1: Lenin however is absolutely furious that we have even entertained such a prospect, especially upon reading the proposed terms. In a heated party meeting, he berates the Party negotiators and outright accuses them of treason. So strongly does he feel about this, he declares he'd sooner let the Party split over the issue, or "go to the sailors" and crush this notion by force. ?]
 
-[?if lenin_anger = 1: Lenin however is absolutely furious that we have even entertained such a prospect—though the measured agreement is at least some consolation. ?]
+[?if lenin_anger != 1: Lenin however is absolutely furious that we have even entertained such a prospect, though the measured agreement is at least some consolation. ?]
 
 The Leninists push for breaking off talks entirely, though its possible we could cautiously reopen negotiations. If so, it's now clear that anything less than this would be a non-starter: <br><br>
 • Recognition of the inviolability of the decrees/actions of the 2nd Soviet Congress.<br>
@@ -825,24 +825,119 @@ go-to: menu2
 
 
 
-@accept_offer2
-title: Agree to the offer. 
-unavailable-subtitle: The other parties will not accept the current offer. 
-choose-if: influence > 40
-new-page: true
-on-arrival: lenin_anger += 1 if (commissariats_held < 10 or disarm_workers = 1 or bar_lenin = 1 or drop_chair = 1 or drop_foreign = 1);
-
-= Tentative Offer
-
-
 
 @reject_offer2
 title: It seems we can't come to an agreement. 
 new-page: true
 
 
+@accept_offer2
+title: Agree to the offer. 
+unavailable-subtitle: The other parties will not accept the current offer. 
+choose-if: influence > 40
+new-page: true
+on-arrival: lenin_anger += 1 if (commissariats_held < 10 or disarm_workers = 1 or bar_lenin = 1 or drop_chair = 1 or drop_foreign = 1 or drop_military = 1 or drop_internal = 1); moderate_dissent += 20 if lenin_anger = 2; moderate_strength -= 20 if lenin_anger = 2; moderate_dissent += 10 if lenin_anger = 1; 
+
+= Tentative Offer
+
+[?if lenin_anger = 2: Despite the best efforts of the negotiators, Lenin still finds the proposed agreement an outrageous betrayal. While negotiations were underway, Lenin was campaigning for his position within the government, and has managed to galvanize the Petrograd Committee (and other influential bodies) against acceptance of any deal. With pressure now mounting, the Central Committee passes a resolution (by a one-vote margin) endorsing the current governmental configuration. Incensed by the counter-campaigning of the Bolshevik Moderates, Lenin also arranges for a condemnation letter against their actions. ?]
+
+[?if lenin_anger = 1: Despite the best efforts of the negotiators, Lenin still finds the proposed agreement unacceptable. While negotiations were underway, Lenin was campaigning for his position within the government, and has managed to galvanize the Petrograd Committee (and other influential bodies) against acceptance of any deal. With pressure now mounting, the Central Committee passes a resolution (by a one-vote margin) endorsing the current governmental configuration. ?]
+
+[?if lenin_anger = 0: Although Lenin is still highly critical of any sort of deal, the terms are just reasonable enough to where the Bolshevik Moderates are able to make a case for them to the rest of the Central Committee. If a vote was to be forced in the Central Committee at this moment, tentative approval for the agreement could be achieved. Although there is still a chance the deal will fall through when discussing the specifics with the other parties. ?]
+
+- @accept_second
+- @reject_second
+
+@reject_second
+title: We must reject the agreement still. 
+new-page: true
 
 
 
+@accept_second
+title: The Central Committee approves the agreement. 
+unavailable-subtitle: There is not enough support for this. 
+choose-if: lenin_anger = 0; 
+new-page: true
+on-arrival: commissariats_promised = commissariats_held; commissariats_held = 14; 
+go-to: cabinet_negotiations
 
 
+@cabinet_negotiations
+
+- #commissariat_assign
+- @finalize_deal
+- @cancel_deal
+
+@cancel_deal
+title: On second thought, a deal is impossible. 
+new-page: true
+
+@finalize_deal
+title: Finalize the agreement. 
+choose-if: commissariats_held <= commissariats_promised
+unavailable-subtitle: The other parties will not accept. 
+new-page: true
+
+
+@enlightenment_assign
+title: Appoint the Enlightenment Commissariat
+view-if: drop_enlightenment = 1
+tags: commissariat_assign
+go-to: enlightenment_menu
+
+@enlightenment_menu
+
+- #enlightenment_candidates2
+
+
+@enlightenment_cancel
+title: Cancel reassignment.
+subtitle: [?if education_minister != "Vacant"": Keep [+ education_minister +] in place. ?]
+tags: enlightenment_candidates2
+go-to: cabinet_negotiations
+
+@enlightenment_vacant
+title: Let's leave the position vacant for now. 
+tags: enlightenment_candidates2
+on-arrival: education_minister = "Vacant"; education_minister_party = ""; 
+go-to: cabinet_negotiations
+
+@enlightenment_lunacharsky
+title: Anatoly Lunacharsky
+subtitle: {!
+Moderate — Experienced cultural theorist, intellectual, and artist.<br> 
+Overall skill: ★★★★<br>
+Suitability: ★★★★★
+!}
+tags: enlightenment_candidates2
+view-if: education_minister != "Lunacharsky" 
+on-arrival: education_minister = "Lunacharsky"; education_minister_party = "Bolshevik";
+go-to: cabinet_negotiations
+
+@enlightenment_natanson
+title: Mark Natanson
+subtitle: {!
+Left-SR — Party leader and elder statesman; some experience in education.<br>
+Overall skill: ★★★☆<br>
+Suitability: ★☆
+!}
+tags: enlightenment_candidates
+choose-if: lsr_relation >= 40
+unavailable-subtitle: Natanson won't accept this offer. 
+on-arrival: education_minister = "Natanson"; education_minister_party = "Left-SR"; commissariats_held -= 1; 
+go-to: cabinet_negotiations
+
+@enlightenment_sukhanov
+title: Nikolai Sukhanov
+subtitle: {!
+SD-Int. — Party leader, writer, and public intellectual.<br>
+Overall skill: ★★★<br>
+Suitability: ★★
+!}
+tags: enlightenment_candidates
+choose-if: sdi_relation >= 40
+unavailable-subtitle: Sukhanov won't accept this offer. 
+on-arrival: education_minister = "Sukhanov"; education_minister_party = "SD-Int"; commissariats_held -= 1; 
+go-to: cabinet_negotiations
