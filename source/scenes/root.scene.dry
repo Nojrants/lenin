@@ -88,16 +88,16 @@ Q.b_dissent_percent = 5;
 Q.b_leadership = 2;
 Q.b_factions = ['leninist', 'moderate', 'leftcom'];
 
-Q.leninist_strength = 20;
-Q.leninist_dissent = 10;
+Q.leninist_strength = 50;
+Q.leninist_dissent = 0;
 Q.leninist_split = 0;
 
-Q.moderate_strength = 20;
-Q.moderate_dissent = 10;
+Q.moderate_strength = 35;
+Q.moderate_dissent = 15;
 Q.moderate_split = 0;
 
-Q.leftcom_strength = 20;
-Q.leftcom_dissent = 10;
+Q.leftcom_strength = 15;
+Q.leftcom_dissent = 0;
 Q.leftcom_split = 0;
 
 // Other Parties
