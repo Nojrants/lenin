@@ -213,16 +213,16 @@ Q.underclass_unrest = 70;
 Q.underclass_strength = 30;
 
 
-Q.unionists = 1500000;
+Q.unionists = 1500;
 Q.union_unrest = 30;
 Q.union_strength = 30;
 
 Q.vikzhel_unrest = 40;
 Q.vikzhel_strength = 40;
 
-Q.party_membership = 350000;
+Q.party_membership = 350;
 
-Q.kremlin_communists = 200;
+Q.kremlin_communists = 0.2;
 Q.kremlin_unrest = 10;
 Q.kremlin_strength = 50;
 
@@ -230,11 +230,11 @@ Q.redarmy_communists = 0;
 Q.redarmy_unrest = 0;
 Q.redarmy_strength = 0;
 
-Q.bourgeois_specialists = 10000;
+Q.bourgeois_specialists = 10;
 Q.bourgeois_specialist_unrest = 50;
 Q.bourgeois_specialist_strength = 50;
 
-Q.red_specialists = 500;
+Q.red_specialists = 0.2;
 Q.red_specialist_unrest = 10;
 Q.red_specialist_strength = 10;
 
@@ -242,7 +242,7 @@ Q.apparatchiki = 0;
 Q.apparatchiki_unrest = 0;
 Q.apparatchiki_strength = 0;
 
-Q.provincials = 10000;
+Q.provincials = 10;
 Q.provincial_unrest = 20;
 Q.provincial_strength = 40;
 
