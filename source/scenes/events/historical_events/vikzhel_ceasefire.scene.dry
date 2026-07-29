@@ -894,7 +894,7 @@ go-to: enlightenment_menu
 
 @enlightenment_cancel
 title: Cancel reassignment.
-subtitle: [?if education_minister != "Vacant"": Keep [+ education_minister +] in place. ?]
+subtitle: [?if education_minister != "Vacant": Keep [+ education_minister +] in place. ?]
 tags: enlightenment_candidates2
 go-to: cabinet_negotiations
 
