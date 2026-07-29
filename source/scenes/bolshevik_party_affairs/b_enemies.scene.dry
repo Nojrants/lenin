@@ -79,7 +79,7 @@ Attacking the foreign imperialists appeals to our base, and all those exhausted 
 
 
 @mensheviks
-title: Mensheviks, SRs, and all "socialists" in the service of the bourgeoisie.  
+title: Mensheviks, SRs, and all such bourgeois "socialists".  
 on-arrival: sdi_relation -= 2; left_m_relation -= 5; centre_m_relation -= 5; right_m_relation -= 5; centre_sr_relation -= 5; right_sr_relation -= 5; ns_relation -= 5; k_relation -= 2; rightist_relation -= 2; sdi_strength -= ((1+b_workers_org)*(1-b_dissent) - (sdi_strength / 50)); left_m_strength -= ((2+b_workers_org)*(1-b_dissent) - (left_m_strength / 50)); centre_m_strength -= ((2+b_workers_org)*(1-b_dissent) - (centre_m_strength / 50)); right_m_strength -= ((2+b_workers_org)*(1-b_dissent) - (right_m_strength / 50)); centre_sr_strength -= ((2+b_workers_org)*(1-b_dissent) - (centre_sr_strength / 50)); right_sr_strength -= ((2+b_workers_org)*(1-b_dissent) - (right_sr_strength / 50)); ns_strength -= ((2+b_workers_org)*(1-b_dissent) - (ns_strength / 50)); 
 
 
