@@ -73,16 +73,15 @@ Q.unemployed_disp = Q.unemployed.toFixed(1);
 **Week [+ week +], [+ month : month +] [+ year +]**
 
 >**Ruling Group:** [+ position +]
->>**Stability:** [+ instability +]
-
+>>**Instability:** [+ instability +]<br>
 >>**Democraticity:** [+ democraticity +]
 
 >**Resources:** [+ resources +]
->>**Income:** [+ income +]
+>>**Income:** [+ income +]<br>
+>>**Expenditure:** [+ expenditure +]<br>
+>**Public debt:** [+ publicdebt +]<br>
 
->>**Expenditure:** [+ expenditure +]
-
->**Public debt:** [+ publicdebt +]
+>**Party funds:** [+ b_resources +]
 
 = Sovnarkom
 
