@@ -20,7 +20,226 @@ Needless to say, the loss of some of our Party's best leaders will severely set 
 
 @let_them_resign
 title: Let them resign.
-on-arrival: instability += 3; moderates_resigned = 1; moderate_strength -= 5; moderate_dissent += 30; [?if deputy_pm = "Kamenev" or "Rykov" or "Zinoviev" or "Nogin" or "Milyutin" or "Teodorovich" or "Riazanov" or "Larin" or "Teodorovich" or "Riazanov" or "Larin": deputy_pm = "Vacant" and deputy_pm_party = "" and efficacy_sovnarkom -= 0.1 ?]; [?if foreign_minister = "Kamenev" or "Rykov" or "Zinoviev" or "Nogin" or "Milyutin" or "Teodorovich" or "Riazanov" or "Larin" or "Teodorovich" or "Riazanov" or "Larin": foreign_minister = "Vacant" and foreign_minister_party = "" and efficacy_foreign -= 0.1 ?]; [?if war_minister = "Kamenev" or "Rykov" or "Zinoviev" or "Nogin" or "Milyutin" or "Teodorovich" or "Riazanov" or "Larin" or "Teodorovich" or "Riazanov" or "Larin": war_minister = "Vacant" and war_minister_party = "" and efficacy_military -= 0.1 ?]; [?if education_minister = "Kamenev" or "Rykov" or "Zinoviev" or "Nogin" or "Milyutin" or "Teodorovich" or "Riazanov" or "Larin": education_minister = "Vacant" and education_minister_party = "" and efficacy_enlightenment -= 0.1 ?]; [?if interior_minister = "Kamenev" or "Rykov" or "Zinoviev" or "Nogin" or "Milyutin" or "Teodorovich" or "Riazanov" or "Larin": interior_minister = "Vacant" and interior_minister_party = "" and efficacy_internal -= 0.1 ?]; [?if transport_minister = "Kamenev" or "Rykov" or "Zinoviev" or "Nogin" or "Milyutin" or "Teodorovich" or "Riazanov" or "Larin": transport_minister = "Vacant" and transport_minister_party = "" and efficacy_railways -= 0.1 ?]; [?if trade_minister = "Kamenev" or "Rykov" or "Zinoviev" or "Nogin" or "Milyutin" or "Teodorovich" or "Riazanov" or "Larin": trade_minister = "Vacant" and trade_party = "" and efficacy_trade -= 0.1 ?]; [?if finance_minister = "Kamenev" or "Rykov" or "Zinoviev" or "Nogin" or "Milyutin" or "Teodorovich" or "Riazanov" or "Larin": finance_minister = "Vacant" and finance_minister_party = "" and efficacy_finance -= 0.1 ?]; [?if labor_minister = "Kamenev" or "Rykov" or "Zinoviev" or "Nogin" or "Milyutin" or "Teodorovich" or "Riazanov" or "Larin": labor_minister = "Vacant" and labor_minister_party = "" and efficacy_labor -= 0.1 ?]; [?if justice_minister = "Kamenev" or "Rykov" or "Zinoviev" or "Nogin" or "Milyutin" or "Teodorovich" or "Riazanov" or "Larin": justice_minister = "Vacant" and justice_minister_party = "" and efficacy_justice -= 0.1 ?]; [?if agriculture_minister = "Kamenev" or "Rykov" or "Zinoviev" or "Nogin" or "Milyutin" or "Teodorovich" or "Riazanov" or "Larin": agriculture_minister = "Vacant" and agriculture_minister_party = "" and efficacy_agiculture -= 0.1 ?]; [?if food_minister = "Kamenev" or "Rykov" or "Zinoviev" or "Nogin" or "Milyutin" or "Teodorovich" or "Riazanov" or "Larin": food_minister = "Vacant" and food_minister_party = "" and efficacy_foodsupply -= 0.1 ?]; [?if nationalities_minister = "Kamenev" or "Rykov" or "Zinoviev" or "Nogin" or "Milyutin" or "Teodorovich" or "Riazanov" or "Larin": nationalities_minister = "Vacant" and nationalities_minister_party = "" and efficacy_nationalities -= 0.1 ?]; [?if welfare_minister = "Kamenev" or "Rykov" or "Zinoviev" or "Nogin" or "Milyutin" or "Teodorovich" or "Riazanov" or "Larin": welfare_minister = "Vacant" and welfare_minister_party = "" and efficacy_welfare -= 0.1 ?]; [?if labor_minister = "Shliapnikov": efficacy_labor -= 0.1 ?];
+on-arrival: {!
+    Q.instability += 3;
+    Q.moderates_resigned = 1;
+    Q.moderate_strength -= 5;
+    Q.moderate_dissent += 30;
+
+    if (
+        Q.deputy_pm == "Kamenev" ||
+        Q.deputy_pm == "Rykov" ||
+        Q.deputy_pm == "Zinoviev" ||
+        Q.deputy_pm == "Nogin" ||
+        Q.deputy_pm == "Milyutin" ||
+        Q.deputy_pm == "Teodorovich" ||
+        Q.deputy_pm == "Riazanov" ||
+        Q.deputy_pm == "Larin"
+    ) {
+        Q.deputy_pm = "Vacant";
+        Q.deputy_pm_party = "";
+        Q.efficacy_sovnarkom -= 0.1;
+    }
+
+    if (
+        Q.foreign_minister == "Kamenev" ||
+        Q.foreign_minister == "Rykov" ||
+        Q.foreign_minister == "Zinoviev" ||
+        Q.foreign_minister == "Nogin" ||
+        Q.foreign_minister == "Milyutin" ||
+        Q.foreign_minister == "Teodorovich" ||
+        Q.foreign_minister == "Riazanov" ||
+        Q.foreign_minister == "Larin"
+    ) {
+        Q.foreign_minister = "Vacant";
+        Q.foreign_minister_party = "";
+        Q.efficacy_foreign -= 0.1;
+    }
+
+    if (
+        Q.war_minister == "Kamenev" ||
+        Q.war_minister == "Rykov" ||
+        Q.war_minister == "Zinoviev" ||
+        Q.war_minister == "Nogin" ||
+        Q.war_minister == "Milyutin" ||
+        Q.war_minister == "Teodorovich" ||
+        Q.war_minister == "Riazanov" ||
+        Q.war_minister == "Larin"
+    ) {
+        Q.war_minister = "Vacant";
+        Q.war_minister_party = "";
+        Q.efficacy_military -= 0.1;
+    }
+
+    if (
+        Q.education_minister == "Kamenev" ||
+        Q.education_minister == "Rykov" ||
+        Q.education_minister == "Zinoviev" ||
+        Q.education_minister == "Nogin" ||
+        Q.education_minister == "Milyutin" ||
+        Q.education_minister == "Teodorovich" ||
+        Q.education_minister == "Riazanov" ||
+        Q.education_minister == "Larin"
+    ) {
+        Q.education_minister = "Vacant";
+        Q.education_minister_party = "";
+        Q.efficacy_enlightenment -= 0.1;
+    }
+
+    if (
+        Q.interior_minister == "Kamenev" ||
+        Q.interior_minister == "Rykov" ||
+        Q.interior_minister == "Zinoviev" ||
+        Q.interior_minister == "Nogin" ||
+        Q.interior_minister == "Milyutin" ||
+        Q.interior_minister == "Teodorovich" ||
+        Q.interior_minister == "Riazanov" ||
+        Q.interior_minister == "Larin"
+    ) {
+        Q.interior_minister = "Vacant";
+        Q.interior_minister_party = "";
+        Q.efficacy_internal -= 0.1;
+    }
+
+    if (
+        Q.transport_minister == "Kamenev" ||
+        Q.transport_minister == "Rykov" ||
+        Q.transport_minister == "Zinoviev" ||
+        Q.transport_minister == "Nogin" ||
+        Q.transport_minister == "Milyutin" ||
+        Q.transport_minister == "Teodorovich" ||
+        Q.transport_minister == "Riazanov" ||
+        Q.transport_minister == "Larin"
+    ) {
+        Q.transport_minister = "Vacant";
+        Q.transport_minister_party = "";
+        Q.efficacy_railways -= 0.1;
+    }
+
+    if (
+        Q.trade_minister == "Kamenev" ||
+        Q.trade_minister == "Rykov" ||
+        Q.trade_minister == "Zinoviev" ||
+        Q.trade_minister == "Nogin" ||
+        Q.trade_minister == "Milyutin" ||
+        Q.trade_minister == "Teodorovich" ||
+        Q.trade_minister == "Riazanov" ||
+        Q.trade_minister == "Larin"
+    ) {
+        Q.trade_minister = "Vacant";
+        Q.trade_party = "";
+        Q.efficacy_trade -= 0.1;
+    }
+
+    if (
+        Q.finance_minister == "Kamenev" ||
+        Q.finance_minister == "Rykov" ||
+        Q.finance_minister == "Zinoviev" ||
+        Q.finance_minister == "Nogin" ||
+        Q.finance_minister == "Milyutin" ||
+        Q.finance_minister == "Teodorovich" ||
+        Q.finance_minister == "Riazanov" ||
+        Q.finance_minister == "Larin"
+    ) {
+        Q.finance_minister = "Vacant";
+        Q.finance_minister_party = "";
+        Q.efficacy_finance -= 0.1;
+    }
+
+    if (
+        Q.labor_minister == "Kamenev" ||
+        Q.labor_minister == "Rykov" ||
+        Q.labor_minister == "Zinoviev" ||
+        Q.labor_minister == "Nogin" ||
+        Q.labor_minister == "Milyutin" ||
+        Q.labor_minister == "Teodorovich" ||
+        Q.labor_minister == "Riazanov" ||
+        Q.labor_minister == "Larin"
+    ) {
+        Q.labor_minister = "Vacant";
+        Q.labor_minister_party = "";
+        Q.efficacy_labor -= 0.1;
+    }
+
+    if (
+        Q.justice_minister == "Kamenev" ||
+        Q.justice_minister == "Rykov" ||
+        Q.justice_minister == "Zinoviev" ||
+        Q.justice_minister == "Nogin" ||
+        Q.justice_minister == "Milyutin" ||
+        Q.justice_minister == "Teodorovich" ||
+        Q.justice_minister == "Riazanov" ||
+        Q.justice_minister == "Larin"
+    ) {
+        Q.justice_minister = "Vacant";
+        Q.justice_minister_party = "";
+        Q.efficacy_justice -= 0.1;
+    }
+
+    if (
+        Q.agriculture_minister == "Kamenev" ||
+        Q.agriculture_minister == "Rykov" ||
+        Q.agriculture_minister == "Zinoviev" ||
+        Q.agriculture_minister == "Nogin" ||
+        Q.agriculture_minister == "Milyutin" ||
+        Q.agriculture_minister == "Teodorovich" ||
+        Q.agriculture_minister == "Riazanov" ||
+        Q.agriculture_minister == "Larin"
+    ) {
+        Q.agriculture_minister = "Vacant";
+        Q.agriculture_minister_party = "";
+        Q.efficacy_agriculture -= 0.1;
+    }
+
+    if (
+        Q.food_minister == "Kamenev" ||
+        Q.food_minister == "Rykov" ||
+        Q.food_minister == "Zinoviev" ||
+        Q.food_minister == "Nogin" ||
+        Q.food_minister == "Milyutin" ||
+        Q.food_minister == "Teodorovich" ||
+        Q.food_minister == "Riazanov" ||
+        Q.food_minister == "Larin"
+    ) {
+        Q.food_minister = "Vacant";
+        Q.food_minister_party = "";
+        Q.efficacy_foodsupply -= 0.1;
+    }
+
+    if (
+        Q.nationalities_minister == "Kamenev" ||
+        Q.nationalities_minister == "Rykov" ||
+        Q.nationalities_minister == "Zinoviev" ||
+        Q.nationalities_minister == "Nogin" ||
+        Q.nationalities_minister == "Milyutin" ||
+        Q.nationalities_minister == "Teodorovich" ||
+        Q.nationalities_minister == "Riazanov" ||
+        Q.nationalities_minister == "Larin"
+    ) {
+        Q.nationalities_minister = "Vacant";
+        Q.nationalities_minister_party = "";
+        Q.efficacy_nationalities -= 0.1;
+    }
+
+    if (
+        Q.welfare_minister == "Kamenev" ||
+        Q.welfare_minister == "Rykov" ||
+        Q.welfare_minister == "Zinoviev" ||
+        Q.welfare_minister == "Nogin" ||
+        Q.welfare_minister == "Milyutin" ||
+        Q.welfare_minister == "Teodorovich" ||
+        Q.welfare_minister == "Riazanov" ||
+        Q.welfare_minister == "Larin"
+    ) {
+        Q.welfare_minister = "Vacant";
+        Q.welfare_minister_party = "";
+        Q.efficacy_welfare -= 0.1;
+    }
+
+    if (Q.labor_minister == "Shliapnikov") {
+        Q.efficacy_labor -= 0.1;
+    }
+!}
 
 The Moderates resign from their posts. While hoping this act of defiance will rally support for their side within the Party, it also limits their influence. Meanwhile, critics and moderate socialists take this affair as proof the Bolsheviks are starting to disintegrate. 
 
