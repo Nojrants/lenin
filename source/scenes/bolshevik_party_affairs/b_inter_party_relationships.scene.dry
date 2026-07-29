@@ -73,7 +73,7 @@ Appealing to the SRs is unexpected, but welcome by those in favor of conciliatio
 
 
 @mensheviks
-title: Mensheviks — Can we repair relations with them? 
+title: Mensheviks — Can we repair relations with them as a whole? 
 subtitle: -1 party funds
 choose-if: b_resources >= 1 and mensheviks_legal = 1
 unavailable-subtitle: [?if b_resources < 1: -1 party funds — We lack the resources for this. ?][?if mensheviks_legal != 1: We have banned these parties. ?]
