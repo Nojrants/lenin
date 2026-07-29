@@ -836,7 +836,7 @@ title: Agree to the offer.
 unavailable-subtitle: The other parties will not accept the current offer. 
 choose-if: influence > 40
 new-page: true
-on-arrival: lenin_anger += 1 if (commissariats_held < 10 or disarm_workers = 1 or bar_lenin = 1 or drop_chair = 1 or drop_foreign = 1 or drop_military = 1 or drop_internal = 1); moderate_dissent += 20 if lenin_anger = 2; moderate_strength -= 20 if lenin_anger = 2; moderate_dissent += 10 if lenin_anger = 1; 
+on-arrival: lenin_anger += 1 if (commissariats_held < 10 or disarm_workers = 1 or bar_lenin = 1 or drop_chair = 1 or drop_foreign = 1 or drop_military = 1 or drop_internal = 1); moderate_dissent += 20 if lenin_anger = 2; moderate_strength -= 5 if lenin_anger = 2; moderate_dissent += 10 if lenin_anger >= 1; 
 
 = Tentative Offer
 
