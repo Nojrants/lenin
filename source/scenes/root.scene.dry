@@ -1224,6 +1224,7 @@ Q.timers = [//m_party
             'mass_demobilization',
             'report',
             'sovnarkom',
+            'party_congress',
             ];
 Q.advisor_action_timer = 0;
 Q.party_congress_timer = 0;
@@ -1236,7 +1237,8 @@ Q.high_inflation_timer = 2;
 Q.land_seizures_timer = 4;
 Q.military_disorder_timer = 3;
 Q.crime_wave_timer = 5;
-Q.enemy_reinforcements_timer = 0
+Q.enemy_reinforcements_timer = 0;
+Q.party_congress_timer = 35;
 
 // constituent assembly election
 Q.election_type = "ca";
