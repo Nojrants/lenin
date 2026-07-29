@@ -1,0 +1,45 @@
+title: Revolt of the Bolshevik Moderates
+subtitle: They have issued their ultimatum. 
+new-page: true
+view-if: year = 1917 and month = 11 and week = 2 and moderate_strength > 20 and moderate_dissent > 20 and lenin_anger >= 1
+max-visits: 1
+tags: event
+
+= Revolt of the Bolshevik Moderates
+
+Feeling strongly about the need for compromise in order to stabilize and save the Revolution, and chaffing against the constraints Lenin has placed upon them, the leaders of the Bolshevik Moderates have threatened to resign from the Central Committee and their various government offices. This they feel will finally communicate to the Leninists the severity of the situation, and grant them the freedom to properly express their views before the Party masses. 
+
+Needless to say, the loss of some of our Party's best leaders will severely set back our government.  
+
+>• Those who will resign immediately: Kamenev, Rykov, Zinoviev, Nogin, Milyutin, Teodorovich, Riazanov, Larin (and several others).<br>
+>• Those who lodge their severe protest (but do not resign): Shliapnikov, Lozovsky 
+
+- @let_them_resign
+- @assuage
+
+
+@let_them_resign
+title: Let them resign.
+on-arrival: instability += 3; moderates_resigned = 1; moderate_strength -= 5; moderate_dissent += 30; [?if deputy_pm = "Kamenev" or "Rykov" or "Zinoviev" or "Nogin" or "Milyutin" or "Teodorovich" or "Riazanov" or "Larin" or "Teodorovich" or "Riazanov" or "Larin": deputy_pm = "Vacant" and deputy_pm_party = "" and efficacy_sovnarkom -= 0.1 ?]; [?if foreign_minister = "Kamenev" or "Rykov" or "Zinoviev" or "Nogin" or "Milyutin" or "Teodorovich" or "Riazanov" or "Larin" or "Teodorovich" or "Riazanov" or "Larin": foreign_minister = "Vacant" and foreign_minister_party = "" and efficacy_foreign -= 0.1 ?]; [?if war_minister = "Kamenev" or "Rykov" or "Zinoviev" or "Nogin" or "Milyutin" or "Teodorovich" or "Riazanov" or "Larin" or "Teodorovich" or "Riazanov" or "Larin": war_minister = "Vacant" and war_minister_party = "" and efficacy_military -= 0.1 ?]; [?if education_minister = "Kamenev" or "Rykov" or "Zinoviev" or "Nogin" or "Milyutin" or "Teodorovich" or "Riazanov" or "Larin": education_minister = "Vacant" and education_minister_party = "" and efficacy_enlightenment -= 0.1 ?]; [?if interior_minister = "Kamenev" or "Rykov" or "Zinoviev" or "Nogin" or "Milyutin" or "Teodorovich" or "Riazanov" or "Larin": interior_minister = "Vacant" and interior_minister_party = "" and efficacy_internal -= 0.1 ?]; [?if transport_minister = "Kamenev" or "Rykov" or "Zinoviev" or "Nogin" or "Milyutin" or "Teodorovich" or "Riazanov" or "Larin": transport_minister = "Vacant" and transport_minister_party = "" and efficacy_railways -= 0.1 ?]; [?if trade_minister = "Kamenev" or "Rykov" or "Zinoviev" or "Nogin" or "Milyutin" or "Teodorovich" or "Riazanov" or "Larin": trade_minister = "Vacant" and trade_party = "" and efficacy_trade -= 0.1 ?]; [?if finance_minister = "Kamenev" or "Rykov" or "Zinoviev" or "Nogin" or "Milyutin" or "Teodorovich" or "Riazanov" or "Larin": finance_minister = "Vacant" and finance_minister_party = "" and efficacy_finance -= 0.1 ?]; [?if labor_minister = "Kamenev" or "Rykov" or "Zinoviev" or "Nogin" or "Milyutin" or "Teodorovich" or "Riazanov" or "Larin": labor_minister = "Vacant" and labor_minister_party = "" and efficacy_labor -= 0.1 ?]; [?if justice_minister = "Kamenev" or "Rykov" or "Zinoviev" or "Nogin" or "Milyutin" or "Teodorovich" or "Riazanov" or "Larin": justice_minister = "Vacant" and justice_minister_party = "" and efficacy_justice -= 0.1 ?]; [?if agriculture_minister = "Kamenev" or "Rykov" or "Zinoviev" or "Nogin" or "Milyutin" or "Teodorovich" or "Riazanov" or "Larin": agriculture_minister = "Vacant" and agriculture_minister_party = "" and efficacy_agiculture -= 0.1 ?]; [?if food_minister = "Kamenev" or "Rykov" or "Zinoviev" or "Nogin" or "Milyutin" or "Teodorovich" or "Riazanov" or "Larin": food_minister = "Vacant" and food_minister_party = "" and efficacy_foodsupply -= 0.1 ?]; [?if nationalities_minister = "Kamenev" or "Rykov" or "Zinoviev" or "Nogin" or "Milyutin" or "Teodorovich" or "Riazanov" or "Larin": nationalities_minister = "Vacant" and nationalities_minister_party = "" and efficacy_nationalities -= 0.1 ?]; [?if welfare_minister = "Kamenev" or "Rykov" or "Zinoviev" or "Nogin" or "Milyutin" or "Teodorovich" or "Riazanov" or "Larin": welfare_minister = "Vacant" and welfare_minister_party = "" and efficacy_welfare -= 0.1 ?]; [?if labor_minister = "Shliapnikov": efficacy_labor -= 0.1 ?];
+
+The Moderates resign from their posts. While hoping this act of defiance will rally support for their side within the Party, it also limits their influence. Meanwhile, critics and moderate socialists take this affair as proof the Bolsheviks are starting to disintegrate. 
+
+@assuage
+title: Is there no way to assuage the Moderates?
+
+- @compromise
+- @congress
+- @let_them_right: On second thought, let them resign. 
+
+@compromise
+title: Discuss a compromise solution.
+choose-if: lenin_anger < 2
+unavailable-subtitle: Tensions are too high to consider this. 
+
+@congress
+title: Call Lenin's bluff and demand a Party Congress to litigate the issue. 
+choose-if: moderate_strength >= 30
+unavailable-subtitle: The Moderates lack the strength to consider this. 
+on-arrival: party_congress_timer = 8 if party_congress_timer > 8; moderate_strength += 5; moderate_dissent += 10; 
+
+Rather than resigning, the Moderates instead force through the convening of a Party Congress. Now both sides will have the opportunity to campaign in support of their respective views, and have their case heard before representatives of the Party at-large. 
