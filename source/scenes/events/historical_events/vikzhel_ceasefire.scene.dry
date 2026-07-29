@@ -892,18 +892,6 @@ go-to: enlightenment_menu
 - #enlightenment_candidates2
 
 
-@enlightenment_cancel
-title: Cancel reassignment.
-subtitle: [?if education_minister != "Vacant": Keep [+ education_minister +] in place. ?]
-tags: enlightenment_candidates2
-go-to: cabinet_negotiations
-
-@enlightenment_vacant
-title: Let's leave the position vacant for now. 
-tags: enlightenment_candidates2
-on-arrival: education_minister = "Vacant"; education_minister_party = ""; 
-go-to: cabinet_negotiations
-
 @enlightenment_lunacharsky
 title: Anatoly Lunacharsky
 subtitle: {!
@@ -923,7 +911,7 @@ Left-SR — Party leader and elder statesman; some experience in education.<br>
 Overall skill: ★★★☆<br>
 Suitability: ★☆
 !}
-tags: enlightenment_candidates
+tags: enlightenment_candidates2
 choose-if: lsr_relation >= 40
 unavailable-subtitle: Natanson won't accept this offer. 
 on-arrival: education_minister = "Natanson"; education_minister_party = "Left-SR"; commissariats_held -= 1; 
@@ -936,8 +924,21 @@ SD-Int. — Party leader, writer, and public intellectual.<br>
 Overall skill: ★★★<br>
 Suitability: ★★
 !}
-tags: enlightenment_candidates
+tags: enlightenment_candidates2
 choose-if: sdi_relation >= 40
 unavailable-subtitle: Sukhanov won't accept this offer. 
 on-arrival: education_minister = "Sukhanov"; education_minister_party = "SD-Int"; commissariats_held -= 1; 
 go-to: cabinet_negotiations
+
+@enlightenment_vacant
+title: Let's leave the position vacant for now. 
+tags: enlightenment_candidates2
+on-arrival: education_minister = "Vacant"; education_minister_party = ""; 
+go-to: cabinet_negotiations
+
+@enlightenment_cancel
+title: Cancel reassignment.
+subtitle: [?if education_minister != "Vacant": Keep [+ education_minister +] in place. ?]
+tags: enlightenment_candidates2
+go-to: cabinet_negotiations
+
