@@ -4,32 +4,92 @@ view-if: b_inter_party_relationships_timer <= 0 and player_party = "b"
 is-card: true
 on-arrival: inter_party_relationships_timer += 4; week_actions += 1
 card-image: img/portraits/taburin_b_m.jpg
-max-visits: 12
 tags: b_party
 
 = Inter-Party Relationships
 
 We can improve our relations with the other democratic or socialist parties.
 
+- @anarchists
+- @lsr
 - @sr
-- @m
+- @mensheviks
+- @kadets 
+- @internationalists
+- @moderates
 - @root: We do not need to improve our relations.
 - @easy_discard
 - @cancel_advisor_action
 
 
+@anarchists
+title: Anarchists & Maximalists — Improve our relations. 
+subtitle: -1 party funds
+choose-if: b_resources >= 1 and anarchists_legal = 1
+unavailable-subtitle: [?if b_resources < 1: -1 party funds — We lack the resources for this. ?][?if anarchists_legal != 1: We have banned these groups. ?]
+on-arrival: anarchist_relation += 8*(1-b_dissent); maximalist_relation += 8*(1-b_dissent); b_resources -= 1;
+
+We have improved our relations with the anarchists and maximalists. 
+
+
+@lsr
+title: Left-SRs — Improve our relations. 
+subtitle: -1 party funds
+choose-if: b_resources >= 1 and lsr_legal = 1
+unavailable-subtitle: [?if b_resources < 1: -1 party funds — We lack the resources for this. ?][?if lsr_legal != 1: We have banned this party. ?]
+on-arrival: lsr_relation += 8*(1-b_dissent); b_resources -= 1;
+
+We have improved our relations with the Left-SRs. 
+
+
 @sr
-title: Improve our relations with the Socialist-Revolutionaries.
-on-arrival: b_sr_relation += 6*(1-b_dissent); b_resources -= 1;
-choose-if: b_resources >= 1
-subtitle: -1 resource
+title: SRs — Can we repair relations with them as a whole?
+subtitle: -1 party funds
+choose-if: b_resources >= 1 and sr_legal = 1
+unavailable-subtitle: [?if b_resources < 1: -1 party funds — We lack the resources for this. ?][?if sr_legal != 1: We have banned these parties. ?]
+on-arrival: b_resources -= 1; moderate_dissent -= 3; moderate_strength += 3; leninist_dissent += 3; leftcom_dissent += 2; lsr_relation += 3*(1-b_dissent); centre_sr_relation += 3 + Math.max(0,(6*(1-b_dissent)) - Math.max(0,(leninist_strength/moderate_strength)) + Math.max(0,(moderate_strength/leninist_strength))); right_sr_relation += 3 + Math.max(0,(4*(1-b_dissent)) - Math.max(0,(leninist_strength/moderate_strength)) + Math.max(0,(moderate_strength/leninist_strength))); right_sr_strength -= 3; 
 
-We have improved our relations with the Party of Socialist-Revolutionaries.
+Appealing to the SRs is unexpected, but welcome by those in favor of conciliationism on either side. [? if leninist_strength >= moderate_strength : The influence of Lenin however makes it difficult for us to make further in-roads. ?]
 
-@m
-title: Can we repair our relations with the Mensheviks?
-on-arrival: m_b_relation += 5*(1-b_dissent); m_b_relation -= 3 if leninist_strength >= moderate_strength; b_resources -= 1;
-choose-if: b_resources >= 1
-subtitle: -1 resource
 
-We have attempted to build closer ties with the Mensheviks, our wayward cousins in the RSDLP. [? if leninist_strength >= moderate_strength : The influence of Lenin makes it difficult for us to build these relationships. ?]
+@mensheviks
+title: Mensheviks — Can we repair relations with them? 
+subtitle: -1 party funds
+choose-if: b_resources >= 1 and mensheviks_legal = 1
+unavailable-subtitle: [?if b_resources < 1: -1 party funds — We lack the resources for this. ?][?if mensheviks_legal != 1: We have banned these parties. ?]
+on-arrival: b_resources -= 1; moderate_dissent -= 3; moderate_strength += 3; leninist_dissent += 3; leftcom_dissent += 2; sdi_relation += 3 + Math.max(0,(10*(1-b_dissent)) - Math.max(0,(leninist_strength/moderate_strength)) + Math.max(0,(moderate_strength/leninist_strength))); left_m_relation += 3 + Math.max(0,(6*(1-b_dissent)) - Math.max(0,(leninist_strength/moderate_strength)) + Math.max(0,(moderate_strength/leninist_strength))); left_m_strength += 3; centre_m_relation += 3 + Math.max(0,(6*(1-b_dissent)) - Math.max(0,(leninist_strength/moderate_strength)) + Math.max(0,(moderate_strength/leninist_strength))); right_m_relation += 3 + Math.max(0,(4*(1-b_dissent)) - Math.max(0,(leninist_strength/moderate_strength)) + Math.max(0,(moderate_strength/leninist_strength)));  right_m_strength -= 3; 
+
+
+Appealing to the Mensheviks is unexpected, but welcome by those in favor of conciliationism on either side. [? if leninist_strength >= moderate_strength : The influence of Lenin however makes it difficult for us to make further in-roads. ?]
+
+@kadets
+title: Kadets — Is there any point appealing to them? 
+subtitle: -1 party funds
+choose-if: b_resources >= 1 and kadets_legal = 1
+unavailable-subtitle: [?if b_resources < 1: -1 party funds — We lack the resources for this. ?][?if kadets_legal != 1: We have banned this party. ?]
+on-arrival: b_resources -= 1; moderate_dissent -= 1; moderate_strength += 2; leninist_dissent += 20; leninist_strength -= 2; leftcom_dissent += 10; leftcom_strength += 2; k_relation += 1 + Math.max(0,(1*(1-b_dissent)) - Math.max(0,(leninist_strength/moderate_strength)) + Math.max(0,(moderate_strength/leninist_strength)) - (instability/50));
+
+Reaching out to the Kadets shocks both their members and our own. Given our past history, it seems we struggle to make any progress. 
+
+@internationalists
+title: Reach out to all internationalists. 
+subtitle: -1 party funds
+choose-if: b_resources >= 1 and parties_legal = 1
+unavailable-subtitle: [?if b_resources < 1: -1 party funds — We lack the resources for this. ?][?if parties_legal != 1: We have banned all other parties. ?]
+on-arrival: b_resources -= 1; moderate_dissent -= 3; moderate_strength += 3; leninist_dissent += 3; leftcom_dissent -= 2; leftcom_strength += 2; sdi_relation += 3 + Math.max(0,(12*(1-b_dissent)) - Math.max(0,(leninist_strength/moderate_strength)) + Math.max(0,(moderate_strength/leninist_strength))); left_m_relation += 3 + Math.max(0,(10*(1-b_dissent)) - Math.max(0,(leninist_strength/moderate_strength)) + Math.max(0,(moderate_strength/leninist_strength))); left_m_strength += 2; centre_m_relation += 2 + Math.max(0,(3*(1-b_dissent)) - Math.max(0,(leninist_strength/moderate_strength)) + Math.max(0,(moderate_strength/leninist_strength))); lsr_relation += 6*(1-b_dissent); anarchist_relation += 5*(1-b_dissent); maximalist_relation += 5*(1-b_dissent); centre_sr_relation += 2 + Math.max(0,(3*(1-b_dissent)) - Math.max(0,(leninist_strength/moderate_strength)) + Math.max(0,(moderate_strength/leninist_strength))); right_sr_strength -= 2; right_m_relation -= 2; right_sr_relation -= 2; ns_relation -= 2; 
+
+
+Appeals for a just and immediate peace resonate among fellow internationalists. [? if leninist_strength >= moderate_strength : The influence of Lenin however makes it difficult for us to make further in-roads. ?]
+
+@moderates
+title: In these trying times, we must seek to repair relations with all fellow socialists. 
+subtitle: -1 party funds
+choose-if: b_resources >= 1 and parties_legal = 1
+unavailable-subtitle: [?if b_resources < 1: -1 party funds — We lack the resources for this. ?][?if parties_legal != 1: We have banned all other parties. ?]
+on-arrival: b_resources -= 1; moderate_dissent -= 5; moderate_strength += 5; leninist_dissent += 8; leninist_strength -= 4; leftcom_dissent += 2; anarchist_relation += 3*(1-b_dissent); maximalist_relation += 3*(1-b_dissent); sdi_relation += 3 + Math.max(0,(6*(1-b_dissent)) - Math.max(0,(leninist_strength/moderate_strength)) + Math.max(0,(moderate_strength/leninist_strength))); left_m_relation += 3 + Math.max(0,(6*(1-b_dissent)) - Math.max(0,(leninist_strength/moderate_strength)) + Math.max(0,(moderate_strength/leninist_strength))); left_m_strength += 3; centre_m_relation += 3 + Math.max(0,(6*(1-b_dissent)) - Math.max(0,(leninist_strength/moderate_strength)) + Math.max(0,(moderate_strength/leninist_strength))); right_m_relation += 3 + Math.max(0,(6*(1-b_dissent)) - Math.max(0,(leninist_strength/moderate_strength)) + Math.max(0,(moderate_strength/leninist_strength)));  right_m_strength -= 3; lsr_relation += 3 + Math.max(0,(6*(1-b_dissent)) - Math.max(0,(leninist_strength/moderate_strength)) + Math.max(0,(moderate_strength/leninist_strength))); centre_sr_relation += 3 + Math.max(0,(6*(1-b_dissent)) - Math.max(0,(leninist_strength/moderate_strength)) + Math.max(0,(moderate_strength/leninist_strength))); right_sr_relation += 3 + Math.max(0,(6*(1-b_dissent)) - Math.max(0,(leninist_strength/moderate_strength)) + Math.max(0,(moderate_strength/leninist_strength))); right_sr_strength -= 3; ns_relation += 3 + Math.max(0,(6*(1-b_dissent)) - Math.max(0,(leninist_strength/moderate_strength)) + Math.max(0,(moderate_strength/leninist_strength))); right_sr_strength -= 3; 
+
+
+Our overtures to the other socialists parties is unexpected, by welcome by moderates on either side. [? if leninist_strength >= moderate_strength : The influence of Lenin however makes it difficult for us to make further in-roads. ?]
+
+
+ 
