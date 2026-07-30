@@ -38,6 +38,8 @@ Q.party_name_map = {"m": "Menshevik",
         "sr": "SR",
         "k": "Kadet"};
 
+Q.dreamteam = 0;
+
 Q.b_is_player = 1;
 Q.player_in_exco = 1;
 Q.player_in_gov = 1;
