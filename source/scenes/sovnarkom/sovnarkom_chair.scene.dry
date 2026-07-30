@@ -110,7 +110,7 @@ Architectual student; briefly managed Russia's largest disability insurance fund
 Overall skill: ★★<br>
 Suitability: ★★★
 !}
-on-arrival: welfare_minister = "N. Milyutin"; welfare_minister_party = "Bolshevik"; 
+on-arrival: welfare_minister = "N_Milyutin"; welfare_minister_party = "Bolshevik"; 
 go-to: welfare
 
 
