@@ -129,18 +129,20 @@ if (Q.unemployed <= 1) {
 
 Q.leaders = {};
 
-Q.leaders.Skvortsov = {
-    auctoritas: 2.5,
-    administration: 2,
-    idealogism: 1,
-    military: 1,
-    economic: 2.5,
-    partyorg: 3,
-    diplomacy: 1,
-    culture: 1,
-    legalism: 1.5,
-    nationalities: 1
-};
+Q.leaders.Vacant = { auctoritas: 1, administration: 1, idealogism: 1, military: 1, economic: 1, partyorg: 1, diplomacy: 1, culture: 1, legalism: 1, nationalities: 1 };
+Q.leaders.Skvortsov = { auctoritas: 2.5, administration: 2, idealogism: 1, military: 1, economic: 2.5, partyorg: 3, diplomacy: 1, culture: 1, legalism: 1.5, nationalities: 1 };
+Q.leaders.Lenin = { auctoritas: 1, administration: 1, idealogism: 1, military: 1, economic: 1, partyorg: 1, diplomacy: 1, culture: 1, legalism: 1, nationalities: 1 };
+Q.leaders.Trotsky = { auctoritas: 1, administration: 1, idealogism: 1, military: 1, economic: 1, partyorg: 1, diplomacy: 1, culture: 1, legalism: 1, nationalities: 1 };
+Q.leaders.Krylenko = { auctoritas: 1, administration: 1, idealogism: 1, military: 1, economic: 1, partyorg: 1, diplomacy: 1, culture: 1, legalism: 1, nationalities: 1 };
+Q.leaders.Lunacharsky = { auctoritas: 1, administration: 1, idealogism: 1, military: 1, economic: 1, partyorg: 1, diplomacy: 1, culture: 1, legalism: 1, nationalities: 1 };
+Q.leaders.Rykov = { auctoritas: 1, administration: 1, idealogism: 1, military: 1, economic: 1, partyorg: 1, diplomacy: 1, culture: 1, legalism: 1, nationalities: 1 };
+Q.leaders.Nogin = { auctoritas: 1, administration: 1, idealogism: 1, military: 1, economic: 1, partyorg: 1, diplomacy: 1, culture: 1, legalism: 1, nationalities: 1 };
+Q.leaders.Lomov = { auctoritas: 1, administration: 1, idealogism: 1, military: 1, economic: 1, partyorg: 1, diplomacy: 1, culture: 1, legalism: 1, nationalities: 1 };
+Q.leaders.Shliapnikov = { auctoritas: 1, administration: 1, idealogism: 1, military: 1, economic: 1, partyorg: 1, diplomacy: 1, culture: 1, legalism: 1, nationalities: 1 };
+Q.leaders.Milyutin = { auctoritas: 1, administration: 1, idealogism: 1, military: 1, economic: 1, partyorg: 1, diplomacy: 1, culture: 1, legalism: 1, nationalities: 1 };
+Q.leaders.Teodorovich = { auctoritas: 1, administration: 1, idealogism: 1, military: 1, economic: 1, partyorg: 1, diplomacy: 1, culture: 1, legalism: 1, nationalities: 1 };
+Q.leaders.Avilov = { auctoritas: 1, administration: 1, idealogism: 1, military: 1, economic: 1, partyorg: 1, diplomacy: 1, culture: 1, legalism: 1, nationalities: 1 };
+Q.leaders.Stalin = { auctoritas: 1, administration: 1, idealogism: 1, military: 1, economic: 1, partyorg: 1, diplomacy: 1, culture: 1, legalism: 1, nationalities: 1 };
 
 Q.finalefficacy_sovnarkom = Q.efficacy_sovnarkom
     + (0.25 * (
