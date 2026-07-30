@@ -283,30 +283,6 @@ view-if: education_minister != "Lunacharsky"
 on-arrival: education_minister = "Lunacharsky"; education_minister_party = "Bolshevik";
 go-to: sovnarkom_composition
 
-@enlightenment_krupskaya
-title: Nadezhda Krupskaya
-subtitle: {!
-Social reformer and pedagogist. As she is Lenin's wife this will appear highly nepotistic.<br>  
-Overall skill: ★★☆<br>
-Suitability: ★★★★
-!}
-tags: enlightenment_candidates
-view-if: education_minister != "Krupskaya" 
-on-arrival: education_minister = "Krupskaya"; education_minister_party = "Bolshevik";
-go-to: sovnarkom_composition
-
-@enlightenment_pokrovsky
-title: Mikhail Pokrovsky
-subtitle: {!
-Vperedist — University-educated historian and leading historical theorist.<br>  
-Overall skill: ★★★★<br>
-Suitability: ★★
-!}
-tags: enlightenment_candidates
-view-if: education_minister != "Pokrovsky" 
-on-arrival: education_minister = "Pokrovsky"; education_minister_party = "Bolshevik";
-go-to: sovnarkom_composition
-
 @enlightenment_bubnov
 title: Andrei Bubnov
 subtitle: {!
@@ -322,13 +298,37 @@ go-to: sovnarkom_composition
 @enlightenment_lebedev
 title: Pavel Lebedev-Polyansky
 subtitle: {!
-Vperedist — Scholar and literary critic; worked in publishing department and Proletkult. 
+Vperedist — Scholar and literary critic; worked in publishing department and Proletkult.<br> 
 Overall skill: ★★★<br>
 Suitability: ★★★★
 !}
 tags: enlightenment_candidates
 view-if: education_minister != "Lebedev" 
 on-arrival: education_minister = "Lebedev"; education_minister_party = "Bolshevik";
+go-to: sovnarkom_composition
+
+@enlightenment_pokrovsky
+title: Mikhail Pokrovsky
+subtitle: {!
+Vperedist — University-educated historian and leading historical theorist.<br>  
+Overall skill: ★★★★<br>
+Suitability: ★★
+!}
+tags: enlightenment_candidates
+view-if: education_minister != "Pokrovsky" 
+on-arrival: education_minister = "Pokrovsky"; education_minister_party = "Bolshevik";
+go-to: sovnarkom_composition
+
+@enlightenment_krupskaya
+title: Nadezhda Krupskaya
+subtitle: {!
+Social reformer and pedagogist. Appointing Lenin's wife will appear nepotistic.<br>  
+Overall skill: ★★☆<br>
+Suitability: ★★★★
+!}
+tags: enlightenment_candidates
+view-if: education_minister != "Krupskaya" 
+on-arrival: education_minister = "Krupskaya"; education_minister_party = "Bolshevik";
 go-to: sovnarkom_composition
 
 @enlightenment_bogdanov
