@@ -155,7 +155,7 @@ Q.leaders.Bogdanov = { auctoritas: 3, administration: 4, idealogism: 5, military
 Q.leaders.Sokolnikov = { auctoritas: 3, administration: 4, idealogism: 2, military: 2, economic: 5, partyorg: 3, diplomacy: 2, culture: 2, legalism: 2.5, nationalities: 1.5 };
 Q.leaders.Kollontai = { auctoritas: 3, administration: 3, idealogism: 4, military: 1.5, economic: 2, partyorg: 2.5, diplomacy: 3.5, culture: 4, legalism: 1.5, nationalities: 1.5 };
 Q.leaders.Vinokurov = { auctoritas: 2.5, administration: 3.5, idealogism: 2.5, military: 1.5, economic: 3, partyorg: 3, diplomacy: 2.5, culture: 2, legalism: 3.5, nationalities: 1 };
-Q.leaders.N. Milyutin = { auctoritas: 2, administration: 3, idealogism: 2, military: 1.5, economic: 3, partyorg: 3, diplomacy: 1.5, culture: 2.5, legalism: 1.5, nationalities: 1.5 };
+Q.leaders.N_Milyutin = { auctoritas: 2, administration: 3, idealogism: 2, military: 1.5, economic: 3, partyorg: 3, diplomacy: 1.5, culture: 2.5, legalism: 1.5, nationalities: 1.5 };
 
 // Mensheviks
 Q.leaders.Martov = { auctoritas: 5, administration: 4, idealogism: 4, military: 1.5, economic: 3, partyorg: 4, diplomacy: 3, culture: 2, legalism: 3, nationalities: 1.5 };
