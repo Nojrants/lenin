@@ -144,10 +144,10 @@ Q.leaders.Skvortsov = {
 
 Q.finalefficacy_finance = Q.efficacy_finance + (0.25 * ((Q.leaders[Q.finance_minister].auctoritas / 20) + (Q.leaders[Q.finance_minister].administration / 10) + (Q.leaders[Q.finance_minister].economic / 5))); 
 
-console.log("Foreign Minister:", Q.foreign_minister);
-console.log("Auctoritas:", Q.leaders[Q.foreign_minister].auctoritas);
-console.log("Administration:", Q.leaders[Q.foreign_minister].administration);
-console.log("Economic:", Q.leaders[Q.foreign_minister].economic);
+console.log("Foreign Minister:", Q.finance_minister);
+console.log("Auctoritas:", Q.leaders[Q.finance_minister].auctoritas);
+console.log("Administration:", Q.leaders[Q.finance_minister].administration);
+console.log("Economic:", Q.leaders[Q.finance_minister].economic);
 console.log("efficacy_finance:", Q.efficacy_finance);
 console.log("finalefficacy_finance:", Q.finalefficacy_finance);
 
