@@ -78,8 +78,8 @@ Q.ipr_change = 6;
 
 // the state of the party
 // overall dissent reduces every increase in party support.
-Q.b_dissent = 0.05;
-Q.b_dissent_percent = 5;
+Q.b_dissent = 0.15;
+Q.b_dissent_percent = 15;
 
 Q.parties_legal = 1; 
 Q.kadets_legal = 1;
