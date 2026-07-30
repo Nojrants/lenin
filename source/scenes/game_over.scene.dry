@@ -7,7 +7,7 @@ on-arrival: {!
 this.achieve('game_completed');
 
 if (Q.dreamteam == 1) {
-    this.achieve('golden_age_of_the_people's_commissars');
+    this.achieve('golden_age_of_the_peoples_commissars');
 }
 
 if (Q.revolutionary_victory && Q.player_party != 'b' && !Q.join_bolshevik) {
@@ -229,7 +229,7 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 
 = Completed Achievements in this Playthrough
 
-[? if game_achievement_golden_age_of_the_people's_commissars : **Golden Age of the People's Commissars** - Assemble an allstar composition in the Council of People's Commissars. ?]
+[? if game_achievement_golden_age_of_the_peoples_commissars : **Golden Age of the People's Commissars** - Assemble an allstar composition in the Council of People's Commissars. ?]
 
 [? if game_achievement_rev_failed : **Неудавшаяся революция (A Failed Revolution)** - as the Bolsheviks, launch the revolution and fail. ?]
 
@@ -280,7 +280,7 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 
 = Completed Achievements Overall
 
-[? if achievement_golden_age_of_the_people's_commissars : **Golden Age of the People's Commissars** - Assemble an all-star composition in the Council of People's Commissars. ?]
+[? if achievement_golden_age_of_the_peoples_commissars : **Golden Age of the People's Commissars** - Assemble an all-star composition in the Council of People's Commissars. ?]
 
 [? if achievement_rev_failed : **Неудавшаяся революция (A Failed Revolution)** - as the Bolsheviks, launch the revolution and fail. ?]
 
