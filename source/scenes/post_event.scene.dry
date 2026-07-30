@@ -129,6 +129,7 @@ if (Q.unemployed <= 1) {
 
 Q.leaders = {};
 // Bolsheviks
+Q.leaders.None = { auctoritas: 1, administration: 1, idealogism: 1, military: 1, economic: 1, partyorg: 1, diplomacy: 1, culture: 1, legalism: 1, nationalities: 1 };
 Q.leaders.Vacant = { auctoritas: 1, administration: 1, idealogism: 1, military: 1, economic: 1, partyorg: 1, diplomacy: 1, culture: 1, legalism: 1, nationalities: 1 };
 Q.leaders.Skvortsov = { auctoritas: 2.5, administration: 2, idealogism: 1, military: 1, economic: 2.5, partyorg: 3, diplomacy: 1, culture: 1, legalism: 1.5, nationalities: 1 };
 Q.leaders.Lenin = { auctoritas: 6, administration: 5, idealogism: 5, military: 2, economic: 3.5, partyorg: 4, diplomacy: 3.5, culture: 2, legalism: 3, nationalities: 3 };
