@@ -86,13 +86,13 @@ go-to: eg_menu
 
 The Bolsheviks, with our assistance, have won the revolution! Hopefully we will be able to maintain our distinctiveness as a party and preserve democracy.
 
-@dustbin_of_history
+@dreamteam
 title: Golden Age of the People's Commissars
 view-if: dreamteam = 1
 tags: endings
 go-to: eg_menu
 
-We assembled an allstar composition in the Council of People's Commissars. 
+We assembled an all-star composition in the Council of People's Commissars. 
 
 @war_persists
 title: The war goes on...
@@ -276,7 +276,7 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 
 = Completed Achievements Overall
 
-[? if achievement_dustbin : **Свалка истории (The Dustbin of History)** - defeated by the Bolshevik revolution. ?]
+[? if achievement_dreamteam : **Golden Age of the People's Commissars** - Assemble an all-star composition in the Council of People's Commissars. ?]
 
 [? if achievement_rev_failed : **Неудавшаяся революция (A Failed Revolution)** - as the Bolsheviks, launch the revolution and fail. ?]
 
