@@ -142,15 +142,137 @@ Q.leaders.Skvortsov = {
     nationalities: 1
 };
 
-Q.finalefficacy_finance = Q.efficacy_finance + (0.25 * ((Q.leaders[Q.finance_minister].auctoritas / 20) + (Q.leaders[Q.finance_minister].administration / 10) + (Q.leaders[Q.finance_minister].economic / 5))); 
+Q.finalefficacy_sovnarkom =
+    Q.efficacy_sovnarkom
+    + (0.25 * (
+        ((Q.leaders?.[Q.prime_minister]?.auctoritas ?? 0) / 5)
+        + ((Q.leaders?.[Q.prime_minister]?.administration ?? 0) / 5)
+    ))
+    + (0.125 * (
+        (Q.leaders?.[Q.deputy_pm]?.administration ?? 0) / 5
+    ));
 
-console.log("Foreign Minister:", Q.finance_minister);
+Q.finalefficacy_foreign =
+    Q.efficacy_foreign
+    + (0.25 * (
+        ((Q.leaders?.[Q.foreign_minister]?.auctoritas ?? 0) / 20)
+        + ((Q.leaders?.[Q.foreign_minister]?.administration ?? 0) / 10)
+        + ((Q.leaders?.[Q.foreign_minister]?.diplomacy ?? 0) / 4)
+    ));
+
+Q.finalefficacy_military =
+    Q.efficacy_military
+    + (0.25 * (
+        ((Q.leaders?.[Q.war_minister]?.auctoritas ?? 0) / 20)
+        + ((Q.leaders?.[Q.war_minister]?.administration ?? 0) / 10)
+        + ((Q.leaders?.[Q.war_minister]?.military ?? 0) / 5)
+    ));
+
+Q.finalefficacy_enlightenment =
+    Q.efficacy_enlightenment
+    + (0.25 * (
+        ((Q.leaders?.[Q.education_minister]?.auctoritas ?? 0) / 20)
+        + ((Q.leaders?.[Q.education_minister]?.administration ?? 0) / 10)
+        + ((Q.leaders?.[Q.education_minister]?.culture ?? 0) / 5)
+    ));
+
+Q.finalefficacy_internal =
+    Q.efficacy_internal
+    + (0.25 * (
+        ((Q.leaders?.[Q.interior_minister]?.auctoritas ?? 0) / 20)
+        + ((Q.leaders?.[Q.interior_minister]?.administration ?? 0) / 10)
+        + ((Q.leaders?.[Q.interior_minister]?.military ?? 0) / 5)
+    ));
+
+Q.finalefficacy_railways =
+    Q.efficacy_railways
+    + (0.25 * (
+        ((Q.leaders?.[Q.transportation_minister]?.auctoritas ?? 0) / 20)
+        + ((Q.leaders?.[Q.transportation_minister]?.administration ?? 0) / 10)
+        + ((Q.leaders?.[Q.transportation_minister]?.military ?? 0) / 10)
+        + ((Q.leaders?.[Q.transportation_minister]?.economic ?? 0) / 10)
+    ));
+
+Q.finalefficacy_trade =
+    Q.efficacy_trade
+    + (0.25 * (
+        ((Q.leaders?.[Q.trade_minister]?.auctoritas ?? 0) / 20)
+        + ((Q.leaders?.[Q.trade_minister]?.administration ?? 0) / 10)
+        + ((Q.leaders?.[Q.trade_minister]?.economic ?? 0) / 5)
+        + ((Q.leaders?.[Q.trade_minister]?.diplomacy ?? 0) / 10)
+    ));
+
+Q.finalefficacy_finance =
+    Q.efficacy_finance
+    + (0.25 * (
+        ((Q.leaders?.[Q.finance_minister]?.auctoritas ?? 0) / 20)
+        + ((Q.leaders?.[Q.finance_minister]?.administration ?? 0) / 10)
+        + ((Q.leaders?.[Q.finance_minister]?.economic ?? 0) / 5)
+    ));
+
+Q.finalefficacy_justice =
+    Q.efficacy_justice
+    + (0.25 * (
+        ((Q.leaders?.[Q.justice_minister]?.auctoritas ?? 0) / 20)
+        + ((Q.leaders?.[Q.justice_minister]?.administration ?? 0) / 10)
+        + ((Q.leaders?.[Q.justice_minister]?.legalism ?? 0) / 10)
+    ));
+
+Q.finalefficacy_agriculture =
+    Q.efficacy_agriculture
+    + (0.25 * (
+        ((Q.leaders?.[Q.agriculture_minister]?.auctoritas ?? 0) / 20)
+        + ((Q.leaders?.[Q.agriculture_minister]?.administration ?? 0) / 10)
+        + ((Q.leaders?.[Q.agriculture_minister]?.economic ?? 0) / 5)
+    ));
+
+Q.finalefficacy_foodsupply =
+    Q.efficacy_foodsupply
+    + (0.25 * (
+        ((Q.leaders?.[Q.food_minister]?.auctoritas ?? 0) / 20)
+        + ((Q.leaders?.[Q.food_minister]?.administration ?? 0) / 10)
+        + ((Q.leaders?.[Q.food_minister]?.economic ?? 0) / 5)
+    ));
+
+Q.finalefficacy_labor =
+    Q.efficacy_labor
+    + (0.25 * (
+        ((Q.leaders?.[Q.labor_minister]?.auctoritas ?? 0) / 20)
+        + ((Q.leaders?.[Q.labor_minister]?.administration ?? 0) / 10)
+        + ((Q.leaders?.[Q.labor_minister]?.economic ?? 0) / 5)
+        + ((Q.leaders?.[Q.labor_minister]?.diplomacy ?? 0) / 10)
+    ));
+
+Q.finalefficacy_nationalities =
+    Q.efficacy_nationalities
+    + (0.25 * (
+        ((Q.leaders?.[Q.nationalities_minister]?.auctoritas ?? 0) / 20)
+        + ((Q.leaders?.[Q.nationalities_minister]?.administration ?? 0) / 10)
+        + ((Q.leaders?.[Q.nationalities_minister]?.nationalities ?? 0) / 5)
+    ));
+
+Q.finalefficacy_welfare =
+    Q.efficacy_welfare
+    + (0.25 * (
+        ((Q.leaders?.[Q.welfare_minister]?.auctoritas ?? 0) / 20)
+        + ((Q.leaders?.[Q.welfare_minister]?.administration ?? 0) / 10)
+        + ((Q.leaders?.[Q.welfare_minister]?.economic ?? 0) / 5)
+        + ((Q.leaders?.[Q.welfare_minister]?.culture ?? 0) / 20)
+    ));
+
+console.log("Finance Minister:", Q.finance_minister);
 console.log("Auctoritas:", Q.leaders[Q.finance_minister].auctoritas);
 console.log("Administration:", Q.leaders[Q.finance_minister].administration);
 console.log("Economic:", Q.leaders[Q.finance_minister].economic);
 console.log("efficacy_finance:", Q.efficacy_finance);
 console.log("finalefficacy_finance:", Q.finalefficacy_finance);
 
+console.log("Foreign Minister:", Q.foreign_minister);
+console.log("Auctoritas:", Q.leaders[Q.foreign_minister].auctoritas);
+console.log("Administration:", Q.leaders[Q.foreign_minister].administration);
+console.log("Economic:", Q.leaders[Q.foreign_minister].economic);
+console.log("efficacy_foreign:", Q.efficacy_foreign);
+console.log("finalefficacy_foreign:", Q.finalefficacy_foreign);
 
 if (Q.sovnarkom_expend < 0.25) Q.sovnarkom_expend = 0.25;
 if (Q.internal_expend < 0.25) Q.internal_expend = 0.25;
