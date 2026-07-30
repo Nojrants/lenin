@@ -191,8 +191,6 @@ on-display: {!
   progressWrapper.appendChild(mode);
   
 !}
-tags: endings
-go-to: fun_zone
 
 = Completed Achievements in this Playthrough
 
