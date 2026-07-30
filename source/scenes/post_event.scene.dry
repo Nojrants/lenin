@@ -297,12 +297,23 @@ if (Q.finalefficacy_sovnarkom + Q.finalefficacy_foreign + Q.finalefficacy_milita
     Q.dreamteam = 1;
 }
 
-console.log("Finance Minister:", Q.finance_minister);
-console.log("Auctoritas:", Q.leaders[Q.finance_minister].auctoritas);
-console.log("Administration:", Q.leaders[Q.finance_minister].administration);
-console.log("Economic:", Q.leaders[Q.finance_minister].economic);
-console.log("efficacy_finance:", Q.efficacy_finance);
+console.log("finalefficacy_sovnarkom:", Q.finalefficacy_sovnarkom);
+console.log("finalefficacy_foreign:", Q.finalefficacy_foreign);
+console.log("finalefficacy_military:", Q.finalefficacy_military);
+console.log("finalefficacy_enlightenment:", Q.finalefficacy_enlightenment);
+console.log("finalefficacy_internal:", Q.finalefficacy_internal);
+console.log("finalefficacy_railways:", Q.finalefficacy_railways);
+console.log("finalefficacy_trade:", Q.finalefficacy_trade);
 console.log("finalefficacy_finance:", Q.finalefficacy_finance);
+console.log("finalefficacy_justice:", Q.finalefficacy_justice);
+console.log("finalefficacy_agriculture:", Q.finalefficacy_agriculture);
+console.log("finalefficacy_foodsupply:", Q.finalefficacy_foodsupply);
+console.log("finalefficacy_labor:", Q.finalefficacy_labor);
+console.log("finalefficacy_posts:", Q.finalefficacy_posts);
+console.log("finalefficacy_nationalities:", Q.finalefficacy_nationalities);
+console.log("finalefficacy_welfare:", Q.finalefficacy_welfare);
+console.log("Total:", Q.finalefficacy_sovnarkom + Q.finalefficacy_foreign + Q.finalefficacy_military + Q.finalefficacy_enlightenment + Q.finalefficacy_internal + Q.finalefficacy_railways + Q.finalefficacy_trade + Q.finalefficacy_finance + Q.finalefficacy_justice + Q.finalefficacy_agriculture + Q.finalefficacy_foodsupply + Q.finalefficacy_labor + Q.finalefficacy_posts + Q.finalefficacy_nationalities + Q.finalefficacy_welfare);
+
 
 console.log("Foreign Minister:", Q.foreign_minister);
 console.log("Auctoritas:", Q.leaders[Q.foreign_minister].auctoritas);
