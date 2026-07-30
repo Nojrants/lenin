@@ -126,7 +126,7 @@ Q.posts_minister = "Avilov";
 Q.posts_minister_party = "Bolshevik";
 Q.nationalities_minister = "Stalin";
 Q.nationalities_minister_party = "Bolshevik";
-Q.welfare_minister = "";
+Q.welfare_minister = "None";
 Q.welfare_minister_party = "";
 
 Q.sdi_relation += 0;
