@@ -226,159 +226,74 @@ title: Achievements
 tags: endings
 new-page: true
 go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
+on-arrival: {!
+const toolsWrapper = document.getElementById('tools_wrapper');
+if (toolsWrapper) {
+  toolsWrapper.style.display = 'none';
+}
+const elements = document.querySelectorAll('header, #content, footer');
+elements.forEach(el => {
+  el.style.maxWidth = '800px';
+});
+
+const achievements = [
+  "achievement_golden_age_of_the_peoples_commissars"
+];
+
+Q.unlockedCount = achievements.filter(key => Q[key] === 1).length;
+Q.totalAchievements = achievements.length;
+Q.percentComplete = Math.round((Q.unlockedCount / Q.totalAchievements) * 100);
 
 = Completed Achievements in this Playthrough
 
-[? if game_achievement_golden_age_of_the_peoples_commissars : **Golden Age of the People's Commissars** - Assemble an allstar composition in the Council of People's Commissars. ?]
-
-[? if game_achievement_rev_failed : **Неудавшаяся революция (A Failed Revolution)** - as the Bolsheviks, launch the revolution and fail. ?]
-
-[? if game_achievement_constituent_assembly : **Учредительное собрание (Constituent Assembly)** - reach the end of the game as the Mensheviks, SRs, or Kadets on at least Normal difficulty. ?]
-
-[? if game_achievement_free_russia : **Свободная Россия (A Free Russia)** - reach the end of the game as the Mensheviks, SRs, or Kadets on Hard difficulty. ?]
-
-[? if game_achievement_red_october : **Красный Октябрь (Red October)** - as the Bolsheviks, launch the revolution and win. ?]
-
-[? if game_achievement_kamenevs_dream : **Мечта Каменева (Kamenev's Dream)** - as the Bolsheviks, win at least 30% of the vote in the Constituent Assembly election without launching a revolution. ?]
-
-[? if game_achievement_junior_partner : **Младший партнер (Junior Partner)** - join the Bolshevik revolution as a junior partner. ?]
-
-[? if game_achievement_historical_materialism : **Исторический материализм (Historical Materialism)** - reach the end of the game as the Mensheviks. ?]
-
-[? if game_achievement_land_and_liberty : **Земля и воля (Land and Liberty)** - reach the end of the game as the Socialist-Revolutionaries. ?]
-
-[? if game_achievement_constitutional_democracy : **Народная Свобода (People's Freedom)** - reach the end of the game as the Kadets. ?]
-
-[? if game_achievement_peace : **Циммервальд (Zimmerwald)** - sign an armistice with the Central Powers. ?]
-
-[? if game_achievement_no_peace_no_war: **Ни мира, ни войны (No peace, no war)** - sign an armistice, and then let the Central Powers declare war again. ?]
-
-[? if game_achievement_peace_2: **Брест-Литовск (Brest-Litovsk)** - sign a permanent peace treaty with the Central Powers. ?] 
-
-[? if game_achievement_victory : **Прорыв (Breakthrough)** - win at least one battle in the Great War. ?]
-
-[? if game_achievement_milyukovs_dream : **Мечта Милюкова (Milyukov's Dream)** - defeat the Ottoman Empire. ?]
-
-[? if game_achievement_allied_victory : **Победа Антанты (Entente Victory)** - win the Great War as part of the Allies. ?]
-
-[? if game_achievement_womens_battalion : **Женские батальоны смерти (Women's Battalion of Death)** - form the Women's Battalion of Death. ?]
-
-[? if game_achievement_martovs_dream : **Мечта Мартова (Martov's Dream)** - as the Mensheviks, form an all-socialist government, sign an armistice, and hold the Constituent Assembly elections. ?]
-
-[? if game_achievement_peace_land_bread : **Мир, земля, хлеб (Peace, Land, Bread)** - sign an armistice, commence land redistribution, and reduce hunger. ?]
-
-[? if game_achievement_end_famine : **Конец голода (The end of hunger)** - hunger has been reduced to a low level. ?]
-
-[? if game_achievement_low_inflation : **Прекращение эмиссии (Stopping the printers)** - inflation is somewhat under control. ?]
-
-[? if game_achievement_law_and_order : **Правопорядок (Law and Order)** - reduce unrest among the working classes, soldiers, and peasantry. ?]
-
-[? if game_achievement_kornilovite : **Корниловцы (Kornilovite)** - successfully launch a military coup. ?]
-
-[? if game_achievement_coup_defeated: **Корниловцы разгромлены (Kornilovites defeated)** - attempt to launch a coup and fail. ?]
-
+[? if game_achievement_golden_age_of_the_peoples_commissars:
+{!<tr>!}
+  {!<td style="width: 60px; height: 60px; vertical-align: middle; text-align: center; border: 2px solid #c00000; background-color: rgba(192, 0, 0, 0.1);">!}
+    <img src="img/achievement/eiserne_front.png" alt="Iron Front Icon"
+         style="width: 100%; height: 100%; object-fit: cover; display: block;">
+  {!</td>!}
+  {!<td style="border: 2px solid #c00000; background-color: rgba(91, 154, 141, 0.1);">!}
+    <div style="padding-left: 0.5em;">
+      <div style="font-weight: bold;">Eiserne Front</div>
+      <div style="font-size: 90%; color: #444; "> - form the <span style="color: #c00000; font-weight: bold;">Iron</span> <span style="color: #1A1A1A; font-weight: bold;">Front</span>.</div>
+    </div>
+  {!</td>!}
+{!</tr>!}
+?]
 
 = Completed Achievements Overall
 
-[? if achievement_golden_age_of_the_peoples_commissars : **Golden Age of the People's Commissars** - Assemble an all-star composition in the Council of People's Commissars. ?]
-
-[? if achievement_rev_failed : **Неудавшаяся революция (A Failed Revolution)** - as the Bolsheviks, launch the revolution and fail. ?]
-
-[? if achievement_constituent_assembly : **Учредительное собрание (Constituent Assembly)** - reach the end of the game as the Mensheviks, SRs, or Kadets on at least Normal difficulty. ?]
-
-[? if achievement_free_russia : **Свободная Россия (A Free Russia)** - reach the end of the game as the Mensheviks, SRs, or Kadets on Hard difficulty. ?]
-
-[? if achievement_red_october : **Красный Октябрь (Red October)** - as the Bolsheviks, launch the revolution and win. ?]
-
-[? if achievement_kamenevs_dream : **Мечта Каменева (Kamenev's Dream)** - as the Bolsheviks, win at least 30% of the vote in the Constituent Assembly election without launching a revolution. ?]
-
-[? if achievement_junior_partner : **Младший партнер (Junior Partner)** - join the Bolshevik revolution as a junior partner. ?]
-
-[? if achievement_historical_materialism : **Исторический материализм (Historical Materialism)** - reach the end of the game as the Mensheviks. ?]
-
-[? if achievement_land_and_liberty : **Земля и воля (Land and Liberty)** - reach the end of the game as the Socialist-Revolutionaries. ?]
-
-[? if achievement_constitutional_democracy : **Народная Свобода (People's Freedom)** - complete the game as the Kadets. ?]
-
-[? if achievement_peace : **Циммервальд (Zimmerwald)** - sign an armistice with the Central Powers. ?]
-
-[? if achievement_no_peace_no_war: **Ни мира, ни войны (No peace, no war)** - sign an armistice, and then let the Central Powers declare war again. ?]
-
-[? if achievement_peace_2: **Брест-Литовск (Brest-Litovsk)** - sign a permanent peace treaty with the Central Powers. ?] 
-
-[? if achievement_victory : **Прорыв (Breakthrough)** - win at least one battle in the Great War. ?]
-
-[? if achievement_milyukovs_dream : **Мечта Милюкова (Milyukov's Dream)** - defeat the Ottoman Empire. ?]
-
-[? if achievement_allied_victory : **Победа Антанты (Entente Victory)** - win the Great War as part of the Allies. ?]
-
-[? if achievement_womens_battalion : **Женские батальоны смерти (Women's Battalion of Death)** - form the Women's Battalion of Death. ?]
-
-[? if achievement_martovs_dream : **Мечта Мартова (Martov's Dream)** - as the Mensheviks, form an all-socialist government, sign an armistice, and hold the Constituent Assembly elections. ?]
-
-[? if achievement_peace_land_bread : **Мир, земля, хлеб (Peace, Land, Bread)** - sign an armistice, commence land redistribution, and reduce hunger. ?]
-
-[? if achievement_end_famine : **Конец голода (The end of hunger)** - hunger has been reduced to a low level. ?]
-
-[? if achievement_low_inflation : **Прекращение эмиссии (Stopping the printers)** - inflation is somewhat under control. ?]
-
-[? if achievement_law_and_order : **Правопорядок (Law and Order)** - reduce unrest among the working classes, soldiers, and peasantry. ?]
-
-[? if achievement_kornilovite : **Корниловцы (Kornilovite)** - successfully launch a military coup. ?]
-
-[? if achievement_coup_defeated: **Корниловцы разгромлены (Kornilovites defeated)** - attempt to launch a coup and fail. ?]
+[? if achievement_golden_age_of_the_peoples_commissars:
+{!<tr>!}
+  {!<td style="width: 60px; height: 60px; vertical-align: middle; text-align: center; border: 2px solid #c00000; background-color: rgba(192, 0, 0, 0.1);">!}
+    <img src="img/achievement/eiserne_front.png" alt="Iron Front Icon"
+         style="width: 100%; height: 100%; object-fit: cover; display: block;">
+  {!</td>!}
+  {!<td style="border: 2px solid #c00000; background-color: rgba(91, 154, 141, 0.1);">!}
+    <div style="padding-left: 0.5em;">
+      <div style="font-weight: bold;">Eiserne Front</div>
+      <div style="font-size: 90%; color: #444; "> - form the <span style="color: #c00000; font-weight: bold;">Iron</span> <span style="color: #1A1A1A; font-weight: bold;">Front</span>.</div>
+    </div>
+  {!</td>!}
+{!</tr>!}
+?]
 
 = Incomplete Achievements
 
-[? if not achievement_golden_age_of_the_peoples_commissars : **Golden Age of the People's Commissars** - Assemble an all-star composition in the Council of People's Commissars. ?]
-
-[? if not achievement_dustbin : **Свалка истории (The Dustbin of History)** - defeated by the Bolshevik revolution. ?]
-
-[? if not achievement_rev_failed : **Неудавшаяся революция (A Failed Revolution)** - as the Bolsheviks, launch the revolution and fail. ?]
-
-[? if not achievement_constituent_assembly : **Учредительное собрание (Constituent Assembly)** - hold the Constituent Assembly elections as the Mensheviks, SRs, or Kadets on at least Normal difficulty. ?]
-
-[? if not achievement_free_russia : **Свободная Россия (A Free Russia)** - reach the end of the game as the Mensheviks, SRs, or Kadets on Hard difficulty. ?]
-
-[? if not achievement_red_october : **Красный Октябрь (Red October)** - as the Bolsheviks, launch the revolution and win. ?]
-
-[? if not achievement_kamenevs_dream : **Мечта Каменева (Kamenev's Dream)** - as the Bolsheviks, win at least 30% of the vote in the Constituent Assembly election without launching a revolution. ?]
-
-[? if not achievement_junior_partner : **Младший партнер (Junior Partner)** - join the Bolshevik revolution as a junior partner. ?]
-
-[? if not achievement_historical_materialism : **Исторический материализм (Historical Materialism)** - reach the end of the game as the Mensheviks. ?]
-
-[? if not achievement_land_and_liberty : **Земля и воля (Land and Liberty)** - reach the end of the game as the Socialist-Revolutionaries. ?]
-
-[? if not achievement_constitutional_democracy : **Народная Свобода (People's Freedom)** - reach the end of the game as the Kadets. ?]
-
-[? if not achievement_peace : **Циммервальд (Zimmerwald)** - sign an armistice with the Central Powers. ?]
-
-[? if not achievement_no_peace_no_war: **Ни мира, ни войны (No peace, no war)** - sign an armistice, and then let the Central Powers declare war again. ?]
-
-[? if not achievement_peace_2: **Брест-Литовск (Brest-Litovsk)** - sign a permanent peace treaty with the Central Powers. ?] 
-
-[? if not achievement_victory : **Прорыв (Breakthrough)** - win at least one battle in the Great War. ?]
-
-[? if not achievement_milyukovs_dream : **Мечта Милюкова (Milyukov's Dream)** - defeat the Ottoman Empire. ?]
-
-[? if not achievement_allied_victory : **Победа Антанты (Entente Victory)** - win the Great War as part of the Allies. ?]
-
-[? if not achievement_womens_battalion : **Женские батальоны смерти (Women's Battalion of Death)** - form the Women's Battalion of Death. ?]
-
-[? if not achievement_martovs_dream : **Мечта Мартова (Martov's Dream)** - as the Mensheviks, form an all-socialist government, sign an armistice, and hold the Constituent Assembly elections. ?]
-
-[? if not achievement_peace_land_bread : **Мир, земля, хлеб (Peace, Land, Bread)** - sign an armistice, commence land redistribution, and reduce hunger. ?]
-
-[? if not achievement_end_famine : **Конец голода (The end of hunger)** - hunger has been reduced to a low level. ?]
-
-[? if not achievement_low_inflation : **Прекращение эмиссии (Stopping the printers)** - inflation is somewhat under control. ?]
-
-[? if not achievement_law_and_order : **Правопорядок (Law and Order)** - reduce unrest among the working classes, soldiers, and peasantry. ?]
-
-[? if not achievement_kornilovite : **Корниловцы (Kornilovite)** - successfully launch a military coup. ?]
-
-[? if not achievement_coup_defeated: **Корниловцы разгромлены (Kornilovites defeated)** - attempt to launch a coup and fail. ?]
+[? if not achievement_golden_age_of_the_peoples_commissars:
+{!<tr>!}
+  {!<td style="width: 60px; height: 60px; vertical-align: middle; text-align: center; border: 2px solid #c00000; background-color: rgba(192, 0, 0, 0.1);">!}
+    <img src="img/achievement/eiserne_front.png" alt="Iron Front Icon"
+         style="width: 100%; height: 100%; object-fit: cover; display: block;">
+  {!</td>!}
+  {!<td style="border: 2px solid #c00000; background-color: rgba(91, 154, 141, 0.1);">!}
+    <div style="padding-left: 0.5em;">
+      <div style="font-weight: bold;">Eiserne Front</div>
+      <div style="font-size: 90%; color: #444; "> - form the <span style="color: #c00000; font-weight: bold;">Iron</span> <span style="color: #1A1A1A; font-weight: bold;">Front</span>.</div>
+    </div>
+  {!</td>!}
+{!</tr>!}
+?]
 
 @end_game
 game-over: true
