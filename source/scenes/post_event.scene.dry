@@ -323,6 +323,7 @@ if (Q.justice_expend < 0.25) Q.justice_expend = 0.25;
 if (Q.agriculture_expend < 0.25) Q.agriculture_expend = 0.25;
 if (Q.foodsupply_expend < 0.25) Q.foodsupply_expend = 0.25;
 if (Q.nationalities_expend < 0.25) Q.nationalities_expend = 0.25;
+if (Q.welfare_expend < 0.25 && Q.welfare_founded != 1) Q.welfare_expend = 0;
 if (Q.welfare_expend < 0.25 && Q.welfare_founded == 1) Q.welfare_expend = 0.25;
 
 Q.government_functions = (
@@ -517,9 +518,9 @@ Q.business_tax =
 );
 
 Q.interest = (
-    (Q.loans_high * 0.08) +
-    (Q.loans_med * 0.06) +
-    (Q.loans_low * 0.04) +
+    (Q.loans_high * 0.16) +
+    (Q.loans_med * 0.12) +
+    (Q.loans_low * 0.08) +
     (Q.bonds * (Q.bond_rate / 100)) +
     (Q.bank_advances * 0.02)
 );
