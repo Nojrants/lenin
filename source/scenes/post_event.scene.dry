@@ -211,10 +211,10 @@ Q.finalefficacy_internal =
 Q.finalefficacy_railways =
     Q.efficacy_railways
     + (0.25 * (
-        (Q.leaders[Q.transportation_minister].auctoritas / 20)
-        + (Q.leaders[Q.transportation_minister].administration / 10)
-        + (Q.leaders[Q.transportation_minister].military / 10)
-        + (Q.leaders[Q.transportation_minister].economic / 10)
+        (Q.leaders[Q.transport_minister].auctoritas / 20)
+        + (Q.leaders[Q.transport_minister].administration / 10)
+        + (Q.leaders[Q.transport_minister].military / 10)
+        + (Q.leaders[Q.transport_minister].economic / 10)
     ));
 
 Q.finalefficacy_trade =
@@ -265,6 +265,14 @@ Q.finalefficacy_labor =
         + (Q.leaders[Q.labor_minister].administration / 10)
         + (Q.leaders[Q.labor_minister].economic / 5)
         + (Q.leaders[Q.labor_minister].diplomacy / 10)
+    ));
+
+Q.finalefficacy_posts =
+    Q.efficacy_posts
+    + (0.25 * (
+        (Q.leaders[Q.posts_minister].auctoritas / 20)
+        + (Q.leaders[Q.posts_minister].administration / 10)
+        + (Q.leaders[Q.posts_minister].economic / 5)
     ));
 
 Q.finalefficacy_nationalities =
