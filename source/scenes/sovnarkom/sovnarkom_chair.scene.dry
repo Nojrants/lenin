@@ -86,7 +86,7 @@ We need to select a people's commsisar to head the commissariat.
 @select_kollontai
 title: Alexandra Kollontai
 subtitle: {!
-Left — A strong social reformer, feminist, and outspoken leftist among Bolshevik leadership.<br>
+Left — Strong social reformer, feminist, and radical.<br>
 Overall skill: ★★★<br>
 Suitability: ★★★★★
 !}
@@ -110,7 +110,7 @@ Architectual student; briefly managed Russia's largest disability insurance fund
 Overall skill: ★★<br>
 Suitability: ★★★
 !}
-on-arrival: welfare_minister = "Milyutin"; welfare_minister_party = "Bolshevik"; 
+on-arrival: welfare_minister = "N. Milyutin"; welfare_minister_party = "Bolshevik"; 
 go-to: welfare
 
 
