@@ -879,6 +879,7 @@ title: Finalize the agreement.
 choose-if: commissariats_held <= commissariats_promised
 unavailable-subtitle: The other parties will not accept. 
 new-page: true
+achievement: vikzhel_averted
 
 
 @enlightenment_assign
