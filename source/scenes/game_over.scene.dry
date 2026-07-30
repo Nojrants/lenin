@@ -330,6 +330,8 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 
 = Incomplete Achievements
 
+[? if not achievement_golden_age_of_the_peoples_commissars : **Golden Age of the People's Commissars** - Assemble an all-star composition in the Council of People's Commissars. ?]
+
 [? if not achievement_dustbin : **Свалка истории (The Dustbin of History)** - defeated by the Bolshevik revolution. ?]
 
 [? if not achievement_rev_failed : **Неудавшаяся революция (A Failed Revolution)** - as the Bolsheviks, launch the revolution and fail. ?]
