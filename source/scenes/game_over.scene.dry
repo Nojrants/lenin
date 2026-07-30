@@ -6,7 +6,7 @@ on-arrival: {!
 // Achievements:
 this.achieve('game_completed');
 
-if (Q.dreamteam = 1) {
+if (Q.dreamteam == 1) {
     this.achieve('dreamteam');
 }
 
