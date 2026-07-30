@@ -6,6 +6,10 @@ on-arrival: {!
 // Achievements:
 this.achieve('game_completed');
 
+if (Q.dreamteam = 1) {
+    this.achieve('dreamteam');
+}
+
 if (Q.revolutionary_victory && Q.player_party != 'b' && !Q.join_bolshevik) {
     this.achieve('dustbin');
 }
@@ -220,10 +224,10 @@ Finally, unrest among the working classes, soldiers, and peasantry has ended.
 @achievements
 title: Achievements
 tags: endings
+new-page: true
 go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 
 = Completed Achievements in this Playthrough
-
 
 [? if game_achievement_dreamteam : **Golden Age of the People's Commissars** - Assemble an allstar composition in the Council of People's Commissars. ?]
 
