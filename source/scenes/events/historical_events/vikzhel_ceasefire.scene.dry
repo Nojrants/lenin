@@ -42,8 +42,7 @@ Though talks initially stall, several days of arguing (and news of anti-Bolshevi
 
 
 @menu
-
-[+ influence +]
+on-arrival: console.log("Influence: ", influence);
 
 - #vikzhel_offers
 - @null
@@ -461,7 +460,7 @@ Vikzhel immediately unleashes a full-scale strike across the railway network, an
 @accept_offer
 title: Agree to the offer. 
 unavailable-subtitle: The other parties will not accept the current offer. 
-choose-if: influence > 40
+choose-if: influence > 43
 new-page: true
 on-arrival: lenin_anger = 1 if (commissariats_held < 10 or disarm_workers = 1 or bar_lenin = 1 or restructure = 1 or drop_chair = 1 or drop_foreign = 1 or drop_military = 1 or drop_internal = 1);
 
@@ -834,7 +833,7 @@ new-page: true
 @accept_offer2
 title: Agree to the offer. 
 unavailable-subtitle: The other parties will not accept the current offer. 
-choose-if: influence > 40
+choose-if: influence > 43
 new-page: true
 on-arrival: lenin_anger += 1 if (commissariats_held < 10 or disarm_workers = 1 or bar_lenin = 1 or drop_chair = 1 or drop_foreign = 1 or drop_military = 1 or drop_internal = 1); moderate_dissent += 20 if lenin_anger = 2; moderate_strength -= 5 if lenin_anger = 2; moderate_dissent += 10 if lenin_anger >= 1; 
 
