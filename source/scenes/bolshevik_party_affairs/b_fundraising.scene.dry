@@ -8,9 +8,9 @@ tags: b_party
 on-arrival: {! 
 Q.b_fundraising_timer = 4;
 Q.week_actions += 1;
-Q.b_dues_income = Math.round((Q.party_membership / 100 * Q.b_dues) * (0.25 + (1 - (Q.instability / 100))));
-Q.b_dues_income2 = Math.round((Q.party_membership / 100 * (Q.b_dues - 1)) * (0.25 + (1 - (Q.instability / 100))));
-Q.b_dues_income3 = Math.round((Q.party_membership / 100 * (Q.b_dues + 1)) * (0.25 + (1 - (Q.instability / 100))));
+Q.b_dues_income = Math.round((Q.party_membership / 1000 * Q.b_dues) * (2 + (1 - (Q.instability / 100))));
+Q.b_dues_income2 = Math.round((Q.party_membership / 1000 * (Q.b_dues - 1)) * (2 + (1 - (Q.instability / 100))));
+Q.b_dues_income3 = Math.round((Q.party_membership / 1000 * (Q.b_dues + 1)) * (2 + (1 - (Q.instability / 100))));
 !}
 
 = Fundraising
