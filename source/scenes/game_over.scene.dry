@@ -9,7 +9,7 @@ this.achieve('game_completed');
 if (Q.dreamteam == 1) {
     this.achieve('golden_age_of_the_peoples_commissars');
 }
-
+!}
 
 
 = End
