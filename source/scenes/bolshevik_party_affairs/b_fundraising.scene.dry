@@ -1,11 +1,17 @@
 title: Fundraising
 new-page: true
 view-if: b_fundraising_timer <= 0
-on-arrival: b_fundraising_timer = 4; week_actions += 1; b_dues_income = Math.round((party_membership / 100 * b_dues) * (0.25 + (1 - (instability / 100)))); b_dues_income2 = Math.round((party_membership / 100 * (b_dues - 1)) * (0.25 + (1 - (instability / 100)))); b_dues_income3 = Math.round((party_membership / 100 * (b_dues + 1)) * (0.25 + (1 - (instability / 100))));
 frequency: 300
 is-card: true
 card-image: img/ruble.jpg
 tags: b_party
+on-arrival: {! 
+Q.b_fundraising_timer = 4;
+Q.week_actions += 1;
+Q.b_dues_income = Math.round((Q.party_membership / 100 * Q.b_dues) * (0.25 + (1 - (Q.instability / 100))));
+Q.b_dues_income2 = Math.round((Q.party_membership / 100 * (Q.b_dues - 1)) * (0.25 + (1 - (Q.instability / 100))));
+Q.b_dues_income3 = Math.round((Q.party_membership / 100 * (Q.b_dues + 1)) * (0.25 + (1 - (Q.instability / 100))));
+!}
 
 = Fundraising
 
