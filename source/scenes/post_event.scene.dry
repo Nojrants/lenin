@@ -127,8 +127,6 @@ if (Q.unemployed <= 1) {
     Q.unemployed = 1;
 }
 
-Q.finalefficacy_sovnarkom = Q.efficacy_sovnarkom + (0.25 * ((Q.leaders[Q.prime_minister].auctoritas / 5) + (Q.leaders[Q.prime_minister].administration / 5))) + (0.125 * (Q.leaders[Q.deputy_pm].administration / 5));
-Q.finalefficacy_finance = Q.efficacy_finance + (0.25 * ((Q.leaders[Q.finance_minister].auctoritas / 20) + (Q.leaders[Q.finance_minister].administration / 10) + (Q.leaders[Q.finance_minister].economic / 5))); 
 
 if (Q.sovnarkom_expend < 0.25) Q.sovnarkom_expend = 0.25;
 if (Q.internal_expend < 0.25) Q.internal_expend = 0.25;
