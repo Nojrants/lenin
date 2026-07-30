@@ -16,13 +16,13 @@ For better or for worse, the party cannot exist without money.
 - @increase: Increase dues.
 
 @maintain
-subtitle: [+ (Math.round((party_membership / 100 * b_dues) * (0.25 + (1-(instability/100)))) +] party funds gained.
-on-arrival: b_resources += Math.round((party_membership / 100 * b_dues) * (0.25 + (1-(instability/100))); 
+subtitle: [+ (Math.round((Q.party_membership / 100 * Q.b_dues) * (0.25 + (1-(Q.instability/100)))) +] party funds gained.
+on-arrival: b_resources += Math.round((Q.party_membership / 100 * Q.b_dues) * (0.25 + (1-(Q.instability/100))); 
 
 We maintain our current dues.
 
 @reduce
-subtitle: [+ (Math.round((party_membership / 100 * (b_dues - 1)) * (0.25 + (1-(instability/100)))) +] party funds gained.
+subtitle: [+ (Math.round((Q.party_membership / 100 * (Q.b_dues - 1)) * (0.25 + (1-(Q.instability/100)))) +] party funds gained.
 choose-if: b_dues > 1
 unavailable-subtitle: We've already abolished dues. 
 on-arrival: b_dues -= 1; b_resources += Math.round((party_membership / 100 * b_dues) * (0.25 + (1-(instability/100))); b_dissent -= 0.1; leninist_dissent -= 4; moderate_dissent -= 4; leftcom_dissent -= 4;
@@ -30,7 +30,7 @@ on-arrival: b_dues -= 1; b_resources += Math.round((party_membership / 100 * b_d
 Our current members appreciate this, but no one decides to join a party because of the low dues.
 
 @increase
-subtitle: [+ (Math.round((party_membership / 100 * (b_dues + 1)) * (0.25 + (1-(instability/100)))) +] party funds gained. [? if hunger >= 15 : Given the present economic situation, this may be painful. ?][? if b_dues >= 4 : Dues are already rather high; increasing them might reduce our membership. ?]
+subtitle: [+ (Math.round((Q.party_membership / 100 * (Q.b_dues + 1)) * (0.25 + (1-(Q.instability/100)))) +] party funds gained. [? if hunger >= 15 : Given the present economic situation, this may be painful. ?][? if b_dues >= 4 : Dues are already rather high; increasing them might reduce our membership. ?]
 on-arrival: b_dues += 1; b_resources += Math.round((party_membership / 100 * b_dues) * (0.25 + (1-(instability/100))); workers_bolshevik -= 3; underclass_bolshevik -= 3; workers_bolshevik -= 10 if hunger >= 15; underclass_bolshevik -= 10 if hunger >= 15; workers_bolshevik -= 3*b_dues if b_dues >= 5; underclass_bolshevik -= 3*b_dues if b_dues >= 5; leninist_dissent += 4; center_dissent += 4; moderate_dissent += 4; b_dissent += 0.1;
 
 Our members grumble at this, and some of the less committed members leave. But now, we have access to additional resources.
