@@ -292,6 +292,7 @@ Q.efficacy_trade = 0.6;
 Q.efficacy_justice = 0.6;
 Q.efficacy_agriculture = 0.6;
 Q.efficacy_foodsupply = 0.6;
+Q.efficacy_posts = 0.5;
 Q.efficacy_nationalities = 0.5;
 Q.efficacy_welfare = 0.5;
 
