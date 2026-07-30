@@ -119,7 +119,7 @@ Q.party_membership_display = (Q.party_membership * 1000).toLocaleString();
 
 >>**Nationalities: ** [+ nationalities_minister +] [?if nationalities_minister_party=="Bolshevik": (<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>)?]
 
->>[?if welfare_minister != "": **Welfare:** [+ welfare_minister +] [?if welfare_minister_party=="Bolshevik": (<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>)?] ?]
+>>[?if welfare_minister != "None": **Welfare:** [+ welfare_minister +] [?if welfare_minister_party=="Bolshevik": (<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>)?] ?]
 
 **Parties in government:** [+ governing_parties_str +]
 
