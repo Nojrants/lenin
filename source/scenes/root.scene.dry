@@ -291,6 +291,7 @@ Q.efficacy_enlightenment = 0.7;
 Q.efficacy_internal = 0.6;
 Q.efficacy_railways = 0.6;
 Q.efficacy_trade = 0.6;
+Q.efficacy_labor = 0.6; 
 Q.efficacy_justice = 0.6;
 Q.efficacy_agriculture = 0.6;
 Q.efficacy_foodsupply = 0.6;
