@@ -42,7 +42,8 @@ Though talks initially stall, several days of arguing (and news of anti-Bolshevi
 
 
 @menu
-on-arrival: console.log("Influence: ", Q.influence);
+
+[+ influence +]
 
 - #vikzhel_offers
 - @null
