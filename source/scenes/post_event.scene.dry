@@ -293,6 +293,10 @@ Q.finalefficacy_welfare =
         + (Q.leaders[Q.welfare_minister].culture / 20)
     ));
 
+if (Q.finalefficacy_sovnarkom + Q.finalefficacy_foreign + Q.finalefficacy_military + Q.finalefficacy_enlightenment + Q.finalefficacy_internal + Q.finalefficacy_railways + Q.finalefficacy_trade + Q.finalefficacy_finance + Q.finalefficacy_justice + Q.finalefficacy_agriculture + Q.finalefficacy_foodsupply + Q.finalefficacy_labor + Q.finalefficacy_posts + Q.finalefficacy_nationalities + Q.finalefficacy_welfare >= 21) {
+    this.achieve('dreamteam');
+}
+
 console.log("Finance Minister:", Q.finance_minister);
 console.log("Auctoritas:", Q.leaders[Q.finance_minister].auctoritas);
 console.log("Administration:", Q.leaders[Q.finance_minister].administration);
