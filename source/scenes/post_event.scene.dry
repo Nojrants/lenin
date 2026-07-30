@@ -532,6 +532,7 @@ Q.expenditure = Math.round(
 ) / 100;
 
 Q.income = Math.round(
+    (
     Q.income_tax +
     Q.property_tax +
     Q.business_tax +
@@ -539,7 +540,7 @@ Q.income = Math.round(
     Q.customs +
     Q.railway_revenue +
     Q.enterprises_revenue
-    * 100
+    ) * 100
 ) / 100;
 
 Q.publicdebt = Math.round(
