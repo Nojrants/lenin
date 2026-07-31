@@ -1,7 +1,7 @@
 title: The Great Civil Servants' Strike
 subtitle: Employees of the government have walked-out en masse...
 new-page: true
-view-if: month = 11 and week = 1
+view-if: month = 11 and week = 2
 max-visits: 1
 tags: event
 on-arrival: efficacy_sovnarkom -= 0.1; efficacy_finance -= 0.5; efficacy_foreign -= 0.5; efficacy_military -= 0.3; efficacy_enlightenment -= 0.3; efficacy_internal -= 0.3; efficacy_railways -= 0.3; efficacy_trade -= 0.5; efficacy_justice -= 0.5; efficacy_agriculture -= 0.5; efficacy_foodsupply -= 0.5; efficacy_posts -= 0.5; efficacy_nationalities -= 0.3; efficacy_welfare -= 0.5; middle_unrest += 20; intelligentsia_unrest += 5; instability += 3; bourgeois_specialist_unrest += 15; 
