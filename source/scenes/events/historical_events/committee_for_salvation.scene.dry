@@ -53,8 +53,7 @@ on-arrival: instability -= 5; workers_b += 10; soldiers_b += 10; leninist_streng
 Despite fearing the worst, it turns out that both parties possessed far fewer numbers and far weaker resolve than expected. The two also fall to coordinate with each other or time their actions successfully, making it relatively easy to crush the "Committee for Salvation" forces separately before Kerensky even mounts his attack. After some brief skirmishes on the edge of the capital, Kerensky's forces break and disperse. 
 
 
-@coup_victory
-on-arrival: krasnov_defeat = 1
+@krasnov_defeat
 
 = Defeat 
 
