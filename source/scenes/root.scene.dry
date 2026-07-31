@@ -1037,6 +1037,7 @@ Q.timers = [//m_party
             'report',
             'sovnarkom',
             'party_congress',
+            'chichern_travel',
             ];
 Q.advisor_action_timer = 0;
 Q.party_congress_timer = 0;
