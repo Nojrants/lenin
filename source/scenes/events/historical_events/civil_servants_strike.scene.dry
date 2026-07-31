@@ -1,0 +1,44 @@
+title: The Great Civil Servants' Strike
+subtitle: Employees of the government have walked-out en masse...
+new-page: true
+view-if: month = 11 and week = 2
+max-visits: 1
+tags: event
+on-arrival: efficacy_sovnarkom -= 0.1; efficacy_finance -= 0.5; efficacy_foreign -= 0.5; efficacy_military -= 0.3; efficacy_enlightenment -= 0.3; efficacy_internal -= 0.3; efficacy_railways -= 0.3; efficacy_trade -= 0.5; efficacy_justice -= 0.5; efficacy_agriculture -= 0.5; efficacy_foodsupply -= 0.5; efficacy_posts -= 0.5; efficacy_nationalities -= 0.3; efficacy_welfare -= 0.5; middle_unrest += 20; intelligentsia_unrest += 5; instability += 3; bourgeois_specialist_unrest += 15; 
+
+= Civil Servants' Strike
+
+Though declaring a new, revolutionary form of government in the people's commissariats, in practice each commissariat has inevitably had to inherit the majority of its personnel, infrastructure, and resources from the previous bourgeois ministries of the same name. While positions all across the political spectrum could be found among the old staff, it's safe to say they generally lean conservative as a whole, and in either case are unappreciative of recent developments. Shocked by the sudden arrest of the Provisional Government, the civil servants have launched a mass strike in protest. Commissariat offices are discovered virtually empty, as the experienced administrators, bureaucrats, and white-collar workers leave their new Bolshevik bosses to fend for themselves. 
+
+There are mass shutdowns at railway stations, banks, telegraph offices, law courts, schools, and other vital institutions. Other locations remain open but at greatly diminished capacity, as employees find ways to subtly hinder, disobey, or sabotage the new regime. Our own people are eager, but woefully inexperienced and unprepared for the task ahead of them. 
+
+Needless to say, government functions have plummeted across the board, and without the aid of the old civil servants, we can't expect a return to full capacity any time soon. 
+
+@civil_servants_options
+
+- @raise_salaries
+- @appoint_replacements
+- @so_be_it
+
+@raise_salaries
+title: Raise salaries significantly to try and entice people back to work.
+subtitle: -1 resources – This may be unpopular among our base, especially given present conditions. 
+max-visits: 1
+go-to: civil_servants_options
+on-arrival: resources -= 1; efficacy_finance += 0.05; efficacy_foreign += 0.05; efficacy_military += 0.05; efficacy_enlightenment += 0.05; efficacy_internal += 0.05; efficacy_railways += 0.05; efficacy_trade += 0.05; efficacy_justice += 0.05; efficacy_agriculture += 0.05; efficacy_foodsupply += 0.05; efficacy_posts += 0.05; efficacy_nationalities += 0.05; efficacy_welfare += 0.05; foreignaffairs_expend += 0.10; military_expend += 0.10; enlightmenet_expend += 0.10; railways_expend += 0.10; trade_expend += 0.10; finance_expend += 0.10; justice_expend += 0.10; agriculture_expend += 0.10; foodsupply_expend += 0.10; posts_expend += 0.10; nationalities_expend += 0.10; welfare_expend += 0.10; monthly_inflation += 0.1; middle_unrest -= 5; intelligentsia_unrest -= 2; bourgeois_specialist_unrest -= 10; labor_unrest += 10; leninist_strength -= 5; instability -= 1;
+
+The Revolution was premised on the idea of overthrowing the old order and replacing it, and so having to appease and reward the old servants of capital instead is an embarrassing state of affairs. Workers grumble about more money going into the pockets of elites. It's also hard to shake the accusation that we caved easily to pressure, hurting our public standing. But that said, the increased salaries do seem to lessen the damage somewhat, eventually luring some employees back to work. 
+
+
+@appoint_replacements
+title: Deploy communist specialists to fill vacancies at the most critical sectors. 
+choose-if: red_specialists > 1
+unavailable-subtitle: We haven't trained enough "red specialists" to make this possible. 
+max-visits: 1
+go-to: civil_servants_options
+on-arrival: 
+
+so_be_it
+title: There's nothing more we can do.
+go-to: root
+
