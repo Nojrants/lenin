@@ -1031,6 +1031,7 @@ Q.timers = [//m_party
             'crime_wave',
             'enemy_reinforcements',
             'german_offensive',
+            'german_waiting',
             'mass_demobilization',
             'report',
             'sovnarkom',
