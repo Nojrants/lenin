@@ -537,10 +537,11 @@ Q.interest = (
 );
 
 Q.expenditure = Math.round(
+    (
     Q.interest +
     Q.indemnities +
     Q.government_functions
-    * 100
+    ) * 100
 ) / 100;
 
 Q.income = Math.round(
