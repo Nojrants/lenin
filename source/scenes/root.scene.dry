@@ -264,6 +264,7 @@ Q.finance_expend = 1;
 Q.justice_expend = 0.5;
 Q.agriculture_expend = 2;
 Q.foodsupply_expend = 3;
+Q.posts_expend = 1; 
 Q.nationalities_expend = 0.5;
 Q.welfare_expend = 0;
 
@@ -279,6 +280,7 @@ Q.government_functions = (
     Q.justice_expend +
     Q.agriculture_expend +
     Q.foodsupply_expend +
+    Q.posts_expend +
     Q.nationalities_expend +
     Q.welfare_expend
 );
@@ -1001,6 +1003,11 @@ Q.timers = [//m_party
             'shuffle_cabinet', 'social_policy',
             'education_policy', 'economic_policy', 'coalition_affairs',
             'womens_rights', 'offensive',
+            'foreign_corruption', 'finance_corruption', 'military_corruption',
+            'internal_corruption', 'enlightenment_corruption', 'internal_corruption',
+            'railways_corruption', 'trade_corruption', 'labor_corruption',
+            'justice_corruption', 'agriculture_corruption', 'foodsupply_corruption',
+            'posts_corruption', 'nationalities_corruption', 'welfare_corruption',
             // soviet
             'food_soviet', 'labor_soviet', 'militias', 'prov_gov_relations',
             'nationalities_soviet', 'war_soviet', 'land_soviet',
