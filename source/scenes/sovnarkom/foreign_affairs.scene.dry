@@ -108,7 +108,7 @@ The Germans have accepted our emissaries and have agreed to hold talks at the he
 
 It is now up to us to prepare our contingent of negotiators and travel to Brest-Litovsk. 
 
-@brest-litovsk
+@brest_litovsk
 title: Dispatch a delegation to Brest-Litovsk to negotiate with the Central Powers. 
 view-if: german_negotiations = 1
 on-arrival: german_negotiations = 2;
