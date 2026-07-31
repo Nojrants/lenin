@@ -1,0 +1,65 @@
+title: Uprising in Petrograd!
+subtitle: Counterrevolutionary forces are mobilizing against us...
+new-page: true
+view-if: month = 11 and week = 2
+max-visits: 1
+face-image: img/kornilov_2.jpg
+tags: event
+
+= Uprising in Petrograd
+
+Although we have secured tentative control over the city of Petrograd, counterrevolutionary forces are assembling against us. 
+
+A group of military officers and cadets, right socialists, and other various notables, have declared an "All-Russian Committee for the Salvation of the Homeland and the Revolution". Despite lacking any real influence outside the city, they appear to be positioning themselves as an alternative government, and have received favorable coverage from a plethora of the city's newspapers. We have received word that soldiers loyal to this group have risen up, in an attempt to overthrow soviet power!
+
+Meanwhile, outside the city limits, Kerensky has reemerged and has managed to rally an army to his side, joined by General Petr Krasnov. This army is now preparing to march on the city as well!
+
+- @shut_down_newspapers
+- @defense
+- @battle
+
+@shut_down_newspapers
+title: Crack down on the counterrevolutionary newspapers!
+max-visits: 1
+go-to: committee_for_salvation
+on-arrival: democraticity -= 2; elite_strength -= 4; middle_strength -= 2; elite_unrest += 2; middle_unrest += 2; labor_unrest += 2; left_m_relation -= 2; centre_m_relation -= 3; right_m_relation -= 5; centre_sr_relation -= 3; right_sr_relation -= 5; ns_relation -= 5; k_relation -= 5; rightist_relation -= 5; 
+
+We take the opportunity to shut down many of the worst offending papers—many of which could be legitimately accused of incitement to rebellion. Although red guards successfully break-up many newspaper offices, we lack the administrative oversight and enforcement to really ensure these bans are followed, allowing many papers to simply restart production under new names. This infringement on the freedom of the press garners some criticism, but Lenin argues the move is necessary given the precarious situation. 
+
+
+@defense
+title: Prepare for the defense of Petrograd and the revolution!
+on-arrival: workers_militia_strength += 10; workers_militia_militancy += 0.2;
+max-visits: 1
+go-to: committee_for_salvation
+
+Barricades have been hastily erected, trenches are being dug around the city. Loyal workers' militias are heeding the call! 
+
+- @battle: There must be a battle...
+
+@battle
+title: There must be a battle...
+go-to: krasnov
+set-jump: post_battle
+
+@post_battle
+go-to: krasnov_victory if krasnov_victory = 1; krasnov_defeat if krasnov_defeat = 1
+
+@krasnov_victory
+on-arrival: instability -= 5; workers_b += 10; soldiers_b += 10; leninist_strength += 5; 
+
+= Bolshevik Victory
+
+Despite fearing the worst, it turns out that both parties possessed far fewer numbers and far weaker resolve than expected. The two also fall to coordinate with each other or time their actions successfully, making it relatively easy to crush the "Committee for Salvation" forces separately before Kerensky even mounts his attack. After some brief skirmishes on the edge of the capital, Kerensky's forces break and disperse. 
+
+
+@coup_victory
+on-arrival: krasnov_defeat = 1
+
+= Defeat 
+
+The counterrevolutionaries have taken over Petrograd! Kerensky's forces sweep over the defenders, disarming the workers' militias and the rebellious garrisons. 
+
+
+- @game_over: A story for another time.
+
