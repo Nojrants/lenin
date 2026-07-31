@@ -1,0 +1,126 @@
+title: Foreign Affairs
+new-page: true
+is-card: true
+on-arrival: foreign_policy_timer += 2; week_actions += 1
+view-if: foreign_policy_timer == 0 and finance_minister_party = "Bolshevik"
+tags: sovnarkom
+
+= Foreign Affairs
+
+- @administration
+- @foreign_null
+- @secret_treaties
+- @open_negotiations
+- @brest_litovsk
+- @prisoner_exchanges
+- @root: Do not change foreign policy
+- @easy_discard
+- @cancel_advisor_action
+
+
+@foreign_null
+title: -------------------------------------------------------------------------------------------------
+go-to: foreign_affairs
+
+@administration
+title: ADMINISTRATION
+
+- @finance_improve_admin
+- @finance_hire_staff
+- @finance_corruption
+- @finance_return
+
+
+@finance_improve_admin
+title: Streamline the commissariat
+subtitle: Cut waste and inefficiencies, increase labor intensity
+choose-if: foreign_corruption = 0
+unavailable-subtitle: There's nothing more to cut at the moment. 
+on-arrival: foreign_expend -= 0.25; efficacy_foreign += 0.1 if efficacy_foreign < 1; foreign_streamline += 8; 
+
+@finance_hire_staff
+title: Hire administrative personnel
+subtitle: -0.5 resources
+on-arrival: efficacy_foreign += 0.2 if efficacy_foreign < 1; foreign_expend += 0.25; resources -= 0.5;
+
+@finance_corruption
+title: Root-out departmental corruption. 
+subtitle: -0.5 resources
+on-arrival: efficacy_foreign += 0.1 if efficacy_foreign < 1; resources -= 0.5;
+
+
+
+
+@secret_treaties
+title: Decide what to do with the secret treaties of the previous governments.  
+subtitle: We inherited numerous documents of note from the Tsarist and Provisional governments...
+new-page: true
+view-if: secret_treaties != 1
+
+Upon coming to power, we captured a plethora of foreign documents and correspondences dating to both the Imperial Russian government and the Provisional Governemnt of 1917. We now have concrete proof for a number of embarrasing arrangements behind closed doors:
+
+>**Constaninople Agreement** (1915) - Russia was promised (bribed with?) future ownership over Constantinople and the Bosporus straits. And yet the Tsar claimed it was a defense war?!
+
+>**Sykes–Picot Agreement** (1916) - Britain and France have pre-divided the former Ottoman Empire amongst themselves! So much for national self-determination...
+
+>**Treaty of London** (1915) - Italy was allured into war with promises of land from Austria. How callous the imperialists are with human lives!
+
+>And countless other examples of diplomatic correspondence, showing bargaining, demands, and extortion...
+
+Considering we've always decried the dangers of "secret diplomacy" in our propaganda, we now have an interesting opportunity at our disposal. By releasing these documents in full to the world, we can make clear the corrupt and conniving nature of the imperialist powers, increasing anti-war sentiment, and proving our own claims about previous administrations true after all. Of course, said imperialists won't appreciate being exposed. 
+
+- @release_the_treaties
+- @bargaining_chips
+- @leave_them_be
+
+
+@release_the_treaties
+title: Publish the documents!
+on-arrival: secret_treaties = 1; workers_b += 0.5; soldiers_b += 1; leninist_strength += 5; uk_relation -= 25; france_relation -= 25; usa_relation -= 10; italy_relation -= 20; japan_relation -= 5; instability += 1; democraticity += 1; 
+
+The publication of the documents causes an international firestorm. Disdain for our government grows among the international community, but especially in Britain and France, where national leaders are enraged. It is likely this will severely impair our ability to work with these countries in the future.
+
+At the same time, socialists around the world applaud our actions as truly revolutionary—hopefully a sign of growing revolutionary sentiment within their own borders. Domestically, the news surges support within our base and helps to win workers and soldiers over to our side. 
+
+@bargaining_chips
+title: Perhaps we can use this info to try and gain some leverage with the Entente instead. 
+subtitle: Begin secret talks with the allies, promising to withhold publication in exchange for favorable terms. 
+choose-if: foreign_minister_faction != "Left"
+unavailable-subtitle: The current people's commissar is from the radical left-wing of the Party, and won't allow this. 
+
+
+@leave_them_be
+title: Leave them be for now. 
+go-to: foreign_affairs
+
+
+
+@open_negotiations
+title: Send word to the Germans that we wish to negotiate an end to the war. 
+view-if: german_negotiations = 0
+on-arrival: german_negotiations = 1; is_armistice = 1; german_waiting = 2; 
+
+The Germans have accepted our emissaries and have agreed to hold talks at the headquarters of the Central Powers Armies at Brest-Litovsk. In the meantime, a local ceasefire agreement has been reached, temporarily suspending hostilities along the frontlines for the next two weeks. 
+
+It is now up to us to prepare our contingent of negotiators and travel to Brest-Litovsk. 
+
+@brest-litovsk
+title: Dispatch a delegation to Brest-Litovsk to negotiate with the Central Powers. 
+view-if: german_negotiations = 1
+on-arrival: german_negotiations = 2;
+
+
+
+@prisoner_exchanges
+title: Open negotiations with the British for the release of known Russian revolutionaries being held by them. 
+subtitle: We could offer the release and safe passage of British subjects in our custody in exchange. 
+choose-if: uk_relation >= 20;
+unavailable-subtitle: The British refuse to work with us! 
+on-arrival: uk_relation += 5; chichern_travel = 8; 
+max-views: 1
+
+The talks prove fruitful, as we manage to arrange for a number of exchanges. Notably, the experienced diplomat and long-standing social-democrat Georgy Chicherin has been released from Brixton Prison, and is now on his way to Russia. In turn, we have released from custody the former ambassador to the Russian Empire, George Buchanan.
+
+
+
+  
