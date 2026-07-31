@@ -297,30 +297,7 @@ if (Q.finalefficacy_sovnarkom + Q.finalefficacy_foreign + Q.finalefficacy_milita
     Q.dreamteam = 1;
 }
 
-console.log("finalefficacy_sovnarkom:", Q.finalefficacy_sovnarkom);
-console.log("finalefficacy_foreign:", Q.finalefficacy_foreign);
-console.log("finalefficacy_military:", Q.finalefficacy_military);
-console.log("finalefficacy_enlightenment:", Q.finalefficacy_enlightenment);
-console.log("finalefficacy_internal:", Q.finalefficacy_internal);
-console.log("finalefficacy_railways:", Q.finalefficacy_railways);
-console.log("finalefficacy_trade:", Q.finalefficacy_trade);
-console.log("finalefficacy_finance:", Q.finalefficacy_finance);
-console.log("finalefficacy_justice:", Q.finalefficacy_justice);
-console.log("finalefficacy_agriculture:", Q.finalefficacy_agriculture);
-console.log("finalefficacy_foodsupply:", Q.finalefficacy_foodsupply);
-console.log("finalefficacy_labor:", Q.finalefficacy_labor);
-console.log("finalefficacy_posts:", Q.finalefficacy_posts);
-console.log("finalefficacy_nationalities:", Q.finalefficacy_nationalities);
-console.log("finalefficacy_welfare:", Q.finalefficacy_welfare);
-console.log("Total:", Q.finalefficacy_sovnarkom + Q.finalefficacy_foreign + Q.finalefficacy_military + Q.finalefficacy_enlightenment + Q.finalefficacy_internal + Q.finalefficacy_railways + Q.finalefficacy_trade + Q.finalefficacy_finance + Q.finalefficacy_justice + Q.finalefficacy_agriculture + Q.finalefficacy_foodsupply + Q.finalefficacy_labor + Q.finalefficacy_posts + Q.finalefficacy_nationalities + Q.finalefficacy_welfare);
 
-
-console.log("Foreign Minister:", Q.foreign_minister);
-console.log("Auctoritas:", Q.leaders[Q.foreign_minister].auctoritas);
-console.log("Administration:", Q.leaders[Q.foreign_minister].administration);
-console.log("Economic:", Q.leaders[Q.foreign_minister].economic);
-console.log("efficacy_foreign:", Q.efficacy_foreign);
-console.log("finalefficacy_foreign:", Q.finalefficacy_foreign);
 
 if (Q.sovnarkom_expend < 0.25) Q.sovnarkom_expend = 0.25;
 if (Q.internal_expend < 0.25) Q.internal_expend = 0.25;
@@ -528,6 +505,7 @@ Q.business_tax =
     ((Q.business_tax_efficacy / 4 * 3) + (Q.finalefficacy_finance / 4))
 );
 
+console.log("interest:", Q.interest);
 Q.interest = (
     (Q.loans_high * 0.16) +
     (Q.loans_med * 0.12) +
@@ -535,6 +513,7 @@ Q.interest = (
     (Q.bonds * (Q.bond_rate / 100)) +
     (Q.bank_advances * 0.02)
 );
+console.log("interest:", Q.interest);
 
 Q.expenditure = Math.round(
     (
@@ -543,6 +522,7 @@ Q.expenditure = Math.round(
     Q.government_functions
     ) * 100
 ) / 100;
+
 
 Q.income = Math.round(
     (
