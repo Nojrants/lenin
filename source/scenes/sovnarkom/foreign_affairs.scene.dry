@@ -22,28 +22,32 @@ tags: sovnarkom
 title: -------------------------------------------------------------------------------------------------
 go-to: foreign_affairs
 
+@foreign_return
+title: Cancel action.
+go-to: foreign_affairs
+
 @administration
 title: ADMINISTRATION
 
-- @finance_improve_admin
-- @finance_hire_staff
-- @finance_corruption
-- @finance_return
+- @improve_admin
+- @hire_staff
+- @corruption
+- @foreign_return
 
 
-@finance_improve_admin
+@improve_admin
 title: Streamline the commissariat
 subtitle: Cut waste and inefficiencies, increase labor intensity
 choose-if: foreign_corruption = 0
 unavailable-subtitle: There's nothing more to cut at the moment. 
 on-arrival: foreign_expend -= 0.25; efficacy_foreign += 0.1 if efficacy_foreign < 1; foreign_streamline += 8; 
 
-@finance_hire_staff
+@hire_staff
 title: Hire administrative personnel
 subtitle: -0.5 resources
 on-arrival: efficacy_foreign += 0.2 if efficacy_foreign < 1; foreign_expend += 0.25; resources -= 0.5;
 
-@finance_corruption
+@corruption
 title: Root-out departmental corruption. 
 subtitle: -0.5 resources
 on-arrival: efficacy_foreign += 0.1 if efficacy_foreign < 1; resources -= 0.5;
