@@ -114,7 +114,7 @@ on-arrival: german_negotiations = 2;
 @prisoner_exchanges
 title: Open negotiations with the British for the release of known Russian revolutionaries being held by them. 
 subtitle: We could offer the release and safe passage of British subjects in our custody in exchange. 
-choose-if: uk_relation >= 20;
+choose-if: uk_relation >= 20
 unavailable-subtitle: The British refuse to work with us! 
 on-arrival: uk_relation += 5; chichern_travel = 8; 
 max-views: 1
