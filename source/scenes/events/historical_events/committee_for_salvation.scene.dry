@@ -5,6 +5,7 @@ view-if: month = 11 and week = 2
 max-visits: 1
 face-image: img/kornilov_2.jpg
 tags: event
+go-to: battle_menu
 
 = Uprising in Petrograd
 
@@ -14,6 +15,8 @@ A group of military officers and cadets, right socialists, and other various not
 
 Meanwhile, outside the city limits, Kerensky has reemerged and has managed to rally an army to his side, joined by General Petr Krasnov. This army is now preparing to march on the city as well!
 
+@battle_menu
+
 - @shut_down_newspapers
 - @defense
 - @battle
@@ -21,7 +24,7 @@ Meanwhile, outside the city limits, Kerensky has reemerged and has managed to ra
 @shut_down_newspapers
 title: Crack down on the counterrevolutionary newspapers!
 max-visits: 1
-go-to: committee_for_salvation
+go-to: battle_menu
 on-arrival: democraticity -= 2; elite_strength -= 4; middle_strength -= 2; elite_unrest += 2; middle_unrest += 2; labor_unrest += 2; left_m_relation -= 2; centre_m_relation -= 3; right_m_relation -= 5; centre_sr_relation -= 3; right_sr_relation -= 5; ns_relation -= 5; k_relation -= 5; rightist_relation -= 5; 
 
 We take the opportunity to shut down many of the worst offending papers—many of which could be legitimately accused of incitement to rebellion. Although red guards successfully break-up many newspaper offices, we lack the administrative oversight and enforcement to really ensure these bans are followed, allowing many papers to simply restart production under new names. This infringement on the freedom of the press garners some criticism, but Lenin argues the move is necessary given the precarious situation. 
@@ -31,7 +34,7 @@ We take the opportunity to shut down many of the worst offending papers—many o
 title: Prepare for the defense of Petrograd and the revolution!
 on-arrival: workers_militia_strength += 10; workers_militia_militancy += 0.2;
 max-visits: 1
-go-to: committee_for_salvation
+go-to: battle_menu
 
 Barricades have been hastily erected, trenches are being dug around the city. Loyal workers' militias are heeding the call! 
 
