@@ -117,7 +117,7 @@ subtitle: We could offer the release and safe passage of British subjects in our
 choose-if: uk_relation >= 20
 unavailable-subtitle: The British refuse to work with us! 
 on-arrival: uk_relation += 5; chichern_travel = 8; 
-max-views: 1
+max-visits: 1
 
 The talks prove fruitful, as we manage to arrange for a number of exchanges. Notably, the experienced diplomat and long-standing social-democrat Georgy Chicherin has been released from Brixton Prison, and is now on his way to Russia. In turn, we have released from custody the former ambassador to the Russian Empire, George Buchanan.
 
