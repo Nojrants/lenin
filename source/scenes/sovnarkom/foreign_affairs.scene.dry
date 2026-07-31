@@ -87,7 +87,7 @@ The publication of the documents causes an international firestorm. Disdain for 
 At the same time, socialists around the world applaud our actions as truly revolutionary—hopefully a sign of growing revolutionary sentiment within their own borders. Domestically, the news surges support within our base and helps to win workers and soldiers over to our side. 
 
 @bargaining_chips
-title: Perhaps we can use this info to try and gain some leverage with the Entente instead. 
+title: Perhaps we can use this info to gain some leverage with the Entente instead. 
 subtitle: Begin secret talks with the allies, promising to withhold publication in exchange for favorable terms. 
 choose-if: foreign_minister_faction != "Left"
 unavailable-subtitle: The current people's commissar is from the radical left-wing of the Party, and won't allow this. 
