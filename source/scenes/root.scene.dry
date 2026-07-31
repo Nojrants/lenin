@@ -752,6 +752,7 @@ Q.ottoman_relation = 5;
 Q.general_negotiations = 0;
 // negotiations for a separate peace with the Central Powers
 Q.central_negotiations = 0;
+Q.german_negotiations = 0;
 Q.armistice_progress = 0;
 // has an armistice been signed?
 Q.is_armistice = 0;
