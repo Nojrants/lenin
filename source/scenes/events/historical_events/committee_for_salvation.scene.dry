@@ -31,7 +31,7 @@ We take the opportunity to shut down many of the worst offending papers—many o
 
 
 @defense
-title: Prepare for the defense of Petrograd and the revolution!
+title: Prepare for the defense of Petrograd and the Revolution!
 on-arrival: workers_militia_strength += 10; workers_militia_militancy += 0.2;
 max-visits: 1
 go-to: battle_menu
