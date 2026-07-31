@@ -1008,6 +1008,11 @@ Q.timers = [//m_party
             'railways_corruption', 'trade_corruption', 'labor_corruption',
             'justice_corruption', 'agriculture_corruption', 'foodsupply_corruption',
             'posts_corruption', 'nationalities_corruption', 'welfare_corruption',
+            'foreign_streamline', 'finance_streamline', 'military_streamline',
+            'internal_streamline', 'enlightenment_streamline', 'internal_streamline',
+            'railways_streamline', 'trade_streamline', 'labor_streamline',
+            'justice_streamline', 'agriculture_streamline', 'foodsupply_streamline',
+            'posts_streamline', 'nationalities_streamline', 'welfare_streamline',
             // soviet
             'food_soviet', 'labor_soviet', 'militias', 'prov_gov_relations',
             'nationalities_soviet', 'war_soviet', 'land_soviet',
