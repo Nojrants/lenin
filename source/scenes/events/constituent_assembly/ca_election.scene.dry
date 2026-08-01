@@ -27,7 +27,7 @@ title: Can we delay again?
 choose-if: moderate_support <= 15
 unavailable-subtitle: There is not enough support within the Party for this. 
 
-@delay_the_elections
+@cancel_the_elections
 title: Cancel the elections!
 choose-if: moderate_support <= 5
 unavailable-subtitle: There is not enough support within the Party for this. 
