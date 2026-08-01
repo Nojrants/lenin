@@ -80,7 +80,7 @@ This is a popular slogan to the peasants of the countryside, although there are 
 @coalition
 title:  - We negotiated an all-socialist government!
 go-to: begin_the_elections
-choose-if: 
+choose-if: coalition_government = 1
 unavailable_subtitle: We haven't accomplished this yet.
 max-visits: 1
 on-arrival: workers_b += 2; soldiers_b += 1; moderate_support += 15; leninist_strength -= 5; leninist_dissent += 5; 
