@@ -65,7 +65,7 @@ go-to: election_strategy
 @we_signed_an_armistice
 title:  - It was us who actually signed an armistice with Germany—a vote for us is<br>‎ ‎ ‎ ‎ demonstrably a vote for peace!
 choose-if: is_armistice = 1
-unavailable-subtitle We haven't accomplished this yet.
+unavailable-subtitle: We haven't accomplished this yet.
 go-to: election_strategy
 max-visits: 1
 on-arrival: peasants_b += 2; workers_b += 5; soldiers_b += 5;
@@ -84,7 +84,7 @@ This is a popular slogan to the peasants of the countryside, although there are 
 title:  - We negotiated an all-socialist government!
 go-to: election_strategy
 choose-if: coalition_government = 1
-unavailable-subtitle We haven't accomplished this yet.
+unavailable-subtitle: We haven't accomplished this yet.
 max-visits: 1
 on-arrival: workers_b += 2; soldiers_b += 1; moderate_support += 15; leninist_strength -= 5; leninist_dissent += 5; 
 
