@@ -39,6 +39,8 @@ new-page: true
 go-to: election_strategy
 
 @election_strategy
+title: Election Strategy
+new-page: true
 
 With the elections officially beginning, now is the time to launch any remaining electoral initiatives. 
 
@@ -56,12 +58,12 @@ With the elections officially beginning, now is the time to launch any remaining
 - @parties
 
 @rhetoric
-title: RHETORIC ----------------------------------------------------------------------
+title: RHETORIC -----------------------------------------------------------------------------
 go-to: election_strategy
 
 
 @we_signed_an_armistice
-title:  - It was us who actually signed an armistice with Germany—a vote for us is<br>   demonstrably a vote for peace!
+title:  - It was us who actually signed an armistice with Germany—a vote for us is<br>‎ ‎ ‎ ‎ demonstrably a vote for peace!
 choose-if: is_armistice = 1
 unavailable_subtitle: We haven't accomplished this yet.
 go-to: election_strategy
@@ -87,7 +89,7 @@ max-visits: 1
 on-arrival: workers_b += 2; soldiers_b += 1; moderate_support += 15; leninist_strength -= 5; leninist_dissent += 5; 
 
 @threaten_revolution 
-title:  - There is an element of the struggle between classes at play in these elections <br>   —a third revolution would be necessary should we not win a majority, of course. 
+title:  - There is an element of the struggle between classes at play in these elections <br>   ‎ ‎ —a third revolution would be necessary should we not win a majority, of course. 
 go-to: election_strategy
 max-visits: 1
 on-arrival: leninist_strength += 5; workers_b += 1; workers_b -= 3; left_m_relation -= 5; centre_m_relation -= 3; right_m_relation -= 3; right_m_strength += 3; centre_sr_relation -= 3; right_sr_relation -= 3; right_sr_strength += 3; ns_relation -= 3; k_relation -= 5; k_strength += 2; democraticity -= 2; instability += 2; 
@@ -96,7 +98,7 @@ These words cause a public furor, probably hurting more than helping. The bourge
 
 
 @actions
-title: ACTIONS -----------------------------------------------------------------------
+title: ACTIONS ------------------------------------------------------------------------------
 go-to: election_strategy
 
 
@@ -104,7 +106,7 @@ go-to: election_strategy
 title:  - Mobilize our activists, give speeches, hold rallies!
 go-to: election_strategy
 max-visits: 1
-on-arrival: workers_b += 0.3
+on-arrival: workers_b += 0.3;
 
 Our supporters take to the streets, holding rallies and giving campaign speeches. 
 
