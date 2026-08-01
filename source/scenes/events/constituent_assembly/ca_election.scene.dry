@@ -18,18 +18,19 @@ These are expected to be the largest and most progressive elections seen in worl
 Due to the difficulties of holding elections across the vast country, it will likely take several days to cast and count all the votes—perhaps weeks in some districts. 
 
 
-- @begin_the_elections
 - @delay_the_elections
 - @cancel_the_elections
+- @begin_the_elections
+
 
 @delay_the_elections
 title: Can we delay again? 
-choose-if: moderate_support <= 15
+choose-if: moderate_strength <= 15
 unavailable-subtitle: There is not enough support within the Party for this. 
 
 @cancel_the_elections
 title: Cancel the elections!
-choose-if: moderate_support <= 5
+choose-if: moderate_strength <= 5
 unavailable-subtitle: There is not enough support within the Party for this. 
 
 @begin_the_elections
