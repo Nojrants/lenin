@@ -55,7 +55,7 @@ With the elections officially beginning, now is the time to launch any remaining
 
 
 @rhetoric
-title: RHETORIC ---------------------------------------------------
+title: RHETORIC ----------------------------------------------------------------------
 go-to: begin_the_elections
 
 
@@ -86,7 +86,7 @@ max-visits: 1
 on-arrival: workers_b += 2; soldiers_b += 1; moderate_support += 15; leninist_strength -= 5; leninist_dissent += 5; 
 
 @threaten_revolution 
-title:  - There is an element of the struggle between classes at play in these elections – a third revolution would be necessary should we not win a majority, of course. 
+title:  - There is an element of the struggle between classes at play in these elections <br>   —a third revolution would be necessary should we not win a majority, of course. 
 go-to: begin_the_elections
 max-visits: 1
 on-arrival: leninist_strength += 5; workers_b += 1; workers_b -= 3; left_m_relation -= 5; centre_m_relation -= 3; right_m_relation -= 3; right_m_strength += 3; centre_sr_relation -= 3; right_sr_relation -= 3; right_sr_strength += 3; ns_relation -= 3; k_relation -= 5; k_strength += 2; democraticity -= 2; instability += 2; 
@@ -95,7 +95,7 @@ These words cause a public furor, probably hurting more than helping. The bourge
 
 
 @actions
-title: ACTIONS ----------------------------------------------------
+title: ACTIONS -----------------------------------------------------------------------
 go-to: begin_the_elections
 
 
