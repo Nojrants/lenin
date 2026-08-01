@@ -36,7 +36,7 @@ unavailable-subtitle: There is not enough support within the Party for this.
 @begin_the_elections
 title: Let us begin the elections...
 new-page: true
-go-t0: election_strategy
+go-to: election_strategy
 
 @election_strategy
 
@@ -57,7 +57,7 @@ With the elections officially beginning, now is the time to launch any remaining
 
 @rhetoric
 title: RHETORIC ----------------------------------------------------------------------
-go-to: begin_the_elections
+go-to: election_strategy
 
 
 @we_signed_an_armistice
