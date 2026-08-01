@@ -34,11 +34,9 @@ unavailable-subtitle: There is not enough support within the Party for this.
 
 @begin_the_elections
 title: Let us begin the elections...
-go-to: election_strategy
 new-page: true
 
 With the elections officially beginning, now is the time to launch any remaining electoral initiatives. 
-
 
 - @rhetoric
 - @we_signed_an_armistice
@@ -51,6 +49,7 @@ With the elections officially beginning, now is the time to launch any remaining
 - @print_runs
 - @send_to_the_countryside
 - @station_guards
+- @parties
 
 
 
