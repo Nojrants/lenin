@@ -55,12 +55,12 @@ With the elections officially beginning, now is the time to launch any remaining
 
 
 @rhetoric
-title: Rhetoric: 
+title: RHETORIC ---------------------------------------------------
 go-to: begin_the_elections
 
 
 @we_signed_an_armistice
-title:  - It was us who actually signed an armistice with Germany—a vote for us is demonstrably a vote for peace!
+title:  - It was us who actually signed an armistice with Germany—a vote for us is<br>   demonstrably a vote for peace!
 choose-if: is_armistice = 1
 unavailable_subtitle: We haven't accomplished this yet.
 go-to: begin_the_elections
@@ -95,7 +95,7 @@ These words cause a public furor, probably hurting more than helping. The bourge
 
 
 @actions
-title: Actions: 
+title: ACTIONS ----------------------------------------------------
 go-to: begin_the_elections
 
 
