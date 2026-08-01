@@ -880,6 +880,7 @@ choose-if: commissariats_held <= commissariats_promised
 unavailable-subtitle: The other parties will not accept. 
 new-page: true
 achievement: vikzhel_averted
+on-arrival: coalition_government = 1; 
 
 
 @enlightenment_assign
