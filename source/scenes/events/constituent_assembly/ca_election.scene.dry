@@ -36,6 +36,9 @@ unavailable-subtitle: There is not enough support within the Party for this.
 @begin_the_elections
 title: Let us begin the elections...
 new-page: true
+go-t0: election_strategy
+
+@election_strategy
 
 With the elections officially beginning, now is the time to launch any remaining electoral initiatives. 
 
@@ -52,8 +55,6 @@ With the elections officially beginning, now is the time to launch any remaining
 - @station_guards
 - @parties
 
-
-
 @rhetoric
 title: RHETORIC ----------------------------------------------------------------------
 go-to: begin_the_elections
@@ -63,7 +64,7 @@ go-to: begin_the_elections
 title:  - It was us who actually signed an armistice with Germany—a vote for us is<br>   demonstrably a vote for peace!
 choose-if: is_armistice = 1
 unavailable_subtitle: We haven't accomplished this yet.
-go-to: begin_the_elections
+go-to: election_strategy
 max-visits: 1
 on-arrival: peasants_b += 2; workers_b += 5; soldiers_b += 5;
 
@@ -71,7 +72,7 @@ Unlike the other parties who merely talk about peace, we actually took a step in
 
 @we_gave_you_land
 title:  - We gave the land to the peasants! 
-go-to: begin_the_elections
+go-to: election_strategy
 max-visits: 1
 on-arrival: peasants_b += 5;
 
@@ -79,7 +80,7 @@ This is a popular slogan to the peasants of the countryside, although there are 
 
 @coalition
 title:  - We negotiated an all-socialist government!
-go-to: begin_the_elections
+go-to: election_strategy
 choose-if: coalition_government = 1
 unavailable_subtitle: We haven't accomplished this yet.
 max-visits: 1
@@ -87,7 +88,7 @@ on-arrival: workers_b += 2; soldiers_b += 1; moderate_support += 15; leninist_st
 
 @threaten_revolution 
 title:  - There is an element of the struggle between classes at play in these elections <br>   —a third revolution would be necessary should we not win a majority, of course. 
-go-to: begin_the_elections
+go-to: election_strategy
 max-visits: 1
 on-arrival: leninist_strength += 5; workers_b += 1; workers_b -= 3; left_m_relation -= 5; centre_m_relation -= 3; right_m_relation -= 3; right_m_strength += 3; centre_sr_relation -= 3; right_sr_relation -= 3; right_sr_strength += 3; ns_relation -= 3; k_relation -= 5; k_strength += 2; democraticity -= 2; instability += 2; 
 
@@ -96,12 +97,12 @@ These words cause a public furor, probably hurting more than helping. The bourge
 
 @actions
 title: ACTIONS -----------------------------------------------------------------------
-go-to: begin_the_elections
+go-to: election_strategy
 
 
 @take_to_the_streets
 title:  - Mobilize our activists, give speeches, hold rallies!
-go-to: begin_the_elections
+go-to: election_strategy
 max-visits: 1
 on-arrival: workers_b += 0.3
 
@@ -110,7 +111,7 @@ Our supporters take to the streets, holding rallies and giving campaign speeches
 @take_to_the_front
 title:  - Send speakers to the frontlines, agitate among the soldiers!
 subtitle: -0.5 resources
-go-to: begin_the_elections
+go-to: election_strategy
 choose-if: resources >= 0.5
 unavailable-subtitle: We lack the resources. 
 max-visits: 1
@@ -123,7 +124,7 @@ title:  - Launch a massive run of newspapers, pamphlets, and posters!
 subtitle: -0.5 resources
 choose-if: resources >= 0.5
 unavailable-subtitle: We lack the resources. 
-go-to: begin_the_elections
+go-to: election_strategy
 max-visits: 1
 on-arrival: workers_b += 0.3; resources -= 0.5;
 
@@ -134,7 +135,7 @@ title:  - Dispatch speakers to the countryside to work among the peasants!
 subtitle: -1 resources
 choose-if: resources >= 1
 unavailable-subtitle: We lack the resources. 
-go-to: begin_the_elections
+go-to: election_strategy
 max-visits: 1
 on-arrival: peasants_b += 5; resources -= 1; 
 
@@ -145,7 +146,7 @@ title:  - Station loyal red guards outside the polling places...
 subtitle: -1 resources
 choose-if: resources >= 1
 unavailable-subtitle: We lack the resources. 
-go-to: begin_the_elections
+go-to: election_strategy
 max-visits: 1
 on-arrival: workers_b += 10; democraticity -= 3; instability += 2; resources -= 1; 
 
