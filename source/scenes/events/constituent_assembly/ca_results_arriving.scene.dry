@@ -31,6 +31,7 @@ In a panic, the Electoral Commission in the capital is arrested, though they are
 
   
 @election_results
+go-to: post_election_menu
 on-arrival: {!
 Q.constituent_assembly_timer = 1;
 
