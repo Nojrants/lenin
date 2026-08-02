@@ -13,8 +13,11 @@ Preliminary results are arriving in the elections to the Constituent Assembly, f
 @ca_reaction
 
 - @stop_the_count
-- @election_algorithm : Brace ourselves for the results...
+- @proceed_election : Brace ourselves for the results...
 
+@proceed_election
+go-to: election_algorithm 
+set-jump: election_results
 
 @stop_the_count
 title: Stop the count!
