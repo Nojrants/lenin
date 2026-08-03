@@ -359,7 +359,7 @@ Soviet cooperation with Provisional Government: [+ soviet_cooperation : efficacy
 
 @party
 title: Party
-on-arrival: {!
+
 **Party Coalition**
 
 <ul>
@@ -383,16 +383,10 @@ on-arrival: {!
 [? if coalition_taylorist = 0: <li>Taylorists</li> ?]
 [? if coalition_military_opposition = 0: <li>Military Opposition</li> ?]
 </ul>
-!}
 
 
-**Party Coalition**
 
-print(coalition.map(x => "• " + x).join("<br>"));
 
-**Opposition**
-
-print(opposition.map(x => "• " + x).join("<br>"));
 
 
 @economy
