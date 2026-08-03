@@ -362,23 +362,35 @@ title: Party
 
 **Party Coalition**
 
->[?if coalition_leninist = 1: Leninists ?]<br>
->[?if coalition_moderate = 1: Moderates ?]<br>
->[?if coalition_left = 1: Leftists ?]<br>
->[?if coalition_leftcom = 1: Leftcoms ?]<br>
->[?if coalition_vpered = 1: Vperedists ?]<br>
->[?if coalition_taylorist = 1: Taylorists ?]<br>
->[?if coalition_military_opposition = 1: Military Opposition ?]<br>
+{!
+let coalition = [];
+
+if (Q.coalition_leninist == 1) coalition.push("Leninists");
+if (Q.coalition_moderate == 1) coalition.push("Moderates");
+if (Q.coalition_left == 1) coalition.push("Leftists");
+if (Q.coalition_leftcom == 1) coalition.push("Left Communists");
+if (Q.coalition_vpered == 1) coalition.push("Vperedists");
+if (Q.coalition_taylorist == 1) coalition.push("Taylorists");
+if (Q.coalition_military_opposition == 1) coalition.push("Military Opposition");
+
+print(coalition.map(x => "• " + x).join("<br>"));
+!}
 
 **Opposition**
 
->[?if coalition_leninist = 0: Leninists ?]<br>
->[?if coalition_moderate = 0: Moderates ?]<br>
->[?if coalition_left = 0: Leftists ?]<br>
->[?if coalition_leftcom = 0: Leftcoms ?]<br>
->[?if coalition_vpered = 0: Vperedists ?]<br>
->[?if coalition_taylorist = 0: Taylorists ?]<br>
->[?if coalition_military_opposition = 0: Military Group ?]<br>
+{!
+let opposition = [];
+
+if (Q.coalition_leninist == 0) opposition.push("Leninists");
+if (Q.coalition_moderate == 0) opposition.push("Moderates");
+if (Q.coalition_left == 0) opposition.push("Leftists");
+if (Q.coalition_leftcom == 0) opposition.push("Left Communists");
+if (Q.coalition_vpered == 0) opposition.push("Vperedists");
+if (Q.coalition_taylorist == 0) opposition.push("Taylorists");
+if (Q.coalition_military_opposition == 0) opposition.push("Military Opposition");
+
+print(opposition.map(x => "• " + x).join("<br>"));
+!}
 
 
 @economy
