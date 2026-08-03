@@ -360,23 +360,29 @@ Soviet cooperation with Provisional Government: [+ soviet_cooperation : efficacy
 @party
 title: Party
 on-arrival: {!
-Q.coalition = [];
-if (Q.coalition_leninist == 1) Q.coalition.push("Leninists");
-if (Q.coalition_moderate == 1) Q.coalition.push("Moderates");
-if (Q.coalition_left == 1) Q.coalition.push("Leftists");
-if (Q.coalition_leftcom == 1) Q.coalition.push("Left Communists");
-if (Q.coalition_vpered == 1) Q.coalition.push("Vperedists");
-if (Q.coalition_taylorist == 1) Q.coalition.push("Taylorists");
-if (Q.coalition_military_opposition == 1) Q.coalition.push("Military Group");
+**Party Coalition**
 
-Q.opposition = [];
-if (Q.coalition_leninist == 0) Q.opposition.push("Leninists");
-if (Q.coalition_moderate == 0) Q.opposition.push("Moderates");
-if (Q.coalition_left == 0) Q.opposition.push("Leftists");
-if (Q.coalition_leftcom == 0) Q.opposition.push("Left Communists");
-if (Q.coalition_vpered == 0) Q.opposition.push("Vperedists");
-if (Q.coalition_taylorist == 0) Q.opposition.push("Taylorists");
-if (Q.coalition_military_opposition == 0) Q.opposition.push("Military Opposition");
+<ul>
+[? if coalition_leninist = 1: <li>Leninists</li> ?]
+[? if coalition_moderate = 1: <li>Moderates</li> ?]
+[? if coalition_left = 1: <li>Leftists</li> ?]
+[? if coalition_leftcom = 1: <li>Left Communists</li> ?]
+[? if coalition_vpered = 1: <li>Vperedists</li> ?]
+[? if coalition_taylorist = 1: <li>Taylorists</li> ?]
+[? if coalition_military_opposition = 1: <li>Military Opposition</li> ?]
+</ul>
+
+**Opposition**
+
+<ul>
+[? if coalition_leninist = 0: <li>Leninists</li> ?]
+[? if coalition_moderate = 0: <li>Moderates</li> ?]
+[? if coalition_left = 0: <li>Leftists</li> ?]
+[? if coalition_leftcom = 0: <li>Left Communists</li> ?]
+[? if coalition_vpered = 0: <li>Vperedists</li> ?]
+[? if coalition_taylorist = 0: <li>Taylorists</li> ?]
+[? if coalition_military_opposition = 0: <li>Military Opposition</li> ?]
+</ul>
 !}
 
 
