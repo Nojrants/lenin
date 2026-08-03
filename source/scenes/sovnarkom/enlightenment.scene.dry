@@ -4,7 +4,7 @@ is-card: true
 on-arrival: education_policy_timer += 2; week_actions += 1
 view-if: education_policy_timer == 0 and education_minister_party = "Bolshevik"
 card-image: img/education.jpg
-tags: sovnarkom
+tags: sovnarkom, government
 
 = Enlightenment
 
