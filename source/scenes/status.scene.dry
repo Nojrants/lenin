@@ -359,11 +359,8 @@ Soviet cooperation with Provisional Government: [+ soviet_cooperation : efficacy
 
 @party
 title: Party
-
-**Party Coalition**
-
+on-arrival: {!
 Q.coalition = [];
-
 if (Q.coalition_leninist == 1) Q.coalition.push("Leninists");
 if (Q.coalition_moderate == 1) Q.coalition.push("Moderates");
 if (Q.coalition_left == 1) Q.coalition.push("Leftists");
@@ -372,12 +369,7 @@ if (Q.coalition_vpered == 1) Q.coalition.push("Vperedists");
 if (Q.coalition_taylorist == 1) Q.coalition.push("Taylorists");
 if (Q.coalition_military_opposition == 1) Q.coalition.push("Military Group");
 
-print(coalition.map(x => "• " + x).join("<br>"));
-
-**Opposition**
-
 Q.opposition = [];
-
 if (Q.coalition_leninist == 0) Q.opposition.push("Leninists");
 if (Q.coalition_moderate == 0) Q.opposition.push("Moderates");
 if (Q.coalition_left == 0) Q.opposition.push("Leftists");
@@ -385,6 +377,14 @@ if (Q.coalition_leftcom == 0) Q.opposition.push("Left Communists");
 if (Q.coalition_vpered == 0) Q.opposition.push("Vperedists");
 if (Q.coalition_taylorist == 0) Q.opposition.push("Taylorists");
 if (Q.coalition_military_opposition == 0) Q.opposition.push("Military Opposition");
+!}
+
+
+**Party Coalition**
+
+print(coalition.map(x => "• " + x).join("<br>"));
+
+**Opposition**
 
 print(opposition.map(x => "• " + x).join("<br>"));
 
