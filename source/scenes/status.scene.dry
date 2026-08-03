@@ -368,7 +368,7 @@ title: Party
 >[?if coalition_leftcom = 1: Leftcoms ?]<br>
 >[?if coalition_vpered = 1: Vperedists ?]<br>
 >[?if coalition_taylorist = 1: Taylorists ?]<br>
->[?if coalition_military_opposition = 1: Military Group ?]<br>
+>[?if coalition_military_opposition = 1: Military Opposition ?]<br>
 
 **Opposition**
 
