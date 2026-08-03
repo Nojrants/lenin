@@ -301,8 +301,8 @@ Land/agricultural policy: [? if player_party = "m": [+ m_land_policy : land_poli
 
 Nationality policy: [? if player_party = "m": [+ m_nationality_policy : nationality_policy +]?][? if player_party = "sr": [+ sr_nationality_policy : nationality_policy +]?][? if player_party = "k": [+ k_nationality_policy : nationality_policy +]?][? if player_party = "b": [+ b_nationality_policy : nationality_policy +]?]
 
-@gov
-title: Government
+@state
+title: State
 
 = [+ government_form : government_form +]
 
