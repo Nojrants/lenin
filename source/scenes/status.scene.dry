@@ -360,8 +360,8 @@ Soviet cooperation with Provisional Government: [+ soviet_cooperation : efficacy
 @party
 title: Party
 
-**Party Coalition**
 
+**Party Coalition**
 <ul>
 [? if coalition_leninist = 1: <li>Leninists</li> ?]
 [? if coalition_moderate = 1: <li>Moderates</li> ?]
@@ -373,7 +373,6 @@ title: Party
 </ul>
 
 **Opposition**
-
 <ul>
 [? if coalition_leninist = 0: <li>Leninists</li> ?]
 [? if coalition_moderate = 0: <li>Moderates</li> ?]
