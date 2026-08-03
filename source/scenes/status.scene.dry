@@ -357,6 +357,30 @@ Soviet efficacy: [+ soviet_efficacy : efficacy +]
 
 Soviet cooperation with Provisional Government: [+ soviet_cooperation : efficacy +]
 
+@party
+title: Party
+
+**Party Coalition**
+
+>[?if coalition_leninist = 1: Leninists ?]<br>
+>[?if coalition_moderate = 1: Moderates ?]<br>
+>[?if coalition_left = 1: Leftists ?]<br>
+>[?if coalition_leftcom = 1: Leftcoms ?]<br>
+>[?if coalition_vpered = 1: Vperedists ?]<br>
+>[?if coalition_taylorist = 1: Taylorists ?]<br>
+>[?if coalition_military_opposition = 1: Military Group ?]<br>
+
+**Opposition**
+
+>[?if coalition_leninist = 0: Leninists ?]<br>
+>[?if coalition_moderate = 0: Moderates ?]<br>
+>[?if coalition_left = 0: Leftists ?]<br>
+>[?if coalition_leftcom = 0: Leftcoms ?]<br>
+>[?if coalition_vpered = 0: Vperedists ?]<br>
+>[?if coalition_taylorist = 0: Taylorists ?]<br>
+>[?if coalition_military_opposition = 0: Military Group ?]<br>
+
+
 @economy
 title: Economy
 on-arrival: {!
