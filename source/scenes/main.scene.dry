@@ -74,7 +74,7 @@ view-if: player_party = "b"
 @government
 title: Government
 view-if: player_party = "k" or (player_party = "m" and m_in_gov) or (player_party = "sr" and sr_in_gov) or (player_party = "b" and b_in_gov)
-card-image: img/prov_gov_1.jpg
+card-image: img/sovnarkom2.jpg
 is-deck: true
 
 - #government
