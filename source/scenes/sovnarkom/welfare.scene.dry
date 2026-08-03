@@ -4,6 +4,8 @@ is-card: true
 on-arrival: social_policy_timer += 2; week_actions += 1
 view-if: social_policy_timer == 0 and welfare_minister_party = "Bolshevik"
 tags: sovnarkom, government
+card-image: img/women_poster.PNG
+
 
 = Welfare 
 
