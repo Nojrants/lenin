@@ -4,7 +4,7 @@ is-card: true
 on-arrival: foreign_policy_timer += 2; week_actions += 1
 view-if: foreign_policy_timer == 0 and finance_minister_party = "Bolshevik"
 tags: sovnarkom, government
-card-image: img/foreign.jpg
+card-image: img/foreign.PNG
 
 
 = Foreign Affairs
