@@ -4,7 +4,7 @@ is-card: true
 view-if: sovnarkom_timer == 0 and prime_minister_party = "Bolshevik"
 on-arrival: week_actions += 1; sovnarkom_timer = 2;
 tags: sovnarkom, government
-card-image: img/sovnarkom3.jpg
+card-image: img/sovnarkom3.PNG
 
 = Sovnarkom
 
