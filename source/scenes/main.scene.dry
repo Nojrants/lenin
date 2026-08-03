@@ -16,15 +16,9 @@ max-cards: 5
 #Here, the main deck will be displayed. Clicking on the deck draws a card into your hand. Clicking on a card activates that card.
 
 
-- @party_m
 - @party_b
-- @party_sr
-- @party_k
-- @prov_gov
-- @soviet_affairs
+- @government
 - #advisor
-- @sr_shuffle_leadership_pinned
-- @m_shuffle_leadership_pinned
 
 @main_easy
 set-bg: img/map_2.jpg
@@ -42,15 +36,9 @@ max-cards: 6
 
 #Here, the main deck will be displayed. Clicking on the deck draws a card into your hand. Clicking on a card activates that card.
 
-- @party_m
 - @party_b
-- @party_sr
-- @party_k
-- @prov_gov
-- @soviet_affairs
+- @government
 - #advisor
-- @sr_shuffle_leadership_pinned
-- @m_shuffle_leadership_pinned
 
 
 @main_hard
@@ -69,22 +57,11 @@ max-cards: 3
 
 #Here, the main deck will be displayed. Clicking on the deck draws a card into your hand. Clicking on a card activates that card.
 
-- @party_m
 - @party_b
-- @party_sr
-- @party_k
-- @prov_gov
-- @soviet_affairs
+- @government
 - #advisor
 
 
-@party_m
-title: Party Affairs
-card-image: img/iskra.jpg
-is-deck: true
-view-if: player_party = "m"
-
-- #m_party
 
 @party_b
 title: Party Affairs
@@ -94,34 +71,10 @@ view-if: player_party = "b"
 
 - #b_party
 
-@party_sr
-title: Party Affairs
-card-image: img/sr.png
-is-deck: true
-view-if: player_party = "sr"
-
-- #sr_party
-
-@party_k
-title: Party Affairs
-card-image: img/kadet.png
-is-deck: true
-view-if: player_party = "k"
-
-- #k_party
-
-@prov_gov
-title: Provisional Government
+@government
+title: Government
 view-if: player_party = "k" or (player_party = "m" and m_in_gov) or (player_party = "sr" and sr_in_gov) or (player_party = "b" and b_in_gov)
 card-image: img/prov_gov_1.jpg
 is-deck: true
 
-- #prov_gov
-
-@soviet_affairs
-title: Petrograd Soviet
-view-if: player_party == "m" or player_party == "sr" or player_party == "b"
-card-image: img/soviet_1.jpg
-is-deck: true
-
-- #soviet
+- #government
