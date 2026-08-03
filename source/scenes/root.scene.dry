@@ -96,11 +96,11 @@ Q.anarchists_legal = 1;
 Q.b_leadership = 2;
 Q.b_factions = ['leninist', 'moderate', 'leftcom'];
 
-Q.coalition_leninist = 1;
-Q.coalition_moderate = 0;
-Q.coalition_left = 1;
-Q.coalition_vpered = 0;
-Q.coalition_taylorist = 0;
+Q.coalition_leninist = 2;
+Q.coalition_moderate = 1;
+Q.coalition_left = 2;
+Q.coalition_vpered = 1;
+Q.coalition_taylorist = 3;
 
 Q.leninist_strength = 50;
 Q.leninist_dissent = 0;
