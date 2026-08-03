@@ -360,8 +360,20 @@ Soviet cooperation with Provisional Government: [+ soviet_cooperation : efficacy
 @party
 title: Party
 
+= Internal Factions
 
-**Party Coalition**
+**Ruling Group**
+<ul>
+[? if coalition_leninist = 2: <li>Leninists</li> ?]
+[? if coalition_moderate = 2: <li>Moderates</li> ?]
+[? if coalition_left = 2: <li>Leftists</li> ?]
+[? if coalition_leftcom = 2: <li>Left Communists</li> ?]
+[? if coalition_vpered = 2: <li>Vperedists</li> ?]
+[? if coalition_taylorist = 2: <li>Taylorists</li> ?]
+[? if coalition_military_opposition = 2: <li>Military Group</li> ?]
+</ul>
+
+**Opposition**
 <ul>
 [? if coalition_leninist = 1: <li>Leninists</li> ?]
 [? if coalition_moderate = 1: <li>Moderates</li> ?]
@@ -370,17 +382,6 @@ title: Party
 [? if coalition_vpered = 1: <li>Vperedists</li> ?]
 [? if coalition_taylorist = 1: <li>Taylorists</li> ?]
 [? if coalition_military_opposition = 1: <li>Military Opposition</li> ?]
-</ul>
-
-**Opposition**
-<ul>
-[? if coalition_leninist = 0: <li>Leninists</li> ?]
-[? if coalition_moderate = 0: <li>Moderates</li> ?]
-[? if coalition_left = 0: <li>Leftists</li> ?]
-[? if coalition_leftcom = 0: <li>Left Communists</li> ?]
-[? if coalition_vpered = 0: <li>Vperedists</li> ?]
-[? if coalition_taylorist = 0: <li>Taylorists</li> ?]
-[? if coalition_military_opposition = 0: <li>Military Opposition</li> ?]
 </ul>
 
 
