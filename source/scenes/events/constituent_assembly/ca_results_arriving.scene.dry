@@ -39,19 +39,14 @@ Q.constituent_assembly_timer = 1;
 Q.k_r = Math.round(800*Q.k_assembly_votes_dec/100);
 Q.b_r = Math.round(800*Q.b_assembly_votes_dec/100);
 Q.m_r = Math.round(800*Q.m_assembly_votes_dec/100);
-if (Q.internationalist_assembly_votes_dec) {
-    Q.internationalist_r = Math.round(800*Q.internationalist_assembly_votes_dec/100);
-}
-if (Q.defensist_assembly_votes_dec) {
-    Q.defensist_r = Math.round(800*Q.defensist_assembly_votes_dec/100);
-}
+
 if (Q.left_sr_assembly_votes_dec) {
     Q.sr_assembly_votes_dec = Q.sr_assembly_votes_dec + Q.left_sr_assembly_votes_dec;
 }
 if (Q.right_sr_assembly_votes_dec) {
     Q.sr_assembly_votes_dec = Q.sr_assembly_votes_dec + Q.right_sr_assembly_votes_dec;
 }
-Q.sr_r = Math.round(800*Q.sr_assembly_votes_dec/100);
+Q.sr_r = Math.round(6 + (800*Q.sr_assembly_votes_dec/100));
 
 
 Q.ukrainian_sr_r = Math.round(800*Q.ukrainian_sr_assembly_votes_dec/100);
