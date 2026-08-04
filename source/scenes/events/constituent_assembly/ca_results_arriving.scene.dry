@@ -208,7 +208,7 @@ data = data.concat([
 ]);
 if (window && d3) {
     console.log(data);
-    var width = 500;
+    var width = 625;
     var height = 500;
     var screenWidth = document.getElementById('content').offsetWidth;
     if (screenWidth < width - 50) {
@@ -235,15 +235,15 @@ if (window && d3) {
 
 {!<tr><td><div class="party-box box b"></div>Bolsheviks</td><td>!}[+ b_r_dec +]%{!</td></tr>!}
 
-!<tr><td><div class="party-box box b"></div>Mensheviks</td><td>!}[+ m_r_dec +]% {!</td>!}
+{!<tr><td><div class="party-box box m"></div>Mensheviks</td><td>!}[+ m_r_dec +]%{!</td></tr>!}
 
 {!<tr><td><div class="party-box box sr"></div>SRs</td><td>!}[+ sr_r_dec +]%{!</td></tr>!}
 
-{!<tr><td><div class="party-box box sr"></div>Ukrainian SRs</td><td>!}[+ ukrainian_sr_r_dec +]%{!</td></tr>!}
+{!<tr><td><div class="party-box box ‎ukrainian_sr‎"></div>Ukrainian SRs</td><td>!}[+ ukrainian_sr_r_dec +]%{!</td></tr>!}
 
 {!<tr><td><div class="party-box box popular_socialist"></div>Popular Socialists</td><td>!}[+ popular_socialist_r_dec +]%{!</td></tr>!}
 
-{!<tr><td><div class="party-box box muslim_socialis"></div>Muslim Socialists</td><td>!}[+ muslim_socialists_r_dec +]%{!</td></tr>!}
+{!<tr><td><div class="party-box box muslim_socialist"></div>Muslim Socialists</td><td>!}[+ muslim_socialists_r_dec +]%{!</td></tr>!}
 
 {!<tr><td><div class="party-box box dashnak"></div>Dashnaks</td><td>!}[+ dashnak_r_dec +]%{!</td></tr>!}
 
