@@ -61,7 +61,14 @@ var data = [
  "legend": "SR-Maximalist",
  "name": "SR-Maximalist",
  "seats": Math.round(Q.maximalist_soviet*10)},
-
+{"id": "b",
+ "legend": "Bolshevik",
+ "name": "Bolshevik",
+ "seats": Math.round(Q.b_soviet*10)},
+{"id": "sdi",
+ "legend": "SD-Internationalist",
+ "name": "SD-Internationalist",
+ "seats": Math.round(Q.sdi_soviet_votes_dec*10)},
 ];
 if (window && d3) {
     var width = 500;
