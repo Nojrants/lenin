@@ -207,7 +207,7 @@ if (window && d3) {
 
 {!</table>!}
 
-{!<svg id="coalitions" style="width: 600px; height: 300px;"> </svg>!}
+// {!<svg id="coalitions" style="width: 600px; height: 300px;"> </svg>!}
 
 
 
