@@ -46,7 +46,7 @@ if (Q.left_sr_assembly_votes_dec) {
 if (Q.right_sr_assembly_votes_dec) {
     Q.sr_assembly_votes_dec = Q.sr_assembly_votes_dec + Q.right_sr_assembly_votes_dec;
 }
-Q.sr_r = Math.round(6 + (800*Q.sr_assembly_votes_dec/100));
+Q.sr_r = Math.round(800*Q.sr_assembly_votes_dec/100) + 6;
 
 
 Q.ukrainian_sr_r = Math.round(800*Q.ukrainian_sr_assembly_votes_dec/100);
