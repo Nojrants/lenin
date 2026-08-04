@@ -112,23 +112,23 @@ if (window && d3) {
 
 {!<tr><td><div class="box a"> </div> !} Anarchists: {!</td><td>!} [+ anarchist_soviet +]% {!</td>!}
 
-{!<tr><td><div class="box a"> </div> !} Maximalists: {!</td><td>!} [+ maximalist_soviet +]% {!</td>!}
+{!<tr><td><div class="box maximalist"> </div> !} Maximalists: {!</td><td>!} [+ maximalist_soviet +]% {!</td>!}
 
 {!<tr><td><div class="box b"> </div> !} Bolsheviks: {!</td><td>!} [+ b_soviet +]% {!</td>!}
 
-{!<tr><td><div class="box b"> </div> !} Menshevik Int.: {!</td><td>!} [+ left_m_soviet +]% {!</td>!}
+{!<tr><td><div class="box left_m"> </div> !} Menshevik Int.: {!</td><td>!} [+ left_m_soviet +]% {!</td>!}
 
 {!<tr><td><div class="box m"> </div> !} Mensheviks-Centre: {!</td><td>!} [+ m_soviet +]% {!</td>!}
 
-{!<tr><td><div class="box m"> </div> !} Mensheviks Defencists: {!</td><td>!} [+ right_m_soviet +]% {!</td>!}
+{!<tr><td><div class="box right_m"> </div> !} Mensheviks Defencists: {!</td><td>!} [+ right_m_soviet +]% {!</td>!}
 
-{!<tr><td><div class="box m"> </div> !} Left-SRs: {!</td><td>!} [+ lsr_soviet +]% {!</td>!}
+{!<tr><td><div class="box lsr"> </div> !} Left-SRs: {!</td><td>!} [+ lsr_soviet +]% {!</td>!}
 
 {!<tr><td><div class="box sr"> </div> !} SRs: {!</td><td>!} [+ sr_soviet +]% {!</td>!}
 
-{!<tr><td><div class="box m"> </div> !} Right SRs: {!</td><td>!} [+ right_sr_soviet +]% {!</td>!}
+{!<tr><td><div class="box right_sr"> </div> !} Right SRs: {!</td><td>!} [+ right_sr_soviet +]% {!</td>!}
 
-{!<tr><td><div class="box m"> </div> !} Popular Socialists: {!</td><td>!} [+ popular_socialist_soviet +]% {!</td>!}
+{!<tr><td><div class="box popular_socialist"> </div> !} Popular Socialists: {!</td><td>!} [+ popular_socialist_soviet +]% {!</td>!}
 
 {!<tr><td><div class="box other"> </div> !} Others: {!</td><td>!} [+ other_soviet +]% {!</td>!}
 {!</table>!}
