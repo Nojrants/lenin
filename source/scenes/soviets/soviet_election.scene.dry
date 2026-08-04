@@ -105,7 +105,7 @@ if (window && d3) {
 
 = Soviet Leadership Election
 
-{!<svg id="soviet" style="width: 600px; height: 350px;"> </svg>!}
+{!<svg id="soviet" style="width: 650px; height: 350px;"> </svg>!}
 
 {!<table class="soviet-table">!}
 
