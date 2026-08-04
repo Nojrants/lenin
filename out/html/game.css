@@ -752,6 +752,7 @@ table {
 
 .soviet-table th:last-child {
     text-align: right;
+    white-space: nowrap;
 }
 
 .party-box {
