@@ -710,7 +710,7 @@ table {
 
 .soviet-table {
     border-collapse: collapse;
-    width: 500px;
+    width: 650px;
     margin-top: 20px;
     font-size: 16px;
 }
@@ -719,7 +719,7 @@ table {
     background-color: #333;
     color: white;
     padding: 4px 8px;
-    text-align: left;
+    text-align: center;
 }
 
 .soviet-table td {
@@ -734,6 +734,10 @@ table {
 
 .soviet-table tr:hover {
     background-color: #ddd;
+}
+
+.soviet-table td:first-child {
+    padding-left: 25px;
 }
 
 .soviet-table td:last-child {
