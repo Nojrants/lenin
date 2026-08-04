@@ -31,6 +31,9 @@ Q.defensist_bloc = Q.m_soviet + Q.right_m_soviet + Q.lsr_soviet + Q.right_sr_sov
 Q.internationalist_bloc = Q.anarchist_soviet + Q.maximalist_soviet + Q.b_soviet + Q.sdi_soviet + Q.left_m_soviet + Q.m_soviet + Q.lsr_soviet + Q.sr_soviet; 
 Q.anti_bolshevik_bloc = Q.sdi_soviet + Q.left_m_soviet + Q.m_soviet + Q.right_m_soviet + Q.lsr_soviet + Q.sr_soviet + Q.right_sr_soviet + Q.popular_socialist_soviet + Q.other_soviet;
 
+console.log("NS Workers", Q.workers_popular_socialist);
+console.log("NS Soldiers", Q.soldiers_popular_socialist);
+
 console.log("Q.anarchist_soviet", Q.anarchist_soviet);
 console.log("Q.maximalist_soviet", Q.maximalist_soviet);
 console.log("Q.b_soviet", Q.b_soviet);
