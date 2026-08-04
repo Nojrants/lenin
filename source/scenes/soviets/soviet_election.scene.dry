@@ -6,7 +6,6 @@ new-page: true
 tags: event
 
 @post_election
-go-to: root
 on-arrival: {!
 Q.soviet_efficacy -= 0.05;
 Q.m_in_exco = 0;
@@ -32,25 +31,42 @@ Q.defensist_bloc = Q.m_soviet + Q.right_m_soviet + Q.lsr_soviet + Q.right_sr_sov
 Q.internationalist_bloc = Q.anarchist_soviet + Q.maximalist_soviet + Q.b_soviet + Q.sdi_soviet + Q.left_m_soviet + Q.m_soviet + Q.lsr_soviet + Q.sr_soviet; 
 Q.anti_bolshevik_bloc = Q.sdi_soviet + Q.left_m_soviet + Q.m_soviet + Q.right_m_soviet + Q.lsr_soviet + Q.sr_soviet + Q.right_sr_soviet + Q.popular_socialist_soviet + Q.other_soviet;
 
-console.log("popular socialist raw workers:", Q.workers_popular_socialist);
-console.log("popular socialist raw soldiers:", Q.soldiers_popular_socialist);
-console.log("popular socialist normalized workers:", Q.workers_popular_socialist_normalized);
-console.log("popular socialist normalized soldiers:", Q.soldiers_popular_socialist_normalized);
-console.log("popular socialist support:", Q.popular_socialist_support);
-console.log("popular socialist vote:", Q.popular_socialist_soviet_votes_dec);
 
-console.log("Q.anarchist_soviet", Q.anarchist_soviet);
-console.log("Q.maximalist_soviet", Q.maximalist_soviet);
-console.log("Q.b_soviet", Q.b_soviet);
-console.log("Q.sdi_soviet", Q.sdi_soviet);
-console.log("Q.left_m_soviet", Q.left_m_soviet);
-console.log("Q.m_soviet", Q.m_soviet);
-console.log("Q.right_m_soviet", Q.right_m_soviet);
-console.log("Q.lsr_soviet", Q.lsr_soviet);
-console.log("Q.sr_soviet", Q.sr_soviet);
-console.log("Q.right_sr_soviet", Q.right_sr_soviet);
-console.log("Q.popular_socialist_soviet", Q.popular_socialist_soviet);
-console.log("Q.other_soviet", other_soviet);
+console.log("RAW INPUTS:");
+console.log("anarchist_soviet_votes_dec:", Q.anarchist_soviet_votes_dec);
+console.log("maximalist_soviet_votes_dec:", Q.maximalist_soviet_votes_dec);
+console.log("b_soviet_votes_dec:", Q.b_soviet_votes_dec);
+console.log("sdi_soviet_votes_dec:", Q.sdi_soviet_votes_dec);
+console.log("left_m_soviet_votes_dec:", Q.left_m_soviet_votes_dec);
+console.log("m_soviet_votes_dec:", Q.m_soviet_votes_dec);
+console.log("right_m_soviet_votes_dec:", Q.right_m_soviet_votes_dec);
+console.log("lsr_soviet_votes_dec:", Q.lsr_soviet_votes_dec);
+console.log("sr_soviet_votes_dec:", Q.sr_soviet_votes_dec);
+console.log("right_sr_soviet_votes_dec:", Q.right_sr_soviet_votes_dec);
+console.log("popular_socialist_soviet_votes_dec:", Q.popular_socialist_soviet_votes_dec);
+console.log("other_soviet_votes_dec:", Q.other_soviet_votes_dec);
+console.log("k_soviet_votes_dec:", Q.k_soviet_votes_dec);
+console.log("conservative_soviet_votes_dec:", Q.conservative_soviet_votes_dec);
+
+console.log("anarchist_soviet:", Q.anarchist_soviet);
+console.log("maximalist_soviet:", Q.maximalist_soviet);
+console.log("b_soviet:", Q.b_soviet);
+console.log("sdi_soviet:", Q.sdi_soviet);
+console.log("left_m_soviet:", Q.left_m_soviet);
+console.log("m_soviet:", Q.m_soviet);
+console.log("right_m_soviet:", Q.right_m_soviet);
+console.log("lsr_soviet:", Q.lsr_soviet);
+console.log("sr_soviet:", Q.sr_soviet);
+console.log("right_sr_soviet:", Q.right_sr_soviet);
+console.log("popular_socialist_soviet:", Q.popular_socialist_soviet);
+console.log("other_soviet:", Q.other_soviet);
+
+console.log("socialist_bloc:", Q.socialist_bloc);
+console.log("october_bloc:", Q.october_bloc);
+console.log("defensist_bloc:", Q.defensist_bloc);
+console.log("internationalist_bloc:", Q.internationalist_bloc);
+console.log("anti_bolshevik_bloc:", Q.anti_bolshevik_bloc);
+
 
 
 !}
