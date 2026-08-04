@@ -24,6 +24,11 @@ Q.sr_soviet = Q.sr_soviet_votes_dec;
 Q.right_sr_soviet = Q.right_sr_soviet_votes_dec;
 Q.popular_socialist_soviet = Q.popular_socialist_soviet_votes_dec;
 Q.other_soviet = Math.round(10*(Q.other_soviet_votes_dec + Q.k_soviet_votes_dec + Q.conservative_soviet_votes_dec))/10;
+Q.m_soviet = Q.m_soviet_votes_dec;
+Q.sr_soviet = Q.sr_soviet_votes_dec;
+Q.b_soviet = Q.b_soviet_votes_dec;
+Q.anarchist_soviet = Q.anarchist_soviet_votes_dec;
+Q.other_soviet = Math.round(10*(Q.popular_socialist_soviet_votes_dec + Q.other_soviet_votes_dec + Q.k_soviet_votes_dec + Q.conservative_soviet_votes_dec))/10;
 
 
 !}
