@@ -87,8 +87,8 @@ var data = [
  "seats": Math.round(Q.other_soviet_votes_dec*10)},
 ];
 if (window && d3) {
-    var width = 500;
-    var height = 500;
+    var width = 700;
+    var height = 700;
     var screenWidth = document.getElementById('content').offsetWidth;
     if (screenWidth < width - 50) {
         width = screenWidth - 50;
