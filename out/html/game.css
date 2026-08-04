@@ -543,19 +543,19 @@ table {
 /* Styles for parties - TODO: have the player party be highlighted. */
 /* Use CSS variables for the colors... */
 :root {
-  --anarchist: #211111;
-  --maximalist: #3e1f1f;
+  --anarchist: #090505;
+  --maximalist: #572c2c;
   --b: #9b1616;
-  --sdi: #b45d41;
+  --sdi: #b47561;
   --left_m: #c34816;
   --m: #b44314;
-  --right_m: #a53e12;
+  --right_m: #9a3a11;
   --d: #fc7a82;
   --i: #ff3c00;
   --k: #DCCA4A;
   --lsr: #295627;
   --sr: #40853d;
-  --right_sr: #4b9d48;
+  --right_sr: #67a365;
   --usr: #FFBB5A;
   --ps: #949d48;
   --m_n: #00780A;
