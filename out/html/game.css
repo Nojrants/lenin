@@ -737,12 +737,22 @@ table {
 }
 
 .soviet-table td:first-child {
-    padding-left: 25px;
+    width: 85%;
 }
 
 .soviet-table td:last-child {
-    text-align: right;
-    font-weight: bold;
+    width: 15%;
+    text-align: left;
+    padding-left: 0;
+    transform: translateX(-20px);
+}
+
+.soviet-table th:first-child {
+    text-align: left;
+}
+
+.soviet-table th:last-child {
+    text-align: center;
 }
 
 .party-box {
