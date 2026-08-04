@@ -571,7 +571,7 @@ table {
     fill: var(--anarchist);
 }
 .seat.maximalist {
-    fill: var(--anarchist);
+    fill: var(--maximalist);
 }
 .seat.b {
     fill: var(--b);
@@ -580,13 +580,13 @@ table {
     background-color: var(--sdi);
 }
 .seat.left_m {
-    fill: var(--anarchist);
+    fill: var(--left_m);
 }
 .seat.m {
     fill: var(--m);
 }
 .seat.right_m {
-    fill: var(--anarchist);
+    fill: var(--right_m);
 }
 .seat.defensist {
     fill: var(--d);
@@ -604,7 +604,7 @@ table {
     fill: var(--sr);
 }
 .seat.right_sr {
-    fill: var(--rsr);
+    fill: var(--right_sr);
 }
 .seat.ukrainian_sr {
     fill: var(--usr);
