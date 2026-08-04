@@ -1082,6 +1082,7 @@ Q.timers = [//m_party
             'sovnarkom',
             'party_congress',
             'chichern_travel',
+            'soviet_congress',
             ];
 Q.advisor_action_timer = 0;
 Q.party_congress_timer = 0;
@@ -1096,6 +1097,7 @@ Q.military_disorder_timer = 3;
 Q.crime_wave_timer = 5;
 Q.enemy_reinforcements_timer = 0;
 Q.party_congress_timer = 35;
+Q.soviet_congress = 0;
 
 // constituent assembly election
 Q.election_type = "ca";
