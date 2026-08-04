@@ -3,6 +3,7 @@ view-if: year = 1917 and month = 11 and week = 1
 go-to: election_algorithm.all_russian_soviet
 set-jump: soviet_election.post_election
 new-page: true
+tags: event
 
 @post_election
 on-arrival: {!
