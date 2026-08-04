@@ -763,3 +763,12 @@ table {
     border: 1px solid black;
     vertical-align: middle;
 }
+
+
+.coalition-bar {
+    fill: #555;
+}
+
+#coalitions text {
+    font-size: 14px;
+}
