@@ -79,28 +79,4 @@ if (window && d3) {
 }
 !}
 
-= Soviet Leadership Election
 
-{!<svg id="soviet" style="width: 500px; height: 250px;"> </svg>!}
-
-{!<table>!}
-{!<tr><td>Party</td><td>Vote share</td></tr>!}
-
-{!<tr><td><div class="box b"> </div> !} Bolsheviks: {!</td><td>!} [+ b_soviet +]% {!</td>!}
-
-[? if internationalist_soviet_votes_dec : {!<tr><td><div class="box internationalist"></div> Menshevik-Internationalists: </td><td>!} [+ internationalist_soviet_votes_dec +]% {!</td>!} ?]
-
-{!<tr><td><div class="box m"> </div> !} Mensheviks: {!</td><td>!} [+ m_soviet +]% {!</td>!}
-
-[? if defensist_soviet_votes_dec : {!<tr><td><div class="box defensist"></div> Menshevik-Defensists: </td><td>!} [+ defensist_soviet_votes_dec +]% {!</td>!} ?]
-
-[? if left_sr_soviet_votes_dec : {!<tr><td><div class="box left_sr"></div> !}Left-SRs: {!</td><td>!} [+ left_sr_soviet_votes_dec +]% {!</td>!} ?]
-
-{!<tr><td><div class="box sr"> </div> !} SRs: {!</td><td>!} [+ sr_soviet +]% {!</td>!}
-
-[? if right_sr_soviet_votes_dec : {!<tr><td><div class="box right_sr"></div> !}Right-SRs: {!</td><td>!} [+ right_sr_soviet_votes_dec +]% {!</td>!} ?]
-
-{!<tr><td><div class="box a"> </div> !} Anarchists: {!</td><td>!} [+ anarchist_soviet +]% {!</td>!}
-
-{!<tr><td><div class="box other"> </div> !} Others: {!</td><td>!} [+ other_soviet +]% {!</td>!}
-{!</table>!}
