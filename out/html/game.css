@@ -744,7 +744,6 @@ table {
     width: 15%;
     text-align: left;
     padding-left: 0;
-    transform: translateX(-20px);
 }
 
 .soviet-table th:first-child {
@@ -752,7 +751,7 @@ table {
 }
 
 .soviet-table th:last-child {
-    text-align: center;
+    text-align: right;
 }
 
 .party-box {
