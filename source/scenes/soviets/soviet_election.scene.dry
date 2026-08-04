@@ -101,12 +101,82 @@ if (window && d3) {
     parliament.exit.toCenter(false).bigToSmall(true);
     d3.select("#soviet").datum(data).call(parliament);
 }
+// Coalition chart
+
+var coalition_data = [
+    {
+        "name": "October Bloc",
+        "value": Q.october_bloc
+    },
+    {
+        "name": "Internationalists",
+        "value": Q.internationalist_bloc
+    },
+    {
+        "name": "Defensists",
+        "value": Q.defensist_bloc
+    },
+    {
+        "name": "Anti-Bolshevik Bloc",
+        "value": Q.anti_bolshevik_bloc
+    },
+    {
+        "name": "Socialist Bloc",
+        "value": Q.socialist_bloc
+    }
+];
+
+
+if (window && d3) {
+
+    var width = 600;
+    var height = 300;
+
+    var svg = d3.select("#coalitions");
+
+    var scale = d3.scaleLinear()
+        .domain([0,100])
+        .range([0,width-150]);
+
+    var bars = svg.selectAll("g")
+        .data(coalition_data)
+        .enter()
+        .append("g")
+        .attr("transform", function(d,i) {
+            return "translate(0," + (i*50 + 20) + ")";
+        });
+
+
+    bars.append("text")
+        .text(function(d){ return d.name; })
+        .attr("x",0)
+        .attr("y",20);
+
+
+    bars.append("rect")
+        .attr("x",150)
+        .attr("y",5)
+        .attr("height",25)
+        .attr("width",function(d){
+            return scale(d.value);
+        })
+        .attr("class","coalition-bar");
+
+
+    bars.append("text")
+        .text(function(d){
+            return d.value.toFixed(1) + "%";
+        })
+        .attr("x",function(d){
+            return 160 + scale(d.value);
+        })
+        .attr("y",22);
+}
 !}
 
 = Soviet Leadership Election
 
 {!<svg id="soviet" style="width: 625px; height: 350px;"> </svg>!}
-
 {!<table class="soviet-table">!}
 
 {!<tr><th>Party</th><th>Vote Share</th></tr>!}
@@ -136,3 +206,9 @@ if (window && d3) {
 {!<tr><td><div class="party-box box other"></div>Others</td><td>!}[+ other_soviet +]%{!</td></tr>!}
 
 {!</table>!}
+
+{!<svg id="coalitions" style="width: 600px; height: 300px;"> </svg>!}
+
+
+
+
