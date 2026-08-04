@@ -6,6 +6,7 @@ new-page: true
 tags: event
 
 @post_election
+go-to: root
 on-arrival: {!
 Q.soviet_efficacy -= 0.05;
 Q.m_in_exco = 0;
@@ -53,6 +54,5 @@ console.log("Q.other_soviet", other_soviet);
 
 
 !}
-
 
 
