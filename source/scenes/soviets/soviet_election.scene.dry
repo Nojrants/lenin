@@ -12,54 +12,25 @@ Q.m_in_exco = 0;
 Q.sr_in_exco = 0;
 Q.b_in_exco = 0;
 
-Q.m_soviet = Q.m_soviet_votes_dec;
-Q.sr_soviet = Q.sr_soviet_votes_dec;
-Q.b_soviet = Q.b_soviet_votes_dec;
 Q.anarchist_soviet = Q.anarchist_soviet_votes_dec;
-Q.other_soviet = Math.round(10*(Q.popular_socialist_soviet_votes_dec + Q.other_soviet_votes_dec + Q.k_soviet_votes_dec + Q.conservative_soviet_votes_dec))/10;
+Q.maximalist_soviet = Q.maximalist_soviet_votes_dec;
+Q.b_soviet = Q.b_soviet_votes_dec;
+Q.sdi_soviet = Q.sdi_soviet_votes_dec;
+Q.left_m_soviet = Q.left_m_soviet_votes_dec;
+Q.m_soviet = Q.m_soviet_votes_dec;
+Q.right_m_soviet = Q.right_m_soviet_votes_dec;
+Q.lsr_soviet = Q.lsr_soviet_votes_dec;
+Q.sr_soviet = Q.sr_soviet_votes_dec;
+Q.right_sr_soviet = Q.right_sr_soviet_votes_dec;
+Q.popular_socialist_soviet = Q.popular_socialist_soviet_votes_dec;
+Q.other_soviet = Math.round(10*(Q.other_soviet_votes_dec + Q.k_soviet_votes_dec + Q.conservative_soviet_votes_dec))/10;
 
-Q.defensist_bloc = 0;
-Q.internationalist_bloc = Q.b_soviet + Q.anarchist_soviet;
-Q.revolutionary_bloc = Q.b_soviet + Q.anarchist_soviet;
-Q.moderate_internationalist_bloc = 0;
-Q.anti_bolshevik_bloc = Q.m_soviet + Q.other_soviet;
+Q.socialist_bloc = Q.anarchist_soviet + Q.maximalist_soviet + Q.b_soviet + Q.sdi_soviet + Q.left_m_soviet + Q.m_soviet + Q.right_m_soviet + Q.lsr_soviet + Q.sr_soviet + Q.right_sr_soviet + Q.popular_socialist_soviet + Q.other_soviet;
+Q.october_bloc = Q.anarchist_soviet + Q.maximalist_soviet + Q.b_soviet;
+Q.defensist_bloc = Q.m_soviet + Q.right_m_soviet + Q.lsr_soviet + Q.right_sr_soviet;
+Q.internationalist_bloc = Q.anarchist_soviet + Q.maximalist_soviet + Q.b_soviet + Q.sdi_soviet + Q.left_m_soviet + Q.m_soviet + Q.lsr_soviet + Q.sr_soviet; 
+Q.anti_bolshevik_bloc = Q.sdi_soviet + Q.left_m_soviet + Q.m_soviet + Q.right_m_soviet + Q.lsr_soviet + Q.sr_soviet + Q.right_sr_soviet + Q.popular_socialist_soviet + Q.other_soviet;
 
-if (Q.m_leadership == 1) {
-    Q.internationalist_bloc += Q.m_soviet;
-    Q.moderate_internationalist_bloc += Q.m_soviet;
-} else {
-    Q.defensist_bloc += Q.m_soviet;
-}
-if (Q.sr_leadership == 1) {
-    Q.internationalist_bloc += Q.sr_soviet;
-    Q.moderate_internationalist_bloc += Q.sr_soviet;
-    if (!Q.right_sr_split) {
-        Q.anti_bolshevik_bloc += Q.sr_soviet;
-    }
-} else {
-    Q.defensist_bloc += Q.sr_soviet;
-    Q.anti_bolshevik_bloc += Q.sr_soviet;
-}
-
-if (Q.internationalist_split && Q.internationalist_soviet_votes_dec) {
-    Q.internationalist_bloc += Q.internationalist_soviet_votes_dec;
-    Q.moderate_internationalist_bloc += Q.internationalist_soviet_votes_dec;
-    Q.anti_bolshevik_bloc += Q.internationalist_soviet_votes_dec;
-}
-if (Q.defensist_split && Q.defensist_soviet_votes_dec) {
-    Q.defensist_bloc += Q.defensist_soviet_votes_dec;
-    Q.anti_bolshevik_bloc += Q.defensist_soviet_votes_dec;
-}
-if (Q.left_sr_split && Q.left_sr_soviet_votes_dec) {
-    Q.internationalist_bloc += Q.left_sr_soviet_votes_dec;
-    Q.moderate_internationalist_bloc += Q.left_sr_soviet_votes_dec;
-}
-if (Q.right_sr_split && Q.right_sr_soviet_votes_dec) {
-    Q.defensist_bloc += Q.right_sr_soviet_votes_dec;
-    Q.anti_bolshevik_bloc += Q.right_sr_soviet_votes_dec;
-}
-Q.defensist_bloc = Math.round(Q.defensist_bloc*10)/10;
-Q.internationalist_bloc = Math.round(Q.internationalist_bloc*10)/10;
 !}
 on-display: {!
 // do the graphs
