@@ -60,7 +60,6 @@ if (Q.right_sr_split && Q.right_sr_soviet_votes_dec) {
 }
 Q.defensist_bloc = Math.round(Q.defensist_bloc*10)/10;
 Q.internationalist_bloc = Math.round(Q.internationalist_bloc*10)/10;
-
 !}
 on-display: {!
 // do the graphs
