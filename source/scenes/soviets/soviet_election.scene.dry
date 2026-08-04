@@ -129,7 +129,7 @@ var coalition_data = [
 
 if (window && d3) {
 
-    var width = 600;
+    var width = 625;
     var height = 300;
 
     var svg = d3.select("#coalitions");
