@@ -706,3 +706,44 @@ table {
     text-decoration: underline;
     text-decoration-style: dotted;
 }
+
+.soviet-table {
+    border-collapse: collapse;
+    width: 450px;
+    margin-top: 20px;
+    font-size: 16px;
+}
+
+.soviet-table th {
+    background-color: #333;
+    color: white;
+    padding: 8px;
+    text-align: left;
+}
+
+.soviet-table td {
+    padding: 8px 12px;
+    border-bottom: 1px solid #aaa;
+}
+
+.soviet-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.soviet-table tr:hover {
+    background-color: #ddd;
+}
+
+.soviet-table td:last-child {
+    text-align: right;
+    font-weight: bold;
+}
+
+.party-box {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    margin-right: 8px;
+    border: 1px solid black;
+    vertical-align: middle;
+}
