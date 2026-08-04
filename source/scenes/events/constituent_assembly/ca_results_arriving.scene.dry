@@ -45,13 +45,11 @@ if (Q.internationalist_assembly_votes_dec) {
 if (Q.defensist_assembly_votes_dec) {
     Q.defensist_r = Math.round(800*Q.defensist_assembly_votes_dec/100);
 }
-if (Q.left_sr_assembly_votes_dec) {
-    Q.left_sr_r = Math.round(800*Q.left_sr_assembly_votes_dec/100);
-}
+
+Q.sr_assembly_votes_dec += Q.left_sr_assembly_votes_dec + Q.right_sr_assembly_votes_dec;
 Q.sr_r = Math.round(800*Q.sr_assembly_votes_dec/100);
-if (Q.right_sr_assembly_votes_dec) {
-    Q.sr_r += Math.round(800*Q.right_sr_assembly_votes_dec/100);
-}
+
+
 Q.ukrainian_sr_r = Math.round(800*Q.ukrainian_sr_assembly_votes_dec/100);
 Q.cossacks_r = Math.round(800*Q.cossacks_assembly_votes_dec/100);
 Q.popular_socialist_r = Math.round(800*Q.popular_socialist_assembly_votes_dec/100);
@@ -73,12 +71,7 @@ if (Q.internationalist_assembly_votes_dec) {
 if (Q.defensist_assembly_votes_dec) {
     Q.defensist_r_dec = Q.defensist_assembly_votes_dec;
 }
-if (Q.left_sr_assembly_votes_dec) {
-    Q.left_sr_r_dec = Q.left_sr_assembly_votes_dec;
-}
-if (Q.right_sr_assembly_votes_dec) {
-    Q.right_sr_r_dec = Q.right_sr_assembly_votes_dec;
-}
+
 Q.sr_r_dec = Q.sr_assembly_votes_dec;
 Q.ukrainian_sr_r_dec = Q.ukrainian_sr_assembly_votes_dec;
 Q.cossacks_r_dec = Q.cossacks_assembly_votes_dec;
@@ -129,14 +122,7 @@ if (Q.defensist_assembly_votes_dec) {
             "seats": Q.defensist_r
             });
 }
-if (Q.left_sr_assembly_votes_dec) {
-    data.push({
-            "id": "left_sr",
-            "legend": "Left-SR",
-            "name": "Left-SR",
-            "seats": Q.left_sr_r
-            });
-}
+
 data.push({
     "id": "sr",
     "legend": "SR",
@@ -239,7 +225,7 @@ if (window && d3) {
 
 {!<tr><td><div class="party-box box sr"></div>SRs</td><td>!}[+ sr_r_dec +]%{!</td></tr>!}
 
-{!<tr><td><div class="party-box box ‎ukrainian_sr‎"></div>Ukrainian SRs</td><td>!}[+ ukrainian_sr_r_dec +]%{!</td></tr>!}
+{!<tr><td><div class="party-box box ukrainian_sr"></div>Ukrainian SRs</td><td>!}[+ ukrainian_sr_r_dec +]%{!</td></tr>!}
 
 {!<tr><td><div class="party-box box popular_socialist"></div>Popular Socialists</td><td>!}[+ popular_socialist_r_dec +]%{!</td></tr>!}
 
