@@ -851,7 +851,7 @@ Q.minorities = ['ukrainians', 'kyrgyz_kazakh', 'tatar', 'other_turkic', 'jews', 
 Q.major_parties = ['m', 'b', 'sr', 'k'];
 // parties represented in the soviets
 Q.soviet_parties = ['m', 'b', 'sr', 'anarchist', 'other'];
-Q.parties = ['sdi', 'left_m', 'm', 'right_m', 'b', 'maximalist', 'lsr', 'sr', 'right_sr', 'k', 'popular_socialist', 'conservative', 'other', 'anarchist', 'none'];
+Q.parties = ['sdi', 'left_m', 'm', 'right_m', 'b', 'maximalist', 'lsr', 'sr', 'right_sr', 'popular_socialist', 'k', 'conservative', 'other', 'anarchist', 'none'];
 Q.minority_parties = ['ukrainian_sr', 'alash', 'musavat', 'dashnak', 'jewish_socialists', 'jewish_national_list', 'muslim_socialists', 'turkic_muslim_parties', 'cossacks'];
 
 // Support for party by social group
