@@ -46,7 +46,7 @@ if (Q.defensist_assembly_votes_dec) {
     Q.defensist_r = Math.round(800*Q.defensist_assembly_votes_dec/100);
 }
 
-Q.sr_assembly_votes_dec += Q.left_sr_assembly_votes_dec + Q.right_sr_assembly_votes_dec;
+Q.sr_assembly_votes_dec = Q.sr_assembly_votes_dec + Q.left_sr_assembly_votes_dec + Q.right_sr_assembly_votes_dec;
 Q.sr_r = Math.round(800*Q.sr_assembly_votes_dec/100);
 
 
@@ -114,14 +114,6 @@ data.push({
     "name": "Menshevik",
     "seats": Q.m_r
 });
-if (Q.defensist_assembly_votes_dec) {
-    data.push({
-            "id": "defensist",
-            "legend": "Menshevik-Defensist",
-            "name": "Menshevik-Defensist",
-            "seats": Q.defensist_r
-            });
-}
 
 data.push({
     "id": "sr",
