@@ -707,6 +707,7 @@ table {
     text-decoration-style: dotted;
 }
 
+
 .soviet-table {
     border-collapse: collapse;
     width: 450px;
@@ -722,7 +723,8 @@ table {
 }
 
 .soviet-table td {
-    padding: 8px 12px;
+    padding: 2px 8px;
+    line-height: 1.1;
     border-bottom: 1px solid #aaa;
 }
 
