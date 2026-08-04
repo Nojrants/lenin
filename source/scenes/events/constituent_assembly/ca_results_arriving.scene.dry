@@ -40,13 +40,20 @@ Q.k_r = Math.round(800*Q.k_assembly_votes_dec/100);
 Q.b_r = Math.round(800*Q.b_assembly_votes_dec/100);
 Q.m_r = Math.round(800*Q.m_assembly_votes_dec/100);
 
+console.log("left SR", left_sr_assembly_votes_dec);
+console.log("right SR", right_sr_assembly_votes_dec);
+console.log("SR", sr_assembly_votes_dec);
+
+
 if (Q.left_sr_assembly_votes_dec) {
     Q.sr_assembly_votes_dec = Q.sr_assembly_votes_dec + Q.left_sr_assembly_votes_dec;
 }
 if (Q.right_sr_assembly_votes_dec) {
     Q.sr_assembly_votes_dec = Q.sr_assembly_votes_dec + Q.right_sr_assembly_votes_dec;
 }
-Q.sr_r = Math.round(800*Q.sr_assembly_votes_dec/100) + 6;
+Q.sr_r = Math.round(800*Q.sr_assembly_votes_dec/100);
+
+console.log("merged", sr_r);
 
 
 Q.ukrainian_sr_r = Math.round(800*Q.ukrainian_sr_assembly_votes_dec/100);
