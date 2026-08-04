@@ -751,7 +751,7 @@ table {
 }
 
 .soviet-table th:last-child {
-    text-align: right;
+    text-align: center;
     white-space: nowrap;
 }
 
