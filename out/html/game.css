@@ -543,17 +543,21 @@ table {
 /* Styles for parties - TODO: have the player party be highlighted. */
 /* Use CSS variables for the colors... */
 :root {
-  --anarchist: #000000;
-  --b: #8B0000;
-  --m: #E3000F;
+  --anarchist: #211111;
+  --maximalist: #3e1f1f;
+  --b: #9b1616;
+  --sdi: #b45d41;
+  --left_m: #c34816;
+  --m: #b44314;
+  --right_m: #a53e12;
   --d: #fc7a82;
   --i: #ff3c00;
   --k: #DCCA4A;
-  --sr: #c700a2;
-  --lsr: #ff006a;
-  --rsr: #c268ff;
+  --lsr: #295627;
+  --sr: #40853d;
+  --right_sr: #4b9d48;
   --usr: #FFBB5A;
-  --ps: #fcc761;
+  --ps: #949d48;
   --m_n: #00780A;
   --m_s: #76f981;
   --j_n: #3F7BC1;
@@ -566,11 +570,23 @@ table {
 .seat.anarchist {
     fill: var(--anarchist);
 }
+.seat.maximalist {
+    fill: var(--anarchist);
+}
 .seat.b {
     fill: var(--b);
 }
+.box.sdi {
+    background-color: var(--sdi);
+}
+.seat.left_m {
+    fill: var(--anarchist);
+}
 .seat.m {
     fill: var(--m);
+}
+.seat.right_m {
+    fill: var(--anarchist);
 }
 .seat.defensist {
     fill: var(--d);
@@ -581,11 +597,11 @@ table {
 .seat.k {
     fill: var(--k);
 }
+.seat.lsr {
+    fill: var(--lsr);
+}
 .seat.sr {
     fill: var(--sr);
-}
-.seat.left_sr {
-    fill: var(--lsr);
 }
 .seat.right_sr {
     fill: var(--rsr);
@@ -622,11 +638,23 @@ table {
 .box.a {
     background-color: var(--anarchist);
 }
+.box.maximalist {
+    background-color: var(--maximalist);
+}
 .box.b {
     background-color: var(--b);
 }
+.box.sdi {
+    background-color: var(--sdi);
+}
+.box.left_m {
+    background-color: var(--left_m);
+}
 .box.m {
     background-color: var(--m);
+}
+.box.right_m {
+    background-color: var(--right_m);
 }
 .box.defensist {
     background-color: var(--d);
@@ -640,11 +668,11 @@ table {
 .box.sr {
     background-color: var(--sr);
 }
-.box.left_sr {
+.box.lsr {
     background-color: var(--lsr);
 }
 .box.right_sr {
-    background-color: var(--rsr);
+    background-color: var(--right_sr);
 }
 .box.ukrainian_sr {
     background-color: var(--usr);
