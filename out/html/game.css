@@ -576,8 +576,8 @@ table {
 .seat.b {
     fill: var(--b);
 }
-.box.sdi {
-    background-color: var(--sdi);
+.seat.sdi {
+   fill: var(--sdi);
 }
 .seat.left_m {
     fill: var(--left_m);
