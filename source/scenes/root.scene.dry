@@ -858,7 +858,7 @@ Q.minority_parties = ['ukrainian_sr', 'alash', 'musavat', 'dashnak', 'jewish_soc
 // they don't have to sum to 100 since the electoral calculations will be normalized.
 
 Q.workers_anarchist = 15;
-Q.workers_maximalists = 2; 
+Q.workers_maximalist = 2; 
 Q.workers_b = 60;
 Q.workers_sdi = 5; 
 Q.workers_left_m = 5; 
@@ -877,7 +877,7 @@ Q.workers_pro_prov_gov = 65;
 Q.workers_pro_soviet = 95;
 
 Q.middle_anarchist = 0;
-Q.middle_maximalists = 0; 
+Q.middle_maximalist = 0; 
 Q.middle_b = 0;
 Q.middle_sdi = 0; 
 Q.middle_left_m = 1; 
@@ -896,7 +896,7 @@ Q.middle_pro_prov_gov = 5;
 Q.middle_pro_soviet = 10;
 
 Q.peasants_anarchist = 2;
-Q.peasants_maximalists = 2; 
+Q.peasants_maximalist = 2; 
 Q.peasants_b = 20;
 Q.peasants_sdi = 0; 
 Q.peasants_left_m = 1; 
@@ -915,7 +915,7 @@ Q.peasants_pro_prov_gov = 45;
 Q.peasants_pro_soviet = 70;
 
 Q.underclass_anarchist = 1;
-Q.underclass_maximalists = 1; 
+Q.underclass_maximalist = 1; 
 Q.underclass_b = 15;
 Q.underclass_sdi = 5; 
 Q.underclass_left_m = 5; 
@@ -934,7 +934,7 @@ Q.underclass_pro_prov_gov = 50;
 Q.underclass_pro_soviet = 60;
 
 Q.soldiers_anarchist = 6;
-Q.soldiers_maximalists = 3; 
+Q.soldiers_maximalist = 3; 
 Q.soldiers_b = 60;
 Q.soldiers_sdi = 5; 
 Q.soldiers_left_m = 5; 
