@@ -1,9 +1,11 @@
 title: Preparing for the Assembly
 new-page: true
-view-if: ca_election_held = 1 and constituent_assembly_timer != 0 and ca_held != 0 and ca_preparations_timer = 0
+view-if: ca_election_held = 1 and ca_held = 0 and ca_preparations_timer = 0
 on-arrival: week_actions += 1; ca_preparations += 2;
 tags: b_party, government
 is-card: true
+card-image: img/theses1.PNG
+
 
 = Preparing for the Constituent Assembly
 
