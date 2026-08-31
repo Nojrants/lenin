@@ -4,6 +4,7 @@ view-if: (year = 1917 and month = 11 and week = 4) and ca_scheduled = 1
 max-visits: 1
 tags: event
 go-to: ca_reaction
+on-arrival: ca_election_held = 1
 
 = Constituent Assembly Elections
 
@@ -269,7 +270,7 @@ subtitle: There's a legitimate argument to be made that this is necessary regard
 max-visits: 1
 go-to: post_election_menu
 on-arrival:{!
-	Q.constituent_assembly_timer = 8;
+	Q.constituent_assembly_timer = 10;
 	Q.ca_week = Q.week + (Q.constituent_assembly_timer % 4);
 	Q.ca_month = Q.month + (Q.constituent_assembly_timer / 4);
 	Q.ca_year = Q.year;
@@ -290,7 +291,7 @@ subtitle: We have moved beyond the need for such a body.
 choose-if: ca_stance != 2
 max-visits: 1
 go-to: post_election_menu
-on-arrival: ca_stance = 1; moderate_dissent += 5; left_sr_relation -= 2; centre_sr_relation -= 5; right_sr_relation -= 5; left_m_relation -= 5; centre_m_relation -= 5; right_m_relation -= 5; ns_relation -= 5; k_relation -= 5; rightist_relation -= 5;
+on-arrival: ca_stance = 1; ca_support -=1; instability += 2; democraticity -=2; moderate_dissent += 5; left_sr_relation -= 2; centre_sr_relation -= 5; right_sr_relation -= 5; left_m_relation -= 5; centre_m_relation -= 5; right_m_relation -= 5; ns_relation -= 5; k_relation -= 5; rightist_relation -= 5;
 
 We immediately begin questioning the necessity of a Constituent Assembly, and attempt to cast doubt on the fairness and completeness of the election results, though it's likely we'll need to put in considerable effort to convince our own supporters of this fully. Nonetheless, the new stance causes considerable alarm for the other parties. 
 
@@ -308,7 +309,7 @@ title: Use red guards to monitor, harass, or arrest known countterrevolutionary 
 subtitle: Surely we can find ways to discredit or stop their election. 
 max-visits: 1
 go-to: post_election_menu
-on-arrival: democraticity -= 3; instability += 2; ca_stance = 1; moderate_dissent += 5; left_sr_relation -= 2; centre_sr_relation -= 5; right_sr_relation -= 5; left_m_relation -= 5; centre_m_relation -= 5; right_m_relation -= 5; ns_relation -= 5; k_relation -= 5; rightist_relation -= 5;
+on-arrival: democraticity -= 3; instability += 1; ca_stance = 1; moderate_dissent += 5; left_sr_relation -= 2; centre_sr_relation -= 5; right_sr_relation -= 5; left_m_relation -= 5; centre_m_relation -= 5; right_m_relation -= 5; ns_relation -= 5; k_relation -= 5; rightist_relation -= 5;
 
 @ca_proceed
 title: We've done all we can.
