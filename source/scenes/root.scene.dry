@@ -1083,6 +1083,8 @@ Q.timers = [//m_party
             'party_congress',
             'chichern_travel',
             'soviet_congress',
+            'ca_preparations',
+            'ca_support',
             ];
 Q.advisor_action_timer = 0;
 Q.party_congress_timer = 0;
@@ -1103,6 +1105,9 @@ Q.soviet_congress = 0;
 Q.election_type = "ca";
 Q.ca_progress = 0;
 Q.ca_scheduled = 1;
+Q.ca_election_held = 0;
+Q.ca_held = 0;
+Q.ca_support = 15;
 Q.next_election_year = 1917;
 Q.next_election_month = 11;
 Q.next_election_week = 3;
