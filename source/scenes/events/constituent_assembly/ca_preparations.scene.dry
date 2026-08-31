@@ -19,7 +19,7 @@ title: Commission articles in the party press, analyzing and explaining away the
 subtitle: This option is available because we have Lenin as advisor. 
 view-if: lenin_advisor = 1
 max-visits: 1
-on-arrival: ca_support -=2; instability += 1; democraticity -=1; moderate_dissent += 2; left_sr_relation -= 1; centre_sr_relation -= 2.5; right_sr_relation -= 5; left_m_relation -= 2.5; centre_m_relation -= 2.5; right_m_relation -= 5; ns_relation -= 5; k_relation -= 5; rightist_relation -= 5;
+on-arrival: ca_support_timer -=2; instability += 1; democraticity -=1; moderate_dissent += 2; left_sr_relation -= 1; centre_sr_relation -= 2.5; right_sr_relation -= 5; left_m_relation -= 2.5; centre_m_relation -= 2.5; right_m_relation -= 5; ns_relation -= 5; k_relation -= 5; rightist_relation -= 5;
 
 Lenin pens a series of articles in Pravda and other party organs, making sense of the apparent Bolshevik defeat to the rest of the Party. 
 
@@ -28,7 +28,7 @@ Although they lost the election overall, he claims they successfully showed thei
 @delegitimize_the_ca
 title: Launch a campaign to delegitimize the election results and the Constituent Assembly. 
 choose-if: ca_stance != 2
-on-arrival: ca_stance = 1; ca_support -=1; instability += 2; democraticity -=2; moderate_dissent += 5; left_sr_relation -= 2; centre_sr_relation -= 5; right_sr_relation -= 5; left_m_relation -= 5; centre_m_relation -= 5; right_m_relation -= 5; ns_relation -= 5; k_relation -= 5; rightist_relation -= 5;
+on-arrival: ca_stance = 1; ca_support_timer -=1; instability += 2; democraticity -=2; moderate_dissent += 5; left_sr_relation -= 2; centre_sr_relation -= 5; right_sr_relation -= 5; left_m_relation -= 5; centre_m_relation -= 5; right_m_relation -= 5; ns_relation -= 5; k_relation -= 5; rightist_relation -= 5;
 
 We cast doubt on the election results, and polemicize against the need for a constituent assembly in the first place.
 
