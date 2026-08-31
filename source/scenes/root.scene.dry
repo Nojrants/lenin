@@ -1107,18 +1107,13 @@ Q.ca_progress = 0;
 Q.ca_scheduled = 1;
 Q.ca_election_held = 0;
 Q.ca_held = 0;
-Q.ca_support = 15;
+Q.ca_support_timer = 15;
+Q.ca_preparations_timer = 0;
 Q.next_election_year = 1917;
 Q.next_election_month = 11;
 Q.next_election_week = 3;
 Q.next_election_time = 100;
 Q.time_to_election = 100;
-
-console.log("ca_election_held: ", Q.ca_election_held);
-console.log("ca_held: ", Q.ca_held);
-console.log("constituent_assembly_timer: ", Q.constituent_assembly_timer);
-console.log("ca_preparations_timer: ", Q.ca_preparations_timer);
-
 
 // menshevik advisors
 // defensists
