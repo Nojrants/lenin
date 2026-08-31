@@ -1,0 +1,41 @@
+title: Preparing for the Assembly
+new-page: true
+view-if: ca_election_held = 1 and constituent_assembly_timer != 0 and ca_held != 0 and ca_preparations_timer = 0
+on-arrival: week_actions += 1; ca_preparations += 2;
+tags: b_party, government
+is-card: true
+
+= Preparing for the Constituent Assembly
+
+With the election results for the Constituent Assembly being lackluster, we must now prepare our response. 
+
+- @studying_the_ca
+- @delegitimize_the_ca
+- @support_recalls
+- @monitor_opponents
+
+@studying_the_ca
+title: Commission articles in the party press, analyzing and explaining away the reasons for the apparent failure. 
+subtitle: This option is available because we have Lenin as advisor. 
+view-if: lenin_advisor = 1
+max-visits: 1
+on-arrival: ca_support -=2; instability += 1; democraticity -=1; moderate_dissent += 2; left_sr_relation -= 1; centre_sr_relation -= 2.5; right_sr_relation -= 5; left_m_relation -= 2.5; centre_m_relation -= 2.5; right_m_relation -= 5; ns_relation -= 5; k_relation -= 5; rightist_relation -= 5;
+
+Lenin pens a series of articles in Pravda and other party organs, making sense of the apparent Bolshevik defeat to the rest of the Party. 
+
+Although they lost the election overall, he claims they successfully showed their support among the working-class, signifying that they approve of the October Revolution. Secondly, he argues that the SR vote total was artificially inflated by the fact that the Left and Right SRs did not have proper time to disambiguate themselves. Above all though, while acknowledgeing the demand for a constituent assembly was initially legitimate, the Revolution has since moved beyond the need for such a thing: the proletariat have since formed self-governance through the soviets, and it would be regression to acquiesce to a "bourgeous parliament". 
+
+@delegitimize_the_ca
+title: Launch a campaign to delegitimize the election results and the Constituent Assembly. 
+choose-if: ca_stance != 2
+on-arrival: ca_stance = 1; ca_support -=1; instability += 2; democraticity -=2; moderate_dissent += 5; left_sr_relation -= 2; centre_sr_relation -= 5; right_sr_relation -= 5; left_m_relation -= 5; centre_m_relation -= 5; right_m_relation -= 5; ns_relation -= 5; k_relation -= 5; rightist_relation -= 5;
+
+We cast doubt on the election results, and polemicize against the need for a constituent assembly in the first place.
+
+@support_recalls
+title: Support a mass recall campaign, controlled by the soviets. 
+on-arrival: left_sr_relation -= 1; centre_sr_relation -= 2; right_sr_relation -= 2; left_m_relation -= 2; centre_m_relation -= 2; right_m_relation -= 2; ns_relation -= 2; k_relation -= 5; rightist_relation -= 5;
+
+@monitor_opponents
+title: Use red guards to monitor, harass, or arrest known countterrevolutionary delegates.
+on-arrival: democraticity -= 3; instability += 1; ca_stance = 1; moderate_dissent += 5; left_sr_relation -= 2; centre_sr_relation -= 5; right_sr_relation -= 5; left_m_relation -= 5; centre_m_relation -= 5; right_m_relation -= 5; ns_relation -= 5; k_relation -= 5; rightist_relation -= 5;
