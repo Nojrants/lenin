@@ -291,7 +291,7 @@ subtitle: We have moved beyond the need for such a body.
 choose-if: ca_stance != 2
 max-visits: 1
 go-to: post_election_menu
-on-arrival: ca_stance = 1; ca_support -=1; instability += 2; democraticity -=2; moderate_dissent += 5; left_sr_relation -= 2; centre_sr_relation -= 5; right_sr_relation -= 5; left_m_relation -= 5; centre_m_relation -= 5; right_m_relation -= 5; ns_relation -= 5; k_relation -= 5; rightist_relation -= 5;
+on-arrival: ca_stance = 1; ca_support_timer -=1; instability += 2; democraticity -=2; moderate_dissent += 5; left_sr_relation -= 2; centre_sr_relation -= 5; right_sr_relation -= 5; left_m_relation -= 5; centre_m_relation -= 5; right_m_relation -= 5; ns_relation -= 5; k_relation -= 5; rightist_relation -= 5;
 
 We immediately begin questioning the necessity of a Constituent Assembly, and attempt to cast doubt on the fairness and completeness of the election results, though it's likely we'll need to put in considerable effort to convince our own supporters of this fully. Nonetheless, the new stance causes considerable alarm for the other parties. 
 
