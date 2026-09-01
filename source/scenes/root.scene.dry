@@ -1024,7 +1024,7 @@ Q.base_attractiveness = {
 
 Q.elites_anarchist = 0;
 Q.elites_maximalist = 0;
-Q.b = 0;
+Q.elites = b = 0;
 Q.elites_sdi = 0; 
 Q.elites_left_m = 0; 
 Q.elites_m = 0;
