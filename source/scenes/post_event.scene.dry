@@ -122,6 +122,17 @@ for (var c of Q.classes) {
         Q[c + '_' + party + '_display'] = Math.round(100*Q[c+'_'+party]/class_votes);
     }
 }
+console.log("=== B BY CLASS ===");
+
+for (var c of Q.classes) {
+    console.log(
+        c,
+        "B raw =", Q[c + "_b"],
+        "B normalized =", Q[c + "_b_normalized"]
+    );
+}
+
+
 // calculate support for each of the parties
 var total_support = 0; 
 for (var party of Q.parties) {
