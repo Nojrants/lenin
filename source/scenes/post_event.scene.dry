@@ -77,7 +77,7 @@ for (var c of Q.classes) {
     var unrest = Q[c + "_unrest"];
     for (var party of Q.parties) {
 		if (party == "none") {
-            Q[c + "_none"] += (Q.disillusionment/1000) * (1 - Q.democraticity / 200);
+            Q[c + "_none"] += (Q.disillusionment/100000) * (1 - Q.democraticity / 200);
             continue;
         }
         if (Q.governing_parties.includes(party)) {
