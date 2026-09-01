@@ -140,7 +140,7 @@ Q.lsr_relation = 55;
 Q.lsr_strength = 20;
 
 Q.centre_sr_relation = 35;
-Q.centre_sr_strength = 65;
+Q.sr_strength = 65;
 
 Q.right_sr_relation = 20;
 Q.right_sr_strength = 40;
