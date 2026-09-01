@@ -122,6 +122,8 @@ Q.coalition_taylorist = 0;
 
 
 // Other Parties
+Q.b_strength = 75; 
+
 Q.sdi_relation = 40;
 Q.sdi_strength = 5;
 
@@ -150,18 +152,19 @@ Q.maximalist_relation = 55;
 Q.maximalist_strength = 5;
 
 Q.ns_relation = 35;
-Q.ns_strength = 10;
+Q.ns_strength = 5;
 
 Q.k_relation = 5;
 Q.k_strength = 15;
 
 Q.rightist_relation = 0;
-Q.rightist_strength = 5;
+Q.rightist_strength = 10;
 
 
 // state of the country 
 Q.instability = 40;
 Q.democraticity = 45;
+Q.disillusionment = 0;
 Q.crime = 60;
 Q.unrest_modifier = 1;
 Q.imperial_police = 0;
@@ -181,10 +184,10 @@ Q.widows_founded = 0;
 Q.nurseries_founded = 0; 
 
 Q.elites = 2;
-Q.elite_unrest = 65;
-Q.elite_strength = 60; 
-Q.elite_wealth = 40;
-Q.elite_business = 25; 
+Q.elites_unrest = 65;
+Q.elites_strength = 60; 
+Q.elites_wealth = 40;
+Q.elites_business = 25; 
 
 Q.middle = 5;
 Q.middle_unrest = 40;
@@ -198,19 +201,19 @@ Q.clergy_unrest = 60;
 Q.clergy_strength = 40;
 
 Q.workers = 5;
-Q.labor_wealth = 8;
-Q.labor_unrest = 40;
-Q.labor_strength = 50;
+Q.workers_wealth = 8;
+Q.workers_unrest = 40;
+Q.workers_strength = 50;
 
 Q.peasants = 67;
-Q.peasant_wealth = 15;
-Q.peasant_unrest = 30;
-Q.peasant_strength = 50;
+Q.peasants_wealth = 15;
+Q.peasants_unrest = 30;
+Q.peasants_strength = 50;
 
 Q.kulaks = 5;
-Q.kulak_wealth = 5;
-Q.kulak_unrest = 30;
-Q.kulak_strength = 60;
+Q.kulaks_wealth = 5;
+Q.kulaks_unrest = 30;
+Q.kulaks_strength = 60;
 
 Q.intelligentsia = 2;
 Q.intelligentsia_wealth = 2;
@@ -227,8 +230,8 @@ Q.underclass_strength = 30;
 
 
 Q.unionists = 1500;
-Q.union_unrest = 30;
-Q.union_strength = 30;
+Q.unionists_unrest = 30;
+Q.unionists_strength = 30;
 
 Q.vikzhel_unrest = 40;
 Q.vikzhel_strength = 40;
@@ -240,24 +243,24 @@ Q.kremlin_unrest = 10;
 Q.kremlin_strength = 50;
 
 Q.redarmy_communists = 0;
-Q.redarmy_unrest = 0;
-Q.redarmy_strength = 0;
+Q.redarmy_communists_unrest = 0;
+Q.redarmy_communists_strength = 0;
 
 Q.bourgeois_specialists = 10;
-Q.bourgeois_specialist_unrest = 50;
-Q.bourgeois_specialist_strength = 50;
+Q.bourgeois_specialists_unrest = 50;
+Q.bourgeois_specialists_strength = 50;
 
 Q.red_specialists = 0.2;
-Q.red_specialist_unrest = 10;
-Q.red_specialist_strength = 10;
+Q.red_specialists_unrest = 10;
+Q.red_specialists_strength = 10;
 
 Q.apparatchiki = 0;
 Q.apparatchiki_unrest = 0;
 Q.apparatchiki_strength = 0;
 
 Q.provincials = 10;
-Q.provincial_unrest = 20;
-Q.provincial_strength = 40;
+Q.provincials_unrest = 20;
+Q.provincials_strength = 40;
 
 Q.bagmen = 0;
 Q.bagmen_unrest = 0;
@@ -846,16 +849,176 @@ Q.elites_petrograd = 5;
 Q.workers_qol = 100;
 Q.peasants = 100;
 
-Q.classes = ['workers', 'middle', 'elites', 'peasants', 'soldiers', 'underclass'];
+Q.classes = ['elites', 'middle', 'clergy', 'workers', 'peasants', 'kulaks', 'soldiers', 'intelligentsia', 'underclass'];
 Q.minorities = ['ukrainians', 'kyrgyz_kazakh', 'tatar', 'other_turkic', 'jews', 'latvians', 'estonians', 'georgians', 'armenians', 'others'];
 Q.major_parties = ['m', 'b', 'sr', 'k'];
 // parties represented in the soviets
 Q.soviet_parties = ['m', 'b', 'sr', 'anarchist', 'other'];
-Q.parties = ['sdi', 'left_m', 'm', 'right_m', 'b', 'maximalist', 'lsr', 'sr', 'right_sr', 'popular_socialist', 'k', 'conservative', 'other', 'anarchist', 'none'];
+Q.parties = ['anarchist', 'maximalist', 'b', 'sdi', 'left_m', 'm', 'right_m', 'lsr', 'sr', 'right_sr', 'popular_socialist', 'k', 'rightist', 'other', 'none'];
 Q.minority_parties = ['ukrainian_sr', 'alash', 'musavat', 'dashnak', 'jewish_socialists', 'jewish_national_list', 'muslim_socialists', 'turkic_muslim_parties', 'cossacks'];
 
 // Support for party by social group
 // they don't have to sum to 100 since the electoral calculations will be normalized.
+
+Q.base_attractiveness = {
+    elites: {
+        anarchist: 1,
+        maximalist: 1,
+        b: 1,
+        sdi: 1,
+        left_m: 1,
+        m: 1,
+        right_m: 1,
+        lsr: 1,
+        sr: 1,
+        right_sr: 1,
+        popular_socialist: 2,
+        k: 4,
+        rightist: 5,
+        other: 3,
+        none: 4
+    },
+    middle: {
+        anarchist: 1,
+        maximalist: 1,
+        b: 2,
+        sdi: 2,
+        left_m: 2,
+        m: 2,
+        right_m: 2,
+        lsr: 2,
+        sr: 2,
+        right_sr: 2,
+        popular_socialist: 3,
+        k: 5,
+        rightist: 4,
+        other: 3,
+        none: 2
+    },
+    clergy: {
+        anarchist: 1,
+        maximalist: 1,
+        b: 1,
+        sdi: 1,
+        left_m: 1,
+        m: 1,
+        right_m: 1,
+        lsr: 1,
+        sr: 1,
+        right_sr: 1,
+        popular_socialist: 1,
+        k: 2,
+        rightist: 4,
+        other: 5,
+        none: 5
+    },
+    workers: {
+        anarchist: 2,
+        maximalist: 2,
+        b: 4,
+        sdi: 2,
+        left_m: 4,
+        m: 4,
+        right_m: 4,
+        lsr: 3,
+        sr: 3,
+        right_sr: 3,
+        popular_socialist: 2,
+        k: 1,
+        rightist: 1,
+        other: 2,
+        none: 2
+    },
+
+    peasants: {
+        anarchist: 2,
+        maximalist: 2,
+        b: 3,
+        sdi: 2,
+        left_m: 2,
+        m: 2,
+        right_m: 2,
+        lsr: 4,
+        sr: 5,
+        right_sr: 4,
+        popular_socialist: 2,
+        k: 1,
+        rightist: 1,
+        other: 2,
+        none: 2
+    },
+
+    kulaks: {
+        anarchist: 2,
+        maximalist: 2,
+        b: 4,
+        sdi: 2,
+        left_m: 2,
+        m: 2,
+        right_m: 2,
+        lsr: 4,
+        sr: 5,
+        right_sr: 4,
+        popular_socialist: 2,
+        k: 2,
+        rightist: 1,
+        other: 2,
+        none: 2
+    },
+
+    soldiers: {
+        anarchist: 2,
+        maximalist: 2,
+        b: 4,
+        sdi: 2,
+        left_m: 3,
+        m: 3,
+        right_m: 2,
+        lsr: 4,
+        sr: 4,
+        right_sr: 3,
+        popular_socialist: 2,
+        k: 1,
+        rightist: 1,
+        other: 2,
+        none: 2
+    },
+
+    intelligentsia: {
+        anarchist: 1,
+        maximalist: 1,
+        b: 2,
+        sdi: 3,
+        left_m: 2,
+        m: 2,
+        right_m: 2,
+        lsr: 2,
+        sr: 2,
+        right_sr: 2,
+        popular_socialist: 1,
+        k: 3,
+        rightist: 2,
+        other: 3,
+        none: 4
+    },
+    underclass: {
+        anarchist: 4,
+        maximalist: 4,
+        b: 3,
+        sdi: 2,
+        left_m: 3,
+        m: 3,
+        right_m: 2,
+        lsr: 3,
+        sr: 3,
+        right_sr: 2,
+        popular_socialist: 1,
+        k: 1,
+        rightist: 1,
+        other: 3,
+        none: 5
+    }
+};
 
 Q.workers_anarchist = 5;
 Q.workers_maximalist = 1; 
