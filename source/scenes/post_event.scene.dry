@@ -114,6 +114,13 @@ for (var c of Q.classes) {
     }
 }
 
+for (var c of Q.classes) {
+    for (var party of Q.parties) {
+        if (isNaN(Q[c + "_" + party])) {
+            console.log("NaN support:", c + "_" + party);
+        }
+    }
+}
 
 for (var c of Q.classes) {
     var class_votes = 0;
@@ -122,6 +129,7 @@ for (var c of Q.classes) {
             Q[c+'_'+party] = 0;
         }
         class_votes += Q[c+'_'+party];
+		console.log(c, "class_votes =", class_votes);
     }
     for (var party of Q.parties) {
         Q[c + '_' + party + '_normalized'] = 100*Q[c+'_'+party]/class_votes;
@@ -392,11 +400,6 @@ if (Q.finalefficacy_sovnarkom + Q.finalefficacy_foreign + Q.finalefficacy_milita
     Q.dreamteam = 1;
 }
 
-console.log("ca_election_held: ", Q.ca_election_held);
-console.log("ca_held: ", Q.ca_held);
-console.log("constituent_assembly_timer: ", Q.constituent_assembly_timer);
-console.log("ca_preparations_timer: ", Q.ca_preparations_timer);
-console.log("ca_support: ", Q.ca_support_timer);
 
 if (Q.sovnarkom_expend < 0.25) Q.sovnarkom_expend = 0.25;
 if (Q.internal_expend < 0.25) Q.internal_expend = 0.25;
