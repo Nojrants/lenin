@@ -90,7 +90,7 @@ This emboldens the moderates with our party, and slightly eases fears among othe
 title: We no longer need the Constituent Assembly!
 subtitle: -1 resource – Delegitimize the upcoming Constituent Assembly. 
 choose-if: b_resources >= 1 and ca_held = 0 and ca_election_held = 1
-view-if: ca_held = 0
+view-if: ca_held = 0 and ca_election_held = 1
 on-arrival: {!
   Q.b_resources -= 1; 
   Q.ca_support -= 1; 
@@ -155,13 +155,13 @@ We push for increased militarization and strength in the face of ongoing crises.
 
 @support_radicalism
 title: Support revolution and radicalism.
-subtitle: -1 resource - Encourage class conflict, land seizures, and the power of the proletariat. 
+subtitle: -1 resource - Class conflict, land seizures, and worker rule. 
 unavailable-subtitle: [? if b_resources < 1: Not enough resources. ?]
 choose-if: b_resources >= 1
 on-arrival: {!
   Q.b_resources -= 1; 
   Q.soldiers_unrest -= 5; Q.workers_unrest -= 8; Q.peasants_unrest -= 8; Q.kulaks_unrest -= 8; 
-  Q.soldiers_strength += 2; Q.workers_strength += 4; Q.peasants_strength += 6; Q.kulaks_strength += 6; 
+  Q.soldiers_strength += 2; Q.workers_strength += 4; Q.peasants_strength += 6; Q.kulaks_strength += 6; Q.bagmen_strength += 2;
   Q.elites_unrest += 6; Q.middle_unrest += 2; Q.intelligentsia_unrest += 4; 
   Q.workers_b += 2*(1-b_dissent); Q.peasants_b += 2*(1-b_dissent); Q.workers_b += 2*(1-b_dissent); 
   Q.instability += 2; Q.militancy += 4; Q.crime += 4; Q.morale -= 0.04; Q.discipline -= 0.04; Q.train_capacity *= 0.95; 
@@ -177,7 +177,7 @@ We enflame the ongoing conflicts in the cities and countryside, rallying the wor
 
 @support_moderation
 title: Support moderation and consolidation. 
-subtitle: -1 resource - Encourage stricter discipline, authority, and a return to normality. 
+subtitle: -1 resource - Discipline, authority, and a return to normality. 
 unavailable-subtitle: [? if b_resources < 1: Not enough resources. ?]
 choose-if: b_resources >= 1
 on-arrival: {!
