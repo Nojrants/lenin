@@ -68,6 +68,12 @@ Q.nationalities_minister = "Stalin";
 Q.nationalities_minister_party = "Bolshevik";
 Q.welfare_minister = "None";
 Q.welfare_minister_party = "";
+Q.property_minister = "None";
+Q.property_minister_party = "";
+Q.local_minister = "None";
+Q.local_minister_party = "";
+Q.palaces_minister = "None";
+Q.palaces_minister_party = "";
 
 Q.sdi_relation -= 5;
 Q.left_m_relation -= 10;
@@ -128,6 +134,12 @@ Q.nationalities_minister = "Stalin";
 Q.nationalities_minister_party = "Bolshevik";
 Q.welfare_minister = "None";
 Q.welfare_minister_party = "";
+Q.property_minister = "None";
+Q.property_minister_party = "";
+Q.local_minister = "None";
+Q.local_minister_party = "";
+Q.palaces_minister = "None";
+Q.palaces_minister_party = "";
 
 Q.sdi_relation += 0;
 Q.left_m_relation -= 5;
