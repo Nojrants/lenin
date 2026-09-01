@@ -131,7 +131,7 @@ Q.left_m_relation = 35;
 Q.left_m_strength = 10;
 
 Q.centre_m_relation = 30;
-Q.centre_m_strength = 25;
+Q.m_strength = 25;
 
 Q.right_m_relation = 15;
 Q.right_m_strength = 20;
