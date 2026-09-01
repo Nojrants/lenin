@@ -26,8 +26,95 @@ if (Q.war_weariness > 99) Q.war_weariness = 99;
 // round to integers...
 Q.train_capacity = Math.round(Q.train_capacity);
 
-// re-calculate party support
-// calculate normalized class voting for the achievements
+
+
+
+
+
+if (Q.hunger > 10) {
+	Q.disillusionment += (Q.hunger >= 50 ? 4 :
+						  Q.hunger >= 40 ? 2 :
+						  Q.hunger >= 30 ? 1 :
+						  Q.hunger >= 20 ? 0.5 :
+						  Q.hunger > 10 ? 0.25 : 0)
+						  * (1 - Q.democraticity / 200);				  
+	} else {
+		Q.disillusionment -= 1 + (Q.democraticity / 400);
+}
+
+if (Q.war_weariness >= 30) {
+	Q.disillusionment += (Q.war_weariness >= 60 ? 2 :
+						  Q.war_weariness >= 40 ? 1 :
+						  Q.war_weariness >= 30 ? 0.5 : 0)
+						  * (1 - Q.democraticity / 200);				  
+	} else {
+		Q.disillusionment -= 0.25 + (Q.democraticity / 400);
+}
+
+if (Q.monthly_inflation > 5) {
+	Q.disillusionment += (Q.monthly_inflation >= 15 ? 3 :
+						  Q.monthly_inflation >= 12.5 ? 2 :
+						  Q.monthly_inflation >= 10 ? 1.5 :
+						  Q.monthly_inflation >= 7.5 ? 1 :
+						  Q.monthly_inflation > 5 ? 0.5 : 0)
+						  * (1 - Q.democraticity / 200);				  
+	} else {
+		Q.disillusionment -= 0.5 + (Q.democraticity / 400);
+}
+
+if (Q.crime > 20) {
+	Q.disillusionment += (Q.crime >= 60 ? 1.5 :
+						  Q.crime >= 50 ? 1 :
+						  Q.crime >= 40 ? 0.5 :
+						  Q.crime >= 30 ? 0.25 :
+						  Q.crime > 20 ? 0.125 : 0)
+						  * (1 - Q.democraticity / 200);				  
+	} else {
+		Q.disillusionment -= 0.5 + (Q.democraticity / 400);
+}
+if (Q.disillusionment < 0) Q.disillusionment = 0;
+
+
+for (var c of Q.classes) {
+    var unrest = Q[c + "_unrest"];
+    for (var party of Q.parties) {
+		if (party == "none") {
+            Q[c + "_none"] += (Q.disillusionment/10) * (1 - Q.democraticity / 200);
+            continue;
+        }
+        if (Q.governing_parties.includes(party)) {
+            if (unrest < 50) {
+                Q[c + "_" + party] += (50 - unrest) / 10
+                    * Q.base_attractiveness[c][party]
+                    * Q[party + "_strength"] / 50
+                    * (1 - Q.instability / 200)
+					/ (1 + (Q.disillusionment / 100));
+            } else {
+                Q[c + "_" + party] += (50 - unrest) / 10
+                    * Q.base_attractiveness[c][party]
+                    * 50 / Math.max(1, Q[party + "_strength"])
+                    * (1 + Q.instability / 200)
+					* (1 + (Q.disillusionment / 100));
+            }
+        } else {
+            if (unrest > 50) {
+                Q[c + "_" + party] += (unrest - 50) / 10
+                    * Q.base_attractiveness[c][party]
+                    * Q[party + "_strength"] / 50
+                    * (1 - Q.instability / 200)
+					* (1 + (Q.disillusionment / 100));
+            } else {
+                Q[c + "_" + party] += (unrest - 50) / 10
+                    * Q.base_attractiveness[c][party]
+                    * 50 / Math.max(1, Q[party + "_strength"])
+                    * (1 + Q.instability / 200)
+					/ (1 + (Q.disillusionment / 100));
+            }
+        }
+    }
+}
+
+
 for (var c of Q.classes) {
     var class_votes = 0;
     for (var party of Q.parties) {
@@ -62,6 +149,14 @@ for (var party of Q.parties) {
     Q[party+'_votes'] = Math.round(Q[party+'_normalized']*100);
     Q[party+'_votes_display'] = Math.round(Q[party+'_normalized']*100);
 }
+
+
+console.log("Disillusionment:", Q.disillusionment);
+console.log("none support:", Q.none_support);
+for (var party of Q.parties) {
+    console.log(party + ": " + Q[party + "_normalized"]);
+}
+
 
 
 // set faction strength/dissent to 0
@@ -798,121 +893,7 @@ if (Q.week_actions >= 1 && Q.current_player >= Q.n_players) {
         }
     }
 
-    // Effects of hunger, inflation, and war exhaustion on party support /////////////////////////////////////////////////
-    // This changes based on which party is in opposition/government
-    if (Q.hunger >= 10 && (Q.war_weariness >= 60 || Q.monthly_inflation >= 6.5)) {
-        if (!Q.b_in_gov) {
-            Q.workers_b += 0.3;
-            Q.soldiers_b += 0.5;
-        }
-        if (Q.m_in_gov) {
-            Q.workers_m -= 0.4;
-            Q.soldiers_m -= 0.4;
-        }
-        if (Q.sr_in_gov) {
-            Q.workers_sr -= 0.3;
-            Q.soldiers_sr -= 0.2;
-        }
-    }
-    if (Q.hunger >= 20 && (Q.war_weariness >= 50 || Q.monthly_inflation >= 5.5)) {
-        Q.prov_gov_legitimacy -= 0.5;
-        if (!Q.b_in_gov) {
-            Q.workers_b += 0.3;
-            Q.soldiers_b += 0.5;
-        }
-        if (Q.m_in_gov) {
-            Q.workers_m -= 0.4;
-            Q.soldiers_m -= 0.4;
-        }
-        if (Q.sr_in_gov) {
-            Q.workers_sr -= 0.3;
-            Q.soldiers_sr -= 0.2;
-        }
-    }
-    if (Q.hunger >= 30 && (Q.war_weariness >= 40 || Q.monthly_inflation >= 5)) {
-        Q.prov_gov_legitimacy -= 0.5;
-        if (!Q.b_in_gov) {
-            Q.workers_b += 0.3;
-            Q.soldiers_b += 0.5;
-        }
-        if (Q.b_in_gov) {
-            Q.workers_b -= 0.3;
-            Q.soldiers_b -= 0.5;
-            Q.workers_anarchist += 0.1;
-            Q.soldiers_anarchist += 0.2;
-            if (!Q.m_in_gov) {
-                Q.workers_m += 0.1;
-                Q.soldiers_m += 0.1;
-            }
-        }
-        if (Q.m_in_gov) {
-            Q.workers_m -= 0.4;
-            Q.soldiers_m -= 0.4;
-        }
-        if (Q.sr_in_gov) {
-            Q.workers_sr -= 0.3;
-            Q.soldiers_sr -= 0.2;
-        }
-        if (Q.labor_unrest < 50) {
-            Q.labor_unrest += 0.5;
-        }
-    }
-    if (Q.hunger >= 40 && (Q.war_weariness >= 30 || Q.monthly_inflation >= 4)) {
-        Q.prov_gov_legitimacy -= 0.5;
-        if (!Q.b_in_gov) {
-            Q.workers_b += 0.3;
-            Q.soldiers_b += 0.5;
-        }
-        if (Q.b_in_gov) {
-            Q.workers_b -= 0.3;
-            Q.soldiers_b -= 0.5;
-            Q.workers_anarchist += 0.1;
-            Q.soldiers_anarchist += 0.2;
-            if (!Q.m_in_gov) {
-                Q.workers_m += 0.1;
-                Q.soldiers_m += 0.1;
-            }
-        }
-        if (Q.m_in_gov) {
-            Q.workers_m -= 0.4;
-            Q.soldiers_m -= 0.4;
-        }
-        if (Q.sr_in_gov) {
-            Q.workers_sr -= 0.3;
-            Q.soldiers_sr -= 0.2;
-        }
-        if (Q.labor_unrest < 75) {
-            Q.labor_unrest += 0.5;
-        }
-    }
-    if (Q.hunger >= 50 || Q.monthly_inflation >= 15) {
-        Q.prov_gov_legitimacy -= 1;
-        if (!Q.b_in_gov) {
-            Q.workers_b += 0.3;
-            Q.soldiers_b += 0.5;
-        }
-        if (Q.b_in_gov) {
-            Q.workers_b -= 0.3;
-            Q.soldiers_b -= 0.5;
-            Q.workers_anarchist += 0.1;
-            Q.soldiers_anarchist += 0.2;
-            if (!Q.m_in_gov) {
-                Q.workers_m += 0.1;
-                Q.soldiers_m += 0.1;
-            }
-        }
-        if (Q.m_in_gov) {
-            Q.workers_m -= 0.4;
-            Q.soldiers_m -= 0.4;
-        }
-        if (Q.sr_in_gov) {
-            Q.workers_sr -= 0.3;
-            Q.soldiers_sr -= 0.2;
-        }
-        if (Q.labor_unrest < 100) {
-            Q.labor_unrest += 0.5;
-        }
-    }
+
 
     // militia loyalties are affected by support... /////////
     if (Q.workers_m_normalized < Q.workers_militia_m_loyalty) {
