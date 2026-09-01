@@ -84,29 +84,29 @@ for (var c of Q.classes) {
             if (unrest < 50) {
                 Q[c + "_" + party] += (50 - unrest) / 10
                     * Q.base_attractiveness[c][party]
-                    * Q[party + "_strength"] / 50
+                    * Math.max(1, Q[party + "_strength"]) / 50
                     * (1 - Q.instability / 200)
-					/ (1 + (Q.disillusionment / 100));
+					/ (1 + (Q.disillusionment / 1000));
             } else {
                 Q[c + "_" + party] += (50 - unrest) / 10
                     * Q.base_attractiveness[c][party]
                     * 50 / Math.max(1, Q[party + "_strength"])
                     * (1 + Q.instability / 200)
-					* (1 + (Q.disillusionment / 100));
+					* (1 + (Q.disillusionment / 1000));
             }
         } else {
             if (unrest > 50) {
                 Q[c + "_" + party] += (unrest - 50) / 10
                     * Q.base_attractiveness[c][party]
-                    * Q[party + "_strength"] / 50
+                    * Math.max(1, Q[party + "_strength"]) / 50
                     * (1 - Q.instability / 200)
-					* (1 + (Q.disillusionment / 100));
+					* (1 + (Q.disillusionment / 1000));
             } else {
                 Q[c + "_" + party] += (unrest - 50) / 10
                     * Q.base_attractiveness[c][party]
                     * 50 / Math.max(1, Q[party + "_strength"])
                     * (1 + Q.instability / 200)
-					/ (1 + (Q.disillusionment / 100));
+					/ (1 + (Q.disillusionment / 1000));
             }
         }
     }
