@@ -160,6 +160,8 @@ Q.k_strength = 15;
 Q.rightist_relation = 0;
 Q.rightist_strength = 10;
 
+Q.other_strength = 5;
+
 
 // state of the country 
 Q.instability = 40;
@@ -1022,7 +1024,7 @@ Q.base_attractiveness = {
 
 Q.elites_anarchist = 0;
 Q.elites_maximalist = 0;
-Q.elites_b = 0;
+Q.b = 0;
 Q.elites_sdi = 0; 
 Q.elites_left_m = 0; 
 Q.elites_m = 0;
