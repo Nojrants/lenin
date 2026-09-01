@@ -205,6 +205,11 @@ if (window && d3) {
     parliament.width(width).height(height).innerRadiusCoef(0.4);
     parliament.enter.fromCenter(true).smallToBig(true);
     parliament.exit.toCenter(false).bigToSmall(true);
+data.forEach(d => {
+    if (!Number.isFinite(d.seats)) {
+        console.error("BAD SEAT VALUE", d.id, d.seats);
+    }
+});
     d3.select("#constituent_assembly").datum(data).call(parliament);
 }
 !}
