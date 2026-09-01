@@ -150,6 +150,31 @@ for (var party of Q.parties) {
 }
 
 
+console.log(
+    "NONE RAW:",
+    Q.none_support,
+    "NONE NORMALIZED:",
+    Q.none_normalized,
+    "TOTAL:",
+    total_support
+);
+
+for (var party of Q.parties) {
+    console.log(
+        party,
+        "raw:",
+        Q[party + "_support"],
+        "normalized:",
+        Q[party + "_normalized"]
+    );
+}
+
+
+
+
+
+
+
 
 // set faction strength/dissent to 0
 // re-calculate dissent.
