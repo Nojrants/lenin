@@ -75,6 +75,8 @@ if (Q.crime > 20) {
 if (Q.disillusionment < 0) Q.disillusionment = 0;
 
 
+
+
 for (var c of Q.classes) {
     var unrest = Q[c + "_unrest"];
     for (var party of Q.parties) {
@@ -124,19 +126,45 @@ for (var c of Q.classes) {
 
 for (var c of Q.classes) {
     var class_votes = 0;
-    for (var party of Q.parties) {
-        if (Q[c+'_'+party] < 0) {
-            Q[c+'_'+party] = 0;
-        }
-        class_votes += Q[c+'_'+party];
-		console.log(c, "class_votes =", class_votes);
-    }
-    for (var party of Q.parties) {
-        Q[c + '_' + party + '_normalized'] = 100*Q[c+'_'+party]/class_votes;
 
-        Q[c + '_' + party + '_display'] = Math.round(100*Q[c+'_'+party]/class_votes);
+    for (var party of Q.parties) {
+
+        if (isNaN(Q[c + "_" + party])) {
+            console.log(
+                "FIRST NaN:",
+                c,
+                party,
+                "support =", Q[c + "_" + party],
+                "strength =", Q[party + "_strength"],
+                "attractiveness =", Q.base_attractiveness[c][party],
+                "unrest =", Q[c + "_unrest"],
+                "disillusionment =", Q.disillusionment,
+                "instability =", Q.instability
+            );
+            break;
+        }
+
+        if (Q[c + "_" + party] < 0) {
+            Q[c + "_" + party] = 0;
+        }
+
+        class_votes += Q[c + "_" + party];
+    }
+
+    console.log(c, "class_votes =", class_votes);
+
+    for (var party of Q.parties) {
+        Q[c + '_' + party + '_normalized'] =
+            100 * Q[c + '_' + party] / class_votes;
+
+        Q[c + '_' + party + '_display'] =
+            Math.round(100 * Q[c + '_' + party] / class_votes);
     }
 }
+
+
+
+
 // calculate support for each of the parties
 var total_support = 0; 
 for (var party of Q.parties) {
