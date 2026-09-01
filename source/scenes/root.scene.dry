@@ -1020,24 +1020,21 @@ Q.base_attractiveness = {
     }
 };
 
-Q.workers_anarchist = 5;
-Q.workers_maximalist = 1; 
-Q.workers_b = 75;
-Q.workers_sdi = 6; 
-Q.workers_left_m = 8; 
-Q.workers_m = 10;
-Q.workers_right_m = 4; 
-Q.workers_lsr = 10; 
-Q.workers_sr = 18;
-Q.workers_right_sr = 12; 
-Q.workers_popular_socialist = 1;
-Q.workers_k = 0;
-Q.workers_conservative = 0;
-Q.workers_other = 5;
-Q.workers_none = 20;
-
-Q.workers_pro_prov_gov = 65;
-Q.workers_pro_soviet = 95;
+Q.elites_anarchist = 0;
+Q.elites_maximalist = 0;
+Q.elites_b = 0;
+Q.elites_sdi = 0; 
+Q.elites_left_m = 0; 
+Q.elites_m = 0;
+Q.elites_right_m = 0;
+Q.elites_lsr = 0;
+Q.elites_sr = 0;
+Q.elites_right_sr = 0;
+Q.elites_popular_socialist = 2;
+Q.elites_k = 50;
+Q.elites_rightist = 25;
+Q.elites_other = 12;
+Q.elites_none = 10;
 
 Q.middle_anarchist = 0;
 Q.middle_maximalist = 0; 
@@ -1051,12 +1048,41 @@ Q.middle_sr = 10;
 Q.middle_right_sr = 10; 
 Q.middle_popular_socialist = 1;
 Q.middle_k = 80;
-Q.middle_conservative = 10;
+Q.middle_rightist = 10;
 Q.middle_other = 15;
 Q.middle_none = 5;
 
-Q.middle_pro_prov_gov = 5;
-Q.middle_pro_soviet = 10;
+Q.clergy_anarchist = 0;
+Q.clergy_maximalist = 0; 
+Q.clergy_b = 0;
+Q.clergy_sdi = 0; 
+Q.clergy_left_m = 0; 
+Q.clergy_m = 0;
+Q.clergy_right_m = 0; 
+Q.clergy_lsr = 0; 
+Q.clergy_sr = 0;
+Q.clergy_right_sr = 0; 
+Q.clergy_popular_socialist = 0;
+Q.clergy_k = 2;
+Q.clergy_rightist = 40;
+Q.clergy_other = 35;
+Q.clergy_none = 40;
+
+Q.workers_anarchist = 5;
+Q.workers_maximalist = 1; 
+Q.workers_b = 75;
+Q.workers_sdi = 6; 
+Q.workers_left_m = 8; 
+Q.workers_m = 10;
+Q.workers_right_m = 4; 
+Q.workers_lsr = 10; 
+Q.workers_sr = 18;
+Q.workers_right_sr = 12; 
+Q.workers_popular_socialist = 1;
+Q.workers_k = 0;
+Q.workers_rightist = 0;
+Q.workers_other = 5;
+Q.workers_none = 20;
 
 Q.peasants_anarchist = 2;
 Q.peasants_maximalist = 2; 
@@ -1070,31 +1096,25 @@ Q.peasants_sr = 55;
 Q.peasants_right_sr = 30; 
 Q.peasants_popular_socialist = 1;
 Q.peasants_k = 0;
-Q.peasants_conservative = 0;
+Q.peasants_rightist = 0;
 Q.peasants_other = 10;
 Q.peasants_none = 10;
 
-Q.peasants_pro_prov_gov = 45;
-Q.peasants_pro_soviet = 70;
-
-Q.underclass_anarchist = 1;
-Q.underclass_maximalist = 1; 
-Q.underclass_b = 15;
-Q.underclass_sdi = 5; 
-Q.underclass_left_m = 5; 
-Q.underclass_m = 5;
-Q.underclass_right_m = 5; 
-Q.underclass_lsr = 5; 
-Q.underclass_sr = 10;
-Q.underclass_right_sr = 5; 
-Q.underclass_popular_socialist = 5;
-Q.underclass_k = 0;
-Q.underclass_conservative = 0;
-Q.underclass_other = 10;
-Q.underclass_none = 80;
-
-Q.underclass_pro_prov_gov = 50;
-Q.underclass_pro_soviet = 60;
+Q.kulaks_anarchist = 2;
+Q.kulaks_maximalist = 4; 
+Q.kulaks_b = 10;
+Q.kulaks_sdi = 0; 
+Q.kulaks_left_m = 0; 
+Q.kulaks_m = 0;
+Q.kulaks_right_m = 0; 
+Q.kulaks_lsr = 5; 
+Q.kulaks_sr = 10;
+Q.kulaks_right_sr = 8; 
+Q.kulaks_popular_socialist = 3;
+Q.kulaks_k = 1;
+Q.kulaks_rightist = 0;
+Q.kulaks_other = 10;
+Q.kulaks_none = 10;
 
 Q.soldiers_anarchist = 3;
 Q.soldiers_maximalist = 1; 
@@ -1108,26 +1128,43 @@ Q.soldiers_sr = 40;
 Q.soldiers_right_sr = 20; 
 Q.soldiers_popular_socialist = 2;
 Q.soldiers_k = 0;
-Q.soldiers_conservative = 0;
+Q.soldiers_rightist = 0;
 Q.soldiers_other = 10;
 Q.soldiers_none = 10;
 
-// this rises a lot due to Order Number 1
-Q.soldiers_pro_prov_gov = 65;
-Q.soldiers_pro_soviet = 95;
+Q.intelligentsia_anarchist = 1;
+Q.intelligentsia_maximalist = 1; 
+Q.intelligentsia_b = 3;
+Q.intelligentsia_sdi = 20; 
+Q.intelligentsia_left_m = 5; 
+Q.intelligentsia_m = 5;
+Q.intelligentsia_right_m = 5; 
+Q.intelligentsia_lsr = 3; 
+Q.intelligentsia_sr = 5;
+Q.intelligentsia_right_sr = 5; 
+Q.intelligentsia_popular_socialist = 5;
+Q.intelligentsia_k = 25;
+Q.intelligentsia_rightist = 10;
+Q.intelligentsia_other = 20;
+Q.intelligentsia_none = 30;
 
-Q.elites_b = 0;
-Q.elites_m = 2;
-Q.elites_sr = 2;
-Q.elites_k = 50;
-Q.elites_conservative = 25;
-Q.elites_popular_socialist = 5;
-Q.elites_anarchist = 0;
-Q.elites_other = 12;
-Q.elites_none = 10;
+Q.underclass_anarchist = 1;
+Q.underclass_maximalist = 1; 
+Q.underclass_b = 15;
+Q.underclass_sdi = 5; 
+Q.underclass_left_m = 5; 
+Q.underclass_m = 5;
+Q.underclass_right_m = 5; 
+Q.underclass_lsr = 5; 
+Q.underclass_sr = 10;
+Q.underclass_right_sr = 5; 
+Q.underclass_popular_socialist = 5;
+Q.underclass_k = 0;
+Q.underclass_rightist = 0;
+Q.underclass_other = 10;
+Q.underclass_none = 80;
 
-Q.elites_pro_prov_gov = 0;
-Q.elites_pro_soviet = 5;
+
 
 // minority party support:
 // based on the numbers
