@@ -14,58 +14,184 @@ What should be our strategy for our newspapers and party organs?
 # media strategies: support prov gov, support soviet policies, support Menshevik campaigning, support revolutionary defensism
 
 - @support_socialist_unity
-- @oppose_prov_gov
+- @oppose_moderates
+- @support_ca
+- @oppose_ca
 - @support_b
+- @rural_outreach
+- @militancy
 - @support_radicalism
+- @support_moderation
 - @root: We do not need more propaganda.
 - @easy_discard
 - @cancel_advisor_action
 
 @support_socialist_unity
 title: Support socialist unity.
-subtitle: -1 resource - Support a united front of all the socialist parties against the bourgeoisie.
+subtitle: -1 resource – Support a united front of all the socialist parties.
 choose-if: b_resources >= 1
-on-arrival: b_resources -= 1; internationalist_strength += 8; left_sr_strength += 8; defensist_dissent += 5; internationalist_dissent += 5; left_sr_dissent += 5; right_sr_dissent += 5
+on-arrival: {!
+  Q.b_resources -= 1; 
+  Q.sdi_strength += 5; Q.left_m_strength += 5; Q.m_strength += 3; Q.lsr_strength += 5; Q.sr_strength += 3; 
+  Q.right_m_strength -= 5; Q.right_sr_strength -= 5; popular_socialist_strength -= 3;
+  Q.sdi_relation += 4; Q.left_m_relation += 4; Q.centre_m_relation += 2; Q.lsr_relation += 4; Q.centre_sr_relation += 2;
+  Q.right_m_relation += 2; Q.right_sr_relation += 2; Q.ns_relation += 2; 
+  Q.moderate_strength += 5; Q.leninist_strength -= 5; 
+  Q.moderate_dissent -= 5; Q.leninist_dissent += 5;
+!}
 
-Our propaganda campaign is aimed at supporting a united front of all socialist parties against the bourgeoisie. This is embarrassing for the socialists who cooperate with the Provisional Government, and encouraged left-leaning factions within them.
+We launch a propaganda campaign aimed at supporting a united front of all socialist parties against the counterrevolution. 
 
-@oppose_prov_gov
-title: Oppose the Provisional Government.
-subtitle: -1 resource - Attack the legitimacy of the Provisional Government and the Soviet's cooperation.
+This emboldens the left-wings of the various opposition groups, as well as moderates within our own party, while aggravating those opposed to compromise.
+
+@oppose_moderates
+title: No more compromises with the petty-bourgeois "socialists"!
+subtitle: -1 resource – Distance ourselves from the moderate socialist parties. 
 choose-if: b_resources >= 1
-on-arrival: b_resources -= 1; prov_gov_legitimacy -= 6; soviet_cooperation -= 0.05;
+on-arrival: {!
+  Q.b_resources -= 1; 
+  Q.sdi_strength -= 4; Q.left_m_strength -= 4; Q.m_strength -= 2; Q.lsr_strength -= 4; Q.sr_strength -= 2; 
+  Q.right_m_strength += 4; Q.right_sr_strength += 4; popular_socialist_strength += 4;
+  Q.sdi_relation -= 5; Q.left_m_relation -= 5; Q.centre_m_relation -= 5; Q.lsr_relation -= 5; Q.centre_sr_relation -= 5;
+  Q.right_m_relation -= 5; Q.right_sr_relation -= 5; Q.ns_relation -= 5; 
+  Q.moderate_strength -= 5; Q.leninist_strength += 5; 
+  Q.moderate_dissent += 5; Q.leninist_dissent -= 5;
+!}
 
-Our propaganda is aimed at attacking the Provisional Government, and driving a weege between it and the Soviet.
+We attack the false promises and hypocrisies of the Mensheviks, SRs, and other moderate socialists. 
+
+This galvanizes support for our party, though hindering relations with all others. The right-wings of the other parties feel emboldened by this. 
+
+
+@support_ca
+title: Support the Constituent Assembly!
+subtitle: -1 resource – Promote the coming Constituent Assembly, and our position in it. 
+choose-if: b_resources >= 1 and ca_held = 0
+view-if: ca_held = 0
+on-arrival: {!
+  Q.b_resources -= 1; 
+  Q.ca_support += 1; 
+  Q.sdi_strength += 2; Q.left_m_strength += 2; Q.m_strength += 1; Q.lsr_strength += 2; Q.sr_strength += 2; 
+  Q.right_m_strength -= 3; Q.right_sr_strength -= 3; popular_socialist_strength -= 2;
+  Q.sdi_relation += 2; Q.left_m_relation += 2; Q.centre_m_relation += 1; Q.lsr_relation += 2; Q.centre_sr_relation += 1;
+  Q.right_m_relation += 1; Q.right_sr_relation += 1; Q.ns_relation += 1; 
+  Q.moderate_strength += 5; Q.leninist_strength -= 5; 
+  Q.moderate_dissent -= 5; Q.leninist_dissent += 5;
+  Q.workers_b += 1*(1-b_dissent); Q.peasants_b += 1*(1-b_dissent); Q.soldiers_b += 1*(1-b_dissent);
+  Q.democraticity += 2; Q.instability -= 1; 
+!}
+
+We rally our base to turn-out for the Constituent Assembly.
+
+This emboldens the moderates with our party, and slightly eases fears among other groups. 
+
+
+@oppose_ca
+title: We no longer need the Constituent Assembly!
+subtitle: -1 resource – Delegitimize the upcoming Constituent Assembly. 
+choose-if: b_resources >= 1 and ca_held = 0 and ca_election_held = 1
+view-if: ca_held = 0
+on-arrival: {!
+  Q.b_resources -= 1; 
+  Q.ca_support -= 1; 
+  Q.sdi_strength -= 4; Q.left_m_strength -= 4; Q.m_strength -= 2; Q.lsr_strength -= 4; Q.sr_strength -= 2; 
+  Q.right_m_strength += 4; Q.right_sr_strength += 4; popular_socialist_strength += 4;
+  Q.sdi_relation -= 5; Q.left_m_relation -= 5; Q.centre_m_relation -= 5; Q.lsr_relation -= 5; Q.centre_sr_relation -= 5;
+  Q.right_m_relation -= 5; Q.right_sr_relation -= 5; Q.ns_relation -= 5; 
+  Q.moderate_strength -= 5; Q.leninist_strength += 5; 
+  Q.moderate_dissent += 5; Q.leninist_dissent -= 5;
+  Q.democraticity -= 2; Q.instability += 1; 
+!}
+
+We publicize the problems with the upcoming Constituent Assembly, and build support for its replacement. 
+
+This alarms the other parties, as well as moderates within our own party. 
+
 
 @support_b
-title: Support the Bolshevik party.
+title: Build support for the Bolsheviks among the urban workers. 
 subtitle: -1 resource
 choose-if: b_resources >= 1
-on-arrival: workers_b += 4*(1-b_dissent); soldiers_b += 4*(1-b_dissent); soldiers_b -= 2 if (war_weariness >= 60 and b_war_policy <= 1); b_resources -= 1
+on-arrival: {!
+  Q.b_resources -= 1;
+  Q.b_strength += 2; Q.leninist_strength += 1;
+  Q.disillusionment -= 0.1; Q.instability -= 1;
+  Q.workers_b += 3*(1-b_dissent);
+  Q.soldiers_b += 3*(1-b_dissent);
+!}
 
-Our propaganda campaign encourages support for the Bolshevik party among the workers and soldiers.
+Our propaganda campaign encourages support for the Bolshevik party among the workers and in the garrisons. 
+
+@rural_outreach
+title: Perform outreach to the countryside. 
+subtitle: -1 resource - Build stronger relations with the peasants. 
+choose-if: b_resources >= 1
+on-arrival: {!
+  Q.b_resources -= 1;
+  Q.b_strength += 2; Q.leninist_strength += 1;
+  Q.disillusionment -= 0.1; Q.instability -= 1;
+  Q.peasants_b += 3*(1-b_dissent); Q.peasants_unrest -= 4;
+  Q.kulaks_b += 3*(1-b_dissent); Q.kulaks_unrest -= 4;
+  Q.ca_support -= 1; 
+!}
+
+Our propaganda campaign encourages support for the Bolshevik party among the peasants. 
+
+
+@militancy
+title: Support militancy and vigilance against counterrevolution. 
+subtitle: -1 resource - Promote military recruitment and labor intensity.   
+choose-if: b_resources >= 1
+on-arrival: {!
+  Q.b_resources -= 1;
+  Q.b_strength += 1; Q.leninist_strength += 1;
+  Q.disillusionment -= 0.05; Q.instability += 1;
+  Q.militancy += 8; Q.crime -= 3; Q.war_weariness -= 2; Q.morale += 0.02; Q.discipline += 0.04;
+  Q.soldiers_unrest -= 6; Q.workers_unrest -= 3; Q.peasants_unrest -= 3;
+!}
+
+We push for increased militarization and strength in the face of ongoing crises. 
+
 
 @support_radicalism
 title: Support revolution and radicalism.
-subtitle: -1 resource - Support strikes among workers, land seizure among peasants, and anti-war sentiment among soldiers.
-unavailable-subtitle: [? if b_resources < 1: Not enough resources. ?][? if b_leadership = 1: The Bolshevik leadership is not radical enough. ?]
-choose-if: b_resources >= 1 and b_leadership = 2
-on-arrival: b_resources -= 1; worker_unrest += 3; peasant_unrest += 3; war_weariness += 8; morale -= 0.04; discipline -= 0.04 
-
-Our newspapers print savage attacks on the entire established order.
-
-@support_id
-title: Support the ideology of internationalism - support immediate negotiations for a peace.
-subtitle: -1 resource
+subtitle: -1 resource - Encourage class conflict, land seizures, and the power of the proletariat. 
+unavailable-subtitle: [? if b_resources < 1: Not enough resources. ?]
 choose-if: b_resources >= 1
-on-arrival: internationalist_strength += 6*(1-b_dissent); internationalist_dissent -= 5*(1-b_dissent); social_patriot_dissent += 5; defensist_dissent += 4; soldiers_m += 3*(1-b_dissent); b_resources -= 1
+on-arrival: {!
+  Q.b_resources -= 1; 
+  Q.soldiers_unrest -= 5; Q.workers_unrest -= 8; Q.peasants_unrest -= 8; Q.kulaks_unrest -= 8; 
+  Q.soldiers_strength += 2; Q.workers_strength += 4; Q.peasants_strength += 6; Q.kulaks_strength += 6; 
+  Q.elites_unrest += 6; Q.middle_unrest += 2; Q.intelligentsia_unrest += 4; 
+  Q.workers_b += 2*(1-b_dissent); Q.peasants_b += 2*(1-b_dissent); Q.workers_b += 2*(1-b_dissent); 
+  Q.instability += 2; Q.militancy += 4; Q.crime += 4; Q.morale -= 0.04; Q.discipline -= 0.04; Q.train_capacity *= 0.95; 
+  Q.Q.food_production *= 0.95; Q.food_sold *= 0.99; 
+  Q.Q.industries_syndicalized += 5; Q.industry *= 0.95; 
+  Q.moderate_dissent += 4; Q.leninist_dissent -= 2; Q.leftcom_dissent -= 4;
+  Q.moderate_strength -= 2; Q.leninist_strength += 2; Q.leftcom_strength += 4;
+  Q.anarchist_strength += 2; Q.maximalist_strength += 2;
+  Q.anarchist_relation += 5; Q.maximalist_relation += 5;
+!}
 
-Our newspapers print editorials in support of internationalism, arguing that an immediate peace is necessary. This bolsters the Internationalist faction within the party while upsetting the defensists, and raises our standing with the soldiers.
+We enflame the ongoing conflicts in the cities and countryside, rallying the working masses to our side, though possibly at the expense of state functions. 
 
-@support_pat
-title: Support the war effort from a social-patriot standpoint.
-subtitle: -1 resource
+@support_moderation
+title: Support moderation and consolidation. 
+subtitle: -1 resource - Encourage stricter discipline, authority, and a return to normality. 
+unavailable-subtitle: [? if b_resources < 1: Not enough resources. ?]
 choose-if: b_resources >= 1
-on-arrival: social_patriot_strength += 6*(1-b_dissent); social_patriot_dissent -= 5*(1-b_dissent); internationalist_dissent += 5; war_weariness -= 3*(1-b_dissent); b_resources -= 1
+on-arrival: {!
+  Q.b_resources -= 1; 
+  Q.soldiers_unrest += 2; Q.workers_unrest += 4; Q.peasants_unrest += 4; Q.kulaks_unrest += 8;
+  Q.soldiers_strength -= 1; Q.workers_strength -= 2; Q.peasants_strength -= 2; Q.kulaks_strength -= 2; 
+  Q.elites_unrest -= 2; Q.middle_unrest -= 5; Q.intelligentsia_unrest -= 5;
+  Q.instability -= 2; Q.militancy -= 5; Q.crime -= 2; Q.morale += 0.02; Q.discipline += 0.04; 
+  Q.industry *= 1.02;
+  Q.moderate_dissent -= 2; Q.leftcom_dissent += 6;
+  Q.anarchist_strength -= 1; Q.maximalist_strength -= 1;
+  Q.anarchist_relation -= 5; Q.maximalist_relation -= 5;
+!}
 
-Our newspapers print editorials in support of the war effort, without any of the revolutionary defensist conditions. This bolsters the Social Patriot faction.
+We promote stricter compliance and consolidation, seeking to put an end to the chaos. 
+
+Though some complain that we are dampening the revolutionary fervor of the masses, hopefully this will right the economic situation in the country. 
