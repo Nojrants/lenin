@@ -152,7 +152,7 @@ Q.maximalist_relation = 55;
 Q.maximalist_strength = 5;
 
 Q.ns_relation = 35;
-Q.ns_strength = 5;
+Q.popular_socialist_strength = 5;
 
 Q.k_relation = 5;
 Q.k_strength = 15;
