@@ -238,11 +238,11 @@ if (window && d3) {
 
 {!<tr><td><div class="party-box box k"></div>Kadets</td><td>!}[+ k_r_dec +]%{!</td></tr>!}
 
-{!<tr><td><div class="party-box box other"></div>Others</td><td>!}[+ other_r_dec +]%{!</td></tr>!}
-
-{!<tr><td><div class="party-box box rightist"></div>rightists</td><td>!}[+ rightist_r_dec +]%{!</td></tr>!}
-
 {!<tr><td><div class="party-box box cossack"></div>Cossacks</td><td>!}[+ cossacks_r_dec +]%{!</td></tr>!}
+
+{!<tr><td><div class="party-box box rightist"></div>Rightists</td><td>!}[+ rightist_r_dec +]%{!</td></tr>!}
+
+{!<tr><td><div class="party-box box other"></div>Others</td><td>!}[+ other_r_dec +]%{!</td></tr>!}
 
 {!</table>!}
 
