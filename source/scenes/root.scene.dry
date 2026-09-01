@@ -168,6 +168,7 @@ Q.instability = 40;
 Q.democraticity = 45;
 Q.disillusionment = 0;
 Q.crime = 60;
+Q.militancy = 25;
 Q.unrest_modifier = 1;
 Q.imperial_police = 0;
 Q.cheka_founded = 0;
