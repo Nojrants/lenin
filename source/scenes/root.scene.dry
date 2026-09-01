@@ -122,7 +122,7 @@ Q.coalition_taylorist = 0;
 
 
 // Other Parties
-Q.b_strength = 75; 
+Q.b_strength = 65; 
 
 Q.sdi_relation = 40;
 Q.sdi_strength = 5;
@@ -140,7 +140,7 @@ Q.lsr_relation = 55;
 Q.lsr_strength = 20;
 
 Q.centre_sr_relation = 35;
-Q.sr_strength = 65;
+Q.sr_strength = 60;
 
 Q.right_sr_relation = 20;
 Q.right_sr_strength = 40;
@@ -918,7 +918,7 @@ Q.base_attractiveness = {
         anarchist: 2,
         maximalist: 2,
         b: 4,
-        sdi: 2,
+        sdi: 3,
         left_m: 4,
         m: 4,
         right_m: 4,
@@ -1071,19 +1071,19 @@ Q.clergy_other = 35;
 Q.clergy_none = 40;
 
 Q.workers_anarchist = 5;
-Q.workers_maximalist = 1; 
+Q.workers_maximalist = 2; 
 Q.workers_b = 75;
-Q.workers_sdi = 6; 
+Q.workers_sdi = 12; 
 Q.workers_left_m = 8; 
-Q.workers_m = 10;
-Q.workers_right_m = 4; 
-Q.workers_lsr = 10; 
+Q.workers_m = 9;
+Q.workers_right_m = 12; 
+Q.workers_lsr = 14; 
 Q.workers_sr = 18;
 Q.workers_right_sr = 12; 
-Q.workers_popular_socialist = 1;
+Q.workers_popular_socialist = 3;
 Q.workers_k = 0;
 Q.workers_rightist = 0;
-Q.workers_other = 5;
+Q.workers_other = 10;
 Q.workers_none = 20;
 
 Q.peasants_anarchist = 2;
