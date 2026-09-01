@@ -29,8 +29,6 @@ Q.train_capacity = Math.round(Q.train_capacity);
 
 
 
-
-
 if (Q.hunger > 10) {
 	Q.disillusionment += (Q.hunger >= 50 ? 4 :
 						  Q.hunger >= 40 ? 2 :
@@ -75,8 +73,6 @@ if (Q.crime > 20) {
 if (Q.disillusionment < 0) Q.disillusionment = 0;
 
 
-
-
 for (var c of Q.classes) {
     var unrest = Q[c + "_unrest"];
     for (var party of Q.parties) {
@@ -116,55 +112,21 @@ for (var c of Q.classes) {
     }
 }
 
-for (var c of Q.classes) {
-    for (var party of Q.parties) {
-        if (isNaN(Q[c + "_" + party])) {
-            console.log("NaN support:", c + "_" + party);
-        }
-    }
-}
 
 for (var c of Q.classes) {
     var class_votes = 0;
-
     for (var party of Q.parties) {
-
-        if (isNaN(Q[c + "_" + party])) {
-            console.log(
-                "FIRST NaN:",
-                c,
-                party,
-                "support =", Q[c + "_" + party],
-                "strength =", Q[party + "_strength"],
-                "attractiveness =", Q.base_attractiveness[c][party],
-                "unrest =", Q[c + "_unrest"],
-                "disillusionment =", Q.disillusionment,
-                "instability =", Q.instability
-            );
-            break;
+        if (Q[c+'_'+party] < 0) {
+            Q[c+'_'+party] = 0;
         }
-
-        if (Q[c + "_" + party] < 0) {
-            Q[c + "_" + party] = 0;
-        }
-
-        class_votes += Q[c + "_" + party];
+        class_votes += Q[c+'_'+party];
     }
-
-    console.log(c, "class_votes =", class_votes);
-
     for (var party of Q.parties) {
-        Q[c + '_' + party + '_normalized'] =
-            100 * Q[c + '_' + party] / class_votes;
+        Q[c + '_' + party + '_normalized'] = 100*Q[c+'_'+party]/class_votes;
 
-        Q[c + '_' + party + '_display'] =
-            Math.round(100 * Q[c + '_' + party] / class_votes);
+        Q[c + '_' + party + '_display'] = Math.round(100*Q[c+'_'+party]/class_votes);
     }
 }
-
-
-
-
 // calculate support for each of the parties
 var total_support = 0; 
 for (var party of Q.parties) {
@@ -185,7 +147,6 @@ for (var party of Q.parties) {
     Q[party+'_votes'] = Math.round(Q[party+'_normalized']*100);
     Q[party+'_votes_display'] = Math.round(Q[party+'_normalized']*100);
 }
-
 
 console.log("Disillusionment:", Q.disillusionment);
 console.log("none support:", Q.none_support);
