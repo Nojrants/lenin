@@ -46,12 +46,12 @@ console.log("right SR", Q.right_sr_assembly_votes_dec);
 console.log("SR", Q.sr_assembly_votes_dec);
 
 
-if (Q.left_sr_assembly_votes_dec) {
-    Q.sr_assembly_votes_dec = Q.sr_assembly_votes_dec + Q.left_sr_assembly_votes_dec;
-}
-if (Q.right_sr_assembly_votes_dec) {
-    Q.sr_assembly_votes_dec = Q.sr_assembly_votes_dec + Q.right_sr_assembly_votes_dec;
-}
+// if (Q.left_sr_assembly_votes_dec) {
+//     Q.sr_assembly_votes_dec = Q.sr_assembly_votes_dec + Q.left_sr_assembly_votes_dec;
+// }
+// if (Q.right_sr_assembly_votes_dec) {
+//     Q.sr_assembly_votes_dec = Q.sr_assembly_votes_dec + Q.right_sr_assembly_votes_dec;
+// }
 Q.sr_r = Math.round(800*Q.sr_assembly_votes_dec/100);
 
 console.log("merged", Q.sr_r);
