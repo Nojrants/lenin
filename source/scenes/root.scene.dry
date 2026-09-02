@@ -1337,6 +1337,8 @@ Q.axelrod_advisor = 0; // Pavel Axelrod
 Q.sukhanov_advisor = 1; // Nikolai Sukhanov
 
 Q.sukhanov_available = 1;
+Q.chicherin_available = 0;
+Q.chicherin_negotiation = 0;
 
 
 // sr advisors
