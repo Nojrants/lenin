@@ -498,7 +498,7 @@ Q.income_tax_1 =
 (
     (
         Q.elites *
-        (75 - ((Q.elite_unrest / 10) * (Q.elite_strength / 100))) / 100
+        (75 - ((Q.elites_unrest / 10) * (Q.elites_strength / 100))) / 100
     )
     +
     (
@@ -511,7 +511,7 @@ Q.income_tax_2 =
 (
     (
         Q.elites *
-        (25 - ((Q.elite_unrest / 10) * (Q.elite_strength / 100))) / 400
+        (25 - ((Q.elites_unrest / 10) * (Q.elites_strength / 100))) / 400
     )
     +
     (
@@ -539,7 +539,7 @@ Q.income_tax_3 =
     +
     (
         Q.kulaks *
-        (25 - ((Q.kulak_unrest / 10) * (Q.kulak_strength / 100))) / 600
+        (25 - ((Q.kulaks_unrest / 10) * (Q.kulaks_strength / 100))) / 600
     )
 ) * Q.income_tax_rate_3;
 
@@ -547,12 +547,12 @@ Q.income_tax_4 =
 (
     (
         Q.kulaks *
-        (75 - ((Q.kulak_unrest / 10) * (Q.kulak_strength / 100))) / 1000
+        (75 - ((Q.kulaks_unrest / 10) * (Q.kulaks_strength / 100))) / 1000
     )
     +
     (
         Q.workers *
-        (75 - ((Q.labor_unrest / 10) * (Q.labor_strength / 100))) / 1000
+        (75 - ((Q.workers_unrest / 10) * (Q.workers_strength / 100))) / 1000
     )
 ) * Q.income_tax_rate_4;
 
@@ -560,12 +560,12 @@ Q.income_tax_5 =
 (
     (
         Q.peasants *
-        (75 - ((Q.peasant_unrest / 10) * (Q.peasant_strength / 100))) / 3000
+        (75 - ((Q.peasants_unrest / 10) * (Q.peasants_strength / 100))) / 3000
     )
     +
     (
         Q.workers *
-        (25 - ((Q.labor_unrest / 10) * (Q.labor_strength / 100))) / 3000
+        (25 - ((Q.workers_unrest / 10) * (Q.workers_strength / 100))) / 3000
     )
 ) * Q.income_tax_rate_5;
 
@@ -589,7 +589,7 @@ Q.property_tax =
     (
         (
             Q.elites *
-            (100 - ((Q.elite_unrest / 10) * (Q.elite_strength / 100))) / 100
+            (100 - ((Q.elites_unrest / 10) * (Q.elites_strength / 100))) / 100
         )
         *
         (Q.elite_wealth / 50)
@@ -616,7 +616,7 @@ Q.property_tax =
     (
         (
             Q.kulaks *
-            (75 - ((Q.kulak_unrest / 10) * (Q.kulak_strength / 100))) / 100
+            (75 - ((Q.kulaks_unrest / 10) * (Q.kulaks_strength / 100))) / 100
         )
         *
         (Q.kulak_wealth / 5000)
@@ -625,7 +625,7 @@ Q.property_tax =
     (
         (
             Q.workers *
-            (100 - ((Q.labor_unrest / 10) * (Q.labor_strength / 100))) / 100
+            (100 - ((Q.workers_unrest / 10) * (Q.workers_strength / 100))) / 100
         )
         *
         (Q.labor_wealth / 2500)
@@ -634,7 +634,7 @@ Q.property_tax =
     (
         (
             Q.peasants *
-            (75 - ((Q.peasant_unrest / 10) * (Q.peasant_strength / 100))) / 100
+            (75 - ((Q.peasants_unrest / 10) * (Q.peasants_strength / 100))) / 100
         )
         *
         (Q.peasant_wealth / 7500)
@@ -652,7 +652,7 @@ Q.business_tax =
 (
     (
         Q.elites *
-        (100 - ((Q.elite_unrest / 10) * (Q.elite_strength / 100))) / 100
+        (100 - ((Q.elites_unrest / 10) * (Q.elites_strength / 100))) / 100
         *
         (Q.elite_business / 50)
     )
@@ -973,15 +973,15 @@ if (Q.week_actions >= 1 && Q.current_player >= Q.n_players) {
     // War exhaustion changes - increase by 1 every week
     if (!Q.is_armistice && !Q.is_peace && !Q.allied_victory && Q.month >= 4) {
         Q.war_weariness += 1;
-        Q.soldier_unrest += 0.2;
+        Q.soldiers_unrest += 0.2;
     }
 
     // Soldier unrest increases up to war weariness...
-    if (Q.soldier_unrest < Q.war_weariness) {
-        Q.soldier_unrest += 1;
+    if (Q.soldiers_unrest < Q.war_weariness) {
+        Q.soldiers_unrest += 1;
     }
-    if (Q.soldier_unrest < Q.war_weariness + 20) {
-        Q.soldier_unrest += 1;
+    if (Q.soldiers_unrest < Q.war_weariness + 20) {
+        Q.soldiers_unrest += 1;
     }
 
     // Calculate strengths on each of the enemy fronts - just in case the enemy might want to attack!!!
