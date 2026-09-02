@@ -1,6 +1,30 @@
 title: Sovnarkom Composition
 new-page: true
 
+<table style="width:100%;">
+<tr>
+<td style="text-align:left;">Factions</td>
+<td style="text-align:right;">Leninists</td>
+<td style="text-align:right;">Leftists</td>
+<td style="text-align:right;">Moderates</td>
+<td style="text-align:right;">Non-Factional</td>
+</tr>
+<tr>
+<td style="text-align:left;">Dissent</td>
+<td style="text-align:right;">[+ leninist_dissent : dissent +]</td>
+<td style="text-align:right;">[+ leftcom_dissent : dissent +]</td>
+<td style="text-align:right;">[+ moderate_dissent : dissent +]</td>
+<td style="text-align:right;"> — </td>
+</tr>
+<tr>
+<td style="text-align:left;">Positions</td>
+<td style="text-align:right;">[+ leninist_positions +]</td>
+<td style="text-align:right;">[+ leftcom_positions : dissent +]</td>
+<td style="text-align:right;">[+ moderate_positions : dissent +]</td>
+<td style="text-align:right;">[+ nonfactional_positions : dissent +]</td>
+</tr>
+</table>
+
 - #sovnarkom_appointments
 - @cancel_composition
 
