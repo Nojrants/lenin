@@ -56,7 +56,7 @@ go-to: sovnarkom_composition
 
 
 @finance
-title: Finance — [+ finance_minister +]
+title: Finance — [+ finance_minister +] [?if finance_minister_party=="Bolshevik" and finance_minister != "None" and finance_minister != "Vacant" : (<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>)?][?if finance_minister_party=="Menshevik": (<span class="tooltip-text" title="Menshevik" style="color: var(--m-color);">RSDLP(u)</span>)?][?if finance_minister_party=="Left-SR": (<span class="tooltip-text" title="Left-SR" style="color: var(--lsr-color);">Left-SR</span>)?][?if finance_minister_party=="SR": (<span class="tooltip-text" title="Socialist Revolutionary" style="color: var(--sr-color);">SR</span>)?][?if finance_minister_party=="SD-Int": (<span class="tooltip-text" title="Social-Democratic Internationalist" style="color: var(--sdi-color);">SD-Int</span>)?][?if finance_minister_party=="NS": (<span class="tooltip-text" title="Popular Socialist" style="color: var(--ns-color);">NS</span>)?]
 tags: sovnarkom_appointments
 
 [?if finance_minister != "Vacant" : Who should we replace [+ finance_minister +] with? ?][?if finance_minister == "Vacant" : Who should we appoint to the position? ?]
@@ -71,7 +71,7 @@ go-to: sovnarkom_composition
 
 
 @labor
-title: Labor — [+ labor_minister +]
+title: Labor — [+ labor_minister +] [?if labor_minister_party=="Bolshevik" and labor_minister != "None" and labor_minister != "Vacant" : (<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>)?][?if labor_minister_party=="Menshevik": (<span class="tooltip-text" title="Menshevik" style="color: var(--m-color);">RSDLP(u)</span>)?][?if labor_minister_party=="Left-SR": (<span class="tooltip-text" title="Left-SR" style="color: var(--lsr-color);">Left-SR</span>)?][?if labor_minister_party=="SR": (<span class="tooltip-text" title="Socialist Revolutionary" style="color: var(--sr-color);">SR</span>)?][?if labor_minister_party=="SD-Int": (<span class="tooltip-text" title="Social-Democratic Internationalist" style="color: var(--sdi-color);">SD-Int</span>)?][?if labor_minister_party=="NS": (<span class="tooltip-text" title="Popular Socialist" style="color: var(--ns-color);">NS</span>)?]
 tags: sovnarkom_appointments
 
 [?if labor_minister != "Vacant" : Who should we replace [+ labor_minister +] with? ?][?if labor_minister == "Vacant" : Who should we appoint to the position? ?]
