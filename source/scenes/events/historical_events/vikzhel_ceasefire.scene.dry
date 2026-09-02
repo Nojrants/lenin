@@ -1560,7 +1560,7 @@ title: Raphael Abramovich
 subtitle: {!
 Menshevik — Leading party organizer, trade unionist, and architect of Bolshevik cooperation.<br> 
 Overall skill: ★★★☆<br>
-Suitability: ★★
+Suitability: ★★★★
 !}
 unavailable-subtitle: [?if transport_minister == "Abramovich" : Abramovich already has a post.<br> ?]Menshevik — Leading party organizer, trade unionist, and architect of Bolshevik cooperation.<br> Overall skill: ★★★☆<br>Suitability: ★★★★
 tags: labor_candidates2
