@@ -1133,7 +1133,6 @@ Suitability: ★★
 unavailable-subtitle: unavailable-subtitle: [?if labor_minister == "Abramovich" : Abramovich already has a post.<br> ?]Menshevik — Leading party organizer, trade unionist, and architect of Bolshevik cooperation.<br> Overall skill: ★★★☆<br>Suitability: ★★
 choose-if: labor_minister != "Abramovich" and transport_minister != "Abramovich"
 tags: transport_candidates2
-choose-if: transport_minister != "Abramovich" 
 on-arrival: {!
   if (Q.transport_minister_party == "Bolshevik" || Q.transport_minister == "Vacant") Q.commissariats_held -= 1;
   if (Q.transport_minister_party == "Menshevik") Q.m_represented -= 1;
