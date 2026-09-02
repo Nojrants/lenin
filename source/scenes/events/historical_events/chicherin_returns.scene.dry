@@ -1,6 +1,6 @@
 title: Chicherin Arrives From Britain
 new-page: true
-view-if: chicherin_travel = 0 and chicherin_negotiation = 1
+view-if: chicherin_travel_timer = 0 and chicherin_negotiation = 1
 max-visits: 1
 tags: event
 on-arrival: chicherin_available = 1
