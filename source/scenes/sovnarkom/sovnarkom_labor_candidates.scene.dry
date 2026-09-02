@@ -13,6 +13,7 @@ unavailable-subtitle: {!
 Overall skill: ★★★★<br>
 Suitability: ★★★★</ul>
 !}
+tags: labor_candidates
 choose-if: labor_minister != "Shliapnikov" 
 on-arrival: labor_minister = "Shliapnikov"; labor_minister_party = "Bolshevik";
 go-to: sovnarkom_composition
