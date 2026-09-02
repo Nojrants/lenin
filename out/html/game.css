@@ -1,7 +1,14 @@
 body {
-  --bolshevik-color: #A8191B;
+  --bolshevik-color: #9B1616;
   --bolshevik-moderate-color: #D83934;
-  --lsr-color: #317037;
+  --sdi-color: #b47561;
+  --left_m-color: #c34816;
+  --m-color: #b44314;
+  --right_m-color: #9a3a11;
+  --lsr-color: #295627;
+  --sr-color: #40853d;
+  --right_sr-color: #67a365;
+  --ns-color: #949d48;
   --bg-color: #f3f3e3;
   --border-color: #000;
   --content-bg-color: #f3f3f3;
