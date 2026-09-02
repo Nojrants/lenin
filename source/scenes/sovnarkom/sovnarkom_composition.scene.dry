@@ -54,3 +54,17 @@ title: Cancel action.
 subtitle: [?if education_minister != "Vacant": Keep [+ education_minister +] in place. ?]
 go-to: sovnarkom_composition
 
+
+@finance
+title: Finance — [+ finance_minister +]
+tags: sovnarkom_appointments
+
+[?if finance_minister != "Vacant" : Who should we replace [+ finance_minister +] with? ?][?if finance_minister == "Vacant" : Who should we appoint to the position? ?]
+
+- #finance_candidates
+- @keep_finance
+
+@keep_finance
+title: Cancel action.
+subtitle: [?if finance_minister != "Vacant": Keep [+ finance_minister +] in place. ?]
+go-to: sovnarkom_composition
