@@ -17,3 +17,10 @@ tags: labor_candidates
 choose-if: labor_minister != "Shliapnikov" 
 on-arrival: labor_minister = "Shliapnikov"; labor_minister_party = "Bolshevik";
 go-to: sovnarkom_composition
+
+
+@labor_vacant
+title: Let's leave the position vacant for now. 
+tags: labor_candidates
+on-arrival: labor_minister = "Vacant"; labor_minister_party = "";
+go-to: sovnarkom_composition
