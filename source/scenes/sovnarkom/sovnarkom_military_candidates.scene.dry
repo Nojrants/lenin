@@ -1,0 +1,76 @@
+title: Military Candidates
+new-page: true
+
+@military_trotsky
+title: Leon Trotsky
+subtitle: {!
+<span style="color: var(--bolshevik-color);">Leftist</span> — Internationally-reknown and experienced organizer.<ul>
+Overall skill: ★★★★★<br>
+Suitability: ★★★★★</ul>
+!}
+unavailable-subtitle: {!
+<span style="color: var(--bolshevik-color);">Leftist</span> — Internationally-reknown and experienced organizer.<ul>
+Overall skill: ★★★★★<br>
+Suitability: ★★★★★</ul>
+!}
+tags: military_candidates 
+choose-if: war_minister != "Trotsky" 
+on-arrival: war_minister = "Trotsky"; war_minister_party = "Bolshevik";
+go-to: sovnarkom_composition
+
+@military_krylenko
+title: Nikolai Krylenko 
+subtitle: {!
+<span style="color: var(--bolshevik-color);">Bolshevik</span> — Veteran of the Russian Army and soldier-agitator; holds a law degree.<ul>
+Overall skill: ★★★<br>
+Suitability: ★★★★</ul>
+!} 
+unavailable-subtitle: {!
+<span style="color: var(--bolshevik-color);">Bolshevik</span> — Veteran of the Russian Army and soldier-agitator; holds a law degree.<ul>
+Overall skill: ★★★<br>
+Suitability: ★★★★</ul>
+!} 
+tags: military_candidates 
+view-if: war_minister != "Krylenko" 
+on-arrival: war_minister = "Krylenko"; war_minister_party = "Bolshevik";
+go-to: sovnarkom_composition
+
+@military_dybenko
+title: Pavel Dybenko
+subtitle: {!
+<span style="color: var(--bolshevik-color);">Bolshevik</span> — Veteran of the Baltic Fleet.<ul>
+Overall skill: ★★<br>
+Suitability: ★★★★</ul>
+!}
+unavailable-subtitle: {!
+<span style="color: var(--bolshevik-color);">Bolshevik</span> — Veteran of the Baltic Fleet.<ul>
+Overall skill: ★★<br>
+Suitability: ★★★★</ul>
+!}
+tags: military_candidates 
+view-if: war_minister != "Dybenko" 
+on-arrival: war_minister = "Dybenko"; war_minister_party = "Bolshevik";
+go-to: sovnarkom_composition
+
+@military_podvoisky
+title: Nikolai Podvoisky
+subtitle: {!
+<span style="color: var(--bolshevik-color);">Bolshevik</span> — Old-school Bolshevik militant; led red guards during October Revolution.<ul>
+Overall skill: ★★★<br>
+Suitability: ★★★★</ul>
+!} 
+unavailable-subtitle: {!
+<span style="color: var(--bolshevik-color);">Bolshevik</span> — Old-school Bolshevik militant; led red guards during October Revolution.<ul>
+Overall skill: ★★★<br>
+Suitability: ★★★★</ul>
+!} 
+tags: military_candidates 
+view-if: war_minister != "Podvoisky" 
+on-arrival: war_minister = "Podvoisky"; war_minister_party = "Bolshevik";
+go-to: sovnarkom_composition
+
+@military_vacant
+title: Let's leave the position vacant for now. 
+tags: military_candidates
+on-arrival: war_minister = "Vacant"; war_minister_party = "";
+go-to: sovnarkom_composition
