@@ -293,10 +293,21 @@ Q.leaders.N_Milyutin = { auctoritas: 2, administration: 3, idealogism: 2, milita
 // Mensheviks
 Q.leaders.Martov = { auctoritas: 5, administration: 4, idealogism: 4, military: 1.5, economic: 3, partyorg: 4, diplomacy: 3, culture: 2, legalism: 3, nationalities: 1.5 };
 Q.leaders.Sukhanov = { auctoritas: 3.5, administration: 4, idealogism: 3, military: 1.5, economic: 2.5, partyorg: 3.5, diplomacy: 3, culture: 1.5, legalism: 2.5, nationalities: 1.5 };
+Q.leaders.Abramovich = { auctoritas: 3.5, administration: 4, idealogism: 2.5, military: 1.5, economic: 3.5, partyorg: 3, diplomacy: 3.5, culture: 1.5, legalism: 2, nationalities: 1.5 };
+Q.leaders.Avilov = { auctoritas: 2.5, administration: 3.5, idealogism: 2.5, military: 2, economic: 2.5, partyorg: 2.5, diplomacy: 2.5, culture: 1.5, legalism: 2, nationalities: 1.5 };
 
 
 // SRs
 Q.leaders.Natanson = { auctoritas: 3.5, administration: 4, idealogism: 3, military: 1.5, economic: 3, partyorg: 4, diplomacy: 3, culture: 1.5, legalism: 2, nationalities: 1.5 };
+Q.leaders.Malitsky = { auctoritas: 3, administration: 3, idealogism: 2, military: 2.5, economic: 3.5, partyorg: 2, diplomacy: 3, culture: 1.5, legalism: 2, nationalities: 1.5 };
+Q.leaders.Maslov = { auctoritas: 2, administration: 3, idealogism: 1.5, military: 2, economic: 4, partyorg: 2, diplomacy: 2, culture: 2.5, legalism: 4, nationalities: 2.5 };
+
+// Left-SRs
+Q.leaders.Malkin = { auctoritas: 2, administration: 2.5, idealogism: 3, military: 2, economic: 2.5, partyorg: 3, diplomacy: 2, culture: 1.5, legalism: 2, nationalities: 1.5 };
+Q.leaders.Karelin = { auctoritas: 3, administration: 3.5, idealogism: 3, military: 2, economic: 2.5, partyorg: 3, diplomacy: 2, culture: 1.5, legalism: 3, nationalities: 1.5 };
+Q.leaders.Trutovsky = { auctoritas: 2.5, administration: 3.5, idealogism: 2.5, military: 2, economic: 2.5, partyorg: 3, diplomacy: 2, culture: 2, legalism: 3.5, nationalities: 2.5 };
+
+
 
 
 Q.finalefficacy_sovnarkom =
