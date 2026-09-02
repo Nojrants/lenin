@@ -1067,7 +1067,7 @@ go-to: cabinet_negotiations
 title: Let's leave the position vacant for now. 
 tags: enlightenment_candidates2
 on-arrival: {!
-  if (Q.education_minister_party == "Menshevik") { m_represented -= 1; Q.commissariats_held += 1; }
+  if (Q.education_minister_party == "Menshevik") { Q.m_represented -= 1; Q.commissariats_held += 1; }
   if (Q.education_minister_party == "SR") { Q.sr_represented -= 1; Q.commissariats_held += 1; }
   if (Q.education_minister_party == "Left-SR") { Q.lsr_represented -= 1; Q.commissariats_held += 1; }
   if (Q.education_minister_party == "NS") { Q.ns_represented -= 1; Q.commissariats_held += 1; }
@@ -1247,7 +1247,7 @@ on-arrival: {!
   if (Q.trade_minister_party == "Left-SR") { Q.lsr_represented -= 1; Q.commissariats_held += 1; }
   if (Q.trade_minister_party == "NS") { Q.ns_represented -= 1; Q.commissariats_held += 1; }
   if (Q.trade_minister_party == "SD-Int") { Q.sdi_represented -= 1; Q.commissariats_held += 1; }
-  Q.trade_minister = "Nogin"; Q.transport_minister_party = "Bolshevik";
+  Q.trade_minister = "Nogin"; Q.trade_minister_party = "Bolshevik";
 !}
 go-to: cabinet_negotiations
 
@@ -1260,7 +1260,7 @@ on-arrival: {!
   if (Q.trade_minister_party == "Left-SR") { Q.lsr_represented -= 1; Q.commissariats_held += 1; }
   if (Q.trade_minister_party == "NS") { Q.ns_represented -= 1; Q.commissariats_held += 1; }
   if (Q.trade_minister_party == "SD-Int") { Q.sdi_represented -= 1; Q.commissariats_held += 1; }
-  Q.trade_minister = "Vacant"; Q.transport_minister_party = "";
+  Q.trade_minister = "Vacant"; Q.trade_minister_party = "";
 !}
 go-to: cabinet_negotiations
 
@@ -1297,7 +1297,7 @@ Overall skill: ★★★☆<br>
 Suitability: ★★
 !}
 tags: property_candidates
-choose-if: local_minister != "Karelin" 
+choose-if: property_minister != "Karelin" 
 on-arrival: {!
   if (Q.property_minister_party == "Menshevik") { m_represented -= 1; Q.commissariats_held += 1; }
   if (Q.property_minister_party == "SR") { Q.sr_represented -= 1; Q.commissariats_held += 1; }
@@ -1317,7 +1317,7 @@ Suitability: ★☆
 !}
 tags: property_candidates
 choose-if: sdi_relation >= 40 and education_minister != "Sukhanov" and property_minister != "Sukhanov"
-unavailable-subtitle: [?if sdi_relation < 40 : Sukhanov won't accept this offer. ?][?if enlightenment_minister = "Sukhanov": Sukhanov already has a post. ?]<br>SD-Int. — Party leader, writer, and public intellectual.<br>Overall skill: ★★★★<br>Suitability: ★☆
+unavailable-subtitle: [?if sdi_relation < 40 : Sukhanov won't accept this offer. ?][?if education_minister = "Sukhanov": Sukhanov already has a post. ?]<br>SD-Int. — Party leader, writer, and public intellectual.<br>Overall skill: ★★★★<br>Suitability: ★☆
 on-arrival: {!
   if (Q.property_minister_party == "Menshevik") { m_represented -= 1; Q.commissariats_held += 1; }
   if (Q.property_minister_party == "SR") { Q.sr_represented -= 1; Q.commissariats_held += 1; }
