@@ -977,6 +977,10 @@ on-arrival: {!
   Q.moderate_strength += 10; Q.leninist_strength -= 5; Q.leftcom_strength -= 5; 
 !}
 
+A coalition agreement has been reached! Vikzhel drops their threat of a strike, and pledges to cooperate with our government fully. The other parties leave the talks pleasantly surprised, if still slightly apprehensive about our motives. 
+
+The Moderate Bolsheviks celebrate this as a major step forward. Lenin, however, is still far from convinced, predicting the coalition will end in disaster. 
+
 @enlightenment_assign
 title: Appoint the Enlightenment Commissar
 subtitle: [?if education_minister != "Vacant" : Currently held by [+ education_minister +] ?][?if education_minister != "Vacant" and education_minister_party=="Bolshevik": (<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>)?]
@@ -1022,12 +1026,7 @@ Suitability: ★☆
 !}
 tags: enlightenment_candidates2
 choose-if: lsr_relation >= 40 and education_minister != "Natanson" 
-unavailable-subtitle: {!
-[?if lsr_relation < 40 : Natanson won't accept this offer. ?]<br>
-Left-SR — Party leader and elder statesman; some experience in education.<br>
-Overall skill: ★★★☆<br>
-Suitability: ★☆
-!}
+unavailable-subtitle: [?if lsr_relation < 40 : Natanson won't accept this offer. ?]<br>Left-SR — Party leader and elder statesman; some experience in education.<br>Overall skill: ★★★☆<br>Suitability: ★☆
 on-arrival: {!
   if (Q.education_minister_party == "Bolshevik" || Q.education_minister == "Vacant") Q.commissariats_held -= 1;
   if (Q.education_minister_party == "Menshevik") Q.m_represented -= 1;
@@ -1048,12 +1047,7 @@ Suitability: ★★
 !}
 tags: enlightenment_candidates2
 choose-if: sdi_relation >= 40 and property_minister != "Sukhanov" and education_minister != "Sukhanov" 
-unavailable-subtitle: {!
-[?if sdi_relation < 40 : Sukhanov won't accept this offer. ?][?if property_minister == "Sukhanov": Sukhanov already has a post. ?]<br>
-SD-Int. — Party leader, writer, and public intellectual.<br>
-Overall skill: ★★★★<br>
-Suitability: ★★
-!}
+unavailable-subtitle: [?if sdi_relation < 40 : Sukhanov won't accept this offer. ?][?if property_minister == "Sukhanov": Sukhanov already has a post. ?]<br>SD-Int. — Party leader, writer, and public intellectual.<br>Overall skill: ★★★★<br>Suitability: ★★
 on-arrival: {!
   if (Q.education_minister_party == "Bolshevik" || Q.education_minister == "Vacant") Q.commissariats_held -= 1;
   if (Q.education_minister_party == "Menshevik") Q.m_represented -= 1;
@@ -1319,12 +1313,7 @@ Suitability: ★☆
 !}
 tags: property_candidates
 choose-if: sdi_relation >= 40 and education_minister != "Sukhanov" and property_minister != "Sukhanov"
-unavailable-subtitle: {!
-[?if sdi_relation < 40 : Sukhanov won't accept this offer. ?][?if enlightenment_minister = "Sukhanov": Sukhanov already has a post. ?]<br>
-SD-Int. — Party leader, writer, and public intellectual.<br>
-Overall skill: ★★★★<br>
-Suitability: ★☆
-!}
+unavailable-subtitle: [?if sdi_relation < 40 : Sukhanov won't accept this offer. ?][?if enlightenment_minister = "Sukhanov": Sukhanov already has a post. ?]<br>SD-Int. — Party leader, writer, and public intellectual.<br>Overall skill: ★★★★<br>Suitability: ★☆
 on-arrival: {!
   if (Q.property_minister_party == "Menshevik") { m_represented -= 1; Q.commissariats_held += 1; }
   if (Q.property_minister_party == "SR") { Q.sr_represented -= 1; Q.commissariats_held += 1; }
