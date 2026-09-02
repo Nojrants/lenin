@@ -11,11 +11,10 @@ go-to: sovnarkom_chair
   
 
 @foreign
-title: Foreign Affairs — [+ foreign_minister +] [?if foreign_minister_party=="Bolshevik" and foreign_minister != "None" and foreign_minister != "Vacant" : (<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>)?][?if foreign_minister_party=="Menshevik": (<span class="tooltip-text" title="Menshevik" style="color: var(--m-color);">RSDLP(u)</span>)?][?if foreign_minister_party=="Left-SR": (<span class="tooltip-text" title="Left-SR" style="color: var(--lsr-color);">Left-SR</span>)?][?if foreign_minister_party=="Menshevik": (<span class="tooltip-text" title="Socialist Revolutionary" style="color: var(--sr-color);">SR</span>)?][?if foreign_minister_party=="SD-Int": (<span class="tooltip-text" title="Social-Democratic Internationalist" style="color: var(--sdi-color);">SD-Int</span>)?][?if foreign_minister_party=="NS": (<span class="tooltip-text" title="Popular Socialist" style="color: var(--ns-color);">NS</span>)?]
+title: Foreign Affairs — [+ foreign_minister +] [?if foreign_minister_party=="Bolshevik" and foreign_minister != "None" and foreign_minister != "Vacant" : (<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>)?][?if foreign_minister_party=="Menshevik": (<span class="tooltip-text" title="Menshevik" style="color: var(--m-color);">RSDLP</span>)?][?if foreign_minister_party=="Left-SR": (<span class="tooltip-text" title="Left-SR" style="color: var(--lsr-color);">Left-SR</span>)?][?if foreign_minister_party=="SR": (<span class="tooltip-text" title="Socialist Revolutionary" style="color: var(--sr-color);">SR</span>)?][?if foreign_minister_party=="SD-Int": (<span class="tooltip-text" title="Social-Democratic Internationalist" style="color: var(--sdi-color);">SD-Int</span>)?][?if foreign_minister_party=="NS": (<span class="tooltip-text" title="Popular Socialist" style="color: var(--ns-color);">NS</span>)?]
 tags: sovnarkom_appointments
 
 [?if foreign_minister != "Vacant" : Who should we replace [+ foreign_minister +] with? ?][?if foreign_minister == "Vacant" : Who should we appoint to the position? ?]
-
 
 - #foreign_candidates
 - @keep_foreign
@@ -27,7 +26,7 @@ go-to: sovnarkom_composition
 
 
 @military
-title: Military — [+ war_minister +]
+title: Military — [+ war_minister +] [?if foreign_minister_party=="Bolshevik" and war_minister != "None" and war_minister != "Vacant" : (<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>)?][?if war_minister_party=="Menshevik": (<span class="tooltip-text" title="Menshevik" style="color: var(--m-color);">RSDLP</span>)?][?if war_minister_party=="Left-SR": (<span class="tooltip-text" title="Left-SR" style="color: var(--lsr-color);">Left-SR</span>)?][?if war_minister_party=="SR": (<span class="tooltip-text" title="Socialist Revolutionary" style="color: var(--sr-color);">SR</span>)?][?if war_minister_party=="SD-Int": (<span class="tooltip-text" title="Social-Democratic Internationalist" style="color: var(--sdi-color);">SD-Int</span>)?][?if war_minister_party=="NS": (<span class="tooltip-text" title="Popular Socialist" style="color: var(--ns-color);">NS</span>)?]
 tags: sovnarkom_appointments
 
 [?if war_minister != "Vacant" : Who should we replace [+ war_minister +] with? ?][?if war_minister == "Vacant" : Who should we appoint to the position? ?]
@@ -38,5 +37,20 @@ tags: sovnarkom_appointments
 @keep_war
 title: Cancel action. 
 subtitle: [?if war_minister != "Vacant": Keep [+ war_minister +] in place. ?]
+go-to: sovnarkom_composition
+
+
+@enlightenment
+title: Enlightenment — [+ education_minister +] [?if education_minister_party=="Bolshevik" and education_minister != "None" and education_minister != "Vacant" : (<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>)?][?if education_minister_party=="Menshevik": (<span class="tooltip-text" title="Menshevik" style="color: var(--m-color);">RSDLP(u)</span>)?][?if education_minister_party=="Left-SR": (<span class="tooltip-text" title="Left-SR" style="color: var(--lsr-color);">Left-SR</span>)?][?if education_minister_party=="SR": (<span class="tooltip-text" title="Socialist Revolutionary" style="color: var(--sr-color);">SR</span>)?][?if education_minister_party=="SD-Int": (<span class="tooltip-text" title="Social-Democratic Internationalist" style="color: var(--sdi-color);">SD-Int</span>)?][?if education_minister_party=="NS": (<span class="tooltip-text" title="Popular Socialist" style="color: var(--ns-color);">NS</span>)?]
+tags: sovnarkom_appointments
+
+[?if war_minister != "Vacant" : Who should we replace [+ education_minister +] with? ?][?if education_minister == "Vacant" : Who should we appoint to the position? ?]
+
+- #enlightenment_candidates
+- @keep_enlightenment
+
+@keep_enlightenment
+title: Cancel action. 
+subtitle: [?if education_minister != "Vacant": Keep [+ education_minister +] in place. ?]
 go-to: sovnarkom_composition
 
