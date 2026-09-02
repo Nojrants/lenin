@@ -318,17 +318,10 @@ Q.leaders.Dzyubinsky = { auctoritas: 3, administration: 3.5, idealogism: 2.5, mi
 
 
 
-console.log({
-    income_tax: Q.income_tax,
-    property_tax: Q.property_tax,
-    business_tax: Q.business_tax,
-    monopolies: Q.monopolies,
-    customs: Q.customs,
-    railway_revenue: Q.railway_revenue,
-    enterprises_revenue: Q.enterprises_revenue,
-    finalefficacy_finance: Q.finalefficacy_finance,
-    finance_minister: Q.finance_minister
-});
+console.log("interest", Q.interest);
+console.log("indemnities", Q.indemnities);
+console.log("government_functions", Q.government_functions);
+console.log("expenditure", Q.expenditure);
 
 
 Q.finalefficacy_sovnarkom =
