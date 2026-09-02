@@ -1,0 +1,54 @@
+title: Foreign Candidates
+new-page: true
+
+@foreign_trotsky
+title: Leon Trotsky
+subtitle: {!
+Internationally-reknown and experienced organizer.<br>
+Overall skill: ★★★★★<br>
+Suitability: ★★★☆
+!}
+tags: foreign_candidates
+view-if: foreign_minister != "Trotsky" 
+on-arrival: foreign_minister = "Trotsky"; foreign_minister_party = "Bolshevik";
+go-to: sovnarkom_composition
+
+@foreign_chicherin
+title: Georgy Chicherin
+subtitle: {!
+Highly qualified diplomat, polyglot, and negotiator.<br>
+Overall skill: ★★★★★<br>
+Suitability: ★★★★★
+!}
+tags: foreign_candidates 
+view-if: foreign_minister != "Chicherin" 
+choose-if: foreign_minister != "Chicherin" and chicherin_available = 1
+unavailable-subtitle: Chicherin is currently imprisoned by the British. 
+on-arrival: foreign_minister = "Chicherin"; foreign_minister_party = "Bolshevik";
+go-to: sovnarkom_composition
+
+@foreign_ioffe
+title: Adolph Ioffe
+subtitle: {!
+Follower of Trotsky with some diplomatic experience.<br>
+Overall skill: ★★<br>
+Suitability: ★★★
+!}
+tags: foreign_candidates 
+view-if: foreign_minister != "Ioffe" 
+on-arrival: foreign_minister = "Ioffe"; foreign_minister_party = "Bolshevik";
+go-to: sovnarkom_composition
+
+@foreign_martov
+title: Iulius Martov
+subtitle: {!
+Menshevik Int. — RSDLP founding member and reknown Menshevik leader. 
+Overall skill: ★★★★★<br>
+Suitability: ★★★★
+!}
+tags: foreign_candidates 
+view-if: foreign_minister != "Martov"
+choose-if: foreign_minister != "Martov" and left_m_relation > 60 and m_in_gov = 1
+unavailable-subtitle: Menshevik Int. — RSDLP founding member and reknown Menshevik leader.<br>[?if m_in_gov != 1: We haven't assented to Menshevik participation in government. ?]<br>[?if left_m_relation <= 60: Martov would not accept this. ?]
+on-arrival: foreign_minister = "Martov"; foreign_minister_party = "Menshevik"; left_m_relation += 10
+go-to: sovnarkom_composition
