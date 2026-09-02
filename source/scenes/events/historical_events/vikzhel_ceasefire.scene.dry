@@ -1228,7 +1228,7 @@ go-to: cabinet_negotiations
 
 @property_assign
 title: [?if property_minister == "None": Perhaps we could create a new "State Property" commissariat for you? ?][? if property_minister != "None": Appoint the Properties Commissar ?]
-subtitle: [? property_minister == "None": They will manage museums, libraries, and former imperial properties. ?][? if property_minister != "None": Currently held by [+ property_minister +] [?if property_minister_party=="Bolshevik": (<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>)?]  ?]
+subtitle: [? property_minister == "None": They will manage museums, libraries, and former imperial properties. ?][? if property_minister != "None": Currently held by [+ property_minister +] ?][?if property_minister_party=="Bolshevik": (<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>)?]
 tags: commissariat_assign
 go-to: property_menu
 
@@ -1286,7 +1286,7 @@ go-to: cabinet_negotiations
 
 @local_assign
 title: [?if local_minister == "None": Perhaps we could create a new "Local Self-Government" commissariat for you? ?][? if local_minister != "None": Appoint the Local Self-Government Commissar ?]
-subtitle: [? local_minister == "None": They will coordinate with local institutions. ?][? if local_minister != "None": Currently held by [+ local_minister +] [?if local_minister_party=="Bolshevik": (<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>)?]  ?]
+subtitle: [? local_minister == "None": They will coordinate with local institutions. ?][? if local_minister != "None": Currently held by [+ local_minister +] ?] [?if local_minister_party=="Bolshevik": (<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>)?]
 tags: commissariat_assign
 go-to: local_menu
 
