@@ -956,7 +956,7 @@ Vikzhel immediately unleashes a full-scale strike across the railway network, an
 @finalize_deal
 title: Finalize the agreement. 
 choose-if: commissariats_held <= commissariats_promised and m_represented >= 1 and sr_represented >= 1 and lsr_represented >= 1
-unavailable-subtitle: The other parties will not accept. [? commissariats_held <= commissariats_promised : We have not granted enough appointments. ?] [?if sr_represented < 1 : The SRs expect a position. ?] [?if lsr_represented < 1 : The Left-SRs expect a position. ?] [?if m_represented < 1 : The Mensheviks expect a position. ?]
+unavailable-subtitle: The other parties will not accept. [?if commissariats_held <= commissariats_promised : We have not granted enough appointments. ?] [?if sr_represented < 1 : The SRs expect a position. ?] [?if lsr_represented < 1 : The Left-SRs expect a position. ?] [?if m_represented < 1 : The Mensheviks expect a position. ?]
 achievement: vikzhel_averted
 on-arrival: {!
   Q.coalition_government = 1; 
@@ -1227,8 +1227,8 @@ go-to: cabinet_negotiations
 
 
 @property_assign
-title: [?if property_minister == "None": Perhaps we could create a new "State Property" commissariat for you? ?][? if property_minister != "None": Appoint the Properties Commissar ?]
-subtitle: [? property_minister == "None": They will manage museums, libraries, and former imperial properties. ?][? if property_minister != "None": Currently held by [+ property_minister +] ?][?if property_minister_party=="Bolshevik": (<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>)?]
+title: [?if property_minister == "None": Perhaps we could create a new "State Property" commissariat for you? ?][?if property_minister != "None": Appoint the Properties Commissar ?]
+subtitle: [?if property_minister == "None": They will manage museums, libraries, and former imperial properties. ?][?if property_minister != "None": Currently held by [+ property_minister +] ?][?if property_minister_party=="Bolshevik": (<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>)?]
 tags: commissariat_assign
 go-to: property_menu
 
@@ -1285,8 +1285,8 @@ go-to: cabinet_negotiations
 
 
 @local_assign
-title: [?if local_minister == "None": Perhaps we could create a new "Local Self-Government" commissariat for you? ?][? if local_minister != "None": Appoint the Local Self-Government Commissar ?]
-subtitle: [? local_minister == "None": They will coordinate with local institutions. ?][? if local_minister != "None": Currently held by [+ local_minister +] ?] [?if local_minister_party=="Bolshevik": (<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>)?]
+title: [?if local_minister == "None": Perhaps we could create a new "Local Self-Government" commissariat for you? ?][?if if local_minister != "None": Appoint the Local Self-Government Commissar ?]
+subtitle: [?if local_minister == "None": They will coordinate with local institutions. ?][?if if local_minister != "None": Currently held by [+ local_minister +] ?] [?if local_minister_party=="Bolshevik": (<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>)?]
 tags: commissariat_assign
 go-to: local_menu
 
