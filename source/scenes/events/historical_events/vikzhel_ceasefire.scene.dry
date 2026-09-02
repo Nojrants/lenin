@@ -1026,7 +1026,7 @@ Suitability: ★☆
 !}
 tags: enlightenment_candidates2
 choose-if: lsr_relation >= 40 and education_minister != "Natanson" 
-unavailable-subtitle: [?if lsr_relation < 40 : Natanson won't accept this offer. ?]<br>Left-SR — Party leader and elder statesman; some experience in education.<br>Overall skill: ★★★☆<br>Suitability: ★☆
+unavailable-subtitle: [?if lsr_relation < 40 : Natanson won't accept this offer.<br> ?]Left-SR — Party leader and elder statesman; some experience in education.<br>Overall skill: ★★★☆<br>Suitability: ★☆
 on-arrival: {!
   if (Q.education_minister_party == "Bolshevik" || Q.education_minister == "Vacant") Q.commissariats_held -= 1;
   if (Q.education_minister_party == "Menshevik") Q.m_represented -= 1;
@@ -1047,7 +1047,7 @@ Suitability: ★★
 !}
 tags: enlightenment_candidates2
 choose-if: sdi_relation >= 40 and property_minister != "Sukhanov" and education_minister != "Sukhanov" 
-unavailable-subtitle: [?if sdi_relation < 40 : Sukhanov won't accept this offer. ?][?if property_minister == "Sukhanov": Sukhanov already has a post. ?]<br>SD-Int. — Party leader, writer, and public intellectual.<br>Overall skill: ★★★★<br>Suitability: ★★
+unavailable-subtitle: [?if sdi_relation < 40 : Sukhanov won't accept this offer.<br> ?][?if property_minister == "Sukhanov": Sukhanov already has a post.<br> ?]SD-Int. — Party leader, writer, and public intellectual.<br>Overall skill: ★★★★<br>Suitability: ★★
 on-arrival: {!
   if (Q.education_minister_party == "Bolshevik" || Q.education_minister == "Vacant") Q.commissariats_held -= 1;
   if (Q.education_minister_party == "Menshevik") Q.m_represented -= 1;
