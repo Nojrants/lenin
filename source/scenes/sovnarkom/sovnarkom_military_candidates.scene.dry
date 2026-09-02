@@ -31,7 +31,7 @@ Overall skill: ★★★<br>
 Suitability: ★★★★</ul>
 !} 
 tags: military_candidates 
-view-if: war_minister != "Krylenko" 
+choose-if: war_minister != "Krylenko" 
 on-arrival: war_minister = "Krylenko"; war_minister_party = "Bolshevik";
 go-to: sovnarkom_composition
 
@@ -48,24 +48,24 @@ Overall skill: ★★<br>
 Suitability: ★★★★</ul>
 !}
 tags: military_candidates 
-view-if: war_minister != "Dybenko" 
+choose-if: war_minister != "Dybenko" 
 on-arrival: war_minister = "Dybenko"; war_minister_party = "Bolshevik";
 go-to: sovnarkom_composition
 
 @military_podvoisky
 title: Nikolai Podvoisky
 subtitle: {!
-<span style="color: var(--bolshevik-color);">Bolshevik</span> — Old-school Bolshevik militant; led red guards during October Revolution.<ul>
+<span style="color: var(--bolshevik-color);">Bolshevik</span> — Old-school militant; led red guards during October Revolution.<ul>
 Overall skill: ★★★<br>
 Suitability: ★★★★</ul>
 !} 
 unavailable-subtitle: {!
-<span style="color: var(--bolshevik-color);">Bolshevik</span> — Old-school Bolshevik militant; led red guards during October Revolution.<ul>
+<span style="color: var(--bolshevik-color);">Bolshevik</span> — Old-school militant; led red guards during October Revolution.<ul>
 Overall skill: ★★★<br>
 Suitability: ★★★★</ul>
 !} 
 tags: military_candidates 
-view-if: war_minister != "Podvoisky" 
+choose-if: war_minister != "Podvoisky" 
 on-arrival: war_minister = "Podvoisky"; war_minister_party = "Bolshevik";
 go-to: sovnarkom_composition
 
