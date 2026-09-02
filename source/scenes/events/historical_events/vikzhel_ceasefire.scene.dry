@@ -900,7 +900,7 @@ on-arrival: {!
   Q.moderate_dissent += 10; Q.leninist_dissent -= 5; Q.leftcom_dissent -= 5;
   if (Q.education_minister_party != "Bolshevik") {
     Q.education_minister = "Vacant";
-    Q.education_minister_party != "Bolshevik";
+    Q.education_minister_party = "Bolshevik";
   }
   if (Q.transport_minister_party != "Bolshevik") {
     Q.transport_minister = "Vacant";
@@ -1199,7 +1199,7 @@ go-to: cabinet_negotiations
 title: Let's leave the position vacant for now. 
 tags: transport_candidates2
 on-arrival: {!
-  if (Q.transport_minister_party == "Menshevik") { m_represented -= 1; Q.commissariats_held += 1; }
+  if (Q.transport_minister_party == "Menshevik") { Q.m_represented -= 1; Q.commissariats_held += 1; }
   if (Q.transport_minister_party == "SR") { Q.sr_represented -= 1; Q.commissariats_held += 1; }
   if (Q.transport_minister_party == "Left-SR") { Q.lsr_represented -= 1; Q.commissariats_held += 1; }
   if (Q.transport_minister_party == "NS") { Q.ns_represented -= 1; Q.commissariats_held += 1; }
@@ -1242,7 +1242,7 @@ Suitability: ★★★
 tags: trade_candidates2
 choose-if: trade_minister != "Nogin" 
 on-arrival: {!
-  if (Q.trade_minister_party == "Menshevik") { m_represented -= 1; Q.commissariats_held += 1; }
+  if (Q.trade_minister_party == "Menshevik") { Q.m_represented -= 1; Q.commissariats_held += 1; }
   if (Q.trade_minister_party == "SR") { Q.sr_represented -= 1; Q.commissariats_held += 1; }
   if (Q.trade_minister_party == "Left-SR") { Q.lsr_represented -= 1; Q.commissariats_held += 1; }
   if (Q.trade_minister_party == "NS") { Q.ns_represented -= 1; Q.commissariats_held += 1; }
@@ -1255,7 +1255,7 @@ go-to: cabinet_negotiations
 title: Let's leave the position vacant for now. 
 tags: trade_candidates2
 on-arrival: {!
-  if (Q.trade_minister_party == "Menshevik") { m_represented -= 1; Q.commissariats_held += 1; }
+  if (Q.trade_minister_party == "Menshevik") { Q.m_represented -= 1; Q.commissariats_held += 1; }
   if (Q.trade_minister_party == "SR") { Q.sr_represented -= 1; Q.commissariats_held += 1; }
   if (Q.trade_minister_party == "Left-SR") { Q.lsr_represented -= 1; Q.commissariats_held += 1; }
   if (Q.trade_minister_party == "NS") { Q.ns_represented -= 1; Q.commissariats_held += 1; }
@@ -1299,7 +1299,7 @@ Suitability: ★★
 tags: property_candidates
 choose-if: property_minister != "Karelin" 
 on-arrival: {!
-  if (Q.property_minister_party == "Menshevik") { m_represented -= 1; Q.commissariats_held += 1; }
+  if (Q.property_minister_party == "Menshevik") { Q.m_represented -= 1; Q.commissariats_held += 1; }
   if (Q.property_minister_party == "SR") { Q.sr_represented -= 1; Q.commissariats_held += 1; }
   if (Q.property_minister_party == "Left-SR") { Q.lsr_represented -= 1; Q.commissariats_held += 1; }
   if (Q.property_minister_party == "NS") { Q.ns_represented -= 1; Q.commissariats_held += 1; }
@@ -1319,7 +1319,7 @@ tags: property_candidates
 choose-if: sdi_relation >= 40 and education_minister != "Sukhanov" and property_minister != "Sukhanov"
 unavailable-subtitle: [?if sdi_relation < 40 : Sukhanov won't accept this offer. ?][?if education_minister = "Sukhanov": Sukhanov already has a post. ?]<br>SD-Int. — Party leader, writer, and public intellectual.<br>Overall skill: ★★★★<br>Suitability: ★☆
 on-arrival: {!
-  if (Q.property_minister_party == "Menshevik") { m_represented -= 1; Q.commissariats_held += 1; }
+  if (Q.property_minister_party == "Menshevik") { Q.m_represented -= 1; Q.commissariats_held += 1; }
   if (Q.property_minister_party == "SR") { Q.sr_represented -= 1; Q.commissariats_held += 1; }
   if (Q.property_minister_party == "Left-SR") { Q.lsr_represented -= 1; Q.commissariats_held += 1; }
   if (Q.property_minister_party == "NS") { Q.ns_represented -= 1; Q.commissariats_held += 1; }
@@ -1332,7 +1332,7 @@ go-to: cabinet_negotiations
 title: Cancel the proposed commissariat.
 tags: property_candidates
 on-arrival: {!
-  if (Q.property_minister_party == "Menshevik") { m_represented -= 1; Q.commissariats_held += 1; }
+  if (Q.property_minister_party == "Menshevik") { Q.m_represented -= 1; Q.commissariats_held += 1; }
   if (Q.property_minister_party == "SR") { Q.sr_represented -= 1; Q.commissariats_held += 1; }
   if (Q.property_minister_party == "Left-SR") { Q.lsr_represented -= 1; Q.commissariats_held += 1; }
   if (Q.property_minister_party == "NS") { Q.ns_represented -= 1; Q.commissariats_held += 1; }
@@ -1376,7 +1376,7 @@ Suitability: ★★★★
 tags: local_candidates
 choose-if: local_minister != "Trutovsky" 
 on-arrival: {!
-  if (Q.local_minister_party == "Menshevik") { m_represented -= 1; Q.commissariats_held += 1; }
+  if (Q.local_minister_party == "Menshevik") { Q.m_represented -= 1; Q.commissariats_held += 1; }
   if (Q.local_minister_party == "SR") { Q.sr_represented -= 1; Q.commissariats_held += 1; }
   if (Q.local_minister_party == "Left-SR") { Q.lsr_represented -= 1; Q.commissariats_held += 1; }
   if (Q.local_minister_party == "NS") { Q.ns_represented -= 1; Q.commissariats_held += 1; }
@@ -1400,7 +1400,7 @@ Overall skill: ★★☆<br>
 Suitability: ★★★
 !}
 on-arrival: {!
-  if (Q.local_minister_party == "Menshevik") { m_represented -= 1; Q.commissariats_held += 1; }
+  if (Q.local_minister_party == "Menshevik") { Q.m_represented -= 1; Q.commissariats_held += 1; }
   if (Q.local_minister_party == "SR") { Q.sr_represented -= 1; Q.commissariats_held += 1; }
   if (Q.local_minister_party == "Left-SR") { Q.lsr_represented -= 1; Q.commissariats_held += 1; }
   if (Q.local_minister_party == "NS") { Q.ns_represented -= 1; Q.commissariats_held += 1; }
@@ -1413,7 +1413,7 @@ go-to: cabinet_negotiations
 title: Cancel the proposed commissariat.
 tags: local_candidates
 on-arrival: {!
-  if (Q.local_minister_party == "Menshevik") { m_represented -= 1; Q.commissariats_held += 1; }
+  if (Q.local_minister_party == "Menshevik") { Q.m_represented -= 1; Q.commissariats_held += 1; }
   if (Q.local_minister_party == "SR") { Q.sr_represented -= 1; Q.commissariats_held += 1; }
   if (Q.local_minister_party == "Left-SR") { Q.lsr_represented -= 1; Q.commissariats_held += 1; }
   if (Q.local_minister_party == "NS") { Q.ns_represented -= 1; Q.commissariats_held += 1; }
