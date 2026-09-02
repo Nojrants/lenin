@@ -103,4 +103,10 @@ tags: enlightenment_candidates
 choose-if: education_minister != "Bogdanov" 
 on-arrival: education_minister = "Bogdanov"; education_minister_party = "Bolshevik";
 go-to: sovnarkom_composition
-  
+
+
+@enlightenment_vacant
+title: Let's leave the position vacant for now. 
+tags: enlightenment_candidates
+on-arrival: education_minister = "Vacant"; education_minister_party = "";
+go-to: sovnarkom_composition
