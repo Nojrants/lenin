@@ -880,6 +880,14 @@ go-to: cabinet_negotiations
 
 
 @cabinet_negotiations
+title: Cabinet negotiations
+on-arrival: {!
+  console.log("m_represented: ", Q.m_represented);
+  console.log("sr_represented: ", Q.sr_represented);
+  console.log("lsr_represented: ", Q.lsr_represented);
+  console.log("commissariats_promised: ", Q.commissariats_promised);
+  console.log("commissariats_held: ", Q.commissariats_held);
+!}
 
 - #commissariat_assign
 - @finalize_deal
@@ -990,6 +998,11 @@ Bolshevik — Experienced cultural theorist, intellectual, and artist.<br>
 Overall skill: ★★★★<br>
 Suitability: ★★★★★
 !}
+unavailable-subtitle: {!
+Bolshevik — Experienced cultural theorist, intellectual, and artist.<br> 
+Overall skill: ★★★★<br>
+Suitability: ★★★★★
+!}
 tags: enlightenment_candidates2
 choose-if: education_minister != "Lunacharsky" 
 on-arrival: {!
@@ -1012,9 +1025,19 @@ Suitability: ★☆
 !}
 tags: enlightenment_candidates2
 choose-if: lsr_relation >= 40 and education_minister != "Natanson" 
-unavailable-subtitle: [?if lsr_relation < 40 : Natanson won't accept this offer. ?]
+unavailable-subtitle: {!
+[?if lsr_relation < 40 : Natanson won't accept this offer. ?]<br>
+Left-SR — Party leader and elder statesman; some experience in education.<br>
+Overall skill: ★★★☆<br>
+Suitability: ★☆
+!}
 on-arrival: {!
-  if (Q.education_minister_party == "Bolshevik" || Q.education_minister == "Vacant") commissariats_held -= 1;
+  if (Q.education_minister_party == "Bolshevik" || Q.education_minister == "Vacant") Q.commissariats_held -= 1;
+  if (Q.education_minister_party == "Menshevik") Q.m_represented -= 1;
+  if (Q.education_minister_party == "SR") Q.sr_represented -= 1;
+  if (Q.education_minister_party == "Left-SR") Q.lsr_represented -= 1;
+  if (Q.education_minister_party == "NS") Q.ns_represented -= 1;
+  if (Q.education_minister_party == "SD-Int") Q.sdi_represented -= 1;
   Q.education_minister = "Natanson"; Q.education_minister_party = "Left-SR"; Q.lsr_represented += 1;
 !}
 go-to: cabinet_negotiations
@@ -1028,7 +1051,12 @@ Suitability: ★★
 !}
 tags: enlightenment_candidates2
 choose-if: sdi_relation >= 40 and property_minister != "Sukhanov" and education_minister != "Sukhanov" 
-unavailable-subtitle: [?if sdi_relation < 40 : Sukhanov won't accept this offer. ?][?if property_minister == "Sukhanov": Sukhanov already has a post. ?]
+unavailable-subtitle: {!
+[?if sdi_relation < 40 : Sukhanov won't accept this offer. ?][?if property_minister == "Sukhanov": Sukhanov already has a post. ?]<br>
+SD-Int. — Party leader, writer, and public intellectual.<br>
+Overall skill: ★★★★<br>
+Suitability: ★★
+!}
 on-arrival: {!
   if (Q.education_minister_party == "Bolshevik" || Q.education_minister == "Vacant") Q.commissariats_held -= 1;
   if (Q.education_minister_party == "Menshevik") Q.m_represented -= 1;
@@ -1075,7 +1103,12 @@ go-to: transport_menu
 @transport_malitsky
 title: A. L. Malitsky
 subtitle: {!
-SR — Vikzhel Chairman; helped crush the Kornilov Rebellion. 
+SR — Vikzhel Chairman; helped crush the Kornilov Coup.<br> 
+Overall skill: ★★★<br>
+Suitability: ★★★★★
+!}
+unavailable-subtitle: {!
+SR — Vikzhel Chairman; helped crush the Kornilov Coup.<br> 
 Overall skill: ★★★<br>
 Suitability: ★★★★★
 !}
@@ -1095,7 +1128,12 @@ go-to: cabinet_negotiations
 @transport_abramovich
 title: Raphael Abramovich
 subtitle: {!
-Menshevik — Leading party organizer, trade unionist, and architect of Bolshevik cooperation. 
+Menshevik — Leading party organizer, trade unionist, and architect of Bolshevik cooperation.<br> 
+Overall skill: ★★★☆<br>
+Suitability: ★★
+!}
+unavailable-subtitle: {!
+Menshevik — Leading party organizer, trade unionist, and architect of Bolshevik cooperation.<br> 
 Overall skill: ★★★☆<br>
 Suitability: ★★
 !}
@@ -1115,7 +1153,12 @@ go-to: cabinet_negotiations
 @transport_avilov
 title: Boris Avilov
 subtitle: {!
-Menshevik — Lawyer, economist, and noted administrator. 
+Menshevik — Lawyer, economist, and noted administrator.<br> 
+Overall skill: ★★☆<br>
+Suitability: ★★★
+!}
+unavailable-subtitle: {!
+Menshevik — Lawyer, economist, and noted administrator.<br> 
 Overall skill: ★★☆<br>
 Suitability: ★★★
 !}
@@ -1135,7 +1178,12 @@ go-to: cabinet_negotiations
 @transport_malkin
 title: Boris Malkin
 subtitle: {!
-Left-SR — Journalist and party activist. 
+Left-SR — Journalist and party activist.<br> 
+Overall skill: ★★☆<br>
+Suitability: ★☆
+!}
+unavailable-subtitle: {!
+Left-SR — Journalist and party activist.<br> 
 Overall skill: ★★☆<br>
 Suitability: ★☆
 !}
@@ -1174,7 +1222,7 @@ go-to: cabinet_negotiations
 
 
 @trade_assign
-title: Appoint the Transportation Commissar
+title: Appoint the Trade Commissar
 subtitle: [?if trade_minister != "Vacant" : Currently held by [+ trade_minister +] ?][?if trade_minister != "Vacant" and trade_minister_party=="Bolshevik": (<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>)?]
 view-if: drop_trade = 1
 tags: commissariat_assign
@@ -1187,7 +1235,12 @@ go-to: trade_menu
 @trade_nogin
 title: Viktor Nogin
 subtitle: {!
-Bolshevik — Proponent moderate with industrial management experience. 
+Bolshevik — Proponent moderate with industrial management experience.<br> 
+Overall skill: ★★★<br>
+Suitability: ★★★
+!}
+unavailable-subtitle: {!
+Bolshevik — Proponent moderate with industrial management experience.<br> 
 Overall skill: ★★★<br>
 Suitability: ★★★
 !}
@@ -1243,6 +1296,11 @@ Left-SR — Leading SR organizer and former law student.
 Overall skill: ★★★☆<br>
 Suitability: ★★
 !}
+unavailable-subtitle: {!
+Left-SR — Leading SR organizer and former law student.
+Overall skill: ★★★☆<br>
+Suitability: ★★
+!}
 tags: property_candidates
 choose-if: local_minister != "Karelin" 
 on-arrival: {!
@@ -1264,7 +1322,12 @@ Suitability: ★☆
 !}
 tags: property_candidates
 choose-if: sdi_relation >= 40 and education_minister != "Sukhanov" and property_minister != "Sukhanov"
-unavailable-subtitle: [?if sdi_relation < 40 : Sukhanov won't accept this offer. ?][?if enlightenment_minister = "Sukhanov": Sukhanov already has a post. ?]
+unavailable-subtitle: {!
+[?if sdi_relation < 40 : Sukhanov won't accept this offer. ?][?if enlightenment_minister = "Sukhanov": Sukhanov already has a post. ?]<br>
+SD-Int. — Party leader, writer, and public intellectual.<br>
+Overall skill: ★★★★<br>
+Suitability: ★☆
+!}
 on-arrival: {!
   if (Q.property_minister_party == "Menshevik") { m_represented -= 1; Q.commissariats_held += 1; }
   if (Q.property_minister_party == "SR") { Q.sr_represented -= 1; Q.commissariats_held += 1; }
@@ -1275,9 +1338,17 @@ on-arrival: {!
 !}
 go-to: cabinet_negotiations
 
+@property_vacant
+title: Cancel the proposed commissariat.
+subtitle: [?if property_minister == "None": Cancel the proposed commissariat. ?]
+view-if: property_minister == "None"
+tags: property_candidates
+go-to: cabinet_negotiations
+
 @property_cancel
 title: Cancel reassignment.
-subtitle: [?if property_minister != "None": Keep [+ property_minister +] in place. ?][?if property_minister = "None": Cancel the proposed commissariat. ?]
+subtitle: [?if property_minister != "None": Keep [+ property_minister +] in place. ?]
+view-if: property_minister != "None"
 tags: property_candidates
 go-to: cabinet_negotiations
 
@@ -1316,13 +1387,17 @@ go-to: cabinet_negotiations
 @local_maslov
 title: Semyon Maslov
 subtitle: {!
-SR — Laywer, statistician, and agronomist with experience in land policy and zemstvo politics. 
+SR — Laywer, statistician, and agronomist with experience in land policy and zemstvo politics.<br>
 Overall skill: ★★☆<br>
 Suitability: ★★★
 !}
 tags: local_candidates
-choose-if: sr_relation >= 30 and local_minister != "Maslov"
-unavailable-subtitle: [?if sdi_relation < 30 : Maslov won't accept this offer. ?]
+choose-if: local_minister != "Maslov"
+unavailable-subtitle: {!
+SR — Laywer, statistician, and agronomist with experience in land policy and zemstvo politics.<br>
+Overall skill: ★★☆<br>
+Suitability: ★★★
+!}
 on-arrival: {!
   if (Q.local_minister_party == "Menshevik") { m_represented -= 1; Q.commissariats_held += 1; }
   if (Q.local_minister_party == "SR") { Q.sr_represented -= 1; Q.commissariats_held += 1; }
@@ -1333,9 +1408,17 @@ on-arrival: {!
 !}
 go-to: cabinet_negotiations
 
+@local_vacant
+title: Cancel the proposed commissariat.
+subtitle: [?if local_minister == "None": Cancel the proposed commissariat. ?]
+view-if: local_minister == "None"
+tags: local_candidates
+go-to: cabinet_negotiations
+
 @local_cancel
 title: Cancel reassignment.
-subtitle: [?if local_minister != "None": Keep [+ local_minister +] in place. ?][?if local_minister = "None": Cancel the proposed commissariat. ?]
+subtitle: [?if local_minister != "None": Keep [+ local_minister +] in place. ?]
+view-if: local_minister != "None"
 tags: local_candidates
 go-to: cabinet_negotiations
 
