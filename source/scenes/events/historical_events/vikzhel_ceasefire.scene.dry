@@ -888,7 +888,6 @@ go-to: cabinet_negotiations
 @cancel_deal
 title: On second thought, a deal is impossible. 
 new-page: true
-new-page: true
 on-arrival: {!
   Q.sdi_relation -= 10; Q.left_m_relation -= 10; Q.centre_m_relation -= 10; Q.right_m_relation -= 15; Q.lsr_relation -= 10; Q.centre_sr_relation -= 15; Q.right_sr_relation -= 15; Q.ns_relation -= 15;
   Q.right_sr_strength += 8; Q.right_m_strength += 8;   
