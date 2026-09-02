@@ -21,12 +21,12 @@ go-to: sovnarkom_composition
 @military_krylenko
 title: Nikolai Krylenko 
 subtitle: {!
-<span style="color: var(--bolshevik-color);">Bolshevik</span> — Veteran of the Russian Army and soldier-agitator; holds a law degree.<ul>
+<span style="color: var(--bolshevik-color);">Bolshevik</span> — Army veteran and soldier-agitator; holds a law degree.<ul>
 Overall skill: ★★★<br>
 Suitability: ★★★★</ul>
 !} 
 unavailable-subtitle: {!
-<span style="color: var(--bolshevik-color);">Bolshevik</span> — Veteran of the Russian Army and soldier-agitator; holds a law degree.<ul>
+<span style="color: var(--bolshevik-color);">Bolshevik</span> — Army veteran and soldier-agitator; holds a law degree.<ul>
 Overall skill: ★★★<br>
 Suitability: ★★★★</ul>
 !} 
