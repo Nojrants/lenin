@@ -1284,7 +1284,7 @@ Q.timers = [//m_party
             'report',
             'sovnarkom',
             'party_congress',
-            'chichern_travel',
+            'chicherin_travel',
             'soviet_congress',
             'ca_preparations',
             'ca_support',
