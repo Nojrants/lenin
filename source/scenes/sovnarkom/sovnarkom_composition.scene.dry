@@ -1,0 +1,29 @@
+title: Sovnarkom Composition
+new-page: true
+
+- #sovnarkom_appointments
+- @cancel_composition
+
+@cancel_composition
+title: Stop changing composition. 
+go-to: sovnarkom_chair
+
+  
+
+@foreign
+title: Foreign Affairs — [+ foreign_minister +] [?if foreign_minister_party=="Bolshevik" and foreign_minister != "None" and foreign_minister != "Vacant" : (<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>)?][?if foreign_minister_party=="Menshevik": (<span class="tooltip-text" title="Menshevik" style="color: var(--m-color);">RSDLP(u)</span>)?][?if foreign_minister_party=="Left-SR": (<span class="tooltip-text" title="Left-SR" style="color: var(--lsr-color);">Left-SR</span>)?][?if foreign_minister_party=="Menshevik": (<span class="tooltip-text" title="Socialist Revolutionary" style="color: var(--sr-color);">SR</span>)?][?if foreign_minister_party=="SD-Int": (<span class="tooltip-text" title="Social-Democratic Internationalist" style="color: var(--sdi-color);">SD-Int</span>)?][?if foreign_minister_party=="NS": (<span class="tooltip-text" title="Popular Socialist" style="color: var(--ns-color);">NS</span>)?]
+tags: sovnarkom_appointments
+
+Who should we replace [+ foreign_minister +] with? 
+
+- #foreign_candidates
+- @keep_foreign
+
+@keep_foreign
+title: Cancel action. 
+subtitle: [?if foreign_minister != "Vacant": Keep [+ foreign_minister +] in place. ?]
+go-to: sovnarkom_composition
+
+
+  
+
