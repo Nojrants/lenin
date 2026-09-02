@@ -1283,12 +1283,12 @@ go-to: property_menu
 @property_karelin
 title: Vladimir Karelin
 subtitle: {!
-Left-SR — Leading SR organizer and former law student.
+Left-SR — Leading SR organizer and former law student.<br>
 Overall skill: ★★★☆<br>
 Suitability: ★★
 !}
 unavailable-subtitle: {!
-Left-SR — Leading SR organizer and former law student.
+Left-SR — Leading SR organizer and former law student.<br>
 Overall skill: ★★★☆<br>
 Suitability: ★★
 !}
@@ -1360,7 +1360,12 @@ go-to: local_menu
 @local_trutovsky
 title: Vladimir Trutovsky
 subtitle: {!
-Left-SR — Former law student, journalist, and expert in local affairs. 
+Left-SR — Former law student, journalist, and expert in local affairs.<br> 
+Overall skill: ★★☆<br>
+Suitability: ★★★★
+!}
+unavailable-subtitle: {!
+Left-SR — Former law student, journalist, and expert in local affairs.<br> 
 Overall skill: ★★☆<br>
 Suitability: ★★★★
 !}
