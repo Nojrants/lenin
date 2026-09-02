@@ -4,12 +4,12 @@ new-page: true
 @foreign_trotsky
 title: Leon Trotsky
 subtitle: {!
-<span style="color: var(--b-color);">Left</span> — Internationally-reknown and experienced organizer.<br>
+<span style="color: var(--bolshevik-color);">Left</span> — Internationally-reknown and experienced organizer.<br>
 Overall skill: ★★★★★<br>
 Suitability: ★★★☆
 !}
 unavailable-subtitle: {!
-Internationally-reknown and experienced organizer.<br>
+<span style="color: var(--bolshevik-color);">Left</span> — Internationally-reknown and experienced organizer.<br>
 Overall skill: ★★★★★<br>
 Suitability: ★★★☆
 !}
@@ -21,25 +21,25 @@ go-to: sovnarkom_composition
 @foreign_chicherin
 title: Georgy Chicherin
 subtitle: {!
-<span style="color: var(--b-color);">Non-Factional</span> — Highly qualified diplomat, polyglot, and negotiator.<br>
+<span style="color: var(--bolshevik-color);">Non-Factional</span> — Highly qualified diplomat, polyglot, and negotiator.<br>
 Overall skill: ★★★★★<br>
 Suitability: ★★★★★
 !}
 tags: foreign_candidates 
 choose-if: foreign_minister != "Chicherin" and chicherin_available = 1
-unavailable-subtitle: [?if chicherin_available != 1 and chicherin_negotiation != 1 : Chicherin is currently imprisoned by the British.<br> ?][?if chicherin_available != 1 and chicherin_negotiation = 1 : Chicherin is currently in transit back to Russia.<br> ?] Highly qualified diplomat, polyglot, and negotiator.<br>Overall skill: ★★★★★<br>Suitability: ★★★★★
+unavailable-subtitle: <span style="color: var(--bolshevik-color);">Non-Factional</span> —Highly qualified diplomat, polyglot, and negotiator.<br>Overall skill: ★★★★★<br>Suitability: ★★★★★[?if chicherin_available != 1 and chicherin_negotiation != 1 : <br>Chicherin is currently imprisoned by the British. ?][?if chicherin_available != 1 and chicherin_negotiation = 1 : <br> Chicherin is currently in transit back to Russia. ?] 
 on-arrival: foreign_minister = "Chicherin"; foreign_minister_party = "Bolshevik";
 go-to: sovnarkom_composition
 
 @foreign_ioffe
 title: Adolph Ioffe
 subtitle: {!
-<span style="color: var(--b-color);">Left</span> — Follower of Trotsky with some diplomatic experience.<br>
+<span style="color: var(--bolshevik-color);">Left</span> — Follower of Trotsky with some diplomatic experience.<br>
 Overall skill: ★★<br>
 Suitability: ★★★
 !}
 unavailable-subtitle: {!
-Follower of Trotsky with some diplomatic experience.<br>
+<span style="color: var(--bolshevik-color);">Left</span> — Follower of Trotsky with some diplomatic experience.<br>
 Overall skill: ★★<br>
 Suitability: ★★★
 !}
@@ -51,13 +51,13 @@ go-to: sovnarkom_composition
 @foreign_martov
 title: Iulius Martov
 subtitle: {!
-<span style="color: var(--m-color);">Menshevik Int.</span> — RSDLP founding member and reknown Menshevik leader. 
+<span style="color: var(--m-color);">Menshevik Int.</span> — RSDLP founding member and reknown Menshevik leader.<br>
 Overall skill: ★★★★★<br>
 Suitability: ★★★★
 !}
 tags: foreign_candidates 
 choose-if: foreign_minister != "Martov" and left_m_relation > 60 and m_in_gov = 1 and coalition_government = 1
-unavailable-subtitle: <span style="color: var(--m-color);">Menshevik Int.</span> — RSDLP founding member and reknown Menshevik leader.<br>[?if m_in_gov != 1: We haven't assented to Menshevik participation in government. ?]<br>[?if left_m_relation <= 60: Martov would not accept this. ?]
+unavailable-subtitle: <span style="color: var(--m-color);">Menshevik Int.</span> — RSDLP founding member and reknown Menshevik leader.<br>Overall skill: ★★★★★<br>Suitability: ★★★★[?if m_in_gov != 1: We haven't assented to Menshevik participation in government.<br> ?][?if left_m_relation <= 60: Martov would not accept this. ?]
 on-arrival: foreign_minister = "Martov"; foreign_minister_party = "Menshevik"; left_m_relation += 10
 go-to: sovnarkom_composition
 
