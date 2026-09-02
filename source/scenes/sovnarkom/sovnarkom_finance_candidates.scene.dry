@@ -1,0 +1,37 @@
+title: Finance Candidates
+new-page: true
+
+
+@finance_skvortsov
+title: Ivan Skvortsov-Stepanov
+subtitle: {!
+<span style="color: var(--bolshevik-color);">Leftist</span> — Former elementary school teacher.<ul>
+Overall skill: ★☆<br>
+Suitability: ★★☆</ul>
+!}
+unavailable-subtitle: {!
+<span style="color: var(--bolshevik-color);">Leftist</span> — Former elementary school teacher.<ul>
+Overall skill: ★☆<br>
+Suitability: ★★☆</ul>
+!}
+tags: finance_candidates
+view-if: finance_minister != "Skvortsov" 
+on-arrival: finance_minister = "Skvortsov"; labor_minister_party = "Bolshevik";
+go-to: sovnarkom_composition
+
+@finance_sokolnikov
+title: Grigory Sokolnikov
+subtitle: {!
+<span style="color: var(--bolshevik-color);">Leninist</span> — Doctorate in economics.<ul>
+Overall skill: ★★★★<br>
+Suitability: ★★★★★</ul>
+!}
+unavailable-subtitle: {!
+<span style="color: var(--bolshevik-color);">Leninist</span> — Doctorate in economics.<ul>
+Overall skill: ★★★★<br>
+Suitability: ★★★★★</ul>
+!}
+tags: finance_candidates
+view-if: finance_minister != "Sokolnikov" 
+on-arrival: finance_minister = "Sokolnikov"; labor_minister_party = "Bolshevik";
+go-to: sovnarkom_composition
