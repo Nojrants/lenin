@@ -1,36 +1,50 @@
 title: Sovnarkom Composition
 new-page: true
 
-<table style="width:100%;">
+
+<table style="width:100%; border-collapse:collapse; margin:10px 0;">
 <tr>
-<td colspan="3" style="text-align:center;"><b>Internal Party Factions</b></td>
+<td colspan="3" style="text-align:center; padding:7px 5px; border-bottom:1px solid var(--text-color);">
+<b>Internal Party Factions</b>
+</td>
 </tr>
 <tr>
-<td style="text-align:left;">Faction</td>
-<td style="text-align:right;">Dissent</td>
-<td style="text-align:right;">Positions</td>
+<td style="text-align:left; padding:5px; border-bottom:1px solid rgba(128,128,128,0.4);">
+<b>Faction</b>
+</td>
+<td style="text-align:center; padding:5px; border-bottom:1px solid rgba(128,128,128,0.4);">
+<b>Dissent</b>
+</td>
+<td style="text-align:center; padding:5px; border-bottom:1px solid rgba(128,128,128,0.4);">
+<b>Positions</b>
+</td>
 </tr>
 <tr>
-<td style="text-align:left;">Leninists</td>
-<td style="text-align:right;">[+ leninist_dissent : dissent +]</td>
-<td style="text-align:right;">[+ leninist_positions +]</td>
+<td style="text-align:left; padding:5px;">Leninists</td>
+<td style="text-align:center; padding:5px;">[+ leninist_dissent : dissent +]</td>
+<td style="text-align:center; padding:5px;">[+ leninist_positions +]</td>
 </tr>
 <tr>
-<td style="text-align:left;">Leftists</td>
-<td style="text-align:right;">[+ leftcom_dissent : dissent +]</td>
-<td style="text-align:right;">[+ leftcom_positions +]</td>
+<td style="text-align:left; padding:5px;">Leftists</td>
+<td style="text-align:center; padding:5px;">[+ leftcom_dissent : dissent +]</td>
+<td style="text-align:center; padding:5px;">[+ leftcom_positions +]</td>
 </tr>
 <tr>
-<td style="text-align:left;">Moderates</td>
-<td style="text-align:right;">[+ moderate_dissent : dissent +]</td>
-<td style="text-align:right;">[+ moderate_positions +]</td>
+<td style="text-align:left; padding:5px;">Moderates</td>
+<td style="text-align:center; padding:5px;">[+ moderate_dissent : dissent +]</td>
+<td style="text-align:center; padding:5px;">[+ moderate_positions +]</td>
 </tr>
 <tr>
-<td style="text-align:left;">Non-Factional</td>
-<td style="text-align:right;"> — </td>
-<td style="text-align:right;">[+ nonfactional_positions +]</td>
+<td style="text-align:left; padding:5px; border-top:1px solid rgba(128,128,128,0.4);">
+Non-Factional
+</td>
+<td style="text-align:center; padding:5px; border-top:1px solid rgba(128,128,128,0.4);">—</td>
+<td style="text-align:center; padding:5px; border-top:1px solid rgba(128,128,128,0.4);">
+[+ nonfactional_positions +]
+</td>
 </tr>
 </table>
+
 
 - #sovnarkom_appointments
 - @cancel_composition
