@@ -1,0 +1,106 @@
+title: Enlightenment Candidates
+new-page: true
+
+
+@enlightenment_lunacharsky
+title: Anatoly Lunacharsky
+subtitle: {!
+<span style="color: var(--bolshevik-color);">Moderate</span> — Experienced cultural theorist, intellectual, and artist.<ul> 
+Overall skill: ★★★★<br>
+Suitability: ★★★★★</ul>
+!}
+unavailable-subtitle: {!
+<span style="color: var(--bolshevik-color);">Moderate</span> — Experienced cultural theorist, intellectual, and artist.<ul> 
+Overall skill: ★★★★<br>
+Suitability: ★★★★★</ul>
+!}
+tags: enlightenment_candidates
+choose-if: education_minister != "Lunacharsky" 
+on-arrival: education_minister = "Lunacharsky"; education_minister_party = "Bolshevik";
+go-to: sovnarkom_composition
+
+@enlightenment_bubnov
+title: Andrei Bubnov
+subtitle: {!
+<span style="color: var(--bolshevik-color);">Leftist</span> — Well-rounded party administrator with military experience.<ul> 
+Overall skill: ★★★<br>
+Suitability: ★</ul>
+!}
+unavailable-subtitle: {!
+<span style="color: var(--bolshevik-color);">Leftist</span> — Well-rounded party administrator with military experience.<ul> 
+Overall skill: ★★★<br>
+Suitability: ★</ul>
+!}
+tags: enlightenment_candidates
+choose-if: education_minister != "Bubnov" 
+on-arrival: education_minister = "Bubnov"; education_minister_party = "Bubnov";
+go-to: sovnarkom_composition
+
+@enlightenment_lebedev
+title: Pavel Lebedev-Polyansky
+subtitle: {!
+<span style="color: var(--bolshevik-color);">Vperedist</span> — Scholar and literary critic; worked in publishing department and Proletkult.<ul> 
+Overall skill: ★★★<br>
+Suitability: ★★★★</ul>
+!}
+unavailable-subtitle: {!
+<span style="color: var(--bolshevik-color);">Vperedist</span> — Scholar and literary critic; worked in publishing department and Proletkult.<ul> 
+Overall skill: ★★★<br>
+Suitability: ★★★★</ul>
+!}
+tags: enlightenment_candidates
+choose-if: education_minister != "Lebedev" 
+on-arrival: education_minister = "Lebedev"; education_minister_party = "Bolshevik";
+go-to: sovnarkom_composition
+
+@enlightenment_pokrovsky
+title: Mikhail Pokrovsky
+subtitle: {!
+<span style="color: var(--bolshevik-color);">Vperedist</span> — University-educated historian and leading historical theorist.<ul>  
+Overall skill: ★★★★<br>
+Suitability: ★★</ul>
+!}
+unavailable-subtitle: {!
+<span style="color: var(--bolshevik-color);">Vperedist</span> — University-educated historian and leading historical theorist.<ul>  
+Overall skill: ★★★★<br>
+Suitability: ★★</ul>
+!}
+tags: enlightenment_candidates
+choose-if: education_minister != "Pokrovsky" 
+on-arrival: education_minister = "Pokrovsky"; education_minister_party = "Bolshevik";
+go-to: sovnarkom_composition
+
+@enlightenment_krupskaya
+title: Nadezhda Krupskaya
+subtitle: {!
+<span style="color: var(--bolshevik-color);">Bolshevik</span> — Social reformer and pedagogist. Appointing Lenin's wife will appear nepotistic.<ul>  
+Overall skill: ★★☆<br>
+Suitability: ★★★★</ul>
+!}
+unavailable-subtitle: {!
+<span style="color: var(--bolshevik-color);">Bolshevik</span> — Social reformer and pedagogist. Appointing Lenin's wife will appear nepotistic.<ul>  
+Overall skill: ★★☆<br>
+Suitability: ★★★★</ul>
+!}
+tags: enlightenment_candidates
+choose-if: education_minister != "Krupskaya" 
+on-arrival: education_minister = "Krupskaya"; education_minister_party = "Bolshevik";
+go-to: sovnarkom_composition
+
+@enlightenment_bogdanov
+title: Alexander Bogdanov
+subtitle: {!
+<span style="color: var(--bolshevik-color);">Vperedist</span> — Leading Bolshevik theoretician until his falling out with Lenin; strong proponent of "proletarian culture". A controversial choice.<ul>
+Overall skill: ★★★★★<br>
+Suitability: ★★★★★</ul>
+!}
+unavailable-subtitle: {!
+<span style="color: var(--bolshevik-color);">Vperedist</span> — Leading Bolshevik theoretician until his falling out with Lenin; strong proponent of "proletarian culture". A controversial choice.<ul>
+Overall skill: ★★★★★<br>
+Suitability: ★★★★★</ul>
+!}
+tags: enlightenment_candidates
+choose-if: education_minister != "Bogdanov" 
+on-arrival: education_minister = "Bogdanov"; education_minister_party = "Bolshevik";
+go-to: sovnarkom_composition
+  
