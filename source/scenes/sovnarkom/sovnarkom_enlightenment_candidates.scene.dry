@@ -33,7 +33,7 @@ Suitability: ★</ul>
 !}
 tags: enlightenment_candidates
 choose-if: education_minister != "Bubnov" 
-on-arrival: education_minister = "Bubnov"; education_minister_party = "Bubnov";
+on-arrival: education_minister = "Bubnov"; education_minister_party = "Bolshevik";
 go-to: sovnarkom_composition
 
 @enlightenment_lebedev
