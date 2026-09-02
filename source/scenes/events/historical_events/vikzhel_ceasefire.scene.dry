@@ -1285,8 +1285,8 @@ go-to: cabinet_negotiations
 
 
 @local_assign
-title: [?if local_minister == "None": Perhaps we could create a new "Local Self-Government" commissariat for you? ?][?if if local_minister != "None": Appoint the Local Self-Government Commissar ?]
-subtitle: [?if local_minister == "None": They will coordinate with local institutions. ?][?if if local_minister != "None": Currently held by [+ local_minister +] ?] [?if local_minister_party=="Bolshevik": (<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>)?]
+title: [?if local_minister == "None": Perhaps we could create a new "Local Self-Government" commissariat for you? ?][?if local_minister != "None": Appoint the Local Self-Government Commissar ?]
+subtitle: [?if local_minister == "None": They will coordinate with local institutions. ?][?if local_minister != "None": Currently held by [+ local_minister +] ?] [?if local_minister_party=="Bolshevik": (<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>)?]
 tags: commissariat_assign
 go-to: local_menu
 
