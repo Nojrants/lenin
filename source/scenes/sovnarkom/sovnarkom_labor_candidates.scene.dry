@@ -1,0 +1,18 @@
+title: Labor Candidates
+new-page: true
+
+@labor_shliapnikov
+title: Alexander Shliapnikov
+subtitle: {!
+<span style="color: var(--bolshevik-color);">Leftist</span> — Popular and skilled trade union organizer.<ul>
+Overall skill: ★★★★<br>
+Suitability: ★★★★</ul>
+!}
+unavailable-subtitle: {!
+<span style="color: var(--bolshevik-color);">Leftist</span> — Popular and skilled trade union organizer.<ul>
+Overall skill: ★★★★<br>
+Suitability: ★★★★</ul>
+!}
+choose-if: labor_minister != "Shliapnikov" 
+on-arrival: labor_minister = "Shliapnikov"; labor_minister_party = "Bolshevik";
+go-to: sovnarkom_composition
