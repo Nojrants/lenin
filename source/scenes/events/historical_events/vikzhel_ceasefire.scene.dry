@@ -872,10 +872,7 @@ title: The Central Committee approves the agreement.
 unavailable-subtitle: There is not enough support for this. 
 choose-if: lenin_anger = 0
 new-page: true
-on-arrival: {!
-  Q.commissariats_promised = commissariats_held; Q.commissariats_held = 14;
-  Q.m_represented = 0; Q.sr_represented = 0; Q.lsr_represented = 0; Q.ns_represented = 0; Q.sdi_represented = 0;
-!}
+on-arrival: commissariats_promised = commissariats_held; commissariats_held = 14; m_represented = 0; sr_represented = 0; lsr_represented = 0; ns_represented = 0; sdi_represented = 0;
 go-to: cabinet_negotiations
 
 
