@@ -9,7 +9,7 @@ tags: event
 
 The leaders of Vikzhel have called a conference of all "democratic" groups in the capital, for the intentions of negotiating a mutually acceptable and inclusive socialist coalition government. This comes off the heels of Vikzhel's protest at the 2nd Soviet Congress, and after a week of pleas in the press for an immediate "ceasefire" between the Bolshevik and anti-Bolshevik forces, issued by the Left-SRs, Menshevik Internationalists, various unions, and other self-described "neutral" factions. Unless all parties cease their conflict and begin serious negotiations, Vikzhel has pledged to call a nationwide railway strike, which has the potential to cripple our transportation capabilities. 
 
-Surprisingly, Vikzhel's demands are echoed by the Petrograd Peasants' Soviet, Petrograd Trade Union Council, Central Soviet of Factory-Shop Committees, and countless unions, soviets, and committees, despite these the Bolshevik majorities within them. Although Lenin dismisses the talks as mere "diplomatic smokescreen for military operations", the Central Committee seems convinced that there is no choice but to open negotiations. 
+Surprisingly, Vikzhel's demands are echoed by the Petrograd Peasants' Soviet, Petrograd Trade Union Council, Central Soviet of Factory-Shop Committees, and countless unions, soviets, and committees, despite the Bolshevik majorities within them. Although Lenin dismisses the talks as mere "diplomatic smokescreen for military operations", the Central Committee seems convinced that there is no choice but to open negotiations. 
 
 Yet at the same time, the precariousness of the Bolshevik position has only hardened the intransigence of many moderate socialists, with some right Mensheviks and SRs going so far as to demand Lenin and Trotsky be barred from any future cabinet, or for the Bolsheviks to be excluded from the all-socialist government entirely. For as much as the Leninists refuse to work with the other parties, the other parties have grown just as obtuse, making the search for an amicable solution all the more difficult. 
 
@@ -38,7 +38,7 @@ go-to: menu
 
 = Vikzhel Negotiations 
 
-Though talks initially stall, several days of arguing (and news of anti-Bolshevik military failures) wear down the most ardent anti-Bolshevik representatives. Though the promises we make here won't be binding until signed-off on by the Party, we are in a position to potentially reach a compromise. 
+Despite the initial talks stalling, several days of arguing (and news of anti-Bolshevik military failures) have worn down the most ardent anti-Bolshevik representatives. Though the promises we make here won't be binding until signed-off on by the Party, we are in a position to potentially reach a compromise. 
 
 
 @menu
@@ -449,7 +449,7 @@ on-arrival: sdi_relation -= 5; left_m_relation -= 5; centre_m_relation -= 5; rig
 
 = Negotiations Collapse
 
-Unable to come to an agreement, we're forced to walk away from the negotiations. The other parties express their strong condemnation, as do a number of other interest groups and organizations. The Bolshevik Moderates lament the failure, though are no less passionate about the need for cooperation.
+Unable to come to an agreement, we're forced to walk away from the negotiations. The other parties express their strong condemnation, as do a number of other interest groups and organizations. The Bolshevik Moderates lament the failure, though their passion for cooperation is no less deterred. 
 
 Lenin criticizes the entire endeavor, using the failure of talks to prove his point that compromise is impossible. This will likely serve as a rallying cry for the Leninist position going forward. 
 
@@ -469,16 +469,18 @@ on-arrival: lenin_anger = 1 if (commissariats_held < 10 or disarm_workers = 1 or
 
 After days of tough negotiations, there is a viable offer on the table. Some Bolshevik newspapers even preemptively acclaim the formation of a new coalition government. 
 
-[?if lenin_anger = 1: Lenin however is absolutely furious that we have even entertained such a prospect, especially upon reading the proposed terms. In a heated party meeting, he berates the Party negotiators and outright accuses them of treason. So strongly does he feel about this, he declares he'd sooner let the Party split over the issue, or "go to the sailors" and crush this notion by force. ?]
+[?if lenin_anger = 1: Lenin however is absolutely furious that we have even entertained such a prospect, especially upon reading the proposed terms. In a heated party meeting, he berates the Party negotiators and outright accuses them of treason. So strongly does he feel about this, he declares he'd sooner let the Party split over the issue, or "go to the sailors" and crush the concilators by force. ?]
 
 [?if lenin_anger != 1: Lenin however is absolutely furious that we have even entertained such a prospect, though the measured agreement is at least some consolation. ?]
 
-The Leninists push for breaking off talks entirely, though its possible we could cautiously reopen negotiations. If so, it's now clear that anything less than this would be a non-starter: <br><br>
-• Recognition of the inviolability of the decrees/actions of the 2nd Soviet Congress.<br>
-• Recognition of the CEC as the coutnry's sole supreme authority.<br>
-• CEC membership only to groups previously represented in the soviets<br>‎ ‎ ‎ (i.e. no expanded "People's Council").<br>
-• Lenin and Trotsky must remain in government.<br>
-• The Bolsheviks must retain a preponderance of government posts (~75%).
+The Leninists push for breaking off talks entirely, though its possible we could cautiously reopen negotiations. If so, it's now clear that anything less than this would be a non-starter: 
+<ul>
+Recognition of the inviolability of the decrees/actions of the 2nd Soviet Congress.
+Recognition of the CEC as the coutnry's sole supreme authority.
+CEC membership only to groups previously represented in the soviets (i.e. no expanded "People's Council").
+Lenin and Trotsky must remain in government.<br>
+The Bolsheviks must retain a preponderance of government posts (~75%).
+</ul>
 
 - @reopen_negotiations
 - @break_talks
@@ -852,6 +854,16 @@ on-arrival: lenin_anger += 1 if (commissariats_held < 10 or disarm_workers = 1 o
 @reject_second
 title: We must reject the agreement still. 
 new-page: true
+on-arrival: sdi_relation -= 10; left_m_relation -= 10; centre_m_relation -= 10; right_m_relation -= 15; lsr_relation -= 10; centre_sr_relation -= 15; right_sr_relation -= 15; ns_relation -= 15; democraticity -= 2; instability += 6; vikzhel_unrest += 20; moderate_dissent += 10; leninist_dissent -= 5; leftcom_dissent -= 5; right_sr_strength += 8; right_m_strength += 8; 
+
+
+Our sudden renegation on the agreement entirely shocks the other parties, seemingly proving the right socialists correct after all—more than likely compromise will be impossible from here on out. Likewise, we receive immense condemnation from various interest groups, and even some members of our own party.
+
+Though on the other hand, Lenin's argument against cooperation carries some sway in the working-class districts of the capital, with workers' councils agreeing that they cannot compromise the values and gains of the October Revolution. 
+
+Vikzhel immediately unleashes a full-scale strike across the railway network, and many other prominent unions and enterprises decide to join them. 
+
+
 
 
 
@@ -860,7 +872,10 @@ title: The Central Committee approves the agreement.
 unavailable-subtitle: There is not enough support for this. 
 choose-if: lenin_anger = 0
 new-page: true
-on-arrival: commissariats_promised = commissariats_held; commissariats_held = 14; 
+on-arrival: {!
+  Q.commissariats_promised = commissariats_held; Q.commissariats_held = 14;
+  Q.m_represented = 0; Q.sr_represented = 0; Q.lsr_represented = 0; Q.ns_represented = 0; Q.sdi_represented = 0;
+!}
 go-to: cabinet_negotiations
 
 
@@ -873,18 +888,94 @@ go-to: cabinet_negotiations
 @cancel_deal
 title: On second thought, a deal is impossible. 
 new-page: true
+new-page: true
+on-arrival: {!
+  Q.sdi_relation -= 10; Q.left_m_relation -= 10; Q.centre_m_relation -= 10; Q.right_m_relation -= 15; Q.lsr_relation -= 10; Q.centre_sr_relation -= 15; Q.right_sr_relation -= 15; Q.ns_relation -= 15;
+  Q.right_sr_strength += 8; Q.right_m_strength += 8;   
+  Q.democraticity -= 2; Q.instability += 6; Q.vikzhel_unrest += 20;
+  Q.moderate_dissent += 10; Q.leninist_dissent -= 5; Q.leftcom_dissent -= 5;
+  if (Q.education_minister_party != "Bolshevik") {
+    Q.education_minister = "Vacant";
+    Q.education_minister_party != "Bolshevik";
+  }
+  if (Q.transport_minister_party != "Bolshevik") {
+    Q.transport_minister = "Vacant";
+    Q.transport_minister_party = "Bolshevik";
+  }
+  if (Q.trade_minister_party != "Bolshevik") {
+    Q.trade_minister = "Vacant";
+    Q.trade_minister_party = "Bolshevik";
+  }
+  if (Q.finance_minister_party != "Bolshevik") {
+    Q.finance_minister = "Vacant";
+    Q.finance_minister_party = "Bolshevik";
+  }
+  if (Q.justice_minister_party != "Bolshevik") {
+    Q.justice_minister = "Vacant";
+    Q.justice_minister_party = "Bolshevik";
+  }
+  if (Q.labor_minister_party != "Bolshevik") {
+    Q.labor_minister = "Vacant";
+    Q.labor_minister_party = "Bolshevik";
+  }
+  if (Q.agriculture_minister_party != "Bolshevik") {
+    Q.agriculture_minister = "Vacant";
+    Q.agriculture_minister_party = "Bolshevik";
+  }
+  if (Q.food_minister_party != "Bolshevik") {
+    Q.food_minister = "Vacant";
+    Q.food_minister_party = "Bolshevik";
+  }
+  if (Q.posts_minister_party != "Bolshevik") {
+    Q.posts_minister = "Vacant";
+    Q.posts_minister_party = "Bolshevik";
+  }
+  if (Q.welfare_minister_party != "Bolshevik") {
+    Q.welfare_minister = "Vacant";
+    Q.welfare_minister_party = "Bolshevik";
+  }
+  if (Q.property_minister != "None") {
+    Q.property_minister = "None";
+    Q.property_minister_party = "";
+  }
+  if (Q.local_minister != "None") {
+    Q.local_minister = "None";
+    Q.local_minister_party = "";
+  }
+  if (Q.palaces_minister != "None") {
+    Q.palaces_minister = "None";
+    Q.palaces_minister_party = "";
+  }
+!}
+
+Our sudden renegation on the agreement entirely shocks the other parties, seemingly proving the right socialists correct after all—more than likely compromise will be impossible from here on out. Likewise, we receive immense condemnation from various interest groups, and even some members of our own party.
+
+Though on the other hand, Lenin's argument against cooperation carries some sway in the working-class districts of the capital, with workers' councils agreeing that they cannot compromise the values and gains of the October Revolution. 
+
+Vikzhel immediately unleashes a full-scale strike across the railway network, and many other prominent unions and enterprises decide to join them. 
 
 @finalize_deal
 title: Finalize the agreement. 
-choose-if: commissariats_held <= commissariats_promised
-unavailable-subtitle: The other parties will not accept. 
-new-page: true
+choose-if: commissariats_held <= commissariats_promised and m_represented >= 1 and sr_represented >= 1 and lsr_represented >= 1
+unavailable-subtitle: The other parties will not accept. [? commissariats_held <= commissariats_promised : We have not granted enough appointments. ?] [?if sr_represented < 1 : The SRs expect a position. ?] [?if lsr_represented < 1 != 1 : The Left-SRs expect a position. ?] [?if m_represented < 1 != 1 : The Mensheviks expect a position. ?]
 achievement: vikzhel_averted
-on-arrival: coalition_government = 1; 
-
+on-arrival: {!
+  Q.coalition_government = 1; 
+  if (Q.m_represented >= 1) m_in_gov = 1; 
+  if (Q.sr_represented >= 1) sr_in_gov = 1;
+  if (Q.lsr_represented >= 1) lsr_in_gov = 1;
+  if (Q.ns_represented >= 1) ns_in_gov = 1;
+  if (Q.sdi_represented >= 1) sdi_in_gov = 1;
+  Q.sdi_relation += 10; Q.left_m_relation += 10; Q.centre_m_relation += 10; Q.right_m_relation += 10; Q.lsr_relation += 10; Q.centre_sr_relation += 10; Q.right_sr_relation += 10; Q.ns_relation += 10;
+  Q.right_sr_strength -= 8; Q.right_m_strength -= 8;   
+  Q.democraticity += 2; Q.instability -= 4; Q.vikzhel_unrest -= 20;
+  Q.moderate_dissent -= 10; Q.leninist_dissent += 10; Q.leftcom_dissent += 5;
+  Q.moderate_strength += 10; Q.leninist_strength -= 5; Q.leftcom_strength -= 5; 
+!}
 
 @enlightenment_assign
-title: Appoint the Enlightenment Commissariat
+title: Appoint the Enlightenment Commissar
+subtitle: [?if education_minister != "Vacant" : Currently held by [+ education_minister +] ?][?if education_minister != "Vacant" and education_minister_party=="Bolshevik": (<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>)?]
 view-if: drop_enlightenment = 1
 tags: commissariat_assign
 go-to: enlightenment_menu
@@ -896,13 +987,21 @@ go-to: enlightenment_menu
 @enlightenment_lunacharsky
 title: Anatoly Lunacharsky
 subtitle: {!
-Moderate — Experienced cultural theorist, intellectual, and artist.<br> 
+Bolshevik — Experienced cultural theorist, intellectual, and artist.<br> 
 Overall skill: ★★★★<br>
 Suitability: ★★★★★
 !}
 tags: enlightenment_candidates2
-view-if: education_minister != "Lunacharsky" 
-on-arrival: education_minister = "Lunacharsky"; education_minister_party = "Bolshevik";
+choose-if: education_minister != "Lunacharsky" 
+on-arrival: {!
+  if (Q.education_minister_party == "Menshevik") Q.m_represented -= 1;
+  if (Q.education_minister_party == "SR") Q.sr_represented -= 1;
+  if (Q.education_minister_party == "Left-SR") Q.lsr_represented -= 1;
+  if (Q.education_minister_party == "NS") Q.ns_represented -= 1;
+  if (Q.education_minister_party == "SD-Int") Q.sdi_represented -= 1;
+  Q.education_minister = "Lunacharsky"; Q.education_minister_party = "Bolshevik"; 
+  Q.commissariats_held += 1
+!}
 go-to: cabinet_negotiations
 
 @enlightenment_natanson
@@ -913,28 +1012,46 @@ Overall skill: ★★★☆<br>
 Suitability: ★☆
 !}
 tags: enlightenment_candidates2
-choose-if: lsr_relation >= 40
-unavailable-subtitle: Natanson won't accept this offer. 
-on-arrival: education_minister = "Natanson"; education_minister_party = "Left-SR"; commissariats_held -= 1; 
+choose-if: lsr_relation >= 40 and education_minister != "Natanson" 
+unavailable-subtitle: [?if lsr_relation < 40 : Natanson won't accept this offer. ?]
+on-arrival: {!
+  if (Q.education_minister_party == "Bolshevik" || Q.education_minister == "Vacant") commissariats_held -= 1;
+  Q.education_minister = "Natanson"; Q.education_minister_party = "Left-SR"; Q.lsr_represented += 1;
+!}
 go-to: cabinet_negotiations
 
 @enlightenment_sukhanov
 title: Nikolai Sukhanov
 subtitle: {!
 SD-Int. — Party leader, writer, and public intellectual.<br>
-Overall skill: ★★★<br>
+Overall skill: ★★★★<br>
 Suitability: ★★
 !}
 tags: enlightenment_candidates2
-choose-if: sdi_relation >= 40
-unavailable-subtitle: Sukhanov won't accept this offer. 
-on-arrival: education_minister = "Sukhanov"; education_minister_party = "SD-Int"; commissariats_held -= 1; 
+choose-if: sdi_relation >= 40 and property_minister != "Sukhanov" and education_minister != "Sukhanov" 
+unavailable-subtitle: [?if sdi_relation < 40 : Sukhanov won't accept this offer. ?][?if property_minister == "Sukhanov": Sukhanov already has a post. ?]
+on-arrival: {!
+  if (Q.education_minister_party == "Bolshevik" || Q.education_minister == "Vacant") Q.commissariats_held -= 1;
+  if (Q.education_minister_party == "Menshevik") Q.m_represented -= 1;
+  if (Q.education_minister_party == "SR") Q.sr_represented -= 1;
+  if (Q.education_minister_party == "Left-SR") Q.lsr_represented -= 1;
+  if (Q.education_minister_party == "NS") Q.ns_represented -= 1;
+  if (Q.education_minister_party == "SD-Int") Q.sdi_represented -= 1;
+  Q.education_minister = "Sukhanov"; Q.education_minister_party = "SD-Int"; Q.sdi_represented += 1;
+!}
 go-to: cabinet_negotiations
 
 @enlightenment_vacant
 title: Let's leave the position vacant for now. 
 tags: enlightenment_candidates2
-on-arrival: education_minister = "Vacant"; education_minister_party = ""; 
+on-arrival: {!
+  if (Q.education_minister_party == "Menshevik") { m_represented -= 1; Q.commissariats_held += 1; }
+  if (Q.education_minister_party == "SR") { Q.sr_represented -= 1; Q.commissariats_held += 1; }
+  if (Q.education_minister_party == "Left-SR") { Q.lsr_represented -= 1; Q.commissariats_held += 1; }
+  if (Q.education_minister_party == "NS") { Q.ns_represented -= 1; Q.commissariats_held += 1; }
+  if (Q.education_minister_party == "SD-Int") { Q.sdi_represented -= 1; Q.commissariats_held += 1; }
+  Q.education_minister = "Vacant"; Q.education_minister_party = "";
+!}
 go-to: cabinet_negotiations
 
 @enlightenment_cancel
@@ -945,7 +1062,282 @@ go-to: cabinet_negotiations
 
 
 
+@transport_assign
+title: Appoint the Transportation Commissar
+subtitle: [?if transport_minister != "Vacant" : Currently held by [+ transport_minister +] ?][?if transport_minister != "Vacant" and transport_minister_party=="Bolshevik": (<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>)?]
+view-if: drop_railways = 1
+tags: commissariat_assign
+go-to: transport_menu
+
+@transport_menu
+
+- #transport_candidates2
+
+@transport_malitsky
+title: A. L. Malitsky
+subtitle: {!
+SR — Vikzhel Chairman; helped crush the Kornilov Rebellion. 
+Overall skill: ★★★<br>
+Suitability: ★★★★★
+!}
+tags: transport_candidates2
+choose-if: transport_minister != "Malitsky" 
+on-arrival: {!
+  if (Q.transport_minister_party == "Bolshevik" || Q.transport_minister == "Vacant") Q.commissariats_held -= 1;
+  if (Q.transport_minister_party == "Menshevik") Q.m_represented -= 1;
+  if (Q.transport_minister_party == "SR") Q.sr_represented -= 1;
+  if (Q.transport_minister_party == "Left-SR") Q.lsr_represented -= 1;
+  if (Q.transport_minister_party == "NS") Q.ns_represented -= 1;
+  if (Q.transport_minister_party == "SD-Int") Q.sdi_represented -= 1;
+  Q.transport_minister = "Malitsky"; Q.transport_minister_party = "SR"; Q.sr_represented += 1;
+!}
+go-to: cabinet_negotiations
+
+@transport_abramovich
+title: Raphael Abramovich
+subtitle: {!
+Menshevik — Leading party organizer, trade unionist, and architect of Bolshevik cooperation. 
+Overall skill: ★★★☆<br>
+Suitability: ★★
+!}
+tags: transport_candidates2
+choose-if: transport_minister != "Abramovich" 
+on-arrival: {!
+  if (Q.transport_minister_party == "Bolshevik" || Q.transport_minister == "Vacant") Q.commissariats_held -= 1;
+  if (Q.transport_minister_party == "Menshevik") Q.m_represented -= 1;
+  if (Q.transport_minister_party == "SR") Q.sr_represented -= 1;
+  if (Q.transport_minister_party == "Left-SR") Q.lsr_represented -= 1;
+  if (Q.transport_minister_party == "NS") Q.ns_represented -= 1;
+  if (Q.transport_minister_party == "SD-Int") Q.sdi_represented -= 1;
+  Q.transport_minister = "Abramovich"; Q.transport_minister_party = "Menshevik"; Q.m_represented += 1;
+!}
+go-to: cabinet_negotiations
+
+@transport_avilov
+title: Boris Avilov
+subtitle: {!
+Menshevik — Lawyer, economist, and noted administrator. 
+Overall skill: ★★☆<br>
+Suitability: ★★★
+!}
+tags: transport_candidates2
+choose-if: transport_minister != "Avilov" 
+on-arrival: {!
+  if (Q.transport_minister_party == "Bolshevik" || Q.transport_minister == "Vacant") Q.commissariats_held -= 1;
+  if (Q.transport_minister_party == "Menshevik") Q.m_represented -= 1;
+  if (Q.transport_minister_party == "SR") Q.sr_represented -= 1;
+  if (Q.transport_minister_party == "Left-SR") Q.lsr_represented -= 1;
+  if (Q.transport_minister_party == "NS") Q.ns_represented -= 1;
+  if (Q.transport_minister_party == "SD-Int") Q.sdi_represented -= 1;
+  Q.transport_minister = "Avilov"; Q.transport_minister_party = "Menshevik"; Q.m_represented += 1;
+!}
+go-to: cabinet_negotiations
+
+@transport_malkin
+title: Boris Malkin
+subtitle: {!
+Left-SR — Journalist and party activist. 
+Overall skill: ★★☆<br>
+Suitability: ★☆
+!}
+tags: transport_candidates2
+choose-if: transport_minister != "Malkin" 
+on-arrival: {!
+  if (Q.transport_minister_party == "Bolshevik" || Q.transport_minister == "Vacant") Q.commissariats_held -= 1;
+  if (Q.transport_minister_party == "Menshevik") Q.m_represented -= 1;
+  if (Q.transport_minister_party == "SR") Q.sr_represented -= 1;
+  if (Q.transport_minister_party == "Left-SR") Q.lsr_represented -= 1;
+  if (Q.transport_minister_party == "NS") Q.ns_represented -= 1;
+  if (Q.transport_minister_party == "SD-Int") Q.sdi_represented -= 1;
+  Q.transport_minister = "Malkin"; Q.transport_minister_party = "Left-SR"; Q.lsr_represented += 1;
+!}
+go-to: cabinet_negotiations
+
+@transport_vacant
+title: Let's leave the position vacant for now. 
+tags: transport_candidates2
+on-arrival: {!
+  if (Q.transport_minister_party == "Menshevik") { m_represented -= 1; Q.commissariats_held += 1; }
+  if (Q.transport_minister_party == "SR") { Q.sr_represented -= 1; Q.commissariats_held += 1; }
+  if (Q.transport_minister_party == "Left-SR") { Q.lsr_represented -= 1; Q.commissariats_held += 1; }
+  if (Q.transport_minister_party == "NS") { Q.ns_represented -= 1; Q.commissariats_held += 1; }
+  if (Q.transport_minister_party == "SD-Int") { Q.sdi_represented -= 1; Q.commissariats_held += 1; }
+  Q.transport_minister = "Vacant"; Q.transport_minister_party = "";
+!}
+go-to: cabinet_negotiations
+
+@transport_cancel
+title: Cancel reassignment.
+subtitle: [?if transport_minister != "Vacant": Keep [+ transport_minister +] in place. ?]
+tags: transport_candidates2
+go-to: cabinet_negotiations
 
 
+
+@trade_assign
+title: Appoint the Transportation Commissar
+subtitle: [?if trade_minister != "Vacant" : Currently held by [+ trade_minister +] ?][?if trade_minister != "Vacant" and trade_minister_party=="Bolshevik": (<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>)?]
+view-if: drop_trade = 1
+tags: commissariat_assign
+go-to: trade_menu
+
+@trade_menu
+
+- #trade_candidates2
+
+@trade_nogin
+title: Viktor Nogin
+subtitle: {!
+Bolshevik — Proponent moderate with industrial management experience. 
+Overall skill: ★★★<br>
+Suitability: ★★★
+!}
+tags: trade_candidates2
+choose-if: trade_minister != "Nogin" 
+on-arrival: {!
+  if (Q.trade_minister_party == "Menshevik") { m_represented -= 1; Q.commissariats_held += 1; }
+  if (Q.trade_minister_party == "SR") { Q.sr_represented -= 1; Q.commissariats_held += 1; }
+  if (Q.trade_minister_party == "Left-SR") { Q.lsr_represented -= 1; Q.commissariats_held += 1; }
+  if (Q.trade_minister_party == "NS") { Q.ns_represented -= 1; Q.commissariats_held += 1; }
+  if (Q.trade_minister_party == "SD-Int") { Q.sdi_represented -= 1; Q.commissariats_held += 1; }
+  Q.trade_minister = "Nogin"; Q.transport_minister_party = "Bolshevik";
+!}
+go-to: cabinet_negotiations
+
+@trade_vacant
+title: Let's leave the position vacant for now. 
+tags: trade_candidates2
+on-arrival: {!
+  if (Q.trade_minister_party == "Menshevik") { m_represented -= 1; Q.commissariats_held += 1; }
+  if (Q.trade_minister_party == "SR") { Q.sr_represented -= 1; Q.commissariats_held += 1; }
+  if (Q.trade_minister_party == "Left-SR") { Q.lsr_represented -= 1; Q.commissariats_held += 1; }
+  if (Q.trade_minister_party == "NS") { Q.ns_represented -= 1; Q.commissariats_held += 1; }
+  if (Q.trade_minister_party == "SD-Int") { Q.sdi_represented -= 1; Q.commissariats_held += 1; }
+  Q.trade_minister = "Vacant"; Q.transport_minister_party = "";
+!}
+go-to: cabinet_negotiations
+
+@trade_cancel
+title: Cancel reassignment.
+subtitle: [?if trade_minister != "Vacant": Keep [+ trade_minister +] in place. ?]
+tags: trade_candidates2
+go-to: cabinet_negotiations
+
+
+
+
+
+@property_assign
+title: [?if property_minister == "None": Perhaps we could create a new "State Property" commissariat for you? ?][? if property_minister != "None": Appoint the Properties Commissar ?]
+subtitle: [? property_minister == "None": They will manage museums, libraries, and former imperial properties. ?][? if property_minister != "None": Currently held by [+ property_minister +] [?if property_minister_party=="Bolshevik": (<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>)?]  ?]
+tags: commissariat_assign
+go-to: property_menu
+
+@property_menu
+
+- #property_candidates
+
+@property_karelin
+title: Vladimir Karelin
+subtitle: {!
+Left-SR — Leading SR organizer and former law student.
+Overall skill: ★★★☆<br>
+Suitability: ★★
+!}
+tags: property_candidates
+choose-if: local_minister != "Karelin" 
+on-arrival: {!
+  if (Q.property_minister_party == "Menshevik") { m_represented -= 1; Q.commissariats_held += 1; }
+  if (Q.property_minister_party == "SR") { Q.sr_represented -= 1; Q.commissariats_held += 1; }
+  if (Q.property_minister_party == "Left-SR") { Q.lsr_represented -= 1; Q.commissariats_held += 1; }
+  if (Q.property_minister_party == "NS") { Q.ns_represented -= 1; Q.commissariats_held += 1; }
+  if (Q.property_minister_party == "SD-Int") { Q.sdi_represented -= 1; Q.commissariats_held += 1; }
+  Q.property_minister = "Karelin"; Q.property_minister_party = "Left-SR"; Q.ommissariats_held -= 1; Q.lsr_represented += 1;
+!}
+go-to: cabinet_negotiations
+
+@property_sukhanov
+title: Nikolai Sukhanov
+subtitle: {!
+SD-Int. — Party leader, writer, and public intellectual.<br>
+Overall skill: ★★★★<br>
+Suitability: ★☆
+!}
+tags: property_candidates
+choose-if: sdi_relation >= 40 and education_minister != "Sukhanov" and property_minister != "Sukhanov"
+unavailable-subtitle: [?if sdi_relation < 40 : Sukhanov won't accept this offer. ?][?if enlightenment_minister = "Sukhanov": Sukhanov already has a post. ?]
+on-arrival: {!
+  if (Q.property_minister_party == "Menshevik") { m_represented -= 1; Q.commissariats_held += 1; }
+  if (Q.property_minister_party == "SR") { Q.sr_represented -= 1; Q.commissariats_held += 1; }
+  if (Q.property_minister_party == "Left-SR") { Q.lsr_represented -= 1; Q.commissariats_held += 1; }
+  if (Q.property_minister_party == "NS") { Q.ns_represented -= 1; Q.commissariats_held += 1; }
+  if (Q.property_minister_party == "SD-Int") { Q.sdi_represented -= 1; Q.commissariats_held += 1; }
+  Q.property_minister = "Sukhanov"; Q.property_minister_party = "SD-Int"; Q.ommissariats_held -= 1; Q.sdi_represented += 1;
+!}
+go-to: cabinet_negotiations
+
+@property_cancel
+title: Cancel reassignment.
+subtitle: [?if property_minister != "None": Keep [+ property_minister +] in place. ?][?if property_minister = "None": Cancel the proposed commissariat. ?]
+tags: property_candidates
+go-to: cabinet_negotiations
+
+
+
+
+@local_assign
+title: [?if local_minister == "None": Perhaps we could create a new "Local Self-Government" commissariat for you? ?][? if local_minister != "None": Appoint the Local Self-Government Commissar ?]
+subtitle: [? local_minister == "None": They will coordinate with local institutions. ?][? if local_minister != "None": Currently held by [+ local_minister +] [?if local_minister_party=="Bolshevik": (<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>)?]  ?]
+tags: commissariat_assign
+go-to: local_menu
+
+@local_menu
+
+- #local_candidates
+
+@local_trutovsky
+title: Vladimir Trutovsky
+subtitle: {!
+Left-SR — Former law student, journalist, and expert in local affairs. 
+Overall skill: ★★☆<br>
+Suitability: ★★★★
+!}
+tags: local_candidates
+choose-if: local_minister != "Trutovsky" 
+on-arrival: {!
+  if (Q.local_minister_party == "Menshevik") { m_represented -= 1; Q.commissariats_held += 1; }
+  if (Q.local_minister_party == "SR") { Q.sr_represented -= 1; Q.commissariats_held += 1; }
+  if (Q.local_minister_party == "Left-SR") { Q.lsr_represented -= 1; Q.commissariats_held += 1; }
+  if (Q.local_minister_party == "NS") { Q.ns_represented -= 1; Q.commissariats_held += 1; }
+  if (Q.local_minister_party == "SD-Int") { Q.sdi_represented -= 1; Q.commissariats_held += 1; }
+  Q.local_minister = "Trutovsky"; Q.local_minister_party = "Left-SR"; Q.ommissariats_held -= 1; Q.lsr_represented += 1;
+!}
+go-to: cabinet_negotiations
+
+@local_maslov
+title: Semyon Maslov
+subtitle: {!
+SR — Laywer, statistician, and agronomist with experience in land policy and zemstvo politics. 
+Overall skill: ★★☆<br>
+Suitability: ★★★
+!}
+tags: local_candidates
+choose-if: sr_relation >= 30 and local_minister != "Maslov"
+unavailable-subtitle: [?if sdi_relation < 30 : Maslov won't accept this offer. ?]
+on-arrival: {!
+  if (Q.local_minister_party == "Menshevik") { m_represented -= 1; Q.commissariats_held += 1; }
+  if (Q.local_minister_party == "SR") { Q.sr_represented -= 1; Q.commissariats_held += 1; }
+  if (Q.local_minister_party == "Left-SR") { Q.lsr_represented -= 1; Q.commissariats_held += 1; }
+  if (Q.local_minister_party == "NS") { Q.ns_represented -= 1; Q.commissariats_held += 1; }
+  if (Q.local_minister_party == "SD-Int") { Q.sdi_represented -= 1; Q.commissariats_held += 1; }
+  Q.local_minister = "Maslov"; Q.local_minister_party = "SR"; Q.ommissariats_held -= 1; Q.sr_represented += 1;
+!}
+go-to: cabinet_negotiations
+
+@local_cancel
+title: Cancel reassignment.
+subtitle: [?if local_minister != "None": Keep [+ local_minister +] in place. ?][?if local_minister = "None": Cancel the proposed commissariat. ?]
+tags: local_candidates
+go-to: cabinet_negotiations
 
 
