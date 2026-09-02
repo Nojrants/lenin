@@ -985,6 +985,9 @@ The Moderate Bolsheviks celebrate this as a major step forward. Lenin, however, 
 
 
 
+
+
+
 @enlightenment_assign
 title: Appoint the Enlightenment Commissar
 subtitle: [?if education_minister != "Vacant" : Currently held by [+ education_minister +] ?][?if education_minister != "Vacant" and education_minister_party=="Bolshevik": (<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>)?][?if education_minister_party=="Menshevik": (<span class="tooltip-text" title="Menshevik" style="color: var(--m-color);">RSDLP(u)</span>)?][?if education_minister_party=="Left-SR": (<span class="tooltip-text" title="Left-SR" style="color: var(--lsr-color);">Left-SR</span>)?][?if education_minister_party=="SR": (<span class="tooltip-text" title="Socialist Revolutionary" style="color: var(--sr-color);">SR</span>)?][?if education_minister_party=="SD-Int": (<span class="tooltip-text" title="Social-Democratic Internationalist" style="color: var(--sdi-color);">SD-Int</span>)?][?if education_minister_party=="NS": (<span class="tooltip-text" title="Popular Socialist" style="color: var(--ns-color);">NS</span>)?]
@@ -1127,11 +1130,8 @@ Menshevik — Leading party organizer, trade unionist, and architect of Bolshevi
 Overall skill: ★★★☆<br>
 Suitability: ★★
 !}
-unavailable-subtitle: {!
-Menshevik — Leading party organizer, trade unionist, and architect of Bolshevik cooperation.<br> 
-Overall skill: ★★★☆<br>
-Suitability: ★★
-!}
+unavailable-subtitle: unavailable-subtitle: [?if labor_minister == "Abramovich" : Abramovich already has a post.<br> ?]Menshevik — Leading party organizer, trade unionist, and architect of Bolshevik cooperation.<br> Overall skill: ★★★☆<br>Suitability: ★★
+choose-if: labor_minister != "Abramovich" and transport_minister != "Abramovich"
 tags: transport_candidates2
 choose-if: transport_minister != "Abramovich" 
 on-arrival: {!
@@ -1152,13 +1152,9 @@ Menshevik — Lawyer, economist, and noted administrator.<br>
 Overall skill: ★★☆<br>
 Suitability: ★★★
 !}
-unavailable-subtitle: {!
-Menshevik — Lawyer, economist, and noted administrator.<br> 
-Overall skill: ★★☆<br>
-Suitability: ★★★
-!}
+unavailable-subtitle: [?if justice_minister == "Avilov": Avilov already has a post.<br> ?][?if trade_minister == "Avilov": Avilov already has a post.<br> ?][?if finance_minister == "Avilov": Avilov already has a post.<br> ?]Menshevik — Lawyer, economist, and noted administrator.<br> Overall skill: ★★☆<br>Suitability: ★★★
 tags: transport_candidates2
-choose-if: transport_minister != "Avilov" 
+choose-if: transport_minister != "Avilov" and trade_minister != "Avilov" and finance_minister != "Avilov" and justice_minister != "Avilov"
 on-arrival: {!
   if (Q.transport_minister_party == "Bolshevik" || Q.transport_minister == "Vacant") Q.commissariats_held -= 1;
   if (Q.transport_minister_party == "Menshevik") Q.m_represented -= 1;
@@ -1251,6 +1247,51 @@ on-arrival: {!
 !}
 go-to: cabinet_negotiations
 
+
+@trade_bazarov
+title: Vladimir Bazarov
+subtitle: {!
+Menshevik — Pioneering economist in the area of central planning.<br> 
+Overall skill: ★★★★<br>
+Suitability: ★★★★
+!}
+unavailable-subtitle: [?if finance_minister == "Bazarov": Bazarov already has a post.<br> ?]Menshevik — Pioneering economist in the area of central planning.<br> Overall skill: ★★★★<br>Suitability: ★★★★
+tags: trade_candidates2
+choose-if: finance_minister != "Bazarov" and trade_minister != "Bazarov"
+on-arrival: {!
+  if (Q.trade_minister_party == "Bolshevik" || Q.trade_minister == "Vacant") Q.commissariats_held -= 1;
+  if (Q.trade_minister_party == "Menshevik") Q.m_represented -= 1;
+  if (Q.trade_minister_party == "SR") Q.sr_represented -= 1;
+  if (Q.trade_minister_party == "Left-SR") Q.lsr_represented -= 1;
+  if (Q.trade_minister_party == "NS") Q.ns_represented -= 1;
+  if (Q.trade_minister_party == "SD-Int") Q.sdi_represented -= 1;
+  Q.trade_minister = "Bazarov"; Q.trade_minister_party = "Menshevik"; Q.m_represented += 1;
+!}
+go-to: cabinet_negotiations
+
+@trade_avilov
+title: Boris Avilov
+subtitle: {!
+Menshevik — Lawyer, economist, and noted administrator.<br> 
+Overall skill: ★★☆<br>
+Suitability: ★★★
+!}
+unavailable-subtitle: [?if justice_minister == "Avilov": Avilov already has a post.<br> ?][?if finance_minister == "Avilov": Avilov already has a post.<br> ?][?if transport_minister == "Avilov": Avilov already has a post.<br> ?]Menshevik — Lawyer, economist, and noted administrator.<br> Overall skill: ★★☆<br>Suitability: ★★★
+tags: trade_candidates2
+choose-if: transport_minister != "Avilov" and trade_minister != "Avilov" and finance_minister != "Avilov" and justice_minister != "Avilov"
+on-arrival: {!
+  if (Q.trade_minister_party == "Bolshevik" || Q.trade_minister == "Vacant") Q.commissariats_held -= 1;
+  if (Q.trade_minister_party == "Menshevik") Q.m_represented -= 1;
+  if (Q.trade_minister_party == "SR") Q.sr_represented -= 1;
+  if (Q.trade_minister_party == "Left-SR") Q.lsr_represented -= 1;
+  if (Q.trade_minister_party == "NS") Q.ns_represented -= 1;
+  if (Q.trade_minister_party == "SD-Int") Q.sdi_represented -= 1;
+  Q.trade_minister = "Avilov"; Q.trade_minister_party = "Menshevik"; Q.m_represented += 1;
+!}
+go-to: cabinet_negotiations
+
+
+
 @trade_vacant
 title: Let's leave the position vacant for now. 
 tags: trade_candidates2
@@ -1269,6 +1310,660 @@ title: Cancel reassignment.
 subtitle: [?if trade_minister != "Vacant": Keep [+ trade_minister +] in place. ?]
 tags: trade_candidates2
 go-to: cabinet_negotiations
+
+
+
+
+
+
+
+@finance_assign
+title: Appoint the finance Commissar
+subtitle: [?if finance_minister != "Vacant" : Currently held by [+ finance_minister +] ?][?if finance_minister != "Vacant" and finance_minister_party=="Bolshevik": (<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>)?][?if finance_minister_party=="Menshevik": (<span class="tooltip-text" title="Menshevik" style="color: var(--m-color);">RSDLP(u)</span>)?][?if finance_minister_party=="Left-SR": (<span class="tooltip-text" title="Left-SR" style="color: var(--lsr-color);">Left-SR</span>)?][?if finance_minister_party=="SR": (<span class="tooltip-text" title="Socialist Revolutionary" style="color: var(--sr-color);">SR</span>)?][?if finance_minister_party=="SD-Int": (<span class="tooltip-text" title="Social-Democratic Internationalist" style="color: var(--sdi-color);">SD-Int</span>)?][?if finance_minister_party=="NS": (<span class="tooltip-text" title="Popular Socialist" style="color: var(--ns-color);">NS</span>)?]
+view-if: drop_finance = 1
+tags: commissariat_assign
+go-to: finance_menu
+
+@finance_menu
+
+- #finance_candidates2
+
+@finance_skvortsov
+title: Ivan Skvortsov-Stepanov
+subtitle: {!
+Bolshevik — Former elementary school teacher.<br>
+Overall skill: ★☆<br>
+Suitability: ★★☆
+!}
+unavailable-subtitle: {!
+Bolshevik — Former elementary school teacher.<br>
+Overall skill: ★☆<br>
+Suitability: ★★☆
+!}
+tags: finance_candidates2
+choose-if: finance_minister != "Skvortsov"  
+on-arrival: {!
+  if (Q.finance_minister_party == "Menshevik") { Q.m_represented -= 1; Q.commissariats_held += 1; }
+  if (Q.finance_minister_party == "SR") { Q.sr_represented -= 1; Q.commissariats_held += 1; }
+  if (Q.finance_minister_party == "Left-SR") { Q.lsr_represented -= 1; Q.commissariats_held += 1; }
+  if (Q.finance_minister_party == "NS") { Q.ns_represented -= 1; Q.commissariats_held += 1; }
+  if (Q.finance_minister_party == "SD-Int") { Q.sdi_represented -= 1; Q.commissariats_held += 1; }
+  Q.finance_minister = "Skvortsov"; Q.finance_minister_party = "Bolshevik";
+!}
+go-to: cabinet_negotiations
+
+@finance_bazarov
+title: Vladimir Bazarov
+subtitle: {!
+Menshevik — Pioneering economist in the area of central planning.<br> 
+Overall skill: ★★★★<br>
+Suitability: ★★★★
+!}
+unavailable-subtitle: [?if trade_minister == "Bazarov": Bazarov already has a post.<br> ?]Menshevik — Pioneering economist in the area of central planning.<br> Overall skill: ★★★★<br>Suitability: ★★★★
+tags: finance_candidates2
+choose-if: finance_minister != "Bazarov" and trade_minister != "Bazarov"
+on-arrival: {!
+  if (Q.finance_minister_party == "Bolshevik" || Q.finance_minister == "Vacant") Q.commissariats_held -= 1;
+  if (Q.finance_minister_party == "Menshevik") Q.m_represented -= 1;
+  if (Q.finance_minister_party == "SR") Q.sr_represented -= 1;
+  if (Q.finance_minister_party == "Left-SR") Q.lsr_represented -= 1;
+  if (Q.finance_minister_party == "NS") Q.ns_represented -= 1;
+  if (Q.finance_minister_party == "SD-Int") Q.sdi_represented -= 1;
+  Q.finance_minister = "Bazarov"; Q.finance_minister_party = "Menshevik"; Q.m_represented += 1;
+!}
+go-to: cabinet_negotiations
+
+@finance_avilov
+title: Boris Avilov
+subtitle: {!
+Menshevik — Lawyer, economist, and noted administrator.<br> 
+Overall skill: ★★☆<br>
+Suitability: ★★★
+!}
+unavailable-subtitle: [?if justice_minister == "Avilov": Avilov already has a post.<br> ?][?if trade_minister == "Avilov": Avilov already has a post.<br> ?][?if transport_minister == "Avilov": Avilov already has a post.<br> ?]Menshevik — Lawyer, economist, and noted administrator.<br> Overall skill: ★★☆<br>Suitability: ★★★
+tags: finance_candidates2
+choose-if: transport_minister != "Avilov" and trade_minister != "Avilov" and finance_minister != "Avilov" and justice_minister != "Avilov"
+on-arrival: {!
+  if (Q.finance_minister_party == "Bolshevik" || Q.finance_minister == "Vacant") Q.commissariats_held -= 1;
+  if (Q.finance_minister_party == "Menshevik") Q.m_represented -= 1;
+  if (Q.finance_minister_party == "SR") Q.sr_represented -= 1;
+  if (Q.finance_minister_party == "Left-SR") Q.lsr_represented -= 1;
+  if (Q.finance_minister_party == "NS") Q.ns_represented -= 1;
+  if (Q.finance_minister_party == "SD-Int") Q.sdi_represented -= 1;
+  Q.finance_minister = "Avilov"; Q.finance_minister_party = "Menshevik"; Q.m_represented += 1;
+!}
+go-to: cabinet_negotiations
+
+@finance_vacant
+title: Let's leave the position vacant for now. 
+tags: finance_candidates2
+on-arrival: {!
+  if (Q.transport_minister_party == "Menshevik") { Q.m_represented -= 1; Q.commissariats_held += 1; }
+  if (Q.transport_minister_party == "SR") { Q.sr_represented -= 1; Q.commissariats_held += 1; }
+  if (Q.transport_minister_party == "Left-SR") { Q.lsr_represented -= 1; Q.commissariats_held += 1; }
+  if (Q.transport_minister_party == "NS") { Q.ns_represented -= 1; Q.commissariats_held += 1; }
+  if (Q.transport_minister_party == "SD-Int") { Q.sdi_represented -= 1; Q.commissariats_held += 1; }
+  Q.transport_minister = "Vacant"; Q.transport_minister_party = "";
+!}
+go-to: cabinet_negotiations
+
+@finance_cancel
+title: Cancel reassignment.
+subtitle: [?if finance_minister != "Vacant": Keep [+ finance_minister +] in place. ?]
+tags: finance_candidates2
+go-to: cabinet_negotiations
+
+
+
+
+
+
+@justice_assign
+title: Appoint the justice Commissar
+subtitle: [?if justice_minister != "Vacant" : Currently held by [+ justice_minister +] ?][?if justice_minister != "Vacant" and justice_minister_party=="Bolshevik": (<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>)?][?if justice_minister_party=="Menshevik": (<span class="tooltip-text" title="Menshevik" style="color: var(--m-color);">RSDLP(u)</span>)?][?if justice_minister_party=="Left-SR": (<span class="tooltip-text" title="Left-SR" style="color: var(--lsr-color);">Left-SR</span>)?][?if justice_minister_party=="SR": (<span class="tooltip-text" title="Socialist Revolutionary" style="color: var(--sr-color);">SR</span>)?][?if justice_minister_party=="SD-Int": (<span class="tooltip-text" title="Social-Democratic Internationalist" style="color: var(--sdi-color);">SD-Int</span>)?][?if justice_minister_party=="NS": (<span class="tooltip-text" title="Popular Socialist" style="color: var(--ns-color);">NS</span>)?]
+view-if: drop_justice = 1
+tags: commissariat_assign
+go-to: justice_menu
+
+@justice_menu
+
+- #justice_candidates2
+
+@justice_oppokov
+title: Georgy Oppokov
+subtitle: {!
+Bolshevik — Party activist with some economic management experience. 
+Overall skill: ★★<br>
+Suitability: ★☆
+!}
+unavailable-subtitle: {!
+Bolshevik — Party activist with some economic management experience. 
+Overall skill: ★★<br>
+Suitability: ★☆
+!}
+tags: justice_candidates2
+choose-if: justice_minister != "Oppokov"  
+on-arrival: {!
+  if (Q.justice_minister_party == "Menshevik") { Q.m_represented -= 1; Q.commissariats_held += 1; }
+  if (Q.justice_minister_party == "SR") { Q.sr_represented -= 1; Q.commissariats_held += 1; }
+  if (Q.justice_minister_party == "Left-SR") { Q.lsr_represented -= 1; Q.commissariats_held += 1; }
+  if (Q.justice_minister_party == "NS") { Q.ns_represented -= 1; Q.commissariats_held += 1; }
+  if (Q.justice_minister_party == "SD-Int") { Q.sdi_represented -= 1; Q.commissariats_held += 1; }
+  Q.justice_minister = "Oppokov"; Q.justice_minister_party = "Bolshevik";
+!}
+go-to: cabinet_negotiations
+
+@justice_steinberg
+title: Isaac Steinberg
+subtitle: {!
+Left-SR — Lawyer with political experience.<br> 
+Overall skill: ★★★<br>
+Suitability: ★★★★
+!}
+unavailable-subtitle: {!
+Left-SR — Lawyer with political experience.<br> 
+Overall skill: ★★★<br>
+Suitability: ★★★★
+!}
+tags: justice_candidates2
+choose-if: justice_minister != "Steinberg"
+on-arrival: {!
+  if (Q.justice_minister_party == "Bolshevik" || Q.justice_minister == "Vacant") Q.commissariats_held -= 1;
+  if (Q.justice_minister_party == "Menshevik") Q.m_represented -= 1;
+  if (Q.justice_minister_party == "SR") Q.sr_represented -= 1;
+  if (Q.justice_minister_party == "Left-SR") Q.lsr_represented -= 1;
+  if (Q.justice_minister_party == "NS") Q.ns_represented -= 1;
+  if (Q.justice_minister_party == "SD-Int") Q.sdi_represented -= 1;
+  Q.justice_minister = "Steinberg"; Q.justice_minister_party = "Left-SR"; Q.lsr_represented += 1;
+!}
+go-to: cabinet_negotiations
+
+@justice_avilov
+title: Boris Avilov
+subtitle: {!
+Menshevik — Lawyer, economist, and noted administrator.<br> 
+Overall skill: ★★☆<br>
+Suitability: ★★★
+!}
+unavailable-subtitle: [?if trade_minister == "Avilov": Avilov already has a post.<br> ?][?if finance_minister == "Avilov": Avilov already has a post.<br> ?][?if transport_minister == "Avilov": Avilov already has a post.<br> ?]Menshevik — Lawyer, economist, and noted administrator.<br> Overall skill: ★★☆<br>Suitability: ★★★
+tags: justice_candidates2
+choose-if: transport_minister != "Avilov" and trade_minister != "Avilov" and finance_minister != "Avilov" and justice_minister != "Avilov"
+on-arrival: {!
+  if (Q.justice_minister_party == "Bolshevik" || Q.justice_minister == "Vacant") Q.commissariats_held -= 1;
+  if (Q.justice_minister_party == "Menshevik") Q.m_represented -= 1;
+  if (Q.justice_minister_party == "SR") Q.sr_represented -= 1;
+  if (Q.justice_minister_party == "Left-SR") Q.lsr_represented -= 1;
+  if (Q.justice_minister_party == "NS") Q.ns_represented -= 1;
+  if (Q.justice_minister_party == "SD-Int") Q.sdi_represented -= 1;
+  Q.justice_minister = "Avilov"; Q.justice_minister_party = "Menshevik"; Q.m_represented += 1;
+!}
+go-to: cabinet_negotiations
+
+@justice_vacant
+title: Let's leave the position vacant for now. 
+tags: justice_candidates2
+on-arrival: {!
+  if (Q.transport_minister_party == "Menshevik") { Q.m_represented -= 1; Q.commissariats_held += 1; }
+  if (Q.transport_minister_party == "SR") { Q.sr_represented -= 1; Q.commissariats_held += 1; }
+  if (Q.transport_minister_party == "Left-SR") { Q.lsr_represented -= 1; Q.commissariats_held += 1; }
+  if (Q.transport_minister_party == "NS") { Q.ns_represented -= 1; Q.commissariats_held += 1; }
+  if (Q.transport_minister_party == "SD-Int") { Q.sdi_represented -= 1; Q.commissariats_held += 1; }
+  Q.transport_minister = "Vacant"; Q.transport_minister_party = "";
+!}
+go-to: cabinet_negotiations
+
+@justice_cancel
+title: Cancel reassignment.
+subtitle: [?if justice_minister != "Vacant": Keep [+ justice_minister +] in place. ?]
+tags: justice_candidates2
+go-to: cabinet_negotiations
+
+
+
+
+@labor_assign
+title: Appoint the labor Commissar
+subtitle: [?if labor_minister != "Vacant" : Currently held by [+ labor_minister +] ?][?if labor_minister != "Vacant" and labor_minister_party=="Bolshevik": (<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>)?][?if labor_minister_party=="Menshevik": (<span class="tooltip-text" title="Menshevik" style="color: var(--m-color);">RSDLP(u)</span>)?][?if labor_minister_party=="Left-SR": (<span class="tooltip-text" title="Left-SR" style="color: var(--lsr-color);">Left-SR</span>)?][?if labor_minister_party=="SR": (<span class="tooltip-text" title="Socialist Revolutionary" style="color: var(--sr-color);">SR</span>)?][?if labor_minister_party=="SD-Int": (<span class="tooltip-text" title="Social-Democratic Internationalist" style="color: var(--sdi-color);">SD-Int</span>)?][?if labor_minister_party=="NS": (<span class="tooltip-text" title="Popular Socialist" style="color: var(--ns-color);">NS</span>)?]
+view-if: drop_labor = 1
+tags: commissariat_assign
+go-to: labor_menu
+
+@labor_menu
+
+- #labor_candidates2
+
+@labor_shliapnikov
+title: Alexander Shliapnikov
+subtitle: {!
+Bolshevik — Popular and skilled trade union organizer.<br>
+Overall skill: ★★★★<br>
+Suitability: ★★★★
+!}
+unavailable-subtitle: {!
+Bolshevik — Popular and skilled trade union organizer.<br>
+Overall skill: ★★★★<br>
+Suitability: ★★★★
+!}
+tags: labor_candidates2
+choose-if: labor_minister != "Shliapnikov"  
+on-arrival: {!
+  if (Q.labor_minister_party == "Menshevik") { Q.m_represented -= 1; Q.commissariats_held += 1; }
+  if (Q.labor_minister_party == "SR") { Q.sr_represented -= 1; Q.commissariats_held += 1; }
+  if (Q.labor_minister_party == "Left-SR") { Q.lsr_represented -= 1; Q.commissariats_held += 1; }
+  if (Q.labor_minister_party == "NS") { Q.ns_represented -= 1; Q.commissariats_held += 1; }
+  if (Q.labor_minister_party == "SD-Int") { Q.sdi_represented -= 1; Q.commissariats_held += 1; }
+  Q.labor_minister = "Shliapnikov"; Q.labor_minister_party = "Bolshevik";
+!}
+go-to: cabinet_negotiations
+
+@labor_abramovich
+title: Raphael Abramovich
+subtitle: {!
+Menshevik — Leading party organizer, trade unionist, and architect of Bolshevik cooperation.<br> 
+Overall skill: ★★★☆<br>
+Suitability: ★★
+!}
+unavailable-subtitle: [?if transport_minister == "Abramovich" : Abramovich already has a post.<br> ?]Menshevik — Leading party organizer, trade unionist, and architect of Bolshevik cooperation.<br> Overall skill: ★★★☆<br>Suitability: ★★★★
+
+tags: labor_candidates2
+choose-if: labor_minister != "Abramovich" and transport_minister != "Abramovich"
+on-arrival: {!
+  if (Q.labor_minister_party == "Bolshevik" || Q.labor_minister == "Vacant") Q.commissariats_held -= 1;
+  if (Q.labor_minister_party == "Menshevik") Q.m_represented -= 1;
+  if (Q.labor_minister_party == "SR") Q.sr_represented -= 1;
+  if (Q.labor_minister_party == "Left-SR") Q.lsr_represented -= 1;
+  if (Q.labor_minister_party == "NS") Q.ns_represented -= 1;
+  if (Q.labor_minister_party == "SD-Int") Q.sdi_represented -= 1;
+  Q.labor_minister = "Abramovich"; Q.labor_minister_party = "Menshevik"; Q.m_represented += 1;
+!}
+go-to: cabinet_negotiations
+
+
+@labor_vacant
+title: Let's leave the position vacant for now. 
+tags: labor_candidates2
+on-arrival: {!
+  if (Q.labor_minister_party == "Menshevik") { Q.m_represented -= 1; Q.commissariats_held += 1; }
+  if (Q.labor_minister_party == "SR") { Q.sr_represented -= 1; Q.commissariats_held += 1; }
+  if (Q.labor_minister_party == "Left-SR") { Q.lsr_represented -= 1; Q.commissariats_held += 1; }
+  if (Q.labor_minister_party == "NS") { Q.ns_represented -= 1; Q.commissariats_held += 1; }
+  if (Q.labor_minister_party == "SD-Int") { Q.sdi_represented -= 1; Q.commissariats_held += 1; }
+  Q.labor_minister = "Vacant"; Q.labor_minister_party = "";
+!}
+go-to: cabinet_negotiations
+
+@labor_cancel
+title: Cancel reassignment.
+subtitle: [?if labor_minister != "Vacant": Keep [+ labor_minister +] in place. ?]
+tags: labor_candidates2
+go-to: cabinet_negotiations
+
+
+
+
+
+
+
+
+@agriculture_assign
+title: Appoint the agriculture Commissar
+subtitle: [?if agriculture_minister != "Vacant" : Currently held by [+ agriculture_minister +] ?][?if agriculture_minister != "Vacant" and agriculture_minister_party=="Bolshevik": (<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>)?][?if agriculture_minister_party=="Menshevik": (<span class="tooltip-text" title="Menshevik" style="color: var(--m-color);">RSDLP(u)</span>)?][?if agriculture_minister_party=="Left-SR": (<span class="tooltip-text" title="Left-SR" style="color: var(--lsr-color);">Left-SR</span>)?][?if agriculture_minister_party=="SR": (<span class="tooltip-text" title="Socialist Revolutionary" style="color: var(--sr-color);">SR</span>)?][?if agriculture_minister_party=="SD-Int": (<span class="tooltip-text" title="Social-Democratic Internationalist" style="color: var(--sdi-color);">SD-Int</span>)?][?if agriculture_minister_party=="NS": (<span class="tooltip-text" title="Popular Socialist" style="color: var(--ns-color);">NS</span>)?]
+view-if: drop_agriculture = 1
+tags: commissariat_assign
+go-to: agriculture_menu
+
+@agriculture_menu
+
+- #agriculture_candidates2
+
+@agriculture_milyutin
+title: Vladimir Milyutin
+subtitle: {!
+Bolshevik — Party activist with some technical and legal expertise.<br>
+Overall skill: ★★<br>
+Suitability: ★
+!}
+unavailable-subtitle: {!
+Bolshevik — Party activist with some technical and legal expertise.<br>
+Overall skill: ★★<br>
+Suitability: ★
+!}
+tags: agriculture_candidates2
+choose-if: agriculture_minister != "Milyutin"  
+on-arrival: {!
+  if (Q.agriculture_minister_party == "Menshevik") { Q.m_represented -= 1; Q.commissariats_held += 1; }
+  if (Q.agriculture_minister_party == "SR") { Q.sr_represented -= 1; Q.commissariats_held += 1; }
+  if (Q.agriculture_minister_party == "Left-SR") { Q.lsr_represented -= 1; Q.commissariats_held += 1; }
+  if (Q.agriculture_minister_party == "NS") { Q.ns_represented -= 1; Q.commissariats_held += 1; }
+  if (Q.agriculture_minister_party == "SD-Int") { Q.sdi_represented -= 1; Q.commissariats_held += 1; }
+  Q.agriculture_minister = "Milyutin"; Q.agriculture_minister_party = "Bolshevik";
+!}
+go-to: cabinet_negotiations
+
+@agriculture_kamkov
+title: Boris Kamkov
+subtitle: {!
+Left-SR — Leading party administrator and lawyer.<br> 
+Overall skill: ★★★☆<br>
+Suitability: ★★☆
+!}
+unavailable-subtitle: {!
+Left-SR — Leading party organizer and lawyer.<br> 
+Overall skill: ★★★☆<br>
+Suitability: ★★☆
+!}
+
+tags: agriculture_candidates2
+choose-if: agriculture_minister != "Kamkov"
+on-arrival: {!
+  if (Q.agriculture_minister_party == "Bolshevik" || Q.agriculture_minister == "Vacant") Q.commissariats_held -= 1;
+  if (Q.agriculture_minister_party == "Menshevik") Q.m_represented -= 1;
+  if (Q.agriculture_minister_party == "SR") Q.sr_represented -= 1;
+  if (Q.agriculture_minister_party == "Left-SR") Q.lsr_represented -= 1;
+  if (Q.agriculture_minister_party == "NS") Q.ns_represented -= 1;
+  if (Q.agriculture_minister_party == "SD-Int") Q.sdi_represented -= 1;
+  Q.agriculture_minister = "Kamkov"; Q.agriculture_minister_party = "Left-SR"; Q.lsr_represented += 1;
+!}
+go-to: cabinet_negotiations
+
+@agriculture_peshekhonov
+title: Alexey Peshekhonov
+subtitle: {!
+NS — Economist, statistician, and expert on rural administration; member of the Provisional Government.<br> 
+Overall skill: ★★★<br>
+Suitability: ★★★★
+!}
+unavailable-subtitle: [?if food_minister == "Peshekhonov" : Peshekhonov already has a post.<br> ?]NS — Economist, statistician, and expert on rural administration; member of the Provisional Government.<br>Overall skill: ★★★<br>Suitability: ★★★★
+
+tags: agriculture_candidates2
+choose-if: agriculture_minister != "Peshekhonov" and food_minister != "Peshekhonov"
+on-arrival: {!
+  if (Q.agriculture_minister_party == "Bolshevik" || Q.agriculture_minister == "Vacant") Q.commissariats_held -= 1;
+  if (Q.agriculture_minister_party == "Menshevik") Q.m_represented -= 1;
+  if (Q.agriculture_minister_party == "SR") Q.sr_represented -= 1;
+  if (Q.agriculture_minister_party == "Left-SR") Q.lsr_represented -= 1;
+  if (Q.agriculture_minister_party == "NS") Q.ns_represented -= 1;
+  if (Q.agriculture_minister_party == "SD-Int") Q.sdi_represented -= 1;
+  Q.agriculture_minister = "Peshekhonov"; Q.agriculture_minister_party = "NS"; Q.ns_represented += 1;
+!}
+go-to: cabinet_negotiations
+
+
+@agriculture_vacant
+title: Let's leave the position vacant for now. 
+tags: agriculture_candidates2
+on-arrival: {!
+  if (Q.agriculture_minister_party == "Bolshevik" || Q.agriculture_minister == "Vacant") Q.commissariats_held -= 1;
+  if (Q.agriculture_minister_party == "Menshevik") Q.m_represented -= 1;
+  if (Q.agriculture_minister_party == "SR") Q.sr_represented -= 1;
+  if (Q.agriculture_minister_party == "Left-SR") Q.lsr_represented -= 1;
+  if (Q.agriculture_minister_party == "NS") Q.ns_represented -= 1;
+  if (Q.agriculture_minister_party == "SD-Int") Q.sdi_represented -= 1;
+  Q.agriculture_minister = "Vacant"; Q.agriculture_minister_party = "";
+!}
+go-to: cabinet_negotiations
+
+@agriculture_cancel
+title: Cancel reassignment.
+subtitle: [?if agriculture_minister != "Vacant": Keep [+ agriculture_minister +] in place. ?]
+tags: agriculture_candidates2
+go-to: cabinet_negotiations
+
+
+
+
+
+
+@food_assign
+title: Appoint the food Commissar
+subtitle: [?if food_minister != "Vacant" : Currently held by [+ food_minister +] ?][?if food_minister != "Vacant" and food_minister_party=="Bolshevik": (<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>)?][?if food_minister_party=="Menshevik": (<span class="tooltip-text" title="Menshevik" style="color: var(--m-color);">RSDLP(u)</span>)?][?if food_minister_party=="Left-SR": (<span class="tooltip-text" title="Left-SR" style="color: var(--lsr-color);">Left-SR</span>)?][?if food_minister_party=="SR": (<span class="tooltip-text" title="Socialist Revolutionary" style="color: var(--sr-color);">SR</span>)?][?if food_minister_party=="SD-Int": (<span class="tooltip-text" title="Social-Democratic Internationalist" style="color: var(--sdi-color);">SD-Int</span>)?][?if food_minister_party=="NS": (<span class="tooltip-text" title="Popular Socialist" style="color: var(--ns-color);">NS</span>)?]
+view-if: drop_food = 1
+tags: commissariat_assign
+go-to: food_menu
+
+@food_menu
+
+- #food_candidates2
+
+@food_teodorovich
+title: Ivan Teodorovich
+subtitle: {!
+Bolshevik — Agronomist and party historian<br>
+Overall skill: ★★<br>
+Suitability: ★★
+!}
+unavailable-subtitle: {!
+Bolshevik — Agronomist and party historian<br>
+Overall skill: ★★<br>
+Suitability: ★★
+!}
+tags: food_candidates2
+choose-if: food_minister != "Teodorovich"  
+on-arrival: {!
+  if (Q.food_minister_party == "Menshevik") { Q.m_represented -= 1; Q.commissariats_held += 1; }
+  if (Q.food_minister_party == "SR") { Q.sr_represented -= 1; Q.commissariats_held += 1; }
+  if (Q.food_minister_party == "Left-SR") { Q.lsr_represented -= 1; Q.commissariats_held += 1; }
+  if (Q.food_minister_party == "NS") { Q.ns_represented -= 1; Q.commissariats_held += 1; }
+  if (Q.food_minister_party == "SD-Int") { Q.sdi_represented -= 1; Q.commissariats_held += 1; }
+  Q.food_minister = "Teodorovich"; Q.food_minister_party = "Bolshevik";
+!}
+go-to: cabinet_negotiations
+
+
+@food_peshekhonov
+title: Alexey Peshekhonov
+subtitle: {!
+NS — Economist, statistician, and expert on rural administration; member of the Provisional Government.<br> 
+Overall skill: ★★★<br>
+Suitability: ★★★★
+!}
+unavailable-subtitle: [?if agriculture_minister == "Peshekhonov" : Peshekhonov already has a post.<br> ?]NS — Economist, statistician, and expert on rural administration; member of the Provisional Government.<br>Overall skill: ★★★<br>Suitability: ★★★★
+
+tags: food_candidates2
+choose-if: food_minister != "Peshekhonov" and agriculture_minister != "Peshekhonov"
+on-arrival: {!
+  if (Q.food_minister_party == "Bolshevik" || Q.food_minister == "Vacant") Q.commissariats_held -= 1;
+  if (Q.food_minister_party == "Menshevik") Q.m_represented -= 1;
+  if (Q.food_minister_party == "SR") Q.sr_represented -= 1;
+  if (Q.food_minister_party == "Left-SR") Q.lsr_represented -= 1;
+  if (Q.food_minister_party == "NS") Q.ns_represented -= 1;
+  if (Q.food_minister_party == "SD-Int") Q.sdi_represented -= 1;
+  Q.food_minister = "Peshekhonov"; Q.food_minister_party = "NS"; Q.ns_represented += 1;
+!}
+go-to: cabinet_negotiations
+
+@food_dzyubinsky
+title: Vladimir Dzyubinsky
+subtitle: {!
+NS — Organizer, publicist, and grassroots activist; former chairman of the Trudoviks.<br> 
+Overall skill: ★★★<br>
+Suitability: ★★
+!}
+unavailable-subtitle: [?if local_minister == "Dzyubinsky" : NS — Organizer, publicist, and grassroots activist; former chairman of the Trudoviks.<br>Overall skill: ★★★<br>Suitability: ★★
+
+tags: food_candidates2
+choose-if: food_minister != "Dzyubinsky" and local_minister != "Dzyubinsky"
+on-arrival: {!
+  if (Q.food_minister_party == "Bolshevik" || Q.food_minister == "Vacant") Q.commissariats_held -= 1;
+  if (Q.food_minister_party == "Menshevik") Q.m_represented -= 1;
+  if (Q.food_minister_party == "SR") Q.sr_represented -= 1;
+  if (Q.food_minister_party == "Left-SR") Q.lsr_represented -= 1;
+  if (Q.food_minister_party == "NS") Q.ns_represented -= 1;
+  if (Q.food_minister_party == "SD-Int") Q.sdi_represented -= 1;
+  Q.food_minister = "Dzyubinsky"; Q.food_minister_party = "NS"; Q.ns_represented += 1;
+!}
+go-to: cabinet_negotiations
+
+
+
+@food_vacant
+title: Let's leave the position vacant for now. 
+tags: food_candidates2
+on-arrival: {!
+  if (Q.food_minister_party == "Bolshevik" || Q.transport_minister == "Vacant") Q.commissariats_held -= 1;
+  if (Q.food_minister_party == "Menshevik") Q.m_represented -= 1;
+  if (Q.food_minister_party == "SR") Q.sr_represented -= 1;
+  if (Q.food_minister_party == "Left-SR") Q.lsr_represented -= 1;
+  if (Q.food_minister_party == "NS") Q.ns_represented -= 1;
+  if (Q.food_minister_party == "SD-Int") Q.sdi_represented -= 1;
+  Q.food_minister = "Vacant"; Q.food_minister_party = "";
+!}
+go-to: cabinet_negotiations
+
+@food_cancel
+title: Cancel reassignment.
+subtitle: [?if food_minister != "Vacant": Keep [+ food_minister +] in place. ?]
+tags: food_candidates2
+go-to: cabinet_negotiations
+
+
+
+
+
+@posts_assign
+title: Appoint the posts Commissar
+subtitle: [?if posts_minister != "Vacant" : Currently held by [+ posts_minister +] ?][?if posts_minister != "Vacant" and posts_minister_party=="Bolshevik": (<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>)?][?if posts_minister_party=="Menshevik": (<span class="tooltip-text" title="Menshevik" style="color: var(--m-color);">RSDLP(u)</span>)?][?if posts_minister_party=="Left-SR": (<span class="tooltip-text" title="Left-SR" style="color: var(--lsr-color);">Left-SR</span>)?][?if posts_minister_party=="SR": (<span class="tooltip-text" title="Socialist Revolutionary" style="color: var(--sr-color);">SR</span>)?][?if posts_minister_party=="SD-Int": (<span class="tooltip-text" title="Social-Democratic Internationalist" style="color: var(--sdi-color);">SD-Int</span>)?][?if posts_minister_party=="NS": (<span class="tooltip-text" title="Popular Socialist" style="color: var(--ns-color);">NS</span>)?]
+view-if: drop_posts = 1
+tags: commissariat_assign
+go-to: posts_menu
+
+@posts_menu
+
+- #posts_candidates2
+
+@posts_glebov
+title: Nikolai Glebov-Avilov
+subtitle: {!
+Bolshevik — Party activist and journalist.<br>
+Overall skill: ★★<br>
+Suitability: ★★
+!}
+unavailable-subtitle: {!
+Bolshevik — Party activist and journalist.<br>
+Overall skill: ★★<br>
+Suitability: ★★
+!}
+tags: posts_candidates2
+choose-if: posts_minister != "Glebov"  
+on-arrival: {!
+  if (Q.posts_minister_party == "Menshevik") { Q.m_represented -= 1; Q.commissariats_held += 1; }
+  if (Q.posts_minister_party == "SR") { Q.sr_represented -= 1; Q.commissariats_held += 1; }
+  if (Q.posts_minister_party == "Left-SR") { Q.lsr_represented -= 1; Q.commissariats_held += 1; }
+  if (Q.posts_minister_party == "NS") { Q.ns_represented -= 1; Q.commissariats_held += 1; }
+  if (Q.posts_minister_party == "SD-Int") { Q.sdi_represented -= 1; Q.commissariats_held += 1; }
+  Q.posts_minister = "Glebov"; Q.posts_minister_party = "Bolshevik";
+!}
+go-to: cabinet_negotiations
+
+
+@posts_proshian
+title: Prosh Proshian
+subtitle: {!
+Left-SR — Lawyer and party activist.<br> 
+Overall skill: ★★★<br>
+Suitability: ★★
+!}
+unavailable-subtitle: {!
+Left-SR — Lawyer and party activist.<br> 
+Overall skill: ★★★<br>
+Suitability: ★★
+!}
+tags: posts_candidates2
+choose-if: posts_minister != "Proshian"
+on-arrival: {!
+  if (Q.posts_minister_party == "Bolshevik" || Q.posts_minister == "Vacant") Q.commissariats_held -= 1;
+  if (Q.posts_minister_party == "Menshevik") Q.m_represented -= 1;
+  if (Q.posts_minister_party == "SR") Q.sr_represented -= 1;
+  if (Q.posts_minister_party == "Left-SR") Q.lsr_represented -= 1;
+  if (Q.posts_minister_party == "NS") Q.ns_represented -= 1;
+  if (Q.posts_minister_party == "SD-Int") Q.sdi_represented -= 1;
+  Q.posts_minister = "Proshian"; Q.posts_minister_party = "Left-SR"; Q.lsr_represented += 1;
+!}
+go-to: cabinet_negotiations
+
+
+
+@posts_vacant
+title: Let's leave the position vacant for now. 
+tags: posts_candidates2
+on-arrival: {!
+  if (Q.posts_minister_party == "Bolshevik" || Q.posts_minister == "Vacant") Q.commissariats_held -= 1;
+  if (Q.posts_minister_party == "Menshevik") Q.m_represented -= 1;
+  if (Q.posts_minister_party == "SR") Q.sr_represented -= 1;
+  if (Q.posts_minister_party == "Left-SR") Q.lsr_represented -= 1;
+  if (Q.posts_minister_party == "NS") Q.ns_represented -= 1;
+  if (Q.posts_minister_party == "SD-Int") Q.sdi_represented -= 1;
+  Q.posts_minister = "Vacant"; Q.posts_minister_party = "";
+!}
+go-to: cabinet_negotiations
+
+@posts_cancel
+title: Cancel reassignment.
+subtitle: [?if posts_minister != "Vacant": Keep [+ posts_minister +] in place. ?]
+tags: posts_candidates2
+go-to: cabinet_negotiations
+
+
+
+
+
+
+@nationalities_assign
+title: Appoint the nationalities Commissar
+subtitle: [?if nationalities_minister != "Vacant" : Currently held by [+ nationalities_minister +] ?][?if nationalities_minister != "Vacant" and nationalities_minister_party=="Bolshevik": (<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>)?][?if nationalities_minister_party=="Menshevik": (<span class="tooltip-text" title="Menshevik" style="color: var(--m-color);">RSDLP(u)</span>)?][?if nationalities_minister_party=="Left-SR": (<span class="tooltip-text" title="Left-SR" style="color: var(--lsr-color);">Left-SR</span>)?][?if nationalities_minister_party=="SR": (<span class="tooltip-text" title="Socialist Revolutionary" style="color: var(--sr-color);">SR</span>)?][?if nationalities_minister_party=="SD-Int": (<span class="tooltip-text" title="Social-Democratic Internationalist" style="color: var(--sdi-color);">SD-Int</span>)?][?if nationalities_minister_party=="NS": (<span class="tooltip-text" title="Popular Socialist" style="color: var(--ns-color);">NS</span>)?]
+view-if: drop_nationalities = 1
+tags: commissariat_assign
+go-to: nationalities_menu
+
+@nationalities_menu
+
+- #nationalities_candidates2
+
+@nationalities_stalin
+title: Iosif Stalin
+subtitle: {!
+Bolshevik — Party administrator and nationalities specialist.<br>
+Overall skill: ★★★★★<br>
+Suitability: ★★★
+!}
+unavailable-subtitle: {!
+Bolshevik — Party administrator and nationalities specialist.<br>
+Overall skill: ★★★★★<br>
+Suitability: ★★★
+!}
+tags: nationalities_candidates2
+choose-if: nationalities_minister != "Stalin"  
+on-arrival: {!
+  if (Q.nationalities_minister_party == "Menshevik") { Q.m_represented -= 1; Q.commissariats_held += 1; }
+  if (Q.nationalities_minister_party == "SR") { Q.sr_represented -= 1; Q.commissariats_held += 1; }
+  if (Q.nationalities_minister_party == "Left-SR") { Q.lsr_represented -= 1; Q.commissariats_held += 1; }
+  if (Q.nationalities_minister_party == "NS") { Q.ns_represented -= 1; Q.commissariats_held += 1; }
+  if (Q.nationalities_minister_party == "SD-Int") { Q.sdi_represented -= 1; Q.commissariats_held += 1; }
+  Q.nationalities_minister = "Stalin"; Q.nationalities_minister_party = "Bolshevik";
+!}
+go-to: cabinet_negotiations
+
+
+@nationalities_vacant
+title: Let's leave the position vacant for now. 
+tags: nationalities_candidates2
+on-arrival: {!
+  if (Q.nationalities_minister_party == "Bolshevik" || Q.nationalities_minister == "Vacant") Q.commissariats_held -= 1;
+  if (Q.nationalities_minister_party == "Menshevik") Q.m_represented -= 1;
+  if (Q.nationalities_minister_party == "SR") Q.sr_represented -= 1;
+  if (Q.nationalities_minister_party == "Left-SR") Q.lsr_represented -= 1;
+  if (Q.nationalities_minister_party == "NS") Q.ns_represented -= 1;
+  if (Q.nationalities_minister_party == "SD-Int") Q.sdi_represented -= 1;
+  Q.nationalities_minister = "Vacant"; Q.nationalities_minister_party = "";
+!}
+go-to: cabinet_negotiations
+
+@nationalities_cancel
+title: Cancel reassignment.
+subtitle: [?if nationalities_minister != "Vacant": Keep [+ nationalities_minister +] in place. ?]
+tags: nationalities_candidates2
+go-to: cabinet_negotiations
+
 
 
 
@@ -1409,6 +2104,27 @@ on-arrival: {!
 !}
 go-to: cabinet_negotiations
 
+
+@local_dzyubinsky
+title: Vladimir Dzyubinsky
+subtitle: {!
+NS — Organizer, publicist, and grassroots activist; former chairman of the Trudoviks.<br> 
+Overall skill: ★★★<br>
+Suitability: ★★★★
+!}
+unavailable-subtitle: [?if food_minister == "Dzyubinsky" : NS — Organizer, publicist, and grassroots activist; former chairman of the Trudoviks.<br>Overall skill: ★★★<br>Suitability: ★★★★
+tags: flocal_candidates2
+choose-if: food_minister != "Dzyubinsky" and local_minister != "Dzyubinsky"
+on-arrival: {!
+  if (Q.local_minister_party == "Bolshevik" || Q.local_minister == "Vacant") Q.commissariats_held -= 1;
+  if (Q.local_minister_party == "Menshevik") Q.m_represented -= 1;
+  if (Q.local_minister_party == "SR") Q.sr_represented -= 1;
+  if (Q.local_minister_party == "Left-SR") Q.lsr_represented -= 1;
+  if (Q.local_minister_party == "NS") Q.ns_represented -= 1;
+  if (Q.local_minister_party == "SD-Int") Q.sdi_represented -= 1;
+  Q.local_minister = "Dzyubinsky"; Q.local_minister_party = "NS"; Q.ns_represented += 1;
+!}
+
 @local_vacant
 title: Cancel the proposed commissariat.
 tags: local_candidates
@@ -1428,5 +2144,4 @@ subtitle: [?if local_minister != "None": Keep [+ local_minister +] in place. ?]
 view-if: local_minister != "None"
 tags: local_candidates
 go-to: cabinet_negotiations
-
 
