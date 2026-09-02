@@ -26,17 +26,5 @@ subtitle: [?if foreign_minister != "Vacant": Keep [+ foreign_minister +] in plac
 go-to: sovnarkom_composition
 
 
-@military
-title: Military — [+ war_minister +]
-tags: sovnarkom_appointments
 
-[?if war_minister != "Vacant" : Who should we replace [+ war_minister +] with? ?][?if war_minister == "Vacant" : Who should we appoint to the position? ?]
-
-- #military_candidates
-- @keep_war
-
-@keep_war
-title: Cancel action. 
-subtitle: [?if war_minister != "Vacant": Keep [+ war_minister +] in place. ?]
-go-to: sovnarkom_composition
 
