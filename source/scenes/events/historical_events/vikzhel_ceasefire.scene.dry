@@ -1317,7 +1317,7 @@ go-to: cabinet_negotiations
 
 
 @finance_assign
-title: Appoint the finance Commissar
+title: Appoint the Finance Commissar
 subtitle: [?if finance_minister != "Vacant" : Currently held by [+ finance_minister +] ?][?if finance_minister != "Vacant" and finance_minister_party=="Bolshevik": (<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>)?][?if finance_minister_party=="Menshevik": (<span class="tooltip-text" title="Menshevik" style="color: var(--m-color);">RSDLP(u)</span>)?][?if finance_minister_party=="Left-SR": (<span class="tooltip-text" title="Left-SR" style="color: var(--lsr-color);">Left-SR</span>)?][?if finance_minister_party=="SR": (<span class="tooltip-text" title="Socialist Revolutionary" style="color: var(--sr-color);">SR</span>)?][?if finance_minister_party=="SD-Int": (<span class="tooltip-text" title="Social-Democratic Internationalist" style="color: var(--sdi-color);">SD-Int</span>)?][?if finance_minister_party=="NS": (<span class="tooltip-text" title="Popular Socialist" style="color: var(--ns-color);">NS</span>)?]
 view-if: drop_finance = 1
 tags: commissariat_assign
@@ -1418,7 +1418,7 @@ go-to: cabinet_negotiations
 
 
 @justice_assign
-title: Appoint the justice Commissar
+title: Appoint the Justice Commissar
 subtitle: [?if justice_minister != "Vacant" : Currently held by [+ justice_minister +] ?][?if justice_minister != "Vacant" and justice_minister_party=="Bolshevik": (<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>)?][?if justice_minister_party=="Menshevik": (<span class="tooltip-text" title="Menshevik" style="color: var(--m-color);">RSDLP(u)</span>)?][?if justice_minister_party=="Left-SR": (<span class="tooltip-text" title="Left-SR" style="color: var(--lsr-color);">Left-SR</span>)?][?if justice_minister_party=="SR": (<span class="tooltip-text" title="Socialist Revolutionary" style="color: var(--sr-color);">SR</span>)?][?if justice_minister_party=="SD-Int": (<span class="tooltip-text" title="Social-Democratic Internationalist" style="color: var(--sdi-color);">SD-Int</span>)?][?if justice_minister_party=="NS": (<span class="tooltip-text" title="Popular Socialist" style="color: var(--ns-color);">NS</span>)?]
 view-if: drop_justice = 1
 tags: commissariat_assign
@@ -1521,7 +1521,7 @@ go-to: cabinet_negotiations
 
 
 @labor_assign
-title: Appoint the labor Commissar
+title: Appoint the Labor Commissar
 subtitle: [?if labor_minister != "Vacant" : Currently held by [+ labor_minister +] ?][?if labor_minister != "Vacant" and labor_minister_party=="Bolshevik": (<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>)?][?if labor_minister_party=="Menshevik": (<span class="tooltip-text" title="Menshevik" style="color: var(--m-color);">RSDLP(u)</span>)?][?if labor_minister_party=="Left-SR": (<span class="tooltip-text" title="Left-SR" style="color: var(--lsr-color);">Left-SR</span>)?][?if labor_minister_party=="SR": (<span class="tooltip-text" title="Socialist Revolutionary" style="color: var(--sr-color);">SR</span>)?][?if labor_minister_party=="SD-Int": (<span class="tooltip-text" title="Social-Democratic Internationalist" style="color: var(--sdi-color);">SD-Int</span>)?][?if labor_minister_party=="NS": (<span class="tooltip-text" title="Popular Socialist" style="color: var(--ns-color);">NS</span>)?]
 view-if: drop_labor = 1
 tags: commissariat_assign
@@ -1563,7 +1563,6 @@ Overall skill: ★★★☆<br>
 Suitability: ★★
 !}
 unavailable-subtitle: [?if transport_minister == "Abramovich" : Abramovich already has a post.<br> ?]Menshevik — Leading party organizer, trade unionist, and architect of Bolshevik cooperation.<br> Overall skill: ★★★☆<br>Suitability: ★★★★
-
 tags: labor_candidates2
 choose-if: labor_minister != "Abramovich" and transport_minister != "Abramovich"
 on-arrival: {!
@@ -1605,7 +1604,7 @@ go-to: cabinet_negotiations
 
 
 @agriculture_assign
-title: Appoint the agriculture Commissar
+title: Appoint the Agriculture Commissar
 subtitle: [?if agriculture_minister != "Vacant" : Currently held by [+ agriculture_minister +] ?][?if agriculture_minister != "Vacant" and agriculture_minister_party=="Bolshevik": (<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>)?][?if agriculture_minister_party=="Menshevik": (<span class="tooltip-text" title="Menshevik" style="color: var(--m-color);">RSDLP(u)</span>)?][?if agriculture_minister_party=="Left-SR": (<span class="tooltip-text" title="Left-SR" style="color: var(--lsr-color);">Left-SR</span>)?][?if agriculture_minister_party=="SR": (<span class="tooltip-text" title="Socialist Revolutionary" style="color: var(--sr-color);">SR</span>)?][?if agriculture_minister_party=="SD-Int": (<span class="tooltip-text" title="Social-Democratic Internationalist" style="color: var(--sdi-color);">SD-Int</span>)?][?if agriculture_minister_party=="NS": (<span class="tooltip-text" title="Popular Socialist" style="color: var(--ns-color);">NS</span>)?]
 view-if: drop_agriculture = 1
 tags: commissariat_assign
@@ -1714,7 +1713,7 @@ go-to: cabinet_negotiations
 
 
 @food_assign
-title: Appoint the food Commissar
+title: Appoint the Food Supply Commissar
 subtitle: [?if food_minister != "Vacant" : Currently held by [+ food_minister +] ?][?if food_minister != "Vacant" and food_minister_party=="Bolshevik": (<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>)?][?if food_minister_party=="Menshevik": (<span class="tooltip-text" title="Menshevik" style="color: var(--m-color);">RSDLP(u)</span>)?][?if food_minister_party=="Left-SR": (<span class="tooltip-text" title="Left-SR" style="color: var(--lsr-color);">Left-SR</span>)?][?if food_minister_party=="SR": (<span class="tooltip-text" title="Socialist Revolutionary" style="color: var(--sr-color);">SR</span>)?][?if food_minister_party=="SD-Int": (<span class="tooltip-text" title="Social-Democratic Internationalist" style="color: var(--sdi-color);">SD-Int</span>)?][?if food_minister_party=="NS": (<span class="tooltip-text" title="Popular Socialist" style="color: var(--ns-color);">NS</span>)?]
 view-if: drop_food = 1
 tags: commissariat_assign
@@ -1820,7 +1819,7 @@ go-to: cabinet_negotiations
 
 
 @posts_assign
-title: Appoint the posts Commissar
+title: Appoint the Posts & Telegrams Commissar
 subtitle: [?if posts_minister != "Vacant" : Currently held by [+ posts_minister +] ?][?if posts_minister != "Vacant" and posts_minister_party=="Bolshevik": (<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>)?][?if posts_minister_party=="Menshevik": (<span class="tooltip-text" title="Menshevik" style="color: var(--m-color);">RSDLP(u)</span>)?][?if posts_minister_party=="Left-SR": (<span class="tooltip-text" title="Left-SR" style="color: var(--lsr-color);">Left-SR</span>)?][?if posts_minister_party=="SR": (<span class="tooltip-text" title="Socialist Revolutionary" style="color: var(--sr-color);">SR</span>)?][?if posts_minister_party=="SD-Int": (<span class="tooltip-text" title="Social-Democratic Internationalist" style="color: var(--sdi-color);">SD-Int</span>)?][?if posts_minister_party=="NS": (<span class="tooltip-text" title="Popular Socialist" style="color: var(--ns-color);">NS</span>)?]
 view-if: drop_posts = 1
 tags: commissariat_assign
@@ -1908,7 +1907,7 @@ go-to: cabinet_negotiations
 
 
 @nationalities_assign
-title: Appoint the nationalities Commissar
+title: Appoint the Nationalities Commissar
 subtitle: [?if nationalities_minister != "Vacant" : Currently held by [+ nationalities_minister +] ?][?if nationalities_minister != "Vacant" and nationalities_minister_party=="Bolshevik": (<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>)?][?if nationalities_minister_party=="Menshevik": (<span class="tooltip-text" title="Menshevik" style="color: var(--m-color);">RSDLP(u)</span>)?][?if nationalities_minister_party=="Left-SR": (<span class="tooltip-text" title="Left-SR" style="color: var(--lsr-color);">Left-SR</span>)?][?if nationalities_minister_party=="SR": (<span class="tooltip-text" title="Socialist Revolutionary" style="color: var(--sr-color);">SR</span>)?][?if nationalities_minister_party=="SD-Int": (<span class="tooltip-text" title="Social-Democratic Internationalist" style="color: var(--sdi-color);">SD-Int</span>)?][?if nationalities_minister_party=="NS": (<span class="tooltip-text" title="Popular Socialist" style="color: var(--ns-color);">NS</span>)?]
 view-if: drop_nationalities = 1
 tags: commissariat_assign
