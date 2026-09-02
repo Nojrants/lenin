@@ -1306,7 +1306,7 @@ on-arrival: {!
   if (Q.property_minister_party == "Left-SR") { Q.lsr_represented -= 1; Q.commissariats_held += 1; }
   if (Q.property_minister_party == "NS") { Q.ns_represented -= 1; Q.commissariats_held += 1; }
   if (Q.property_minister_party == "SD-Int") { Q.sdi_represented -= 1; Q.commissariats_held += 1; }
-  Q.property_minister = "Karelin"; Q.property_minister_party = "Left-SR"; Q.ommissariats_held -= 1; Q.lsr_represented += 1;
+  Q.property_minister = "Karelin"; Q.property_minister_party = "Left-SR"; Q.commissariats_held -= 1; Q.lsr_represented += 1;
 !}
 go-to: cabinet_negotiations
 
@@ -1331,15 +1331,21 @@ on-arrival: {!
   if (Q.property_minister_party == "Left-SR") { Q.lsr_represented -= 1; Q.commissariats_held += 1; }
   if (Q.property_minister_party == "NS") { Q.ns_represented -= 1; Q.commissariats_held += 1; }
   if (Q.property_minister_party == "SD-Int") { Q.sdi_represented -= 1; Q.commissariats_held += 1; }
-  Q.property_minister = "Sukhanov"; Q.property_minister_party = "SD-Int"; Q.ommissariats_held -= 1; Q.sdi_represented += 1;
+  Q.property_minister = "Sukhanov"; Q.property_minister_party = "SD-Int"; Q.commissariats_held -= 1; Q.sdi_represented += 1;
 !}
 go-to: cabinet_negotiations
 
 @property_vacant
 title: Cancel the proposed commissariat.
-subtitle: [?if property_minister == "None": Cancel the proposed commissariat. ?]
-view-if: property_minister == "None"
 tags: property_candidates
+on-arrival: {!
+  if (Q.property_minister_party == "Menshevik") { m_represented -= 1; Q.commissariats_held += 1; }
+  if (Q.property_minister_party == "SR") { Q.sr_represented -= 1; Q.commissariats_held += 1; }
+  if (Q.property_minister_party == "Left-SR") { Q.lsr_represented -= 1; Q.commissariats_held += 1; }
+  if (Q.property_minister_party == "NS") { Q.ns_represented -= 1; Q.commissariats_held += 1; }
+  if (Q.property_minister_party == "SD-Int") { Q.sdi_represented -= 1; Q.commissariats_held += 1; }
+  Q.property_minister = "None"; Q.property_minister_party = ""; 
+!}
 go-to: cabinet_negotiations
 
 @property_cancel
@@ -1377,7 +1383,7 @@ on-arrival: {!
   if (Q.local_minister_party == "Left-SR") { Q.lsr_represented -= 1; Q.commissariats_held += 1; }
   if (Q.local_minister_party == "NS") { Q.ns_represented -= 1; Q.commissariats_held += 1; }
   if (Q.local_minister_party == "SD-Int") { Q.sdi_represented -= 1; Q.commissariats_held += 1; }
-  Q.local_minister = "Trutovsky"; Q.local_minister_party = "Left-SR"; Q.ommissariats_held -= 1; Q.lsr_represented += 1;
+  Q.local_minister = "Trutovsky"; Q.local_minister_party = "Left-SR"; Q.commissariats_held -= 1; Q.lsr_represented += 1;
 !}
 go-to: cabinet_negotiations
 
@@ -1401,15 +1407,21 @@ on-arrival: {!
   if (Q.local_minister_party == "Left-SR") { Q.lsr_represented -= 1; Q.commissariats_held += 1; }
   if (Q.local_minister_party == "NS") { Q.ns_represented -= 1; Q.commissariats_held += 1; }
   if (Q.local_minister_party == "SD-Int") { Q.sdi_represented -= 1; Q.commissariats_held += 1; }
-  Q.local_minister = "Maslov"; Q.local_minister_party = "SR"; Q.ommissariats_held -= 1; Q.sr_represented += 1;
+  Q.local_minister = "Maslov"; Q.local_minister_party = "SR"; Q.commissariats_held -= 1; Q.sr_represented += 1;
 !}
 go-to: cabinet_negotiations
 
 @local_vacant
 title: Cancel the proposed commissariat.
-subtitle: [?if local_minister == "None": Cancel the proposed commissariat. ?]
-view-if: local_minister == "None"
 tags: local_candidates
+on-arrival: {!
+  if (Q.local_minister_party == "Menshevik") { m_represented -= 1; Q.commissariats_held += 1; }
+  if (Q.local_minister_party == "SR") { Q.sr_represented -= 1; Q.commissariats_held += 1; }
+  if (Q.local_minister_party == "Left-SR") { Q.lsr_represented -= 1; Q.commissariats_held += 1; }
+  if (Q.local_minister_party == "NS") { Q.ns_represented -= 1; Q.commissariats_held += 1; }
+  if (Q.local_minister_party == "SD-Int") { Q.sdi_represented -= 1; Q.commissariats_held += 1; }
+  Q.local_minister = "None"; Q.local_minister_party = ""; 
+!}
 go-to: cabinet_negotiations
 
 @local_cancel
