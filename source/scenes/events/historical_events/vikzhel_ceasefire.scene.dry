@@ -1708,12 +1708,10 @@ go-to: cabinet_negotiations
 
 
 
-
-
 @food_assign
 title: Appoint the Food Supply Commissar
 subtitle: [?if food_minister != "Vacant" : Currently held by [+ food_minister +] ?][?if food_minister != "Vacant" and food_minister_party=="Bolshevik": (<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>)?][?if food_minister_party=="Menshevik": (<span class="tooltip-text" title="Menshevik" style="color: var(--m-color);">RSDLP(u)</span>)?][?if food_minister_party=="Left-SR": (<span class="tooltip-text" title="Left-SR" style="color: var(--lsr-color);">Left-SR</span>)?][?if food_minister_party=="SR": (<span class="tooltip-text" title="Socialist Revolutionary" style="color: var(--sr-color);">SR</span>)?][?if food_minister_party=="SD-Int": (<span class="tooltip-text" title="Social-Democratic Internationalist" style="color: var(--sdi-color);">SD-Int</span>)?][?if food_minister_party=="NS": (<span class="tooltip-text" title="Popular Socialist" style="color: var(--ns-color);">NS</span>)?]
-view-if: drop_food = 1
+view-if: drop_foodsupply = 1
 tags: commissariat_assign
 go-to: food_menu
 
@@ -2107,7 +2105,7 @@ Overall skill: ★★★<br>
 Suitability: ★★★★
 !}
 unavailable-subtitle: [?if food_minister == "Dzyubinsky" : NS — Organizer, publicist, and grassroots activist; former chairman of the Trudoviks.<br>Overall skill: ★★★<br>Suitability: ★★★★
-tags: flocal_candidates2
+tags: local_candidates2
 choose-if: food_minister != "Dzyubinsky" and local_minister != "Dzyubinsky"
 on-arrival: {!
   if (Q.local_minister_party == "Bolshevik" || Q.local_minister == "Vacant") Q.commissariats_held -= 1;
