@@ -1,0 +1,10 @@
+title: Chicherin Arrives From Britain
+new-page: true
+view-if: chicherin_travel = 0 and chicherin_negotiation = 1;
+max-visits: 1
+tags: event
+on-arrival: chicherin_available = 1
+
+= Chicherin Arrives
+
+The veteran revolutionary Georgy Chicherin has arrived today from Britain, and has officially joined the Bolsheviks. We now have him at our disposal for reassignment. 
