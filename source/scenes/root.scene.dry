@@ -276,7 +276,7 @@ Q.sovnarkom_expend = 0.25;
 Q.internal_expend = 1;
 Q.foreignaffairs_expend = 0.5;
 Q.military_expend = 10;
-Q.enlightmenet_expend = 0.5;
+Q.enlightenment_expend = 0.5;
 Q.railways_expend = 2;
 Q.trade_expend = 0.5;
 Q.finance_expend = 1;
@@ -292,7 +292,7 @@ Q.government_functions = (
     Q.internal_expend +
     Q.foreignaffairs_expend +
     Q.military_expend +
-    Q.enlightmenet_expend +
+    Q.enlightenment_expend +
     Q.railways_expend +
     Q.trade_expend +
     Q.finance_expend +
