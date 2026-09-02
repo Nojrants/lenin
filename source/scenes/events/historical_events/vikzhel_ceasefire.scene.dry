@@ -956,7 +956,7 @@ Vikzhel immediately unleashes a full-scale strike across the railway network, an
 @finalize_deal
 title: Finalize the agreement. 
 choose-if: commissariats_held <= commissariats_promised and m_represented >= 1 and sr_represented >= 1 and lsr_represented >= 1
-unavailable-subtitle: The other parties will not accept. [? commissariats_held <= commissariats_promised : We have not granted enough appointments. ?] [?if sr_represented < 1 : The SRs expect a position. ?] [?if lsr_represented < 1 != 1 : The Left-SRs expect a position. ?] [?if m_represented < 1 != 1 : The Mensheviks expect a position. ?]
+unavailable-subtitle: The other parties will not accept. [? commissariats_held <= commissariats_promised : We have not granted enough appointments. ?] [?if sr_represented < 1 : The SRs expect a position. ?] [?if lsr_represented < 1 : The Left-SRs expect a position. ?] [?if m_represented < 1 : The Mensheviks expect a position. ?]
 achievement: vikzhel_averted
 on-arrival: {!
   Q.coalition_government = 1; 
