@@ -1650,7 +1650,6 @@ Left-SR — Leading party organizer and lawyer.<br>
 Overall skill: ★★★☆<br>
 Suitability: ★★☆
 !}
-
 tags: agriculture_candidates2
 choose-if: agriculture_minister != "Kamkov"
 on-arrival: {!
@@ -1672,7 +1671,6 @@ Overall skill: ★★★<br>
 Suitability: ★★★★
 !}
 unavailable-subtitle: [?if food_minister == "Peshekhonov" : Peshekhonov already has a post.<br> ?]NS — Economist, statistician, and expert on rural administration; member of the Provisional Government.<br>Overall skill: ★★★<br>Suitability: ★★★★
-
 tags: agriculture_candidates2
 choose-if: agriculture_minister != "Peshekhonov" and food_minister != "Peshekhonov"
 on-arrival: {!
@@ -1756,7 +1754,6 @@ Overall skill: ★★★<br>
 Suitability: ★★★★
 !}
 unavailable-subtitle: [?if agriculture_minister == "Peshekhonov" : Peshekhonov already has a post.<br> ?]NS — Economist, statistician, and expert on rural administration; member of the Provisional Government.<br>Overall skill: ★★★<br>Suitability: ★★★★
-
 tags: food_candidates2
 choose-if: food_minister != "Peshekhonov" and agriculture_minister != "Peshekhonov"
 on-arrival: {!
@@ -1778,7 +1775,6 @@ Overall skill: ★★★<br>
 Suitability: ★★
 !}
 unavailable-subtitle: [?if local_minister == "Dzyubinsky" : NS — Organizer, publicist, and grassroots activist; former chairman of the Trudoviks.<br>Overall skill: ★★★<br>Suitability: ★★
-
 tags: food_candidates2
 choose-if: food_minister != "Dzyubinsky" and local_minister != "Dzyubinsky"
 on-arrival: {!
