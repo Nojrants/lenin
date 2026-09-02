@@ -15,7 +15,7 @@ Overall skill: ★☆<br>
 Suitability: ★★☆</ul>
 !}
 tags: finance_candidates
-view-if: finance_minister != "Skvortsov" 
+choose-if: finance_minister != "Skvortsov" 
 on-arrival: finance_minister = "Skvortsov"; labor_minister_party = "Bolshevik";
 go-to: sovnarkom_composition
 
@@ -32,6 +32,6 @@ Overall skill: ★★★★<br>
 Suitability: ★★★★★</ul>
 !}
 tags: finance_candidates
-view-if: finance_minister != "Sokolnikov" 
+choose-if: finance_minister != "Sokolnikov" 
 on-arrival: finance_minister = "Sokolnikov"; labor_minister_party = "Bolshevik";
 go-to: sovnarkom_composition
