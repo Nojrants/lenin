@@ -275,7 +275,7 @@ Q.leaders.Shliapnikov = { auctoritas: 4, administration: 4, idealogism: 4, milit
 Q.leaders.Milyutin = { auctoritas: 2.5, administration: 3, idealogism: 1.5, military: 1, economic: 2, partyorg: 2, diplomacy: 1.5, culture: 1, legalism: 1.5, nationalities: 1 };
 Q.leaders.Teodorovich = { auctoritas: 2.5, administration: 3, idealogism: 3, military: 2, economic: 3, partyorg: 2.5, diplomacy: 1.5, culture: 1, legalism: 2, nationalities: 1 };
 Q.leaders.Glebov = { auctoritas: 2.5, administration: 3, idealogism: 2.5, military: 1, economic: 2.5, partyorg: 3, diplomacy: 1.5, culture: 3, legalism: 2, nationalities: 1 };
-Q.leaders.Stalin = { auctoritas: 4, administration: 4, idealogism: 3, military: 2, economic: 3, partyorg: 5, diplomacy: 3, culture: 2, legalism: 2, nationalities: 5 };
+Q.leaders.Stalin = { auctoritas: 4, administration: 4, idealogism: 3, military: 3, economic: 2.5, partyorg: 5, diplomacy: 2.5, culture: 3, legalism: 2, nationalities: 5 };
 Q.leaders.Chicherin = { auctoritas: 3, administration: 4, idealogism: 3, military: 1, economic: 2, partyorg: 2.5, diplomacy: 5, culture: 2, legalism: 3, nationalities: 3 };
 Q.leaders.Ioffe = { auctoritas: 2.5, administration: 3, idealogism: 2, military: 1.5, economic: 1.5, partyorg: 2.5, diplomacy: 3, culture: 2, legalism: 2, nationalities: 1.5 };
 Q.leaders.Dybenko = { auctoritas: 3, administration: 3, idealogism: 1.5, military: 4, economic: 1.5, partyorg: 2, diplomacy: 2, culture: 1, legalism: 3, nationalities: 1.5 };
@@ -289,7 +289,6 @@ Q.leaders.Sokolnikov = { auctoritas: 3, administration: 4, idealogism: 2, milita
 Q.leaders.Kollontai = { auctoritas: 3, administration: 3, idealogism: 4, military: 1.5, economic: 2, partyorg: 2.5, diplomacy: 3.5, culture: 4, legalism: 1.5, nationalities: 1.5 };
 Q.leaders.Vinokurov = { auctoritas: 2.5, administration: 3.5, idealogism: 2.5, military: 1.5, economic: 3, partyorg: 3, diplomacy: 2.5, culture: 2, legalism: 3.5, nationalities: 1 };
 Q.leaders.N_Milyutin = { auctoritas: 2, administration: 3, idealogism: 2, military: 1.5, economic: 3, partyorg: 3, diplomacy: 1.5, culture: 2.5, legalism: 1.5, nationalities: 1.5 };
-Q.leaders.Stalin = { auctoritas: 4, administration: 5, idealogism: 5, military: 3, economic: 2.5, partyorg: 5, diplomacy: 2.5, culture: 3.5, legalism: 3, nationalities: 4 };
 
 
 // Mensheviks
@@ -592,7 +591,7 @@ Q.property_tax =
             (100 - ((Q.elites_unrest / 10) * (Q.elites_strength / 100))) / 100
         )
         *
-        (Q.elite_wealth / 50)
+        (Q.elites_wealth / 50)
     )
     +
     (
@@ -619,7 +618,7 @@ Q.property_tax =
             (75 - ((Q.kulaks_unrest / 10) * (Q.kulaks_strength / 100))) / 100
         )
         *
-        (Q.kulak_wealth / 5000)
+        (Q.kulaks_wealth / 5000)
     )
     +
     (
@@ -628,7 +627,7 @@ Q.property_tax =
             (100 - ((Q.workers_unrest / 10) * (Q.workers_strength / 100))) / 100
         )
         *
-        (Q.labor_wealth / 2500)
+        (Q.workers_wealth / 2500)
     )
     +
     (
@@ -637,7 +636,7 @@ Q.property_tax =
             (75 - ((Q.peasants_unrest / 10) * (Q.peasants_strength / 100))) / 100
         )
         *
-        (Q.peasant_wealth / 7500)
+        (Q.peasants_wealth / 7500)
     )
 )
 *
@@ -654,7 +653,7 @@ Q.business_tax =
         Q.elites *
         (100 - ((Q.elites_unrest / 10) * (Q.elites_strength / 100))) / 100
         *
-        (Q.elite_business / 50)
+        (Q.elites_business / 50)
     )
     +
     (
@@ -951,7 +950,7 @@ if (Q.week_actions >= 1 && Q.current_player >= Q.n_players) {
         Q.train_capacity *= 0.995;
     }
     if (Q.transportation_production >= 5) {
-        if (Q.train_capcity < 140000) {
+        if (Q.train_capacity < 140000) {
             Q.train_capacity *= 1.005;
         } else {
             Q.train_capacity *= 1.001;
