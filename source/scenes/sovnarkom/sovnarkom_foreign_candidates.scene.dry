@@ -57,7 +57,7 @@ Suitability: ★★★★
 !}
 tags: foreign_candidates 
 choose-if: foreign_minister != "Martov" and left_m_relation > 60 and m_in_gov = 1 and coalition_government = 1
-unavailable-subtitle: <span style="color: var(--m-color);">Menshevik Int.</span> — RSDLP founding member and reknown Menshevik leader.<br>Overall skill: ★★★★★<br>Suitability: ★★★★[?if m_in_gov != 1: We haven't assented to Menshevik participation in government.<br> ?][?if left_m_relation <= 60: Martov would not accept this. ?]
+unavailable-subtitle: <span style="color: var(--m-color);">Menshevik Int.</span> — RSDLP founding member and reknown Menshevik leader.<br><ul>Overall skill: ★★★★★<br>Suitability: ★★★★</ul>[?if m_in_gov != 1: <br> We haven't assented to Menshevik participation in government. ?][?if left_m_relation <= 60: <br> Martov would not accept this. ?]
 on-arrival: foreign_minister = "Martov"; foreign_minister_party = "Menshevik"; left_m_relation += 10
 go-to: sovnarkom_composition
 
