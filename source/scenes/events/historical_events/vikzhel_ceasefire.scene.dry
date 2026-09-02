@@ -976,10 +976,15 @@ on-arrival: {!
   Q.moderate_dissent -= 10; Q.leninist_dissent += 10; Q.leftcom_dissent += 5;
   Q.moderate_strength += 10; Q.leninist_strength -= 5; Q.leftcom_strength -= 5; 
 !}
+go-to: coalition_created
 
 A coalition agreement has been reached! Vikzhel drops their threat of a strike, and pledges to cooperate with our government fully. The other parties leave the talks pleasantly surprised, if still slightly apprehensive about our motives. 
 
 The Moderate Bolsheviks celebrate this as a major step forward. Lenin, however, is still far from convinced, predicting the coalition will end in disaster. 
+
+@coalition_created
+title: May this be a sign of good things to come...
+go-to: root
 
 @enlightenment_assign
 title: Appoint the Enlightenment Commissar
