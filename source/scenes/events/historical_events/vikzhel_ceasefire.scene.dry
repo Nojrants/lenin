@@ -965,11 +965,11 @@ unavailable-subtitle: The other parties will not accept. [?if commissariats_held
 achievement: vikzhel_averted
 on-arrival: {!
   Q.coalition_government = 1; 
-  if (Q.m_represented >= 1) m_in_gov = 1; 
-  if (Q.sr_represented >= 1) sr_in_gov = 1;
-  if (Q.lsr_represented >= 1) lsr_in_gov = 1;
-  if (Q.ns_represented >= 1) ns_in_gov = 1;
-  if (Q.sdi_represented >= 1) sdi_in_gov = 1;
+  if (Q.m_represented >= 1) Q.m_in_gov = 1; 
+  if (Q.sr_represented >= 1) Q.sr_in_gov = 1;
+  if (Q.lsr_represented >= 1) Q.lsr_in_gov = 1;
+  if (Q.ns_represented >= 1) Q.ns_in_gov = 1;
+  if (Q.sdi_represented >= 1) Q.sdi_in_gov = 1;
   Q.sdi_relation += 10; Q.left_m_relation += 10; Q.centre_m_relation += 10; Q.right_m_relation += 10; Q.lsr_relation += 10; Q.centre_sr_relation += 10; Q.right_sr_relation += 10; Q.ns_relation += 10;
   Q.right_sr_strength -= 8; Q.right_m_strength -= 8;   
   Q.democraticity += 2; Q.instability -= 4; Q.vikzhel_unrest -= 20;
