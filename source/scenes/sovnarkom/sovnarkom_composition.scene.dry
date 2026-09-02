@@ -76,7 +76,7 @@ tags: sovnarkom_appointments
 
 [?if labor_minister != "Vacant" : Who should we replace [+ labor_minister +] with? ?][?if labor_minister == "Vacant" : Who should we appoint to the position? ?]
 
-- @labor_shliapnikov
+- #labor_candidates
 - @keep_labor
 
 @keep_labor
