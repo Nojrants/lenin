@@ -4,12 +4,12 @@ new-page: true
 @foreign_trotsky
 title: Leon Trotsky
 subtitle: {!
-<span style="color: var(--bolshevik-color);">Left</span> — Internationally-reknown and experienced organizer.<ul>
+<span style="color: var(--bolshevik-color);">Leftist</span> — Internationally-reknown and experienced organizer.<ul>
 Overall skill: ★★★★★<br>
 Suitability: ★★★☆</ul>
 !}
 unavailable-subtitle: {!
-<span style="color: var(--bolshevik-color);">Left</span> — Internationally-reknown and experienced organizer.<ul>
+<span style="color: var(--bolshevik-color);">Leftist</span> — Internationally-reknown and experienced organizer.<ul>
 Overall skill: ★★★★★<br>
 Suitability: ★★★☆</ul>
 !}
@@ -34,12 +34,12 @@ go-to: sovnarkom_composition
 @foreign_ioffe
 title: Adolph Ioffe
 subtitle: {!
-<span style="color: var(--bolshevik-color);">Left</span> — Follower of Trotsky with some diplomatic experience.<ul>
+<span style="color: var(--bolshevik-color);">Leftist</span> — Follower of Trotsky with some diplomatic experience.<ul>
 Overall skill: ★★<br>
 Suitability: ★★★</ul>
 !}
 unavailable-subtitle: {!
-<span style="color: var(--bolshevik-color);">Left</span> — Follower of Trotsky with some diplomatic experience.<ul>
+<span style="color: var(--bolshevik-color);">Leftist</span> — Follower of Trotsky with some diplomatic experience.<ul>
 Overall skill: ★★<br>
 Suitability: ★★★</ul>
 !}
