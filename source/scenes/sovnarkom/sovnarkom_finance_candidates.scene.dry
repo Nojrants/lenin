@@ -35,3 +35,10 @@ tags: finance_candidates
 choose-if: finance_minister != "Sokolnikov" 
 on-arrival: finance_minister = "Sokolnikov"; labor_minister_party = "Bolshevik";
 go-to: sovnarkom_composition
+
+
+@foreign_vacant
+title: Let's leave the position vacant for now. 
+tags: foreign_candidates
+on-arrival: foreign_minister = "Vacant"; foreign_minister_party = "";
+go-to: sovnarkom_composition
