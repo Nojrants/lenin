@@ -68,3 +68,18 @@ tags: sovnarkom_appointments
 title: Cancel action.
 subtitle: [?if finance_minister != "Vacant": Keep [+ finance_minister +] in place. ?]
 go-to: sovnarkom_composition
+
+
+@labor
+title: Labor — [+ labor_minister +]
+tags: sovnarkom_appointments
+
+[?if labor_minister != "Vacant" : Who should we replace [+ labor_minister +] with? ?][?if labor_minister == "Vacant" : Who should we appoint to the position? ?]
+
+- @labor_shliapnikov
+- @keep_labor
+
+@keep_labor
+title: Cancel action.
+subtitle: [?if labor_minister != "Vacant": Keep [+ labor_minister +] in place. ?]
+go-to: sovnarkom_composition
