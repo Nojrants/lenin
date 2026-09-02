@@ -319,6 +319,19 @@ Q.leaders.Dzyubinsky = { auctoritas: 3, administration: 3.5, idealogism: 2.5, mi
 
 
 
+console.log({
+    income_tax: Q.income_tax,
+    property_tax: Q.property_tax,
+    business_tax: Q.business_tax,
+    monopolies: Q.monopolies,
+    customs: Q.customs,
+    railway_revenue: Q.railway_revenue,
+    enterprises_revenue: Q.enterprises_revenue,
+    finalefficacy_finance: Q.finalefficacy_finance,
+    finance_minister: Q.finance_minister
+});
+
+
 Q.finalefficacy_sovnarkom =
     Q.efficacy_sovnarkom
     + (0.25 * (
@@ -454,7 +467,7 @@ if (Q.sovnarkom_expend < 0.25) Q.sovnarkom_expend = 0.25;
 if (Q.internal_expend < 0.25) Q.internal_expend = 0.25;
 if (Q.foreignaffairs_expend < 0.25) Q.foreignaffairs_expend = 0.25;
 if (Q.military_expend < 0.25) Q.military_expend = 0.25;
-if (Q.enlightmenet_expend < 0.25) Q.enlightmenet_expend = 0.25;
+if (Q.enlightenment_expend < 0.25) Q.enlightenment_expend = 0.25;
 if (Q.railways_expend < 0.25) Q.railways_expend = 0.25;
 if (Q.trade_expend < 0.25) Q.trade_expend = 0.25;
 if (Q.finance_expend < 0.25) Q.finance_expend = 0.25;
@@ -470,7 +483,7 @@ Q.government_functions = (
     Q.internal_expend +
     Q.foreignaffairs_expend +
     Q.military_expend +
-    Q.enlightmenet_expend +
+    Q.enlightenment_expend +
     Q.railways_expend +
     Q.trade_expend +
     Q.finance_expend +
