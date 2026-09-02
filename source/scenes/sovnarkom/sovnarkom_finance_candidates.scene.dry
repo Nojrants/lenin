@@ -16,7 +16,7 @@ Suitability: ★★☆</ul>
 !}
 tags: finance_candidates
 choose-if: finance_minister != "Skvortsov" 
-on-arrival: finance_minister = "Skvortsov"; labor_minister_party = "Bolshevik";
+on-arrival: finance_minister = "Skvortsov"; finance_minister_party = "Bolshevik";
 go-to: sovnarkom_composition
 
 @finance_sokolnikov
@@ -33,12 +33,12 @@ Suitability: ★★★★★</ul>
 !}
 tags: finance_candidates
 choose-if: finance_minister != "Sokolnikov" 
-on-arrival: finance_minister = "Sokolnikov"; labor_minister_party = "Bolshevik";
+on-arrival: finance_minister = "Sokolnikov"; finance_minister_party = "Bolshevik";
 go-to: sovnarkom_composition
 
 
-@foreign_vacant
+@finance_vacant
 title: Let's leave the position vacant for now. 
-tags: foreign_candidates
-on-arrival: foreign_minister = "Vacant"; foreign_minister_party = "";
+tags: finance_candidates
+on-arrival: finance_minister = "Vacant"; finance_minister_party = "";
 go-to: sovnarkom_composition
