@@ -5,25 +5,16 @@ new-page: true
 @enlightenment_lunacharsky
 title: Anatoly Lunacharsky
 subtitle: {!
-  if (Q.leaders.Lunacharsky.faction == "Leninist") <span style="color: var(--bolshevik-color);">Leninist</span>
-  if (Q.leaders.Lunacharsky.faction == "Leftist") <span style="color: var(--bolshevik-color);">Leftist</span>
-  if (Q.leaders.Lunacharsky.faction == "Moderate") <span style="color: var(--bolshevik-color);">Moderate</span>
-  if (Q.leaders.Lunacharsky.faction == "Vperedist") <span style="color: var(--bolshevik-color);">Vperedist</span>
-  if (Q.leaders.Lunacharsky.faction == "Non-Factional") <span style="color: var(--bolshevik-color);">Non-Factional</span>
+  [?if leaders.Lunacharsky.faction == "Leninist" : <span style="color: var(--bolshevik-color);">Leninist</span> ?]
+  [?if leaders.Lunacharsky.faction == "Leftist" : <span style="color: var(--bolshevik-color);">Leftist</span> ?]
+  [?if leaders.Lunacharsky.faction == "Moderate" : <span style="color: var(--bolshevik-color);">Moderate</span> ?]
+  [?if leaders.Lunacharsky.faction == "Vperedist" : <span style="color: var(--bolshevik-color);">Vperedist</span> ?]
+  [?if leaders.Lunacharsky.faction == "Non-Factional" : <span style="color: var(--bolshevik-color);">Non-Factional</span> ?]
 — Experienced cultural theorist, intellectual, and artist.<ul> 
 Overall skill: ★★★★<br>
 Suitability: ★★★★★</ul>
 !}
-unavailable-subtitle: {!
-  if (Q.leaders.Lunacharsky.faction == "Leninist") <span style="color: var(--bolshevik-color);">Leninist</span>
-  if (Q.leaders.Lunacharsky.faction == "Leftist") <span style="color: var(--bolshevik-color);">Leftist</span>
-  if (Q.leaders.Lunacharsky.faction == "Moderate") <span style="color: var(--bolshevik-color);">Moderate</span>
-  if (Q.leaders.Lunacharsky.faction == "Vperedist") <span style="color: var(--bolshevik-color);">Vperedist</span>
-  if (Q.leaders.Lunacharsky.faction == "Non-Factional") <span style="color: var(--bolshevik-color);">Non-Factional</span>
-— Experienced cultural theorist, intellectual, and artist.<ul> 
-Overall skill: ★★★★<br>
-Suitability: ★★★★★</ul>
-!}
+unavailable-subtitle: [?if leaders.Lunacharsky.faction == "Leninist" : <span style="color: var(--bolshevik-color);">Leninist</span> ?][?if leaders.Lunacharsky.faction == "Leftist" : <span style="color: var(--bolshevik-color);">Leftist</span> ?][?if leaders.Lunacharsky.faction == "Moderate" : <span style="color: var(--bolshevik-color);">Moderate</span> ?][?if leaders.Lunacharsky.faction == "Vperedist" : <span style="color: var(--bolshevik-color);">Vperedist</span> ?][?if leaders.Lunacharsky.faction == "Non-Factional" : <span style="color: var(--bolshevik-color);">Non-Factional</span> ?]— Experienced cultural theorist, intellectual, and artist.<ul>Overall skill: ★★★★<br>Suitability: ★★★★★</ul>
 tags: enlightenment_candidates
 choose-if: education_minister != "Lunacharsky" 
 on-arrival: education_minister = "Lunacharsky"; education_minister_party = "Bolshevik";
