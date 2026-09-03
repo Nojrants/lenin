@@ -1,14 +1,15 @@
 title: Enlightenment Candidates
 new-page: true
+on-arrival: {!
+  Q.lunacharsky_faction = Q.leaders.Lunacharsky.faction;
+  console.log("Lunacharsky Faction:", Q.leaders.Lunacharsky.faction);
+  console.log("Lunacharsky Faction:", Q.lunacharsky_faction);
+!}
 
 
 @enlightenment_lunacharsky
 title: Anatoly Lunacharsky
-subtitle: {!
-<span style="color: var(--bolshevik-color);">Moderate</span> — Experienced cultural theorist, intellectual, and artist.<ul> 
-Overall skill: ★★★★<br>
-Suitability: ★★★★★</ul>
-!}
+subtitle: [?if lunacharsky_faction != "" : [+ lunacharsky_faction +] ?]   [?if lunacharsky_faction != "" : <span style="color: var(--bolshevik-color);">[+ lunacharsky_faction +]</span> ?]
 unavailable-subtitle: {!
 <span style="color: var(--bolshevik-color);">Moderate</span> — Experienced cultural theorist, intellectual, and artist.<ul> 
 Overall skill: ★★★★<br>
