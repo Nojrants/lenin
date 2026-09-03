@@ -2,11 +2,16 @@ title: Enlightenment Candidates
 new-page: true
 on-arrival: {!
   Q.lunacharsky_faction = Q.leaders.Lunacharsky.faction;
+  console.log("Lunacharsky Faction:", Q.leaders.Lunacharsky.faction);
+  console.log("Lunacharsky Faction:", Q.lunacharsky_faction);
 !}
 
 @enlightenment_lunacharsky
 title: Anatoly Lunacharsky
-subtitle: [?if lunacharsky_faction == "Moderate" : <span style="color: var(--bolshevik-color);">Moderate</span> ?] — Experienced cultural theorist, intellectual, and artist.<ul>Overall skill: ★★★★<br>Suitability: ★★★★★</ul>
+subtitle: {!
+  [?if lunacharsky_faction == "Moderate" : <span style="color: var(--bolshevik-color);">Moderate</span> ?]
+  — Experienced cultural theorist, intellectual, and artist.<ul>Overall skill: ★★★★<br>Suitability: ★★★★★</ul>
+!}
 unavailable-subtitle: 
 tags: enlightenment_candidates
 choose-if: education_minister != "Lunacharsky" 
