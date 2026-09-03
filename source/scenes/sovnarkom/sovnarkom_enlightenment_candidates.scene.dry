@@ -5,12 +5,12 @@ new-page: true
 @enlightenment_lunacharsky
 title: Anatoly Lunacharsky
 subtitle: {!
-<span style="color: var(--bolshevik-color);">Moderate</span> — Experienced cultural theorist, intellectual, and artist.<ul> 
+<span style="color: var(--bolshevik-color);">[+ leaders.Lunacharsky.faction +]</span> — Experienced cultural theorist, intellectual, and artist.<ul> 
 Overall skill: ★★★★<br>
 Suitability: ★★★★★</ul>
 !}
 unavailable-subtitle: {!
-<span style="color: var(--bolshevik-color);">Moderate</span> — Experienced cultural theorist, intellectual, and artist.<ul> 
+<span style="color: var(--bolshevik-color);">[+ leaders.Lunacharsky.faction +]</span> — Experienced cultural theorist, intellectual, and artist.<ul> 
 Overall skill: ★★★★<br>
 Suitability: ★★★★★</ul>
 !}
@@ -22,12 +22,12 @@ go-to: sovnarkom_composition
 @enlightenment_bubnov
 title: Andrei Bubnov
 subtitle: {!
-<span style="color: var(--bolshevik-color);">Leftist</span> — Well-rounded party administrator with military experience.<ul> 
+<span style="color: var(--bolshevik-color);">[+ leaders.Bubnov.faction +]</span> — Well-rounded party administrator with military experience.<ul> 
 Overall skill: ★★★<br>
 Suitability: ★</ul>
 !}
 unavailable-subtitle: {!
-<span style="color: var(--bolshevik-color);">Leftist</span> — Well-rounded party administrator with military experience.<ul> 
+<span style="color: var(--bolshevik-color);">[+ leaders.Bubnov.faction +]</span> — Well-rounded party administrator with military experience.<ul> 
 Overall skill: ★★★<br>
 Suitability: ★</ul>
 !}
@@ -39,12 +39,12 @@ go-to: sovnarkom_composition
 @enlightenment_lebedev
 title: Pavel Lebedev-Polyansky
 subtitle: {!
-<span style="color: var(--bolshevik-color);">Vperedist</span> — Scholar and literary critic; worked in publishing department and Proletkult.<ul> 
+<span style="color: var(--bolshevik-color);">[+ leaders.Lebedev.faction +]</span> — Scholar and literary critic; worked in publishing department and Proletkult.<ul> 
 Overall skill: ★★★<br>
 Suitability: ★★★★</ul>
 !}
 unavailable-subtitle: {!
-<span style="color: var(--bolshevik-color);">Vperedist</span> — Scholar and literary critic; worked in publishing department and Proletkult.<ul> 
+<span style="color: var(--bolshevik-color);">[+ leaders.Lebedev.faction +]</span> — Scholar and literary critic; worked in publishing department and Proletkult.<ul> 
 Overall skill: ★★★<br>
 Suitability: ★★★★</ul>
 !}
@@ -56,12 +56,12 @@ go-to: sovnarkom_composition
 @enlightenment_pokrovsky
 title: Mikhail Pokrovsky
 subtitle: {!
-<span style="color: var(--bolshevik-color);">Vperedist</span> — University-educated historian and leading historical theorist.<ul>  
+<span style="color: var(--bolshevik-color);">[+ leaders.Pokrovsky.faction +]</span> — University-educated historian and leading historical theorist.<ul>  
 Overall skill: ★★★★<br>
 Suitability: ★★</ul>
 !}
 unavailable-subtitle: {!
-<span style="color: var(--bolshevik-color);">Vperedist</span> — University-educated historian and leading historical theorist.<ul>  
+<span style="color: var(--bolshevik-color);">[+ leaders.Pokrovsky.faction +]</span> — University-educated historian and leading historical theorist.<ul>  
 Overall skill: ★★★★<br>
 Suitability: ★★</ul>
 !}
@@ -73,12 +73,12 @@ go-to: sovnarkom_composition
 @enlightenment_krupskaya
 title: Nadezhda Krupskaya
 subtitle: {!
-<span style="color: var(--bolshevik-color);">Bolshevik</span> — Social reformer and pedagogist. Appointing Lenin's wife will appear nepotistic.<ul>  
+<span style="color: var(--bolshevik-color);">[+ leaders.Krupskaya.faction +]</span> — Social reformer and pedagogist. Appointing Lenin's wife will appear nepotistic.<ul>  
 Overall skill: ★★☆<br>
 Suitability: ★★★★</ul>
 !}
 unavailable-subtitle: {!
-<span style="color: var(--bolshevik-color);">Bolshevik</span> — Social reformer and pedagogist. Appointing Lenin's wife will appear nepotistic.<ul>  
+<span style="color: var(--bolshevik-color);">[+ leaders.Krupskaya.faction +]</span> — Social reformer and pedagogist. Appointing Lenin's wife will appear nepotistic.<ul>  
 Overall skill: ★★☆<br>
 Suitability: ★★★★</ul>
 !}
@@ -90,12 +90,12 @@ go-to: sovnarkom_composition
 @enlightenment_bogdanov
 title: Alexander Bogdanov
 subtitle: {!
-<span style="color: var(--bolshevik-color);">Vperedist</span> — Leading Bolshevik theoretician until his falling out with Lenin; strong proponent of "proletarian culture". A controversial choice.<ul>
+<span style="color: var(--bolshevik-color);">[+ leaders.Bogdanov.faction +]</span> — Leading Bolshevik theoretician until his falling out with Lenin; strong proponent of "proletarian culture". A controversial choice.<ul>
 Overall skill: ★★★★★<br>
 Suitability: ★★★★★</ul>
 !}
 unavailable-subtitle: {!
-<span style="color: var(--bolshevik-color);">Vperedist</span> — Leading Bolshevik theoretician until his falling out with Lenin; strong proponent of "proletarian culture". A controversial choice.<ul>
+<span style="color: var(--bolshevik-color);">[+ leaders.Bogdanov.faction +]</span> — Leading Bolshevik theoretician until his falling out with Lenin; strong proponent of "proletarian culture". A controversial choice.<ul>
 Overall skill: ★★★★★<br>
 Suitability: ★★★★★</ul>
 !}
