@@ -4,7 +4,7 @@ new-page: true
 
 @enlightenment_lunacharsky
 title: Anatoly Lunacharsky
-subtitle: {! Q.leaders.Lunacharsky.faction !} 
+subtitle: [+ leaders.Lunacharsky.faction +]
 unavailable-subtitle: [+ leaders.Lunacharsky.faction +]
 tags: enlightenment_candidates
 choose-if: education_minister != "Lunacharsky" 
