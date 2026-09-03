@@ -4,12 +4,8 @@ new-page: true
 
 @enlightenment_lunacharsky
 title: Anatoly Lunacharsky
-subtitle: {! leaders.Lunacharsky.faction !} [+ leaders.Lunacharsky.faction +]
-unavailable-subtitle: {!
-<span style="color: var(--bolshevik-color);">Moderate</span> — Experienced cultural theorist, intellectual, and artist.<ul> 
-Overall skill: ★★★★<br>
-Suitability: ★★★★★</ul>
-!}
+subtitle: {! Q.leaders.Lunacharsky.faction !} 
+unavailable-subtitle: [+ leaders.Lunacharsky.faction +]
 tags: enlightenment_candidates
 choose-if: education_minister != "Lunacharsky" 
 on-arrival: education_minister = "Lunacharsky"; education_minister_party = "Bolshevik";
