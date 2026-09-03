@@ -1,5 +1,6 @@
 title: Sovnarkom Composition
 new-page: true
+on-arrival: {!
 
 Q.leninist_positions_previous = Q.leninist_positions;
 Q.leftcom_positions_previous = Q.leftcom_positions;
@@ -55,6 +56,7 @@ countFaction(Q.welfare_minister);
 countFaction(Q.property_minister);
 countFaction(Q.local_minister);
 
+!}
 
 <table style="width:100%; border-collapse:collapse; margin:10px 0;">
 <tr>
