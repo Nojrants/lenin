@@ -5,7 +5,7 @@ new-page: true
 @enlightenment_lunacharsky
 title: Anatoly Lunacharsky
 subtitle: {!
-<span style="color: var(--bolshevik-color);">[+ Q.leaders.Lunacharsky.faction +]</span> — Experienced cultural theorist, intellectual, and artist.<ul> 
+"<span style=\"color: var(--bolshevik-color);\">" + Q.leaders.lunacharsky.faction + "</span> — Experienced cultural theorist, intellectual, and artist.<ul> 
 Overall skill: ★★★★<br>
 Suitability: ★★★★★</ul>
 !}
