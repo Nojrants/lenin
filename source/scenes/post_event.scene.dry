@@ -262,6 +262,66 @@ if (Q.unemployed <= 1) {
 
 
 
+Q.leninist_positions = 0;
+Q.leftcom_positions = 0;
+Q.moderate_positions = 0;
+Q.vperedist_positions = 0;
+Q.nonfactional_positions = 0;
+
+function countFaction(position) {
+    if (!position || position == "Vacant" || position == "None") return;
+
+    var leader = Q.leaders[position];
+    if (!leader || !leader.faction) return;
+
+    if (leader.faction == "Leninist") {
+        Q.leninist_positions += 1;
+    }
+    else if (leader.faction == "Leftist") {
+        Q.leftcom_positions += 1;
+    }
+    else if (leader.faction == "Moderate") {
+        Q.moderate_positions += 1;
+    }
+    else if (leader.faction == "Vperedist") {
+        Q.vperedist_positions += 1;
+    }
+    else if (leader.faction == "Non-Factional") {
+        Q.nonfactional_positions += 1;
+    }
+}
+
+countFaction(Q.prime_minister);
+countFaction(Q.deputy_pm);
+countFaction(Q.foreign_minister);
+countFaction(Q.war_minister);
+countFaction(Q.education_minister);
+countFaction(Q.interior_minister);
+countFaction(Q.transport_minister);
+countFaction(Q.trade_minister);
+countFaction(Q.finance_minister);
+countFaction(Q.justice_minister);
+countFaction(Q.labor_minister);
+countFaction(Q.agriculture_minister);
+countFaction(Q.food_minister);
+countFaction(Q.posts_minister);
+countFaction(Q.nationalities_minister);
+countFaction(Q.welfare_minister);
+countFaction(Q.property_minister);
+countFaction(Q.local_minister);
+
+
+console.log("Leninist positions: " + Q.leninist_positions);
+console.log("Leftist positions: " + Q.leftcom_positions);
+console.log("Moderate positions: " + Q.moderate_positions);
+console.log("Vperedist positions: " + Q.vperedist_positions);
+console.log("Non-Factional positions: " + Q.nonfactional_positions);
+
+
+
+
+
+
 Q.finalefficacy_sovnarkom =
     Q.efficacy_sovnarkom
     + (0.25 * (
