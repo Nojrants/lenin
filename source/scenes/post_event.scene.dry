@@ -343,6 +343,9 @@ Q.moderate_strength += Q.moderate_positions / 10;
 Q.vperedist_strength += Q.vperedist_positions / 10;
 Q.nonfactional_strength += Q.nonfactional_positions / 10;
 
+if (Q.prime_minister == "Lenin") leninist_strength += 2;
+if (Q.coalition_government == 1) moderate_strength += 1; 
+
 var faction_positions = [
     ["Leninist", Q.leninist_positions],
     ["Leftist", Q.leftcom_positions],
