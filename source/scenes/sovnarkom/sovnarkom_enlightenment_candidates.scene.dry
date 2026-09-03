@@ -8,11 +8,8 @@ on-arrival: {!
 
 @enlightenment_lunacharsky
 title: Anatoly Lunacharsky
-subtitle: {!
-  [?if lunacharsky_faction == "Moderate" : <span style="color: var(--bolshevik-color);">Moderate</span> ?]
-  — Experienced cultural theorist, intellectual, and artist.<ul>Overall skill: ★★★★<br>Suitability: ★★★★★</ul>
-!}
-unavailable-subtitle: 
+subtitle: Moderate — Experienced cultural theorist, intellectual, and artist.<ul>Overall skill: ★★★★<br>Suitability: ★★★★★</ul>
+unavailable-subtitle: Moderate — Experienced cultural theorist, intellectual, and artist.<ul>Overall skill: ★★★★<br>Suitability: ★★★★★</ul>
 tags: enlightenment_candidates
 choose-if: education_minister != "Lunacharsky" 
 on-arrival: education_minister = "Lunacharsky"; education_minister_party = "Bolshevik";
