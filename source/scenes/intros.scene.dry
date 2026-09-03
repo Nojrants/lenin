@@ -75,6 +75,10 @@ Q.local_minister_party = "";
 Q.palaces_minister = "None";
 Q.palaces_minister_party = "";
 
+Q.leninist_positions = 4;
+Q.leftcom_positions = 3;
+Q.moderate_positions = 6;
+
 Q.sdi_relation -= 5;
 Q.left_m_relation -= 10;
 Q.centre_m_relation -= 15;
@@ -140,6 +144,11 @@ Q.local_minister = "None";
 Q.local_minister_party = "";
 Q.palaces_minister = "None";
 Q.palaces_minister_party = "";
+
+Q.leninist_positions = 4;
+Q.leftcom_positions = 3;
+Q.moderate_positions = 6;
+
 
 Q.sdi_relation += 0;
 Q.left_m_relation -= 5;
