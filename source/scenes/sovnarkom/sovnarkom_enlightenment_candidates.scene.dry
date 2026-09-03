@@ -5,12 +5,22 @@ new-page: true
 @enlightenment_lunacharsky
 title: Anatoly Lunacharsky
 subtitle: {!
-"<span style=\"color: var(--bolshevik-color);\">" + Q.leaders.lunacharsky.faction + "</span> — Experienced cultural theorist, intellectual, and artist.<ul> 
+[?if leaders.Lunacharsky.faction == "Leninist" : <span style="color: var(--bolshevik-color);">Leninist</span>)?]
+[?if leaders.Lunacharsky.faction == "Leftist" : <span style="color: var(--bolshevik-color);">Leftist</span>)?]
+[?if leaders.Lunacharsky.faction == "Moderate" : <span style="color: var(--bolshevik-color);">Moderate</span>)?]
+[?if leaders.Lunacharsky.faction == "Vperedist" : <span style="color: var(--bolshevik-color);">Vperedist</span>)?]
+[?if leaders.Lunacharsky.faction == "Non-Factional" : <span style="color: var(--bolshevik-color);">Non-Factional</span>)?]
+— Experienced cultural theorist, intellectual, and artist.<ul> 
 Overall skill: ★★★★<br>
 Suitability: ★★★★★</ul>
 !}
 unavailable-subtitle: {!
-<span style="color: var(--bolshevik-color);">[+ leaders.Lunacharsky.faction +]</span> — Experienced cultural theorist, intellectual, and artist.<ul> 
+[?if leaders.Lunacharsky.faction == "Leninist" : <span style="color: var(--bolshevik-color);">Leninist</span>)?]
+[?if leaders.Lunacharsky.faction == "Leftist" : <span style="color: var(--bolshevik-color);">Leftist</span>)?]
+[?if leaders.Lunacharsky.faction == "Moderate" : <span style="color: var(--bolshevik-color);">Moderate</span>)?]
+[?if leaders.Lunacharsky.faction == "Vperedist" : <span style="color: var(--bolshevik-color);">Vperedist</span>)?]
+[?if leaders.Lunacharsky.faction == "Non-Factional" : <span style="color: var(--bolshevik-color);">Non-Factional</span>)?]
+— Experienced cultural theorist, intellectual, and artist.<ul> 
 Overall skill: ★★★★<br>
 Suitability: ★★★★★</ul>
 !}
