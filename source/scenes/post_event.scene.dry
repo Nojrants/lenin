@@ -259,69 +259,7 @@ if (Q.unemployed <= 1) {
     Q.unemployed = 1;
 }
 
-Q.leaders = {};
-// Bolsheviks
-Q.leaders.None = { auctoritas: 1, administration: 1, idealogism: 1, military: 1, economic: 1, partyorg: 1, diplomacy: 1, culture: 1, legalism: 1, nationalities: 1 };
-Q.leaders.Vacant = { auctoritas: 1, administration: 1, idealogism: 1, military: 1, economic: 1, partyorg: 1, diplomacy: 1, culture: 1, legalism: 1, nationalities: 1 };
-Q.leaders.Skvortsov = { auctoritas: 2.5, administration: 2, idealogism: 1, military: 1, economic: 2.5, partyorg: 3, diplomacy: 1, culture: 1, legalism: 1.5, nationalities: 1 };
-Q.leaders.Lenin = { auctoritas: 6, administration: 5, idealogism: 5, military: 2, economic: 3.5, partyorg: 4, diplomacy: 3.5, culture: 2, legalism: 3, nationalities: 3 };
-Q.leaders.Trotsky = { auctoritas: 5, administration: 5, idealogism: 5, military: 5, economic: 3, partyorg: 3.5, diplomacy: 3.5, culture: 1.5, legalism: 2, nationalities: 1 };
-Q.leaders.Krylenko = { auctoritas: 3, administration: 3, idealogism: 2, military: 4, economic: 2, partyorg: 3, diplomacy: 1, culture: 1, legalism: 4, nationalities: 1 };
-Q.leaders.Lunacharsky = { auctoritas: 3.5, administration: 4, idealogism: 4, military: 1, economic: 2, partyorg: 2, diplomacy: 3, culture: 5, legalism: 2, nationalities: 1.5 };
-Q.leaders.Rykov = { auctoritas: 4, administration: 5, idealogism: 2, military: 2, economic: 4, partyorg: 3, diplomacy: 2.5, culture: 1.5, legalism: 2.5, nationalities: 1.5 };
-Q.leaders.Nogin = { auctoritas: 3, administration: 3.5, idealogism: 2, military: 2, economic: 3.5, partyorg: 2.5, diplomacy: 2, culture: 1, legalism: 2, nationalities: 1 };
-Q.leaders.Oppokov = { auctoritas: 2.5, administration: 3, idealogism: 2, military: 2, economic: 2, partyorg: 2, diplomacy: 2, culture: 1, legalism: 4, nationalities: 1 };
-Q.leaders.Shliapnikov = { auctoritas: 4, administration: 4, idealogism: 4, military: 2, economic: 3.5, partyorg: 3.5, diplomacy: 3, culture: 1.5, legalism: 1, nationalities: 1 };
-Q.leaders.Milyutin = { auctoritas: 2.5, administration: 3, idealogism: 1.5, military: 1, economic: 2, partyorg: 2, diplomacy: 1.5, culture: 1, legalism: 1.5, nationalities: 1 };
-Q.leaders.Teodorovich = { auctoritas: 2.5, administration: 3, idealogism: 3, military: 2, economic: 3, partyorg: 2.5, diplomacy: 1.5, culture: 1, legalism: 2, nationalities: 1 };
-Q.leaders.Glebov = { auctoritas: 2.5, administration: 3, idealogism: 2.5, military: 1, economic: 2.5, partyorg: 3, diplomacy: 1.5, culture: 3, legalism: 2, nationalities: 1 };
-Q.leaders.Stalin = { auctoritas: 4, administration: 4, idealogism: 3, military: 3, economic: 2.5, partyorg: 5, diplomacy: 2.5, culture: 3, legalism: 2, nationalities: 5 };
-Q.leaders.Chicherin = { auctoritas: 3, administration: 4, idealogism: 3, military: 1, economic: 2, partyorg: 2.5, diplomacy: 5, culture: 2, legalism: 3, nationalities: 3 };
-Q.leaders.Ioffe = { auctoritas: 2.5, administration: 3, idealogism: 2, military: 1.5, economic: 1.5, partyorg: 2.5, diplomacy: 3, culture: 2, legalism: 2, nationalities: 1.5 };
-Q.leaders.Dybenko = { auctoritas: 3, administration: 3, idealogism: 1.5, military: 4, economic: 1.5, partyorg: 2, diplomacy: 2, culture: 1, legalism: 3, nationalities: 1.5 };
-Q.leaders.Podvoisky = { auctoritas: 3.5, administration: 4, idealogism: 1.5, military: 4, economic: 1.5, partyorg: 3, diplomacy: 2, culture: 1.5, legalism: 2.5, nationalities: 1.5 };
-Q.leaders.Krupskaya = { auctoritas: 2.5, administration: 3, idealogism: 1.5, military: 1, economic: 1.5, partyorg: 2.5, diplomacy: 2, culture: 4, legalism: 2.5, nationalities: 1 };
-Q.leaders.Pokrovsky = { auctoritas: 3.5, administration: 4, idealogism: 3.5, military: 1.5, economic: 2, partyorg: 2.5, diplomacy: 2, culture: 3, legalism: 2.5, nationalities: 1.5 };
-Q.leaders.Bubnov = { auctoritas: 2.5, administration: 3, idealogism: 1.5, military: 2.5, economic: 2, partyorg: 3, diplomacy: 1.5, culture: 2, legalism: 1.5, nationalities: 1 };
-Q.leaders.Lebedev = { auctoritas: 2, administration: 3, idealogism: 1, military: 1, economic: 2, partyorg: 2, diplomacy: 2, culture: 3, legalism: 2.5, nationalities: 1.5 };
-Q.leaders.Bogdanov = { auctoritas: 3, administration: 4, idealogism: 5, military: 2, economic: 3, partyorg: 4, diplomacy: 2, culture: 5, legalism: 2.5, nationalities: 2 };
-Q.leaders.Sokolnikov = { auctoritas: 3, administration: 4, idealogism: 2, military: 2, economic: 5, partyorg: 3, diplomacy: 2, culture: 2, legalism: 2.5, nationalities: 1.5 };
-Q.leaders.Kollontai = { auctoritas: 3, administration: 3, idealogism: 4, military: 1.5, economic: 2, partyorg: 2.5, diplomacy: 3.5, culture: 4, legalism: 1.5, nationalities: 1.5 };
-Q.leaders.Vinokurov = { auctoritas: 2.5, administration: 3.5, idealogism: 2.5, military: 1.5, economic: 3, partyorg: 3, diplomacy: 2.5, culture: 2, legalism: 3.5, nationalities: 1 };
-Q.leaders.N_Milyutin = { auctoritas: 2, administration: 3, idealogism: 2, military: 1.5, economic: 3, partyorg: 3, diplomacy: 1.5, culture: 2.5, legalism: 1.5, nationalities: 1.5 };
 
-
-// Mensheviks
-Q.leaders.Martov = { auctoritas: 5, administration: 4, idealogism: 4, military: 1.5, economic: 3, partyorg: 4, diplomacy: 3, culture: 2, legalism: 3, nationalities: 1.5 };
-Q.leaders.Sukhanov = { auctoritas: 3.5, administration: 4, idealogism: 3, military: 1.5, economic: 2.5, partyorg: 3.5, diplomacy: 3, culture: 1.5, legalism: 2.5, nationalities: 1.5 };
-Q.leaders.Abramovich = { auctoritas: 3.5, administration: 4, idealogism: 2.5, military: 1.5, economic: 3.5, partyorg: 3, diplomacy: 3.5, culture: 1.5, legalism: 2, nationalities: 1.5 };
-Q.leaders.Avilov = { auctoritas: 2.5, administration: 3.5, idealogism: 2.5, military: 2, economic: 2.5, partyorg: 2.5, diplomacy: 2.5, culture: 1.5, legalism: 2.5, nationalities: 1.5 };
-Q.leaders.Bazarov = { auctoritas: 2.5, administration: 3.5, idealogism: 3, military: 1.5, economic: 4, partyorg: 2.5, diplomacy: 2.5, culture: 2.5, legalism: 2.5, nationalities: 1.5 };
-
-
-// SRs
-Q.leaders.Natanson = { auctoritas: 3.5, administration: 4, idealogism: 3, military: 1.5, economic: 3, partyorg: 4, diplomacy: 3, culture: 1.5, legalism: 2, nationalities: 1.5 };
-Q.leaders.Malitsky = { auctoritas: 3, administration: 3, idealogism: 2, military: 2.5, economic: 3.5, partyorg: 2, diplomacy: 3, culture: 1.5, legalism: 2, nationalities: 1.5 };
-Q.leaders.Maslov = { auctoritas: 2, administration: 3, idealogism: 1.5, military: 2, economic: 4, partyorg: 2, diplomacy: 2, culture: 2.5, legalism: 4, nationalities: 2.5 };
-
-// Left-SRs
-Q.leaders.Malkin = { auctoritas: 2, administration: 2.5, idealogism: 3, military: 2, economic: 2.5, partyorg: 3, diplomacy: 2, culture: 1.5, legalism: 2, nationalities: 1.5 };
-Q.leaders.Karelin = { auctoritas: 3, administration: 3.5, idealogism: 3, military: 2, economic: 2.5, partyorg: 3, diplomacy: 2, culture: 1.5, legalism: 3, nationalities: 1.5 };
-Q.leaders.Trutovsky = { auctoritas: 2.5, administration: 3.5, idealogism: 2.5, military: 2, economic: 2.5, partyorg: 3, diplomacy: 2, culture: 2, legalism: 3.5, nationalities: 2.5 };
-Q.leaders.Steinberg = { auctoritas: 2, administration: 3.5, idealogism: 2.5, military: 1.5, economic: 2.5, partyorg: 3, diplomacy: 3, culture: 1.5, legalism: 4, nationalities: 1.5 };
-Q.leaders.Proshian = { auctoritas: 2.5, administration: 3, idealogism: 2, military: 1.5, economic: 2.5, partyorg: 3, diplomacy: 2.5, culture: 1.5, legalism: 3, nationalities: 2.5 };
-
-
-// NSs
-Q.leaders.Peshekhonov = { auctoritas: 3, administration: 3, idealogism: 2.5, military: 1.5, economic: 4, partyorg: 3.5, diplomacy: 2.5, culture: 1.5, legalism: 2.5, nationalities: 1.5 };
-Q.leaders.Dzyubinsky = { auctoritas: 3, administration: 3.5, idealogism: 2.5, military: 2.5, economic: 4, partyorg: 4, diplomacy: 2.5, culture: 2.5, legalism: 3, nationalities: 2 };
-
-
-
-console.log("interest", Q.interest);
-console.log("indemnities", Q.indemnities);
-console.log("government_functions", Q.government_functions);
-console.log("expenditure", Q.expenditure);
 
 
 Q.finalefficacy_sovnarkom =
