@@ -78,6 +78,8 @@ Q.palaces_minister_party = "";
 Q.leninist_positions = 4;
 Q.leftcom_positions = 3;
 Q.moderate_positions = 6;
+Q.vperedist_positions = 0;
+Q.nonfactional_positions = 0;
 
 Q.sdi_relation -= 5;
 Q.left_m_relation -= 10;
@@ -148,6 +150,8 @@ Q.palaces_minister_party = "";
 Q.leninist_positions = 4;
 Q.leftcom_positions = 3;
 Q.moderate_positions = 6;
+Q.vperedist_positions = 0;
+Q.nonfactional_positions = 0;
 
 
 Q.sdi_relation += 0;
