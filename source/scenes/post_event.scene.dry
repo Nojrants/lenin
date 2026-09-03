@@ -262,6 +262,12 @@ if (Q.unemployed <= 1) {
 
 
 
+Q.leninist_positions_previous = Q.leninist_positions;
+Q.leftcom_positions_previous = Q.leftcom_positions;
+Q.moderate_positions_previous = Q.moderate_positions;
+Q.vperedist_positions_previous = Q.vperedist_positions;
+Q.nonfactional_positions_previous = Q.nonfactional_positions;
+
 Q.leninist_positions = 0;
 Q.leftcom_positions = 0;
 Q.moderate_positions = 0;
@@ -310,6 +316,57 @@ countFaction(Q.welfare_minister);
 countFaction(Q.property_minister);
 countFaction(Q.local_minister);
 
+if (Q.leninist_positions < Q.leninist_positions_previous)
+    Q.leninist_dissent += (Q.leninist_positions_previous - Q.leninist_positions) * 2;
+if (Q.leninist_positions > Q.leninist_positions_previous)
+    Q.leninist_dissent -= (Q.leninist_positions - Q.leninist_positions_previous) * 2;
+if (Q.leftcom_positions < Q.leftcom_positions_previous)
+    Q.leftcom_dissent += (Q.leftcom_positions_previous - Q.leftcom_positions) * 2;
+if (Q.leftcom_positions > Q.leftcom_positions_previous)
+    Q.leftcom_dissent -= (Q.leftcom_positions - Q.leftcom_positions_previous) * 2;
+if (Q.moderate_positions < Q.moderate_positions_previous)
+    Q.moderate_dissent += (Q.moderate_positions_previous - Q.moderate_positions) * 2;
+if (Q.moderate_positions > Q.moderate_positions_previous)
+    Q.moderate_dissent -= (Q.moderate_positions - Q.moderate_positions_previous) * 2;
+if (Q.vperedist_positions < Q.vperedist_positions_previous)
+    Q.vperedist_dissent += (Q.vperedist_positions_previous - Q.vperedist_positions) * 2;
+if (Q.vperedist_positions > Q.vperedist_positions_previous)
+    Q.vperedist_dissent -= (Q.vperedist_positions - Q.vperedist_positions_previous) * 2;
+if (Q.nonfactional_positions < Q.nonfactional_positions_previous)
+    Q.nonfactional_dissent += (Q.nonfactional_positions_previous - Q.nonfactional_positions) * 2;
+if (Q.nonfactional_positions > Q.nonfactional_positions_previous)
+    Q.nonfactional_dissent -= (Q.nonfactional_positions - Q.nonfactional_positions_previous) * 2;
+
+Q.leninist_strength += Q.leninist_positions / 10;
+Q.leftcom_strength += Q.leftcom_positions / 10;
+Q.moderate_strength += Q.moderate_positions / 10;
+Q.vperedist_strength += Q.vperedist_positions / 10;
+Q.nonfactional_strength += Q.nonfactional_positions / 10;
+
+var faction_positions = [
+    ["Leninist", Q.leninist_positions],
+    ["Leftist", Q.leftcom_positions],
+    ["Moderate", Q.moderate_positions],
+    ["Vperedist", Q.vperedist_positions],
+    ["Non-Factional", Q.nonfactional_positions]
+];
+var max_positions = Math.max(
+    Q.leninist_positions,
+    Q.leftcom_positions,
+    Q.moderate_positions,
+    Q.vperedist_positions,
+    Q.nonfactional_positions
+);
+for (var i = 0; i < faction_positions.length; i++) {
+    if (faction_positions[i][1] == max_positions) {
+        if (faction_positions[i][0] == "Leninist") Q.leninist_strength += 1;
+        else if (faction_positions[i][0] == "Leftist") Q.leftcom_strength += 1;
+        else if (faction_positions[i][0] == "Moderate") Q.moderate_strength += 1;
+        else if (faction_positions[i][0] == "Vperedist") Q.vperedist_strength += 1;
+        else if (faction_positions[i][0] == "Non-Factional") Q.nonfactional_strength += 1;
+        break;
+    }
+}
 
 console.log("Leninist positions: " + Q.leninist_positions);
 console.log("Leftist positions: " + Q.leftcom_positions);
