@@ -182,6 +182,7 @@ go-to: menu
 
 @drop_property
 title: [?if property_minister == "None": Perhaps we could create a new "State Property" commissariat for you? ?][?if property_minister != "None": Drop the Properties Commissariat. ?]
+subtitle: [?if property_minister == "None": They will manage museums, libraries, and former imperial properties. ?]
 view-if: drop_property != 1
 tags: lsr_offers
 on-arrival: drop_property = 1; influence += 1; commissariats_held -= 1;
@@ -189,6 +190,7 @@ go-to: menu
 
 @drop_local
 title: [?if local_minister == "None": Perhaps we could create a new "Local Self-Government" commissariat for you? ?][?if local_minister != "None": Drop the Local Self-Government Commissariat. ?]
+subtitle: [?if local_minister == "None": They will coordinate with local institutions. ?]
 view-if: drop_local != 1
 tags: lsr_offers
 on-arrival: drop_local = 1; influence += 1; commissariats_held -= 1;
@@ -348,14 +350,14 @@ unavailable-subtitle: The Left-SRs will not accept the current offer.
 choose-if: influence > 56 and (drop_internal = 1 or drop_military = 1 or drop_justice = 1) and commissariats_held <= 8
 new-page: true
 on-arrival: commissariats_promised = commissariats_held; commissariats_held = 14;
-go-to: cabinet_negotiations
+go-to: cabinet_negotiations2
 
 We have formed a tentative agreement. Now we must finalize the selections in the people's commissariats. 
 
-@cabinet_negotiations
+@cabinet_negotiations2
 title: Cabinet negotiations
 
-- #commissariat_assign
+- #commissariat_assign2
 - @finalize_deal
 - @cancel_deal
 
@@ -459,12 +461,12 @@ on-arrival: {!
 title: Appoint the Foreign Affairs Commissar
 subtitle: [?if foreign_minister != "Vacant" : Currently held by [+ foreign_minister +] ?][?if foreign_minister != "Vacant" and foreign_minister_party=="Bolshevik": (<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>)?][?if foreign_minister_party=="Menshevik": (<span class="tooltip-text" title="Menshevik" style="color: var(--m-color);">RSDLP(u)</span>)?][?if foreign_minister_party=="Left-SR": (<span class="tooltip-text" title="Left-SR" style="color: var(--lsr-color);">Left-SR</span>)?][?if foreign_minister_party=="SR": (<span class="tooltip-text" title="Socialist Revolutionary" style="color: var(--sr-color);">SR</span>)?][?if foreign_minister_party=="SD-Int": (<span class="tooltip-text" title="Social-Democratic Internationalist" style="color: var(--sdi-color);">SD-Int</span>)?][?if foreign_minister_party=="NS": (<span class="tooltip-text" title="Popular Socialist" style="color: var(--ns-color);">NS</span>)?]
 view-if: drop_foreign = 1
-tags: commissariat_assign
+tags: commissariat_assign2
 go-to: foreign_menu
 
 @foreign_menu
 
-- #foreign_menu
+- #foreign_menu3
 
 @foreign_trotsky
 title: Leon Trotsky
@@ -478,13 +480,13 @@ unavailable-subtitle: {!
 Overall skill: ★★★★★<br>
 Suitability: ★★★☆</ul>
 !}
-tags: foreign_menu
+tags: foreign_menu3
 choose-if: foreign_minister != "Trotsky" 
 on-arrival: {!
   if (Q.foreign_minister_party == "Left-SR") commissariats_held += 1; 
   Q.foreign_minister = "Trotsky"; Q.foreign_minister_party = "Bolshevik";
 !}
-go-to: cabinet_negotiations
+go-to: cabinet_negotiations2
 
 @foreign_spiridonova
 title: Maria Spiridonova
@@ -498,28 +500,28 @@ unavailable-subtitle: {!
 Overall skill: ★★★★<br>
 Suitability: ★★★</ul>
 !}
-tags: foreign_menu
+tags: foreign_menu3
 choose-if: foreign_minister != "Spiridonova" 
 on-arrival: {!
   if (Q.foreign_minister_party != "Left-SR") commissariats_held -= 1; 
   Q.foreign_minister = "Spiridonova"; Q.foreign_minister_party = "Left-SR";
 !}
-go-to: cabinet_negotiations
+go-to: cabinet_negotiations2
 
 @foreign_vacant
 title: Let's leave the position vacant for now. 
-tags: foreign_menu
+tags: foreign_menu3
 on-arrival: {!
   if (Q.foreign_minister_party == "Left-SR") commissariats_held += 1; 
   Q.foreign_minister = "Vacant"; Q.foreign_minister_party = "";
 !}
-go-to: cabinet_negotiations
+go-to: cabinet_negotiations2
 
 @foreign_cancel
 title: Cancel reassignment.
 subtitle: [?if foreign_minister != "Vacant": Keep [+ foreign_minister +] in place. ?]
-tags: foreign_menu
-go-to: cabinet_negotiations
+tags: foreign_menu3
+go-to: cabinet_negotiations2
 
 
 
@@ -527,12 +529,12 @@ go-to: cabinet_negotiations
 title: Appoint the Military Commissar
 subtitle: [?if war_minister != "Vacant" : Currently held by [+ war_minister +] ?][?if war_minister != "Vacant" and war_minister_party=="Bolshevik": (<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>)?][?if war_minister_party=="Menshevik": (<span class="tooltip-text" title="Menshevik" style="color: var(--m-color);">RSDLP(u)</span>)?][?if war_minister_party=="Left-SR": (<span class="tooltip-text" title="Left-SR" style="color: var(--lsr-color);">Left-SR</span>)?][?if war_minister_party=="SR": (<span class="tooltip-text" title="Socialist Revolutionary" style="color: var(--sr-color);">SR</span>)?][?if war_minister_party=="SD-Int": (<span class="tooltip-text" title="Social-Democratic Internationalist" style="color: var(--sdi-color);">SD-Int</span>)?][?if war_minister_party=="NS": (<span class="tooltip-text" title="Popular Socialist" style="color: var(--ns-color);">NS</span>)?]
 view-if: drop_military = 1
-tags: commissariat_assign
+tags: commissariat_assign2
 go-to: military_menu
 
 @military_menu
 
-- #military_menu
+- #military_menu3
 
 @military_krylenko
 title: Nikolai Krylenko 
@@ -546,29 +548,29 @@ unavailable-subtitle: {!
 Overall skill: ★★★<br>
 Suitability: ★★★★</ul>
 !} 
-tags: military_menu 
+tags: military_menu3 
 choose-if: war_minister != "Krylenko" 
 on-arrival: {!
   if (Q.war_minister_party == "Left-SR") commissariats_held += 1; 
   Q.war_minister = "Krylenko"; Q.war_minister_party = "Bolshevik";
 !}
-go-to: cabinet_negotiations
+go-to: cabinet_negotiations2
 
 
 @military_vacant
 title: Let's leave the position vacant for now. 
-tags: military_menu
+tags: military_menu3
 on-arrival: {!
   if (Q.war_minister_party == "Left-SR") commissariats_held += 1; 
   Q.war_minister = "Vacant"; Q.war_minister_party = "";
 !}
-go-to: cabinet_negotiations
+go-to: cabinet_negotiations2
 
 @military_cancel
 title: Cancel reassignment.
 subtitle: [?if war_minister != "Vacant": Keep [+ war_minister +] in place. ?]
-tags: military_menu
-go-to: cabinet_negotiations
+tags: military_menu3
+go-to: cabinet_negotiations2
 
 
 
@@ -579,7 +581,7 @@ go-to: cabinet_negotiations
 title: Appoint the Enlightenment Commissar
 subtitle: [?if education_minister != "Vacant" : Currently held by [+ education_minister +] ?][?if education_minister != "Vacant" and education_minister_party=="Bolshevik": (<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>)?][?if education_minister_party=="Menshevik": (<span class="tooltip-text" title="Menshevik" style="color: var(--m-color);">RSDLP(u)</span>)?][?if education_minister_party=="Left-SR": (<span class="tooltip-text" title="Left-SR" style="color: var(--lsr-color);">Left-SR</span>)?][?if education_minister_party=="SR": (<span class="tooltip-text" title="Socialist Revolutionary" style="color: var(--sr-color);">SR</span>)?][?if education_minister_party=="SD-Int": (<span class="tooltip-text" title="Social-Democratic Internationalist" style="color: var(--sdi-color);">SD-Int</span>)?][?if education_minister_party=="NS": (<span class="tooltip-text" title="Popular Socialist" style="color: var(--ns-color);">NS</span>)?]
 view-if: drop_enlightenment = 1
-tags: commissariat_assign
+tags: commissariat_assign2
 go-to: enlightenment_menu
 
 @enlightenment_menu
@@ -598,13 +600,13 @@ Bolshevik — Experienced cultural theorist, intellectual, and artist.<br>
 Overall skill: ★★★★<br>
 Suitability: ★★★★★
 !}
-tags: enlightenment_candidates2
+tags: enlightenment_candidates3
 choose-if: education_minister != "Lunacharsky" 
 on-arrival: {!
   if (Q.education_minister_party == "Left-SR") commissariats_held += 1; 
   Q.education_minister = "Lunacharsky"; Q.education_minister_party = "Bolshevik"; 
 !}
-go-to: cabinet_negotiations
+go-to: cabinet_negotiations2
 
 @enlightenment_natanson
 title: Mark Natanson
@@ -613,29 +615,29 @@ Left-SR — Party leader and elder statesman; some experience in education.<br>
 Overall skill: ★★★☆<br>
 Suitability: ★☆
 !}
-tags: enlightenment_candidates2
+tags: enlightenment_candidates3
 choose-if: lsr_relation >= 40 and education_minister != "Natanson" 
 unavailable-subtitle: [?if lsr_relation < 40 : Natanson won't accept this offer.<br> ?]Left-SR — Party leader and elder statesman; some experience in education.<br>Overall skill: ★★★☆<br>Suitability: ★☆
 on-arrival: {!
   if (Q.education_minister_party == "Bolshevik" || Q.education_minister == "Vacant") Q.commissariats_held -= 1;
   Q.education_minister = "Natanson"; Q.education_minister_party = "Left-SR"; Q.lsr_represented += 1;
 !}
-go-to: cabinet_negotiations
+go-to: cabinet_negotiations2
 
 @enlightenment_vacant
 title: Let's leave the position vacant for now. 
-tags: enlightenment_candidates2
+tags: enlightenment_candidates3
 on-arrival: {!
   if (Q.education_minister_party == "Left-SR") commissariats_held += 1; 
   Q.education_minister = "Vacant"; Q.education_minister_party = "";
 !}
-go-to: cabinet_negotiations
+go-to: cabinet_negotiations2
 
 @enlightenment_cancel
 title: Cancel reassignment.
 subtitle: [?if education_minister != "Vacant": Keep [+ education_minister +] in place. ?]
-tags: enlightenment_candidates2
-go-to: cabinet_negotiations
+tags: enlightenment_candidates3
+go-to: cabinet_negotiations2
 
 
                        
@@ -644,7 +646,7 @@ go-to: cabinet_negotiations
 title: Appoint the Internal Affairs Commissar
 subtitle: [?if interior_minister != "Vacant" : Currently held by [+ interior_minister +] ?][?if interior_minister != "Vacant" and interior_minister_party=="Bolshevik": (<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>)?][?if interior_minister_party=="Menshevik": (<span class="tooltip-text" title="Menshevik" style="color: var(--m-color);">RSDLP(u)</span>)?][?if interior_minister_party=="Left-SR": (<span class="tooltip-text" title="Left-SR" style="color: var(--lsr-color);">Left-SR</span>)?][?if interior_minister_party=="SR": (<span class="tooltip-text" title="Socialist Revolutionary" style="color: var(--sr-color);">SR</span>)?][?if interior_minister_party=="SD-Int": (<span class="tooltip-text" title="Social-Democratic Internationalist" style="color: var(--sdi-color);">SD-Int</span>)?][?if interior_minister_party=="NS": (<span class="tooltip-text" title="Popular Socialist" style="color: var(--ns-color);">NS</span>)?]
 view-if: drop_internal = 1
-tags: commissariat_assign
+tags: commissariat_assign2
 go-to: internal_menu
 
 @internal_menu
@@ -655,29 +657,29 @@ go-to: internal_menu
 title: Alexei Rykov
 subtitle: 
 unavailable-subtitle: 
-tags: internal_candidates
+tags: internal_candidates3
 view-if: moderates_resigned != 0
 choose-if: interior_minister != "Rykov" 
 on-arrival: {!
   if (Q.interior_minister_party == "Left-SR") commissariats_held += 1; 
   Q.interior_minister = "Rykov"; Q.interior_minister_party = "Bolshevik"; 
 !}
-go-to: cabinet_negotiations
+go-to: cabinet_negotiations2
 
 @internal_vacant
 title: Let's leave the position vacant for now. 
-tags: internal_candidates
+tags: internal_candidates3
 on-arrival: {!
   if (Q.interior_minister_party == "Left-SR") commissariats_held += 1; 
   Q.interior_minister = "Vacant"; Q.interior_minister_party = "";
 !}
-go-to: cabinet_negotiations
+go-to: cabinet_negotiations2
 
 @internal_cancel
 title: Cancel reassignment.
 subtitle: [?if interior_minister != "Vacant": Keep [+ interior_minister +] in place. ?]
-tags: internal_candidates
-go-to: cabinet_negotiations
+tags: internal_candidates3
+go-to: cabinet_negotiations2
 
 
 
@@ -686,7 +688,7 @@ go-to: cabinet_negotiations
 title: Appoint the Transportation Commissar
 subtitle: [?if transport_minister != "Vacant" : Currently held by [+ transport_minister +] ?][?if transport_minister != "Vacant" and transport_minister_party=="Bolshevik": (<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>)?][?if transport_minister_party=="Menshevik": (<span class="tooltip-text" title="Menshevik" style="color: var(--m-color);">RSDLP(u)</span>)?][?if transport_minister_party=="Left-SR": (<span class="tooltip-text" title="Left-SR" style="color: var(--lsr-color);">Left-SR</span>)?][?if transport_minister_party=="SR": (<span class="tooltip-text" title="Socialist Revolutionary" style="color: var(--sr-color);">SR</span>)?][?if transport_minister_party=="SD-Int": (<span class="tooltip-text" title="Social-Democratic Internationalist" style="color: var(--sdi-color);">SD-Int</span>)?][?if transport_minister_party=="NS": (<span class="tooltip-text" title="Popular Socialist" style="color: var(--ns-color);">NS</span>)?]
 view-if: drop_railways = 1
-tags: commissariat_assign
+tags: commissariat_assign2
 go-to: transport_menu
 
 @transport_menu
@@ -705,28 +707,28 @@ Left-SR — Journalist and party activist.<br>
 Overall skill: ★★☆<br>
 Suitability: ★☆
 !}
-tags: transport_candidates2
+tags: transport_candidates3
 choose-if: transport_minister != "Malkin" 
 on-arrival: {!
   if (Q.transport_minister_party != "Left-SR") commissariats_held -= 1; 
   Q.transport_minister = "Malkin"; Q.transport_minister_party = "Left-SR";
 !}
-go-to: cabinet_negotiations
+go-to: cabinet_negotiations2
 
 @transport_vacant
 title: Let's leave the position vacant for now. 
-tags: transport_candidates2
+tags: transport_candidates3
 on-arrival: {!
   if (Q.transport_minister_party == "Left-SR") commissariats_held += 1; 
   Q.transport_minister = "Vacant"; Q.transport_minister_party = "";
 !}
-go-to: cabinet_negotiations
+go-to: cabinet_negotiations2
 
 @transport_cancel
 title: Cancel reassignment.
 subtitle: [?if transport_minister != "Vacant": Keep [+ transport_minister +] in place. ?]
-tags: transport_candidates2
-go-to: cabinet_negotiations
+tags: transport_candidates3
+go-to: cabinet_negotiations2
 
 
 
@@ -734,7 +736,7 @@ go-to: cabinet_negotiations
 title: Appoint the Trade Commissar
 subtitle: [?if trade_minister != "Vacant" : Currently held by [+ trade_minister +] ?][?if trade_minister != "Vacant" and trade_minister_party=="Bolshevik": (<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>)?][?if trade_minister_party=="Menshevik": (<span class="tooltip-text" title="Menshevik" style="color: var(--m-color);">RSDLP(u)</span>)?][?if trade_minister_party=="Left-SR": (<span class="tooltip-text" title="Left-SR" style="color: var(--lsr-color);">Left-SR</span>)?][?if trade_minister_party=="SR": (<span class="tooltip-text" title="Socialist Revolutionary" style="color: var(--sr-color);">SR</span>)?][?if trade_minister_party=="SD-Int": (<span class="tooltip-text" title="Social-Democratic Internationalist" style="color: var(--sdi-color);">SD-Int</span>)?][?if trade_minister_party=="NS": (<span class="tooltip-text" title="Popular Socialist" style="color: var(--ns-color);">NS</span>)?]
 view-if: drop_trade = 1
-tags: commissariat_assign
+tags: commissariat_assign2
 go-to: trade_menu
 
 @trade_menu
@@ -753,28 +755,28 @@ Bolshevik — Proponent moderate with industrial management experience.<br>
 Overall skill: ★★★<br>
 Suitability: ★★★
 !}
-tags: trade_candidates2
+tags: trade_candidates3
 choose-if: trade_minister != "Nogin" 
 on-arrival: {!
   if (Q.trade_minister_party == "Left-SR") { Q.commissariats_held += 1; }
   Q.trade_minister = "Nogin"; Q.trade_minister_party = "Bolshevik";
 !}
-go-to: cabinet_negotiations
+go-to: cabinet_negotiations2
 
 @trade_vacant
 title: Let's leave the position vacant for now. 
-tags: trade_candidates2
+tags: trade_candidates3
 on-arrival: {!
   if (Q.trade_minister_party == "Left-SR") { Q.commissariats_held += 1; }
   Q.trade_minister = "Vacant"; Q.trade_minister_party = "";
 !}
-go-to: cabinet_negotiations
+go-to: cabinet_negotiations2
 
 @trade_cancel
 title: Cancel reassignment.
 subtitle: [?if trade_minister != "Vacant": Keep [+ trade_minister +] in place. ?]
-tags: trade_candidates2
-go-to: cabinet_negotiations
+tags: trade_candidates3
+go-to: cabinet_negotiations2
 
 
 
@@ -783,7 +785,7 @@ go-to: cabinet_negotiations
 title: Appoint the Finance Commissar
 subtitle: [?if finance_minister != "Vacant" : Currently held by [+ finance_minister +] ?][?if finance_minister != "Vacant" and finance_minister_party=="Bolshevik": (<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>)?][?if finance_minister_party=="Menshevik": (<span class="tooltip-text" title="Menshevik" style="color: var(--m-color);">RSDLP(u)</span>)?][?if finance_minister_party=="Left-SR": (<span class="tooltip-text" title="Left-SR" style="color: var(--lsr-color);">Left-SR</span>)?][?if finance_minister_party=="SR": (<span class="tooltip-text" title="Socialist Revolutionary" style="color: var(--sr-color);">SR</span>)?][?if finance_minister_party=="SD-Int": (<span class="tooltip-text" title="Social-Democratic Internationalist" style="color: var(--sdi-color);">SD-Int</span>)?][?if finance_minister_party=="NS": (<span class="tooltip-text" title="Popular Socialist" style="color: var(--ns-color);">NS</span>)?]
 view-if: drop_finance = 1
-tags: commissariat_assign
+tags: commissariat_assign2
 go-to: finance_menu
 
 @finance_menu
@@ -802,28 +804,28 @@ Bolshevik — Former elementary school teacher.<br>
 Overall skill: ★☆<br>
 Suitability: ★★☆
 !}
-tags: finance_candidates2
+tags: finance_candidates3
 choose-if: finance_minister != "Skvortsov"  
 on-arrival: {!
   if (Q.finance_minister_party == "Left-SR") { Q.commissariats_held += 1; }
   Q.finance_minister = "Skvortsov"; Q.finance_minister_party = "Bolshevik";
 !}
-go-to: cabinet_negotiations
+go-to: cabinet_negotiations2
 
 @finance_vacant
 title: Let's leave the position vacant for now. 
-tags: finance_candidates2
+tags: finance_candidates3
 on-arrival: {!
   if (Q.transport_minister_party == "Left-SR") { Q.commissariats_held += 1; }
   Q.transport_minister = "Vacant"; Q.transport_minister_party = "";
 !}
-go-to: cabinet_negotiations
+go-to: cabinet_negotiations2
 
 @finance_cancel
 title: Cancel reassignment.
 subtitle: [?if finance_minister != "Vacant": Keep [+ finance_minister +] in place. ?]
-tags: finance_candidates2
-go-to: cabinet_negotiations
+tags: finance_candidates3
+go-to: cabinet_negotiations2
 
 
 
@@ -833,7 +835,7 @@ go-to: cabinet_negotiations
 title: Appoint the Justice Commissar
 subtitle: [?if justice_minister != "Vacant" : Currently held by [+ justice_minister +] ?][?if justice_minister != "Vacant" and justice_minister_party=="Bolshevik": (<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>)?][?if justice_minister_party=="Menshevik": (<span class="tooltip-text" title="Menshevik" style="color: var(--m-color);">RSDLP(u)</span>)?][?if justice_minister_party=="Left-SR": (<span class="tooltip-text" title="Left-SR" style="color: var(--lsr-color);">Left-SR</span>)?][?if justice_minister_party=="SR": (<span class="tooltip-text" title="Socialist Revolutionary" style="color: var(--sr-color);">SR</span>)?][?if justice_minister_party=="SD-Int": (<span class="tooltip-text" title="Social-Democratic Internationalist" style="color: var(--sdi-color);">SD-Int</span>)?][?if justice_minister_party=="NS": (<span class="tooltip-text" title="Popular Socialist" style="color: var(--ns-color);">NS</span>)?]
 view-if: drop_justice = 1
-tags: commissariat_assign
+tags: commissariat_assign2
 go-to: justice_menu
 
 @justice_menu
@@ -852,13 +854,13 @@ Bolshevik — Party activist with some economic management experience.
 Overall skill: ★★<br>
 Suitability: ★☆
 !}
-tags: justice_candidates2
+tags: justice_candidates3
 choose-if: justice_minister != "Oppokov"  
 on-arrival: {!
   if (Q.justice_minister_party == "Left-SR") { Q.commissariats_held += 1; }
   Q.justice_minister = "Oppokov"; Q.justice_minister_party = "Bolshevik";
 !}
-go-to: cabinet_negotiations
+go-to: cabinet_negotiations2
 
 @justice_steinberg
 title: Isaac Steinberg
@@ -872,28 +874,28 @@ Left-SR — Lawyer with political experience.<br>
 Overall skill: ★★★<br>
 Suitability: ★★★★
 !}
-tags: justice_candidates2
+tags: justice_candidates3
 choose-if: justice_minister != "Steinberg"
 on-arrival: {!
   if (Q.justice_minister_party == "Bolshevik" || Q.justice_minister == "Vacant") Q.commissariats_held -= 1;
   Q.justice_minister = "Steinberg"; Q.justice_minister_party = "Left-SR";
 !}
-go-to: cabinet_negotiations
+go-to: cabinet_negotiations2
 
 @justice_vacant
 title: Let's leave the position vacant for now. 
-tags: justice_candidates2
+tags: justice_candidates3
 on-arrival: {!
   if (Q.transport_minister_party == "Left-SR") { Q.commissariats_held += 1; }
   Q.transport_minister = "Vacant"; Q.transport_minister_party = "";
 !}
-go-to: cabinet_negotiations
+go-to: cabinet_negotiations2
 
 @justice_cancel
 title: Cancel reassignment.
 subtitle: [?if justice_minister != "Vacant": Keep [+ justice_minister +] in place. ?]
-tags: justice_candidates2
-go-to: cabinet_negotiations
+tags: justice_candidates3
+go-to: cabinet_negotiations2
 
 
                        
@@ -901,7 +903,7 @@ go-to: cabinet_negotiations
 title: Appoint the Labor Commissar
 subtitle: [?if labor_minister != "Vacant" : Currently held by [+ labor_minister +] ?][?if labor_minister != "Vacant" and labor_minister_party=="Bolshevik": (<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>)?][?if labor_minister_party=="Menshevik": (<span class="tooltip-text" title="Menshevik" style="color: var(--m-color);">RSDLP(u)</span>)?][?if labor_minister_party=="Left-SR": (<span class="tooltip-text" title="Left-SR" style="color: var(--lsr-color);">Left-SR</span>)?][?if labor_minister_party=="SR": (<span class="tooltip-text" title="Socialist Revolutionary" style="color: var(--sr-color);">SR</span>)?][?if labor_minister_party=="SD-Int": (<span class="tooltip-text" title="Social-Democratic Internationalist" style="color: var(--sdi-color);">SD-Int</span>)?][?if labor_minister_party=="NS": (<span class="tooltip-text" title="Popular Socialist" style="color: var(--ns-color);">NS</span>)?]
 view-if: drop_labor = 1
-tags: commissariat_assign
+tags: commissariat_assign2
 go-to: labor_menu
 
 @labor_menu
@@ -920,28 +922,28 @@ Bolshevik — Popular and skilled trade union organizer.<br>
 Overall skill: ★★★★<br>
 Suitability: ★★★★
 !}
-tags: labor_candidates2
+tags: labor_candidates3
 choose-if: labor_minister != "Shliapnikov"  
 on-arrival: {!
   if (Q.labor_minister_party == "Left-SR") { Q.commissariats_held += 1; }
   Q.labor_minister = "Shliapnikov"; Q.labor_minister_party = "Bolshevik";
 !}
-go-to: cabinet_negotiations
+go-to: cabinet_negotiations2
 
 @labor_vacant
 title: Let's leave the position vacant for now. 
-tags: labor_candidates2
+tags: labor_candidates3
 on-arrival: {!
   if (Q.labor_minister_party == "Left-SR") { Q.commissariats_held += 1; }
   Q.labor_minister = "Vacant"; Q.labor_minister_party = "";
 !}
-go-to: cabinet_negotiations
+go-to: cabinet_negotiations2
 
 @labor_cancel
 title: Cancel reassignment.
 subtitle: [?if labor_minister != "Vacant": Keep [+ labor_minister +] in place. ?]
-tags: labor_candidates2
-go-to: cabinet_negotiations
+tags: labor_candidates3
+go-to: cabinet_negotiations2
 
 
 
@@ -949,7 +951,7 @@ go-to: cabinet_negotiations
 title: Appoint the Agriculture Commissar
 subtitle: [?if agriculture_minister != "Vacant" : Currently held by [+ agriculture_minister +] ?][?if agriculture_minister != "Vacant" and agriculture_minister_party=="Bolshevik": (<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>)?][?if agriculture_minister_party=="Menshevik": (<span class="tooltip-text" title="Menshevik" style="color: var(--m-color);">RSDLP(u)</span>)?][?if agriculture_minister_party=="Left-SR": (<span class="tooltip-text" title="Left-SR" style="color: var(--lsr-color);">Left-SR</span>)?][?if agriculture_minister_party=="SR": (<span class="tooltip-text" title="Socialist Revolutionary" style="color: var(--sr-color);">SR</span>)?][?if agriculture_minister_party=="SD-Int": (<span class="tooltip-text" title="Social-Democratic Internationalist" style="color: var(--sdi-color);">SD-Int</span>)?][?if agriculture_minister_party=="NS": (<span class="tooltip-text" title="Popular Socialist" style="color: var(--ns-color);">NS</span>)?]
 view-if: drop_agriculture = 1
-tags: commissariat_assign
+tags: commissariat_assign2
 go-to: agriculture_menu
 
 @agriculture_menu
@@ -968,13 +970,13 @@ Bolshevik — Party activist with some technical and legal expertise.<br>
 Overall skill: ★★<br>
 Suitability: ★
 !}
-tags: agriculture_candidates2
+tags: agriculture_candidates3
 choose-if: agriculture_minister != "Milyutin"  
 on-arrival: {!
   if (Q.agriculture_minister_party == "Left-SR") { Q.commissariats_held += 1; }
   Q.agriculture_minister = "Milyutin"; Q.agriculture_minister_party = "Bolshevik";
 !}
-go-to: cabinet_negotiations
+go-to: cabinet_negotiations2
 
 @agriculture_kamkov
 title: Boris Kamkov
@@ -988,28 +990,28 @@ Left-SR — Leading party organizer and lawyer.<br>
 Overall skill: ★★★☆<br>
 Suitability: ★★☆
 !}
-tags: agriculture_candidates2
+tags: agriculture_candidates3
 choose-if: agriculture_minister != "Kamkov"
 on-arrival: {!
   if (Q.agriculture_minister_party == "Bolshevik" || Q.agriculture_minister == "Vacant") Q.commissariats_held -= 1;
   Q.agriculture_minister = "Kamkov"; Q.agriculture_minister_party = "Left-SR"; 
 !}
-go-to: cabinet_negotiations
+go-to: cabinet_negotiations2
 
 @agriculture_vacant
 title: Let's leave the position vacant for now. 
-tags: agriculture_candidates2
+tags: agriculture_candidates3
 on-arrival: {!
   if (Q.agriculture_minister_party == "Left-SR") { Q.commissariats_held += 1; }
   Q.agriculture_minister = "Vacant"; Q.agriculture_minister_party = "";
 !}
-go-to: cabinet_negotiations
+go-to: cabinet_negotiations2
 
 @agriculture_cancel
 title: Cancel reassignment.
 subtitle: [?if agriculture_minister != "Vacant": Keep [+ agriculture_minister +] in place. ?]
-tags: agriculture_candidates2
-go-to: cabinet_negotiations
+tags: agriculture_candidates3
+go-to: cabinet_negotiations2
 
 
 
@@ -1017,7 +1019,7 @@ go-to: cabinet_negotiations
 title: Appoint the Food Supply Commissar
 subtitle: [?if food_minister != "Vacant" : Currently held by [+ food_minister +] ?][?if food_minister != "Vacant" and food_minister_party=="Bolshevik": (<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>)?][?if food_minister_party=="Menshevik": (<span class="tooltip-text" title="Menshevik" style="color: var(--m-color);">RSDLP(u)</span>)?][?if food_minister_party=="Left-SR": (<span class="tooltip-text" title="Left-SR" style="color: var(--lsr-color);">Left-SR</span>)?][?if food_minister_party=="SR": (<span class="tooltip-text" title="Socialist Revolutionary" style="color: var(--sr-color);">SR</span>)?][?if food_minister_party=="SD-Int": (<span class="tooltip-text" title="Social-Democratic Internationalist" style="color: var(--sdi-color);">SD-Int</span>)?][?if food_minister_party=="NS": (<span class="tooltip-text" title="Popular Socialist" style="color: var(--ns-color);">NS</span>)?]
 view-if: drop_foodsupply = 1
-tags: commissariat_assign
+tags: commissariat_assign2
 go-to: food_menu
 
 @food_menu
@@ -1036,28 +1038,28 @@ Bolshevik — Agronomist and party historian<br>
 Overall skill: ★★<br>
 Suitability: ★★
 !}
-tags: food_candidates2
+tags: food_candidates3
 choose-if: food_minister != "Teodorovich"  
 on-arrival: {!
   if (Q.agriculture_minister_party == "Left-SR") { Q.commissariats_held += 1; }
   Q.food_minister = "Teodorovich"; Q.food_minister_party = "Bolshevik";
 !}
-go-to: cabinet_negotiations
+go-to: cabinet_negotiations2
 
 @food_vacant
 title: Let's leave the position vacant for now. 
-tags: food_candidates2
+tags: food_candidates3
 on-arrival: {!
   if (Q.food_minister_party == "Left-SR") Q.commissariats_held += 1;
   Q.food_minister = "Vacant"; Q.food_minister_party = "";
 !}
-go-to: cabinet_negotiations
+go-to: cabinet_negotiations2
 
 @food_cancel
 title: Cancel reassignment.
 subtitle: [?if food_minister != "Vacant": Keep [+ food_minister +] in place. ?]
-tags: food_candidates2
-go-to: cabinet_negotiations
+tags: food_candidates3
+go-to: cabinet_negotiations2
 
 
 
@@ -1065,7 +1067,7 @@ go-to: cabinet_negotiations
 title: Appoint the Posts & Telegrams Commissar
 subtitle: [?if posts_minister != "Vacant" : Currently held by [+ posts_minister +] ?][?if posts_minister != "Vacant" and posts_minister_party=="Bolshevik": (<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>)?][?if posts_minister_party=="Menshevik": (<span class="tooltip-text" title="Menshevik" style="color: var(--m-color);">RSDLP(u)</span>)?][?if posts_minister_party=="Left-SR": (<span class="tooltip-text" title="Left-SR" style="color: var(--lsr-color);">Left-SR</span>)?][?if posts_minister_party=="SR": (<span class="tooltip-text" title="Socialist Revolutionary" style="color: var(--sr-color);">SR</span>)?][?if posts_minister_party=="SD-Int": (<span class="tooltip-text" title="Social-Democratic Internationalist" style="color: var(--sdi-color);">SD-Int</span>)?][?if posts_minister_party=="NS": (<span class="tooltip-text" title="Popular Socialist" style="color: var(--ns-color);">NS</span>)?]
 view-if: drop_posts = 1
-tags: commissariat_assign
+tags: commissariat_assign2
 go-to: posts_menu
 
 @posts_menu
@@ -1084,13 +1086,13 @@ Bolshevik — Party activist and journalist.<br>
 Overall skill: ★★<br>
 Suitability: ★★
 !}
-tags: posts_candidates2
+tags: posts_candidates3
 choose-if: posts_minister != "Glebov"  
 on-arrival: {!
   if (Q.posts_minister_party == "Left-SR") { Q.commissariats_held += 1; }
   Q.posts_minister = "Glebov"; Q.posts_minister_party = "Bolshevik";
 !}
-go-to: cabinet_negotiations
+go-to: cabinet_negotiations2
 
 
 @posts_proshian
@@ -1105,29 +1107,29 @@ Left-SR — Lawyer and party activist.<br>
 Overall skill: ★★★<br>
 Suitability: ★★
 !}
-tags: posts_candidates2
+tags: posts_candidates3
 choose-if: posts_minister != "Proshian"
 on-arrival: {!
   if (Q.posts_minister_party == "Bolshevik" || Q.posts_minister == "Vacant") Q.commissariats_held -= 1;
   Q.posts_minister = "Proshian"; Q.posts_minister_party = "Left-SR";
 !}
-go-to: cabinet_negotiations
+go-to: cabinet_negotiations2
 
 
 @posts_vacant
 title: Let's leave the position vacant for now. 
-tags: posts_candidates2
+tags: posts_candidates3
 on-arrival: {!
   if (Q.posts_minister_party == "Left-SR") Q.commissariats_held += 1;
   Q.posts_minister = "Vacant"; Q.posts_minister_party = "";
 !}
-go-to: cabinet_negotiations
+go-to: cabinet_negotiations2
 
 @posts_cancel
 title: Cancel reassignment.
 subtitle: [?if posts_minister != "Vacant": Keep [+ posts_minister +] in place. ?]
-tags: posts_candidates2
-go-to: cabinet_negotiations
+tags: posts_candidates3
+go-to: cabinet_negotiations2
                        
 
 
@@ -1136,7 +1138,7 @@ go-to: cabinet_negotiations
 title: Appoint the Nationalities Commissar
 subtitle: [?if nationalities_minister != "Vacant" : Currently held by [+ nationalities_minister +] ?][?if nationalities_minister != "Vacant" and nationalities_minister_party=="Bolshevik": (<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>)?][?if nationalities_minister_party=="Menshevik": (<span class="tooltip-text" title="Menshevik" style="color: var(--m-color);">RSDLP(u)</span>)?][?if nationalities_minister_party=="Left-SR": (<span class="tooltip-text" title="Left-SR" style="color: var(--lsr-color);">Left-SR</span>)?][?if nationalities_minister_party=="SR": (<span class="tooltip-text" title="Socialist Revolutionary" style="color: var(--sr-color);">SR</span>)?][?if nationalities_minister_party=="SD-Int": (<span class="tooltip-text" title="Social-Democratic Internationalist" style="color: var(--sdi-color);">SD-Int</span>)?][?if nationalities_minister_party=="NS": (<span class="tooltip-text" title="Popular Socialist" style="color: var(--ns-color);">NS</span>)?]
 view-if: drop_nationalities = 1
-tags: commissariat_assign
+tags: commissariat_assign2
 go-to: nationalities_menu
 
 @nationalities_menu
@@ -1155,36 +1157,36 @@ Bolshevik — Party administrator and nationalities specialist.<br>
 Overall skill: ★★★★★<br>
 Suitability: ★★★
 !}
-tags: nationalities_candidates2
+tags: nationalities_candidates3
 choose-if: nationalities_minister != "Stalin"  
 on-arrival: {!
   if (Q.nationalities_minister_party == "Left-SR") { Q.commissariats_held += 1; }
   Q.nationalities_minister = "Stalin"; Q.nationalities_minister_party = "Bolshevik";
 !}
-go-to: cabinet_negotiations
+go-to: cabinet_negotiations2
 
 
 @nationalities_vacant
 title: Let's leave the position vacant for now. 
-tags: nationalities_candidates2
+tags: nationalities_candidates3
 on-arrival: {!
   if (Q.nationalities_minister_party == "Left-SR") Q.commissariats_held += 1;
   Q.nationalities_minister = "Vacant"; Q.nationalities_minister_party = "";
 !}
-go-to: cabinet_negotiations
+go-to: cabinet_negotiations2
 
 @nationalities_cancel
 title: Cancel reassignment.
 subtitle: [?if nationalities_minister != "Vacant": Keep [+ nationalities_minister +] in place. ?]
-tags: nationalities_candidates2
-go-to: cabinet_negotiations
+tags: nationalities_candidates3
+go-to: cabinet_negotiations2
   
 
 
                        
 @property_assign
-title: [?if property_minister == "None": Perhaps we could create a new "State Property" commissariat for you? ?][?if property_minister != "None": Appoint the Properties Commissar ?]
-subtitle: [?if property_minister == "None": They will manage museums, libraries, and former imperial properties. ?][?if property_minister != "None": Currently held by [+ property_minister +] ?][?if property_minister_party=="Bolshevik": (<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>)?][?if property_minister_party=="Menshevik": (<span class="tooltip-text" title="Menshevik" style="color: var(--m-color);">RSDLP(u)</span>)?][?if property_minister_party=="Left-SR": (<span class="tooltip-text" title="Left-SR" style="color: var(--lsr-color);">Left-SR</span>)?][?if property_minister_party=="SR": (<span class="tooltip-text" title="Socialist Revolutionary" style="color: var(--sr-color);">SR</span>)?][?if property_minister_party=="SD-Int": (<span class="tooltip-text" title="Social-Democratic Internationalist" style="color: var(--sdi-color);">SD-Int</span>)?][?if property_minister_party=="NS": (<span class="tooltip-text" title="Popular Socialist" style="color: var(--ns-color);">NS</span>)?]
+title: Appoint the Properties Commissar 
+subtitle: [?if property_minister != "None" and property_minister != "Vacant": Currently held by [+ property_minister +] ?][?if property_minister_party=="Bolshevik": (<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>)?][?if property_minister_party=="Menshevik": (<span class="tooltip-text" title="Menshevik" style="color: var(--m-color);">RSDLP(u)</span>)?][?if property_minister_party=="Left-SR": (<span class="tooltip-text" title="Left-SR" style="color: var(--lsr-color);">Left-SR</span>)?][?if property_minister_party=="SR": (<span class="tooltip-text" title="Socialist Revolutionary" style="color: var(--sr-color);">SR</span>)?][?if property_minister_party=="SD-Int": (<span class="tooltip-text" title="Social-Democratic Internationalist" style="color: var(--sdi-color);">SD-Int</span>)?][?if property_minister_party=="NS": (<span class="tooltip-text" title="Popular Socialist" style="color: var(--ns-color);">NS</span>)?]
 tags: lsr_offers
 go-to: property_menu
 
@@ -1204,37 +1206,37 @@ Left-SR — Leading SR organizer and former law student.<br>
 Overall skill: ★★★☆<br>
 Suitability: ★★
 !}
-tags: property_candidates
+tags: property_candidates3
 choose-if: property_minister != "Karelin" 
 on-arrival: {!
   if (Q.posts_minister_party != "Left-SR") Q.commissariats_held -= 1;
   Q.property_minister = "Karelin"; Q.property_minister_party = "Left-SR";
 !}
-go-to: menu
+go-to: cabinet_negotiations2
 
 @property_vacant
 title: Cancel the proposed commissariat.
-tags: property_candidates
+tags: property_candidates3
 on-arrival: {!
   if (Q.property_minister_party == "Left-SR") { Q.commissariats_held += 1; }
   Q.property_minister = "None"; Q.property_minister_party = ""; 
 !}
-go-to: cabinet_negotiations
+go-to: cabinet_negotiations2
 
 @property_cancel
 title: Cancel reassignment.
 subtitle: [?if property_minister != "None": Keep [+ property_minister +] in place. ?]
 view-if: property_minister != "None"
-tags: property_candidates
-go-to: cabinet_negotiations
+tags: property_candidates3
+go-to: cabinet_negotiations2
 
 
 
 
 @local_assign
-title: [?if local_minister == "None": Perhaps we could create a new "Local Self-Government" commissariat for you? ?][?if local_minister != "None": Appoint the Local Self-Government Commissar ?]
-subtitle: [?if local_minister == "None": They will coordinate with local institutions. ?][?if local_minister != "None": Currently held by [+ local_minister +] ?] [?if local_minister_party=="Bolshevik": (<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>)?][?if local_minister_party=="Menshevik": (<span class="tooltip-text" title="Menshevik" style="color: var(--m-color);">RSDLP(u)</span>)?][?if local_minister_party=="Left-SR": (<span class="tooltip-text" title="Left-SR" style="color: var(--lsr-color);">Left-SR</span>)?][?if local_minister_party=="SR": (<span class="tooltip-text" title="Socialist Revolutionary" style="color: var(--sr-color);">SR</span>)?][?if local_minister_party=="SD-Int": (<span class="tooltip-text" title="Social-Democratic Internationalist" style="color: var(--sdi-color);">SD-Int</span>)?][?if local_minister_party=="NS": (<span class="tooltip-text" title="Popular Socialist" style="color: var(--ns-color);">NS</span>)?]
-tags: commissariat_assign
+title: Appoint the Local Self-Government Commissar
+subtitle: [?if local_minister != "None" and local_minister != "Vacant": Currently held by [+ local_minister +] ?] [?if local_minister_party=="Bolshevik": (<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>)?][?if local_minister_party=="Menshevik": (<span class="tooltip-text" title="Menshevik" style="color: var(--m-color);">RSDLP(u)</span>)?][?if local_minister_party=="Left-SR": (<span class="tooltip-text" title="Left-SR" style="color: var(--lsr-color);">Left-SR</span>)?][?if local_minister_party=="SR": (<span class="tooltip-text" title="Socialist Revolutionary" style="color: var(--sr-color);">SR</span>)?][?if local_minister_party=="SD-Int": (<span class="tooltip-text" title="Social-Democratic Internationalist" style="color: var(--sdi-color);">SD-Int</span>)?][?if local_minister_party=="NS": (<span class="tooltip-text" title="Popular Socialist" style="color: var(--ns-color);">NS</span>)?]
+tags: commissariat_assign2
 go-to: local_menu
 
 @local_menu
@@ -1253,30 +1255,30 @@ Left-SR — Former law student, journalist, and expert in local affairs.<br>
 Overall skill: ★★☆<br>
 Suitability: ★★★★
 !}
-tags: local_candidates
+tags: local_candidates3
 choose-if: local_minister != "Trutovsky" 
 on-arrival: {!
   if (Q.local_minister_party != "Left-SR") { Q.commissariats_held -= 1; }
   Q.local_minister = "Trutovsky"; Q.local_minister_party = "Left-SR"; 
 !}
-go-to: cabinet_negotiations
+go-to: cabinet_negotiations2
 
 
 @local_vacant
 title: Cancel the proposed commissariat.
-tags: local_candidates
+tags: local_candidates3
 on-arrival: {!
   if (Q.local_minister_party == "Left-SR") { Q.commissariats_held += 1; }
   Q.local_minister = "None"; Q.local_minister_party = ""; 
 !}
-go-to: cabinet_negotiations
+go-to: cabinet_negotiations2
 
 @local_cancel
 title: Cancel reassignment.
 subtitle: [?if local_minister != "None": Keep [+ local_minister +] in place. ?]
 view-if: local_minister != "None"
 tags: local_candidates
-go-to: cabinet_negotiations
+go-to: cabinet_negotiations2
 
 
 
