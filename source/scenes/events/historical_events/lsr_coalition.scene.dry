@@ -346,8 +346,8 @@ Unable to come to an agreement, we haven broken off talks with the Left-SRs. It 
   
 @accept_offer
 title: Agree to the offer. 
-unavailable-subtitle: The Left-SRs will not accept the current offer. 
-choose-if: influence > 56 and (drop_internal = 1 or drop_military = 1 or drop_justice = 1) and commissariats_held <= 8
+unavailable-subtitle: [?if influence <= 56 or (drop_internal = 1 or drop_military = 1 or drop_justice = 1) or commissariats_held <= 8 : The Left-SRs will not accept the current offer. ?][?if commissariats_held <= 5 or (drop_foreign != 1 and commissariats_held < 8) or (drop_internal != 1 and commissariats_held < 8) or (drop_military != 1 and commissariats_held < 8) : The Central Committee believes we have ceded too much. ?]
+choose-if: influence > 56 and (drop_internal = 1 or drop_military = 1 or drop_justice = 1) and commissariats_held <= 8 and commissariats_held > 5 and (drop_foreign != 1 or commissariats_held >= 8) and (drop_internal != 1 or commissariats_held >= 8) and (drop_military != 1 or commissariats_held >= 8) 
 new-page: true
 on-arrival: commissariats_promised = commissariats_held; commissariats_held = 14;
 go-to: cabinet_negotiations2
@@ -453,8 +453,9 @@ on-arrival: {!
 
 = Coalition Created
 
+We have formed a coalition agreement! Though not an all-socialist government, the inclusion of another party helps bolster our government's legitimacy somewhat. 
 
-
+Satisfied with our efforts, Vikzhel has announced they are lifting their strike. 
 
 
 
