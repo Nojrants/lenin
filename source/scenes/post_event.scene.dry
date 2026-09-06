@@ -64,6 +64,12 @@ Q.leaders.Karelin = { auctoritas: 3, administration: 3.5, idealogism: 3, militar
 Q.leaders.Trutovsky = { auctoritas: 2.5, administration: 3.5, idealogism: 2.5, military: 2, economic: 2.5, partyorg: 3, diplomacy: 2, culture: 2, legalism: 3.5, nationalities: 2.5 };
 Q.leaders.Steinberg = { auctoritas: 2, administration: 3.5, idealogism: 2.5, military: 1.5, economic: 2.5, partyorg: 3, diplomacy: 3, culture: 1.5, legalism: 4, nationalities: 1.5 };
 Q.leaders.Proshian = { auctoritas: 2.5, administration: 3, idealogism: 2, military: 1.5, economic: 2.5, partyorg: 3, diplomacy: 2.5, culture: 1.5, legalism: 3, nationalities: 2.5 };
+Q.leaders.Lazimir = { auctoritas: 2, administration: 2.5, idealogism: 1.5, military: 3, economic: 2, partyorg: 2, diplomacy: 1.5, culture: 1, legalism: 1, nationalities: 1 };
+Q.leaders.Blumkin = { auctoritas: 2, administration: 2, idealogism: 2, military: 2.5, economic: 1.5, partyorg: 2.5, diplomacy: 1.5, culture: 1.5, legalism: 1.5, nationalities: 1.5 };
+Q.leaders.Brilliantov = { auctoritas: 1.5, administration: 2, idealogism: 1.5, military: 1.5, economic: 2.5, partyorg: 2, diplomacy: 2, culture: 1.5, legalism: 1.5, nationalities: 1.5 };
+Q.leaders.Algasov = { auctoritas: 3.5, administration: 3.5, idealogism: 2, military: 2.5, economic: 3.5, partyorg: 3, diplomacy: 3, culture: 1.5, legalism: 3, nationalities: 1.5 };
+Q.leaders.Mayorov = { auctoritas: 1.5, administration: 2, idealogism: 1.5, military: 1.5, economic: 2, partyorg: 2, diplomacy: 1.5, culture: 1.5, legalism: 2, nationalities: 1.5 };
+
 
 // NSs
 Q.leaders.Peshekhonov = { auctoritas: 3, administration: 3, idealogism: 2.5, military: 1.5, economic: 4, partyorg: 3.5, diplomacy: 2.5, culture: 1.5, legalism: 2.5, nationalities: 1.5 };
