@@ -356,6 +356,10 @@ We have formed a tentative agreement. Now we must finalize the selections in the
 
 @cabinet_negotiations2
 title: Cabinet negotiations
+{!
+  console.log("commissariats_promised: ", Q.commissariats_promised);
+  console.log("commissariats_held: ", Q.commissariats_held);
+!}
 
 - #commissariat_assign2
 - @finalize_deal
