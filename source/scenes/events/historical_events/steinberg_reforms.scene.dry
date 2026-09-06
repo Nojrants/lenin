@@ -1,0 +1,123 @@
+title: Judicial Reforms
+new-page: true
+view-if: coalition_actions_timer = 0 and justice_minister_party != "Bolshevik" and justice_minister_party != "Vacant"  
+max-visits: 1
+tags: event
+on-arrival: {!
+  Q.coalition_actions_timer = 2;
+  Q.pro_vote = 0; Q.opposition_vote = 0;
+  if (Q.prime_minister_party == "Bolshevik") Q.bolshevik_vote += 1;
+  if (Q.foreign_minister_party == "Bolshevik") Q.bolshevik_vote += 1;
+  if (Q.war_minister_party == "Bolshevik") Q.bolshevik_vote += 1;
+  if (Q.education_minister_party == "Bolshevik") Q.bolshevik_vote += 1;
+  if (Q.interior_minister_party == "Bolshevik") Q.bolshevik_vote += 1;
+  if (Q.transport_minister_party == "Bolshevik") Q.bolshevik_vote += 1;
+  if (Q.trade_minister_party == "Bolshevik") Q.bolshevik_vote += 1;
+  if (Q.finance_minister_party == "Bolshevik") Q.bolshevik_vote += 1;
+  if (Q.justice_minister_party == "Bolshevik") Q.bolshevik_vote += 1;
+  if (Q.labor_minister_party == "Bolshevik") Q.bolshevik_vote += 1;
+  if (Q.agriculture_minister_party == "Bolshevik") Q.bolshevik_vote += 1;
+  if (Q.food_minister_party == "Bolshevik") Q.bolshevik_vote += 1;
+  if (Q.posts_minister_party == "Bolshevik") Q.bolshevik_vote += 1;
+  if (Q.nationalities_minister_party == "Bolshevik") Q.bolshevik_vote += 1;
+  if (Q.welfare_minister_party == "Bolshevik") Q.bolshevik_vote += 1;            
+  if (Q.property_minister_party == "Bolshevik") Q.bolshevik_vote += 1;             
+  if (Q.local_minister_party == "Bolshevik") Q.bolshevik_vote += 1;
+  if (Q.prime_minister_party != "Bolshevik" || Q.prime_minister_party != "Vacant" || Q.prime_minister_party != "None") Q.opposition_vote += 1;
+  if (Q.foreign_minister_party != "Bolshevik" || Q.foreign_minister_party != "Vacant" || Q.foreign_minister_party != "None") Q.opposition_vote += 1;
+  if (Q.war_minister_party != "Bolshevik" || Q.war_minister_party != "Vacant" || Q.war_minister_party != "None") Q.opposition_vote += 1;
+  if (Q.education_minister_party != "Bolshevik" || Q.education_minister_party != "Vacant" || Q.education_minister_party != "None") Q.opposition_vote += 1;
+  if (Q.interior_minister_party != "Bolshevik" || Q.interior_minister_party != "Vacant" || Q.interior_minister_party != "None") Q.opposition_vote += 1;
+  if (Q.transport_minister_party != "Bolshevik" || Q.transport_minister_party != "Vacant" || Q.transport_minister_party != "None") Q.opposition_vote += 1;
+  if (Q.trade_minister_party != "Bolshevik" || Q.trade_minister_party != "Vacant" || Q.trade_minister_party != "None") Q.opposition_vote += 1;
+  if (Q.finance_minister_party != "Bolshevik" || Q.finance_minister_party != "Vacant" || Q.finance_minister_party != "None") Q.opposition_vote += 1;
+  if (Q.justice_minister_party != "Bolshevik" || Q.justice_minister_party != "Vacant" || Q.justice_minister_party != "None") Q.opposition_vote += 1;
+  if (Q.labor_minister_party != "Bolshevik" || Q.labor_minister_party != "Vacant" || Q.labor_minister_party != "None") Q.opposition_vote += 1;
+  if (Q.agriculture_minister_party != "Bolshevik" || Q.agriculture_minister_party != "Vacant" || Q.agriculture_minister_party != "None") Q.opposition_vote += 1;
+  if (Q.food_minister_party != "Bolshevik" || Q.food_minister_party != "Vacant" || Q.food_minister_party != "None") Q.opposition_vote += 1;
+  if (Q.posts_minister_party != "Bolshevik" || Q.posts_minister_party != "Vacant" || Q.posts_minister_party != "None") Q.opposition_vote += 1;
+  if (Q.nationalities_minister_party != "Bolshevik" || Q.nationalities_minister_party != "Vacant" || Q.nationalities_minister_party != "None") Q.opposition_vote += 1;
+  if (Q.welfare_minister_party != "Bolshevik" || Q.welfare_minister_party != "Vacant" || Q.welfare_minister_party != "None") Q.opposition_vote += 1;
+  if (Q.property_minister_party != "Bolshevik" || Q.property_minister_party != "Vacant" || Q.property_minister_party != "None") Q.opposition_vote += 1;
+  if (Q.local_minister_party != "Bolshevik" || Q.local_minister_party != "Vacant" || Q.local_minister_party != "None") Q.opposition_vote += 1;
+!}
+             
+As one of his first acts in office, the non-Bolshevik Justice Commissar [+ justice_minister +] has begun an ambitious project of reform.
+
+It has been decreed that all prisoners currently held by the government are to be immediately transferred to proper premises, where they are to have their arrests reviewed by judicial commissions. If not remanded for trial, they are to be freed within 24 hours. A similar audit is to be conducted among the Petrograd jails, freeing those not guilty of any specific crime. 
+  
+In other words, this will directly end our current practice of preemptively arresting political opponents before they have committed a crime, in order to prevent them from causing trouble in the first place. 
+
+Elsewhere, it has been decreed that only certain agencies may conduct searches and arrests, with the Commissariat to monitor for improper actions. Soviets are being instructed to halt systematic repression, while work begins on a compendium of revolutionary laws, intended to systematize and guide the work of tribunals. 
+
+[?if cheka_founded == 1 : According to the Cheka, the Justice Commissar is interferring in their work and badly embarrassing the standing of the chekists. They are demanding that the Commissar be reined in. ?]
+
+- @crash_government
+- @reprimand
+- @nothing
+
+
+@crash_government
+title: This is unaccaptable, we're terminating the coalition agreement!
+on-arrival: {!
+  Q.instability += 2; Q.democraticity -= 2; Q.coalition_government = 0; 
+  Q.cheka_strength += 2; Q.cheka_militancy += 0.1; 
+  Q.moderate_unrest += 10; Q.leninist_unrest -= 5; Q.leftcom_unrest -= 10;
+  if (Q.lsr_in_gov == 1) { Q.lsr_in_gov = 0; Q.lsr_relation -= 10: }
+  if (Q.m_in_gov == 1) { Q.m_in_gov = 0; Q.centre_m_relation -= 10: }
+  if (Q.sr_in_gov == 1) { Q.sr_in_gov = 0; Q.centr_sr_relation -= 10: }
+  if (Q.sdi_in_gov == 1) { Q.sdi_in_gov = 0; Q.sdi_relation -= 10: }
+  if (Q.ns_in_gov == 1) { Q.ns_in_gov = 0; Q.ns_relation -= 10: }
+  Q.right_m_strength += 5; Q.right_sr_strength += 5;
+  if (Q.foreign_minister_party != "Bolshevik") { Q.foreign_minister = "Vacant"; Q.foreign_minister_party = ""; }
+  if (Q.war_minister_party != "Bolshevik") { Q.war_minister = "Vacant"; Q.war_minister_party = ""; }
+  if (Q.education_minister_party != "Bolshevik") { Q.education_minister = "Vacant"; Q.education_minister_party = ""; }
+  if (Q.interior_minister_party != "Bolshevik") { Q.interior_minister = "Vacant"; Q.interior_minister_party = ""; }
+  if (Q.transport_minister_party != "Bolshevik") { Q.transport_minister = "Vacant"; Q.transport_minister_party = ""; }
+  if (Q.trade_minister_party != "Bolshevik") { Q.trade_minister = "Vacant"; Q.trade_minister_party = ""; }
+  if (Q.finance_minister_party != "Bolshevik") { Q.finance_minister = "Vacant"; Q.finance_minister_party = ""; }
+  if (Q.justice_minister_party != "Bolshevik") { Q.justice_minister = "Vacant"; Q.justice_minister_party = ""; }
+  if (Q.labor_minister != "Bolshevik") { Q.labor_minister = "Vacant"; Q.labor_minister_party = ""; }
+  if (Q.agriculture_minister != "Bolshevik") { Q.agriculture_minister = "Vacant"; Q.agriculture_minister = ""; }
+  if (Q.food_minister_party != "Bolshevik") { Q.food_minister = "Vacant"; Q.food_minister_party = ""; }
+  if (Q.posts_minister_party != "Bolshevik") { Q.posts_minister = "Vacant"; Q.posts_minister_party = ""; }
+  if (Q.nationalities_minister_party != "Bolshevik") { Q.nationalities_minister = "Vacant"; Q.nationalities_minister_party = ""; }
+  if (Q.welfare_minister_party != "Bolshevik") { Q.welfare_minister = "Vacant"; Q.welfare_minister_party = ""; }
+  if (Q.property_minister_party != "Bolshevik") { Q.property_minister = "Vacant"; Q.property_minister_party = ""; }
+  if (Q.local_minister_party != "Bolshevik") { Q.local_minister = "Vacant"; Q.foreign_minister_party = ""; }
+!}
+
+
+
+@reprimand
+title: Issue a Sovnarkom resolution reprimanding the Commissar for overstepping, and decree that they may not interfere in the work of other bodies.
+choose-if:  bolshevik_vote >= opposition_vote
+unavailable-subtitle: The opposition has enough votes to block us!
+on-arrival: {!
+  Q.democraticity -= 0.5; 
+  Q.leftcom_unrest -= 5; Q.cheka_strength += 2; Q.cheka_militancy += 0.1; Q.cheka_loyality += 0.05; 
+  if (Q.justice_minister_party != "Left-SR") { Q.lsr_relation -= 5; }
+  if (Q.justice_minister_party != "SR") { Q.centre_sr_relation -= 5; }
+  if (Q.justice_minister_party != "Menshevik") { Q.centre_m_relation -= 5; }
+  if (Q.justice_minister_party != "SD-Int") { Q.sdi_relation -= 5; }
+  if (Q.justice_minister_party != "NS") { Q.ns_relation -= 5; }
+!}
+
+@nothing
+title: There's nothing we can do.
+on-arrival: {!
+  Q.leftcom_unrest += 10; Q.leninist_unrest += 2; Q.moderate_unrest -= 5;
+  Q.cheka_strength -= 2; Q.cheka -= 0.5; 
+  if (Q.justice_minister_party != "Left-SR") { Q.lsr_relation += 5; }
+  if (Q.justice_minister_party != "SR") { Q.centre_sr_relation += 5; }
+  if (Q.justice_minister_party != "Menshevik") { Q.centre_m_relation += 5; }
+  if (Q.justice_minister_party != "SD-Int") { Q.sdi_relation += 5; }
+  if (Q.justice_minister_party != "NS") { Q.ns_relation += 5; }
+!}
+
+      
+
+
+
+
+  
