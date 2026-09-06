@@ -1116,7 +1116,7 @@ subtitle: {!
 Overall skill: ★★★<br>
 Suitability: ★★★</ul>
 !}
-unavailable-subtitle:<span style="color: var(--lsr-color);">Left-SR</span> — Party organizer with and economic expertise.<ul> Overall skill: ★★★<br>Suitability: ★★★</ul>[?if food_minister == "Algasov" || posts_minister == "Algasov" : <br>Algasov already has a post. ?]
+unavailable-subtitle:<span style="color: var(--lsr-color);">Left-SR</span> — Party organizer with and economic expertise.<ul> Overall skill: ★★★<br>Suitability: ★★★</ul>[?if food_minister == "Algasov" or posts_minister == "Algasov" : <br>Algasov already has a post. ?]
 choose-if: agriculture_minister != "Algasov" and posts_minister != "Algasov" and food_minister != "Algasov"
 on-arrival: {!
   if (Q.agriculture_minister_party != "Left-SR") Q.commissariats_held -= 1; 
@@ -1216,7 +1216,7 @@ subtitle: {!
 Overall skill: ★★★<br>
 Suitability: ★★</ul>
 !}
-unavailable-subtitle:<span style="color: var(--lsr-color);">Left-SR</span> — Party organizer with and economic expertise.<ul> Overall skill: ★★★<br>Suitability: ★★</ul>[?if agriculture_minister == "Algasov" || posts_minister == "Algasov" : <br>Algasov already has a post. ?]
+unavailable-subtitle:<span style="color: var(--lsr-color);">Left-SR</span> — Party organizer with and economic expertise.<ul> Overall skill: ★★★<br>Suitability: ★★</ul>[?if agriculture_minister == "Algasov" or posts_minister == "Algasov" : <br>Algasov already has a post. ?]
 choose-if: agriculture_minister != "Algasov" and posts_minister != "Algasov" and food_minister != "Algasov"
 on-arrival: {!
   if (Q.food_minister_party != "Left-SR") Q.commissariats_held -= 1; 
@@ -1298,7 +1298,7 @@ subtitle: {!
 Overall skill: ★★★<br>
 Suitability: ★★</ul>
 !}
-unavailable-subtitle:<span style="color: var(--lsr-color);">Left-SR</span> — Party organizer with and economic expertise.<ul> Overall skill: ★★★<br>Suitability: ★★</ul>[?if agriculture_minister == "Algasov" || food_minister == "Algasov" : <br>Algasov already has a post. ?]
+unavailable-subtitle:<span style="color: var(--lsr-color);">Left-SR</span> — Party organizer with and economic expertise.<ul> Overall skill: ★★★<br>Suitability: ★★</ul>[?if agriculture_minister == "Algasov" or food_minister == "Algasov" : <br>Algasov already has a post. ?]
 choose-if: agriculture_minister != "Algasov" and posts_minister != "Algasov" and food_minister != "Algasov"
 on-arrival: {!
   if (Q.posts_minister_party != "Left-SR") Q.commissariats_held -= 1; 
