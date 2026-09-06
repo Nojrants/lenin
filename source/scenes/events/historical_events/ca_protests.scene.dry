@@ -1,0 +1,87 @@
+title: Constituent Assembly Protests
+new-page: true
+view-if: ca_stance = 1 and ca_held = 0
+max-visits: 1
+tags: event
+
+= Constituent Assembly Protests
+
+In the wake of Bolshevik attacks against the upcoming Constitutent Assembly, a number of bodies have voiced disapproval. Leading the charge in the capital is the Petrograd City Duma, a hotbed of anti-Bolshevik parties. Various Duma politicians and opposition leaders have declared a "Union for Defense of the Constituent Assembly", whose stated purpose is to rally support for the coming Assembly. Alarmingly, some of those involved in the recent anti-Bolshevik uprising in Petrograd have flocked to its banner. Though attracting members from numerous parties, it seems the Kadets are most outspoken among this group.  
+
+Numerous rallies have been held in the capital, with one fiery protest managing to break into the Tauride Palace. Pro-Assembly delegates reportedly held an unofficial meeting, and gave speeches attacking Bolshevik rule. 
+
+All the while, it's also become clear that the final counting votes is woefully behind schedule, and that it will take longer than expected for the delegates to arrive in the capital. 
+
+- @delay_the_ca
+- @close_duma
+- @crackdown_protests
+- @crackdown_kadets
+
+  
+@delay_the_ca
+title: Push back the scheduled opening. 
+subtitle: There's a legitimate argument to be made that this is necessary regardles.
+unavailable-subtitle: We've already pushed back opening day. 
+max-visits: 1
+go-to: ca_protests
+
+choose-if: constituent_assembly_timer <= 3
+on-arrival:{!
+	Q.constituent_assembly_timer = 10;
+	Q.ca_week = Q.week + (Q.constituent_assembly_timer % 4);
+	Q.ca_month = Q.month + (Q.constituent_assembly_timer / 4);
+	Q.ca_year = Q.year;
+	if (Q.ca_month >= 13) {
+    Q.ca_month = Q.ca_month % 12;
+    Q.ca_year = Q.year + 1;
+	Q.instability += 1;
+	Q.democraticity -= 1;
+	}
+!}
+
+@close_duma
+title: Take this opportunity to close down the counterrevolutionary City Duma.
+max-visits: 1
+go-to: ca_protests
+on-arrival: {!
+  Q.sdi_strength -= 1; Q.left_m_strength -= 1; Q.m_strength -= 4; Q.lsr_strength -= 1; Q.sr_strength -= 2; 
+  Q.right_m_strength -= 2; Q.right_sr_strength -= 2; Q.popular_socialist_strength -= 2; Q.k_strength -= 2;
+  Q.sdi_relation -= 3; Q.left_m_relation -= 3; Q.centre_m_relation -= 3; Q.lsr_relation -= 3; Q.centre_sr_relation -= 5;
+  Q.right_m_relation -= 5; Q.right_sr_relation -= 5; Q.ns_relation -= 5; Q.k_relation -= 5; 
+  Q.democraticity -= 1; Q.instability += 0.5; 
+  Q.workers_b *= 1.02;
+!}
+
+The Petrograd City Duma is formally shut down, although it appears many of their members have continued to hold meetings in secret. 
+
+
+@crackdown_protests
+title: Crack down on protests and arrest the worst troublemakers. 
+max-visits: 1
+go-to: ca_protests
+on-arrival: {!
+  Q.sdi_strength -= 1; Q.left_m_strength -= 1; Q.m_strength -= 4; Q.lsr_strength -= 1; Q.sr_strength -= 2; 
+  Q.right_m_strength -= 2; Q.right_sr_strength -= 2; Q.popular_socialist_strength -= 2; Q.k_strength -= 2;
+  Q.sdi_relation -= 3; Q.left_m_relation -= 3; Q.centre_m_relation -= 3; Q.lsr_relation -= 3; Q.centre_sr_relation -= 5;
+  Q.right_m_relation -= 5; Q.right_sr_relation -= 5; Q.ns_relation -= 5; Q.k_relation -= 5; 
+  Q.democraticity -= 1; Q.instability += 0.5; 
+  Q.workers_b *= 1.02;
+!}
+
+We manage to shut down many of the upcoming planned rallies, and station guards at the Tauride Palace to prevent another outburst from occuring. The counterrevolutionary press decries our actions as suppression of the right of assembly. 
+
+@crackdown_kadets
+title: Declare the Kadets "enemies of the people" and arrest their leaders. 
+max-visits: 1
+go-to: ca_protests
+on-arrival: {!
+  Q.sdi_relation -= 2; Q.left_m_relation -= 2; Q.centre_m_relation -= 2; Q.lsr_relation -= 2; Q.centre_sr_relation -= 2;
+  Q.right_m_relation -= 2; Q.right_sr_relation -= 2; Q.ns_relation -= 2; Q.k_relation -= 20;
+  Q.k_strength -= 5;
+  Q.democraticity -= 1; Q.instability += 0.5; 
+  Q.workers_b *= 1.01;
+  Q.kadets_legal = 0;
+!}
+
+We manage to round up many Kadet leaders, including some delegates to the Constituent Assembly. The Kadets are of course enraged, but the other parties as well seemed dismayed by our actions. 
+
