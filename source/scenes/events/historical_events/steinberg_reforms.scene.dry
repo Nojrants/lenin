@@ -63,11 +63,11 @@ on-arrival: {!
   Q.instability += 2; Q.democraticity -= 2; Q.coalition_government = 0; 
   Q.cheka_strength += 2; Q.cheka_militancy += 0.1; 
   Q.moderate_unrest += 10; Q.leninist_unrest -= 5; Q.leftcom_unrest -= 10;
-  if (Q.lsr_in_gov == 1) { Q.lsr_in_gov = 0; Q.lsr_relation -= 10: }
-  if (Q.m_in_gov == 1) { Q.m_in_gov = 0; Q.centre_m_relation -= 10: }
-  if (Q.sr_in_gov == 1) { Q.sr_in_gov = 0; Q.centr_sr_relation -= 10: }
-  if (Q.sdi_in_gov == 1) { Q.sdi_in_gov = 0; Q.sdi_relation -= 10: }
-  if (Q.ns_in_gov == 1) { Q.ns_in_gov = 0; Q.ns_relation -= 10: }
+  if (Q.lsr_in_gov == 1) { Q.lsr_in_gov = 0; Q.lsr_relation -= 10; }
+  if (Q.m_in_gov == 1) { Q.m_in_gov = 0; Q.centre_m_relation -= 10; }
+  if (Q.sr_in_gov == 1) { Q.sr_in_gov = 0; Q.centr_sr_relation -= 10; }
+  if (Q.sdi_in_gov == 1) { Q.sdi_in_gov = 0; Q.sdi_relation -= 10; }
+  if (Q.ns_in_gov == 1) { Q.ns_in_gov = 0; Q.ns_relation -= 10; }
   Q.right_m_strength += 5; Q.right_sr_strength += 5;
   if (Q.foreign_minister_party != "Bolshevik") { Q.foreign_minister = "Vacant"; Q.foreign_minister_party = ""; }
   if (Q.war_minister_party != "Bolshevik") { Q.war_minister = "Vacant"; Q.war_minister_party = ""; }
@@ -84,7 +84,7 @@ on-arrival: {!
   if (Q.nationalities_minister_party != "Bolshevik") { Q.nationalities_minister = "Vacant"; Q.nationalities_minister_party = ""; }
   if (Q.welfare_minister_party != "Bolshevik") { Q.welfare_minister = "Vacant"; Q.welfare_minister_party = ""; }
   if (Q.property_minister_party != "Bolshevik") { Q.property_minister = "Vacant"; Q.property_minister_party = ""; }
-  if (Q.local_minister_party != "Bolshevik") { Q.local_minister = "Vacant"; Q.foreign_minister_party = ""; }
+  if (Q.local_minister_party != "Bolshevik") { Q.local_minister = "Vacant"; Q.local_minister_party = ""; }
 !}
 
 
