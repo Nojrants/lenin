@@ -816,8 +816,8 @@ go-to: cabinet_negotiations2
 title: Let's leave the position vacant for now. 
 tags: finance_candidates3
 on-arrival: {!
-  if (Q.transport_minister_party == "Left-SR") { Q.commissariats_held += 1; }
-  Q.transport_minister = "Vacant"; Q.transport_minister_party = "";
+  if (Q.finance_minister_party == "Left-SR") { Q.commissariats_held += 1; }
+  Q.finance_minister = "Vacant"; Q.finance_minister_party = "";
 !}
 go-to: cabinet_negotiations2
 
@@ -886,8 +886,8 @@ go-to: cabinet_negotiations2
 title: Let's leave the position vacant for now. 
 tags: justice_candidates3
 on-arrival: {!
-  if (Q.transport_minister_party == "Left-SR") { Q.commissariats_held += 1; }
-  Q.transport_minister = "Vacant"; Q.transport_minister_party = "";
+  if (Q.justice_minister_party == "Left-SR") { Q.commissariats_held += 1; }
+  Q.justice_minister = "Vacant"; Q.justice_minister_party = "";
 !}
 go-to: cabinet_negotiations2
 
