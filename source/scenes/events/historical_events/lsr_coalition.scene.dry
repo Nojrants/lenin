@@ -345,8 +345,8 @@ Unable to come to an agreement, we haven broken off talks with the Left-SRs. It 
   
 @accept_offer
 title: Agree to the offer. 
-unavailable-subtitle: [?if influence <= 60 or (drop_internal != 1 and drop_military != 1 and drop_justice != 1) or commissariats_held > 8 : The Left-SRs will not accept the current offer. ?][?if commissariats_held <= 5 or (drop_foreign == 1 and commissariats_held <= 9) or (drop_internal == 1 and commissariats_held <= 9) or (drop_military == 1 and commissariats_held <= 9) or (drop_internal == 1 and drop_foreign == 1 and drop_military == 1) : The Central Committee believes we have ceded too much. ?]
-choose-if: influence > 60 and (drop_internal = 1 or drop_military = 1 or drop_justice = 1) and commissariats_held <= 8 and commissariats_held > 5 and (drop_foreign != 1 or commissariats_held >= 8) and (drop_internal != 1 or commissariats_held >= 8) and (drop_military != 1 or commissariats_held >= 8) and (drop_internal != 1 and drop_foreign != 1 and drop_military != 1)
+unavailable-subtitle: [?if influence <= 57 or (drop_internal != 1 and drop_military != 1 and drop_justice != 1) or commissariats_held > 8 : The Left-SRs will not accept the current offer. ?][?if commissariats_held <= 5 or (drop_foreign == 1 and commissariats_held <= 9) or (drop_internal == 1 and commissariats_held <= 9) or (drop_military == 1 and commissariats_held <= 9) or (drop_internal == 1 and drop_foreign == 1 and drop_military == 1) : The Central Committee believes we have ceded too much. ?]
+choose-if: influence > 57 and (drop_internal = 1 or drop_military = 1 or drop_justice = 1) and commissariats_held <= 8 and commissariats_held > 5 and (drop_foreign != 1 or commissariats_held >= 8) and (drop_internal != 1 or commissariats_held >= 8) and (drop_military != 1 or commissariats_held >= 8) and (drop_internal != 1 and drop_foreign != 1 and drop_military != 1)
 new-page: true
 on-arrival: commissariats_promised = commissariats_held; commissariats_held = 14;
 go-to: cabinet_negotiations2
