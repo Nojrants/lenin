@@ -902,8 +902,8 @@ Suitability: ★★</ul>
 tags: finance_candidates3
 choose-if: finance_minister != "Brilliantov"  
 on-arrival: {!
-  if (Q.finance_minister_party == "Left-SR") { Q.commissariats_held += 1; }
-  Q.finance_minister = "Brilliantov"; Q.finance_minister_party = "Bolshevik";
+  if (Q.justice_minister_party == "Bolshevik" || Q.justice_minister == "Vacant") Q.commissariats_held -= 1;
+  Q.finance_minister = "Brilliantov"; Q.finance_minister_party = "Left-SR";
 !}
 go-to: cabinet_negotiations2
 
@@ -1089,19 +1089,35 @@ on-arrival: {!
 !}
 go-to: cabinet_negotiations2
 
-@agriculture_algasov
-title: Vladimir Algasov
+@agriculture_kolegayev
+title: Andrei Kolegayev
 subtitle: {!
-<span style="color: var(--lsr-color);">Left-SR</span> — Party organizer with agricultural and economic expertise.<ul> 
-Overall skill: ★★★☆<br>
-Suitability: ★★★★</ul>
-!}
-unavailable-subtitle:{!
-<span style="color: var(--lsr-color);">Left-SR</span> — Party organizer with agricultural and economic expertise.<ul> 
+<span style="color: var(--lsr-color);">Left-SR</span> — Expert in agricultural management.<ul> 
 Overall skill: ★★★<br>
 Suitability: ★★★★</ul>
 !}
-choose-if: agriculture_minister != "Algasov"
+unavailable-subtitle:{!
+<span style="color: var(--lsr-color);">Left-SR</span> — Expert in agricultural management.<ul> 
+Overall skill: ★★★<br>
+Suitability: ★★★★</ul>
+!}
+choose-if: agriculture_minister != "Kolegayev"
+on-arrival: {!
+  if (Q.agriculture_minister_party != "Left-SR") Q.commissariats_held -= 1; 
+  Q.agriculture_minister = "Kolegayev"; Q.agriculture_minister_party = "Left-SR";
+!}
+tags: agriculture_candidates3
+go-to: cabinet_negotiations2
+
+@agriculture_algasov
+title: Vladimir Algasov
+subtitle: {!
+<span style="color: var(--lsr-color);">Left-SR</span> — Party organizer with and economic expertise.<ul> 
+Overall skill: ★★★<br>
+Suitability: ★★★</ul>
+!}
+unavailable-subtitle:<span style="color: var(--lsr-color);">Left-SR</span> — Party organizer with and economic expertise.<ul> Overall skill: ★★★<br>Suitability: ★★★</ul>[?if food_minister == "Algasov" || posts_minister == "Algasov" : <br>Algasov already has a post. ?]
+choose-if: agriculture_minister != "Algasov" and posts_minister != "Algasov" and food_minister != "Algasov"
 on-arrival: {!
   if (Q.agriculture_minister_party != "Left-SR") Q.commissariats_held -= 1; 
   Q.agriculture_minister = "Algasov"; Q.agriculture_minister_party = "Left-SR";
@@ -1193,6 +1209,22 @@ on-arrival: {!
 tags: food_candidates3
 go-to: cabinet_negotiations2
 
+@food_algasov
+title: Vladimir Algasov
+subtitle: {!
+<span style="color: var(--lsr-color);">Left-SR</span> — Party organizer with and economic expertise.<ul> 
+Overall skill: ★★★<br>
+Suitability: ★★</ul>
+!}
+unavailable-subtitle:<span style="color: var(--lsr-color);">Left-SR</span> — Party organizer with and economic expertise.<ul> Overall skill: ★★★<br>Suitability: ★★</ul>[?if agriculture_minister == "Algasov" || posts_minister == "Algasov" : <br>Algasov already has a post. ?]
+choose-if: agriculture_minister != "Algasov" and posts_minister != "Algasov" and food_minister != "Algasov"
+on-arrival: {!
+  if (Q.food_minister_party != "Left-SR") Q.commissariats_held -= 1; 
+  Q.food_minister = "Algasov"; Q.food_minister_party = "Left-SR";
+!}
+tags: food_candidates3
+go-to: cabinet_negotiations2
+
 
 @food_vacant
 title: Let's leave the position vacant for now. 
@@ -1257,6 +1289,22 @@ on-arrival: {!
   if (Q.posts_minister_party == "Bolshevik" || Q.posts_minister == "Vacant") Q.commissariats_held -= 1;
   Q.posts_minister = "Proshian"; Q.posts_minister_party = "Left-SR";
 !}
+go-to: cabinet_negotiations2
+
+@posts_algasov
+title: Vladimir Algasov
+subtitle: {!
+<span style="color: var(--lsr-color);">Left-SR</span> — Party organizer with and economic expertise.<ul> 
+Overall skill: ★★★<br>
+Suitability: ★★</ul>
+!}
+unavailable-subtitle:<span style="color: var(--lsr-color);">Left-SR</span> — Party organizer with and economic expertise.<ul> Overall skill: ★★★<br>Suitability: ★★</ul>[?if agriculture_minister == "Algasov" || food_minister == "Algasov" : <br>Algasov already has a post. ?]
+choose-if: agriculture_minister != "Algasov" and posts_minister != "Algasov" and food_minister != "Algasov"
+on-arrival: {!
+  if (Q.posts_minister_party != "Left-SR") Q.commissariats_held -= 1; 
+  Q.posts_minister = "Algasov"; Q.posts_minister_party = "Left-SR";
+!}
+tags: posts_candidates3
 go-to: cabinet_negotiations2
 
 
