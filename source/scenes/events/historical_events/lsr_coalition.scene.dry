@@ -708,6 +708,26 @@ on-arrival: {!
 !}
 go-to: cabinet_negotiations2
 
+internal_alexandrov
+title: Vyacheslav Alexandrov
+subtitle: {!
+<span style="color: var(--lsr-color);">Left-SR</span> — Experienced revolutionary militant.<ul>
+Overall skill: ★★<br>
+Suitability: ★★</ul>
+!}
+unavailable-subtitle: {!
+<span style="color: var(--lsr-color);">Left-SR</span> — Experienced revolutionary militant.<ul>
+Overall skill: ★★<br>
+Suitability: ★★</ul>
+!}
+tags: internal_candidates3
+choose-if: interior_minister != "Alexandrov" 
+on-arrival: {!
+  if (Q.interior_minister_party == "Left-SR") Q.commissariats_held += 1; 
+  Q.interior_minister = "Alexandrov"; Q.interior_minister_party = "Bolshevik"; 
+!}
+go-to: cabinet_negotiations2
+
 internal_blumkin
 title: Yakov Blumkin
 subtitle: {!
