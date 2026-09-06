@@ -255,9 +255,8 @@ for (var p of Q.garrison_parties) {
 }
 Q.garrison_independent = 100*(100-non_independent)/total_garrison_loyalty;
 
-if (Q.unemployed <= 1) {
-    Q.unemployed = 1;
-}
+
+
 
 
 
@@ -763,6 +762,15 @@ Q.resources = Math.round(Q.resources * 10) /10;
 // inflation
 Q.inflation = Math.pow(1+0.01*Q.monthly_inflation, 12);
 Q.inflation = Math.round(1000*(Q.inflation - 1))/10;
+
+
+if (Q.monthly_inflation <- 10) Q.unemployed -= (10-Q.monthly_inflation) * 0.5;
+if (Q.monthly_inflation >= 20) Q.unemployed += (Q.monthly_inflation - 10) * 0.15;
+
+if (Q.unemployed <= 1) {
+    Q.unemployed = 1;
+}
+
 
 // food production and distribution
 // food demand
