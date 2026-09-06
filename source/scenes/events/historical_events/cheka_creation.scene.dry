@@ -1,14 +1,14 @@
-title: Creation of the Cheka
+title: Creation of an "Extraordinary Commission"
 new-page: true
 view-if: coalition_government = 1 and cheka_founded = 0
 max-visits: 1
 tags: event
 
-= Constituent Assembly Protests
+= Extraordinary Commission 
 
 With the advent of a coalition government, there are some within the Bolshevik leadership who fear the non-Bolshevik commissars will now impede our anti-counterrevolutionary efforts, through legal and governmental meddling. In particular, hardline Bolsheviks within the Military Revolutionary Committee have petitioned for some kind of special commission, to take up their work free from outside interference. 
 
-It has been proposed that we create an "Extraordinary Commission for Combating Counter-Revolution and Sabotage" (Cheka), which will inherit the functions of the Military Revolutionary Committee. 
+It has been proposed that we create an "Extraordinary Commission for Combating Counter-Revolution and Sabotage" (Cheka), which will inherit the functions of the Military Revolutionary Committee. Such a body would be free of opposition parties, and commanded by experienced Bolshevik militants. 
 
   
 - @create
