@@ -501,7 +501,7 @@ subtitle: {!
 Overall skill: ★★★☆<br>
 Suitability: ★★★★</ul>
 !}
-unavailable-subtitle: [?if agriculture_minister = "Kamkov" : Kamkov already has a post.<br> ?] <span style="color: var(--lsr-color);">Left-SR</span> — Leading party administrator and lawyer.<ul>Overall skill: ★★★☆<br>Suitability: ★★☆</ul>
+unavailable-subtitle: <span style="color: var(--lsr-color);">Left-SR</span> — Leading party administrator and lawyer.<ul>Overall skill: ★★★☆<br>Suitability: ★★☆</ul>[?if agriculture_minister = "Kamkov" : <br>Kamkov already has a post. ?] 
 tags: foreign_menu3
 choose-if: foreign_minister != "Kamkov" and agriculture_minister != "Kamkov"
 on-arrival: {!
@@ -829,7 +829,7 @@ subtitle: {!
 Overall skill: ★★★<br>
 Suitability: ★★</ul>
 !}
-unavailable-subtitle: [?if posts_minister == "Proshian" : Proshian already has a post.<br> ?]<span style="color: var(--lsr-color);">Left-SR</span> — Lawyer and party activistul>Overall skill: ★★★<br>Suitability: ★★</ul>
+unavailable-subtitle: <span style="color: var(--lsr-color);">Left-SR</span> — Lawyer and party activistul>Overall skill: ★★★<br>Suitability: ★★</ul>[?if posts_minister == "Proshian" : <br>Proshian already has a post. ?]
 tags: trade_candidates3
 choose-if: posts_minister != "Proshian" and trade_minister != "Proshian"
 on-arrival: {!
@@ -1032,7 +1032,7 @@ subtitle: {!
 Overall skill: ★★☆<br>
 Suitability: ★☆</u>
 !}
-unavailable-subtitle: [?if local_minister == "Trutovsky" : Trutovsky already has a post. <br>?]<span style="color: var(--lsr-color);">Left-SR</span> — Former law student, journalist, and expert in local affairs.<br> Overall skill: ★★☆<br>Suitability: ★☆</ul>
+unavailable-subtitle: <span style="color: var(--lsr-color);">Left-SR</span> — Former law student, journalist, and expert in local affairs.<br> Overall skill: ★★☆<br>Suitability: ★☆</ul>[?if local_minister == "Trutovsky" : <br>Trutovsky already has a post. ?]
 tags: labor_candidates3
 choose-if: labor_minister != "Trutovsky" and local_minister != "Trutovsky"
 on-arrival: {!
@@ -1116,7 +1116,7 @@ subtitle: {!
 Overall skill: ★★★☆<br>
 Suitability: ★★☆</ul>
 !}
-unavailable-subtitle: [?if foreign_minister = "Kamkov" : Kamkov already has a post.<br> ?] <span style="color: var(--lsr-color);">Left-SR</span> — Leading party administrator and lawyer.<ul>Overall skill: ★★★☆<br>Suitability: ★★☆</ul>
+unavailable-subtitle: <span style="color: var(--lsr-color);">Left-SR</span> — Leading party administrator and lawyer.<ul>Overall skill: ★★★☆<br>Suitability: ★★☆</ul>[?if foreign_minister = "Kamkov" : <br>Kamkov already has a post. ?] 
 choose-if: foreign_minister != "Kamkov" and agriculture_minister != "Kamkov"
 on-arrival: {!
   if (Q.agriculture_minister_party != "Left-SR") Q.commissariats_held -= 1; 
@@ -1190,7 +1190,7 @@ on-arrival: {!
   if (Q.food_minister_party != "Left-SR") Q.commissariats_held -= 1; 
   Q.food_minister = "Mayorov"; Q.food_minister_party = "Left-SR";
 !}
-tags: agriculture_candidates3
+tags: food_candidates3
 go-to: cabinet_negotiations2
 
 
@@ -1250,7 +1250,7 @@ subtitle: {!
 Overall skill: ★★★<br>
 Suitability: ★★</ul>
 !}
-unavailable-subtitle: [?if trade_minister == "Proshian" : Proshian already has a post.<br> ?]<span style="color: var(--lsr-color);">Left-SR</span> — Lawyer and party activistul>Overall skill: ★★★<br>Suitability: ★★</ul>
+unavailable-subtitle: <span style="color: var(--lsr-color);">Left-SR</span> — Lawyer and party activistul>Overall skill: ★★★<br>Suitability: ★★</ul>[?if trade_minister == "Proshian" : <br>Proshian already has a post. ?]
 tags: posts_candidates3
 choose-if: posts_minister != "Proshian" and trade_minister != "Proshian"
 on-arrival: {!
@@ -1359,6 +1359,22 @@ on-arrival: {!
 !}
 go-to: cabinet_negotiations2
 
+@property_izmailovich
+title: Aleksandra Izmailovich
+subtitle: {!
+<span style="color: var(--lsr-color);">Left-SR</span> — Party organizer with managerial experience.<ul> 
+Overall skill: ★★<br>
+Suitability: ★★★</ul>
+!}
+unavailable-subtitle: <span style="color: var(--lsr-color);">Left-SR</span> — Party organizer with managerial experience.<ul>Overall skill: ★★<br>Suitability: ★★</ul>[?if local_minister == "Izmailovich" : <br>Izmailovich already has a post. ?]
+tags: property_candidates3
+choose-if: local_minister != "Izmailovich" and property_minister != "Izmailovich"
+on-arrival: {!
+  if (Q.property_minister_party != "Left-SR") { Q.commissariats_held -= 1; }
+  Q.property_minister = "Izmailovich"; Q.property_minister_party = "Left-SR"; 
+!}
+go-to: cabinet_negotiations2
+
 @property_vacant
 title: Cancel the proposed commissariat.
 tags: property_candidates3
@@ -1396,12 +1412,28 @@ subtitle: {!
 Overall skill: ★★☆<br>
 Suitability: ★★★★</ul>
 !}
-unavailable-subtitle: [?if labor_minister == "Trutovsky" : Trutovsky already has a post.<br> ?]<span style="color: var(--lsr-color);">Left-SR</span> — Former law student, journalist, and expert in local affairs.<ul>Overall skill: ★★☆<br>Suitability: ★★★★</ul>
+unavailable-subtitle: <span style="color: var(--lsr-color);">Left-SR</span> — Former law student, journalist, and expert in local affairs.<ul>Overall skill: ★★☆<br>Suitability: ★★★★</ul>[?if labor_minister == "Trutovsky" : <br>Trutovsky already has a post. ?]
 tags: local_candidates3
 choose-if: local_minister != "Trutovsky" and labor_minister != "Trutovsky"
 on-arrival: {!
   if (Q.local_minister_party != "Left-SR") { Q.commissariats_held -= 1; }
   Q.local_minister = "Trutovsky"; Q.local_minister_party = "Left-SR"; 
+!}
+go-to: cabinet_negotiations2
+
+@local_izmailovich
+title: Aleksandra Izmailovich
+subtitle: {!
+<span style="color: var(--lsr-color);">Left-SR</span> — Party organizer with managerial experience.<ul> 
+Overall skill: ★★<br>
+Suitability: ★★</ul>
+!}
+unavailable-subtitle: <span style="color: var(--lsr-color);">Left-SR</span> — Party organizer with managerial experience.<ul>Overall skill: ★★<br>Suitability: ★★</ul>[?if property_minister == "Izmailovich" : <br>Izmailovich already has a post. ?]
+tags: local_candidates3
+choose-if: local_minister != "Izmailovich" and property_minister != "Izmailovich"
+on-arrival: {!
+  if (Q.local_minister_party != "Left-SR") { Q.commissariats_held -= 1; }
+  Q.local_minister = "Izmailovich"; Q.local_minister_party = "Left-SR"; 
 !}
 go-to: cabinet_negotiations2
 
