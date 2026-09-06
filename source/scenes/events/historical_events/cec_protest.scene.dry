@@ -1,4 +1,4 @@
-title: CEC Protest Vote
+title: Vote in the CEC
 new-page: true
 view-if: ca_stance = 1 and ca_held = 0 and kadets_legal = 0
 max-visits: 1
