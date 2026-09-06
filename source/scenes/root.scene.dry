@@ -325,6 +325,8 @@ Q.leaders.Malitsky = { auctoritas: 3, administration: 3, idealogism: 2, military
 Q.leaders.Maslov = { auctoritas: 2, administration: 3, idealogism: 1.5, military: 2, economic: 4, partyorg: 2, diplomacy: 2, culture: 2.5, legalism: 4, nationalities: 2.5 };
 
 // Left-SRs
+Q.leaders.Spiridonova = { auctoritas: 4, administration: 3, idealogism: 4, military: 2.5, economic: 2.5, partyorg: 4, diplomacy: 3, culture: 2, legalism: 3, nationalities: 1.5 };
+Q.leaders.Kamkov = { auctoritas: 3.5, administration: 3, idealogism: 3, military: 1.5, economic: 2, partyorg: 3.5, diplomacy: 2.5, culture: 1.5, legalism: 3, nationalities: 1.5 };
 Q.leaders.Malkin = { auctoritas: 2, administration: 2.5, idealogism: 3, military: 2, economic: 2.5, partyorg: 3, diplomacy: 2, culture: 1.5, legalism: 2, nationalities: 1.5 };
 Q.leaders.Karelin = { auctoritas: 3, administration: 3.5, idealogism: 3, military: 2, economic: 2.5, partyorg: 3, diplomacy: 2, culture: 1.5, legalism: 3, nationalities: 1.5 };
 Q.leaders.Trutovsky = { auctoritas: 2.5, administration: 3.5, idealogism: 2.5, military: 2, economic: 2.5, partyorg: 3, diplomacy: 2, culture: 2, legalism: 3.5, nationalities: 2.5 };
