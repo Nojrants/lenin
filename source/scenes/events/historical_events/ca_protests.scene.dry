@@ -21,7 +21,7 @@ All the while, it's also become clear that the final counting votes is woefully 
 - @close_duma
 - @crackdown_protests
 - @crackdown_kadets
-
+- @nothing
   
 @delay_the_ca
 title: Push back the scheduled opening. 
@@ -88,4 +88,13 @@ on-arrival: {!
 !}
 
 We manage to round up many Kadet leaders, including some delegates to the Constituent Assembly. The Kadets are of course enraged, but the other parties as well seemed dismayed by our actions. 
+
+
+@nothing
+title: We've done all we can. 
+go-to: root
+
+
+
+
 
