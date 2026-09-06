@@ -1,4 +1,5 @@
 title: Creation of an "Extraordinary Commission"
+subtitle: We must remain vigiliant in the fight against counterrevolution. 
 new-page: true
 view-if: coalition_government = 1 and cheka_founded = 0
 max-visits: 1
