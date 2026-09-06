@@ -35,11 +35,11 @@ We open talks with the Left-SRs, though various objections and protests drag the
 
 The Left-SRs have put forth their primary demands:
 <ul>
-Control over the People's Commissariats for Internal Affairs, Military, Justice, Agriculture, and Railways (in that order).<br>
-Rough parity in Sovnarkom, and positions within the collegia of people's commissariats and government institutions.<br>
-A military build-up to protect the revolution, and support socialist uprisings abroad.<br>
-Creation of a just system of revolutionary laws.<br>
-Implementation of land reform in the countryside.
+&nbsp;&nbsp;• Control over the People's Commissariats for Internal Affairs, Military, Justice, Agriculture, and Railways (in that order).<br>
+&nbsp;&nbsp;• Rough parity in Sovnarkom, and positions within the collegia of people's commissariats and government institutions.<br>
+&nbsp;&nbsp;• A military build-up to protect the revolution, and support socialist uprisings abroad.<br>
+&nbsp;&nbsp;• Creation of a just system of revolutionary laws.<br>
+&nbsp;&nbsp;• Implementation of land reform in the countryside.
 </ul>
 
 Ceding so many commissariats is not something Lenin will allow, but the demands nonetheless serve as a good starting point. 
@@ -347,8 +347,8 @@ Unable to come to an agreement, we haven broken off talks with the Left-SRs. It 
   
 @accept_offer
 title: Agree to the offer. 
-unavailable-subtitle: [?if influence <= 56 or (drop_internal != 1 and drop_military != 1 and drop_justice != 1) or commissariats_held > 8 : The Left-SRs will not accept the current offer. ?][?if commissariats_held <= 5 or (drop_foreign == 1 and commissariats_held <= 9) or (drop_internal == 1 and commissariats_held <= 9) or (drop_military == 1 and commissariats_held <= 9) or (drop_internal == 1 and drop_foreign == 1 and drop_military == 1) : The Central Committee believes we have ceded too much. ?]
-choose-if: influence > 56 and (drop_internal = 1 or drop_military = 1 or drop_justice = 1) and commissariats_held <= 8 and commissariats_held > 5 and (drop_foreign != 1 or commissariats_held >= 8) and (drop_internal != 1 or commissariats_held >= 8) and (drop_military != 1 or commissariats_held >= 8) and (drop_internal != 1 and drop_foreign != 1 and drop_military != 1)
+unavailable-subtitle: [?if influence <= 60 or (drop_internal != 1 and drop_military != 1 and drop_justice != 1) or commissariats_held > 8 : The Left-SRs will not accept the current offer. ?][?if commissariats_held <= 5 or (drop_foreign == 1 and commissariats_held <= 9) or (drop_internal == 1 and commissariats_held <= 9) or (drop_military == 1 and commissariats_held <= 9) or (drop_internal == 1 and drop_foreign == 1 and drop_military == 1) : The Central Committee believes we have ceded too much. ?]
+choose-if: influence > 60 and (drop_internal = 1 or drop_military = 1 or drop_justice = 1) and commissariats_held <= 8 and commissariats_held > 5 and (drop_foreign != 1 or commissariats_held >= 8) and (drop_internal != 1 or commissariats_held >= 8) and (drop_military != 1 or commissariats_held >= 8) and (drop_internal != 1 and drop_foreign != 1 and drop_military != 1)
 new-page: true
 on-arrival: commissariats_promised = commissariats_held; commissariats_held = 14;
 go-to: cabinet_negotiations2
