@@ -515,7 +515,7 @@ on-arrival: {!
 !}
 go-to: cabinet_negotiations
 
-@enlightenment_cancel
+@foreign_cancel
 title: Cancel reassignment.
 subtitle: [?if foreign_minister != "Vacant": Keep [+ foreign_minister +] in place. ?]
 tags: foreign_menu
