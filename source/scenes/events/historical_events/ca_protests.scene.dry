@@ -6,7 +6,9 @@ tags: event
 
 = Constituent Assembly Protests
 
-In the wake of Bolshevik attacks against the upcoming Constitutent Assembly, a number of bodies have voiced disapproval. Leading the charge in the capital is the Petrograd City Duma, a hotbed of anti-Bolshevik parties. Various Duma politicians and opposition leaders have declared a "Union for Defense of the Constituent Assembly", whose stated purpose is to rally support for the coming Assembly. Alarmingly, some of those involved in the recent anti-Bolshevik uprising in Petrograd have flocked to its banner. Though attracting members from numerous parties, it seems the Kadets are most outspoken among this group.  
+In the wake of Bolshevik attacks against the upcoming Constitutent Assembly, a number of bodies have voiced disapproval. Leading the charge in the capital is the Petrograd City Duma, a hotbed of anti-Bolshevik parties. 
+
+Various Duma politicians and opposition leaders have declared a "Union for Defense of the Constituent Assembly", whose stated purpose is to rally support for the coming Assembly. Alarmingly, some of those involved in the recent anti-Bolshevik uprising in Petrograd have flocked to its banner. Though attracting members from numerous parties, it seems the Kadets are most outspoken among this group.  
 
 Numerous rallies have been held in the capital, with one fiery protest managing to break into the Tauride Palace. Pro-Assembly delegates reportedly held an unofficial meeting, and gave speeches attacking Bolshevik rule. 
 
@@ -24,8 +26,7 @@ subtitle: There's a legitimate argument to be made that this is necessary regard
 unavailable-subtitle: We've already pushed back opening day. 
 max-visits: 1
 go-to: ca_protests
-
-choose-if: constituent_assembly_timer <= 3
+choose-if: constituent_assembly_timer <= 2
 on-arrival:{!
 	Q.constituent_assembly_timer = 10;
 	Q.ca_week = Q.week + (Q.constituent_assembly_timer % 4);
