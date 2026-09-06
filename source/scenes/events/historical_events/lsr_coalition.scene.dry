@@ -586,7 +586,7 @@ go-to: enlightenment_menu
 
 @enlightenment_menu
 
-- #enlightenment_candidates2
+- #enlightenment_candidates3
 
 @enlightenment_lunacharsky
 title: Anatoly Lunacharsky
@@ -651,7 +651,7 @@ go-to: internal_menu
 
 @internal_menu
 
-- #internal_candidates
+- #internal_candidates3
 
 @internal_rykov
 title: Alexei Rykov
@@ -693,7 +693,7 @@ go-to: transport_menu
 
 @transport_menu
 
-- #transport_candidates2
+- #transport_candidates3
 
 @transport_malkin
 title: Boris Malkin
@@ -741,7 +741,7 @@ go-to: trade_menu
 
 @trade_menu
 
-- #trade_candidates2
+- #trade_candidates3
 
 @trade_nogin
 title: Viktor Nogin
@@ -790,7 +790,7 @@ go-to: finance_menu
 
 @finance_menu
 
-- #finance_candidates2
+- #finance_candidates3
 
 @finance_skvortsov
 title: Ivan Skvortsov-Stepanov
@@ -840,7 +840,7 @@ go-to: justice_menu
 
 @justice_menu
 
-- #justice_candidates2
+- #justice_candidates3
 
 @justice_oppokov
 title: Georgy Oppokov
@@ -908,7 +908,7 @@ go-to: labor_menu
 
 @labor_menu
 
-- #labor_candidates2
+- #labor_candidates3
 
 @labor_shliapnikov
 title: Alexander Shliapnikov
@@ -956,7 +956,7 @@ go-to: agriculture_menu
 
 @agriculture_menu
 
-- #agriculture_candidates2
+- #agriculture_candidates3
 
 @agriculture_milyutin
 title: Vladimir Milyutin
@@ -1024,7 +1024,7 @@ go-to: food_menu
 
 @food_menu
 
-- #food_candidates2
+- #food_candidates3
 
 @food_teodorovich
 title: Ivan Teodorovich
@@ -1072,7 +1072,7 @@ go-to: posts_menu
 
 @posts_menu
 
-- #posts_candidates2
+- #posts_candidates3
 
 @posts_glebov
 title: Nikolai Glebov-Avilov
@@ -1143,7 +1143,7 @@ go-to: nationalities_menu
 
 @nationalities_menu
 
-- #nationalities_candidates2
+- #nationalities_candidates3
 
 @nationalities_stalin
 title: Iosif Stalin
@@ -1192,7 +1192,7 @@ go-to: property_menu
 
 @property_menu
 
-- #property_candidates
+- #property_candidates3
 
 @property_karelin
 title: Vladimir Karelin
@@ -1241,7 +1241,7 @@ go-to: local_menu
 
 @local_menu
 
-- #local_candidates
+- #local_candidates3
 
 @local_trutovsky
 title: Vladimir Trutovsky
