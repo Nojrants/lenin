@@ -2,6 +2,7 @@ title: Constituent Assembly Protests
 new-page: true
 view-if: ca_stance = 1 and ca_held = 0
 max-visits: 1
+go-to:protest_menu
 tags: event
 
 = Constituent Assembly Protests
@@ -14,6 +15,8 @@ Numerous rallies have been held in the capital, with one fiery protest managing 
 
 All the while, it's also become clear that the final counting votes is woefully behind schedule, and that it will take longer than expected for the delegates to arrive in the capital. 
 
+@protest_menu
+
 - @delay_the_ca
 - @close_duma
 - @crackdown_protests
@@ -25,7 +28,7 @@ title: Push back the scheduled opening.
 subtitle: There's a legitimate argument to be made that this is necessary regardles.
 unavailable-subtitle: We've already pushed back opening day. 
 max-visits: 1
-go-to: ca_protests
+go-to: protest_menu
 choose-if: constituent_assembly_timer <= 2
 on-arrival:{!
 	Q.constituent_assembly_timer = 10;
@@ -43,7 +46,7 @@ on-arrival:{!
 @close_duma
 title: Take this opportunity to close down the counterrevolutionary City Duma.
 max-visits: 1
-go-to: ca_protests
+go-to: protest_menu
 on-arrival: {!
   Q.sdi_strength -= 1; Q.left_m_strength -= 1; Q.m_strength -= 4; Q.lsr_strength -= 1; Q.sr_strength -= 2; 
   Q.right_m_strength -= 2; Q.right_sr_strength -= 2; Q.popular_socialist_strength -= 2; Q.k_strength -= 2;
@@ -59,7 +62,7 @@ The Petrograd City Duma is formally shut down, although it appears many of their
 @crackdown_protests
 title: Crack down on protests and arrest the worst troublemakers. 
 max-visits: 1
-go-to: ca_protests
+go-to: protest_menu
 on-arrival: {!
   Q.sdi_strength -= 1; Q.left_m_strength -= 1; Q.m_strength -= 4; Q.lsr_strength -= 1; Q.sr_strength -= 2; 
   Q.right_m_strength -= 2; Q.right_sr_strength -= 2; Q.popular_socialist_strength -= 2; Q.k_strength -= 2;
@@ -74,7 +77,7 @@ We manage to shut down many of the upcoming planned rallies, and station guards 
 @crackdown_kadets
 title: Declare the Kadets "enemies of the people" and arrest their leaders. 
 max-visits: 1
-go-to: ca_protests
+go-to: protest_menu
 on-arrival: {!
   Q.sdi_relation -= 2; Q.left_m_relation -= 2; Q.centre_m_relation -= 2; Q.lsr_relation -= 2; Q.centre_sr_relation -= 2;
   Q.right_m_relation -= 2; Q.right_sr_relation -= 2; Q.ns_relation -= 2; Q.k_relation -= 20;
