@@ -1304,6 +1304,7 @@ Q.timers = [//m_party
             'soviet_congress',
             'ca_preparations',
             'ca_support',
+            'coalition_actions',
             ];
 Q.advisor_action_timer = 0;
 Q.party_congress_timer = 0;
