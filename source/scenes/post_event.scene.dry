@@ -71,6 +71,7 @@ Q.leaders.Algasov = { auctoritas: 3.5, administration: 3.5, idealogism: 2, milit
 Q.leaders.Mayorov = { auctoritas: 1.5, administration: 2, idealogism: 1.5, military: 1.5, economic: 2, partyorg: 2, diplomacy: 1.5, culture: 1.5, legalism: 2, nationalities: 1.5 };
 Q.leaders.Izmailovich = { auctoritas: 2.5, administration: 2, idealogism: 2.5, military: 2, economic: 2, partyorg: 3, diplomacy: 1.5, culture: 1.5, legalism: 2, nationalities: 1.5 };
 Q.leaders.Kolegayev = { auctoritas: 2.5, administration: 2.5, idealogism: 2.5, military: 2, economic: 3, partyorg: 3, diplomacy: 2, culture: 1.5, legalism: 2, nationalities: 1.5 };
+Q.leaders.Alexandrov = { auctoritas: 2, administration: 2, idealogism: 1.5, military: 3, economic: 1.5, partyorg: 2.5, diplomacy: 1.5, culture: 1, legalism: 1.5, nationalities: 1 };
 
 
 // NSs
