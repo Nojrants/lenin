@@ -1,0 +1,35 @@
+title: CEC Protest Vote
+new-page: true
+view-if: ca_stance = 1 and ca_held = 0 and kadets_legal = 0
+max-visits: 1
+tags: event
+
+= Constituent Assembly Protests
+
+Our various attacks against the upcoming Constituent Assembly, and the recent outlawing of the Kadets in particular, have sparked major backlash among the opposition parties. Even among those sympathetic to us, it is claimed we are hurting the legitimacy of soviet power.  
+
+A resolution has appeared in the CEC, initiated by the Left-SRs, which calls for Sovnarkom to be barred from interfering in the convocation of the Constituent Assembly, for Sovnarkom's accountability to the CEC to be reaffirmed, and for the decree outlawing the Kadets to be reversed.
+
+We have the votes in the CEC to defeat this initiative easily, and the general Bolshevik opinion is that acquiescing to these demands would come across as serious weakness. On the other hand, we could potentially foster some goodwill among the other parties by letting the resolution pass.
+
+- @fail
+- @pass
+  
+@fail
+title: Reject the resolution. 
+
+We instruct our members to vote against the resolution, and it fails to pass. The final vote is 98 for, 150 against, with 3 abstentions. 
+
+The other parties are unsurprised but disappointed. 
+
+
+@pass
+title: Let the resolution pass. 
+on-arrival: {!
+  Q.sdi_relation += 3; Q.left_m_relation += 3; Q.centre_m_relation += 3; Q.lsr_relation += 6; Q.centre_sr_relation += 3;
+  Q.right_m_relation += 3; Q.right_sr_relation += 3; Q.ns_relation += 3; Q.k_relation += 5; 
+  Q.k_strength += 5;
+  Q.democraticity += 2;
+!}
+
+We instruct our members to abstain from the vote, allowing it to pass. The other parties are pleasantly surprised by our tolerance. The Kadets profit most of all, though they seem not at all grateful. 
