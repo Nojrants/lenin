@@ -494,6 +494,22 @@ on-arrival: {!
 !}
 go-to: cabinet_negotiations2
 
+@foreign_kamkov
+title: Boris Kamkov
+subtitle: {!
+Left-SR — Leading party administrator and lawyer.<ul> 
+Overall skill: ★★★☆<br>
+Suitability: ★★★★</ul>
+!}
+unavailable-subtitle: [?if agriculture_minister = "Kamkov" : Kamkov already has a post.<br> ?] Left-SR — Leading party administrator and lawyer.<ul>Overall skill: ★★★☆<br>Suitability: ★★☆</ul>
+tags: foreign_menu3
+choose-if: foreign_minister != "Kamkov" and agriculture_minister != "Kamkov"
+on-arrival: {!
+  if (Q.foreign_minister_party != "Left-SR") Q.commissariats_held -= 1; 
+  Q.foreign_minister = "Kamkov"; Q.foreign_minister_party = "Left-SR";
+!}
+go-to: cabinet_negotiations2
+
 @foreign_spiridonova
 title: Maria Spiridonova
 subtitle: {!
@@ -562,6 +578,25 @@ on-arrival: {!
 !}
 go-to: cabinet_negotiations2
 
+@military_lazimir
+title: Pavel Lazimir
+subtitle: {!
+<span style="color: var(--lsr-color);">Left-SR</span> — Chair of the Petrograd Military Revolutionary Committee; prominent soldier-activist during October Revolution.<ul>
+Overall skill: ★★<br>
+Suitability: ★★★★</ul>
+!}
+unavailable-subtitle: {!
+<span style="color: var(--lsr-color);">Left-SR</span> — Chair of the Petrograd Military Revolutionary Committee; prominent soldier-activist during October Revolution.<ul>
+Overall skill: ★★<br>
+Suitability: ★★★★</ul>
+!}
+tags: military_menu3
+choose-if: foreign_minister != "Lazimir" 
+on-arrival: {!
+  if (Q.war_minister_party != "Left-SR") Q.commissariats_held -= 1; 
+  Q.war_minister = "Lazimir"; Q.war_minister_party = "Left-SR";
+!}
+go-to: cabinet_negotiations2
 
 @military_vacant
 title: Let's leave the position vacant for now. 
@@ -617,13 +652,13 @@ go-to: cabinet_negotiations2
 @enlightenment_natanson
 title: Mark Natanson
 subtitle: {!
-Left-SR — Party leader and elder statesman; some experience in education.<br>
+<span style="color: var(--lsr-color);">Left-SR</span> — Party leader and elder statesman; some experience in education.<br>
 Overall skill: ★★★☆<br>
 Suitability: ★☆
 !}
 tags: enlightenment_candidates3
 choose-if: lsr_relation >= 40 and education_minister != "Natanson" 
-unavailable-subtitle: [?if lsr_relation < 40 : Natanson won't accept this offer.<br> ?]Left-SR — Party leader and elder statesman; some experience in education.<br>Overall skill: ★★★☆<br>Suitability: ★☆
+unavailable-subtitle: [?if lsr_relation < 40 : Natanson won't accept this offer.<br> ?]<span style="color: var(--lsr-color);">Left-SR</span> — Party leader and elder statesman; some experience in education.<br>Overall skill: ★★★☆<br>Suitability: ★☆
 on-arrival: {!
   if (Q.education_minister_party == "Bolshevik" || Q.education_minister == "Vacant") Q.commissariats_held -= 1;
   Q.education_minister = "Natanson"; Q.education_minister_party = "Left-SR"; Q.lsr_represented += 1;
@@ -672,6 +707,26 @@ on-arrival: {!
 !}
 go-to: cabinet_negotiations2
 
+internal_blumkin
+title: Yakov Blumkin
+subtitle: {!
+<span style="color: var(--lsr-color);">Left-SR</span> — Soldier-agitator with some experience in espionage.<br>
+Overall skill: ★☆<br>
+Suitability: ★★
+!}
+unavailable-subtitle: {!
+<span style="color: var(--lsr-color);">Left-SR</span> — Soldier-agitator with some experience in espionage.<br>
+Overall skill: ★☆<br>
+Suitability: ★★
+!}
+tags: internal_candidates3
+choose-if: interior_minister != "Blumkin" 
+on-arrival: {!
+  if (Q.interior_minister_party == "Left-SR") Q.commissariats_held += 1; 
+  Q.interior_minister = "Blumkin"; Q.interior_minister_party = "Bolshevik"; 
+!}
+go-to: cabinet_negotiations2
+
 @internal_vacant
 title: Let's leave the position vacant for now. 
 tags: internal_candidates3
@@ -688,8 +743,6 @@ tags: internal_candidates3
 go-to: cabinet_negotiations2
 
 
-
-
 @transport_assign
 title: Appoint the Transportation Commissar
 subtitle: [?if transport_minister != "Vacant" : Currently held by [+ transport_minister +] ?][?if transport_minister != "Vacant" and transport_minister_party=="Bolshevik": (<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>)?][?if transport_minister_party=="Menshevik": (<span class="tooltip-text" title="Menshevik" style="color: var(--m-color);">RSDLP(u)</span>)?][?if transport_minister_party=="Left-SR": (<span class="tooltip-text" title="Left-SR" style="color: var(--lsr-color);">Left-SR</span>)?][?if transport_minister_party=="SR": (<span class="tooltip-text" title="Socialist Revolutionary" style="color: var(--sr-color);">SR</span>)?][?if transport_minister_party=="SD-Int": (<span class="tooltip-text" title="Social-Democratic Internationalist" style="color: var(--sdi-color);">SD-Int</span>)?][?if transport_minister_party=="NS": (<span class="tooltip-text" title="Popular Socialist" style="color: var(--ns-color);">NS</span>)?]
@@ -704,12 +757,12 @@ go-to: transport_menu
 @transport_malkin
 title: Boris Malkin
 subtitle: {!
-Left-SR — Journalist and party activist.<br> 
+<span style="color: var(--lsr-color);">Left-SR</span> — Journalist and party activist.<br> 
 Overall skill: ★★☆<br>
 Suitability: ★☆
 !}
 unavailable-subtitle: {!
-Left-SR — Journalist and party activist.<br> 
+<span style="color: var(--lsr-color);">Left-SR</span> — Journalist and party activist.<br> 
 Overall skill: ★★☆<br>
 Suitability: ★☆
 !}
@@ -769,6 +822,22 @@ on-arrival: {!
 !}
 go-to: cabinet_negotiations2
 
+@trade_proshian
+title: Prosh Proshian
+subtitle: {!
+<span style="color: var(--lsr-color);">Left-SR</span> — Lawyer and party activist.<ul> 
+Overall skill: ★★★<br>
+Suitability: ★★</ul>
+!}
+unavailable-subtitle: [?if posts_minister == "Proshian" : Proshian already has a post.<br> ?]<span style="color: var(--lsr-color);">Left-SR</span> — Lawyer and party activistul>Overall skill: ★★★<br>Suitability: ★★</ul>
+tags: trade_candidates3
+choose-if: posts_minister != "Proshian" and trade_minister != "Proshian"
+on-arrival: {!
+  if (Q.trade_minister_party == "Bolshevik" || Q.posts_minister == "Vacant") Q.commissariats_held -= 1;
+  Q.trade_minister = "Proshian"; Q.trade_minister_party = "Left-SR";
+!}
+go-to: cabinet_negotiations2
+
 @trade_vacant
 title: Let's leave the position vacant for now. 
 tags: trade_candidates3
@@ -815,6 +884,26 @@ choose-if: finance_minister != "Skvortsov"
 on-arrival: {!
   if (Q.finance_minister_party == "Left-SR") { Q.commissariats_held += 1; }
   Q.finance_minister = "Skvortsov"; Q.finance_minister_party = "Bolshevik";
+!}
+go-to: cabinet_negotiations2
+
+@finance_brilliantov
+title: Alexander Brilliantov
+subtitle: {!
+<span style="color: var(--lsr-color);">Left-SR</span> — Activist with some financial experience.<ul> 
+Overall skill: ★★<br>
+Suitability: ★★</ul>
+!}
+unavailable-subtitle: {!
+<span style="color: var(--lsr-color);">Left-SR</span> — Activist with some financial experience.<ul> 
+Overall skill: ★★<br>
+Suitability: ★★</ul>
+!}
+tags: finance_candidates3
+choose-if: finance_minister != "Brilliantov"  
+on-arrival: {!
+  if (Q.finance_minister_party == "Left-SR") { Q.commissariats_held += 1; }
+  Q.finance_minister = "Brilliantov"; Q.finance_minister_party = "Bolshevik";
 !}
 go-to: cabinet_negotiations2
 
@@ -936,6 +1025,22 @@ on-arrival: {!
 !}
 go-to: cabinet_negotiations2
 
+@labor_trutovsky
+title: Vladimir Trutovsky
+subtitle: {!
+<span style="color: var(--lsr-color);">Left-SR</span> — Former law student, journalist, and expert in local affairs.<ul> 
+Overall skill: ★★☆<br>
+Suitability: ★☆</u>
+!}
+unavailable-subtitle: [?if local_minister == "Trutovsky" : Trutovsky already has a post. <br>?]<span style="color: var(--lsr-color);">Left-SR</span> — Former law student, journalist, and expert in local affairs.<br> Overall skill: ★★☆<br>Suitability: ★☆</ul>
+tags: labor_candidates3
+choose-if: labor_minister != "Trutovsky" and local_minister != "Trutovsky"
+on-arrival: {!
+  if (Q.labor_minister_party == "Left-SR") { Q.commissariats_held += 1; }
+  Q.labor_minister = "Trutovsky"; Q.labor_minister_party = "Bolshevik";
+!}
+go-to: cabinet_negotiations2
+
 @labor_vacant
 title: Let's leave the position vacant for now. 
 tags: labor_candidates3
@@ -984,24 +1089,40 @@ on-arrival: {!
 !}
 go-to: cabinet_negotiations2
 
+@agriculture_algasov
+title: Vladimir Algasov
+subtitle: {!
+<span style="color: var(--lsr-color);">Left-SR</span> — Party organizer with agricultural and economic expertise.<ul> 
+Overall skill: ★★★☆<br>
+Suitability: ★★★★</ul>
+!}
+unavailable-subtitle:{!
+<span style="color: var(--lsr-color);">Left-SR</span> — Party organizer with agricultural and economic expertise.<ul> 
+Overall skill: ★★★<br>
+Suitability: ★★★★</ul>
+!}
+choose-if: agriculture_minister != "Algasov"
+on-arrival: {!
+  if (Q.agriculture_minister_party != "Left-SR") Q.commissariats_held -= 1; 
+  Q.agriculture_minister = "Algasov"; Q.agriculture_minister_party = "Left-SR";
+!}
+tags: agriculture_candidates3
+go-to: cabinet_negotiations2
+
 @agriculture_kamkov
 title: Boris Kamkov
 subtitle: {!
-Left-SR — Leading party administrator and lawyer.<br> 
+<span style="color: var(--lsr-color);">Left-SR</span> — Leading party administrator and lawyer.<ul> 
 Overall skill: ★★★☆<br>
-Suitability: ★★☆
+Suitability: ★★☆</ul>
 !}
-unavailable-subtitle: {!
-Left-SR — Leading party organizer and lawyer.<br> 
-Overall skill: ★★★☆<br>
-Suitability: ★★☆
+unavailable-subtitle: [?if foreign_minister = "Kamkov" : Kamkov already has a post.<br> ?] <span style="color: var(--lsr-color);">Left-SR</span> — Leading party administrator and lawyer.<ul>Overall skill: ★★★☆<br>Suitability: ★★☆</ul>
+choose-if: foreign_minister != "Kamkov" and agriculture_minister != "Kamkov"
+on-arrival: {!
+  if (Q.agriculture_minister_party != "Left-SR") Q.commissariats_held -= 1; 
+  Q.agriculture_minister = "Kamkov"; Q.agriculture_minister_party = "Left-SR";
 !}
 tags: agriculture_candidates3
-choose-if: agriculture_minister != "Kamkov"
-on-arrival: {!
-  if (Q.agriculture_minister_party == "Bolshevik" || Q.agriculture_minister == "Vacant") Q.commissariats_held -= 1;
-  Q.agriculture_minister = "Kamkov"; Q.agriculture_minister_party = "Left-SR"; 
-!}
 go-to: cabinet_negotiations2
 
 @agriculture_vacant
@@ -1047,10 +1168,31 @@ Suitability: ★★
 tags: food_candidates3
 choose-if: food_minister != "Teodorovich"  
 on-arrival: {!
-  if (Q.agriculture_minister_party == "Left-SR") { Q.commissariats_held += 1; }
+  if (Q.food_minister_party == "Left-SR") { Q.commissariats_held += 1; }
   Q.food_minister = "Teodorovich"; Q.food_minister_party = "Bolshevik";
 !}
 go-to: cabinet_negotiations2
+
+@food_mayorov
+title: Ilya Mayorov
+subtitle: {!
+<span style="color: var(--lsr-color);">Left-SR</span> — Lawyer with agricultural management experience.<ul> 
+Overall skill: ★★<br>
+Suitability: ★★☆</ul>
+!}
+unavailable-subtitle: {!
+<span style="color: var(--lsr-color);">Left-SR</span> — Lawyer with agricultural management experience.<ul> 
+Overall skill: ★★<br>
+Suitability: ★★☆</ul>
+!}
+choose-if: food_minister != "Mayorov"
+on-arrival: {!
+  if (Q.food_minister_party != "Left-SR") Q.commissariats_held -= 1; 
+  Q.food_minister = "Mayorov"; Q.food_minister_party = "Left-SR";
+!}
+tags: agriculture_candidates3
+go-to: cabinet_negotiations2
+
 
 @food_vacant
 title: Let's leave the position vacant for now. 
@@ -1104,17 +1246,13 @@ go-to: cabinet_negotiations2
 @posts_proshian
 title: Prosh Proshian
 subtitle: {!
-Left-SR — Lawyer and party activist.<br> 
+<span style="color: var(--lsr-color);">Left-SR</span> — Lawyer and party activist.<br> 
 Overall skill: ★★★<br>
 Suitability: ★★
 !}
-unavailable-subtitle: {!
-Left-SR — Lawyer and party activist.<br> 
-Overall skill: ★★★<br>
-Suitability: ★★
-!}
+unavailable-subtitle: [?if trade_minister == "Proshian" : Proshian already has a post.<br> ?]<span style="color: var(--lsr-color);">Left-SR</span> — Lawyer and party activistul>Overall skill: ★★★<br>Suitability: ★★</ul>
 tags: posts_candidates3
-choose-if: posts_minister != "Proshian"
+choose-if: posts_minister != "Proshian" and trade_minister != "Proshian"
 on-arrival: {!
   if (Q.posts_minister_party == "Bolshevik" || Q.posts_minister == "Vacant") Q.commissariats_held -= 1;
   Q.posts_minister = "Proshian"; Q.posts_minister_party = "Left-SR";
@@ -1254,17 +1392,13 @@ go-to: local_menu
 @local_trutovsky
 title: Vladimir Trutovsky
 subtitle: {!
-Left-SR — Former law student, journalist, and expert in local affairs.<br> 
+<span style="color: var(--lsr-color);">Left-SR</span> — Former law student, journalist, and expert in local affairs.<br> 
 Overall skill: ★★☆<br>
 Suitability: ★★★★
 !}
-unavailable-subtitle: {!
-Left-SR — Former law student, journalist, and expert in local affairs.<br> 
-Overall skill: ★★☆<br>
-Suitability: ★★★★
-!}
+unavailable-subtitle: [?if labor_minister == "Trutovsky" : Trutovsky already has a post.<br> ?]<span style="color: var(--lsr-color);">Left-SR</span> — Former law student, journalist, and expert in local affairs.<ul>Overall skill: ★★☆<br>Suitability: ★★★★</ul>
 tags: local_candidates3
-choose-if: local_minister != "Trutovsky" 
+choose-if: local_minister != "Trutovsky" and labor_minister != "Trutovsky"
 on-arrival: {!
   if (Q.local_minister_party != "Left-SR") { Q.commissariats_held -= 1; }
   Q.local_minister = "Trutovsky"; Q.local_minister_party = "Left-SR"; 
