@@ -1214,7 +1214,7 @@ Suitability: ★★
 tags: property_candidates3
 choose-if: property_minister != "Karelin" 
 on-arrival: {!
-  if (Q.posts_minister_party != "Left-SR") Q.commissariats_held -= 1;
+  if (Q.property_minister_party != "Left-SR") Q.commissariats_held -= 1;
   Q.property_minister = "Karelin"; Q.property_minister_party = "Left-SR";
 !}
 go-to: cabinet_negotiations2
