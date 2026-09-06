@@ -4,6 +4,8 @@ view-if: ca_election_held = 1 and coalition_government != 1 and month = 12
 max-visits: 1
 tags: event
 
+= Coalition Negotiations
+
 Though opposed to coalition government in general, the recent election results have led Lenin and others to consider a more limited coalition with just the Left-SRs. Given that the SRs overall won the election, courting the sympathetic Left-SRs to our side would help divide the SR vote. 
 
 Talks are already planned to discuss the merger of the peasants' soviets and the workers' and soldiers' Soviets into a single system, which could serve as an opportunity for further talks with the Left-SRs. 
