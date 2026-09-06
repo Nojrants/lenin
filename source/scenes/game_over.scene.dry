@@ -34,8 +34,15 @@ view-if: vikzhel_averted
 tags: endings
 go-to: eg_menu
 
-We successfully averted the Vikzhel Strike by negotiating an all-socialist coalition government.
+We averted the Vikzhel Strike by negotiating an all-socialist coalition government.
 
+@lsr_coalition
+title: Children of October
+view-if: lsr_coalition
+tags: endings
+go-to: eg_menu
+
+We formed a coalition government between the Bolsheviks and Left-SRs. 
 
 
 
@@ -91,6 +98,28 @@ style="width: 100%; height: 100%; object-fit: cover; display: block;">
 !}
 ?]
 
+[? if game_achievement_lsr_coalition:
+{!
+<table style="border-collapse: collapse; width: 100%;">
+<tr>
+<td style="width: 60px; height: 60px; vertical-align: middle; text-align: center; border: 2px solid #c00000; background-color: rgba(192, 0, 0, 0.1);">
+<img src="img/train.jpg alt="Achievement Icon"
+style="width: 100%; height: 100%; object-fit: cover; display: block;">
+</td>
+
+<td style="border: 2px solid #c00000; background-color: rgba(91, 154, 141, 0.1);">
+<div style="padding-left: 0.5em;">
+<div style="font-weight: bold;">Children of October</div>
+<div style="font-size: 90%; color: #444;">
+- Form a coalition government between the Bolsheviks and Left-SRs. 
+</div>
+</div>
+</td>
+</tr>
+</table>
+!}
+?]
+
 = Completed Achievements Overall
 
 [? if achievement_golden_age_of_the_peoples_commissars:
@@ -137,6 +166,29 @@ style="width: 100%; height: 100%; object-fit: cover; display: block;">
 !}
 ?]
 
+[? if achievement_lsr_coalition:
+{!
+<table style="border-collapse: collapse; width: 100%;">
+<tr>
+<td style="width: 60px; height: 60px; vertical-align: middle; text-align: center; border: 2px solid #c00000; background-color: rgba(192, 0, 0, 0.1);">
+<img src="img/train.jpg alt="Achievement Icon"
+style="width: 100%; height: 100%; object-fit: cover; display: block;">
+</td>
+
+<td style="border: 2px solid #c00000; background-color: rgba(91, 154, 141, 0.1);">
+<div style="padding-left: 0.5em;">
+<div style="font-weight: bold;">Children of October</div>
+<div style="font-size: 90%; color: #444;">
+- Form a coalition government between the Bolsheviks and Left-SRs. 
+</div>
+</div>
+</td>
+</tr>
+</table>
+!}
+?]
+
+
 = Incomplete Achievements
 
 [? if not achievement_golden_age_of_the_peoples_commissars:
@@ -175,6 +227,28 @@ style="width: 100%; height: 100%; object-fit: cover; display: block;">
 <div style="font-weight: bold;">Vikzhel Negotiator</div>
 <div style="font-size: 90%; color: #444;">
 - Avert the Vikzhel Strike by negotiating a coalition agreement.
+</div>
+</div>
+</td>
+</tr>
+</table>
+!}
+?]
+
+[? if not achievement_lsr_coalition:
+{!
+<table style="border-collapse: collapse; width: 100%;">
+<tr>
+<td style="width: 60px; height: 60px; vertical-align: middle; text-align: center; border: 2px solid #c00000; background-color: rgba(192, 0, 0, 0.1);">
+<img src="img/train.jpg alt="Achievement Icon"
+style="width: 100%; height: 100%; object-fit: cover; display: block;">
+</td>
+
+<td style="border: 2px solid #c00000; background-color: rgba(91, 154, 141, 0.1);">
+<div style="padding-left: 0.5em;">
+<div style="font-weight: bold;">Children of October</div>
+<div style="font-size: 90%; color: #444;">
+- Form a coalition government between the Bolsheviks and Left-SRs. 
 </div>
 </div>
 </td>
