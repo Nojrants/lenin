@@ -450,7 +450,7 @@ Q.government_form = 0;
 // 96% inflation 
 // source for inflation number: table 2 of https://warwick.ac.uk/fac/soc/economics/staff/mharrison/public/rgwr_postprint.pdf
 // annualized from a 5.8% montly inflation rate
-Q.monthly_inflation = 5.8;
+Q.monthly_inflation = 12.5;
 Q.inflation = Math.pow(1+0.01*Q.monthly_inflation, 12);
 Q.inflation = Math.round(1000*(Q.inflation - 1))/10;
 
@@ -468,9 +468,7 @@ Q.consumer_goods = 5;
 // availability of food in urban areas
 // this is just fudged - Food production declined by 20% by 1917 from 1913 (as did real incomes)
 
-
-// given the massive labor shortages due to millions of people being conscripted for the war, there is effectively no unemployment.
-Q.unemployed = 2;
+Q.unemployed = 5.5;
 
 // Industries
 // This is all fudged; I don't have actual stats
@@ -534,7 +532,7 @@ Q.land_reform_progress = 0;
 // fudge factor for feed/meat conversions lol
 Q.food_production = 134000; // in millions of kg of grain-equivalent
 // source: https://encyclopedia.1914-1918-online.net/article/food-and-nutrition-russian-empire/ - "7.4%" of grain and fodder crops reached the market
-Q.food_sold = 0.08; // fraction of food production that reaches the civilian population in the cities
+Q.food_sold = 0.06; // fraction of food production that reaches the civilian population in the cities
 // food consumed by the military
 Q.food_requisitioned = 0.08;
 // millions of kg consumed by civilians per year (TODO)
@@ -1365,8 +1363,8 @@ Q.labor_unrest_timer = 5;
 Q.report_timer = 4;
 
 Q.prov_gov_policies_timer = 3;
-Q.food_shortages_timer = 2;
-Q.high_inflation_timer = 2;
+Q.food_shortages_timer = 4;
+Q.high_inflation_timer = 6;
 Q.land_seizures_timer = 4;
 Q.military_disorder_timer = 3;
 Q.crime_wave_timer = 5;
