@@ -15,9 +15,9 @@ It has been proposed that we create an "Extraordinary Commission for Combating C
 - @reject
 
 
-  @create
-  title: Create the Extraordinary Commission. 
-  on-arrival: {!
+@create
+title: Create the Extraordinary Commission. 
+on-arrival: {!
     Q.cheka_founded = 1; Q.instability += 1; 
     Q.cheka = 5; Q.cheka_strength = 5; Q.cheka_militancy = 0.2; Q.cheka_loyality = 0.5;
     Q.internal_expend += 0.25; 
