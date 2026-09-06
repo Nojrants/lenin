@@ -450,6 +450,7 @@ on-arrival: {!
   Q.lsr_relation += 10; Q.lsr_strength += 10;   
   Q.democraticity += 1; Q.instability -= 1; Q.vikzhel_unrest -= 20;
   Q.moderate_dissent -= 5; Q.moderate_strength += 5;
+  Q.coalition_actions_timer = 1;
 !}
 
 = Coalition Created
