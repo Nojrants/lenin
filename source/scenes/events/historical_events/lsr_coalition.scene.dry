@@ -487,7 +487,7 @@ Suitability: ★★★☆</ul>
 tags: foreign_menu3
 choose-if: foreign_minister != "Trotsky" 
 on-arrival: {!
-  if (Q.foreign_minister_party == "Left-SR") commissariats_held += 1; 
+  if (Q.foreign_minister_party == "Left-SR") Q.commissariats_held += 1; 
   Q.foreign_minister = "Trotsky"; Q.foreign_minister_party = "Bolshevik";
 !}
 go-to: cabinet_negotiations2
@@ -507,7 +507,7 @@ Suitability: ★★★</ul>
 tags: foreign_menu3
 choose-if: foreign_minister != "Spiridonova" 
 on-arrival: {!
-  if (Q.foreign_minister_party != "Left-SR") commissariats_held -= 1; 
+  if (Q.foreign_minister_party != "Left-SR") Q.commissariats_held -= 1; 
   Q.foreign_minister = "Spiridonova"; Q.foreign_minister_party = "Left-SR";
 !}
 go-to: cabinet_negotiations2
@@ -516,7 +516,7 @@ go-to: cabinet_negotiations2
 title: Let's leave the position vacant for now. 
 tags: foreign_menu3
 on-arrival: {!
-  if (Q.foreign_minister_party == "Left-SR") commissariats_held += 1; 
+  if (Q.foreign_minister_party == "Left-SR") Q.commissariats_held += 1; 
   Q.foreign_minister = "Vacant"; Q.foreign_minister_party = "";
 !}
 go-to: cabinet_negotiations2
@@ -555,7 +555,7 @@ Suitability: ★★★★</ul>
 tags: military_menu3 
 choose-if: war_minister != "Krylenko" 
 on-arrival: {!
-  if (Q.war_minister_party == "Left-SR") commissariats_held += 1; 
+  if (Q.war_minister_party == "Left-SR") Q.commissariats_held += 1; 
   Q.war_minister = "Krylenko"; Q.war_minister_party = "Bolshevik";
 !}
 go-to: cabinet_negotiations2
@@ -565,7 +565,7 @@ go-to: cabinet_negotiations2
 title: Let's leave the position vacant for now. 
 tags: military_menu3
 on-arrival: {!
-  if (Q.war_minister_party == "Left-SR") commissariats_held += 1; 
+  if (Q.war_minister_party == "Left-SR") Q.commissariats_held += 1; 
   Q.war_minister = "Vacant"; Q.war_minister_party = "";
 !}
 go-to: cabinet_negotiations2
@@ -607,7 +607,7 @@ Suitability: ★★★★★
 tags: enlightenment_candidates3
 choose-if: education_minister != "Lunacharsky" 
 on-arrival: {!
-  if (Q.education_minister_party == "Left-SR") commissariats_held += 1; 
+  if (Q.education_minister_party == "Left-SR") Q.commissariats_held += 1; 
   Q.education_minister = "Lunacharsky"; Q.education_minister_party = "Bolshevik"; 
 !}
 go-to: cabinet_negotiations2
@@ -632,7 +632,7 @@ go-to: cabinet_negotiations2
 title: Let's leave the position vacant for now. 
 tags: enlightenment_candidates3
 on-arrival: {!
-  if (Q.education_minister_party == "Left-SR") commissariats_held += 1; 
+  if (Q.education_minister_party == "Left-SR") Q.commissariats_held += 1; 
   Q.education_minister = "Vacant"; Q.education_minister_party = "";
 !}
 go-to: cabinet_negotiations2
@@ -662,10 +662,10 @@ title: Alexei Rykov
 subtitle: 
 unavailable-subtitle: 
 tags: internal_candidates3
-view-if: moderates_resigned != 0
+view-if: moderates_resigned != 1
 choose-if: interior_minister != "Rykov" 
 on-arrival: {!
-  if (Q.interior_minister_party == "Left-SR") commissariats_held += 1; 
+  if (Q.interior_minister_party == "Left-SR") Q.commissariats_held += 1; 
   Q.interior_minister = "Rykov"; Q.interior_minister_party = "Bolshevik"; 
 !}
 go-to: cabinet_negotiations2
@@ -674,7 +674,7 @@ go-to: cabinet_negotiations2
 title: Let's leave the position vacant for now. 
 tags: internal_candidates3
 on-arrival: {!
-  if (Q.interior_minister_party == "Left-SR") commissariats_held += 1; 
+  if (Q.interior_minister_party == "Left-SR") Q.commissariats_held += 1; 
   Q.interior_minister = "Vacant"; Q.interior_minister_party = "";
 !}
 go-to: cabinet_negotiations2
@@ -714,7 +714,7 @@ Suitability: ★☆
 tags: transport_candidates3
 choose-if: transport_minister != "Malkin" 
 on-arrival: {!
-  if (Q.transport_minister_party != "Left-SR") commissariats_held -= 1; 
+  if (Q.transport_minister_party != "Left-SR") Q.commissariats_held -= 1; 
   Q.transport_minister = "Malkin"; Q.transport_minister_party = "Left-SR";
 !}
 go-to: cabinet_negotiations2
@@ -723,7 +723,7 @@ go-to: cabinet_negotiations2
 title: Let's leave the position vacant for now. 
 tags: transport_candidates3
 on-arrival: {!
-  if (Q.transport_minister_party == "Left-SR") commissariats_held += 1; 
+  if (Q.transport_minister_party == "Left-SR") Q.commissariats_held += 1; 
   Q.transport_minister = "Vacant"; Q.transport_minister_party = "";
 !}
 go-to: cabinet_negotiations2
