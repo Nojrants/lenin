@@ -1,0 +1,62 @@
+title: Membership in the Cheka
+subtitle: The Opposition wants representation. 
+new-page: true
+view-if: coalition_government >= 1 and coalition_actions_timer = 0 and cheka_created = 1 and constituent_assembly_timer <= 1 and justice_minister_party != "Bolshevik" and justice_minister_party != ""  
+max-visits: 1
+tags: event
+
+= Membership in the Cheka
+             
+As part of his campaign to rein in repressionary measures, Justice Commissar [+ justice_minister +] is now requesting that [?if coalition_government == 1 :representatives from all the socialist parties be included in the leadership of the Cheka. ?][?if coalition_government == 2 :Left-SRs included in the leadership of the Cheka. ?]
+
+Though the chekists argue this will be a nuisance, acquiescing to the demand would help shore up support from our coalition partners, especially on the eve of the Constituent Assembly.
+  
+- @accept
+- @reject
+
+
+@accept
+title: Agree to the proposal. 
+on-arrival: {!
+  Q.democraticity += 0.5; 
+  Q.cheka_strength += 3; Q.cheka_loyalty -= 0.25
+  Q.moderate_unrest -= 5; Q.leftcom_unrest += 5;
+  if (Q.lsr_in_gov == 1) { Q.lsr_relation += 5; Q.lsr_strength += 5; }
+  if (Q.m_in_gov == 1) { Q.centre_m_relation += 5; Q.m_strength += 5; }
+  if (Q.sr_in_gov == 1) { Q.centre_sr_relation += 5; Q.sr_strength += 5; }
+  if (Q.sdi_in_gov == 1) { Q.sdi_relation += 5; Q.sdi_strength += 5; }
+  if (Q.ns_in_gov == 1) { Q.ns_relation += 5; Q.ns_strength += 5;  }
+  if (Q.coalition_government == 2) { Q.lsr_relation += 5; Q.lsr_strength += 5; }
+!}
+
+[?if coalition_government == 2: Four Left-SRs are appointed to the collegium of the Cheka, while Viacheslav Aleksandrovich is made the body's deputy chairman. This also opens the door to recruitment of Left-SRs into the Cheka, strengthening the body in general, though at the expense of unilateral control. ?]
+[?if coalition_government == 1: A Left-SR, SR, and Menshevik each are appointed to the collegium of the Cheka, while Left-SR Viacheslav Aleksandrovich is made the body's deputy chairman. This also opens the door to recruitment of oppositionists into the Cheka, strengthening the body in general, though at the expense of unilateral control. ?]
+
+Ardent chekists grumble about this, but accept it as a necessary compromise. 
+
+@reject
+title: Reject the proposal. 
+on-arrival: {!
+  Q.democraticity -= 1; 
+  Q.cheka_loyalty += 0.05
+  Q.moderate_unrest += 5; Q.leftcom_unrest -= 5;
+    if (Q.coalition_government == 1) {
+      if (Q.lsr_in_gov == 1) { Q.lsr_relation -= 5; }
+      if (Q.m_in_gov == 1) { Q.centre_m_relation -= 5; }
+      if (Q.sr_in_gov == 1) { Q.centre_sr_relation -= 5; }
+      if (Q.sdi_in_gov == 1) { Q.sdi_relation -= 5; }
+      if (Q.ns_in_gov == 1) { Q.ns_relation -= 5; }
+    } else {
+      Q.lsr_relation -= 10; Q.lsr_strength -= 5; 
+    }
+!}
+
+[?if coalition_government == 2: The rejection causes widespread skepticism among our coalition partners, now worried of our true intentions. ?]
+[?if coalition_government == 1: The rejection causes widespread skepticism among the Left-SRs, now worried of our true intentions. ?]
+
+The opposition press decries Bolshevik repression and obstinence, fearmongering about the secretive nature of the Cheka. Militant Bolsheviks are pleased, though without the support of the other parties recruitment into the Cheka is slowed. 
+
+
+
+
+  
