@@ -447,6 +447,8 @@ on-arrival: {!
 title: Finalize the agreement. 
 choose-if: commissariats_held <= commissariats_promised
 unavailable-subtitle: The Left-SRs will not accept. 
+new-page: true
+achievement: lsr_coalition
 on-arrival: {!
   Q.coalition_government = 1; Q.lsr_in_gov = 1; 
   Q.lsr_relation += 10; Q.lsr_strength += 10;   
