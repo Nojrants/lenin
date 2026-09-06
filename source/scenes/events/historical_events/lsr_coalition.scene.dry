@@ -477,12 +477,12 @@ go-to: foreign_menu
 @foreign_trotsky
 title: Leon Trotsky
 subtitle: {!
-<span style="color: var(--bolshevik-color);">Leftist</span> — Internationally-reknown and experienced organizer.<ul>
+<span style="color: var(--bolshevik-color);">Bolshevik</span> — Internationally-reknown and experienced organizer.<ul>
 Overall skill: ★★★★★<br>
 Suitability: ★★★☆</ul>
 !}
 unavailable-subtitle: {!
-<span style="color: var(--bolshevik-color);">Leftist</span> — Internationally-reknown and experienced organizer.<ul>
+<span style="color: var(--bolshevik-color);">Bolshevik</span> — Internationally-reknown and experienced organizer.<ul>
 Overall skill: ★★★★★<br>
 Suitability: ★★★☆</ul>
 !}
@@ -497,11 +497,11 @@ go-to: cabinet_negotiations2
 @foreign_kamkov
 title: Boris Kamkov
 subtitle: {!
-Left-SR — Leading party administrator and lawyer.<ul> 
+<span style="color: var(--lsr-color);">Left-SR</span> — Leading party administrator and lawyer.<ul> 
 Overall skill: ★★★☆<br>
 Suitability: ★★★★</ul>
 !}
-unavailable-subtitle: [?if agriculture_minister = "Kamkov" : Kamkov already has a post.<br> ?] Left-SR — Leading party administrator and lawyer.<ul>Overall skill: ★★★☆<br>Suitability: ★★☆</ul>
+unavailable-subtitle: [?if agriculture_minister = "Kamkov" : Kamkov already has a post.<br> ?] <span style="color: var(--lsr-color);">Left-SR</span> — Leading party administrator and lawyer.<ul>Overall skill: ★★★☆<br>Suitability: ★★☆</ul>
 tags: foreign_menu3
 choose-if: foreign_minister != "Kamkov" and agriculture_minister != "Kamkov"
 on-arrival: {!
@@ -632,14 +632,14 @@ go-to: enlightenment_menu
 @enlightenment_lunacharsky
 title: Anatoly Lunacharsky
 subtitle: {!
-Bolshevik — Experienced cultural theorist, intellectual, and artist.<br> 
+<span style="color: var(--bolshevik-color);">Bolshevik</span> — Experienced cultural theorist, intellectual, and artist.<ul> 
 Overall skill: ★★★★<br>
-Suitability: ★★★★★
+Suitability: ★★★★★</ul>
 !}
 unavailable-subtitle: {!
-Bolshevik — Experienced cultural theorist, intellectual, and artist.<br> 
+<span style="color: var(--bolshevik-color);">Bolshevik</span> — Experienced cultural theorist, intellectual, and artist.<ul> 
 Overall skill: ★★★★<br>
-Suitability: ★★★★★
+Suitability: ★★★★★</ul>
 !}
 tags: enlightenment_candidates3
 choose-if: education_minister != "Lunacharsky" 
@@ -652,13 +652,13 @@ go-to: cabinet_negotiations2
 @enlightenment_natanson
 title: Mark Natanson
 subtitle: {!
-<span style="color: var(--lsr-color);">Left-SR</span> — Party leader and elder statesman; some experience in education.<br>
+<span style="color: var(--lsr-color);">Left-SR</span> — Party leader and elder statesman; some experience in education.<ul>
 Overall skill: ★★★☆<br>
-Suitability: ★☆
+Suitability: ★☆</ul>
 !}
 tags: enlightenment_candidates3
 choose-if: lsr_relation >= 40 and education_minister != "Natanson" 
-unavailable-subtitle: [?if lsr_relation < 40 : Natanson won't accept this offer.<br> ?]<span style="color: var(--lsr-color);">Left-SR</span> — Party leader and elder statesman; some experience in education.<br>Overall skill: ★★★☆<br>Suitability: ★☆
+unavailable-subtitle: [?if lsr_relation < 40 : Natanson won't accept this offer.<br> ?]<span style="color: var(--lsr-color);">Left-SR</span> — Party leader and elder statesman; some experience in education.<ul>Overall skill: ★★★☆<br>Suitability: ★☆</ul>
 on-arrival: {!
   if (Q.education_minister_party == "Bolshevik" || Q.education_minister == "Vacant") Q.commissariats_held -= 1;
   Q.education_minister = "Natanson"; Q.education_minister_party = "Left-SR"; Q.lsr_represented += 1;
@@ -710,14 +710,14 @@ go-to: cabinet_negotiations2
 internal_blumkin
 title: Yakov Blumkin
 subtitle: {!
-<span style="color: var(--lsr-color);">Left-SR</span> — Soldier-agitator with some experience in espionage.<br>
+<span style="color: var(--lsr-color);">Left-SR</span> — Soldier-agitator with some experience in espionage.<ul>
 Overall skill: ★☆<br>
-Suitability: ★★
+Suitability: ★★</ul>
 !}
 unavailable-subtitle: {!
-<span style="color: var(--lsr-color);">Left-SR</span> — Soldier-agitator with some experience in espionage.<br>
+<span style="color: var(--lsr-color);">Left-SR</span> — Soldier-agitator with some experience in espionage.<ul>
 Overall skill: ★☆<br>
-Suitability: ★★
+Suitability: ★★</ul>
 !}
 tags: internal_candidates3
 choose-if: interior_minister != "Blumkin" 
@@ -757,14 +757,14 @@ go-to: transport_menu
 @transport_malkin
 title: Boris Malkin
 subtitle: {!
-<span style="color: var(--lsr-color);">Left-SR</span> — Journalist and party activist.<br> 
+<span style="color: var(--lsr-color);">Left-SR</span> — Journalist and party activist.<ul> 
 Overall skill: ★★☆<br>
-Suitability: ★☆
+Suitability: ★☆</ul>
 !}
 unavailable-subtitle: {!
-<span style="color: var(--lsr-color);">Left-SR</span> — Journalist and party activist.<br> 
+<span style="color: var(--lsr-color);">Left-SR</span> — Journalist and party activist.<ul> 
 Overall skill: ★★☆<br>
-Suitability: ★☆
+Suitability: ★☆</ul>
 !}
 tags: transport_candidates3
 choose-if: transport_minister != "Malkin" 
@@ -805,14 +805,14 @@ go-to: trade_menu
 @trade_nogin
 title: Viktor Nogin
 subtitle: {!
-Bolshevik — Proponent moderate with industrial management experience.<br> 
+<span style="color: var(--bolshevik-color);">Bolshevik</span> — Proponent moderate with industrial management experience.<ul> 
 Overall skill: ★★★<br>
-Suitability: ★★★
+Suitability: ★★★</ul>
 !}
 unavailable-subtitle: {!
-Bolshevik — Proponent moderate with industrial management experience.<br> 
+<span style="color: var(--bolshevik-color);">Bolshevik</span> — Proponent moderate with industrial management experience.<ul> 
 Overall skill: ★★★<br>
-Suitability: ★★★
+Suitability: ★★★</ul>
 !}
 tags: trade_candidates3
 choose-if: trade_minister != "Nogin" 
@@ -870,14 +870,14 @@ go-to: finance_menu
 @finance_skvortsov
 title: Ivan Skvortsov-Stepanov
 subtitle: {!
-Bolshevik — Former elementary school teacher.<br>
+<span style="color: var(--bolshevik-color);">Bolshevik</span> — Former elementary school teacher.<ul>
 Overall skill: ★☆<br>
-Suitability: ★★☆
+Suitability: ★★☆</ul>
 !}
 unavailable-subtitle: {!
-Bolshevik — Former elementary school teacher.<br>
+<span style="color: var(--bolshevik-color);">Bolshevik</span> — Former elementary school teacher.<ul>
 Overall skill: ★☆<br>
-Suitability: ★★☆
+Suitability: ★★☆</ul>
 !}
 tags: finance_candidates3
 choose-if: finance_minister != "Skvortsov"  
@@ -940,14 +940,14 @@ go-to: justice_menu
 @justice_oppokov
 title: Georgy Oppokov
 subtitle: {!
-Bolshevik — Party activist with some economic management experience. 
+<span style="color: var(--bolshevik-color);">Bolshevik</span> — Party activist with some economic management experience.<ul>
 Overall skill: ★★<br>
-Suitability: ★☆
+Suitability: ★☆</ul>
 !}
 unavailable-subtitle: {!
-Bolshevik — Party activist with some economic management experience. 
+<span style="color: var(--bolshevik-color);">Bolshevik</span> — Party activist with some economic management experience.<ul>
 Overall skill: ★★<br>
-Suitability: ★☆
+Suitability: ★☆</ul>
 !}
 tags: justice_candidates3
 choose-if: justice_minister != "Oppokov"  
@@ -960,14 +960,14 @@ go-to: cabinet_negotiations2
 @justice_steinberg
 title: Isaac Steinberg
 subtitle: {!
-Left-SR — Lawyer with political experience.<br> 
+<span style="color: var(--lsr-color);">Left-SR</span> — Lawyer with political experience.<ul> 
 Overall skill: ★★★<br>
-Suitability: ★★★★
+Suitability: ★★★★</ul>
 !}
 unavailable-subtitle: {!
-Left-SR — Lawyer with political experience.<br> 
+<span style="color: var(--lsr-color);">Left-SR</span> — Lawyer with political experience.<ul> 
 Overall skill: ★★★<br>
-Suitability: ★★★★
+Suitability: ★★★★</ul>
 !}
 tags: justice_candidates3
 choose-if: justice_minister != "Steinberg"
@@ -1008,14 +1008,14 @@ go-to: labor_menu
 @labor_shliapnikov
 title: Alexander Shliapnikov
 subtitle: {!
-Bolshevik — Popular and skilled trade union organizer.<br>
+<span style="color: var(--bolshevik-color);">Bolshevik</span> — Popular and skilled trade union organizer.<ul>
 Overall skill: ★★★★<br>
-Suitability: ★★★★
+Suitability: ★★★★</ul>
 !}
 unavailable-subtitle: {!
-Bolshevik — Popular and skilled trade union organizer.<br>
+<span style="color: var(--bolshevik-color);">Bolshevik</span> — Popular and skilled trade union organizer.<ul>
 Overall skill: ★★★★<br>
-Suitability: ★★★★
+Suitability: ★★★★</ul>
 !}
 tags: labor_candidates3
 choose-if: labor_minister != "Shliapnikov"  
@@ -1072,14 +1072,14 @@ go-to: agriculture_menu
 @agriculture_milyutin
 title: Vladimir Milyutin
 subtitle: {!
-Bolshevik — Party activist with some technical and legal expertise.<br>
+<span style="color: var(--bolshevik-color);">Bolshevik</span> — Party activist with some technical and legal expertise.<ul>
 Overall skill: ★★<br>
-Suitability: ★
+Suitability: ★</ul>
 !}
 unavailable-subtitle: {!
-Bolshevik — Party activist with some technical and legal expertise.<br>
+<span style="color: var(--bolshevik-color);">Bolshevik</span> — Party activist with some technical and legal expertise.<ul>
 Overall skill: ★★<br>
-Suitability: ★
+Suitability: ★</ul>
 !}
 tags: agriculture_candidates3
 choose-if: agriculture_minister != "Milyutin"  
@@ -1156,14 +1156,14 @@ go-to: food_menu
 @food_teodorovich
 title: Ivan Teodorovich
 subtitle: {!
-Bolshevik — Agronomist and party historian<br>
+<span style="color: var(--bolshevik-color);">Bolshevik</span> — Agronomist and party historian<ul>
 Overall skill: ★★<br>
-Suitability: ★★
+Suitability: ★★</ul>
 !}
 unavailable-subtitle: {!
-Bolshevik — Agronomist and party historian<br>
+<span style="color: var(--bolshevik-color);">Bolshevik</span> — Agronomist and party historian<ul>
 Overall skill: ★★<br>
-Suitability: ★★
+Suitability: ★★</ul>
 !}
 tags: food_candidates3
 choose-if: food_minister != "Teodorovich"  
@@ -1225,14 +1225,14 @@ go-to: posts_menu
 @posts_glebov
 title: Nikolai Glebov-Avilov
 subtitle: {!
-Bolshevik — Party activist and journalist.<br>
+<span style="color: var(--bolshevik-color);">Bolshevik</span> — Party activist and journalist.<ul>
 Overall skill: ★★<br>
-Suitability: ★★
+Suitability: ★★</ul>
 !}
 unavailable-subtitle: {!
-Bolshevik — Party activist and journalist.<br>
+<span style="color: var(--bolshevik-color);">Bolshevik</span> — Party activist and journalist.<ul>
 Overall skill: ★★<br>
-Suitability: ★★
+Suitability: ★★</ul>
 !}
 tags: posts_candidates3
 choose-if: posts_minister != "Glebov"  
@@ -1246,9 +1246,9 @@ go-to: cabinet_negotiations2
 @posts_proshian
 title: Prosh Proshian
 subtitle: {!
-<span style="color: var(--lsr-color);">Left-SR</span> — Lawyer and party activist.<br> 
+<span style="color: var(--lsr-color);">Left-SR</span> — Lawyer and party activist.<ul> 
 Overall skill: ★★★<br>
-Suitability: ★★
+Suitability: ★★</ul>
 !}
 unavailable-subtitle: [?if trade_minister == "Proshian" : Proshian already has a post.<br> ?]<span style="color: var(--lsr-color);">Left-SR</span> — Lawyer and party activistul>Overall skill: ★★★<br>Suitability: ★★</ul>
 tags: posts_candidates3
@@ -1292,14 +1292,14 @@ go-to: nationalities_menu
 @nationalities_stalin
 title: Iosif Stalin
 subtitle: {!
-Bolshevik — Party administrator and nationalities specialist.<br>
+<span style="color: var(--bolshevik-color);">Bolshevik</span> — Party administrator and nationalities specialist.<ul>
 Overall skill: ★★★★★<br>
-Suitability: ★★★
+Suitability: ★★★</ul>
 !}
 unavailable-subtitle: {!
-Bolshevik — Party administrator and nationalities specialist.<br>
+<span style="color: var(--bolshevik-color);">Bolshevik</span> — Party administrator and nationalities specialist.<ul>
 Overall skill: ★★★★★<br>
-Suitability: ★★★
+Suitability: ★★★</ul>
 !}
 tags: nationalities_candidates3
 choose-if: nationalities_minister != "Stalin"  
@@ -1342,14 +1342,14 @@ go-to: property_menu
 @property_karelin
 title: Vladimir Karelin
 subtitle: {!
-Left-SR — Leading SR organizer and former law student.<br>
+<span style="color: var(--lsr-color);">Left-SR</span> — Leading SR organizer and former law student.<ul>
 Overall skill: ★★★☆<br>
-Suitability: ★★
+Suitability: ★★</ul>
 !}
 unavailable-subtitle: {!
-Left-SR — Leading SR organizer and former law student.<br>
+<span style="color: var(--lsr-color);">Left-SR</span> — Leading SR organizer and former law student.<ul>
 Overall skill: ★★★☆<br>
-Suitability: ★★
+Suitability: ★★</ul>
 !}
 tags: property_candidates3
 choose-if: property_minister != "Karelin" 
@@ -1392,9 +1392,9 @@ go-to: local_menu
 @local_trutovsky
 title: Vladimir Trutovsky
 subtitle: {!
-<span style="color: var(--lsr-color);">Left-SR</span> — Former law student, journalist, and expert in local affairs.<br> 
+<span style="color: var(--lsr-color);">Left-SR</span> — Former law student, journalist, and expert in local affairs.<ul> 
 Overall skill: ★★☆<br>
-Suitability: ★★★★
+Suitability: ★★★★</ul>
 !}
 unavailable-subtitle: [?if labor_minister == "Trutovsky" : Trutovsky already has a post.<br> ?]<span style="color: var(--lsr-color);">Left-SR</span> — Former law student, journalist, and expert in local affairs.<ul>Overall skill: ★★☆<br>Suitability: ★★★★</ul>
 tags: local_candidates3
