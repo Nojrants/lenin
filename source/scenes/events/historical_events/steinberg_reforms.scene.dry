@@ -1,6 +1,6 @@
 title: Judicial Reforms
 new-page: true
-view-if: coalition_actions_timer = 0 and justice_minister_party != "Bolshevik" and justice_minister_party != "Vacant"  
+view-if: coalition_actions_timer = 0 and justice_minister_party != "Bolshevik" and justice_minister_party != ""  
 max-visits: 1
 tags: event
 on-arrival: {!
