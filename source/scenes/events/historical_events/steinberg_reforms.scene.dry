@@ -79,7 +79,7 @@ on-arrival: {!
   if (Q.finance_minister_party != "Bolshevik") { Q.finance_minister = "Vacant"; Q.finance_minister_party = ""; }
   if (Q.justice_minister_party != "Bolshevik") { Q.justice_minister = "Vacant"; Q.justice_minister_party = ""; }
   if (Q.labor_minister != "Bolshevik") { Q.labor_minister = "Vacant"; Q.labor_minister_party = ""; }
-  if (Q.agriculture_minister != "Bolshevik") { Q.agriculture_minister = "Vacant"; Q.agriculture_minister = ""; }
+  if (Q.agriculture_minister != "Bolshevik") { Q.agriculture_minister = "Vacant"; Q.agriculture_minister_party = ""; }
   if (Q.food_minister_party != "Bolshevik") { Q.food_minister = "Vacant"; Q.food_minister_party = ""; }
   if (Q.posts_minister_party != "Bolshevik") { Q.posts_minister = "Vacant"; Q.posts_minister_party = ""; }
   if (Q.nationalities_minister_party != "Bolshevik") { Q.nationalities_minister = "Vacant"; Q.nationalities_minister_party = ""; }
