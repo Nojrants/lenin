@@ -25,6 +25,7 @@ We shut down the proposed talks before they can begin. Needless to say, the Left
 @initiate_talks
 title: Agree to talks with the Left-SRs. 
 go-to: menu
+new-page: true
 on-arrival: {!
   Q.influence = (10 + (Q.lsr_relation / 2) + (Q.lsr_strength / 5) - (Q.instability / 10));
   Q.drop_foreign = 0; Q.drop_military = 0; Q.drop_enlightenment = 0; Q.drop_internal = 0; Q.drop_railways = 0; Q.drop_trade = 0; Q.drop_finance = 0; Q.drop_labor = 0; Q.drop_justice = 0; Q.drop_agriculture = 0; Q.drop_foodsupply = 0; Q.drop_posts = 0; Q.drop_nationalities = 0; Q.drop_welfare = 0; Q.drop_property = 0; Q.drop_local = 0; 
@@ -37,11 +38,11 @@ We open talks with the Left-SRs, though various objections and protests drag the
 
 The Left-SRs have put forth their primary demands:
 <ul>
-&nbsp;&nbsp;• Control over the People's Commissariats for Internal Affairs, Military, Justice, Agriculture, and Railways (in that order).<br>
-&nbsp;&nbsp;• Rough parity in Sovnarkom, and positions within the collegia of people's commissariats and government institutions.<br>
-&nbsp;&nbsp;• A military build-up to protect the revolution, and support socialist uprisings abroad.<br>
-&nbsp;&nbsp;• Creation of a just system of revolutionary laws.<br>
-&nbsp;&nbsp;• Implementation of land reform in the countryside.
+Control over the People's Commissariats for Internal Affairs, Military, Justice, Agriculture, and Railways (in that order).<br>
+Rough parity in Sovnarkom, and positions within the collegia of people's commissariats and government institutions.<br>
+A military build-up to protect the revolution, and support socialist uprisings abroad.<br>
+Creation of a just system of revolutionary laws.<br>
+Implementation of land reform in the countryside.
 </ul>
 
 Ceding so many commissariats is not something Lenin will allow, but the demands nonetheless serve as a good starting point. 
