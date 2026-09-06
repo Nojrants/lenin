@@ -1,6 +1,6 @@
 title: Talks with the Left-SRs
 new-page: true
-view-if: ca_election_held = 1 and coalition_government != 1
+view-if: ca_election_held = 1 and coalition_government != 1 and month = 12
 max-visits: 1
 tags: event
 
