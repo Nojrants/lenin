@@ -2,125 +2,149 @@ title: The Constituent Assembly
 subtitle: Finally, the new Russian government can begin to form...
 new-page: true
 view-if: ca_election_held = 1 and constituent_assembly_timer = 0 and ca_held = 0
-on-arrival: {!
-Q.ca_held = 1;
-!}
 max-visits: 1
 tags: event
+on-arrival: {!
+ Q.ca_held = 1;
+ if (Q.stopped_count != 1) Q.delegate_total = 665; else Q.delegate_total = 640;
+ Q.ca_seats_bolshevik = Math.Round(Q.b_r_dec / 100 * Q.delegate_total * Math.Max(1, Q.train_capacity / 150000) * Math.Max(1, 50 / Q.instability));
+ Q.ca_seats_menshevik = Math.Round(Q.m_r_dec / 100 * Q.delegate_total * Math.Max(0.75, Q.train_capacity / 150000) * Math.Max(1, 50 / Q.instability));
+ Q.ca_seats_sr = Math.Round(Q.sr_r_dec / 100 * Q.delegate_total * Math.Max(1, Q.train_capacity / 150000) * Math.Max(1, 50 / Q.instability));
+ Q.ca_seats_lsr = Math.Round(Q.ca_seats_sr * 0.3); Math.Round(Q.ca_seats_sr *= 0.7); 
+ Q.ca_seats_ukr = Math.Round(Q.ukrainian_sr_r_dec / 100 * Q.delegate_total * Math.Max(0.9, Q.train_capacity / 150000) * Math.Max(1, 50 / Q.instability));
+ Q.ca_seats_ns = Math.Round(Q.popular_socialist_r_dec / 100 * Q.delegate_total * Math.Max(1, Q.train_capacity / 150000) * Math.Max(1, 50 / Q.instability));
+ Q.ca_seats_muslim_socialist = Math.Round(Q.muslim_socialists_r_dec / 100 * Q.delegate_total * Math.Max(0.75, Q.train_capacity / 150000) * Math.Max(1, 50 / Q.instability));
+ Q.ca_seats_dashnak = Math.Round(Q.dashnak_r_dec / 100 * Q.delegate_total * Math.Max(0.5, Q.train_capacity / 150000) * Math.Max(1, 50 / Q.instability));
+ Q.ca_seats_jewish = Math.Round(Q.jewish_national_r_dec / 100 * Q.delegate_total * Math.Max(0.75, Q.train_capacity / 150000) * Math.Max(1, 50 / Q.instability));
+ Q.ca_seats_muslim_national = Math.Round(Q.muslim_national_r_dec / 100 * Q.delegate_total * Math.Max(0.5, Q.train_capacity / 150000) * Math.Max(1, 50 / Q.instability));
+ Q.ca_seats_kadet = Math.Round(Q.k_r_dec / 100 * Q.delegate_total * Math.Max(1, Q.train_capacity / 150000) * Math.Max(1, 50 / Q.instability));
+ Q.ca_seats_cossack = Math.Round(Q.cossacks_r_dec / 100 * Q.delegate_total * Math.Max(0.5, Q.train_capacity / 150000) * Math.Max(1, 50 / Q.instability));
+ Q.ca_seats_rightist = Math.Round(Q.rightist_r_dec / 100 * Q.delegate_total * Math.Max(1, Q.train_capacity / 150000) * Math.Max(1, 50 / Q.instability));
+ Q.ca_seats_other = Math.Round(Q.other_r_dec / 100 * Q.delegate_total * Math.Max(1, Q.train_capacity / 150000) * Math.Max(1, 50 / Q.instability));
+
+ if (Q.ca_stance == 1) {
+   Q.ca_seats_menshevik = Math.Round(Q.ca_seats_menshevik * 0.8);
+   Q.ca_seats_sr = Math.Round(Q.ca_seats_sr * 0.8);
+   Q.ca_seats_ukr = Math.Round(Q.ca_seats_ukr * 0.9);
+   Q.ca_seats_ns = Math.Round(Q.ca_seats_ns * 0.7); 
+   Q.ca_seats_muslim_socialist = Math.Round(Q.ca_seats_muslim_socialist * 0.8); 
+   Q.ca_seats_dashnak = Math.Round(Q.ca_seats_dashnak * 0.9); 
+   Q.ca_seats_jewish = Math.Round(Q.ca_seats_jewish * 0.9); 
+   Q.ca_seats_muslim_national = Math.Round(Q.ca_seats_muslim_national * 0.7); 
+   Q.ca_seats_kadet = Math.Round(Q.ca_seats_kadet * 0.2); 
+   Q.ca_seats_cossack = Math.Round(Q.ca_seats_cossack * 0.5); 
+   Q.ca_seats_rightist = Math.Round(Q.ca_seats_rightist * 0.2);
+   Q.ca_seats_other = Math.Round(Q.ca_seats_other * 0.7); 
+ }
+ if (Q.cheka_founded == 1) {
+   Q.ca_seats_menshevik = Math.Round(Q.ca_seats_menshevik * 0.9);
+   Q.ca_seats_sr = Math.Round(Q.ca_seats_sr * 0.9);
+   Q.ca_seats_ukr = Math.Round(Q.ca_seats_ukr * 0.9);
+   Q.ca_seats_ns = Math.Round(Q.ca_seats_ns * 0.9); 
+   Q.ca_seats_muslim_socialist = Math.Round(Q.ca_seats_muslim_socialist * 0.9); 
+   Q.ca_seats_dashnak = Math.Round(Q.ca_seats_dashnak * 0.9); 
+   Q.ca_seats_jewish = Math.Round(Q.ca_seats_jewish * 0.9); 
+   Q.ca_seats_muslim_national = Math.Round(Q.ca_seats_muslim_national * 0.9); 
+   Q.ca_seats_kadet = Math.Round(Q.ca_seats_kadet * 0.2); 
+   Q.ca_seats_cossack = Math.Round(Q.ca_seats_cossack * 0.5); 
+   Q.ca_seats_rightist = Math.Round(Q.ca_seats_rightist * 0.2);
+   Q.ca_seats_other = Math.Round(Q.ca_seats_other * 0.95); 
+ }
+Q.ca_empty = 765 - Q.ca_seats_bolshevik - Q.ca_seats_menshevik - Q.ca_seats_lsr - Q.ca_seats_sr - Q.ca_seats_ukr - Q.ca_seats_ns - Q.ca_seats_muslim_socialist - Q.ca_seats_dashnak - Q.ca_seats_jewish - Q.ca_seats_muslim_national - Q.ca_seats_kadet - Q.ca_seats_cossack - Q.ca_seats_rightist - Q.ca_seats_other;  
+
+!}
 on-display: {!
 // do the graphs
 var data = [
 {"id": "b",
  "legend": "Bolshevik",
  "name": "Bolshevik",
- "seats": Q.b_r},
+ "seats": Q.ca_seats_bolshevik},
 ];
-if (Q.internationalist_assembly_votes_dec) {
-    data.push({
-            "id": "internationalist",
-            "legend": "Menshevik-Internationalist",
-            "name": "Menshevik-Internationalist",
-            "seats": Q.internationalist_r
-            });
-}
 data.push({
     "id": "m",
     "legend": "Menshevik",
     "name": "Menshevik",
-    "seats": Q.m_r
+    "seats": Q.ca_seats_menshevik
 });
-if (Q.defensist_assembly_votes_dec) {
-    data.push({
-            "id": "defensist",
-            "legend": "Menshevik-Defensist",
-            "name": "Menshevik-Defensist",
-            "seats": Q.defensist_r
-            });
-}
-if (Q.left_sr_assembly_votes_dec) {
-    data.push({
-            "id": "left_sr",
-            "legend": "Left-SR",
-            "name": "Left-SR",
-            "seats": Q.left_sr_r
-            });
-}
+data.push({
+    "id": "lsr",
+    "legend": "Left-SR",
+    "name": "Left-SR",
+    "seats": Q.ca_seats_lsr
+});
 data.push({
     "id": "sr",
     "legend": "SR",
     "name": "SR",
-    "seats": Q.sr_r
+    "seats": Q.ca_seats_sr
 });
-if (Q.right_sr_assembly_votes_dec) {
-    data.push({
-            "id": "right_sr",
-            "legend": "Right-SR",
-            "name": "Right-SR",
-            "seats": Q.right_sr_r
-            });
-}
-data = data.concat([
-{
+data.push({
   "id": "ukrainian_sr",
   "legend": "Ukrainian SR",
   "name": "Ukrainian SR",
-  "seats": Q.ukrainian_sr_r
-},
-{
+  "seats": Q.ca_seats_ukr
+});
+data.push({
   "id": "popular_socialist",
   "legend": "Popular Socialist",
   "name": "Popular Socialist",
-  "seats": Q.popular_socialist_r
-},
-{
+  "seats": Q.ca_seats_ns
+});
+data.push({
   "id": "muslim_socialist",
   "legend": "Muslim Socialist",
   "name": "Muslim Socialist",
-  "seats": Q.muslim_socialists_r
-},
-{
+  "seats": Q.ca_seats_muslim_socialist
+});
+data.push({
   "id": "dashnak",
   "legend": "Dashnak",
   "name": "Dashnak",
-  "seats": Q.dashnak_r
-},
-{
+  "seats": Q.ca_seats_dashnak
+});
+data.push({
   "id": "jewish_national",
   "legend": "Jewish National",
   "name": "Jewish National",
-  "seats": Q.jewish_national_r
-},
-{
+  "seats": Q.ca_seats_jewish
+});
+data.push({
   "id": "muslim_national",
   "legend": "Muslim National",
   "name": "Muslim National",
-  "seats": Q.muslim_national_r
-},
-{
+  "seats": Q.ca_seats_muslim_national
+});
+data.push({
   "id": "k",
   "legend": "Kadet",
   "name": "Kadet",
-  "seats": Q.k_r
+  "seats": Q.ca_seats_kadet
+});
+data.push({
+  "id": "cossack",
+  "legend": "Cossack",
+  "name": "Cossack",
+  "seats": Q.ca_seats_cossack
 },
-{
+data.push({
+  "id": "rightist",
+  "legend": "Rightist",
+  "name": "Rightist",
+  "seats": Q.ca_seats_rightist
+});
+data.push({
   "id": "other",
   "legend": "Others",
   "name": "Others",
   "seats": Q.other_r
-},
-{
-  "id": "conservative",
-  "legend": "Conservative",
-  "name": "Conservative",
-  "seats": Q.conservative_r
-},
-{
-  "id": "cossack",
-  "legend": "Cossack",
-  "name": "Cossack",
-  "seats": Q.cossacks_r
-},
-]);
+});
+data.push({
+  "id": "none",
+  "legend": "Vacant",
+  "name": "Vacant",
+  "seats": Q.ca_empty
+});
 if (window && d3) {
     console.log(data);
     var width = 500;
@@ -143,46 +167,18 @@ if (window && d3) {
 
 {!<svg id="constituent_assembly" style="width: 500px; height: 250px;"> </svg>!}
 
-Finally, the long-awaited Constituent Assembly can be held! Representatives from all across Russia will write a new constitution, and decide crucial questions regarding the organization of the new society and economy.
-
-However, this is a different chapter of Russia's history. The days of the Revolution are behind us. The future is yet to be determined.
 
 
-# TODO: disable for now - we will decide this stuff later!!!
-
-@form_assembly
 
 
-# step 1: forming a governing coalition
-
-The goal of the Constituent Assembly is to write a new constitution for Russia. First, there must be the election of a new speaker.
-
-Possible coalitions:
-
-# defensists only
-Moderate socialist coalition (Mensheviks + SRs + Minority Socialists):
-
-Internationalist socialist coalition:
-
-Democratic coalition (Kadets + Mensheviks + SRs + Minority Socialists + Minority Nationalists):
-
-Bourgeois-Nationalist coalition (Kadets + Minority Nationalists):
-
-Who should we support as the speaker of the Constituent Assembly?
-
-# each party has a default speaker choice.
-
-# then we should form a new government.
-
-@chernov
-title: Viktor Chernov (SR)
-
-@tsereteli
-title: Irakli Tsereteli (Menshevik)
 
 
-@disband
-title: Disband this Constituent Assembly!
-subtitle: The Soviets are the true organs of democracy.
-view-if: ((player_party = "b" or (player_party = "sr")) and government_form = 1)
+
+
+
+
+
+
+
+
 
