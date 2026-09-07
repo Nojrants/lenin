@@ -59,6 +59,7 @@ max-visits: 1
 go-to: options
 on-arrival: {!
   Q.moderate_strength -= 2; Q.moderate_unrest += 2; 
+  Q.kamenev_available = 0;
 !}
 
 @nothing
