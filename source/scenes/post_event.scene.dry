@@ -12,6 +12,8 @@ for (var c of Q.classes) {
     }
 }
 
+console.log("CA timer: ", Q.constituent_assembly_timer);
+
 
 Q.leaders = {};
 // Bolsheviks
