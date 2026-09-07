@@ -888,6 +888,17 @@ if (Q.soldier_hunger < 0) {
 
 
 // EDUCATION
+
+console.log("CLASS BREAKDOWN BEFORE UNIVERSITY", {
+    elites: Q.elites,
+    middle: Q.middle,
+    workers: Q.workers,
+    kulaks: Q.kulaks,
+    peasants: Q.peasants,
+    students: Q.students
+});
+
+
 Q.urban_literacy += Q.urban_schools * 0.00007;
 Q.rural_literacy += Q.rural_schools * 0.00005;
 Q.university_capacity = (Q.higher_schools * 0.0000007);
