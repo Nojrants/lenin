@@ -1040,7 +1040,7 @@ Q.base_attractiveness = {
         rightist: 1,
         other: 3,
         none: 5
-    }
+    },
     students: {
         anarchist: 2,
         maximalist: 2,
