@@ -362,16 +362,16 @@ g.selectAll(".label")
 title: Proceed...
 new-page: true
 on-arrival: {!
- Q.vote_sr = Math.round(Q.ca_seats_sr + Q.ca_seats_menshevik + (Q.ca_seats_ukr * 0.95) + Q.ca_seats_ns + ((Q.ca_seats_muslim_socialist + Q.ca_seats_dashnak + Q.ca_seats_jewish + Q.ca_seats_muslim_national) * 0.9) + Q.ca_seats_kadet + Q.ca_seats_cossack + Q.ca_seats_rightist + (Q.ca_seats_other * 0.75));
- Q.vote_bolshevik = Math.round(Q.ca_seats_bolshevik + (Q.ca_seats_lsr * 0.7) + ((Q.ca_seats_muslim_socialist + Q.ca_seats_dashnak + Q.ca_seats_jewish + Q.ca_seats_muslim_national) * 0.05) + (Q.ca_seats_other * 0.15));
+ Q.vote_sr = Math.round(Q.ca_seats_sr + Q.ca_seats_menshevik + (Q.ca_seats_ukr * 0.8) + Q.ca_seats_ns + ((Q.ca_seats_muslim_socialist + Q.ca_seats_dashnak + Q.ca_seats_jewish + Q.ca_seats_muslim_national) * 0.9) + Q.ca_seats_kadet + Q.ca_seats_cossack + Q.ca_seats_rightist + (Q.ca_seats_other * 0.75));
+ Q.vote_bolshevik = Math.round(Q.ca_seats_bolshevik + (Q.ca_seats_lsr * 0.7) + (Q.ca_seats_ukr * 0.15) + ((Q.ca_seats_muslim_socialist + Q.ca_seats_dashnak + Q.ca_seats_jewish + Q.ca_seats_muslim_national) * 0.05) + (Q.ca_seats_other * 0.15));
  Q.vote_other = Math.round((Q.ca_seats_lsr * 0.3) + (Q.ca_seats_ukr * 0.05) + ((Q.ca_seats_muslim_socialist + Q.ca_seats_dashnak + Q.ca_seats_jewish + Q.ca_seats_muslim_national) * 0.05) + (Q.ca_seats_other * 0.1));
 !}
 
 = Vote on the Programs
 
-Lenin has prepared a document, known as the "Declaration of the Rights of Toiling and Exploited People", which he plans to give to the Assembly for a vote, without taking any comments or amendments. In addition to affirming the goals of the Bolshevik program, this declaration explicitly recognizes the supremacy of the soviet government, and calls for the Constituent Assembly to be dissolved. In effect, Lenin is forcing the Constituent Assembly to either immediately back his government, or discredit itself by having to vote no to the rest of the declaration. 
+Lenin has prepared a document, known as the "Declaration of the Rights of Toiling and Exploited People", which he intends to give to the Assembly for an immediate vote, without taking any comments or amendments. In addition to affirming the goals of the Bolshevik program, this declaration explicitly recognizes the supremacy of the soviet government, and calls for the Constituent Assembly to be dissolved. In effect, Lenin is forcing the Constituent Assembly to either immediately back his government, or discredit itself by having to vote no to the rest of the declaration. 
 
-Meanwhile the SRs have prepared a full first-day agenda, which calls for consideration of legislation on peace, land and state power in ordered sequence. 
+Meanwhile the SRs have prepared a full first-day agenda, which calls for discussion and review of legislation on peace, land and state power in ordered sequence. 
 
 These two items are now being directly juxtaposed: either a vote for the Declaration, or a vote to proceed with the SR agenda. 
 
@@ -479,4 +479,26 @@ g.selectAll(".label")
 
 [?if vote_sr > vote_bolshevik : The SR agenda proposal is passed. ?]
 
+Proceeding with the agenda, the SRs announce their intention to pass the following: 
+<ul>
+Formal abolition of the monarchy, and declaration of a democratic republic.<br>
+Federation based on free association of equal peoples.<br>
+Self-determination for all nationalities.<br>
+Immediate negotiations for a universal, democratic, and just resolution to the Great War.<br>
+Systematic redistribution of all land to the working peasantry without compensation.<br>
+Demobilization of conscripts, to be replaced with an all-volunteer army.<br>
+State control over industrial production, with mass workplace democracy.<br>
+Transition to industrial production directed by workers.<br>
+A mass public works program to revitalize the economy.<br>
+Guarantee to provide basic necessities to masses.<br>
+Establishment of an 8-hour work day.<br>
+Establishment of a minimum wage and social insurance.<br>
+Enshrined protection of minority rights.<br>
+Periodic national plebiscites to ensure people's will.<br>
+Creation of a socialist coalition government (i.e. no collaboration with the right-wing parties). 
+</ul> 
 
+- @program_vote2
+
+@program_vote2
+title: Proceed...
