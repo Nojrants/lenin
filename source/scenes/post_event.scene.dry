@@ -266,12 +266,6 @@ for (var party of Q.parties) {
 }
 
 
-
-
-
-
-
-
 // set faction strength/dissent to 0
 // re-calculate dissent.
 for (var p of Q.parties) {
@@ -891,6 +885,91 @@ Q.food_demand_military;
 if (Q.soldier_hunger < 0) {
     Q.soldier_hunger = 0; 
 }
+
+
+// EDUCATION
+Q.urban_literacy += Q.urban_schools * 0.00007;
+Q.rural_literacy += Q.rural_schools * 0.00005;
+Q.university_capacity = (Q.higher_schools * 0.0000007);
+
+Q.university_policy = {
+    elites: 0.40,
+    middle: 0.30,
+    workers: 0.15,
+    kulaks: 0.10,
+    peasants: 0.05,
+};
+
+Q.eligible = {};
+Q.eligible.elites = (Q.elites * 0.000075 * Q.elite_university_access);
+Q.eligible.middle = (Q.middle * 0.000055 * Q.middle_university_access);
+Q.eligible.workers = (Q.workers * 0.00005 * Q.workers_university_access * (Q.urban_literacy / 100));
+Q.eligible.kulaks = (Q.kulaks * 0.00004 * Q.kulaks_university_access * (Q.rural_literacy / 100));
+Q.eligible.peasants = (Q.peasants * 0.000025 * Q.peasants_university_access * (Q.rural_literacy / 100));
+
+Q.desired_elites = Q.university_capacity * Q.university_policy.elites;
+Q.desired_workers = Q.university_capacity * Q.university_policy.workers;
+Q.desired_peasants = Q.university_capacity * Q.university_policy.peasants;
+Q.desired_middle = Q.university_capacity * Q.university_policy.middle;
+
+Q.enrolled = {}; 
+Q.enrolled.elites = Math.min(Q.university_capacity * Q.university_policy.elites, Q.eligible.elites); 
+Q.enrolled.middle = Math.min(Q.university_capacity * Q.university_policy.middle, Q.eligible.middle);
+Q.enrolled.workers = Math.min(Q.university_capacity * Q.university_policy.workers, Q.eligible.workers);
+Q.enrolled.kulaks = Math.min(Q.university_capacity * Q.university_policy.kulaks, Q.eligible.kulaks);
+Q.enrolled.peasants = Math.min(Q.university_capacity * Q.university_policy.peasants, Q.eligible.peasants);
+
+Q.used = Q.enrolled.elites + Q.enrolled.middle + Q.enrolled.workers + Q.enrolled.kulaks + Q.enrolled.peasants;
+Q.unused = Q.university_capacity - Q.used;
+while (Q.unused > 0) { 
+	Q.remaining = {
+		elites: Q.eligible.elites - Q.enrolled.elites,
+		middle: Q.eligible.middle - Q.enrolled.middle, 
+		workers: Q.eligible.workers - Q.enrolled.workers,
+		kulaks: Q.eligible.kulaks - Q.enrolled.kulaks, 
+		peasants: Q.eligible.peasants - Q.enrolled.peasants, 
+	};
+	Q.remaining_weight =
+		(Q.remaining.elites > 0 ? Q.university_policy.elites : 0) +
+		(Q.remaining.middle > 0 ? Q.university_policy.middle : 0) + 
+		(Q.remaining.workers > 0 ? Q.university_policy.workers : 0) +
+		(Q.remaining.kulaks > 0 ? Q.university_policy.kulaks : 0) +
+		(Q.remaining.peasants > 0 ? Q.university_policy.peasants : 0);
+	if (Q.remaining_weight <= 0) {
+		break;
+	} 
+
+	Q.additional_elites = Q.remaining.elites > 0 ? Math.min(Q.remaining.elites, Q.unused * Q.university_policy.elites / Q.remaining_weight) : 0;
+	Q.additional_middle = Q.remaining.middle > 0 ? Math.min(Q.remaining.middle, Q.unused * Q.university_policy.middle / Q.remaining_weight ) : 0; 	
+	Q.additional_workers = Q.remaining.workers > 0 ? Math.min(Q.remaining.workers, Q.unused * Q.university_policy.workers / Q.remaining_weight ) : 0;
+	Q.additional_kulaks = Q.remaining.kulaks > 0 ? Math.min(Q.remaining.kulaks, Q.unused * Q.university_policy.kulaks / Q.remaining_weight ) : 0;
+	Q.additional_peasants = Q.remaining.peasants > 0 ? Math.min(Q.remaining.peasants, Q.unused * Q.university_policy.peasants / Q.remaining_weight ) : 0;
+
+	Q.enrolled.elites += Q.additional_elites;
+	Q.enrolled.middle += Q.additional_middle; 
+	Q.enrolled.workers += Q.additional_workers;
+	Q.enrolled.kulaks += Q.additional_kulaks; 
+	Q.enrolled.peasants += Q.additional_peasants;
+
+	Q.new_used = Q.enrolled.elites + Q.enrolled.middle + Q.enrolled.workers + Q.enrolled.kulaks + Q.enrolled.peasants;
+	
+	if (Q.new_used == Q.used) {
+		break;
+	}
+	Q.used = Q.new_used;
+	Q.unused = Q.university_capacity - Q.used;
+}
+
+
+Q.elites -= Q.enrolled.elites;
+Q.middle -= Q.enrolled.middle; 
+Q.workers -= Q.enrolled.workers;
+Q.kulaks -= Q.enrolled.kulaks; 
+Q.peasants -= Q.enrolled.peasants;
+Q.students += Q.enrolled.elites + Q.enrolled.middle + Q.enrolled.workers + Q.enrolled.kulaks + Q.enrolled.peasants;
+
+
+
 
 
 // 1. update dates
