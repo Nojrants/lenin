@@ -7,48 +7,48 @@ tags: event
 on-arrival: {!
  Q.ca_held = 1;
  if (Q.stopped_count != 1) Q.delegate_total = 665; else Q.delegate_total = 640;
- Q.ca_seats_bolshevik = math.round(Q.b_r_dec / 100 * Q.delegate_total * math.min(1, Q.train_capacity / 150000) * math.min(1, 50 / Q.instability));
- Q.ca_seats_menshevik = math.round(Q.m_r_dec / 100 * Q.delegate_total * math.min(0.75, Q.train_capacity / 150000) * math.min(1, 50 / Q.instability));
- Q.ca_seats_sr = math.round(Q.sr_r_dec / 100 * Q.delegate_total * math.min(1, Q.train_capacity / 150000) * math.min(1, 50 / Q.instability));
- Q.ca_seats_lsr = math.round(Q.ca_seats_sr * 0.2); Q.ca_seats_sr = math.round(Q.ca_seats_sr *= 0.8); 
- Q.ca_seats_ukr = math.round(Q.ukrainian_sr_r_dec / 100 * Q.delegate_total * math.min(0.9, Q.train_capacity / 150000) * math.min(1, 50 / Q.instability));
- Q.ca_seats_ns = math.round(Q.popular_socialist_r_dec / 100 * Q.delegate_total * math.min(1, Q.train_capacity / 150000) * math.min(1, 50 / Q.instability));
- Q.ca_seats_muslim_socialist = math.round(Q.muslim_socialists_r_dec / 100 * Q.delegate_total * math.min(0.75, Q.train_capacity / 150000) * math.min(1, 50 / Q.instability));
- Q.ca_seats_dashnak = math.round(Q.dashnak_r_dec / 100 * Q.delegate_total * math.min(0.5, Q.train_capacity / 150000) * math.min(1, 50 / Q.instability));
- Q.ca_seats_jewish = math.round(Q.jewish_national_r_dec / 100 * Q.delegate_total * math.min(0.75, Q.train_capacity / 150000) * math.min(1, 50 / Q.instability));
- Q.ca_seats_muslim_national = math.round(Q.muslim_national_r_dec / 100 * Q.delegate_total * math.min(0.5, Q.train_capacity / 150000) * math.min(1, 50 / Q.instability));
- Q.ca_seats_kadet = math.round(Q.k_r_dec / 100 * Q.delegate_total * math.min(1, Q.train_capacity / 150000) * math.min(1, 50 / Q.instability));
- Q.ca_seats_cossack = math.round(Q.cossacks_r_dec / 100 * Q.delegate_total * math.min(0.5, Q.train_capacity / 150000) * math.min(1, 50 / Q.instability));
- Q.ca_seats_rightist = math.round(Q.rightist_r_dec / 100 * Q.delegate_total * math.min(1, Q.train_capacity / 150000) * math.min(1, 50 / Q.instability));
- Q.ca_seats_other = math.round(Q.other_r_dec / 100 * Q.delegate_total * math.min(1, Q.train_capacity / 150000) * math.min(1, 50 / Q.instability));
+ Q.ca_seats_bolshevik = Math.round(Q.b_r_dec / 100 * Q.delegate_total * Math.min(1, Q.train_capacity / 150000) * Math.min(1, 50 / Q.instability));
+ Q.ca_seats_menshevik = Math.round(Q.m_r_dec / 100 * Q.delegate_total * Math.min(0.75, Q.train_capacity / 150000) * Math.min(1, 50 / Q.instability));
+ Q.ca_seats_sr = Math.round(Q.sr_r_dec / 100 * Q.delegate_total * Math.min(1, Q.train_capacity / 150000) * Math.min(1, 50 / Q.instability));
+ Q.ca_seats_lsr = Math.round(Q.ca_seats_sr * 0.2); Q.ca_seats_sr = Math.round(Q.ca_seats_sr *= 0.8); 
+ Q.ca_seats_ukr = Math.round(Q.ukrainian_sr_r_dec / 100 * Q.delegate_total * Math.min(0.9, Q.train_capacity / 150000) * Math.min(1, 50 / Q.instability));
+ Q.ca_seats_ns = Math.round(Q.popular_socialist_r_dec / 100 * Q.delegate_total * Math.min(1, Q.train_capacity / 150000) * Math.min(1, 50 / Q.instability));
+ Q.ca_seats_muslim_socialist = Math.round(Q.muslim_socialists_r_dec / 100 * Q.delegate_total * Math.min(0.75, Q.train_capacity / 150000) * Math.min(1, 50 / Q.instability));
+ Q.ca_seats_dashnak = Math.round(Q.dashnak_r_dec / 100 * Q.delegate_total * Math.min(0.5, Q.train_capacity / 150000) * Math.min(1, 50 / Q.instability));
+ Q.ca_seats_jewish = Math.round(Q.jewish_national_r_dec / 100 * Q.delegate_total * Math.min(0.75, Q.train_capacity / 150000) * Math.min(1, 50 / Q.instability));
+ Q.ca_seats_muslim_national = Math.round(Q.muslim_national_r_dec / 100 * Q.delegate_total * Math.min(0.5, Q.train_capacity / 150000) * Math.min(1, 50 / Q.instability));
+ Q.ca_seats_kadet = Math.round(Q.k_r_dec / 100 * Q.delegate_total * Math.min(1, Q.train_capacity / 150000) * Math.min(1, 50 / Q.instability));
+ Q.ca_seats_cossack = Math.round(Q.cossacks_r_dec / 100 * Q.delegate_total * Math.min(0.5, Q.train_capacity / 150000) * Math.min(1, 50 / Q.instability));
+ Q.ca_seats_rightist = Math.round(Q.rightist_r_dec / 100 * Q.delegate_total * Math.min(1, Q.train_capacity / 150000) * Math.min(1, 50 / Q.instability));
+ Q.ca_seats_other = Math.round(Q.other_r_dec / 100 * Q.delegate_total * Math.min(1, Q.train_capacity / 150000) * Math.min(1, 50 / Q.instability));
 
  if (Q.ca_stance == 1) {
-   Q.ca_seats_menshevik = math.round(Q.ca_seats_menshevik * 0.9);
-   Q.ca_seats_sr = math.round(Q.ca_seats_sr * 0.9);
-   Q.ca_seats_ukr = math.round(Q.ca_seats_ukr * 0.95);
-   Q.ca_seats_ns = math.round(Q.ca_seats_ns * 0.9); 
-   Q.ca_seats_muslim_socialist = math.round(Q.ca_seats_muslim_socialist * 0.8); 
-   Q.ca_seats_dashnak = math.round(Q.ca_seats_dashnak * 0.9); 
-   Q.ca_seats_jewish = math.round(Q.ca_seats_jewish * 0.9); 
-   Q.ca_seats_muslim_national = math.round(Q.ca_seats_muslim_national * 0.7); 
-   Q.ca_seats_kadet = math.round(Q.ca_seats_kadet * 0); 
-   Q.ca_seats_cossack = math.round(Q.ca_seats_cossack * 0.5); 
-   Q.ca_seats_rightist = math.round(Q.ca_seats_rightist * 0.2);
-   Q.ca_seats_other = math.round(Q.ca_seats_other * 0.9); 
+   Q.ca_seats_menshevik = Math.round(Q.ca_seats_menshevik * 0.9);
+   Q.ca_seats_sr = Math.round(Q.ca_seats_sr * 0.9);
+   Q.ca_seats_ukr = Math.round(Q.ca_seats_ukr * 0.95);
+   Q.ca_seats_ns = Math.round(Q.ca_seats_ns * 0.9); 
+   Q.ca_seats_muslim_socialist = Math.round(Q.ca_seats_muslim_socialist * 0.8); 
+   Q.ca_seats_dashnak = Math.round(Q.ca_seats_dashnak * 0.9); 
+   Q.ca_seats_jewish = Math.round(Q.ca_seats_jewish * 0.9); 
+   Q.ca_seats_muslim_national = Math.round(Q.ca_seats_muslim_national * 0.7); 
+   Q.ca_seats_kadet = Math.round(Q.ca_seats_kadet * 0); 
+   Q.ca_seats_cossack = Math.round(Q.ca_seats_cossack * 0.5); 
+   Q.ca_seats_rightist = Math.round(Q.ca_seats_rightist * 0.2);
+   Q.ca_seats_other = Math.round(Q.ca_seats_other * 0.9); 
  }
  if (Q.cheka_founded == 1) {
-   Q.ca_seats_menshevik = math.round(Q.ca_seats_menshevik * 0.9);
-   Q.ca_seats_sr = math.round(Q.ca_seats_sr * 0.9);
-   Q.ca_seats_ukr = math.round(Q.ca_seats_ukr * 0.9);
-   Q.ca_seats_ns = math.round(Q.ca_seats_ns * 0.9); 
-   Q.ca_seats_muslim_socialist = math.round(Q.ca_seats_muslim_socialist * 0.9); 
-   Q.ca_seats_dashnak = math.round(Q.ca_seats_dashnak * 0.9); 
-   Q.ca_seats_jewish = math.round(Q.ca_seats_jewish * 0.9); 
-   Q.ca_seats_muslim_national = math.round(Q.ca_seats_muslim_national * 0.9); 
-   Q.ca_seats_kadet = math.round(Q.ca_seats_kadet * 0.1); 
-   Q.ca_seats_cossack = math.round(Q.ca_seats_cossack * 0.5); 
-   Q.ca_seats_rightist = math.round(Q.ca_seats_rightist * 0.2);
-   Q.ca_seats_other = math.round(Q.ca_seats_other * 0.95); 
+   Q.ca_seats_menshevik = Math.round(Q.ca_seats_menshevik * 0.9);
+   Q.ca_seats_sr = Math.round(Q.ca_seats_sr * 0.9);
+   Q.ca_seats_ukr = Math.round(Q.ca_seats_ukr * 0.9);
+   Q.ca_seats_ns = Math.round(Q.ca_seats_ns * 0.9); 
+   Q.ca_seats_muslim_socialist = Math.round(Q.ca_seats_muslim_socialist * 0.9); 
+   Q.ca_seats_dashnak = Math.round(Q.ca_seats_dashnak * 0.9); 
+   Q.ca_seats_jewish = Math.round(Q.ca_seats_jewish * 0.9); 
+   Q.ca_seats_muslim_national = Math.round(Q.ca_seats_muslim_national * 0.9); 
+   Q.ca_seats_kadet = Math.round(Q.ca_seats_kadet * 0.1); 
+   Q.ca_seats_cossack = Math.round(Q.ca_seats_cossack * 0.5); 
+   Q.ca_seats_rightist = Math.round(Q.ca_seats_rightist * 0.2);
+   Q.ca_seats_other = Math.round(Q.ca_seats_other * 0.95); 
  }
 Q.ca_empty = 765 - Q.ca_seats_bolshevik - Q.ca_seats_menshevik - Q.ca_seats_lsr - Q.ca_seats_sr - Q.ca_seats_ukr - Q.ca_seats_ns - Q.ca_seats_muslim_socialist - Q.ca_seats_dashnak - Q.ca_seats_jewish - Q.ca_seats_muslim_national - Q.ca_seats_kadet - Q.ca_seats_cossack - Q.ca_seats_rightist - Q.ca_seats_other;  
 
@@ -220,8 +220,8 @@ The first order of business is electing a chairperson. The SRs have nominated Vi
 title: Back the Left-SR candidate, Maria Spiridonova.
 on-arrival: {!
  Q.lsr_relation += 5;
- Q.vote_chernov = math.round(Q.ca_seats_sr + Q.ca_seats_menshevik + (Q.ca_seats_ukr * 0.95) + Q.ca_seats_ns + ((Q.ca_seats_muslim_socialist + Q.ca_seats_dashnak + Q.ca_seats_jewish + Q.ca_seats_muslim_national) * 0.9) + Q.ca_seats_kadet + Q.ca_seats_cossack + Q.ca_seats_rightist + (Q.ca_seats_other * 0.8));
- Q.vote_spiridonova = math.round(Q.ca_seats_bolshevik + Q.ca_seats_lsr + (Q.ca_seats_ukr * 0.05) + ((Q.ca_seats_muslim_socialist + Q.ca_seats_dashnak + Q.ca_seats_jewish + Q.ca_seats_muslim_national) * 0.1) + (Q.ca_seats_other * 0.2));
+ Q.vote_chernov = Math.round(Q.ca_seats_sr + Q.ca_seats_menshevik + (Q.ca_seats_ukr * 0.95) + Q.ca_seats_ns + ((Q.ca_seats_muslim_socialist + Q.ca_seats_dashnak + Q.ca_seats_jewish + Q.ca_seats_muslim_national) * 0.9) + Q.ca_seats_kadet + Q.ca_seats_cossack + Q.ca_seats_rightist + (Q.ca_seats_other * 0.8));
+ Q.vote_spiridonova = Math.round(Q.ca_seats_bolshevik + Q.ca_seats_lsr + (Q.ca_seats_ukr * 0.05) + ((Q.ca_seats_muslim_socialist + Q.ca_seats_dashnak + Q.ca_seats_jewish + Q.ca_seats_muslim_national) * 0.1) + (Q.ca_seats_other * 0.2));
 !}
 go-to: program_vote
 
@@ -231,9 +231,9 @@ choose-if: kamenev_available != 0
 unavailable-subtitle: Kamenev is absent from the proceedings. 
 on-arrival: {!
  Q.moderate_strength += 5; Q.moderate_unrest -= 5; 
- Q.vote_chernov = math.round(Q.ca_seats_sr + Q.ca_seats_menshevik + (Q.ca_seats_ukr * 0.95) + Q.ca_seats_ns + ((Q.ca_seats_muslim_socialist + Q.ca_seats_dashnak + Q.ca_seats_jewish + Q.ca_seats_muslim_national) * 0.9) + Q.ca_seats_kadet + Q.ca_seats_cossack + Q.ca_seats_rightist + (Q.ca_seats_other * 0.8));
- Q.vote_spiridonova = math.round(Q.ca_seats_lsr + (Q.ca_seats_ukr * 0.025) + ((Q.ca_seats_muslim_socialist + Q.ca_seats_dashnak + Q.ca_seats_jewish + Q.ca_seats_muslim_national) * 0.075) + (Q.ca_seats_other * 0.1));
- Q.vote_kamenev = math.round(Q.ca_seats_bolshevik + (Q.ca_seats_ukr * 0.025) + ((Q.ca_seats_muslim_socialist + Q.ca_seats_dashnak + Q.ca_seats_jewish + Q.ca_seats_muslim_national) * 0.025) + (Q.ca_seats_other * 0.1));
+ Q.vote_chernov = Math.round(Q.ca_seats_sr + Q.ca_seats_menshevik + (Q.ca_seats_ukr * 0.95) + Q.ca_seats_ns + ((Q.ca_seats_muslim_socialist + Q.ca_seats_dashnak + Q.ca_seats_jewish + Q.ca_seats_muslim_national) * 0.9) + Q.ca_seats_kadet + Q.ca_seats_cossack + Q.ca_seats_rightist + (Q.ca_seats_other * 0.8));
+ Q.vote_spiridonova = Math.round(Q.ca_seats_lsr + (Q.ca_seats_ukr * 0.025) + ((Q.ca_seats_muslim_socialist + Q.ca_seats_dashnak + Q.ca_seats_jewish + Q.ca_seats_muslim_national) * 0.075) + (Q.ca_seats_other * 0.1));
+ Q.vote_kamenev = Math.round(Q.ca_seats_bolshevik + (Q.ca_seats_ukr * 0.025) + ((Q.ca_seats_muslim_socialist + Q.ca_seats_dashnak + Q.ca_seats_jewish + Q.ca_seats_muslim_national) * 0.025) + (Q.ca_seats_other * 0.1));
 !}
 go-to: program_vote
 
@@ -241,9 +241,9 @@ go-to: program_vote
 title: Nominate the Leninist, Yakov Sverdlov. 
 on-arrival: {!
  Q.moderate_unrest += 5; 
- Q.vote_chernov = math.round(Q.ca_seats_sr + Q.ca_seats_menshevik + (Q.ca_seats_ukr * 0.95) + Q.ca_seats_ns + ((Q.ca_seats_muslim_socialist + Q.ca_seats_dashnak + Q.ca_seats_jewish + Q.ca_seats_muslim_national) * 0.9) + Q.ca_seats_kadet + Q.ca_seats_cossack + Q.ca_seats_rightist + (Q.ca_seats_other * 0.8));
- Q.vote_spiridonova = math.round(Q.ca_seats_lsr + (Q.ca_seats_ukr * 0.05) + ((Q.ca_seats_muslim_socialist + Q.ca_seats_dashnak + Q.ca_seats_jewish + Q.ca_seats_muslim_national) * 0.1) + (Q.ca_seats_other * 0.15));
- Q.vote_sverdlov = math.round(Q.ca_seats_bolshevik + (Q.ca_seats_other * 0.05));
+ Q.vote_chernov = Math.round(Q.ca_seats_sr + Q.ca_seats_menshevik + (Q.ca_seats_ukr * 0.95) + Q.ca_seats_ns + ((Q.ca_seats_muslim_socialist + Q.ca_seats_dashnak + Q.ca_seats_jewish + Q.ca_seats_muslim_national) * 0.9) + Q.ca_seats_kadet + Q.ca_seats_cossack + Q.ca_seats_rightist + (Q.ca_seats_other * 0.8));
+ Q.vote_spiridonova = Math.round(Q.ca_seats_lsr + (Q.ca_seats_ukr * 0.05) + ((Q.ca_seats_muslim_socialist + Q.ca_seats_dashnak + Q.ca_seats_jewish + Q.ca_seats_muslim_national) * 0.1) + (Q.ca_seats_other * 0.15));
+ Q.vote_sverdlov = Math.round(Q.ca_seats_bolshevik + (Q.ca_seats_other * 0.05));
 !}
 go-to: program_vote
 
