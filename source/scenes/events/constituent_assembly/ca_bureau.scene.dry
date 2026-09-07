@@ -1,0 +1,66 @@
+title: Creation of a Fraction Bureau for the Constituent Assembly
+subtitle: Our delegates to the Constituent Assembly have begun to arrive. 
+new-page: true
+view-if: ca_election_held = 1 and constituent_assembly_timer >= 1 and constituent_assembly_timer < 5 and ca_held = 0
+max-visits: 1
+tags: event
+go-to: options
+on-arrival: {!
+  Q.moderate_strength += 10;
+!}
+
+With many of our delegates to the Constituent Assembly having arrived in the capital, an organizational meeting is convened to prepare and elect a fraction bureau (to lead the delegation). 
+
+The assembled delegates elect a bureau consisting mainly of Bolshevik Moderates, including Kamenev, Nogin, Rykov, Milyutin, Riazanov, and Larin. Under their direction, the bureau has begun preparing legislation for the Assembly. The fraction also calls for a conference to transparently define the party's approach to the Constituent Assembly, which would limit Sovnarkom's ability to control the proceedings unilaterally. 
+
+An apparent attempt by the Moderates to support the Constituent Assembly, Lenin has responded by calling a meeting of the Central Committee, where he intends to rein the delegation in. 
+
+@options
+
+- @new_bureau
+- @cec_purge
+- @communicate
+- @send_kamenev
+- @nothing
+
+@new_bureau
+title: Order that a new fraction bureau be elected, without the Moderates in control.
+max-visits: 1
+go-to: options
+on-arrival: {!
+  Q.moderate_strength -= 5; Q.moderate_unrest += 5; 
+  Q.leninist_strength += 5; Q.leninist_unrest -= 5; 
+!}
+
+@cec_purge
+title: Order that Kamenev and most prominent Moderates be purged from the CEC fraction bureau as well. 
+max-visits: 1
+go-to: options
+on-arrival: {!
+  Q.moderate_strength -= 5; Q.moderate_unrest += 5; 
+  Q.leninist_strength += 2; Q.leninist_unrest -= 2; 
+  Q.soviet_chair = "Vacant"; Q.soviet_chair_party = ""; 
+!}
+
+@communicate
+title: Appoint several Leninists to explain the importance of marginalizing the Assembly to the delegation. 
+max-visits: 1
+go-to: options
+on-arrival: {!
+  Q.moderate_strength -= 5; Q.moderate_unrest += 2; 
+  Q.leninist_strength += 5; Q.leninist_unrest -= 5; 
+!}
+
+@send_kamenev
+title: Send Kamenev to the negotiations with the Germans, so he can't influence the Assembly further. 
+choose-if: german_negotiations = 1
+unavailable-subtitle: We haven't opened negotiations with the Germans yet. 
+max-visits: 1
+go-to: options
+on-arrival: {!
+  Q.moderate_strength -= 2; Q.moderate_unrest += 2; 
+!}
+
+@nothing
+title: We've done all we can.
+go-to: root
