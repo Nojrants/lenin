@@ -319,6 +319,8 @@ if (window && d3) {
 
 @kamenev
 title: Nominate the Moderate Bolshevik, Lev Kamenev. 
+choose-if: kamenev_available != 0
+unavailable-subtitle: Kamenev is absent from the proceedings. 
 on-arrival: {!
  Q.moderate_strength += 5; Q.moderate_unrest -= 5; 
  Q.vote_chernov = math.round(Q.ca_seats_sr + Q.ca_seats_menshevik + (Q.ca_seats_ukr * 0.95) + Q.ca_seats_ns + ((Q.ca_seats_muslim_socialist + Q.ca_seats_dashnak + Q.ca_seats_jewish + Q.ca_seats_muslim_national) * 0.9) + Q.ca_seats_kadet + Q.ca_seats_cossack + Q.ca_seats_rightist + (Q.ca_seats_other * 0.8));
