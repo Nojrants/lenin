@@ -508,22 +508,24 @@ unavailable-subtitle: The Moderates don't have enough strength for this.
 @walkout
 title: We walk out and declare this assembly disbanded! 
 on-arrival: {!
+  Q.ca_disbanded = 1; 
   Q.left_m_relation -= 5; Q.centre_m_relation -= 5; Q.right_m_relation -= 5; Q.centre_sr_relation -= 5; Q.right_sr_relation -= 5; 
   Q.sr_strength += 5; Q.right_m_strength += 5; Q.right_sr_strength += 5;
   Q.democraticity -= 10; Q.instability += 10; 
   Q.moderate_strength -= 10;
   Q.moderate_unrest += 10; Q.leninist_unrest -= 5; Q.leftcom_unrest -= 5; 
   console.log("ca_support_timer: ", Q.ca_support_timer); 
-  if (Q.ca_support_timer > 3) {
+  if (Q.ca_support_timer > 4) {
     Q.instability += 10;
+    Q.kulaks_unrest += 5; 
     Q.peasants_unrest += 20;
     Q.workers_unrest += 10;
     Q.right_sr_strength += 10;
   }
-  if (Q.ca_support_timer == 2) {
-    Q.instability += 5;
-    Q.peasants_unrest += 10;
-    Q.workers_unrest += 5;
+  if (Q.ca_support_timer > 2) {
+    Q.instability += 2.5;
+    Q.peasants_unrest += 5;
+    Q.workers_unrest += 2.5;
     Q.right_sr_strength += 5;
   }
 !}
@@ -535,7 +537,7 @@ The Bolsheviks walk out, causing an enormous uproar in the hall. The remaining d
 
 After the delegates depart home, guards are stationed at the Tauride Palace, instructed to prevent any resumption of the Assembly. And so, after only one day in session, the Constituent Assembly is disbanded.
 
-Over the next few days, several protests break out in the capital. The SRs and others begin using the reconvocation of the Constituent Assembly as a rallying cry. [?if ca_support_timer > 3 : Despite our best efforts, it appears a great number of people indeed still favor the Constituent Assembly, and word spreads of peasant uprisings in the countryside. ?]
+Protests break out in the capital over the next few days, with the SRs and others using the reconvocation of the Constituent Assembly as a rallying cry. [?if ca_support_timer > 4 : It appears that we did not do enough work to discredit the Assembly in the eyes of the masses, as agreat number of people indeed still favor the Constituent Assembly. Word spreads of peasant uprisings in the countryside, calling for a new assembly to enshrine their land seizures. ?][?if ca_support_timer == 3 or ca_support_timer == 2 : Yet at the same time, it appears our campaign to discredit the Constituent Assembly did find some success, as not as many as expected rally to the cause of the SRs. Though there are reports of peasants organizing in support of the Constituent Assembly, others appear apathetic to the dissolution. ?][?if ca_support_timer <= 1 : Yet at the same time, it appears our campaign to discredit the Constituent Assembly was largely successful. The backlash is surprisingly tame in the countryside, with many peasants satisified by our efforts to socialize land outside the Assembly, or at least apathetic to the loss of the Constituent Assembly. Though the SRs attempt to mobilize grassroots support against us, their efforts fail to gain momentum. ?]
 
 We must now decide what to do with the fallout...
 
