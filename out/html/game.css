@@ -730,6 +730,9 @@ table {
     fill: var(--bolshevik-color);
 }
 
+.bar.other {
+    fill: var(--bolshevik-other);
+}
 
 
 .tooltip-text {
