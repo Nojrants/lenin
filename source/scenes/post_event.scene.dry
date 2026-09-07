@@ -968,7 +968,22 @@ Q.kulaks -= Q.enrolled.kulaks;
 Q.peasants -= Q.enrolled.peasants;
 Q.students += Q.enrolled.elites + Q.enrolled.middle + Q.enrolled.workers + Q.enrolled.kulaks + Q.enrolled.peasants;
 
-
+console.log("=== UNIVERSITY ===");
+console.log("Capacity:", Q.university_capacity);
+console.log("Eligible:", Q.eligible);
+console.log("Enrolled:", Q.enrolled);
+console.log("Used:", Q.used);
+console.log("Unused:", Q.unused);
+console.log("Remaining:", Q.remaining);
+console.log("Remaining weight:", Q.remaining_weight);
+console.log("Population after enrollment:", {
+    elites: Q.elites,
+    middle: Q.middle,
+    workers: Q.workers,
+    kulaks: Q.kulaks,
+    peasants: Q.peasants,
+    students: Q.students
+});
 
 
 
