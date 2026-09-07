@@ -10,7 +10,7 @@ on-arrival: {!
  Q.ca_seats_bolshevik = Math.Round(Q.b_r_dec / 100 * Q.delegate_total * Math.Max(1, Q.train_capacity / 150000) * Math.Max(1, 50 / Q.instability));
  Q.ca_seats_menshevik = Math.Round(Q.m_r_dec / 100 * Q.delegate_total * Math.Max(0.75, Q.train_capacity / 150000) * Math.Max(1, 50 / Q.instability));
  Q.ca_seats_sr = Math.Round(Q.sr_r_dec / 100 * Q.delegate_total * Math.Max(1, Q.train_capacity / 150000) * Math.Max(1, 50 / Q.instability));
- Q.ca_seats_lsr = Math.Round(Q.ca_seats_sr * 0.3); Math.Round(Q.ca_seats_sr *= 0.7); 
+ Q.ca_seats_lsr = Math.Round(Q.ca_seats_sr * 0.3); Q.ca_seats_sr = Math.Round(Q.ca_seats_sr *= 0.7); 
  Q.ca_seats_ukr = Math.Round(Q.ukrainian_sr_r_dec / 100 * Q.delegate_total * Math.Max(0.9, Q.train_capacity / 150000) * Math.Max(1, 50 / Q.instability));
  Q.ca_seats_ns = Math.Round(Q.popular_socialist_r_dec / 100 * Q.delegate_total * Math.Max(1, Q.train_capacity / 150000) * Math.Max(1, 50 / Q.instability));
  Q.ca_seats_muslim_socialist = Math.Round(Q.muslim_socialists_r_dec / 100 * Q.delegate_total * Math.Max(0.75, Q.train_capacity / 150000) * Math.Max(1, 50 / Q.instability));
@@ -126,7 +126,7 @@ data.push({
   "legend": "Cossack",
   "name": "Cossack",
   "seats": Q.ca_seats_cossack
-},
+});
 data.push({
   "id": "rightist",
   "legend": "Rightist",
@@ -137,7 +137,7 @@ data.push({
   "id": "other",
   "legend": "Others",
   "name": "Others",
-  "seats": Q.other_r
+  "seats": Q.ca_seats_other
 });
 data.push({
   "id": "none",
