@@ -224,98 +224,6 @@ on-arrival: {!
  Q.vote_spiridonova = math.round(Q.ca_seats_bolshevik + Q.ca_seats_lsr + (Q.ca_seats_ukr * 0.05) + ((Q.ca_seats_muslim_socialist + Q.ca_seats_dashnak + Q.ca_seats_jewish + Q.ca_seats_muslim_national) * 0.1) + (Q.ca_seats_other * 0.2));
 !}
 go-to: program_vote
-on-display: {!
-// Create bar graph data
-var data = [
-    {
-        "id": "sr",
-        "legend": "Chernov",
-        "name": "Chernov",
-        "votes": Q.vote_chernov
-    },
-    {
-        "id": "lsr",
-        "legend": "Spiridonova",
-        "name": "Spiridonova",
-        "votes": Q.vote_spiridonova
-    }
-];
-
-if (window && d3) {
-    var width = 625;
-    var height = 400;
-
-    var screenWidth = document.getElementById('content').offsetWidth;
-
-    if (screenWidth < width - 50) {
-        width = screenWidth - 50;
-        height = 400;
-        document.getElementById("vote_chart").style.height = height + "px";
-    }
-
-    var svg = d3.select("#vote_chart");
-
-    svg.attr("width", width)
-       .attr("height", height);
-
-    var margin = {
-        top: 30,
-        right: 30,
-        bottom: 60,
-        left: 60
-    };
-
-    var chartWidth = width - margin.left - margin.right;
-    var chartHeight = height - margin.top - margin.bottom;
-
-    var x = d3.scaleBand()
-        .domain(data.map(function(d) { return d.name; }))
-        .range([0, chartWidth])
-        .padding(0.3);
-
-    var y = d3.scaleLinear()
-        .domain([0, d3.max(data, function(d) { return d.votes; })])
-        .nice()
-        .range([chartHeight, 0]);
-
-    var g = svg.append("g")
-        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-    g.append("g")
-        .attr("transform", "translate(0," + chartHeight + ")")
-        .call(d3.axisBottom(x));
-
-    g.append("g")
-        .call(d3.axisLeft(y));
-
-    g.selectAll(".bar")
-        .data(data)
-        .enter()
-        .append("rect")
-        .attr("class", "bar")
-        .attr("x", function(d) { return x(d.name); })
-        .attr("y", function(d) { return y(d.votes); })
-        .attr("width", x.bandwidth())
-        .attr("height", function(d) { return chartHeight - y(d.votes); });
-
-    g.selectAll(".label")
-        .data(data)
-        .enter()
-        .append("text")
-        .attr("class", "label")
-        .attr("x", function(d) { return x(d.name) + x.bandwidth() / 2; })
-        .attr("y", function(d) { return y(d.votes) - 10; })
-        .attr("text-anchor", "middle")
-        .text(function(d) { return d.votes; });
-}
-!}
-
-{!<svg id="vote_chart" style="width: 625px; height: 400px;"></svg>!}
-
-[?if vote_chernov > vote_spiridonova : Chernov is elected chairman, giving the SRs control over proceedings. ?]
-
-
-
 
 @kamenev
 title: Nominate the Moderate Bolshevik, Lev Kamenev. 
@@ -328,103 +236,6 @@ on-arrival: {!
  Q.vote_kamenev = math.round(Q.ca_seats_bolshevik + (Q.ca_seats_ukr * 0.025) + ((Q.ca_seats_muslim_socialist + Q.ca_seats_dashnak + Q.ca_seats_jewish + Q.ca_seats_muslim_national) * 0.025) + (Q.ca_seats_other * 0.1));
 !}
 go-to: program_vote
-on-display: {!
-// Create bar graph data
-var data = [
-    {
-        "id": "sr",
-        "legend": "Chernov",
-        "name": "Chernov",
-        "votes": Q.vote_chernov
-    },
-    {
-        "id": "lsr",
-        "legend": "Spiridonova",
-        "name": "Spiridonova",
-        "votes": Q.vote_spiridonova
-    },
-    {
-        "id": "b",
-        "legend": "Kamenev",
-        "name": "Kamenev",
-        "votes": Q.vote_kamenev
-    }
-];
-
-if (window && d3) {
-    var width = 625;
-    var height = 400;
-
-    var screenWidth = document.getElementById('content').offsetWidth;
-
-    if (screenWidth < width - 50) {
-        width = screenWidth - 50;
-        height = 400;
-        document.getElementById("vote_chart").style.height = height + "px";
-    }
-
-    var svg = d3.select("#vote_chart");
-
-    svg.attr("width", width)
-       .attr("height", height);
-
-    var margin = {
-        top: 30,
-        right: 30,
-        bottom: 60,
-        left: 60
-    };
-
-    var chartWidth = width - margin.left - margin.right;
-    var chartHeight = height - margin.top - margin.bottom;
-
-    var x = d3.scaleBand()
-        .domain(data.map(function(d) { return d.name; }))
-        .range([0, chartWidth])
-        .padding(0.3);
-
-    var y = d3.scaleLinear()
-        .domain([0, d3.max(data, function(d) { return d.votes; })])
-        .nice()
-        .range([chartHeight, 0]);
-
-    var g = svg.append("g")
-        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-    g.append("g")
-        .attr("transform", "translate(0," + chartHeight + ")")
-        .call(d3.axisBottom(x));
-
-    g.append("g")
-        .call(d3.axisLeft(y));
-
-    g.selectAll(".bar")
-        .data(data)
-        .enter()
-        .append("rect")
-        .attr("class", "bar")
-        .attr("x", function(d) { return x(d.name); })
-        .attr("y", function(d) { return y(d.votes); })
-        .attr("width", x.bandwidth())
-        .attr("height", function(d) { return chartHeight - y(d.votes); });
-
-    g.selectAll(".label")
-        .data(data)
-        .enter()
-        .append("text")
-        .attr("class", "label")
-        .attr("x", function(d) { return x(d.name) + x.bandwidth() / 2; })
-        .attr("y", function(d) { return y(d.votes) - 10; })
-        .attr("text-anchor", "middle")
-        .text(function(d) { return d.votes; });
-}
-!}
-
-{!<svg id="vote_chart" style="width: 625px; height: 400px;"></svg>!}
-
-[?if vote_chernov > vote_spiridonova : Chernov is elected chairman, giving the SRs control over proceedings. ?]
-
-
 
 @sverdlov
 title: Nominate the Leninist, Yakov Sverdlov. 
@@ -435,6 +246,11 @@ on-arrival: {!
  Q.vote_sverdlov = math.round(Q.ca_seats_bolshevik + (Q.ca_seats_other * 0.05));
 !}
 go-to: program_vote
+
+
+
+@program_vote
+title: Program Vote
 on-display: {!
 // Create bar graph data
 var data = [
@@ -443,101 +259,98 @@ var data = [
         "legend": "Chernov",
         "name": "Chernov",
         "votes": Q.vote_chernov
-    },
-    {
+    }
+];
+
+if (Q.vote_spiridonova != undefined) {
+    data.push({
         "id": "lsr",
         "legend": "Spiridonova",
         "name": "Spiridonova",
         "votes": Q.vote_spiridonova
-    },
-    {
+    });
+}
+
+if (Q.vote_kamenev != undefined) {
+    data.push({
+        "id": "b",
+        "legend": "Kamenev",
+        "name": "Kamenev",
+        "votes": Q.vote_kamenev
+    });
+}
+
+if (Q.vote_sverdlov != undefined) {
+    data.push({
         "id": "b",
         "legend": "Sverdlov",
         "name": "Sverdlov",
         "votes": Q.vote_sverdlov
-    }
-];
-
-if (window && d3) {
-    var width = 625;
-    var height = 400;
-
-    var screenWidth = document.getElementById('content').offsetWidth;
-
-    if (screenWidth < width - 50) {
-        width = screenWidth - 50;
-        height = 400;
-        document.getElementById("vote_chart").style.height = height + "px";
-    }
-
-    var svg = d3.select("#vote_chart");
-
-    svg.attr("width", width)
-       .attr("height", height);
-
-    var margin = {
-        top: 30,
-        right: 30,
-        bottom: 60,
-        left: 60
-    };
-
-    var chartWidth = width - margin.left - margin.right;
-    var chartHeight = height - margin.top - margin.bottom;
-
-    var x = d3.scaleBand()
-        .domain(data.map(function(d) { return d.name; }))
-        .range([0, chartWidth])
-        .padding(0.3);
-
-    var y = d3.scaleLinear()
-        .domain([0, d3.max(data, function(d) { return d.votes; })])
-        .nice()
-        .range([chartHeight, 0]);
-
-    var g = svg.append("g")
-        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-    g.append("g")
-        .attr("transform", "translate(0," + chartHeight + ")")
-        .call(d3.axisBottom(x));
-
-    g.append("g")
-        .call(d3.axisLeft(y));
-
-    g.selectAll(".bar")
-        .data(data)
-        .enter()
-        .append("rect")
-        .attr("class", "bar")
-        .attr("x", function(d) { return x(d.name); })
-        .attr("y", function(d) { return y(d.votes); })
-        .attr("width", x.bandwidth())
-        .attr("height", function(d) { return chartHeight - y(d.votes); });
-
-    g.selectAll(".label")
-        .data(data)
-        .enter()
-        .append("text")
-        .attr("class", "label")
-        .attr("x", function(d) { return x(d.name) + x.bandwidth() / 2; })
-        .attr("y", function(d) { return y(d.votes) - 10; })
-        .attr("text-anchor", "middle")
-        .text(function(d) { return d.votes; });
+    });
 }
+
+var width = 625;
+var height = 400;
+
+var svg = d3.select("#vote_chart");
+
+svg.attr("width", width)
+   .attr("height", height);
+
+var margin = {
+    top: 30,
+    right: 30,
+    bottom: 60,
+    left: 60
+};
+
+var chartWidth = width - margin.left - margin.right;
+var chartHeight = height - margin.top - margin.bottom;
+
+var x = d3.scaleBand()
+    .domain(data.map(function(d) { return d.name; }))
+    .range([0, chartWidth])
+    .padding(0.3);
+
+var y = d3.scaleLinear()
+    .domain([0, d3.max(data, function(d) { return d.votes; })])
+    .nice()
+    .range([chartHeight, 0]);
+
+var g = svg.append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+g.append("g")
+    .attr("transform", "translate(0," + chartHeight + ")")
+    .call(d3.axisBottom(x));
+
+g.append("g")
+    .call(d3.axisLeft(y));
+
+g.selectAll(".bar")
+    .data(data)
+    .enter()
+    .append("rect")
+    .attr("class", "bar")
+    .attr("x", function(d) { return x(d.name); })
+    .attr("y", function(d) { return y(d.votes); })
+    .attr("width", x.bandwidth())
+    .attr("height", function(d) { return chartHeight - y(d.votes); });
+
+g.selectAll(".label")
+    .data(data)
+    .enter()
+    .append("text")
+    .attr("class", "label")
+    .attr("x", function(d) { return x(d.name) + x.bandwidth() / 2; })
+    .attr("y", function(d) { return y(d.votes) - 10; })
+    .attr("text-anchor", "middle")
+    .text(function(d) { return d.votes; });
 !}
 
 {!<svg id="vote_chart" style="width: 625px; height: 400px;"></svg>!}
 
 [?if vote_chernov > vote_spiridonova : Chernov is elected chairman, giving the SRs control over proceedings. ?]
-
-
-
-
-@program_vote
-title: Program Vote
-
-
 
 
 
