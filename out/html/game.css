@@ -572,6 +572,7 @@ table {
   --dashnak: #fe67ff;
   --conservative: #0030ff;
   --cossack: #758fff;
+  --none: #cccccc;
 }
 
 .seat.anarchist {
@@ -640,6 +641,10 @@ table {
 .seat.cossack {
     fill: var(--cossack);
 }
+.seat.none {
+    fill: var(--none);
+}
+
 
 /* boxes... */
 .box.a {
@@ -707,6 +712,9 @@ table {
 }
 .box.cossack {
     background-color: var(--cossack);
+}
+.box.none {
+    background-color: var(--none);
 }
 
 .tooltip-text {
