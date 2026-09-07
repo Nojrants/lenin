@@ -973,8 +973,9 @@ Q.intelligentsia -= (Q.party_schools * 0.00000007) / 0.33;
 Q.graduates = (Q.students / 4) * Q.finalefficacy_enlightenment * Q.school_funding;
 Q.intelligentsia += Q.graduates * Math.min(1, Q.intelligentsia_strength / 50) * 0.25;
 Q.graduates *= 0.75; 
-Q.red_specialists += Q.graduates * (Q.students_b / Q.students);
-Q.bourgeois_specialists += Q.graduates * (1 - (Q.students_b / Q.students));
+Q.red_graduates = Math.min(Q.graduates, Q.graduates * ((Q.students_b / Q.students) + (Q.school_loyalty * 0.5));
+Q.red_specialists += Q.red_graduates;
+Q.bourgeois_specialists += Q.graduates - Q.red_graduates; 
 Q.red_specialists += (Q.students / 4) * Q.finalefficacy_enlightenment * Q.school_funding * Q.party_schools;
 
 console.log("=== UNIVERSITY ===");
