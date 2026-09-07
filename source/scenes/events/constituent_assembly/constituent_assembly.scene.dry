@@ -354,7 +354,7 @@ g.selectAll(".label")
 
 {!<svg id="vote_chart" style="width: 625px; height: 400px;"></svg>!}
 
-[?if vote_chernov > vote_spiridonova : Chernov is elected chairman, giving the SRs control over proceedings. In his keynote address, he describes an ambitious socialist program, that is to be put into place by the Constituent Assembly. ?]
+[?if vote_chernov > vote_spiridonova : Chernov is elected chairman, giving the SRs control over proceedings. In his keynote address, he describes an ambitious socialist program – including full socialization of the land, immediate peace negotiations, and worker democracy in industry – that is to be put into place by the Constituent Assembly. ?]
 
 - @program_vote
 
