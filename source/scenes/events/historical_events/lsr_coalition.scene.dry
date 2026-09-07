@@ -1057,8 +1057,8 @@ unavailable-subtitle: <span style="color: var(--lsr-color);">Left-SR</span> — 
 tags: labor_candidates3
 choose-if: labor_minister != "Trutovsky" and local_minister != "Trutovsky"
 on-arrival: {!
-  if (Q.labor_minister_party == "Left-SR") { Q.commissariats_held += 1; }
-  Q.labor_minister = "Trutovsky"; Q.labor_minister_party = "Bolshevik";
+  if (Q.labor_minister_party != "Left-SR") Q.commissariats_held -= 1; 
+  Q.labor_minister = "Trutovsky"; Q.labor_minister_party = "Left-SR";
 !}
 go-to: cabinet_negotiations2
 
