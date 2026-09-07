@@ -223,7 +223,8 @@ on-arrival: {!
  Q.vote_chernov = Math.round(Q.ca_seats_sr + Q.ca_seats_menshevik + (Q.ca_seats_ukr * 0.95) + Q.ca_seats_ns + ((Q.ca_seats_muslim_socialist + Q.ca_seats_dashnak + Q.ca_seats_jewish + Q.ca_seats_muslim_national) * 0.9) + Q.ca_seats_kadet + Q.ca_seats_cossack + Q.ca_seats_rightist + (Q.ca_seats_other * 0.8));
  Q.vote_spiridonova = Math.round(Q.ca_seats_bolshevik + Q.ca_seats_lsr + (Q.ca_seats_ukr * 0.05) + ((Q.ca_seats_muslim_socialist + Q.ca_seats_dashnak + Q.ca_seats_jewish + Q.ca_seats_muslim_national) * 0.1) + (Q.ca_seats_other * 0.2));
 !}
-go-to: program_vote
+set-jump
+go-to: chairperson_result
 
 @kamenev
 title: Nominate the Moderate Bolshevik, Lev Kamenev. 
@@ -235,7 +236,7 @@ on-arrival: {!
  Q.vote_spiridonova = Math.round(Q.ca_seats_lsr + (Q.ca_seats_ukr * 0.025) + ((Q.ca_seats_muslim_socialist + Q.ca_seats_dashnak + Q.ca_seats_jewish + Q.ca_seats_muslim_national) * 0.075) + (Q.ca_seats_other * 0.1));
  Q.vote_kamenev = Math.round(Q.ca_seats_bolshevik + (Q.ca_seats_ukr * 0.025) + ((Q.ca_seats_muslim_socialist + Q.ca_seats_dashnak + Q.ca_seats_jewish + Q.ca_seats_muslim_national) * 0.025) + (Q.ca_seats_other * 0.1));
 !}
-go-to: program_vote
+go-to: chairperson_result
 
 @sverdlov
 title: Nominate the Leninist, Yakov Sverdlov. 
@@ -245,12 +246,12 @@ on-arrival: {!
  Q.vote_spiridonova = Math.round(Q.ca_seats_lsr + (Q.ca_seats_ukr * 0.05) + ((Q.ca_seats_muslim_socialist + Q.ca_seats_dashnak + Q.ca_seats_jewish + Q.ca_seats_muslim_national) * 0.1) + (Q.ca_seats_other * 0.15));
  Q.vote_sverdlov = Math.round(Q.ca_seats_bolshevik + (Q.ca_seats_other * 0.05));
 !}
-go-to: program_vote
+go-to: chairperson_result
 
 
 
-@program_vote
-title: Program Vote
+@chairperson_result
+title: Chairperson Result
 on-display: {!
 // Create bar graph data
 var data = [
@@ -352,7 +353,129 @@ g.selectAll(".label")
 
 {!<svg id="vote_chart" style="width: 625px; height: 400px;"></svg>!}
 
-[?if vote_chernov > vote_spiridonova : Chernov is elected chairman, giving the SRs control over proceedings. ?]
+[?if vote_chernov > vote_spiridonova : Chernov is elected chairman, giving the SRs control over proceedings. In his keynote address, he describes an ambitious socialist program, that is to be put into place by the Constituent Assembly. ?]
 
+- @program_vote
+
+@program_vote
+title: Proceed...
+new-page: true
+on-arrival: {!
+ Q.vote_sr = Math.round(Q.ca_seats_sr + Q.ca_seats_menshevik + (Q.ca_seats_ukr * 0.95) + Q.ca_seats_ns + ((Q.ca_seats_muslim_socialist + Q.ca_seats_dashnak + Q.ca_seats_jewish + Q.ca_seats_muslim_national) * 0.9) + Q.ca_seats_kadet + Q.ca_seats_cossack + Q.ca_seats_rightist + (Q.ca_seats_other * 0.75));
+ Q.vote_bolshevik = Math.round(Q.ca_seats_bolshevik + (Q.ca_seats_lsr * 0.7) + ((Q.ca_seats_muslim_socialist + Q.ca_seats_dashnak + Q.ca_seats_jewish + Q.ca_seats_muslim_national) * 0.05) + (Q.ca_seats_other * 0.15));
+ Q.vote_other = Math.round((Q.ca_seats_lsr * 0.3) + (Q.ca_seats_ukr * 0.05) + ((Q.ca_seats_muslim_socialist + Q.ca_seats_dashnak + Q.ca_seats_jewish + Q.ca_seats_muslim_national) * 0.05) + (Q.ca_seats_other * 0.1));
+!}
+
+= Vote on the Programs
+
+Lenin has prepared a document, known as the "Declaration of the Rights of Toiling and Exploited People", which he plans to give to the Assembly for a vote, without taking any comments or amendments. In addition to affirming the goals of the Bolshevik program, this declaration explicitly recognizes the supremacy of the soviet government, and calls for the Constituent Assembly to be dissolved. In effect, Lenin is forcing the Constituent Assembly to either immediately back his government, or discredit itself by having to vote no to the rest of the declaration. 
+
+Meanwhile the SRs have prepared a full first-day agenda, which calls for consideration of legislation on peace, land and state power in ordered sequence. 
+
+These two items are now being directly juxtaposed: either a vote for the Declaration, or a vote to proceed with the SR agenda. 
+
+
+- @vote_yes
+
+@vote_yes
+title: The Bolsheviks vote for the Declaration. 
+go-to: program_result
+
+
+@program_result
+title: Program Result
+on-display: {!
+// Create bar graph data
+var data = [
+    {
+        "id": "sr",
+        "legend": "SR Agenda",
+        "name": "SR Agenda",
+        "votes": Q.vote_sr
+    }
+];
+
+if (Q.vote_bolshevik != undefined) {
+    data.push({
+        "id": "b",
+        "legend": "Declaration",
+        "name": "Declaration",
+        "votes": Q.vote_bolshevik
+    });
+}
+
+if (Q.vote_other != undefined) {
+    data.push({
+        "id": "other",
+        "legend": "Abstain",
+        "name": "Abstain",
+        "votes": Q.vote_other
+    });
+}
+
+var width = 625;
+var height = 400;
+
+var svg = d3.select("#vote_chart");
+
+svg.attr("width", width)
+   .attr("height", height);
+
+var margin = {
+    top: 30,
+    right: 30,
+    bottom: 60,
+    left: 60
+};
+
+var chartWidth = width - margin.left - margin.right;
+var chartHeight = height - margin.top - margin.bottom;
+
+var x = d3.scaleBand()
+    .domain(data.map(function(d) { return d.name; }))
+    .range([0, chartWidth])
+    .padding(0.3);
+
+var y = d3.scaleLinear()
+    .domain([0, d3.max(data, function(d) { return d.votes; })])
+    .nice()
+    .range([chartHeight, 0]);
+
+var g = svg.append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+g.append("g")
+    .attr("transform", "translate(0," + chartHeight + ")")
+    .call(d3.axisBottom(x))
+    .selectAll("text")
+    .style("font-size", "16px");
+
+g.append("g")
+    .call(d3.axisLeft(y));
+
+g.selectAll(".bar")
+    .data(data)
+    .enter()
+    .append("rect")
+    .attr("class", function(d) { return "bar " + d.id; })
+    .attr("x", function(d) { return x(d.name); })
+    .attr("y", function(d) { return y(d.votes); })
+    .attr("width", x.bandwidth())
+    .attr("height", function(d) { return chartHeight - y(d.votes); });
+
+g.selectAll(".label")
+    .data(data)
+    .enter()
+    .append("text")
+    .attr("class", "label")
+    .attr("x", function(d) { return x(d.name) + x.bandwidth() / 2; })
+    .attr("y", function(d) { return y(d.votes) - 10; })
+    .attr("text-anchor", "middle")
+    .text(function(d) { return d.votes; });
+!}
+
+{!<svg id="vote_chart" style="width: 625px; height: 400px;"></svg>!}
+
+[?if vote_sr > vote_bolshevik : The SR agenda proposal is passed. ?]
 
 
