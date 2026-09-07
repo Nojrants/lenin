@@ -10,7 +10,7 @@ on-arrival: {!
  Q.ca_seats_bolshevik = Math.round(Q.b_r_dec / 100 * Q.delegate_total * Math.min(1, Q.train_capacity / 150000) * Math.min(1, 50 / Q.instability));
  Q.ca_seats_menshevik = Math.round(Q.m_r_dec / 100 * Q.delegate_total * Math.min(0.75, Q.train_capacity / 150000) * Math.min(1, 50 / Q.instability));
  Q.ca_seats_sr = Math.round(Q.sr_r_dec / 100 * Q.delegate_total * Math.min(1, Q.train_capacity / 150000) * Math.min(1, 50 / Q.instability));
- Q.ca_seats_lsr = Math.round(Q.ca_seats_sr * 0.3); Q.ca_seats_sr = Math.round(Q.ca_seats_sr *= 0.7); 
+ Q.ca_seats_lsr = Math.round(Q.ca_seats_sr * 0.2); Q.ca_seats_sr = Math.round(Q.ca_seats_sr *= 0.8); 
  Q.ca_seats_ukr = Math.round(Q.ukrainian_sr_r_dec / 100 * Q.delegate_total * Math.min(0.9, Q.train_capacity / 150000) * Math.min(1, 50 / Q.instability));
  Q.ca_seats_ns = Math.round(Q.popular_socialist_r_dec / 100 * Q.delegate_total * Math.min(1, Q.train_capacity / 150000) * Math.min(1, 50 / Q.instability));
  Q.ca_seats_muslim_socialist = Math.round(Q.muslim_socialists_r_dec / 100 * Q.delegate_total * Math.min(0.75, Q.train_capacity / 150000) * Math.min(1, 50 / Q.instability));
@@ -23,10 +23,10 @@ on-arrival: {!
  Q.ca_seats_other = Math.round(Q.other_r_dec / 100 * Q.delegate_total * Math.min(1, Q.train_capacity / 150000) * Math.min(1, 50 / Q.instability));
 
  if (Q.ca_stance == 1) {
-   Q.ca_seats_menshevik = Math.round(Q.ca_seats_menshevik * 0.8);
-   Q.ca_seats_sr = Math.round(Q.ca_seats_sr * 0.8);
-   Q.ca_seats_ukr = Math.round(Q.ca_seats_ukr * 0.9);
-   Q.ca_seats_ns = Math.round(Q.ca_seats_ns * 0.7); 
+   Q.ca_seats_menshevik = Math.round(Q.ca_seats_menshevik * 0.9);
+   Q.ca_seats_sr = Math.round(Q.ca_seats_sr * 0.9);
+   Q.ca_seats_ukr = Math.round(Q.ca_seats_ukr * 0.95);
+   Q.ca_seats_ns = Math.round(Q.ca_seats_ns * 0.9); 
    Q.ca_seats_muslim_socialist = Math.round(Q.ca_seats_muslim_socialist * 0.8); 
    Q.ca_seats_dashnak = Math.round(Q.ca_seats_dashnak * 0.9); 
    Q.ca_seats_jewish = Math.round(Q.ca_seats_jewish * 0.9); 
@@ -34,7 +34,7 @@ on-arrival: {!
    Q.ca_seats_kadet = Math.round(Q.ca_seats_kadet * 0.2); 
    Q.ca_seats_cossack = Math.round(Q.ca_seats_cossack * 0.5); 
    Q.ca_seats_rightist = Math.round(Q.ca_seats_rightist * 0.2);
-   Q.ca_seats_other = Math.round(Q.ca_seats_other * 0.7); 
+   Q.ca_seats_other = Math.round(Q.ca_seats_other * 0.9); 
  }
  if (Q.cheka_founded == 1) {
    Q.ca_seats_menshevik = Math.round(Q.ca_seats_menshevik * 0.9);
@@ -173,37 +173,37 @@ data.forEach(d => {
 {!<svg id="constituent_assembly" style="width: 625px; height: 350px;"> </svg>!}
 
 {!<table class="soviet-table">!}
-{!<tr><th>Party</th><th>Vote Share</th></tr>!}
+{!<tr><th>Party</th><th>Seats</th></tr>!}
 
-{!<tr><td><div class="party-box box b"></div>Bolsheviks</td><td>!}[+ ca_seats_bolshevik +]%{!</td></tr>!}
+{!<tr><td><div class="party-box box b"></div>Bolsheviks</td><td>!}[+ ca_seats_bolshevik +]{!</td></tr>!}
 
-{!<tr><td><div class="party-box box m"></div>Mensheviks</td><td>!}[+ ca_seats_menshevik +]%{!</td></tr>!}
+{!<tr><td><div class="party-box box m"></div>Mensheviks</td><td>!}[+ ca_seats_menshevik +]{!</td></tr>!}
 
-{!<tr><td><div class="party-box box lsr"></div>Left-SRs</td><td>!}[+ ca_seats_lsr +]%{!</td></tr>!}
+{!<tr><td><div class="party-box box lsr"></div>Left-SRs</td><td>!}[+ ca_seats_lsr +]{!</td></tr>!}
 
-{!<tr><td><div class="party-box box sr"></div>SRs</td><td>!}[+ ca_seats_sr +]%{!</td></tr>!}
+{!<tr><td><div class="party-box box sr"></div>SRs</td><td>!}[+ ca_seats_sr +]{!</td></tr>!}
 
-{!<tr><td><div class="party-box box ukrainian_sr"></div>Ukrainian SRs</td><td>!}[+ ca_seats_ukr +]%{!</td></tr>!}
+{!<tr><td><div class="party-box box ukrainian_sr"></div>Ukrainian SRs</td><td>!}[+ ca_seats_ukr +]{!</td></tr>!}
 
-{!<tr><td><div class="party-box box popular_socialist"></div>Popular Socialists</td><td>!}[+ ca_seats_ns +]%{!</td></tr>!}
+{!<tr><td><div class="party-box box popular_socialist"></div>Popular Socialists</td><td>!}[+ ca_seats_ns +]{!</td></tr>!}
 
-{!<tr><td><div class="party-box box muslim_socialist"></div>Muslim Socialists</td><td>!}[+ ca_seats_muslim_socialist +]%{!</td></tr>!}
+{!<tr><td><div class="party-box box muslim_socialist"></div>Muslim Socialists</td><td>!}[+ ca_seats_muslim_socialist +]{!</td></tr>!}
 
-{!<tr><td><div class="party-box box dashnak"></div>Dashnaks</td><td>!}[+ ca_seats_dashnak +]%{!</td></tr>!}
+{!<tr><td><div class="party-box box dashnak"></div>Dashnaks</td><td>!}[+ ca_seats_dashnak +]{!</td></tr>!}
 
-{!<tr><td><div class="party-box box jewish_national"></div>Jewish National List</td><td>!}[+ ca_seats_jewish +]%{!</td></tr>!}
+{!<tr><td><div class="party-box box jewish_national"></div>Jewish National List</td><td>!}[+ ca_seats_jewish +]{!</td></tr>!}
 
-{!<tr><td><div class="party-box box muslim_national"></div>Muslim national parties</td><td>!}[+ ca_seats_muslim_national +]%{!</td></tr>!}
+{!<tr><td><div class="party-box box muslim_national"></div>Muslim national parties</td><td>!}[+ ca_seats_muslim_national +]{!</td></tr>!}
 
-{!<tr><td><div class="party-box box k"></div>Kadets</td><td>!}[+ ca_seats_kadet +]%{!</td></tr>!}
+{!<tr><td><div class="party-box box k"></div>Kadets</td><td>!}[+ ca_seats_kadet +]{!</td></tr>!}
 
-{!<tr><td><div class="party-box box cossack"></div>Cossacks</td><td>!}[+ ca_seats_cossack +]%{!</td></tr>!}
+{!<tr><td><div class="party-box box cossack"></div>Cossacks</td><td>!}[+ ca_seats_cossack +]{!</td></tr>!}
 
-{!<tr><td><div class="party-box box rightist"></div>Rightists</td><td>!}[+ ca_seats_rightist +]%{!</td></tr>!}
+{!<tr><td><div class="party-box box rightist"></div>Rightists</td><td>!}[+ ca_seats_rightist +]{!</td></tr>!}
 
-{!<tr><td><div class="party-box box other"></div>Others</td><td>!}[+ ca_seats_other +]%{!</td></tr>!}
+{!<tr><td><div class="party-box box other"></div>Others</td><td>!}[+ ca_seats_other +]{!</td></tr>!}
 
-{!<tr><td><div class="party-box box none"></div>Vacant</td><td>!}[+ ca_empty +]%{!</td></tr>!}
+{!<tr><td><div class="party-box box none"></div>Vacant</td><td>!}[+ ca_empty +]{!</td></tr>!}
 
 {!</table>!}
 
