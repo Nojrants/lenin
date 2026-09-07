@@ -322,16 +322,18 @@ var g = svg.append("g")
 
 g.append("g")
     .attr("transform", "translate(0," + chartHeight + ")")
-    .call(d3.axisBottom(x));
+    .call(d3.axisBottom(x))
+    .selectAll("text")
+    .style("font-size", "16px");
 
 g.append("g")
     .call(d3.axisLeft(y));
 
-g.selectAll(".bar")
+g.selectAll(".box")
     .data(data)
     .enter()
     .append("rect")
-    .attr("class", "bar")
+    .attr("class", function(d) { return "box " + d.id; })
     .attr("x", function(d) { return x(d.name); })
     .attr("y", function(d) { return y(d.votes); })
     .attr("width", x.bandwidth())
