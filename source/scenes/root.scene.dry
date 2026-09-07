@@ -239,6 +239,10 @@ Q.underclass = 5.5;
 Q.underclass_unrest = 70;
 Q.underclass_strength = 30;
 
+Q.students = 0.5;
+Q.students_unrest = 30;
+Q.students_strength = 50;
+
 
 Q.unionists = 1500;
 Q.unionists_unrest = 30;
@@ -1182,6 +1186,22 @@ Q.underclass_k = 0;
 Q.underclass_rightist = 0;
 Q.underclass_other = 10;
 Q.underclass_none = 80;
+
+Q.students_anarchist = 3;
+Q.students_maximalist = 3; 
+Q.students_b = 10;
+Q.students_sdi = 10; 
+Q.students_left_m = 10; 
+Q.students_m = 5;
+Q.students_right_m = 5; 
+Q.students_lsr = 5; 
+Q.students_sr = 5;
+Q.students_right_sr = 5; 
+Q.students_popular_socialist = 10;
+Q.students_k = 50;
+Q.students_rightist = 20;
+Q.students_other = 30;
+Q.students_none = 40;
 
 
 
