@@ -979,7 +979,6 @@ Q.bourgeois_specialists += Q.graduates - Q.red_graduates;
 Q.red_specialists += (Q.students / 4) * Q.finalefficacy_enlightenment * Q.school_funding * Q.party_schools;
 
 console.log("=== UNIVERSITY ===");
-console.log("students_b_normalized: ", students_b_normalized)
 console.log("Capacity:", Q.university_capacity);
 console.log("Eligible:", Q.eligible);
 console.log("Enrolled:", Q.enrolled);
