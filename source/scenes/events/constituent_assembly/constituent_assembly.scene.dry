@@ -223,7 +223,6 @@ on-arrival: {!
  Q.vote_chernov = Math.round(Q.ca_seats_sr + Q.ca_seats_menshevik + (Q.ca_seats_ukr * 0.95) + Q.ca_seats_ns + ((Q.ca_seats_muslim_socialist + Q.ca_seats_dashnak + Q.ca_seats_jewish + Q.ca_seats_muslim_national) * 0.9) + Q.ca_seats_kadet + Q.ca_seats_cossack + Q.ca_seats_rightist + (Q.ca_seats_other * 0.8));
  Q.vote_spiridonova = Math.round(Q.ca_seats_bolshevik + Q.ca_seats_lsr + (Q.ca_seats_ukr * 0.05) + ((Q.ca_seats_muslim_socialist + Q.ca_seats_dashnak + Q.ca_seats_jewish + Q.ca_seats_muslim_national) * 0.1) + (Q.ca_seats_other * 0.2));
 !}
-set-jump
 go-to: chairperson_result
 
 @kamenev
