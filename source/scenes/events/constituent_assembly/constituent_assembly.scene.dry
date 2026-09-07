@@ -496,9 +496,50 @@ Proceeding with the agenda, the SRs announce their intention to pass the followi
 &nbsp;&nbsp;&nbsp;&nbsp;• Enshrined protection of minority rights.<br>
 &nbsp;&nbsp;&nbsp;&nbsp;• Periodic national plebiscites to ensure people's will.<br>
 &nbsp;&nbsp;&nbsp;&nbsp;• Creation of a socialist coalition government<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(i.e. no collaboration with the right-wing parties). 
-</ul> 
 
-- @program_vote2
+Angered by the rejection of the Declaration, Lenin calls for the Bolsheviks to immediately walk out of the Assembly, and leave it to its own devices for the remainder of the night. The Left-SRs are likely also planning to walk out. After that, the Assembly is to be disbanded by force. 
 
-@program_vote2
-title: Proceed...
+- @walkout
+- @wait
+
+@wait
+title: Let's wait and see where this goes.
+choose-if: moderate_strength >= leninist_strength
+unavailable-subtitle: The Moderates don't have enough strength for this.
+
+@walkout
+title: We walk out and declare this assembly disbanded! 
+on-arrival: {!
+  Q.left_m_relation -= 5; Q.centre_m_relation -= 5; Q.right_m_relation -= 5; Q.centre_sr_relation -= 5; Q.right_sr_relation -= 5; 
+  Q.sr_strength += 5; Q.right_m_strength += 5; Q.right_sr_strength += 5;
+  Q.democraticity -= 10; Q.instability += 10; 
+  Q.moderate_strength -= 10;
+  Q.moderate_unrest += 10; Q.leninist_unrest -= 5; Q.leftcom_unrest -= 5; 
+  console.log("ca_support_timer: ", ca_support_timer); 
+  if (ca_support_timer > 3) {
+    Q.instability += 10;
+    Q.peasants_unrest += 20;
+    Q.workers_unrest += 10;
+    Q.right_sr_strength += 10;
+  }
+  if (ca_support_timer == 2) {
+    Q.instability += 5;
+    Q.peasants_unrest += 10;
+    Q.workers_unrest += 5;
+    Q.right_sr_strength += 5;
+  }
+!}
+
+>"Not for a minute wishing to hide the crimes of enemies of the people, we hereby announce our withdrawal from this Constituent Assembly in order to let Soviet power decide on a policy toward the counterrevolutionary part of the Constituent Assembly once and for all."
+>>—Raskolnikov, reading Lenin's pre-prepared withdrawl statement. 
+
+The Bolsheviks walk out, causing an enormous uproar among the delegates. The remaining delegates hastily pass their planned legislation, into the early morning hours. 
+
+After the delegates depart home, guards are stationed at the Tauride Palace, instructed to prevent any resumption of the Assembly. And so, after only one day in session, the Constituent Assembly is disbanded.
+
+Several protests break out in the capital. The SRs and others begin using the reconvocation of the Constituent Assembly as a rallying cry. [?if ca_support_timer > 3 : Despite our best efforts, it appears a great number of people indeed still favor the Constituent Assembly, and word spreads of peasant uprisings in the countryside. ?]
+
+We must now decide what to do with the fallout...
+
+
+
