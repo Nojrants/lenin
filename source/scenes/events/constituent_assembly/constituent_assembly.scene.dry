@@ -251,7 +251,6 @@ go-to: chairperson_result
 
 @chairperson_result
 title: Chairperson Result
-go-to: program_vote
 on-display: {!
 // Create bar graph data
 var data = [
