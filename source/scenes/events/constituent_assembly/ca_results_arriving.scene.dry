@@ -275,7 +275,7 @@ subtitle: There's a legitimate argument to be made that this is necessary regard
 max-visits: 1
 go-to: post_election_menu
 on-arrival:{!
-	Q.constituent_assembly_timer = 5;
+	Q.constituent_assembly_timer = 6;
 	Q.ca_week = Q.week + (Q.constituent_assembly_timer % 4);
 	Q.ca_month = Q.month + (Q.constituent_assembly_timer / 4);
 	Q.ca_year = Q.year;
