@@ -252,6 +252,7 @@ go-to: chairperson_result
 
 @chairperson_result
 title: Chairperson Result
+go-to: program_vote
 on-display: {!
 // Create bar graph data
 var data = [
@@ -350,6 +351,8 @@ g.selectAll(".label")
     .attr("text-anchor", "middle")
     .text(function(d) { return d.votes; });
 !}
+
+= Chairperson Election
 
 {!<svg id="vote_chart" style="width: 625px; height: 400px;"></svg>!}
 
