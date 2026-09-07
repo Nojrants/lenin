@@ -1041,6 +1041,23 @@ Q.base_attractiveness = {
         other: 3,
         none: 5
     }
+    students: {
+        anarchist: 2,
+        maximalist: 2,
+        b: 2,
+        sdi: 2,
+        left_m: 2,
+        m: 2,
+        right_m: 2,
+        lsr: 2,
+        sr: 2,
+        right_sr: 2,
+        popular_socialist: 2,
+        k: 3,
+        rightist: 2,
+        other: 4,
+        none: 4
+    }
 };
 
 Q.elites_anarchist = 0;
