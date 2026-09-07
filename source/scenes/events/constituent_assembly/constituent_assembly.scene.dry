@@ -7,48 +7,48 @@ tags: event
 on-arrival: {!
  Q.ca_held = 1;
  if (Q.stopped_count != 1) Q.delegate_total = 665; else Q.delegate_total = 640;
- Q.ca_seats_bolshevik = Math.Round(Q.b_r_dec / 100 * Q.delegate_total * Math.Max(1, Q.train_capacity / 150000) * Math.Max(1, 50 / Q.instability));
- Q.ca_seats_menshevik = Math.Round(Q.m_r_dec / 100 * Q.delegate_total * Math.Max(0.75, Q.train_capacity / 150000) * Math.Max(1, 50 / Q.instability));
- Q.ca_seats_sr = Math.Round(Q.sr_r_dec / 100 * Q.delegate_total * Math.Max(1, Q.train_capacity / 150000) * Math.Max(1, 50 / Q.instability));
- Q.ca_seats_lsr = Math.Round(Q.ca_seats_sr * 0.3); Q.ca_seats_sr = Math.Round(Q.ca_seats_sr *= 0.7); 
- Q.ca_seats_ukr = Math.Round(Q.ukrainian_sr_r_dec / 100 * Q.delegate_total * Math.Max(0.9, Q.train_capacity / 150000) * Math.Max(1, 50 / Q.instability));
- Q.ca_seats_ns = Math.Round(Q.popular_socialist_r_dec / 100 * Q.delegate_total * Math.Max(1, Q.train_capacity / 150000) * Math.Max(1, 50 / Q.instability));
- Q.ca_seats_muslim_socialist = Math.Round(Q.muslim_socialists_r_dec / 100 * Q.delegate_total * Math.Max(0.75, Q.train_capacity / 150000) * Math.Max(1, 50 / Q.instability));
- Q.ca_seats_dashnak = Math.Round(Q.dashnak_r_dec / 100 * Q.delegate_total * Math.Max(0.5, Q.train_capacity / 150000) * Math.Max(1, 50 / Q.instability));
- Q.ca_seats_jewish = Math.Round(Q.jewish_national_r_dec / 100 * Q.delegate_total * Math.Max(0.75, Q.train_capacity / 150000) * Math.Max(1, 50 / Q.instability));
- Q.ca_seats_muslim_national = Math.Round(Q.muslim_national_r_dec / 100 * Q.delegate_total * Math.Max(0.5, Q.train_capacity / 150000) * Math.Max(1, 50 / Q.instability));
- Q.ca_seats_kadet = Math.Round(Q.k_r_dec / 100 * Q.delegate_total * Math.Max(1, Q.train_capacity / 150000) * Math.Max(1, 50 / Q.instability));
- Q.ca_seats_cossack = Math.Round(Q.cossacks_r_dec / 100 * Q.delegate_total * Math.Max(0.5, Q.train_capacity / 150000) * Math.Max(1, 50 / Q.instability));
- Q.ca_seats_rightist = Math.Round(Q.rightist_r_dec / 100 * Q.delegate_total * Math.Max(1, Q.train_capacity / 150000) * Math.Max(1, 50 / Q.instability));
- Q.ca_seats_other = Math.Round(Q.other_r_dec / 100 * Q.delegate_total * Math.Max(1, Q.train_capacity / 150000) * Math.Max(1, 50 / Q.instability));
+ Q.ca_seats_bolshevik = Math.round(Q.b_r_dec / 100 * Q.delegate_total * Math.min(1, Q.train_capacity / 150000) * Math.min(1, 50 / Q.instability));
+ Q.ca_seats_menshevik = Math.round(Q.m_r_dec / 100 * Q.delegate_total * Math.min(0.75, Q.train_capacity / 150000) * Math.min(1, 50 / Q.instability));
+ Q.ca_seats_sr = Math.round(Q.sr_r_dec / 100 * Q.delegate_total * Math.min(1, Q.train_capacity / 150000) * Math.min(1, 50 / Q.instability));
+ Q.ca_seats_lsr = Math.round(Q.ca_seats_sr * 0.3); Q.ca_seats_sr = Math.round(Q.ca_seats_sr *= 0.7); 
+ Q.ca_seats_ukr = Math.round(Q.ukrainian_sr_r_dec / 100 * Q.delegate_total * Math.min(0.9, Q.train_capacity / 150000) * Math.min(1, 50 / Q.instability));
+ Q.ca_seats_ns = Math.round(Q.popular_socialist_r_dec / 100 * Q.delegate_total * Math.min(1, Q.train_capacity / 150000) * Math.min(1, 50 / Q.instability));
+ Q.ca_seats_muslim_socialist = Math.round(Q.muslim_socialists_r_dec / 100 * Q.delegate_total * Math.min(0.75, Q.train_capacity / 150000) * Math.min(1, 50 / Q.instability));
+ Q.ca_seats_dashnak = Math.round(Q.dashnak_r_dec / 100 * Q.delegate_total * Math.min(0.5, Q.train_capacity / 150000) * Math.min(1, 50 / Q.instability));
+ Q.ca_seats_jewish = Math.round(Q.jewish_national_r_dec / 100 * Q.delegate_total * Math.min(0.75, Q.train_capacity / 150000) * Math.min(1, 50 / Q.instability));
+ Q.ca_seats_muslim_national = Math.round(Q.muslim_national_r_dec / 100 * Q.delegate_total * Math.min(0.5, Q.train_capacity / 150000) * Math.min(1, 50 / Q.instability));
+ Q.ca_seats_kadet = Math.round(Q.k_r_dec / 100 * Q.delegate_total * Math.min(1, Q.train_capacity / 150000) * Math.min(1, 50 / Q.instability));
+ Q.ca_seats_cossack = Math.round(Q.cossacks_r_dec / 100 * Q.delegate_total * Math.min(0.5, Q.train_capacity / 150000) * Math.min(1, 50 / Q.instability));
+ Q.ca_seats_rightist = Math.round(Q.rightist_r_dec / 100 * Q.delegate_total * Math.min(1, Q.train_capacity / 150000) * Math.min(1, 50 / Q.instability));
+ Q.ca_seats_other = Math.round(Q.other_r_dec / 100 * Q.delegate_total * Math.min(1, Q.train_capacity / 150000) * Math.min(1, 50 / Q.instability));
 
  if (Q.ca_stance == 1) {
-   Q.ca_seats_menshevik = Math.Round(Q.ca_seats_menshevik * 0.8);
-   Q.ca_seats_sr = Math.Round(Q.ca_seats_sr * 0.8);
-   Q.ca_seats_ukr = Math.Round(Q.ca_seats_ukr * 0.9);
-   Q.ca_seats_ns = Math.Round(Q.ca_seats_ns * 0.7); 
-   Q.ca_seats_muslim_socialist = Math.Round(Q.ca_seats_muslim_socialist * 0.8); 
-   Q.ca_seats_dashnak = Math.Round(Q.ca_seats_dashnak * 0.9); 
-   Q.ca_seats_jewish = Math.Round(Q.ca_seats_jewish * 0.9); 
-   Q.ca_seats_muslim_national = Math.Round(Q.ca_seats_muslim_national * 0.7); 
-   Q.ca_seats_kadet = Math.Round(Q.ca_seats_kadet * 0.2); 
-   Q.ca_seats_cossack = Math.Round(Q.ca_seats_cossack * 0.5); 
-   Q.ca_seats_rightist = Math.Round(Q.ca_seats_rightist * 0.2);
-   Q.ca_seats_other = Math.Round(Q.ca_seats_other * 0.7); 
+   Q.ca_seats_menshevik = Math.round(Q.ca_seats_menshevik * 0.8);
+   Q.ca_seats_sr = Math.round(Q.ca_seats_sr * 0.8);
+   Q.ca_seats_ukr = Math.round(Q.ca_seats_ukr * 0.9);
+   Q.ca_seats_ns = Math.round(Q.ca_seats_ns * 0.7); 
+   Q.ca_seats_muslim_socialist = Math.round(Q.ca_seats_muslim_socialist * 0.8); 
+   Q.ca_seats_dashnak = Math.round(Q.ca_seats_dashnak * 0.9); 
+   Q.ca_seats_jewish = Math.round(Q.ca_seats_jewish * 0.9); 
+   Q.ca_seats_muslim_national = Math.round(Q.ca_seats_muslim_national * 0.7); 
+   Q.ca_seats_kadet = Math.round(Q.ca_seats_kadet * 0.2); 
+   Q.ca_seats_cossack = Math.round(Q.ca_seats_cossack * 0.5); 
+   Q.ca_seats_rightist = Math.round(Q.ca_seats_rightist * 0.2);
+   Q.ca_seats_other = Math.round(Q.ca_seats_other * 0.7); 
  }
  if (Q.cheka_founded == 1) {
-   Q.ca_seats_menshevik = Math.Round(Q.ca_seats_menshevik * 0.9);
-   Q.ca_seats_sr = Math.Round(Q.ca_seats_sr * 0.9);
-   Q.ca_seats_ukr = Math.Round(Q.ca_seats_ukr * 0.9);
-   Q.ca_seats_ns = Math.Round(Q.ca_seats_ns * 0.9); 
-   Q.ca_seats_muslim_socialist = Math.Round(Q.ca_seats_muslim_socialist * 0.9); 
-   Q.ca_seats_dashnak = Math.Round(Q.ca_seats_dashnak * 0.9); 
-   Q.ca_seats_jewish = Math.Round(Q.ca_seats_jewish * 0.9); 
-   Q.ca_seats_muslim_national = Math.Round(Q.ca_seats_muslim_national * 0.9); 
-   Q.ca_seats_kadet = Math.Round(Q.ca_seats_kadet * 0.2); 
-   Q.ca_seats_cossack = Math.Round(Q.ca_seats_cossack * 0.5); 
-   Q.ca_seats_rightist = Math.Round(Q.ca_seats_rightist * 0.2);
-   Q.ca_seats_other = Math.Round(Q.ca_seats_other * 0.95); 
+   Q.ca_seats_menshevik = Math.round(Q.ca_seats_menshevik * 0.9);
+   Q.ca_seats_sr = Math.round(Q.ca_seats_sr * 0.9);
+   Q.ca_seats_ukr = Math.round(Q.ca_seats_ukr * 0.9);
+   Q.ca_seats_ns = Math.round(Q.ca_seats_ns * 0.9); 
+   Q.ca_seats_muslim_socialist = Math.round(Q.ca_seats_muslim_socialist * 0.9); 
+   Q.ca_seats_dashnak = Math.round(Q.ca_seats_dashnak * 0.9); 
+   Q.ca_seats_jewish = Math.round(Q.ca_seats_jewish * 0.9); 
+   Q.ca_seats_muslim_national = Math.round(Q.ca_seats_muslim_national * 0.9); 
+   Q.ca_seats_kadet = Math.round(Q.ca_seats_kadet * 0.2); 
+   Q.ca_seats_cossack = Math.round(Q.ca_seats_cossack * 0.5); 
+   Q.ca_seats_rightist = Math.round(Q.ca_seats_rightist * 0.2);
+   Q.ca_seats_other = Math.round(Q.ca_seats_other * 0.95); 
  }
 Q.ca_empty = 765 - Q.ca_seats_bolshevik - Q.ca_seats_menshevik - Q.ca_seats_lsr - Q.ca_seats_sr - Q.ca_seats_ukr - Q.ca_seats_ns - Q.ca_seats_muslim_socialist - Q.ca_seats_dashnak - Q.ca_seats_jewish - Q.ca_seats_muslim_national - Q.ca_seats_kadet - Q.ca_seats_cossack - Q.ca_seats_rightist - Q.ca_seats_other;  
 
