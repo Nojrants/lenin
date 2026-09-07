@@ -329,11 +329,11 @@ g.append("g")
 g.append("g")
     .call(d3.axisLeft(y));
 
-g.selectAll(".box")
+g.selectAll(".bar")
     .data(data)
     .enter()
     .append("rect")
-    .attr("class", function(d) { return "box " + d.id; })
+    .attr("class", function(d) { return "bar " + d.id; })
     .attr("x", function(d) { return x(d.name); })
     .attr("y", function(d) { return y(d.votes); })
     .attr("width", x.bandwidth())
