@@ -570,7 +570,7 @@ table {
   --j_n: #3F7BC1;
   --other: #919191;
   --dashnak: #fe67ff;
-  --conservative: #0030ff;
+  --rightist: #0030ff;
   --cossack: #758fff;
   --none: #cccccc;
 }
@@ -635,8 +635,8 @@ table {
 .seat.dashnak {
     fill: var(--dashnak);
 }
-.seat.conservative {
-    fill: var(--conservative);
+.seat.rightist {
+    fill: var(--rightist);
 }
 .seat.cossack {
     fill: var(--cossack);
@@ -707,8 +707,8 @@ table {
 .box.dashnak {
     background-color: var(--dashnak);
 }
-.box.conservative {
-    background-color: var(--conservative);
+.box.rightist {
+    background-color: var(--rightist);
 }
 .box.cossack {
     background-color: var(--cossack);
