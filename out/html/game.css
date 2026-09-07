@@ -717,6 +717,21 @@ table {
     background-color: var(--none);
 }
 
+
+.bar.sr {
+    fill: var(--sr-color);
+}
+
+.bar.lsr {
+    fill: var(--lsr-color);
+}
+
+.bar.b {
+    fill: var(--bolshevik-color);
+}
+
+
+
 .tooltip-text {
     text-decoration: underline;
     text-decoration-style: dotted;
