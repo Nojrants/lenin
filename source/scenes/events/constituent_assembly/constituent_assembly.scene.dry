@@ -170,7 +170,42 @@ data.forEach(d => {
 
 = The Constituent Assembly
 
-{!<svg id="constituent_assembly" style="width: 500px; height: 250px;"> </svg>!}
+{!<svg id="constituent_assembly" style="width: 625px; height: 350px;"> </svg>!}
+
+{!<table class="soviet-table">!}
+{!<tr><th>Party</th><th>Vote Share</th></tr>!}
+
+{!<tr><td><div class="party-box box b"></div>Bolsheviks</td><td>!}[+ ca_seats_bolshevik +]%{!</td></tr>!}
+
+{!<tr><td><div class="party-box box m"></div>Mensheviks</td><td>!}[+ ca_seats_menshevik +]%{!</td></tr>!}
+
+{!<tr><td><div class="party-box box lsr"></div>Left-SRs</td><td>!}[+ ca_seats_lsr +]%{!</td></tr>!}
+
+{!<tr><td><div class="party-box box sr"></div>SRs</td><td>!}[+ ca_seats_sr +]%{!</td></tr>!}
+
+{!<tr><td><div class="party-box box ukrainian_sr"></div>Ukrainian SRs</td><td>!}[+ ca_seats_ukr +]%{!</td></tr>!}
+
+{!<tr><td><div class="party-box box popular_socialist"></div>Popular Socialists</td><td>!}[+ ca_seats_ns +]%{!</td></tr>!}
+
+{!<tr><td><div class="party-box box muslim_socialist"></div>Muslim Socialists</td><td>!}[+ ca_seats_muslim_socialist +]%{!</td></tr>!}
+
+{!<tr><td><div class="party-box box dashnak"></div>Dashnaks</td><td>!}[+ ca_seats_dashnak +]%{!</td></tr>!}
+
+{!<tr><td><div class="party-box box jewish_national"></div>Jewish National List</td><td>!}[+ ca_seats_jewish +]%{!</td></tr>!}
+
+{!<tr><td><div class="party-box box muslim_national"></div>Muslim national parties</td><td>!}[+ ca_seats_muslim_national +]%{!</td></tr>!}
+
+{!<tr><td><div class="party-box box k"></div>Kadets</td><td>!}[+ ca_seats_kadet +]%{!</td></tr>!}
+
+{!<tr><td><div class="party-box box cossack"></div>Cossacks</td><td>!}[+ ca_seats_cossack +]%{!</td></tr>!}
+
+{!<tr><td><div class="party-box box rightist"></div>Rightists</td><td>!}[+ ca_seats_rightist +]%{!</td></tr>!}
+
+{!<tr><td><div class="party-box box other"></div>Others</td><td>!}[+ ca_seats_other +]%{!</td></tr>!}
+
+{!<tr><td><div class="party-box box none"></div>Vacant</td><td>!}[+ ca_empty +]%{!</td></tr>!}
+
+{!</table>!}
 
 
 
