@@ -207,15 +207,15 @@ for (var c of Q.classes) {
         Q[c + '_' + party + '_display'] = Math.round(100*Q[c+'_'+party]/class_votes);
     }
 }
-console.log("=== B BY CLASS ===");
 
-for (var c of Q.classes) {
-    console.log(
-        c,
-        "B raw =", Q[c + "_b"],
-        "B normalized =", Q[c + "_b_normalized"]
-    );
-}
+// console.log("=== B BY CLASS ===");
+// for (var c of Q.classes) {
+//     console.log(
+//         c,
+//         "B raw =", Q[c + "_b"],
+//         "B normalized =", Q[c + "_b_normalized"]
+//     );
+// }
 
 
 // calculate support for each of the parties
@@ -240,30 +240,27 @@ for (var party of Q.parties) {
 }
 
 console.log("Disillusionment:", Q.disillusionment);
-console.log("none support:", Q.none_support);
-for (var party of Q.parties) {
-    console.log(party + ": " + Q[party + "_normalized"]);
-}
-
-
-console.log(
-    "NONE RAW:",
-    Q.none_support,
-    "NONE NORMALIZED:",
-    Q.none_normalized,
-    "TOTAL:",
-    total_support
-);
-
-for (var party of Q.parties) {
-    console.log(
-        party,
-        "raw:",
-        Q[party + "_support"],
-        "normalized:",
-        Q[party + "_normalized"]
-    );
-}
+// console.log("none support:", Q.none_support);
+// for (var party of Q.parties) {
+//     console.log(party + ": " + Q[party + "_normalized"]);
+// }
+// console.log(
+//     "NONE RAW:",
+//     Q.none_support,
+//     "NONE NORMALIZED:",
+//     Q.none_normalized,
+//     "TOTAL:",
+//     total_support
+// );
+// for (var party of Q.parties) {
+//     console.log(
+//         party,
+//         "raw:",
+//         Q[party + "_support"],
+//         "normalized:",
+//         Q[party + "_normalized"]
+//     );
+// }
 
 
 // set faction strength/dissent to 0
@@ -440,11 +437,11 @@ for (var i = 0; i < faction_positions.length; i++) {
     }
 }
 
-console.log("Leninist positions: " + Q.leninist_positions);
-console.log("Leftist positions: " + Q.leftcom_positions);
-console.log("Moderate positions: " + Q.moderate_positions);
-console.log("Vperedist positions: " + Q.vperedist_positions);
-console.log("Non-Factional positions: " + Q.nonfactional_positions);
+// console.log("Leninist positions: " + Q.leninist_positions);
+// console.log("Leftist positions: " + Q.leftcom_positions);
+// console.log("Moderate positions: " + Q.moderate_positions);
+// console.log("Vperedist positions: " + Q.vperedist_positions);
+// console.log("Non-Factional positions: " + Q.nonfactional_positions);
 
 
 
@@ -788,7 +785,6 @@ Q.business_tax =
     ((Q.business_tax_efficacy / 4 * 3) + (Q.finalefficacy_finance / 4))
 );
 
-console.log("interest:", Q.interest);
 Q.interest = (
     (Q.loans_high * 0.16) +
     (Q.loans_med * 0.12) +
@@ -796,7 +792,6 @@ Q.interest = (
     (Q.bonds * (Q.bond_rate / 100)) +
     (Q.bank_advances * 0.02)
 );
-console.log("interest:", Q.interest);
 
 Q.expenditure = Math.round(
     (
@@ -888,17 +883,6 @@ if (Q.soldier_hunger < 0) {
 
 
 // EDUCATION
-
-console.log("CLASS BREAKDOWN BEFORE UNIVERSITY", {
-    elites: Q.elites,
-    middle: Q.middle,
-    workers: Q.workers,
-    kulaks: Q.kulaks,
-    peasants: Q.peasants,
-    students: Q.students
-});
-
-
 Q.urban_literacy += Q.urban_schools * 0.00007;
 Q.rural_literacy += Q.rural_schools * 0.00005;
 Q.university_capacity = (Q.higher_schools * 0.0000007);
@@ -989,8 +973,8 @@ Q.intelligentsia -= (Q.party_schools * 0.00000007) / 0.33;
 Q.graduates = (Q.students / 4) * Q.finalefficacy_enlightenment * Q.school_funding;
 Q.intelligentsia += Q.graduates * Math.min(1, Q.intelligentsia_strength / 50) * 0.25;
 Q.graduates *= 0.75; 
-Q.red_specialists += Q.graduates * Q.school_loyalty;
-Q.bourgeois_specialists += Q.graduates * (1 - Q.school_loyalty);
+Q.red_specialists += Q.graduates * (Q.students_b / Q.students);
+Q.bourgeois_specialists += Q.graduates * (1 - (Q.students_b / Q.students));
 Q.red_specialists += (Q.students / 4) * Q.finalefficacy_enlightenment * Q.school_funding * Q.party_schools;
 
 console.log("=== UNIVERSITY ===");
