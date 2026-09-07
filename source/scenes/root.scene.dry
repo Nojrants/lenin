@@ -872,7 +872,7 @@ Q.elites_petrograd = 5;
 Q.workers_qol = 100;
 Q.peasants = 100;
 
-Q.classes = ['elites', 'middle', 'clergy', 'workers', 'peasants', 'kulaks', 'soldiers', 'intelligentsia', 'underclass'];
+Q.classes = ['elites', 'middle', 'clergy', 'workers', 'peasants', 'kulaks', 'soldiers', 'intelligentsia', 'underclass', 'students'];
 Q.minorities = ['ukrainians', 'kyrgyz_kazakh', 'tatar', 'other_turkic', 'jews', 'latvians', 'estonians', 'georgians', 'armenians', 'others'];
 Q.major_parties = ['m', 'b', 'sr', 'k'];
 // parties represented in the soviets
