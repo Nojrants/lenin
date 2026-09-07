@@ -1,7 +1,7 @@
 title: Membership in the Cheka
 subtitle: The Opposition wants representation. 
 new-page: true
-view-if: coalition_government >= 1 and coalition_actions_timer = 0 and cheka_created = 1 and constituent_assembly_timer <= 1 and justice_minister_party != "Bolshevik" and justice_minister_party != ""  
+view-if: coalition_government >= 1 and coalition_actions_timer = 0 and cheka_founded = 1 and constituent_assembly_timer <= 1 and justice_minister_party != "Bolshevik" and justice_minister_party != ""  
 max-visits: 1
 tags: event
 
