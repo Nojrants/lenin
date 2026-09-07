@@ -513,14 +513,14 @@ on-arrival: {!
   Q.democraticity -= 10; Q.instability += 10; 
   Q.moderate_strength -= 10;
   Q.moderate_unrest += 10; Q.leninist_unrest -= 5; Q.leftcom_unrest -= 5; 
-  console.log("ca_support_timer: ", ca_support_timer); 
-  if (ca_support_timer > 3) {
+  console.log("ca_support_timer: ", Q.ca_support_timer); 
+  if (Q.ca_support_timer > 3) {
     Q.instability += 10;
     Q.peasants_unrest += 20;
     Q.workers_unrest += 10;
     Q.right_sr_strength += 10;
   }
-  if (ca_support_timer == 2) {
+  if (Q.ca_support_timer == 2) {
     Q.instability += 5;
     Q.peasants_unrest += 10;
     Q.workers_unrest += 5;
@@ -531,11 +531,11 @@ on-arrival: {!
 >"Not for a minute wishing to hide the crimes of enemies of the people, we hereby announce our withdrawal from this Constituent Assembly in order to let Soviet power decide on a policy toward the counterrevolutionary part of the Constituent Assembly once and for all."
 >>—Raskolnikov, reading Lenin's pre-prepared withdrawl statement. 
 
-The Bolsheviks walk out, causing an enormous uproar among the delegates. The remaining delegates hastily pass their planned legislation, into the early morning hours. 
+The Bolsheviks walk out, causing an enormous uproar in the hall. The remaining delegates hastily pass their planned legislation, into the early morning hours. 
 
 After the delegates depart home, guards are stationed at the Tauride Palace, instructed to prevent any resumption of the Assembly. And so, after only one day in session, the Constituent Assembly is disbanded.
 
-Several protests break out in the capital. The SRs and others begin using the reconvocation of the Constituent Assembly as a rallying cry. [?if ca_support_timer > 3 : Despite our best efforts, it appears a great number of people indeed still favor the Constituent Assembly, and word spreads of peasant uprisings in the countryside. ?]
+Over the next few days, several protests break out in the capital. The SRs and others begin using the reconvocation of the Constituent Assembly as a rallying cry. [?if ca_support_timer > 3 : Despite our best efforts, it appears a great number of people indeed still favor the Constituent Assembly, and word spreads of peasant uprisings in the countryside. ?]
 
 We must now decide what to do with the fallout...
 
