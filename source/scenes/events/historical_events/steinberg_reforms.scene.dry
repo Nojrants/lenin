@@ -24,23 +24,23 @@ on-arrival: {!
   if (Q.welfare_minister_party == "Bolshevik") Q.pro_vote += 1;            
   if (Q.property_minister_party == "Bolshevik") Q.pro_vote += 1;             
   if (Q.local_minister_party == "Bolshevik") Q.pro_vote += 1;
-  if (Q.prime_minister_party != "Bolshevik" && Q.prime_minister_party != "Vacant" && Q.prime_minister_party != "None") Q.opposition_vote += 1;
-  if (Q.foreign_minister_party != "Bolshevik" && Q.foreign_minister_party != "Vacant" && Q.foreign_minister_party != "None") Q.opposition_vote += 1;
-  if (Q.war_minister_party != "Bolshevik" && Q.war_minister_party != "Vacant" && Q.war_minister_party != "None") Q.opposition_vote += 1;
-  if (Q.education_minister_party != "Bolshevik" && Q.education_minister_party != "Vacant" && Q.education_minister_party != "None") Q.opposition_vote += 1;
-  if (Q.interior_minister_party != "Bolshevik" && Q.interior_minister_party != "Vacant" && Q.interior_minister_party != "None") Q.opposition_vote += 1;
-  if (Q.transport_minister_party != "Bolshevik" && Q.transport_minister_party != "Vacant" && Q.transport_minister_party != "None") Q.opposition_vote += 1;
-  if (Q.trade_minister_party != "Bolshevik" && Q.trade_minister_party != "Vacant" && Q.trade_minister_party != "None") Q.opposition_vote += 1;
-  if (Q.finance_minister_party != "Bolshevik" && Q.finance_minister_party != "Vacant" && Q.finance_minister_party != "None") Q.opposition_vote += 1;
-  if (Q.justice_minister_party != "Bolshevik" && Q.justice_minister_party != "Vacant" && Q.justice_minister_party != "None") Q.opposition_vote += 1;
-  if (Q.labor_minister_party != "Bolshevik" && Q.labor_minister_party != "Vacant" && Q.labor_minister_party != "None") Q.opposition_vote += 1;
-  if (Q.agriculture_minister_party != "Bolshevik" && Q.agriculture_minister_party != "Vacant" && Q.agriculture_minister_party != "None") Q.opposition_vote += 1;
-  if (Q.food_minister_party != "Bolshevik" && Q.food_minister_party != "Vacant" && Q.food_minister_party != "None") Q.opposition_vote += 1;
-  if (Q.posts_minister_party != "Bolshevik" && Q.posts_minister_party != "Vacant" && Q.posts_minister_party != "None") Q.opposition_vote += 1;
-  if (Q.nationalities_minister_party != "Bolshevik" && Q.nationalities_minister_party != "Vacant" && Q.nationalities_minister_party != "None") Q.opposition_vote += 1;
-  if (Q.welfare_minister_party != "Bolshevik" && Q.welfare_minister_party != "Vacant" && Q.welfare_minister_party != "None") Q.opposition_vote += 1;
-  if (Q.property_minister_party != "Bolshevik" && Q.property_minister_party != "Vacant" && Q.property_minister_party != "None") Q.opposition_vote += 1;
-  if (Q.local_minister_party != "Bolshevik" && Q.local_minister_party != "Vacant" && Q.local_minister_party != "None") Q.opposition_vote += 1;
+  if (Q.prime_minister_party != "Bolshevik" && Q.prime_minister_party != "Vacant" && Q.prime_minister_party != "None" && Q.prime_minister_party != "") Q.opposition_vote += 1;
+  if (Q.foreign_minister_party != "Bolshevik" && Q.foreign_minister_party != "Vacant" && Q.foreign_minister_party != "None"&& Q.foreign_minister_party != "") Q.opposition_vote += 1;
+  if (Q.war_minister_party != "Bolshevik" && Q.war_minister_party != "Vacant" && Q.war_minister_party != "None" && Q.war_minister_party != "") Q.opposition_vote += 1;
+  if (Q.education_minister_party != "Bolshevik" && Q.education_minister_party != "Vacant" && Q.education_minister_party != "None" && Q.education_minister_party != "") Q.opposition_vote += 1;
+  if (Q.interior_minister_party != "Bolshevik" && Q.interior_minister_party != "Vacant" && Q.interior_minister_party != "None" && Q.interior_minister_party != "") Q.opposition_vote += 1;
+  if (Q.transport_minister_party != "Bolshevik" && Q.transport_minister_party != "Vacant" && Q.transport_minister_party != "None" && Q.transport_minister_party != "") Q.opposition_vote += 1;
+  if (Q.trade_minister_party != "Bolshevik" && Q.trade_minister_party != "Vacant" && Q.trade_minister_party != "None" && Q.trade_minister_party != "") Q.opposition_vote += 1;
+  if (Q.finance_minister_party != "Bolshevik" && Q.finance_minister_party != "Vacant" && Q.finance_minister_party != "None" && Q.finance_minister_party != "") Q.opposition_vote += 1;
+  if (Q.justice_minister_party != "Bolshevik" && Q.justice_minister_party != "Vacant" && Q.justice_minister_party != "None" && Q.justice_minister_party != "") Q.opposition_vote += 1;
+  if (Q.labor_minister_party != "Bolshevik" && Q.labor_minister_party != "Vacant" && Q.labor_minister_party != "None" && Q.labor_minister_party != "") Q.opposition_vote += 1;
+  if (Q.agriculture_minister_party != "Bolshevik" && Q.agriculture_minister_party != "Vacant" && Q.agriculture_minister_party != "None" && Q.agriculture_minister_party != "") Q.opposition_vote += 1;
+  if (Q.food_minister_party != "Bolshevik" && Q.food_minister_party != "Vacant" && Q.food_minister_party != "None" && Q.food_minister_party != "") Q.opposition_vote += 1;
+  if (Q.posts_minister_party != "Bolshevik" && Q.posts_minister_party != "Vacant" && Q.posts_minister_party != "None" && Q.posts_minister_party != "") Q.opposition_vote += 1;
+  if (Q.nationalities_minister_party != "Bolshevik" && Q.nationalities_minister_party != "Vacant" && Q.nationalities_minister_party != "None" && Q.nationalities_minister_party != "") Q.opposition_vote += 1;
+  if (Q.welfare_minister_party != "Bolshevik" && Q.welfare_minister_party != "Vacant" && Q.welfare_minister_party != "None" && Q.welfare_minister_party != "") Q.opposition_vote += 1;
+  if (Q.property_minister_party != "Bolshevik" && Q.property_minister_party != "Vacant" && Q.property_minister_party != "None" && Q.property_minister_party != "") Q.opposition_vote += 1;
+  if (Q.local_minister_party != "Bolshevik" && Q.local_minister_party != "Vacant" && Q.local_minister_party != "None" && Q.local_minister_party != "") Q.opposition_vote += 1;
 !}
 
 = Judicial Reforms
