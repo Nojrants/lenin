@@ -23,7 +23,7 @@ set-jump: election_results
 @stop_the_count
 title: Stop the count!
 subtitle: Something is wrong! Arrest the Electoral Commission!
-on-arrival: democraticity -= 2; instability += 1; 
+on-arrival: democraticity -= 2; instability += 1; count_stopped = 1; 
 max-visits: 1
 go-to: ca_reaction
 
