@@ -763,7 +763,7 @@ Q.cheka_loyalty = 0;
 
 Q.party_schools = 0;
 Q.school_funding = 0.5; 
-Q.school_loyalty = 0.5; 
+Q.school_loyalty = 0.2; 
 Q.higher_schools = 11;
 Q.urban_schools = 200; 
 Q.rural_schools = 300; 
