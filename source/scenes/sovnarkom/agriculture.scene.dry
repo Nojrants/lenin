@@ -38,7 +38,7 @@ title: ADMINISTRATION
 - @improve_admin
 - @hire_staff
 - @corruption
-- @foreign_return
+- @agriculture_return
 
 @improve_admin
 title: Streamline the commissariat
@@ -59,6 +59,10 @@ on-arrival: efficacy_agriculture += 0.1 if efficacy_agriculture < 1; resources -
 
 @agriculture_null
 title: ------------------------------------------------------------------------
+go-to: agriculture
+
+@agriculture_return
+title: Cancel action
 go-to: agriculture
 
   
