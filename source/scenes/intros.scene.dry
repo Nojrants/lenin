@@ -12,13 +12,13 @@ Our unilateral arrest of the previous government, before the Congress could give
 
 However, the events of the evening have made broad cooperation a fleeting dream. A succession of <span style="color: var(--m-color);">Mensheviks</span> and <span style="color: var(--sr-color);">Socialist-Revolutionaries</span> speakers take to the floor to condemn us as usurpers, before ultimately walking out; our own speakers condemn those parties as servants of capital and reaction. Finally, an inflammatory resolution is proposed by Trotsky, which would formally condemn the parties outright, in order to properly send them off "into the dustbin of history". Even those like Martov are unable to stomach this, and soon walk out too.
 
-Under these auspices, Lenin reads out his manifesto, declaring the following:<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• Transfer of supreme power into the hands of the Congress,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; and local soviets everywhere.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• Intentions to create an immediate peace in the Great War,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; without annexations or indemnities.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• Transfer of land to peasant committees.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• Complete democratization of the army and defense of soldiers' rights.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• Workers' control over production and bread in the cities.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• The right of self-determination to all nationalities.<br> 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• Timely convocation of the Constituent Assembly.<br>
+Under these auspices, Lenin reads out his manifesto, declaring the following:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• Transfer of supreme power into the hands of the Congress,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; and local soviets everywhere.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• Intentions to create an immediate peace in the Great War,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; without annexations or indemnities.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• Transfer of land to peasant committees.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• Complete democratization of the army and defense of soldiers' rights.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• Workers' control over production and bread in the cities.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• The right of self-determination to all nationalities.<br> 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• Timely convocation of the Constituent Assembly.<br>
 
 It is an ambitious political platform, but more than that it is a declaration to the workers of the entire world: the revolution has begun! 
 
@@ -147,7 +147,7 @@ if (window && d3) {
 
 {!<tr><td><div class="party-box box right_m"></div>Menshevik Defencists</td><td>!}[+ right_m_soviet +]%{!</td></tr>!}
 
-{!<tr><td><div class="party-box box lsr"></div>Left SRs</td><td>!}[+ lsr_soviet +]%{!</td></tr>!}
+{!<tr><td><div class="party-box box lsr"></div>Left-SRs</td><td>!}[+ lsr_soviet +]%{!</td></tr>!}
 
 {!<tr><td><div class="party-box box sr"></div>SRs</td><td>!}[+ sr_soviet +]%{!</td></tr>!}
 
@@ -165,7 +165,7 @@ The Congress first approves the creation of a new **Central Executive Committee*
 
 There remains general support among the delegates and parties, including from a sizeable minority of our own party (**<span style="color: var(--bolshevik-moderate-color);">Bolshevik Moderates</span>**), for the creation of the broad socialist coalition government that Martov alluded to. However, the **<span style="color: var(--bolshevik-color);">Leninists</span>** of our party view that as untenable, and have successfully strongarmed their peers into accepting this (at least as a start). 
 
-Hypothetically, we could offer a handful of seats to sympathetic non-Bolshevik leaders, but it's unlikely any would accept. Even the **<span style="color: var(--lsr-color);">Left SRs</span>**, though sympathetic to our actions in general, have announced they will stand firm on an all-socialist government. Therefore, Lenin is prepared to present a list for Sovnarkom consisting of an exclusively Bolshevik composition. 
+Hypothetically, we could offer a handful of seats to sympathetic non-Bolshevik leaders, but it's unlikely any would accept. Even the **<span style="color: var(--lsr-color);">Left-SRs</span>**, though sympathetic to our actions in general, have announced they will stand firm on an all-socialist government. Therefore, Lenin is prepared to present a list for Sovnarkom consisting of an exclusively Bolshevik composition. 
 
 @2nd_soviet_menu
 
