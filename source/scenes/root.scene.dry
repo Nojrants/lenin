@@ -482,7 +482,7 @@ Q.land_reform_progress = 0;
 // 86% of agriculture goes to food crops..., 51% of all agriculture is grain
 // = 134,902 million kg
 // fudge factor for feed/meat conversions lol
-Q.food_production = 134000; // in millions of kg of grain-equivalent
+Q.food_production = 74000; // in millions of kg of grain-equivalent
 // source: https://encyclopedia.1914-1918-online.net/article/food-and-nutrition-russian-empire/ - "7.4%" of grain and fodder crops reached the market
 Q.food_sold = 0.06; // fraction of food production that reaches the civilian population in the cities
 // food consumed by the military
