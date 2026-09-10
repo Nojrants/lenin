@@ -129,6 +129,7 @@ if (window && d3) {
     parliament.exit.toCenter(false).bigToSmall(true);
     d3.select("#soviet").datum(data).call(parliament);
 }
+!}
 {!<svg id="soviet" style="width: 625px; height: 350px;"> </svg>!}
 {!<table class="soviet-table">!}
 {!<tr><th>Party</th><th>Vote Share</th></tr>!}
