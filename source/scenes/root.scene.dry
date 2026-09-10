@@ -1118,9 +1118,9 @@ Q.clergy_rightist = 40;
 Q.clergy_other = 35;
 Q.clergy_none = 40;
 
-Q.workers_anarchist = 3;
-Q.workers_maximalist = 3; 
-Q.workers_b = 80;
+Q.workers_anarchist = 1;
+Q.workers_maximalist = 1; 
+Q.workers_b = 90;
 Q.workers_sdi = 20; 
 Q.workers_left_m = 10; 
 Q.workers_m = 9;
