@@ -1,4 +1,5 @@
 title: Soviet Leadership Election
+view-if: player_party != "b"
 go-to: election_algorithm.all_russian_soviet
 set-jump: soviet_election.post_election
 new-page: true
