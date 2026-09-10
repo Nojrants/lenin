@@ -37,30 +37,24 @@ tags: event
 
 @post_election
 on-arrival: {!
-Q.soviet_efficacy -= 0.05;
-Q.m_in_exco = 0;
-Q.sr_in_exco = 0;
-Q.b_in_exco = 0;
-Q.soviet_congress += 24;
+  Q.soviet_efficacy -= 0.05;
+  Q.m_in_exco = 0;
+  Q.sr_in_exco = 0;
+  Q.b_in_exco = 0;
+  Q.soviet_congress += 24;
 
-Q.anarchist_soviet = Q.anarchist_soviet_votes_dec;
-Q.maximalist_soviet = Q.maximalist_soviet_votes_dec;
-Q.b_soviet = Q.b_soviet_votes_dec;
-Q.sdi_soviet = Q.sdi_soviet_votes_dec;
-Q.left_m_soviet = Q.left_m_soviet_votes_dec;
-Q.m_soviet = Q.m_soviet_votes_dec;
-Q.right_m_soviet = Q.right_m_soviet_votes_dec;
-Q.lsr_soviet = Q.lsr_soviet_votes_dec;
-Q.sr_soviet = Q.sr_soviet_votes_dec;
-Q.right_sr_soviet = Q.right_sr_soviet_votes_dec;
-Q.popular_socialist_soviet = Q.popular_socialist_soviet_votes_dec;
-Q.other_soviet = Math.round(10*(Q.other_soviet_votes_dec + Q.k_soviet_votes_dec + Q.conservative_soviet_votes_dec))/10;
-
-Q.socialist_bloc = Q.anarchist_soviet + Q.maximalist_soviet + Q.b_soviet + Q.sdi_soviet + Q.left_m_soviet + Q.m_soviet + Q.right_m_soviet + Q.lsr_soviet + Q.sr_soviet + Q.right_sr_soviet + Q.popular_socialist_soviet + Q.other_soviet;
-Q.october_bloc = Q.anarchist_soviet + Q.maximalist_soviet + Q.b_soviet;
-Q.defensist_bloc = Q.m_soviet + Q.right_m_soviet + Q.lsr_soviet + Q.right_sr_soviet;
-Q.internationalist_bloc = Q.anarchist_soviet + Q.maximalist_soviet + Q.b_soviet + Q.sdi_soviet + Q.left_m_soviet + Q.m_soviet + Q.lsr_soviet + Q.sr_soviet; 
-Q.anti_bolshevik_bloc = Q.sdi_soviet + Q.left_m_soviet + Q.m_soviet + Q.right_m_soviet + Q.lsr_soviet + Q.sr_soviet + Q.right_sr_soviet + Q.popular_socialist_soviet + Q.other_soviet;
+  Q.anarchist_soviet = Q.anarchist_soviet_votes_dec;
+  Q.maximalist_soviet = Q.maximalist_soviet_votes_dec;
+  Q.b_soviet = Q.b_soviet_votes_dec;
+  Q.sdi_soviet = Q.sdi_soviet_votes_dec;
+  Q.left_m_soviet = Q.left_m_soviet_votes_dec;
+  Q.m_soviet = Q.m_soviet_votes_dec;
+  Q.right_m_soviet = Q.right_m_soviet_votes_dec;
+  Q.lsr_soviet = Q.lsr_soviet_votes_dec;
+  Q.sr_soviet = Q.sr_soviet_votes_dec;
+  Q.right_sr_soviet = Q.right_sr_soviet_votes_dec;
+  Q.popular_socialist_soviet = Q.popular_socialist_soviet_votes_dec;
+  Q.other_soviet = Math.round(10*(Q.other_soviet_votes_dec + Q.k_soviet_votes_dec + Q.conservative_soviet_votes_dec))/10;
 !}
 on-display: {!
 // do the graphs
@@ -130,21 +124,36 @@ if (window && d3) {
     d3.select("#soviet").datum(data).call(parliament);
 }
 !}
+
 {!<svg id="soviet" style="width: 625px; height: 350px;"> </svg>!}
 {!<table class="soviet-table">!}
+
 {!<tr><th>Party</th><th>Vote Share</th></tr>!}
+
 {!<tr><td><div class="party-box box a"></div>Anarchists</td><td>!}[+ anarchist_soviet +]%{!</td></tr>!}
+
 {!<tr><td><div class="party-box box maximalist"></div>Maximalists</td><td>!}[+ maximalist_soviet +]%{!</td></tr>!}
+
 {!<tr><td><div class="party-box box b"></div>Bolsheviks</td><td>!}[+ b_soviet +]%{!</td></tr>!}
+
 {!<tr><td><div class="party-box box sdi"></div>SD-Internationalists</td><td>!}[+ sdi_soviet +]%{!</td></tr>!}
+
 {!<tr><td><div class="party-box box left_m"></div>Menshevik Internationalists</td><td>!}[+ left_m_soviet +]%{!</td></tr>!}
+
 {!<tr><td><div class="party-box box m"></div>Mensheviks (Centre)</td><td>!}[+ m_soviet +]%{!</td></tr>!}
+
 {!<tr><td><div class="party-box box right_m"></div>Menshevik Defencists</td><td>!}[+ right_m_soviet +]%{!</td></tr>!}
+
 {!<tr><td><div class="party-box box lsr"></div>Left SRs</td><td>!}[+ lsr_soviet +]%{!</td></tr>!}
+
 {!<tr><td><div class="party-box box sr"></div>SRs</td><td>!}[+ sr_soviet +]%{!</td></tr>!}
+
 {!<tr><td><div class="party-box box right_sr"></div>Right SRs</td><td>!}[+ right_sr_soviet +]%{!</td></tr>!}
+
 {!<tr><td><div class="party-box box popular_socialist"></div>Popular Socialists</td><td>!}[+ popular_socialist_soviet +]%{!</td></tr>!}
+
 {!<tr><td><div class="party-box box other"></div>Others</td><td>!}[+ other_soviet +]%{!</td></tr>!}
+
 {!</table>!}
 
 = Soviet Governnment
