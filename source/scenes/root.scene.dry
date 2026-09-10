@@ -1118,8 +1118,8 @@ Q.clergy_rightist = 40;
 Q.clergy_other = 35;
 Q.clergy_none = 40;
 
-Q.workers_anarchist = 1;
-Q.workers_maximalist = 1; 
+Q.workers_anarchist = 0;
+Q.workers_maximalist = 0; 
 Q.workers_b = 90;
 Q.workers_sdi = 20; 
 Q.workers_left_m = 10; 
@@ -1166,9 +1166,9 @@ Q.kulaks_rightist = 0;
 Q.kulaks_other = 10;
 Q.kulaks_none = 10;
 
-Q.soldiers_anarchist = 3;
-Q.soldiers_maximalist = 4; 
-Q.soldiers_b = 80;
+Q.soldiers_anarchist = 1;
+Q.soldiers_maximalist = 2; 
+Q.soldiers_b = 85;
 Q.soldiers_sdi = 5; 
 Q.soldiers_left_m = 3; 
 Q.soldiers_m = 4;
