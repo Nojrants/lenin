@@ -1,0 +1,124 @@
+title: Agriculture and Land Reform
+new-page: true
+is-card: true
+on-arrival: agricultural_policy_timer += 3; week_actions += 1
+view-if: agricultural_policy_timer == 0
+card-image: img/agriculture.PNG
+tags: sovnarkom, government
+
+= Agricultural Policy
+
+Russia is an agrarian country, so rural policy is a crucial part of the government's portfolio.
+
+The peasants are hungry for land, and the workers are hungry for bread. There must be a way to satisfy these demands, or the country will collapse.
+
+>>Urban food demand: [+ food_demand_urban +] million kg/year
+
+>>Urban food supply: [+ food_supply_urban +] million kg/year
+
+>>Food shortage: [+ hunger +]%
+
+# options: start land committees
+# - create a state buyer for grain, with a fixed price
+# state farms
+# recruit pows and other atypical employees for farms
+
+- @adminsitration
+- @agriculture_null
+- @accelerate_land
+- @preserve_estates
+- @establish_communes
+- @promote_cooperatives
+
+
+
+@administration
+title: ADMINISTRATION
+
+- @improve_admin
+- @hire_staff
+- @corruption
+- @foreign_return
+
+@improve_admin
+title: Streamline the commissariat
+subtitle: Cut waste and inefficiencies, increase labor intensity
+choose-if: agriculture_corruption = 0
+unavailable-subtitle: There's nothing more to cut at the moment. 
+on-arrival: agriculture_expend -= 0.25; efficacy_agriculture += 0.1 if efficacy_agriculture < 1; agriculture_streamline += 8; 
+
+@hire_staff
+title: Hire administrative personnel
+subtitle: -0.5 resources
+on-arrival: efficacy_agriculture += 0.2 if efficacy_agriculture < 1; agriculture_expend += 0.25; resources -= 0.5;
+
+@corruption
+title: Root-out departmental corruption. 
+subtitle: -0.5 resources
+on-arrival: efficacy_agriculture += 0.1 if efficacy_agriculture < 1; resources -= 0.5;
+
+@agriculture_null
+title: ------------------------------------------------------------------------
+go-to: agriculture
+
+  
+
+@accelerate_land
+title: Accelerate land redistribution to peasants. 
+subtitle: -0.5 resources – Increase funding and personnel to the redistribution of confiscated estates. 
+choose-if: efficacy_agriculture >= 0.8 and resources >= 0.5
+unavailable-subtitle: -0.5 resources – [?if efficacy_agriculture < 0.8 : We lack the administrative capacity to accelerate any further. ?] [?if resources < 1: We lack the funds to implement this. ?]
+max-visits: 2
+on-arrival: {!
+  Q.resources -= 1;
+  Q.instability += 2; 
+  Q.peasants_unrest -= 10; Q.kulaks_unrest -= 8; Q.elites_unrest += 5;
+  Q.peasants_strength += 10; Q.kulaks_strength += 15;
+  Q.elites_strength -= 2; 
+  Q.peasants_b += 5*(1-b_dissent); 
+  Q.efficacy_agriculture -= 0.2;
+  Q.agriculture_expend += 0.5; 
+  Q.food_production *= 0.85;
+  Q.food_sold *= 0.9; 
+!}
+
+We have intensified the land reform process, by devoting additional resources to confiscation and redistribution of confiscated estates. Peasants celebrate our action, though agricultural production and stability temporarily suffer.
+
+@preserve_estates
+title: Issue protections for large productive estates to prevent their disintegration. 
+max-visits: 1
+on-arrival: {!
+  Q.instability -= 2; 
+  Q.peasants_unrest += 5;
+  Q.kulaks_unrest += 2;
+  Q.peasants_b -= 2*(1-b_dissent); 
+  Q.food_production *= 1.05;
+!}
+
+Protections are established for current large estates, preventing the land from being broken-up and redistributed. Peasants grumble that we are compromising the land reform process, though on the other hand this safeguards part of the food supply.
+
+@establish_communes
+title: Establish communal farms, to more effectively pool resources. 
+subtitle: -0.5 resources
+max-visits: 1
+on-arrival: {!
+  Q.resources -= 0.5; 
+  Q.efficacy_agriculture += 0.05; 
+!}
+
+We establish a number of communal farms out of existing estates, to be overseen by peasant committees.
+
+@promote_cooperatives
+title: Promote agricultural cooperatives
+subtitle: -0.5 resources
+max-visits: 1
+on-arrival: {!
+  Q.resources -= 0.5;
+  Q.efficacy_agriculture += 0.05; 
+  Q.peasants_strength += 10;
+  Q.kulaks_strength += 10;
+!}
+
+We launch a campaign supporting cooperative purchasing, cultivation, and marketing. 
+
+
