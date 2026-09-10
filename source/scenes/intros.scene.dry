@@ -128,36 +128,21 @@ if (window && d3) {
 !}
 
 = Soviet Governnment
-
 {!<svg id="soviet" style="width: 625px; height: 350px;"> </svg>!}
 {!<table class="soviet-table">!}
-
 {!<tr><th>Party</th><th>Vote Share</th></tr>!}
-
 {!<tr><td><div class="party-box box a"></div>Anarchists</td><td>!}[+ anarchist_soviet +]%{!</td></tr>!}
-
 {!<tr><td><div class="party-box box maximalist"></div>Maximalists</td><td>!}[+ maximalist_soviet +]%{!</td></tr>!}
-
 {!<tr><td><div class="party-box box b"></div>Bolsheviks</td><td>!}[+ b_soviet +]%{!</td></tr>!}
-
 {!<tr><td><div class="party-box box sdi"></div>SD-Internationalists</td><td>!}[+ sdi_soviet +]%{!</td></tr>!}
-
 {!<tr><td><div class="party-box box left_m"></div>Menshevik Internationalists</td><td>!}[+ left_m_soviet +]%{!</td></tr>!}
-
 {!<tr><td><div class="party-box box m"></div>Mensheviks (Centre)</td><td>!}[+ m_soviet +]%{!</td></tr>!}
-
 {!<tr><td><div class="party-box box right_m"></div>Menshevik Defencists</td><td>!}[+ right_m_soviet +]%{!</td></tr>!}
-
 {!<tr><td><div class="party-box box lsr"></div>Left-SRs</td><td>!}[+ lsr_soviet +]%{!</td></tr>!}
-
 {!<tr><td><div class="party-box box sr"></div>SRs</td><td>!}[+ sr_soviet +]%{!</td></tr>!}
-
 {!<tr><td><div class="party-box box right_sr"></div>Right SRs</td><td>!}[+ right_sr_soviet +]%{!</td></tr>!}
-
 {!<tr><td><div class="party-box box popular_socialist"></div>Popular Socialists</td><td>!}[+ popular_socialist_soviet +]%{!</td></tr>!}
-
 {!<tr><td><div class="party-box box other"></div>Others</td><td>!}[+ other_soviet +]%{!</td></tr>!}
-
 {!</table>!}
 
 With the constant comings and goings of delegates, it is hard to say for certain how large our lead was at the Congress initially. Though with most of the moderate socialists eventually walking-out, we are left in firm control thereafter. 
