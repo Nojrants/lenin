@@ -12,13 +12,13 @@ Our unilateral arrest of the previous government, before the Congress could give
 
 However, the events of the evening have made broad cooperation a fleeting dream. A succession of Mensheviks and SRs speakers take to the floor to condemn us as usurpers, before ultimately walking out; our own speakers condemn those parties as servants of capital and reaction. Finally, an inflammatory resolution is proposed by Trotsky, which would formally condemn the Mensheviks and SRs outright, in order to properly send them off "into the dustbin of history". Even those like Martov are unable to stomach this, and soon walk out too.
 
-Under these auspices, Lenin reads out his manifesto, declaring the following:<br><br>&nbsp;&nbsp;&nbsp;&nbsp;• Transfer of supreme power into the hands of the Congress, and local soviets everywhere.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;• Intentions to create an immediate peace in the Great War, without annexations or indemnities.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;• Transfer of land to peasant committees.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;• Complete democratization of the army and defense of soldiers' rights.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;• Workers' control over production and bread in the cities.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;• The right of self-determination to all nationalities.<br> 
-&nbsp;&nbsp;&nbsp;&nbsp;• Timely convocation of the Constituent Assembly.<br>
+Under these auspices, Lenin reads out his manifesto, declaring the following:<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• Transfer of supreme power into the hands of the Congress,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; and local soviets everywhere.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• Intentions to create an immediate peace in the Great War,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; without annexations or indemnities.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• Transfer of land to peasant committees.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• Complete democratization of the army and defense of soldiers' rights.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• Workers' control over production and bread in the cities.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• The right of self-determination to all nationalities.<br> 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• Timely convocation of the Constituent Assembly.<br>
 
 It is an ambitious political platform, but more than that it is a declaration to the workers of the entire world: the revolution has begun! 
 
@@ -36,6 +36,7 @@ new-page: true
 tags: event
 
 @post_election
+go-to: 2nd_soviet_menu
 on-arrival: {!
   Q.soviet_efficacy -= 0.05;
   Q.m_in_exco = 0;
@@ -125,6 +126,8 @@ if (window && d3) {
 }
 !}
 
+= Soviet Governnment
+
 {!<svg id="soviet" style="width: 625px; height: 350px;"> </svg>!}
 {!<table class="soviet-table">!}
 
@@ -155,8 +158,6 @@ if (window && d3) {
 {!<tr><td><div class="party-box box other"></div>Others</td><td>!}[+ other_soviet +]%{!</td></tr>!}
 
 {!</table>!}
-
-= Soviet Governnment
 
 With the constant comings and goings of delegates, it is hard to say for certain how large our lead was at the Congress initially. Though with most of the moderate socialists eventually walking-out, we are left in firm control thereafter. 
 
@@ -289,7 +290,6 @@ Q.leftcom_positions = 3;
 Q.moderate_positions = 6;
 Q.vperedist_positions = 0;
 Q.nonfactional_positions = 0;
-
 
 Q.sdi_relation += 0;
 Q.left_m_relation -= 5;
