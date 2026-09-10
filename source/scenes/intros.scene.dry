@@ -1,6 +1,7 @@
 title: Intros
 new-page: true
 go-to: intro_menu
+max-visits: 1
 face-image: img/womens_day.jpg
 audio: shuffle music/WorkersMarseillaise.ogg music/TchaikovskyQuartet.mp3 music/AyUchniem.mp3 music/SwetitMiesiatz.mp3 music/EchTyDolia.mp3 music/LongingforOurCountry.mp3 music/OdessaMama.mp3 music/VolgaBoatmen.ogg music/LomirSichIberbeiten.mp3 music/Internationale.ogg music/WorkersMarseillaise.ogg music/Kalinka.mp3 music/DearFriends.mp3 music/Dubinushka.mp3
 
@@ -12,7 +13,7 @@ Our unilateral arrest of the previous government, before the Congress could give
 
 However, the events of the evening have made broad cooperation a fleeting dream. A succession of <span style="color: var(--m-color);">Mensheviks</span> and <span style="color: var(--sr-color);">Socialist-Revolutionaries</span> speakers take to the floor to condemn us as usurpers, before ultimately walking out; our own speakers condemn those parties as servants of capital and reaction. Finally, an inflammatory resolution is proposed by Trotsky, which would formally condemn the parties outright, in order to properly send them off "into the dustbin of history". Even those like Martov are unable to stomach this, and soon walk out too.
 
-Under these auspices, Lenin reads out his manifesto, declaring the following:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• Transfer of supreme power into the hands of the Congress,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; and local soviets everywhere.<br>
+Under these auspices, Lenin reads out his manifesto, declaring the following:<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• Transfer of supreme power into the hands of the Congress,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; and local soviets everywhere.<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• Intentions to create an immediate peace in the Great War,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; without annexations or indemnities.<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• Transfer of land to peasant committees.<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• Complete democratization of the army and defense of soldiers' rights.<br>
@@ -33,7 +34,7 @@ title: All Power to the Soviets!
 go-to: election_algorithm.all_russian_soviet
 set-jump: intros.post_election
 new-page: true
-tags: event
+max-visits: 1
 
 @post_election
 go-to: 2nd_soviet_menu
