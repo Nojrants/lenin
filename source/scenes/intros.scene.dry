@@ -6,26 +6,155 @@ audio: shuffle music/WorkersMarseillaise.ogg music/TchaikovskyQuartet.mp3 music/
 
 = October Revolution
 
-October Revolution Event Text
+In the late hours of 7 November 1917, the 2nd Soviet Congress was called to order, amidst the sounds of cannon fire off in the distance. The fall of the Winter Palace was under way, and with it, the arrest of the Provisional Government, which had struggled to govern Russia the past several months. 
+
+Our unilateral arrest of the previous government, before the Congress could give any sort of sanction, has proved the tipping point for the other socialist parties, long exacerbated by our actions. In an attempt to salvage the situation, the <span style="color: var(--left_m-color);">Menshevik Internationalist</span> Iulius Martov has called for a cessation of the warfare in the streets, and immediate negotiations for the formation of all-socialist coalition government—a proposal that passes unanimously.
+
+However, the events of the evening have made broad cooperation a fleeting dream. A succession of Mensheviks and SRs speakers take to the floor to condemn us as usurpers, before ultimately walking out; our own speakers condemn those parties as servants of capital and reaction. Finally, an inflammatory resolution is proposed by Trotsky, which would formally condemn the Mensheviks and SRs outright, in order to properly send them off "into the dustbin of history". Even those like Martov are unable to stomach this, and soon walk out too.
+
+Under these auspices, Lenin reads out his manifesto, declaring the following:<br><br>&nbsp;&nbsp;&nbsp;&nbsp;• Transfer of supreme power into the hands of the Congress, and local soviets everywhere.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;• Intentions to create an immediate peace in the Great War, without annexations or indemnities.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;• Transfer of land to peasant committees.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;• Complete democratization of the army and defense of soldiers' rights.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;• Workers' control over production and bread in the cities.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;• The right of self-determination to all nationalities.<br> 
+&nbsp;&nbsp;&nbsp;&nbsp;• Timely convocation of the Constituent Assembly.<br>
+
+It is an ambitious political platform, but more than that it is a declaration to the workers of the entire world: the revolution has begun! 
+
+In the meantime, we will have to find a way to govern...
 
 @intro_menu
 
 - @all_power_to_the_soviets
 
 @all_power_to_the_soviets
-title: All Power to the Soviets
-go-to: 2nd_soviet
+title: All Power to the Soviets!
+go-to: election_algorithm.all_russian_soviet
+set-jump: intros.post_election
+new-page: true
+tags: event
 
-= All Power to the Soviets
+@post_election
+on-arrival: {!
+Q.soviet_efficacy -= 0.05;
+Q.m_in_exco = 0;
+Q.sr_in_exco = 0;
+Q.b_in_exco = 0;
+Q.soviet_congress += 24;
 
-@2nd_soviet
-go-to: 2nd_soviet_menu
+Q.anarchist_soviet = Q.anarchist_soviet_votes_dec;
+Q.maximalist_soviet = Q.maximalist_soviet_votes_dec;
+Q.b_soviet = Q.b_soviet_votes_dec;
+Q.sdi_soviet = Q.sdi_soviet_votes_dec;
+Q.left_m_soviet = Q.left_m_soviet_votes_dec;
+Q.m_soviet = Q.m_soviet_votes_dec;
+Q.right_m_soviet = Q.right_m_soviet_votes_dec;
+Q.lsr_soviet = Q.lsr_soviet_votes_dec;
+Q.sr_soviet = Q.sr_soviet_votes_dec;
+Q.right_sr_soviet = Q.right_sr_soviet_votes_dec;
+Q.popular_socialist_soviet = Q.popular_socialist_soviet_votes_dec;
+Q.other_soviet = Math.round(10*(Q.other_soviet_votes_dec + Q.k_soviet_votes_dec + Q.conservative_soviet_votes_dec))/10;
 
-Having seized power from the Provisional Government, we must now decide on a replacement. Though some assumed the Soviet Executive would simply absorb the functions of the government, the Bolsheviks have arranged for the creation of a "temporary" auxiliary organ to perform similar duties: the **Council of People's Commissars** (Sovnarkom). 
+Q.socialist_bloc = Q.anarchist_soviet + Q.maximalist_soviet + Q.b_soviet + Q.sdi_soviet + Q.left_m_soviet + Q.m_soviet + Q.right_m_soviet + Q.lsr_soviet + Q.sr_soviet + Q.right_sr_soviet + Q.popular_socialist_soviet + Q.other_soviet;
+Q.october_bloc = Q.anarchist_soviet + Q.maximalist_soviet + Q.b_soviet;
+Q.defensist_bloc = Q.m_soviet + Q.right_m_soviet + Q.lsr_soviet + Q.right_sr_soviet;
+Q.internationalist_bloc = Q.anarchist_soviet + Q.maximalist_soviet + Q.b_soviet + Q.sdi_soviet + Q.left_m_soviet + Q.m_soviet + Q.lsr_soviet + Q.sr_soviet; 
+Q.anti_bolshevik_bloc = Q.sdi_soviet + Q.left_m_soviet + Q.m_soviet + Q.right_m_soviet + Q.lsr_soviet + Q.sr_soviet + Q.right_sr_soviet + Q.popular_socialist_soviet + Q.other_soviet;
+!}
+on-display: {!
+// do the graphs
+var data = [
+{"id": "anarchist",
+ "legend": "Anarchist",
+ "name": "Anarchist",
+ "seats": Math.round(Q.anarchist_soviet*10)},
+{"id": "maximalist",
+ "legend": "SR-Maximalist",
+ "name": "SR-Maximalist",
+ "seats": Math.round(Q.maximalist_soviet*10)},
+{"id": "b",
+ "legend": "Bolshevik",
+ "name": "Bolshevik",
+ "seats": Math.round(Q.b_soviet*10)},
+{"id": "sdi",
+ "legend": "SD-Internationalist",
+ "name": "SD-Internationalist",
+ "seats": Math.round(Q.sdi_soviet_votes_dec*10)},
+{"id": "left_m",
+ "legend": "Menshevik-Internationalist",
+ "name": "Menshevik-Internationalist",
+ "seats": Math.round(Q.left_m_soviet_votes_dec*10)},
+{"id": "m",
+ "legend": "Menshevik-Centre",
+ "name": "Menshevik-Centre",
+ "seats": Math.round(Q.m_soviet_votes_dec*10)},
+{"id": "right_m",
+ "legend": "Menshevik-Defencist",
+ "name": "Menshevik-Defencist",
+ "seats": Math.round(Q.right_m_soviet_votes_dec*10)},
+{"id": "lsr",
+ "legend": "Left-SR",
+ "name": "Left-SR",
+ "seats": Math.round(Q.lsr_soviet_votes_dec*10)},
+{"id": "sr",
+ "legend": "SR",
+ "name": "SR",
+ "seats": Math.round(Q.sr_soviet_votes_dec*10)},
+{"id": "right_sr",
+ "legend": "Right SR",
+ "name": "Right SR",
+ "seats": Math.round(Q.right_sr_soviet_votes_dec*10)},
+{"id": "popular_socialist",
+ "legend": "Popular Socialist",
+ "name": "Popular Socialist",
+ "seats": Math.round(Q.popular_socialist_soviet_votes_dec*10)},
+{"id": "other",
+ "legend": "Other",
+ "name": "Other",
+ "seats": Math.round(Q.other_soviet_votes_dec*10)},
+];
+if (window && d3) {
+    var width = 625;
+    var height = 625;
+    var screenWidth = document.getElementById('content').offsetWidth;
+    if (screenWidth < width - 50) {
+        width = screenWidth - 50;
+        height = width;
+        document.getElementById("soviet").style.height = width + "px";
+    }
+    var parliament = d3.parliament();
+    parliament.width(width).height(height).innerRadiusCoef(0.4);
+    parliament.enter.fromCenter(true).smallToBig(true);
+    parliament.exit.toCenter(false).bigToSmall(true);
+    d3.select("#soviet").datum(data).call(parliament);
+}
+{!<svg id="soviet" style="width: 625px; height: 350px;"> </svg>!}
+{!<table class="soviet-table">!}
+{!<tr><th>Party</th><th>Vote Share</th></tr>!}
+{!<tr><td><div class="party-box box a"></div>Anarchists</td><td>!}[+ anarchist_soviet +]%{!</td></tr>!}
+{!<tr><td><div class="party-box box maximalist"></div>Maximalists</td><td>!}[+ maximalist_soviet +]%{!</td></tr>!}
+{!<tr><td><div class="party-box box b"></div>Bolsheviks</td><td>!}[+ b_soviet +]%{!</td></tr>!}
+{!<tr><td><div class="party-box box sdi"></div>SD-Internationalists</td><td>!}[+ sdi_soviet +]%{!</td></tr>!}
+{!<tr><td><div class="party-box box left_m"></div>Menshevik Internationalists</td><td>!}[+ left_m_soviet +]%{!</td></tr>!}
+{!<tr><td><div class="party-box box m"></div>Mensheviks (Centre)</td><td>!}[+ m_soviet +]%{!</td></tr>!}
+{!<tr><td><div class="party-box box right_m"></div>Menshevik Defencists</td><td>!}[+ right_m_soviet +]%{!</td></tr>!}
+{!<tr><td><div class="party-box box lsr"></div>Left SRs</td><td>!}[+ lsr_soviet +]%{!</td></tr>!}
+{!<tr><td><div class="party-box box sr"></div>SRs</td><td>!}[+ sr_soviet +]%{!</td></tr>!}
+{!<tr><td><div class="party-box box right_sr"></div>Right SRs</td><td>!}[+ right_sr_soviet +]%{!</td></tr>!}
+{!<tr><td><div class="party-box box popular_socialist"></div>Popular Socialists</td><td>!}[+ popular_socialist_soviet +]%{!</td></tr>!}
+{!<tr><td><div class="party-box box other"></div>Others</td><td>!}[+ other_soviet +]%{!</td></tr>!}
+{!</table>!}
 
-There is general support among the delegates and parties, including from a sizeable minority of our own party (**<span style="color: var(--bolshevik-moderate-color);">Bolshevik Moderates</span>**), for the creation of a broad socialist coalition government. However, the **<span style="color: var(--bolshevik-color);">Leninists</span>** of our party view this as untenable, and have successfully strongarmed the Bolshevik Moderates into accepting this (at least as a start). 
+= Soviet Governnment
 
-Hypothetically, we could offer a handful of seats to sympathetic non-Bolshevik leaders, but it's unlikely any would accept. Even the **<span style="color: var(--lsr-color);">Left SRs</span>**, though sympathetic to our actions in general, have announced they will stand firm on an all-socialist government. Therefore, Lenin is prepared to present a list for an exclusively Bolshevik composition. 
+With the constant comings and goings of delegates, it is hard to say for certain how large our lead was at the Congress initially. Though with most of the moderate socialists eventually walking-out, we are left in firm control thereafter. 
+
+The Congress first approves the creation of a new **Central Executive Committee** (CEC), as a permanent assembly at the head of the soviets. Though some assumed this Executive would simply absorb the functions of the old Provisional Government, the Bolsheviks have instead arranged for the creation of a temporary auxiliary organ to perform similar duties, alongside the CEC: the **Council of People's Commissars** (Sovnarkom). 
+
+There remains general support among the delegates and parties, including from a sizeable minority of our own party (**<span style="color: var(--bolshevik-moderate-color);">Bolshevik Moderates</span>**), for the creation of the broad socialist coalition government that Martov alluded to. However, the **<span style="color: var(--bolshevik-color);">Leninists</span>** of our party view that as untenable, and have successfully strongarmed their peers into accepting this (at least as a start). 
+
+Hypothetically, we could offer a handful of seats to sympathetic non-Bolshevik leaders, but it's unlikely any would accept. Even the **<span style="color: var(--lsr-color);">Left SRs</span>**, though sympathetic to our actions in general, have announced they will stand firm on an all-socialist government. Therefore, Lenin is prepared to present a list for Sovnarkom consisting of an exclusively Bolshevik composition. 
 
 @2nd_soviet_menu
 
@@ -97,13 +226,11 @@ Q.moderate_dissent += 5;
 Q.leftcom_strength += 2;
 !}
 
-Sovnarkom is declared as a temporary provisional government until the convocation of the Constituent Assembly. A proposal consisting solely of Bolshevik members is put forth for Sovnarkom's inaugural composition. 
+Sovnarkom is declared as a temporary provisional government until the convocation of the Constituent Assembly. A proposal consisting solely of Bolshevik members is put forth for Sovnarkom's inaugural composition. Moderates and Bolshevik sympathizers are displeased but hold their tongues.  
 
-Already incensed by our actions thus far, most Mensheviks and Socialist-Revolutionaries have walked out by this point. Moderates and Bolshevik sympathizers are displeased but hold their tongues.  
+Boris Avilov, on behalf of the remaining <span style="color: var(--left_m-color);">Menshevik Internationalists</span> present, remarks that an exclusively Bolshevik government will surely struggle to govern and gain legitimacy, and will fail to be recognized by the Allied Powers, making peace all the more difficult. Nonetheless, his counterproposal is voted down. 
 
-Boris Avilov, on behalf of the remaining Menshevik Internationalists present, remarks that an exclusively Bolshevik government will surely struggle to govern and gain legitimacy, and will fail to be recognized by the Allied Powers, making peace all the more difficult. Nonetheless, his counter proposal is voted down. 
-
-A representative of the country's largest and most influential union, the All-Russian Union of Railway Workers (**Vikzhel**), announces the union stands firmly in opposition to "seizure of power by any one party", implying the union will act if an amicable arrangement isn't negotiated. 
+He's followed by a representative of the country's largest and most influential union, the All-Russian Union of Railway Workers (**Vikzhel**), who announces that the union stands firmly in opposition to "seizure of power by any one party", implying the union will act if an amicable arrangement isn't negotiated. 
 
 
 @2nd_piecemeal
@@ -173,10 +300,9 @@ Sovnarkom is declared as a temporary provisional government until the convocatio
 
 The leaders of the other major parties refuse to take any of these vacancies out of principle. Nonetheless, the gesture is taken as a sign of good will by moderates, including from among our own party.
 
-Boris Avilov, on behalf of the remaining Menshevik Internationalists present, remarks that an exclusively Bolshevik government will surely struggle to govern and gain legitimacy, and will fail to be recognized by the Allied Powers, making peace all the more difficult. Nonetheless, his counter proposal is voted down. 
+Boris Avilov, on behalf of the remaining <span style="color: var(--left_m-color);">Menshevik Internationalists</span> present, remarks that an exclusively Bolshevik government will surely struggle to govern and gain legitimacy, and will fail to be recognized by the Allied Powers, making peace all the more difficult. Nonetheless, his counterproposal is voted down. 
 
-A representative of the country's largest and most influential union, the All-Russian Union of Railway Workers (**Vikzhel**), announces the union stands firmly in opposition to "seizure of power by any one party", implying the union will act if an amicable arrangement isn't negotiated. 
-
+He's followed by a representative of the country's largest and most influential union, the All-Russian Union of Railway Workers (**Vikzhel**), who announces that the union stands firmly in opposition to "seizure of power by any one party", implying the union will act if an amicable arrangement isn't negotiated. 
 
 @2nd_soviet_homogenous
 choose-if: player_party != "b"
