@@ -1,4 +1,4 @@
-title: Agriculture and Land Reform
+title: Agriculture
 new-page: true
 is-card: true
 on-arrival: agricultural_policy_timer += 3; week_actions += 1
