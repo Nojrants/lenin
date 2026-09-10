@@ -38,7 +38,7 @@ go-to: finance
 title: Seize the banks!
 subtitle: Nationalize banks to allow us full control over fiscal policy. 
 view-if: banks_seized = 0
-on-arrival: banks_seized = 1; resources += 3; elite_unrest += 5; middle_unrest += 5; instability += 5; capital_flight_progress += 0.5;
+on-arrival: banks_seized = 1; resources += 4; elite_unrest += 5; middle_unrest += 5; instability += 5; capital_flight_progress += 0.5;
 
 @repudiate_loans
 title: Repudiate all outstanding loans.
@@ -46,7 +46,7 @@ subtitle: This will free-up resources but substantially impact our foreign relat
 view-if: repudiation = 0
 choose-if: loans >= 0
 unavailable-subtitle: We have no outstanding loans. 
-on-arrival: repudiation = 1; loans_high = 0; loans_med = 0; loans_low = 0; bonds -= 8 if bonds >= 8; uk_relation -= 35; france_relation -= 40; usa_relation -= 35; italy_relation -= 30; japan_relation -= 30; germany_relation -= 5; austria_relation -= 5; ottoman_relation -= 5; instability += 10; monthly_inflation += 0.5; capital_flight_progress += 1; 
+on-arrival: repudiation = 1; loans_high = 0; loans_med = 0; loans_low = 0; bonds *= 0.65; uk_relation -= 35; france_relation -= 40; usa_relation -= 35; italy_relation -= 30; japan_relation -= 30; germany_relation -= 5; austria_relation -= 5; ottoman_relation -= 5; instability += 10; monthly_inflation += 0.5; capital_flight_progress += 1; 
 
 @finance_return
 title: Cancel action
@@ -234,8 +234,8 @@ choose-if: banks_seized = 1
 unavailable-subtitle: We lack control over the banks. 
 subtitle: +5 resources
 on-arrival: {!
-    resources += 5;
-    Q.monthly_inflation += (1.2 * (instability/12.5));
+    Q.resources += 5;
+    Q.monthly_inflation += (1.2 * (Q.instability/12.5));
     Q.instability += 1;
 !}
 
@@ -245,9 +245,9 @@ choose-if: banks_seized = 1
 unavailable-subtitle: We lack control over the banks. 
 subtitle: +5 resources
 on-arrival: {!
-    resources += 5;
-    bank_advances += 5; 
-    Q.monthly_inflation += (1.2 * (instability/25));
+    Q.resources += 5;
+    Q.bank_advances += 5; 
+    Q.monthly_inflation += (1.2 * (Q.instability/25));
     Q.instability += 0.25;
 !}
 
