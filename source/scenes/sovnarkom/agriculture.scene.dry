@@ -69,7 +69,7 @@ go-to: agriculture
 title: Accelerate land redistribution to peasants. 
 subtitle: -0.5 resources – Increase funding and personnel to the redistribution of confiscated estates. 
 choose-if: efficacy_agriculture >= 0.8 and resources >= 0.5
-unavailable-subtitle: -0.5 resources – [?if efficacy_agriculture < 0.8 : We lack the administrative capacity to accelerate any further. ?] [?if resources < 1: We lack the funds to implement this. ?]
+unavailable-subtitle: -0.5 resources – [?if efficacy_agriculture < 0.8 : We lack the administrative capacity to accelerate further. ?] [?if resources < 1: We lack the funds to implement this. ?]
 max-visits: 2
 on-arrival: {!
   Q.resources -= 1;
