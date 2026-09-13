@@ -83,7 +83,7 @@ Q.party_membership_display = (Q.party_membership * 1000).toLocaleString();
 
 >>**Public debt:** [+ publicdebt +]
 
-<hr2>
+<hr>
 
 [?if sovnarkom_created = 1 : <h1>Sovnarkom</h1> ?]
 
@@ -120,7 +120,7 @@ Q.party_membership_display = (Q.party_membership * 1000).toLocaleString();
 
 >> **<span style="color: var(--other-color);">Others</span>:** [+ other_soviet_display +]%
 
-<hr2>
+<hr>
 
 = Support
 
