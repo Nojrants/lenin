@@ -126,7 +126,7 @@ Q.party_membership_display = (Q.party_membership * 1000).toLocaleString();
 >>[?if local_minister != "None": **Local Gov:** [+ local_minister +] [?if local_minister_party=="Bolshevik" and local_minister != "None" and local_minister != "Vacant" : (<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>)?] ?][?if local_minister_party=="Menshevik": (<span class="tooltip-text" title="Menshevik" style="color: var(--m-color);">RSDLP(u)</span>)?][?if local_minister_party=="Left-SR": (<span class="tooltip-text" title="Left-SR" style="color: var(--lsr-color);">Left-SR</span>)?][?if local_minister_party=="SR": (<span class="tooltip-text" title="Socialist Revolutionary" style="color: var(--sr-color);">SR</span>)?][?if local_minister_party=="SD-Int": (<span class="tooltip-text" title="Social-Democratic Internationalist" style="color: var(--sdi-color);">SD-Int</span>)?][?if local_minister_party=="NS": (<span class="tooltip-text" title="Popular Socialist" style="color: var(--ns-color);">NS</span>)?]
 
 
-**Parties in government:** [+ governing_parties_str +]
+**In government:** [+ governing_parties_str +]
 
 = CEC
 
@@ -142,6 +142,24 @@ Q.party_membership_display = (Q.party_membership * 1000).toLocaleString();
 
 >> **<span style="color: var(--other-color);">Others</span>:** [+ (anarchist_soviet + maximalist_soviet + sdi_soviet + popular_socialist_soviet + other_soviet) +]%
 
+= Support
+
+
+>>**Labor unrest:** [+ workers_unrest : war_weariness +]
+
+>>**Rural unrest:** [+ peasants_unrest : war_weariness +]
+
+>**Party dissent:** [+ b_dissent_percent : dissent +]
+
+>**War weariness:** [+ war_weariness : war_weariness +]
+
+= Statistics
+
+>**Inflation:** [+ monthly_inflation +]% ([+ inflation +]% p.a.)
+
+> **Hunger:** [+ hunger : hunger +]
+
+> **Unemployment:** [+ unemployed +]%
 
 
 
