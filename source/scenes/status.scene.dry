@@ -134,13 +134,13 @@ Q.party_membership_display = (Q.party_membership * 1000).toLocaleString();
 
 >> **<span style="color: var(--bolshevik-color);">Bolsheviks</span>:** [+ b_soviet +]%
 
->> **<span style="color: var(--m-color);">Mensheviks</span>:** [+ left_m_soviet + m_soviet + right_m_soviet +]%
+>> **<span style="color: var(--m-color);">Mensheviks</span>:** [+ (left_m_soviet + m_soviet + right_m_soviet) +]%
 
 >> **<span style="color: var(--lsr-color);">Left-SRs</span>:** [+ lsr_soviet +]%
 
->> **<span style="color: var(--sr-color);">SRs</span>:** [+ sr_soviet + right_sr_soviet +]%
+>> **<span style="color: var(--sr-color);">SRs</span>:** [+ (sr_soviet + right_sr_soviet) +]%
 
->> **<span style="color: var(--other-color);">Others</span>:** [+ anarchist_soviet + maximalist_soviet + sdi_soviet + popular_socialist_soviet + other_soviet +]%
+>> **<span style="color: var(--other-color);">Others</span>:** [+ (anarchist_soviet + maximalist_soviet + sdi_soviet + popular_socialist_soviet + other_soviet) +]%
 
 = Support
 
