@@ -146,20 +146,17 @@ Q.party_membership_display = (Q.party_membership * 1000).toLocaleString();
 
 >**General unrest:** [+ general_unrest : war_weariness +]
 
->>**Labor unrest:** [+ workers_unrest : war_weariness +]
+>>**Labor:** [+ workers_unrest : war_weariness +]
 
->>**Rural unrest:** [+ peasants_unrest : war_weariness +]
+>>**Rural:** [+ peasants_unrest : war_weariness +]
 
->**Party dissent:** [+ b_dissent_percent : dissent +]
-
+>**Party dissent:** [+ b_dissent_percent : dissent +]<br>
 >**War weariness:** [+ war_weariness : war_weariness +]
 
 = Statistics
 
->**Inflation:** [+ monthly_inflation +]% ([+ inflation +]% p.a.)
-
-> **Hunger:** [+ hunger : hunger +]
-
+>**Inflation:** [+ monthly_inflation +]% ([+ inflation +]% p.a.)<br>
+> **Hunger:** [+ hunger : hunger +]<br>
 > **Unemployment:** [+ unemployed +]%
 
 
