@@ -191,6 +191,7 @@ Hypothetically, we could offer a handful of seats to sympathetic non-Bolshevik l
 
 @2nd_soviet_bolshevik
 on-arrival:{!
+  Q.sovnerkom_created = 1;
   Q.prime_minister = "Lenin";
   Q.prime_minister_party = "Bolshevik"
   Q.deputy_pm = "Vacant";
@@ -261,6 +262,7 @@ He's followed by a representative of the country's largest and most influential 
 
 @2nd_piecemeal
 on-arrival:{!
+  Q.sovnerkom_created = 1;
   Q.prime_minister = "Lenin";
   Q.prime_minister_party = "Bolshevik"
   Q.deputy_pm = "Vacant";
