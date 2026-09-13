@@ -804,3 +804,14 @@ table {
 #coalitions text {
     font-size: 14px;
 }
+
+
+.sovnarkom-chair {
+    margin-left: 20px;
+    margin-bottom: 0;
+}
+
+.sovnarkom-item {
+    margin-left: 40px;
+    margin-bottom: 0;
+}
