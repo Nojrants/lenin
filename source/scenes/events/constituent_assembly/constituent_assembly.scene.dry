@@ -27,13 +27,13 @@ on-arrival: {!
    Q.ca_seats_sr = Math.round(Q.ca_seats_sr * 0.9);
    Q.ca_seats_ukr = Math.round(Q.ca_seats_ukr * 0.95);
    Q.ca_seats_ns = Math.round(Q.ca_seats_ns * 0.9); 
-   Q.ca_seats_muslim_socialist = Math.round(Q.ca_seats_muslim_socialist * 0.8); 
+   Q.ca_seats_muslim_socialist = Math.round(Q.ca_seats_muslim_socialist * 0.9); 
    Q.ca_seats_dashnak = Math.round(Q.ca_seats_dashnak * 0.9); 
    Q.ca_seats_jewish = Math.round(Q.ca_seats_jewish * 0.9); 
    Q.ca_seats_muslim_national = Math.round(Q.ca_seats_muslim_national * 0.7); 
    Q.ca_seats_kadet = Math.round(Q.ca_seats_kadet * 0); 
    Q.ca_seats_cossack = Math.round(Q.ca_seats_cossack * 0.5); 
-   Q.ca_seats_rightist = Math.round(Q.ca_seats_rightist * 0.2);
+   Q.ca_seats_rightist = Math.round(Q.ca_seats_rightist * 0);
    Q.ca_seats_other = Math.round(Q.ca_seats_other * 0.9); 
  }
  if (Q.cheka_founded == 1) {
@@ -210,7 +210,7 @@ data.forEach(d => {
 
 A great number of the seats are empty. In some constituencies, the elections never completed, and so no one was elected at all. Others completed their elections, but their delegates are still in transit to the capital. And a great many delegates have simply not shown up, either because they have little regard for the Assembly's prospects, or because they fear they will be arrested should they appear. Indeed, several delegates would have shown, but are currently sitting in our jails. [?if ca_stance == 1: Our efforts to delegitimize the Assembly have surely increased the number of absentee seats. ?] But despite all of that, the Bolsheviks still lack a majority, meaning we will have to tread carefully. 
 
-The first order of business is electing a chairperson. The SRs have nominated Viktor Chernov, and he has received the backing of most other party delegations. Anticipating that a Bolshevik candidate will be the least likely to succeed, the Party considers it wise to instead back the Left-SR candidate, Maria Spiridonova. Not only does this have the chance of attracting some outside support, it will show solidarity with the Left-SRs, whose alliance here will likely be crucial. Though the Bolshevik Moderates would have liked to see Kamenev as chair, they are on board with backing with Spiridonova.  
+The first order of business is electing a chairperson. The SRs have nominated Viktor Chernov, and he has received the backing of most other party delegations. Anticipating that a Bolshevik candidate will be the least likely to succeed, the Party considers it wise to instead back the Left-SR candidate, Maria Spiridonova. Not only does this have the chance of attracting some outside support, it will show solidarity with the Left-SRs, whose alliance here will likely be crucial. Though the Bolshevik Moderates would have liked to see Kamenev as chair, they are on board with backing Spiridonova.  
 
 - @spiridonova
 - @kamenev
@@ -479,7 +479,7 @@ g.selectAll(".label")
 
 [?if vote_sr > vote_bolshevik : The SR agenda proposal is passed. ?]
 
-Proceeding with the agenda, the SRs announce their intention to pass the following:<br>&nbsp;&nbsp;&nbsp;&nbsp;• Formal abolition of the monarchy, and declaration of a democratic republic.<br>
+Proceeding with the agenda, the SRs announce their intention to pass the following:<br><br>&nbsp;&nbsp;&nbsp;&nbsp;• Formal abolition of the monarchy, and declaration of a democratic republic.<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• Federation based on free association of equal peoples.<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• Self-determination for all nationalities.<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• Immediate negotiations for a universal, democratic, and just peace.<br>
