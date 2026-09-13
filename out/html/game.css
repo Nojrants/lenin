@@ -1,4 +1,11 @@
 body {
+  --level1-color: #008000;
+  --level2-color: #258b52;
+  --level3-color: #659e61;
+  --level4-color: #bdb76b;
+  --level5-color: #da8264;
+  --level6-color: #cd4545;
+  --level7-color: #8b0000;
   --bolshevik-color: #9B1616;
   --bolshevik-moderate-color: #D83934;
   --sdi-color: #b47561;
