@@ -64,12 +64,6 @@ on-arrival: {!
   Q.popular_socialist_soviet = Q.popular_socialist_soviet_votes_dec;
   Q.other_soviet = Math.round(10*(Q.other_soviet_votes_dec + Q.k_soviet_votes_dec + Q.conservative_soviet_votes_dec))/10;
 
-  Q.b_soviet_display = Math.round(b_soviet*10)/10; 
-  Q.m_soviet_display = Math.round((left_m_soviet + m_soviet + right_m_soviet)*10)/10; 
-  Q.lsr_soviet_display = Math.round(lsr_soviet*10)/10; 
-  Q.sr_soviet_display = Math.round((sr_soviet + right_sr_soviet)*10)/10; 
-  Q.other_soviet_display = Math.round((anarchist_soviet + maximalist_soviet + sdi_soviet + popular_socialist_soviet + other_soviet)*10)/10; 
-  Q.soviet_chair = "Kamenev"; Q.soviet_chair_party="Bolshevik";
 !}
 on-display: {!
 // do the graphs
@@ -190,66 +184,72 @@ Hypothetically, we could offer a handful of seats to sympathetic non-Bolshevik l
 
 @2nd_soviet_bolshevik
 on-arrival:{!
-
-Q.prime_minister = "Lenin";
-Q.prime_minister_party = "Bolshevik"
-Q.deputy_pm = "Vacant";
-Q.deputy_pm_party = "";
-Q.foreign_minister = "Trotsky";
-Q.foreign_minister_party = "Bolshevik";
-Q.war_minister = "Krylenko";
-Q.war_minister_party = "Bolshevik";
-Q.education_minister = "Lunacharsky";
-Q.education_minister_party = "Bolshevik";
-Q.interior_minister = "Rykov";
-Q.interior_minister_party = "Bolshevik";
-Q.transport_minister = "Vacant";
-Q.transport_minister_party = "";
-Q.trade_minister = "Nogin";
-Q.trade_minister_party = "Bolshevik";
-Q.finance_minister = "Skvortsov";
-Q.finance_minister_party = "Bolshevik";
-Q.labor_minister = "Shliapnikov";
-Q.labor_minister_party = "Bolshevik";
-Q.justice_minister = "Oppokov";
-Q.justice_minister_party = "Bolshevik";
-Q.agriculture_minister = "Milyutin";
-Q.agriculture_minister_party = "Bolshevik";
-Q.food_minister = "Teodorovich";
-Q.food_minister_party = "Bolshevik";
-Q.posts_minister = "Glebov";
-Q.posts_minister_party = "Bolshevik";
-Q.nationalities_minister = "Stalin";
-Q.nationalities_minister_party = "Bolshevik";
-Q.welfare_minister = "None";
-Q.welfare_minister_party = "";
-Q.property_minister = "None";
-Q.property_minister_party = "";
-Q.local_minister = "None";
-Q.local_minister_party = "";
-Q.palaces_minister = "None";
-Q.palaces_minister_party = "";
-
-Q.leninist_positions = 4;
-Q.leftcom_positions = 3;
-Q.moderate_positions = 6;
-Q.vperedist_positions = 0;
-Q.nonfactional_positions = 0;
-
-Q.sdi_relation -= 5;
-Q.left_m_relation -= 10;
-Q.centre_m_relation -= 15;
-Q.right_m_relation -= 5;
-Q.lsr_relation -= 5;
-Q.centre_sr_relation -= 10;
-Q.right_relation -= 20;
-Q.ns_relation -= 15;
-Q.k_relation -= 5;
-Q.k_relation -= 5;
-Q.leninist_strength += 5;
-Q.moderate_strength -= 5;
-Q.moderate_dissent += 5;
-Q.leftcom_strength += 2;
+  Q.prime_minister = "Lenin";
+  Q.prime_minister_party = "Bolshevik"
+  Q.deputy_pm = "Vacant";
+  Q.deputy_pm_party = "";
+  Q.foreign_minister = "Trotsky";
+  Q.foreign_minister_party = "Bolshevik";
+  Q.war_minister = "Krylenko";
+  Q.war_minister_party = "Bolshevik";
+  Q.education_minister = "Lunacharsky";
+  Q.education_minister_party = "Bolshevik";
+  Q.interior_minister = "Rykov";
+  Q.interior_minister_party = "Bolshevik";
+  Q.transport_minister = "Vacant";
+  Q.transport_minister_party = "";
+  Q.trade_minister = "Nogin";
+  Q.trade_minister_party = "Bolshevik";
+  Q.finance_minister = "Skvortsov";
+  Q.finance_minister_party = "Bolshevik";
+  Q.labor_minister = "Shliapnikov";
+  Q.labor_minister_party = "Bolshevik";
+  Q.justice_minister = "Oppokov";
+  Q.justice_minister_party = "Bolshevik";
+  Q.agriculture_minister = "Milyutin";
+  Q.agriculture_minister_party = "Bolshevik";
+  Q.food_minister = "Teodorovich";
+  Q.food_minister_party = "Bolshevik";
+  Q.posts_minister = "Glebov";
+  Q.posts_minister_party = "Bolshevik";
+  Q.nationalities_minister = "Stalin";
+  Q.nationalities_minister_party = "Bolshevik";
+  Q.welfare_minister = "None";
+  Q.welfare_minister_party = "";
+  Q.property_minister = "None";
+  Q.property_minister_party = "";
+  Q.local_minister = "None";
+  Q.local_minister_party = "";
+  Q.palaces_minister = "None";
+  Q.palaces_minister_party = "";
+  
+  Q.leninist_positions = 4;
+  Q.leftcom_positions = 3;
+  Q.moderate_positions = 6;
+  Q.vperedist_positions = 0;
+  Q.nonfactional_positions = 0;
+  
+  Q.sdi_relation -= 5;
+  Q.left_m_relation -= 10;
+  Q.centre_m_relation -= 15;
+  Q.right_m_relation -= 5;
+  Q.lsr_relation -= 5;
+  Q.centre_sr_relation -= 10;
+  Q.right_relation -= 20;
+  Q.ns_relation -= 15;
+  Q.k_relation -= 5;
+  Q.k_relation -= 5;
+  Q.leninist_strength += 5;
+  Q.moderate_strength -= 5;
+  Q.moderate_dissent += 5;
+  Q.leftcom_strength += 2;
+  
+  Q.b_soviet_display = Math.round(b_soviet*10)/10; 
+  Q.m_soviet_display = Math.round((left_m_soviet + m_soviet + right_m_soviet)*10)/10; 
+  Q.lsr_soviet_display = Math.round(lsr_soviet*10)/10; 
+  Q.sr_soviet_display = Math.round((sr_soviet + right_sr_soviet)*10)/10; 
+  Q.other_soviet_display = Math.round((anarchist_soviet + maximalist_soviet + sdi_soviet + popular_socialist_soviet + other_soviet)*10)/10; 
+  Q.soviet_chair = "Kamenev"; Q.soviet_chair_party="Bolshevik";
 !}
 
 Sovnarkom is declared as a temporary provisional government until the convocation of the Constituent Assembly. A proposal consisting solely of Bolshevik members is put forth for Sovnarkom's inaugural composition. Moderates and Bolshevik sympathizers are displeased but hold their tongues.  
@@ -261,64 +261,71 @@ He's followed by a representative of the country's largest and most influential 
 
 @2nd_piecemeal
 on-arrival:{!
-Q.prime_minister = "Lenin";
-Q.prime_minister_party = "Bolshevik"
-Q.deputy_pm = "Vacant";
-Q.deputy_pm_party = "";
-Q.foreign_minister = "Trotsky";
-Q.foreign_minister_party = "Bolshevik";
-Q.war_minister = "Krylenko";
-Q.war_minister_party = "Bolshevik";
-Q.education_minister = "Lunacharsky";
-Q.education_minister_party = "Bolshevik";
-Q.interior_minister = "Rykov";
-Q.interior_minister_party = "Bolshevik";
-Q.transport_minister = "Vacant";
-Q.transport_minister_party = "";
-Q.trade_minister = "Nogin";
-Q.trade_minister_party = "Bolshevik";
-Q.finance_minister = "Skvortsov";
-Q.finance_minister_party = "Bolshevik";
-Q.labor_minister = "Shliapnikov";
-Q.labor_minister_party = "Bolshevik";
-Q.justice_minister = "Oppokov";
-Q.justice_minister_party = "Bolshevik";
-Q.agriculture_minister = "Milyutin";
-Q.agriculture_minister_party = "Bolshevik";
-Q.food_minister = "Teodorovich";
-Q.food_minister_party = "Bolshevik";
-Q.posts_minister = "Glebov";
-Q.posts_minister_party = "Bolshevik";
-Q.nationalities_minister = "Stalin";
-Q.nationalities_minister_party = "Bolshevik";
-Q.welfare_minister = "None";
-Q.welfare_minister_party = "";
-Q.property_minister = "None";
-Q.property_minister_party = "";
-Q.local_minister = "None";
-Q.local_minister_party = "";
-Q.palaces_minister = "None";
-Q.palaces_minister_party = "";
+  Q.prime_minister = "Lenin";
+  Q.prime_minister_party = "Bolshevik"
+  Q.deputy_pm = "Vacant";
+  Q.deputy_pm_party = "";
+  Q.foreign_minister = "Trotsky";
+  Q.foreign_minister_party = "Bolshevik";
+  Q.war_minister = "Krylenko";
+  Q.war_minister_party = "Bolshevik";
+  Q.education_minister = "Lunacharsky";
+  Q.education_minister_party = "Bolshevik";
+  Q.interior_minister = "Rykov";
+  Q.interior_minister_party = "Bolshevik";
+  Q.transport_minister = "Vacant";
+  Q.transport_minister_party = "";
+  Q.trade_minister = "Nogin";
+  Q.trade_minister_party = "Bolshevik";
+  Q.finance_minister = "Skvortsov";
+  Q.finance_minister_party = "Bolshevik";
+  Q.labor_minister = "Shliapnikov";
+  Q.labor_minister_party = "Bolshevik";
+  Q.justice_minister = "Oppokov";
+  Q.justice_minister_party = "Bolshevik";
+  Q.agriculture_minister = "Milyutin";
+  Q.agriculture_minister_party = "Bolshevik";
+  Q.food_minister = "Teodorovich";
+  Q.food_minister_party = "Bolshevik";
+  Q.posts_minister = "Glebov";
+  Q.posts_minister_party = "Bolshevik";
+  Q.nationalities_minister = "Stalin";
+  Q.nationalities_minister_party = "Bolshevik";
+  Q.welfare_minister = "None";
+  Q.welfare_minister_party = "";
+  Q.property_minister = "None";
+  Q.property_minister_party = "";
+  Q.local_minister = "None";
+  Q.local_minister_party = "";
+  Q.palaces_minister = "None";
+  Q.palaces_minister_party = "";
+  
+  Q.leninist_positions = 4;
+  Q.leftcom_positions = 3;
+  Q.moderate_positions = 6;
+  Q.vperedist_positions = 0;
+  Q.nonfactional_positions = 0;
+  
+  Q.sdi_relation += 0;
+  Q.left_m_relation -= 5;
+  Q.centre_m_relation -= 5;
+  Q.right_m_relation -= 5;
+  Q.lsr_relation += 0;
+  Q.centre_sr_relation -= 5;
+  Q.right_relation -= 5;
+  Q.ns_relation -= 10;
+  Q.leninist_strength += 2;
+  Q.leninist_dissent += 2;
+  Q.moderate_strength += 5;
+  Q.moderate_dissent -= 5;
+  Q.leftcom_dissent += 5;
 
-Q.leninist_positions = 4;
-Q.leftcom_positions = 3;
-Q.moderate_positions = 6;
-Q.vperedist_positions = 0;
-Q.nonfactional_positions = 0;
-
-Q.sdi_relation += 0;
-Q.left_m_relation -= 5;
-Q.centre_m_relation -= 5;
-Q.right_m_relation -= 5;
-Q.lsr_relation += 0;
-Q.centre_sr_relation -= 5;
-Q.right_relation -= 5;
-Q.ns_relation -= 10;
-Q.leninist_strength += 2;
-Q.leninist_dissent += 2;
-Q.moderate_strength += 5;
-Q.moderate_dissent -= 5;
-Q.leftcom_dissent += 5;
+  Q.b_soviet_display = Math.round(b_soviet*10)/10; 
+  Q.m_soviet_display = Math.round((left_m_soviet + m_soviet + right_m_soviet)*10)/10; 
+  Q.lsr_soviet_display = Math.round(lsr_soviet*10)/10; 
+  Q.sr_soviet_display = Math.round((sr_soviet + right_sr_soviet)*10)/10; 
+  Q.other_soviet_display = Math.round((anarchist_soviet + maximalist_soviet + sdi_soviet + popular_socialist_soviet + other_soviet)*10)/10; 
+  Q.soviet_chair = "Kamenev"; Q.soviet_chair_party="Bolshevik";
 !}
 
 Sovnarkom is declared as a temporary provisional government until the convocation of the Constituent Assembly. A composition is proposed reserving the key seats for the Bolsheviks, though offering some minor positions the other parties. 
