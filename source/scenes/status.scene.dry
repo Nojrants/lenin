@@ -142,25 +142,6 @@ Q.party_membership_display = (Q.party_membership * 1000).toLocaleString();
 
 >> **<span style="color: var(--other-color);">Others</span>:** [+ (anarchist_soviet + maximalist_soviet + sdi_soviet + popular_socialist_soviet + other_soviet) +]%
 
-= Support
-
->**General unrest:** [+ (((elites_unrest * elites) + (middle_unrest * middle) + (clergy_unrest * clergy) + (workers_unrest * workers) + (peasants_unrest * peasants) + (kulaks_unrest * kulaks) + (intelligentsia_unrest * intelligentsia) + (soldiers_unrest * soldiers) + (underclass_unrest * underclass) + (students_unrest * students)) / 100) : war_weariness +]
-
->>**Labor unrest:** [+ workers_unrest : war_weariness +]
-
->>**Rural unrest:** [+ peasants_unrest : war_weariness +]
-
->**Party dissent:** [+ b_dissent_percent : dissent +]
-
->**War weariness:** [+ war_weariness : war_weariness +]
-
-= Statistics
-
->**Inflation:** [+ monthly_inflation +]% ([+ inflation +]% p.a.)
-
-> **Hunger:** [+ hunger : hunger +]
-
-> **Unemployment:** [+ unemployed +]%
 
 
 
