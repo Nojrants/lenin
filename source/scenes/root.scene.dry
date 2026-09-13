@@ -173,7 +173,7 @@ Q.other_strength = 5;
 
 // state of the country 
 Q.instability = 40;
-Q.democraticity = 45;
+Q.democraticity = 55;
 Q.disillusionment = 0;
 Q.crime = 60;
 Q.militancy = 25;
