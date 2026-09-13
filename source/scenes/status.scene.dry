@@ -144,6 +144,7 @@ Q.party_membership_display = (Q.party_membership * 1000).toLocaleString();
 
 = Support
 
+>**General unrest:** [+ general_unrest : war_weariness +]
 
 >>**Labor unrest:** [+ workers_unrest : war_weariness +]
 
