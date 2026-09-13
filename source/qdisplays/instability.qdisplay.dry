@@ -1,8 +1,8 @@
 
-(..25) strong
-(25..40) secure
-(40..55) strained
-(55..70) precarious
-(70..85) turbulent 
-(85..100) crisis
-(100..) catastrophe
+(..25) <span style="color: var(--level1-color);">Strong</span>
+(25..40) <span style="color: var(--level2-color);">Secure</span>
+(40..55) <span style="color: var(--level3-color);">Strained</span>
+(55..70) <span style="color: var(--level4-color);">Precarious</span>
+(70..85) <span style="color: var(--level5-color);">Turbulent</span>
+(85..100) <span style="color: var(--level6-color);">Crisis</span>
+(100..) <span style="color: var(--level7-color);">Catastrophe</span>
