@@ -4,6 +4,14 @@ go-to: intro_menu
 max-visits: 1
 face-image: img/womens_day.jpg
 audio: shuffle music/WorkersMarseillaise.ogg music/TchaikovskyQuartet.mp3 music/AyUchniem.mp3 music/SwetitMiesiatz.mp3 music/EchTyDolia.mp3 music/LongingforOurCountry.mp3 music/OdessaMama.mp3 music/VolgaBoatmen.ogg music/LomirSichIberbeiten.mp3 music/Internationale.ogg music/WorkersMarseillaise.ogg music/Kalinka.mp3 music/DearFriends.mp3 music/Dubinushka.mp3
+on-arrival: {!
+  Q.b_soviet_display = 18.1;
+  Q.m_soviet_display = 38.4;
+  Q.lsr_soviet_display = 0;
+  Q.sr_soviet_display = 37.2; 
+  Q.other_soviet_display = 6.2;
+!}
+
 
 = October Revolution
 
@@ -55,6 +63,13 @@ on-arrival: {!
   Q.right_sr_soviet = Q.right_sr_soviet_votes_dec;
   Q.popular_socialist_soviet = Q.popular_socialist_soviet_votes_dec;
   Q.other_soviet = Math.round(10*(Q.other_soviet_votes_dec + Q.k_soviet_votes_dec + Q.conservative_soviet_votes_dec))/10;
+
+  Q.b_soviet_display = Math.round(b_soviet*10)/10; 
+  Q.m_soviet_display = Math.round((left_m_soviet + m_soviet + right_m_soviet)*10)/10; 
+  Q.lsr_soviet_display = Math.round(lsr_soviet*10)/10; 
+  Q.sr_soviet_display = Math.round((sr_soviet + right_sr_soviet)*10)/10; 
+  Q.other_soviet_display = Math.round((anarchist_soviet + maximalist_soviet + sdi_soviet + popular_socialist_soviet + other_soviet)*10)/10; 
+  Q.soviet_chair = "Kamenev"; Q.soviet_chair_party="Bolshevik";
 !}
 on-display: {!
 // do the graphs
