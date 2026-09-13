@@ -64,6 +64,12 @@ on-arrival: {!
   Q.popular_socialist_soviet = Q.popular_socialist_soviet_votes_dec;
   Q.other_soviet = Math.round(10*(Q.other_soviet_votes_dec + Q.k_soviet_votes_dec + Q.conservative_soviet_votes_dec))/10;
 
+  Q.b_soviet_display = Math.round(Q.b_soviet*10)/10; 
+  Q.m_soviet_display = Math.round((Q.left_m_soviet + Q.m_soviet + Q.right_m_soviet)*10)/10; 
+  Q.lsr_soviet_display = Math.round(Q.lsr_soviet*10)/10; 
+  Q.sr_soviet_display = Math.round((Q.sr_soviet + Q.right_sr_soviet)*10)/10; 
+  Q.other_soviet_display = Math.round((Q.anarchist_soviet + Q.maximalist_soviet + Q.sdi_soviet + Q.popular_socialist_soviet + Q.other_soviet)*10)/10; 
+  Q.soviet_chair = "Kamenev"; Q.soviet_chair_party="Bolshevik";
 !}
 on-display: {!
 // do the graphs
@@ -243,13 +249,6 @@ on-arrival:{!
   Q.moderate_strength -= 5;
   Q.moderate_dissent += 5;
   Q.leftcom_strength += 2;
-  
-  Q.b_soviet_display = Math.round(b_soviet*10)/10; 
-  Q.m_soviet_display = Math.round((left_m_soviet + m_soviet + right_m_soviet)*10)/10; 
-  Q.lsr_soviet_display = Math.round(lsr_soviet*10)/10; 
-  Q.sr_soviet_display = Math.round((sr_soviet + right_sr_soviet)*10)/10; 
-  Q.other_soviet_display = Math.round((anarchist_soviet + maximalist_soviet + sdi_soviet + popular_socialist_soviet + other_soviet)*10)/10; 
-  Q.soviet_chair = "Kamenev"; Q.soviet_chair_party="Bolshevik";
 !}
 
 Sovnarkom is declared as a temporary provisional government until the convocation of the Constituent Assembly. A proposal consisting solely of Bolshevik members is put forth for Sovnarkom's inaugural composition. Moderates and Bolshevik sympathizers are displeased but hold their tongues.  
@@ -319,13 +318,6 @@ on-arrival:{!
   Q.moderate_strength += 5;
   Q.moderate_dissent -= 5;
   Q.leftcom_dissent += 5;
-
-  Q.b_soviet_display = Math.round(b_soviet*10)/10; 
-  Q.m_soviet_display = Math.round((left_m_soviet + m_soviet + right_m_soviet)*10)/10; 
-  Q.lsr_soviet_display = Math.round(lsr_soviet*10)/10; 
-  Q.sr_soviet_display = Math.round((sr_soviet + right_sr_soviet)*10)/10; 
-  Q.other_soviet_display = Math.round((anarchist_soviet + maximalist_soviet + sdi_soviet + popular_socialist_soviet + other_soviet)*10)/10; 
-  Q.soviet_chair = "Kamenev"; Q.soviet_chair_party="Bolshevik";
 !}
 
 Sovnarkom is declared as a temporary provisional government until the convocation of the Constituent Assembly. A composition is proposed reserving the key seats for the Bolsheviks, though offering some minor positions the other parties. 
