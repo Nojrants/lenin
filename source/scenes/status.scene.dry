@@ -131,9 +131,6 @@ Q.other_soviet_display = Math.round((anarchist_soviet + maximalist_soviet + sdi_
 
 >>[?if local_minister != "None": **Local Gov:** [+ local_minister +] [?if local_minister_party=="Bolshevik" and local_minister != "None" and local_minister != "Vacant" : (<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>)?] ?][?if local_minister_party=="Menshevik": (<span class="tooltip-text" title="Menshevik" style="color: var(--m-color);">RSDLP(u)</span>)?][?if local_minister_party=="Left-SR": (<span class="tooltip-text" title="Left-SR" style="color: var(--lsr-color);">Left-SR</span>)?][?if local_minister_party=="SR": (<span class="tooltip-text" title="Socialist Revolutionary" style="color: var(--sr-color);">SR</span>)?][?if local_minister_party=="SD-Int": (<span class="tooltip-text" title="Social-Democratic Internationalist" style="color: var(--sdi-color);">SD-Int</span>)?][?if local_minister_party=="NS": (<span class="tooltip-text" title="Popular Socialist" style="color: var(--ns-color);">NS</span>)?]
 
-
-**In government:** [+ governing_parties_str +]
-
 = CEC
 
 >**Chair: ** [+ soviet_chair +] [?if soviet_chair_party=="Bolshevik": (<span style="color: var(--bolshevik-color);">RCP(b)</span>)?]
