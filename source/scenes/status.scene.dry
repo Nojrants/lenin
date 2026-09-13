@@ -91,9 +91,6 @@ Q.other_soviet_display = Math.round((Q.anarchist_soviet + Q.maximalist_soviet + 
 
 >>**Public debt:** [+ publicdebt +]
 
-// >**Party membership:** [+ party_membership_display +]
-// >>**Party funds:** [+ b_resources +]
-
 
 [?if sovnarkom_created = 1 : <h1>Sovnarkom</h1> ?]
 
