@@ -74,9 +74,9 @@ Q.party_membership_display = (Q.party_membership * 1000).toLocaleString();
 **Week [+ week +], [+ month : month +] [+ year +]**
 
 >**Ruling group:** [+ position +]
->>**Instability:** [+ instability +]
+>>**Stability:** [+ instability : instability +]
 
->>**Democraticity:** [+ democraticity +]
+>>**Democraticity:** [+ democraticity : democraticity +]
 
 >**Resources:** [+ resources +]
 >>**Income:** [+ income +]
@@ -124,58 +124,39 @@ Q.party_membership_display = (Q.party_membership * 1000).toLocaleString();
 >>[?if property_minister != "None": **Properties:** [+ property_minister +] [?if property_minister_party=="Bolshevik" and property_minister != "None" and property_minister != "Vacant" : (<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>)?] ?][?if property_minister_party=="Menshevik": (<span class="tooltip-text" title="Menshevik" style="color: var(--m-color);">RSDLP(u)</span>)?][?if property_minister_party=="Left-SR": (<span class="tooltip-text" title="Left-SR" style="color: var(--lsr-color);">Left-SR</span>)?][?if property_minister_party=="SR": (<span class="tooltip-text" title="Socialist Revolutionary" style="color: var(--sr-color);">SR</span>)?][?if property_minister_party=="SD-Int": (<span class="tooltip-text" title="Social-Democratic Internationalist" style="color: var(--sdi-color);">SD-Int</span>)?][?if property_minister_party=="NS": (<span class="tooltip-text" title="Popular Socialist" style="color: var(--ns-color);">NS</span>)?]
 
 >>[?if local_minister != "None": **Local Gov:** [+ local_minister +] [?if local_minister_party=="Bolshevik" and local_minister != "None" and local_minister != "Vacant" : (<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>)?] ?][?if local_minister_party=="Menshevik": (<span class="tooltip-text" title="Menshevik" style="color: var(--m-color);">RSDLP(u)</span>)?][?if local_minister_party=="Left-SR": (<span class="tooltip-text" title="Left-SR" style="color: var(--lsr-color);">Left-SR</span>)?][?if local_minister_party=="SR": (<span class="tooltip-text" title="Socialist Revolutionary" style="color: var(--sr-color);">SR</span>)?][?if local_minister_party=="SD-Int": (<span class="tooltip-text" title="Social-Democratic Internationalist" style="color: var(--sdi-color);">SD-Int</span>)?][?if local_minister_party=="NS": (<span class="tooltip-text" title="Popular Socialist" style="color: var(--ns-color);">NS</span>)?]
-
+<br>
 
 **Parties in government:** [+ governing_parties_str +]
 
+= CEC
 
+>**Chair: ** [+ soviet_chair +] [?if soviet_chair_party=="Bolshevik": (<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>)?]
 
+>> **<span style="color: var(--bolshevik-color);">Bolsheviks</span>:** [+ b_soviet +]%
 
-[? if not ca_election_held: Constituent Assembly elections: [? if ca_scheduled: Week [+ next_election_week +], [+ next_election_month : month +] [+ next_election_year +] ?] [? if not ca_scheduled: Not scheduled ?] ?]
+>> **<span style="color: var(--m-color);">Mensheviks</span>:** [+ left_m_soviet + m_soviet + right_m_soviet +]%
 
-[? if ca_election_held: Constituent Assembly convocation: Week [+ ca_week +], [+ ca_month : month +] [+ ca_year +] ?]
+>> **<span style="color: var(--lsr-color);">Left-SRs</span>:** [+ lsr_soviet +]%
 
-= Central Executive Committee
+>> **<span style="color: var(--sr-color);">SRs</span>:** [+ sr_soviet + right_sr_soviet +]%
 
->**Chair: ** [+ prime_minister +] [?if prime_minister_party=="Bolshevik": (<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>)?]
-
->**Composition:**
->> **Mensheviks:** [+ m_soviet +]%
-
->> **Bolsheviks:** [+ b_soviet +]%
-
->> **SRs:** [+ sr_soviet +]%
-
->> **Anarchists:** [+ anarchist_soviet +]%
-
->> **Others:** [+ other_soviet +]%
-
->> [? if defensist_split: Menshevik-Defensists: [+ defensist_soviet_votes_dec +]% ?]
-
-[? if internationalist_split: Menshevik-Internationalists: [+ internationalist_soviet_votes_dec +]% ?]
-[? if right_sr_split: Right-SRs: [+ right_sr_soviet_votes_dec +]% ?]
-[? if left_sr_split: Left-SRs: [+ left_sr_soviet_votes_dec +]% ?]
+>> **<span style="color: var(--other-color);">Others</span>:** [+ anarchist_soviet + maximalist_soviet + sdi_soviet + popular_socialist_soviet + other_soviet +]%
 
 = Support
 
->**Party dissent:** [? if player_party == "b": [+ b_dissent_percent : dissent +] ?]
+>**General unrest:** [+ ((elites_unrest * elites) + (middle_unrest * middle) + (clergy_unrest * clergy) + (workers_unrest * workers) + (peasants_unrest * peasants) + (kulaks_unrest * kulaks) + (intelligentsia_unrest * intelligentsia) + (soldiers_unrest * soldiers) + (underclass_unrest * underclass) + (students_unrest * students) / 100) : war_weariness +]
 
+>>**Labor unrest:** [+ workers_unrest : war_weariness +]
+
+>>**Rural unrest:** [+ peasants_unrest : war_weariness +]
+
+>**Party dissent:** [? if player_party == "b": [+ b_dissent_percent : dissent +] ?]<br>
 >**War weariness:** [+ war_weariness : war_weariness +]
-
->**Soldier unrest:** [+ soldier_unrest : war_weariness +]
-
->**Rural unrest:** [+ rural_unrest : war_weariness +]
-
->**Labor unrest:** [+ labor_unrest : war_weariness +]
-
 
 = Statistics
 
-# Real income (% of 1913): [+ income +]%
-> **Monthly inflation:** [+ monthly_inflation +]% ([+ inflation +]% annually)
-
-> **Hunger:** [+ hunger : hunger +]
-
+>**Inflation:** [+ monthly_inflation +]% ([+ inflation +]% p.a.)<br>
+> **Hunger:** [+ hunger : hunger +]<br>
 > **Unemployment:** [+ unemployed +]%
 
 
