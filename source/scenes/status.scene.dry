@@ -77,8 +77,6 @@ Q.other_soviet_display = Math.round((Q.anarchist_soviet + Q.maximalist_soviet + 
 
 = Vitals
 
-**Week [+ week +], [+ month : month +] [+ year +]**
-
 >**Ruling group:** [+ position +]
 >>**Stability:** [+ instability : instability +]
 
