@@ -1256,13 +1256,6 @@ Q.minorities_pro_soviet = 60;
 
 // Provisional government
 
-// Petrograd Soviet compositions
-// I can't find hard numbers
-Q.b_soviet = 9;
-Q.m_soviet = 40;
-Q.sr_soviet = 33;
-Q.other_soviet = 18;
-
 // Soviet electoral bonuses
 Q.m_soviet_bonus = 1;
 Q.sr_soviet_bonus = 1;
