@@ -1,8 +1,8 @@
 
-(..15) <span style="color: var(--level1-color);">Nonexistent</span>
-(15..30) <span style="color: var(--level2-color);">Repressive</span>
-(30..45) <span style="color: var(--level3-color);">Limited</span>
+(..15) <span style="color: var(--level7-color);">Nonexistent</span>
+(15..30) <span style="color: var(--level6-color);">Repressive</span>
+(30..45) <span style="color: var(--level5-color);">Limited</span>
 (45..60) <span style="color: var(--level4-color);">Acceptable</span>
-(60..85) <span style="color: var(--level5-color);">Credible</span>
-(85..100) <span style="color: var(--level6-color);">Commendable</span>
-(100..) <span style="color: var(--level7-color);">Outstanding</span>
+(60..85) <span style="color: var(--level3-color);">Credible</span>
+(85..100) <span style="color: var(--level2-color);">Commendable</span>
+(100..) <span style="color: var(--level1-color);">Outstanding</span>
