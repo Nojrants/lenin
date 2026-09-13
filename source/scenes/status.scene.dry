@@ -94,7 +94,8 @@ Q.other_soviet_display = Math.round((Q.anarchist_soviet + Q.maximalist_soviet + 
 >**Party membership:** [+ party_membership_display +]
 >>**Party funds:** [+ b_resources +]
 
-= Sovnarkom
+
+[?if sovnarkom_created = 1 : <h2>Sovnarkom</h2> ?]
 
 [?if sovnarkom_created = 1 : <div class="sovnarkom-chair">**Chair: ** [+ prime_minister +] [?if prime_minister_party=="Bolshevik": (<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>)?][?if prime_minister_party=="Menshevik": (<span class="tooltip-text" title="Menshevik" style="color: var(--m-color);">RSDLP(u)</span>)?][?if prime_minister_party=="Left-SR": (<span class="tooltip-text" title="Left-SR" style="color: var(--lsr-color);">Left-SR</span>)?][?if prime_minister_party=="SR": (<span class="tooltip-text" title="Socialist Revolutionary" style="color: var(--sr-color);">SR</span>)?][?if prime_minister_party=="SD-Int": (<span class="tooltip-text" title="Social-Democratic Internationalist" style="color: var(--sdi-color);">SD-Int</span>)?][?if prime_minister_party=="NS": (<span class="tooltip-text" title="Popular Socialist" style="color: var(--ns-color);">NS</span>)?]</div> ?]
 [?if sovnarkom_created = 1 : <div class="sovnarkom-item">**Deputy: ** [+ deputy_pm +] [?if deputy_pm_party=="Bolshevik": (<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>)?]</div> ?]
