@@ -281,7 +281,7 @@ Q.bagmen = 0;
 Q.bagmen_unrest = 0;
 Q.bagmen_strength = 0;
 
-
+Q.general_unrest = ((Q.elites_unrest * Q.elites) + (Q.middle_unrest * Q.middle) + (Q.clergy_unrest * Q.clergy) + (Q.workers_unrest * Q.workers) + (Q.peasants_unrest * Q.peasants) + (Q.kulaks_unrest * Q.kulaks) + (Q.intelligentsia_unrest * Q.intelligentsia) + (Q.soldiers_unrest * Q.soldiers) + (Q.underclass_unrest * Q.underclass) + (Q.students_unrest * Q.students)) / 100;
 
 
 
