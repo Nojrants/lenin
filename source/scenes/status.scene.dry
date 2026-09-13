@@ -89,7 +89,7 @@ Q.other_soviet_display = Math.round((Q.anarchist_soviet + Q.maximalist_soviet + 
 
 >>**Public debt:** [+ publicdebt +]
 
-<hr>
+<hr2>
 
 [?if sovnarkom_created = 1 : <h1>Sovnarkom</h1> ?]
 
@@ -126,7 +126,7 @@ Q.other_soviet_display = Math.round((Q.anarchist_soviet + Q.maximalist_soviet + 
 
 >> **<span style="color: var(--other-color);">Others</span>:** [+ other_soviet_display +]%
 
-<hr>
+<hr2>
 
 = Support
 
