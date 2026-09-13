@@ -62,7 +62,7 @@ on-arrival: {!
   Q.sr_soviet = Q.sr_soviet_votes_dec;
   Q.right_sr_soviet = Q.right_sr_soviet_votes_dec;
   Q.popular_socialist_soviet = Q.popular_socialist_soviet_votes_dec;
-  Q.other_soviet = Math.round(10*(Q.other_soviet_votes_dec + Q.k_soviet_votes_dec + Q.conservative_soviet_votes_dec))/10;
+  Q.other_soviet = Math.round(10*(Q.other_soviet_votes_dec + Q.k_soviet_votes_dec + Q.rightist_soviet_votes_dec))/10;
 
   Q.b_soviet_display = Math.round(Q.b_soviet*10)/10; 
   Q.m_soviet_display = Math.round((Q.left_m_soviet + Q.m_soviet + Q.right_m_soviet)*10)/10; 
@@ -70,6 +70,11 @@ on-arrival: {!
   Q.sr_soviet_display = Math.round((Q.sr_soviet + Q.right_sr_soviet)*10)/10; 
   Q.other_soviet_display = Math.round((Q.anarchist_soviet + Q.maximalist_soviet + Q.sdi_soviet + Q.popular_socialist_soviet + Q.other_soviet)*10)/10; 
   Q.soviet_chair = "Kamenev"; Q.soviet_chair_party="Bolshevik";
+
+  console.log("other_soviet_votes_dec: ", Q.other_soviet_votes_dec);
+  console.log("k_soviet_votes_dec: ", Q.k_soviet_votes_dec);
+  console.log("rightist_soviet_votes_dec: ", Q.rightist_soviet_votes_dec);
+  console.log("other_soviet: ", Q.other_soviet);
 !}
 on-display: {!
 // do the graphs
