@@ -45,11 +45,7 @@ max-visits: 1
 @post_election
 go-to: 2nd_soviet_menu
 on-arrival: {!
-  Q.soviet_efficacy -= 0.05;
-  Q.m_in_exco = 0;
-  Q.sr_in_exco = 0;
-  Q.b_in_exco = 0;
-  Q.soviet_congress += 24;
+  Q.soviet_congress_timer = 24;
 
   Q.anarchist_soviet = Q.anarchist_soviet_votes_dec;
   Q.maximalist_soviet = Q.maximalist_soviet_votes_dec;
