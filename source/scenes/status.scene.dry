@@ -91,8 +91,8 @@ Q.other_soviet_display = Math.round((Q.anarchist_soviet + Q.maximalist_soviet + 
 
 >>**Public debt:** [+ publicdebt +]
 
->**Party membership:** [+ party_membership_display +]
->>**Party funds:** [+ b_resources +]
+// >**Party membership:** [+ party_membership_display +]
+// >>**Party funds:** [+ b_resources +]
 
 
 [?if sovnarkom_created = 1 : <h1>Sovnarkom</h1> ?]
@@ -116,7 +116,7 @@ Q.other_soviet_display = Math.round((Q.anarchist_soviet + Q.maximalist_soviet + 
 [?if sovnarkom_created = 1 and property_minister != "None" : <div class="sovnarkom-item">**Properties:** [+ property_minister +] [?if property_minister_party=="Bolshevik" and property_minister != "None" and property_minister != "Vacant" : (<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>)?][?if property_minister_party=="Menshevik": (<span class="tooltip-text" title="Menshevik" style="color: var(--m-color);">RSDLP(u)</span>)?][?if property_minister_party=="Left-SR": (<span class="tooltip-text" title="Left-SR" style="color: var(--lsr-color);">Left-SR</span>)?][?if property_minister_party=="SR": (<span class="tooltip-text" title="Socialist Revolutionary" style="color: var(--sr-color);">SR</span>)?][?if property_minister_party=="SD-Int": (<span class="tooltip-text" title="Social-Democratic Internationalist" style="color: var(--sdi-color);">SD-Int</span>)?][?if property_minister_party=="NS": (<span class="tooltip-text" title="Popular Socialist" style="color: var(--ns-color);">NS</span>)?]</div> ?]
 [?if sovnarkom_created = 1 and local_minister != "None" : <div class="sovnarkom-item">**Local Gov:** [+ local_minister +] [?if local_minister_party=="Bolshevik" and local_minister != "None" and local_minister != "Vacant" : (<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>)?][?if local_minister_party=="Menshevik": (<span class="tooltip-text" title="Menshevik" style="color: var(--m-color);">RSDLP(u)</span>)?][?if local_minister_party=="Left-SR": (<span class="tooltip-text" title="Left-SR" style="color: var(--lsr-color);">Left-SR</span>)?][?if local_minister_party=="SR": (<span class="tooltip-text" title="Socialist Revolutionary" style="color: var(--sr-color);">SR</span>)?][?if local_minister_party=="SD-Int": (<span class="tooltip-text" title="Social-Democratic Internationalist" style="color: var(--sdi-color);">SD-Int</span>)?][?if local_minister_party=="NS": (<span class="tooltip-text" title="Popular Socialist" style="color: var(--ns-color);">NS</span>)?]</div> ?]
 
-= Central Executive Committee
+= Central Executive
 
 >**Chair: ** [+ soviet_chair +] [?if soviet_chair_party=="Bolshevik": (<span style="color: var(--bolshevik-color);">RCP(b)</span>)?]
 
