@@ -69,8 +69,8 @@ We have enforced party discipline to reduce dissent across all factions.
 @demand_congress
 title: Demand a Party Congress
 subtitle: Begin planning to hold a congress of the RCP(b). 
-unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?][? if party_congress_timer > 0 : [+ party_congress_timer +] months before next advisor action. ?]
-choose-if: advisor_action_timer = 0
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?][? if party_congress_timer >= 10 : A party congress has already been scheduled. ?]
+choose-if: advisor_action_timer = 0 and party_congress_timer < 10
 on-arrival: advisor_action_timer = 2; party_congress_timer = 10; time_to_election = 10
 call: set_next_election_time
 
