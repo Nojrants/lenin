@@ -1433,6 +1433,8 @@ Q.rodzianko_advisor = 0; // Mikhail Rodzianko
 
 // bolshevik advisors
 Q.sovnarkom_advisor = 1; 
+Q.cec_advisor = 1; 
+Q.scc_advisor = 1; 
 Q.lenin_advisor = 1; 
 Q.sverdlov_advisor = 0; 
 Q.trotsky_advisor = 0;
