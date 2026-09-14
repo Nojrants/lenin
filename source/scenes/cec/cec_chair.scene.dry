@@ -3,6 +3,7 @@ new-page: true
 is-card: true
 choose-if: soviet_chair_party=="Bolshevik"
 tags: cec
+priority: 100
 on-arrival: {!
   dendryUI.dendryEngine.goToScene(Q.soviet_chair.toLowerCase());
 !}
