@@ -1,0 +1,10 @@
+title: Call for a soviet election.
+new-page: true
+choose-if: soviet_congress_timer > 8
+unavailable-subtitle: A congress is already scheduled for within the next two months. 
+tags: cec
+on-arrival: {!
+  Q.soviet_congress_timer = 8; 
+!}
+
+We have scheduled elections to the next All-Russian Congress of Soviets. 
