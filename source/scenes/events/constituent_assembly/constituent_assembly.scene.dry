@@ -502,7 +502,7 @@ Angered by the rejection of the Declaration, Lenin calls for the Bolsheviks to i
 
 @wait
 title: Let's wait and see where this goes.
-choose-if: moderate_strength >= leninist_strength
+choose-if: (moderate_strength >= leninist_strength) or coalition_government = 1
 unavailable-subtitle: The Moderates don't have enough strength for this.
 
 @walkout
