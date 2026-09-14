@@ -1,0 +1,6 @@
+title: Chairperson — [+ soviet_chair +] [?if soviet_chair_party=="Bolshevik": (<span style="color: var(--bolshevik-color);">RCP(b)</span>)?][?if soviet_chair_party=="Menshevik": (<span style="color: var(--m-color);">RSDLP</span>)?][?if soviet_chair_party=="Left-SR": (<span style="color: var(--lsr-color);">Left-SR</span>)?][?if soviet_chair_party=="SR": (<span style="color: var(--sr-color);">SR</span>)?][?if soviet_chair_party=="SD-Int": (<span style="color: var(--sdi-color);">SD-Int</span>)?][?if soviet_chair_party=="NS": (<span style="color: var(--ns-color);">NS</span>)?]
+new-page: true
+is-card: true
+choose-if: soviet_chair_party=="Bolshevik"
+tags: cec
+go-to: [+ soviet_chair +]
