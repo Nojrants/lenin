@@ -448,16 +448,24 @@ achievement: lsr_coalition
 on-arrival: {!
   Q.coalition_government = 2; Q.lsr_in_gov = 1; 
   Q.lsr_relation += 10; Q.lsr_strength += 10;   
-  Q.democraticity += 1; Q.instability -= 1; Q.vikzhel_unrest -= 20;
+  Q.democraticity += 1; Q.instability -= 1; Q.vikzhel_unrest -= 20; 
   Q.moderate_dissent -= 5; Q.moderate_strength += 5;
   Q.coalition_actions_timer = 1;
+
+  if (Q.vikzhel_strike == 1) {
+    Q.vikzhel_strike_ended = 1;
+    Q.workers_unrest -= 10;
+    Q.train_capacity = Q.previous_train_capacity;
+    Q.industry = Q.previous_industry;
+    Q.transportation_industry = Q.previous_transportation_industry;
+  }
 !}
 
 = Coalition Created
 
 We have formed a coalition agreement! Though not an all-socialist government, the inclusion of another party helps bolster our government's legitimacy somewhat. 
 
-Satisfied with our efforts, Vikzhel has announced they are lifting their strike. 
+[?if vikzhel_strike_ended = 1 : Satisfied with our efforts, Vikzhel has announced they are lifting their strike. ?]
 
 
 
