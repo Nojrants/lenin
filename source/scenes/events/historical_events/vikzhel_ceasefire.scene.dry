@@ -2037,7 +2037,7 @@ subtitle: {!
 Overall skill: ★★★★<br>
 Suitability: ★☆</ul>
 !}
-tags: property_candidates
+tags: property_candidates2
 choose-if: sdi_relation >= 40 and education_minister != "Sukhanov" and property_minister != "Sukhanov"
 unavailable-subtitle: <span style="color: var(--sdi-color);">SD-Int.</span> — Party leader, writer, and public intellectual.<ul>Overall skill: ★★★★<br>Suitability: ★☆</ul>[?if sdi_relation < 40 : <br> Sukhanov won't accept this offer. ?][?if education_minister = "Sukhanov": <br> Sukhanov already has a post. ?]
 on-arrival: {!
