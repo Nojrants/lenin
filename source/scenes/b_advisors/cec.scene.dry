@@ -1,0 +1,17 @@
+title: CEC
+is-pinned-card: true
+tags: advisor
+card-image: img/soviet1.jpg
+view-if: cec_advisor = 1 and player_party = "b"
+new-page: true 
+
+= CEC
+
+Central Executive Committee
+  
+- #cec
+- @back: Return to main
+
+@back
+on-arrival: last_cabinet_action = 0
+go-to: root
