@@ -24,31 +24,31 @@ We can improve our relations with the other democratic or socialist parties.
 
 @anarchists
 title: Anarchists & Maximalists — Improve our relations. 
-subtitle: -1 party funds
-choose-if: b_resources >= 1 and anarchists_legal = 1
-unavailable-subtitle: [?if b_resources < 1: -1 party funds — We lack the resources for this. ?][?if anarchists_legal != 1: We have banned these groups. ?]
-on-arrival: anarchist_relation += 8*(1-b_dissent); maximalist_relation += 8*(1-b_dissent); b_resources -= 1;
+subtitle: -1 resources
+choose-if: resources >= 1 and anarchists_legal = 1
+unavailable-subtitle: [?if resources < 1: -1 resources — We lack the resources for this. ?][?if anarchists_legal != 1: We have banned these groups. ?]
+on-arrival: anarchist_relation += 8*(1-b_dissent); maximalist_relation += 8*(1-b_dissent); resources -= 1;
 
 We have improved our relations with the anarchists and maximalists. 
 
 
 @lsr
 title: Left-SRs — Improve our relations. 
-subtitle: -1 party funds
-choose-if: b_resources >= 1 and lsr_legal = 1
-unavailable-subtitle: [?if b_resources < 1: -1 party funds — We lack the resources for this. ?][?if lsr_legal != 1: We have banned this party. ?]
-on-arrival: lsr_relation += 8*(1-b_dissent); b_resources -= 1;
+subtitle: -1 resources
+choose-if: resources >= 1 and lsr_legal = 1
+unavailable-subtitle: [?if resources < 1: -1 resources — We lack the resources for this. ?][?if lsr_legal != 1: We have banned this party. ?]
+on-arrival: lsr_relation += 8*(1-b_dissent); resources -= 1;
 
 We have improved our relations with the Left-SRs. 
 
 
 @sr
 title: SRs — Can we repair relations with them as a whole?
-subtitle: -1 party funds
-choose-if: b_resources >= 1 and sr_legal = 1
-unavailable-subtitle: [?if b_resources < 1: -1 party funds — We lack the resources for this. ?][?if sr_legal != 1: We have banned these parties. ?]
+subtitle: -1 resources
+choose-if: resources >= 1 and sr_legal = 1
+unavailable-subtitle: [?if resources < 1: -1 resources — We lack the resources for this. ?][?if sr_legal != 1: We have banned these parties. ?]
 on-arrival:{!
-Q.b_resources -= 1;
+Q.resources -= 1;
 Q.moderate_dissent -= 3;
 Q.moderate_strength += 3;
 Q.leninist_dissent += 3;
@@ -74,11 +74,11 @@ Appealing to the SRs is unexpected, but welcome by those in favor of conciliatio
 
 @mensheviks
 title: Mensheviks — Can we repair relations with them as a whole? 
-subtitle: -1 party funds
-choose-if: b_resources >= 1 and mensheviks_legal = 1
-unavailable-subtitle: [?if b_resources < 1: -1 party funds — We lack the resources for this. ?][?if mensheviks_legal != 1: We have banned these parties. ?]
+subtitle: -1 resources
+choose-if: resources >= 1 and mensheviks_legal = 1
+unavailable-subtitle: [?if resources < 1: -1 resources — We lack the resources for this. ?][?if mensheviks_legal != 1: We have banned these parties. ?]
 on-arrival: {!
-Q.b_resources -= 1;
+Q.resources -= 1;
 Q.moderate_dissent -= 3;
 Q.moderate_strength += 3;
 Q.leninist_dissent += 3;
@@ -115,11 +115,11 @@ Appealing to the Mensheviks is unexpected, but welcome by those in favor of conc
 
 @kadets
 title: Kadets — Is there any point appealing to them? 
-subtitle: -1 party funds
-choose-if: b_resources >= 1 and kadets_legal = 1
-unavailable-subtitle: [?if b_resources < 1: -1 party funds — We lack the resources for this. ?][?if kadets_legal != 1: We have banned this party. ?]
+subtitle: -1 resources
+choose-if: resources >= 1 and kadets_legal = 1
+unavailable-subtitle: [?if resources < 1: -1 resources — We lack the resources for this. ?][?if kadets_legal != 1: We have banned this party. ?]
 on-arrival: {!
-Q.b_resources -= 1;
+Q.resources -= 1;
 Q.moderate_dissent -= 1;
 Q.moderate_strength += 2;
 Q.leninist_dissent += 20;
@@ -139,11 +139,11 @@ Reaching out to the Kadets shocks both their members and our own. Given our past
 
 @internationalists
 title: Reach out to all internationalists. 
-subtitle: -1 party funds
-choose-if: b_resources >= 1 and parties_legal = 1
-unavailable-subtitle: [?if b_resources < 1: -1 party funds — We lack the resources for this. ?][?if parties_legal != 1: We have banned all other parties. ?]
+subtitle: -1 resources
+choose-if: resources >= 1 and parties_legal = 1
+unavailable-subtitle: [?if resources < 1: -1 resources — We lack the resources for this. ?][?if parties_legal != 1: We have banned all other parties. ?]
 on-arrival: {!
-Q.b_resources -= 1;
+Q.resources -= 1;
 Q.moderate_dissent -= 3;
 Q.moderate_strength += 3;
 Q.leninist_dissent += 3;
@@ -187,11 +187,11 @@ Appeals for a just and immediate peace resonate among fellow internationalists. 
 
 @moderates
 title: In these trying times, we must seek to repair relations with all fellow socialists. 
-subtitle: -1 party funds
-choose-if: b_resources >= 1 and parties_legal = 1
-unavailable-subtitle: [?if b_resources < 1: -1 party funds — We lack the resources for this. ?][?if parties_legal != 1: We have banned all other parties. ?]
+subtitle: -1 resources
+choose-if: resources >= 1 and parties_legal = 1
+unavailable-subtitle: [?if resources < 1: -1 resources — We lack the resources for this. ?][?if parties_legal != 1: We have banned all other parties. ?]
 on-arrival: {!
-Q.b_resources -= 1;
+Q.resources -= 1;
 Q.moderate_dissent -= 5;
 Q.moderate_strength += 5;
 Q.leninist_dissent += 8;
