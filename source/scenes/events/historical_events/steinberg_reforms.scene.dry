@@ -88,7 +88,7 @@ on-arrival: {!
   if (Q.local_minister_party != "Bolshevik") { Q.local_minister = "Vacant"; Q.local_minister_party = ""; }
   
   Q.vikzhel_unrest += 20; 
-  if (Q.vikzhel_unrest >= 50 and Q.vikzhel_strength >= 25) {
+  if (Q.vikzhel_unrest >= 50 && Q.vikzhel_strength >= 25) {
     Q.vikzhel_strike = 1;
     Q.workers_unrest += 10;
     Q.previous_train_capacity = Q.train_capacity; 
