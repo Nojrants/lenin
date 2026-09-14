@@ -2,7 +2,6 @@ title: Lev Kamenev
 is-pinned-card: true
 tags: advisor, cec
 card-image: img/portraits/b/kamenev.jpg
-view-if: kamenev_advisor = 1 and player_party = "b"
 new-page: true 
 
 = Lev Kamenev
@@ -10,30 +9,31 @@ new-page: true
 Lev Kamenev is a Bolshevik leader who has a more conciliatory position towards the other socialists.
 
 - @support_moderate
-- @m_relations
+- @moderate_relations
 - @soviet_campaigning
 - @root: Return to main
 
 @support_moderate
-title:  Promote the course of the Moderates.
+title: Promote the course of the Moderates
 choose-if: advisor_action_timer = 0
 unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] weeks before next advisor action. ?]
-on-arrival: advisor_action_timer = 4;
+on-arrival: advisor_action_timer = 4; 
 go-to: b_ideology.support_moderate 
 
 @m_relations
-title: Menshevik Relations
-subtitle: Work with the Mensheviks, and increase Internationalist support. -1 resource
+title: Intra-party Outreach
+subtitle: Build cooperative relations with other parties in the CEC. 
 choose-if: advisor_action_timer = 0 and b_resources >= 1
-unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] weeks before next advisor action. ?][? if b_resources < 1: Not enough resources. ?]
-on-arrival: advisor_action_timer = 4; b_resources -= 1; m_b_relation += 7*(1-b_dissent);
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] weeks before next advisor action. ?]
+on-arrival: advisor_action_timer = 4; 
+go-to: b_inter_party_relationships.moderates
 
 @soviet_campaigning
 title: Soviet Campaigning
-subtitle: Increase our vote share in the Petrograd Soviet. -1 resource
+subtitle: Increase our vote share in the soviets.
 choose-if: advisor_action_timer = 0 and b_resources >= 1
-unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] weeks before next advisor action. ?][? if b_resources < 1: Not enough resources. ?]
-on-arrival: advisor_action_timer = 4
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] weeks before next advisor action. ?]
+on-arrival: advisor_action_timer = 4; 
 go-to: minority_party_soviet.s_campaign
 
 
