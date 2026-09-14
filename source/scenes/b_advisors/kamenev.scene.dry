@@ -17,12 +17,11 @@ Lev Kamenev is a Bolshevik leader who has a more conciliatory position towards t
 - @root: Return to main
 
 @support_moderate
-title: Moderate Ideology
-subtitle: Support the moderate position.
+title:  Promote the course of the Moderates.
 choose-if: advisor_action_timer = 0
 unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] weeks before next advisor action. ?]
 on-arrival: advisor_action_timer = 4;
-go-to: b_ideology.support_moderate if moderate_strength <= 40; b_ideology.adopt_moderate if moderate_strength > 40 and b_leadership != 1; b_ideology.moderate_continue if b_leadership = 1
+go-to: b_ideology.support_moderate 
 
 @m_relations
 title: Menshevik Relations
