@@ -1,0 +1,62 @@
+title: Review and ratify recent Sovnarkom decrees. 
+subtitle: The CEC may add its stamp of approval to laws created by Sovnarkom. 
+new-page: true
+tags: cec
+on-arrival: {!
+  Q.democraticity += 3; Q.instability -= 1;
+  Q.cec_incident = 0;
+  if (Q.b_soviet_display <= 50) { Q.cec_incident += 1; }
+  if (
+      ((Q.left_m_relation <= 60 || Q.m_relation <= 55 || Q.right_m_relation <= 50) &&  Q.m_soviet_display > 0) ||
+      ((Q.centre_sr_relation <= 55 || Q.right_sr_relation <= 50) && Q.sr_soviet_display > 0) ||
+      (Q.lsr_relation <= 65 && Q.lsr_soviet_display > 0)
+    )  { Q.cec_incident += 1; }
+!}
+
+= Legislation Review
+
+Both the CEC and Sovnarkom have the ability to pass laws in their own right, though it's nonetheless prudent to have both bodies give their approval to key legislation. A number of recent pieces of legislation are discussed by the CEC and approved without incident. 
+
+[?if cec_incident > 0 : On the other hand, the opposition parties take this opportunity to attack a number of recent decrees, causing embarrassment for the government. ?]
+
+- @sovnarkom_powers
+- @amend
+- @reject
+- @great
+
+
+
+@sovnarkom_powers
+title: The opposition is demanding a discussion on the separation of powers...
+view-if: sovnarkom_powers_vote != 1
+go-to: sovnarkom_powers
+
+@amend
+title: Amend some laws, cancel a few we no longer need. 
+view-if: sovnarkom_powers_vote = 1 and cec_incident > 0
+on-arrival: {!
+  Q.left_m_relation += 2; Q.m_relation += 2; Q.right_m_relation += 2; Q.sdi_relation += 2; Q.lsr_relation += 2; Q.centre_sr_relation += 2; Q.right_sr_relation += 2; Q.ns_relation += 2;
+  Q.left_m_strength += 2; Q.lsr_strength += 2; 
+  Q.democraticity += 1; Q.instability -= 0.5; 
+  Q.moderate_unrest -= 5; Q.leninist_unrest += 5; 
+  Q.moderate_strength += 2;
+!}
+
+@reject
+title: Instruct the party fraction to ignore the opposition.
+choose-if: b_soviet_display > 50
+view-if: sovnarkom_powers_vote = 1 and cec_incident > 0
+unavailable-subtitle: The opposition has the votes to force through amendments. 
+on-arrival: {!
+  Q.left_m_relation -= 2; Q.m_relation -= 2; Q.right_m_relation -= 2; Q.sdi_relation -= 2; Q.lsr_relation -= 2; Q.centre_sr_relation -= 2; Q.right_sr_relation -= 2; Q.ns_relation -= 2;
+  Q.left_m_strength -= 2; Q.lsr_strength -= 2; 
+  Q.democraticity -= 1; Q.instability += 0.5; 
+  Q.moderate_unrest += 5; Q.leninist_unrest -= 5; 
+  Q.moderate_strength -= 2;
+!}
+
+@great
+title: Great work everyone! 
+choose-if: b_soviet_display > 50
+view-if: sovnarkom_powers_vote = 1 and cec_incident = 0
+go-to: root
