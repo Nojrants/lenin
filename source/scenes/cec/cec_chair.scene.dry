@@ -3,4 +3,5 @@ new-page: true
 is-card: true
 choose-if: soviet_chair_party=="Bolshevik"
 tags: cec
-go-to: {! Q.soviet_chair !}
+
+[?if soviet_chair == "Kamenev": go-to: Kamenev ?]
