@@ -16,6 +16,7 @@ Which ideological current should be supported?
 - @support_moderate
 - @support_leninist
 - @support_left
+- @support_vpered
 - @support_unity
 - @root: No, we will not change any of our ideological positions.
 - @easy_discard
@@ -41,7 +42,7 @@ on-arrival: {!
   Q.moderate_dissent += 5; Q.leftcom_dissent -= 10; Q.vperedist_dissent -= 5;
 !}
 
-@support_left
+@support_vpered
 title: Promote the avant-garde projects of the Vperedists. 
 on-arrival: {!
   Q.leftcom_strength += 2; Q.vperedist_strength += 10;
