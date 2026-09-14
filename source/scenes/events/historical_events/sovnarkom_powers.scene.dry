@@ -1,1 +1,11 @@
+title: Discussion in the CEC 
+subtitle: The opposition is demanding a discussion on the separation of powers...
+view-if: sovnarkom_powers != 1 and (democraticity <= 40 or month = 12)
+new-page: true
+max-visits: 1
+tags: event
+on-arrival: {!
+  Q.sovnarkom_powers = 1; 
+!}
 
+The opposition is demanding a discussion on the separation of powers...
