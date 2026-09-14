@@ -2004,7 +2004,7 @@ go-to: property_menu
 
 @property_menu
 
-- #property_candidates
+- #property_candidates2
 
 @property_karelin
 title: Vladimir Karelin
@@ -2018,7 +2018,7 @@ unavailable-subtitle: {!
 Overall skill: ★★★☆<br>
 Suitability: ★★</ul>
 !}
-tags: property_candidates
+tags: property_candidates2
 choose-if: property_minister != "Karelin" 
 on-arrival: {!
   if (Q.property_minister_party == "Menshevik") { Q.m_represented -= 1; Q.commissariats_held += 1; }
@@ -2052,7 +2052,7 @@ go-to: cabinet_negotiations
 
 @property_vacant
 title: Cancel the proposed commissariat.
-tags: property_candidates
+tags: property_candidates2
 on-arrival: {!
   if (Q.property_minister_party == "Menshevik") { Q.m_represented -= 1; Q.commissariats_held += 1; }
   if (Q.property_minister_party == "SR") { Q.sr_represented -= 1; Q.commissariats_held += 1; }
@@ -2067,7 +2067,7 @@ go-to: cabinet_negotiations
 title: Cancel reassignment.
 subtitle: [?if property_minister != "None": Keep [+ property_minister +] in place. ?]
 view-if: property_minister != "None"
-tags: property_candidates
+tags: property_candidates2
 go-to: cabinet_negotiations
 
 
@@ -2081,7 +2081,7 @@ go-to: local_menu
 
 @local_menu
 
-- #local_candidates
+- #local_candidates2
 
 @local_trutovsky
 title: Vladimir Trutovsky
@@ -2095,7 +2095,7 @@ unavailable-subtitle: {!
 Overall skill: ★★☆<br>
 Suitability: ★★★★</ul>
 !}
-tags: local_candidates
+tags: local_candidates2
 choose-if: local_minister != "Trutovsky" 
 on-arrival: {!
   if (Q.local_minister_party == "Menshevik") { Q.m_represented -= 1; Q.commissariats_held += 1; }
@@ -2114,7 +2114,7 @@ subtitle: {!
 Overall skill: ★★☆<br>
 Suitability: ★★★</ul>
 !}
-tags: local_candidates
+tags: local_candidates2
 choose-if: local_minister != "Maslov"
 unavailable-subtitle: {!
 <span style="color: var(--sr-color);">SR</span> — Laywer, statistician, and agronomist with experience in land policy and zemstvo politics.<ul>
@@ -2154,7 +2154,7 @@ on-arrival: {!
 
 @local_vacant
 title: Cancel the proposed commissariat.
-tags: local_candidates
+tags: local_candidates2
 on-arrival: {!
   if (Q.local_minister_party == "Menshevik") { Q.m_represented -= 1; Q.commissariats_held += 1; }
   if (Q.local_minister_party == "SR") { Q.sr_represented -= 1; Q.commissariats_held += 1; }
@@ -2169,6 +2169,6 @@ go-to: cabinet_negotiations
 title: Cancel reassignment.
 subtitle: [?if local_minister != "None": Keep [+ local_minister +] in place. ?]
 view-if: local_minister != "None"
-tags: local_candidates
+tags: local_candidates2
 go-to: cabinet_negotiations
 
