@@ -48,9 +48,9 @@ on-arrival: {!
     Q.workers_b -= 7; 
     Q.underclass_b -= 10;
   }
-  if (Q.b_dues) >= 5 {
-    Q.workers_b -= 3*Q.b_dues 
-    Q.underclass_b -= 3*Q.b_dues
+  if (Q.b_dues >= 5) {
+    Q.workers_b -= 3*Q.b_dues;
+    Q.underclass_b -= 3*Q.b_dues;
   }
   Q.leninist_dissent += 4; Q.moderate_dissent += 4; Q.leftcom_dissent += 4; Q.b_dissent += 0.1;
 !}
