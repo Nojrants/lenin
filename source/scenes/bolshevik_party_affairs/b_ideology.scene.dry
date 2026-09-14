@@ -9,67 +9,49 @@ tags: b_party
 
 = Questions of Ideology
 
-Within the Bolsheviks, there are two major ideological currents - a "moderate" current that argues for cooperation with the other socialist parties and possibly even the Provisional Government, and a more radical Leninist current that argues for a Bolshevik seizure of power on behalf of the Soviets. Most Bolsheviks will follow the predominant mood of the party, whatever that happens to be.
+Within the Bolsheviks, there are several ideological currents. Most Bolsheviks will follow the predominant mood of the party, whatever that happens to be.
 
 Which ideological current should be supported?
 
 - @support_moderate
-- @adopt_moderate
-- @moderate_continue
 - @support_leninist
-- @adopt_leninist
-- @leninist_continue
+- @support_left
+- @support_unity
 - @root: No, we will not change any of our ideological positions.
 - @easy_discard
 
 @support_moderate
-title: Support the moderate course of Kamenev and Zinoviev.
-view-if: moderate_strength < leninist_strength and b_war_policy != 2
-on-arrival: moderate_strength += 10; leninist_dissent += 10;
-
-The moderates support an internationalist war policy (i.e. negotiations to end the war), workers' councils, and the formation of an all-socialist provisional government.
-
-
-@adopt_moderate
-title: Adopt the moderate course of Kamenev and Zinoviev.
-view-if: moderate_strength >= leninist_strength and b_war_policy != 2
-on-arrival: b_war_policy = 2; b_industrial_policy = 1; b_prov_gov_policy = 3; b_land_policy = 1; moderate_strength += 10; leninist_dissent += 10; lenin_advisor = 0; trotsky_advisor = 0; kamenev_advisor = 1; zinoviev_advisor = 1; b_leadership = 1;
-
-The moderates support an internationalist war policy (i.e. negotiations to end the war), workers' councils, and the formation of an all-socialist provisional government.
-
-Now, the moderates have control of the party's leadership and key positions within the party.
-
-@moderate_continue
-title: Continue to support Kamenev and Zinoviev's moderate plans.
-view-if: b_war_policy = 2
-on-arrival: moderate_dissent -= 10; moderate_strength += 8
-
-We are continuing to support the moderate course: an internationalist war policy (i.e. negotiations to end the war), workers' councils, and the formation of an all-socialist provisional government.
-
+title: Promote the course of the Moderates. 
+on-arrival: {!
+  Q.moderate_strength += 10; Q.leninist_strength -= 5; Q.leftcom_strength -= 5;
+  Q.moderate_dissent -= 5; Q.leninist_dissent += 10; Q.leftcom_dissent += 10; 
+!}
 
 @support_leninist
-title: Support Lenin's radical plans.
-view-if: leninist_strength < moderate_strength
-on-arrival: leninist_strength += 10; moderate_dissent += 10;
+title: Promote the course of the Leninists. 
+on-arrival: {!
+  Q.moderate_strength -= 5; Q.leninist_strength += 10; Q.leftcom_strength -= 5;
+  Q.moderate_dissent += 5; Q.leninist_dissent -= 5; Q.leftcom_dissent += 5; 
+!}
 
-Lenin supports an immediate end to the war without conditions, state or collective ownership of industries, and the overthrow of the Provisional Government in favor of one based in the Soviet of Workers' and Soldiers' Deputies.
+@support_left
+title: Promote further radicalism and extremism. 
+on-arrival: {!
+  Q.moderate_strength -= 5; Q.leftcom_strength += 5; Q.vperedist_strength += 2;
+  Q.moderate_dissent += 5; Q.leftcom_dissent -= 10; Q.vperedist_dissent -= 5;
+!}
 
-@adopt_leninist
-title: Adopt Lenin's radical plans.
-view-if: leninist_strength >= moderate_strength and b_war_policy != 3
-on-arrival: b_war_policy = 3; b_industrial_policy = 3; b_prov_gov_policy = 4; b_land_policy = 2; leninist_strength += 10; moderate_dissent += 10; stasova_advisor = 0; kamenev_advisor = 0; zinoviev_advisor = 0; lenin_advisor = 1; trotsky_advisor = 1 if trotsky_available; sverdlov_advisor = 1; b_leadership = 2;
+@support_left
+title: Promote the avant-garde projects of the Vperedists. 
+on-arrival: {!
+  Q.leftcom_strength += 2; Q.vperedist_strength += 10;
+  Q.leninist_dissent += 5; Q.leftcom_dissent -= 5; Q.vperedist_dissent -= 10;
+!}
 
-# drop stasova and shliapnikov?
+@support_unity
+title: Call for greater party unity among the factions. 
+on-arrival: {!
+  Q.moderate_dissent -= 5; Q.leninist_dissent -= 5; Q.leftcom_dissent -= 5; Q.vperedist_dissent -= 5;
+  Q.b_dissent * 0.75; 
+!}
 
-Lenin supports an immediate end to the war without conditions, state or collective ownership of industries, and the overthrow of the Provisional Government in favor of one based in the Soviet of Workers' and Soldiers' Deputies.
-
-The Leninists have shaken up the party's leadership, and now control all key positions.
-
-With this ideological program, we are calling for violent revolution against the Provisional Government. We should make preparations.
-
-@leninist_continue
-title: Continue to support Lenin's plans.
-view-if: b_war_policy = 3
-on-arrival: leninist_dissent -= 10; leninist_strength += 8
-
-We are continuing to support Lenin's plans: an immediate end to the war without conditions, state or collective ownership of industries, and the overthrow of the Provisional Government in favor of one based in the Soviet of Workers' and Soldiers' Deputies.
