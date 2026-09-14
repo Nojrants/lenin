@@ -4,7 +4,7 @@ new-page: true
 
 = Lev Kamenev
 
-Lev Kamenev is a Bolshevik leader who has a more conciliatory position towards the other socialists.
+Lev Kamenev is a Bolshevik leader who has a more conciliatory position towards the other socialist parties. 
 
 - @support_moderate
 - @moderate_relations
@@ -13,7 +13,8 @@ Lev Kamenev is a Bolshevik leader who has a more conciliatory position towards t
 - @root: Return to main
 
 @support_moderate
-title: Promote the course of the Moderates
+title: Bolshevik Moderation
+subtitle: Promote the course of the Moderates to party members. 
 choose-if: advisor_action_timer = 0
 unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] weeks before next advisor action. ?]
 on-arrival: advisor_action_timer = 4; 
