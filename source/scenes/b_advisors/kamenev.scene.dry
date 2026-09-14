@@ -34,7 +34,7 @@ title: Soviet Campaigning
 subtitle: Increase our vote share in the soviets.
 choose-if: advisor_action_timer = 0
 unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] weeks before next advisor action. ?]
-on-arrival: advisor_action_timer = 4; Q.workers_b += 2*(1-Q.b_dissent);
+on-arrival: advisor_action_timer = 4; workers_b += 2*(1-b_dissent);
 go-to: minority_party_soviet.s_campaign
 
 @ca_support
@@ -43,7 +43,7 @@ subtitle: [?if ca_election_held != 1 : Campaign in preparation of the Constituen
 view-if: ca_held != 1
 choose-if: advisor_action_timer = 0 
 unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] weeks before next advisor action. ?]
-on-arrival: advisor_action_timer = 4; Q.workers_b += 1*(1-Q.b_dissent);
+on-arrival: advisor_action_timer = 4; workers_b += 1*(1-b_dissent);
 go-to: b_media.support_ca
 
 
