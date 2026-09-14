@@ -19,7 +19,20 @@ Yet at the same time, the precariousness of the Bolshevik position has only hard
 @refuse_vikzhel
 title: We refuse to be blackmailed by counterrevolutionaries! 
 subtitle: Reject the offer to attend the conference. 
-on-arrival: sdi_relation -= 5; left_m_relation -= 5; centre_m_relation -= 5; right_m_relation -= 10; lsr_relation -= 5; centre_sr_relation -= 10; right_sr_relation -= 10; ns_relation -= 10; democraticity -= 1; instability += 4; moderate_dissent += 10; leninist_dissent -= 5; leftcom_dissent -= 5; vikzhel_unrest += 20; right_sr_strength += 2; right_m_strength += 2; 
+on-arrival: {!
+  Q.sdi_relation -= 5; Q.left_m_relation -= 5; Q.centre_m_relation -= 5; Q.right_m_relation -= 10; Q.lsr_relation -= 5; Q.centre_sr_relation -= 10; Q.right_sr_relation -= 10; Q.ns_relation -= 10; 
+  Q.democraticity -= 3; Q.instability += 5;
+  Q.right_sr_strength += 2; Q.right_m_strength += 2; 
+  Q.moderate_dissent += 10; Q.leninist_dissent -= 5; Q.leftcom_dissent -= 5;
+  Q.vikzhel_strike = 1; Q.vikzhel_unrest += 20; Q.workers_unrest += 10; 
+
+  Q.previous_train_capacity = Q.train_capacity; 
+	Q.previous_industry = Q.industry; 
+	Q.previous_transportation_industry = Q.transportation_industry;
+	Q.transportation_industry = 0.5; 
+	Q.train_capacity = Q.previous_train_capacity * 0.8; 
+	Q.industry = Q.previous_industry * 0.5; 
+!}
 
 Our refusal to cooperate entirely shocks the other parties, seemingly proving the right socialists correct after all—more than likely compromise will be impossible from here on out. Likewise, we receive immense condemnation from various interest groups, and even some members of our own party.
 
@@ -445,7 +458,20 @@ go-to: menu
 @reject_offer
 title: It seems we can't come to an agreement. 
 new-page: true
-on-arrival: sdi_relation -= 5; left_m_relation -= 5; centre_m_relation -= 5; right_m_relation -= 10; lsr_relation -= 5; centre_sr_relation -= 10; right_sr_relation -= 10; ns_relation -= 10; democraticity -= 1; instability += 4; moderate_dissent += 10; leninist_dissent -= 5; leninist_strength += 5; leftcom_dissent -= 5; vikzhel_unrest += 20; right_sr_strength += 2; right_m_strength += 2; 
+on-arrival: {!
+  Q.sdi_relation -= 5; Q.left_m_relation -= 5; Q.centre_m_relation -= 5; Q.right_m_relation -= 10; Q.lsr_relation -= 5; Q.centre_sr_relation -= 10; Q.right_sr_relation -= 10; Q.ns_relation -= 10; 
+  Q.democraticity -= 3; Q.instability += 5;
+  Q.right_sr_strength += 2; Q.right_m_strength += 2; 
+  Q.moderate_dissent += 10; Q.leninist_dissent -= 5; Q.leftcom_dissent -= 5;
+  Q.vikzhel_strike = 1; Q.vikzhel_unrest += 20; Q.workers_unrest += 10; 
+
+  Q.previous_train_capacity = Q.train_capacity; 
+	Q.previous_industry = Q.industry; 
+	Q.previous_transportation_industry = Q.transportation_industry;
+	Q.transportation_industry = 0.5; 
+	Q.train_capacity = Q.previous_train_capacity * 0.8; 
+	Q.industry = Q.previous_industry * 0.5; 
+!}
 
 = Negotiations Collapse
 
@@ -898,6 +924,15 @@ on-arrival: {!
   Q.right_sr_strength += 8; Q.right_m_strength += 8;   
   Q.democraticity -= 2; Q.instability += 6; Q.vikzhel_unrest += 20;
   Q.moderate_dissent += 10; Q.leninist_dissent -= 5; Q.leftcom_dissent -= 5;
+  Q.vikzhel_strike = 1; Q.vikzhel_unrest += 20; Q.workers_unrest += 10; 
+
+  Q.previous_train_capacity = Q.train_capacity; 
+	Q.previous_industry = Q.industry; 
+	Q.previous_transportation_industry = Q.transportation_industry;
+	Q.transportation_industry = 0.5; 
+	Q.train_capacity = Q.previous_train_capacity * 0.8; 
+	Q.industry = Q.previous_industry * 0.5; 
+
   if (Q.education_minister_party != "Bolshevik") {
     Q.education_minister = "Vacant";
     Q.education_minister_party = "Bolshevik";
