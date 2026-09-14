@@ -1,4 +1,4 @@
-title: Call for a Soviet Congress
+title: Call for a Soviet Congress.
 subtitle: Elections will be held within the next two months. 
 new-page: true
 choose-if: soviet_congress_timer > 8
