@@ -850,7 +850,7 @@ subtitle: {!
 Overall skill: ★★★<br>
 Suitability: ★★</ul>
 !}
-unavailable-subtitle: <span style="color: var(--lsr-color);">Left-SR</span> — Lawyer and party activistul>Overall skill: ★★★<br>Suitability: ★★</ul>[?if posts_minister == "Proshian" : <br>Proshian already has a post. ?]
+unavailable-subtitle: <span style="color: var(--lsr-color);">Left-SR</span> — Lawyer and party activist<ul>Overall skill: ★★★<br>Suitability: ★★</ul>[?if posts_minister == "Proshian" : <br>Proshian already has a post. ?]
 tags: trade_candidates3
 choose-if: posts_minister != "Proshian" and trade_minister != "Proshian"
 on-arrival: {!
@@ -1303,7 +1303,7 @@ subtitle: {!
 Overall skill: ★★★<br>
 Suitability: ★★</ul>
 !}
-unavailable-subtitle: <span style="color: var(--lsr-color);">Left-SR</span> — Lawyer and party activistul>Overall skill: ★★★<br>Suitability: ★★</ul>[?if trade_minister == "Proshian" : <br>Proshian already has a post. ?]
+unavailable-subtitle: <span style="color: var(--lsr-color);">Left-SR</span> — Lawyer and party activist<ul>Overall skill: ★★★<br>Suitability: ★★</ul>[?if trade_minister == "Proshian" : <br>Proshian already has a post. ?]
 tags: posts_candidates3
 choose-if: posts_minister != "Proshian" and trade_minister != "Proshian"
 on-arrival: {!
