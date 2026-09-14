@@ -15,9 +15,7 @@ The workers' militias were organized by the working classes in the industrial di
 - @loyalty
 - @recruitment
 - @arming
-- @mrc
-- @preparing
-- @revolution
+- @cheka
 - @root: No action is needed.
 - @easy_discard
 - @cancel_advisor_action
@@ -28,47 +26,36 @@ on-arrival: workers_militia_b_loyalty += 7*(1-b_dissent)
 
 Through our party organizations and propaganda campaigns, we are tying the militias closer to the Bolshevik party.
 
-# TODO: max recruitment depends on support
 
 @recruitment
 title: Recruit more workers into the militias.
 subtitle: -1 resource
-choose-if: workers_militia_strength <= 100 and b_resources >= 1
-unavailable-subtitle: [? if workers_militia_strength > 80 : There are not enough willing workers to recruit. ?][? if b_resources < 1 : Not enough resources. ?]
-on-arrival: workers_militia_strength += 6*(1-b_dissent); b_resources -= 1
+choose-if: workers_militia_strength <= 100 and resources >= 1
+unavailable-subtitle: [? if workers_militia_strength > 80 : There are not enough willing workers to recruit. ?][? if resources < 1 : Not enough resources. ?]
+on-arrival: workers_militia_strength += 6*(1-b_dissent); resources -= 1
 
 We have increased recruitment into the workers' militias.
 
 @arming
 title: Increase armaments for the militias.
 subtitle: -1 resource
-choose-if: workers_militia_militancy <= 1 and  b_resources >= 1
-unavailable-subtitle: [? if b_resources < 1: Not have enough resources. ?][? if workers_militia_militancy > 1 : We cannot arm them any further. ?]
-on-arrival: workers_militia_militancy += 0.09; b_resources -= 1;
+choose-if: workers_militia_militancy <= 1 and  resources >= 1
+unavailable-subtitle: [? if resources < 1: Not have enough resources. ?][? if workers_militia_militancy > 1 : We cannot arm them any further. ?]
+on-arrival: workers_militia_militancy += 0.09; resources -= 1;
 
 We have spent resources on purchasing more armaments for the workers' militias.
 
-@mrc
-title: Form a Military-Revolutionary Committee!
-subtitle: We will organize the workers' militias for the defense of the revolution against all enemies. -2 resources
-unavailable-subtitle: [? if b_resources < 2: Not enough resources. ?][? if not b_in_exco: We must control the Soviet's Executive Committee. ?]
-view-if: player_party = "b" and mrc = 0
-choose-if: b_resources >= 2 and b_in_exco
-on-arrival: soldiers_b += 15; workers_militia_b_loyalty += 25; mrc = 1; rev_progress += 1
-max-visits: 1
-
-The Petrograd Soviet has formed the Military-Revolutionary Committee, a committee to organize the workers' militias and garrison troops for the defense of the revolution. This ties together the workers' militias, the soldiers, and the Bolshevik party.
-
-@preparing
-title: Preparing for Revolution
-subtitle: The Provisional Government is weak; we must prepare for the uprising...
-view-if: player_party = "b" and mrc = 1 and b_in_exco and rev_progress < 4
-on-arrival: rev_progress += 1
+@cheka
+title: Recruit militiamen into the Cheka. 
+view-if: cheka_founded = 1
+on-arrival: {!
+  Q.workers_militia_strength -= 5;
+  Q.cheka += 5; Q.cheka_strength += 2; Q.cheka_militancy += 2;
+  Q.cheka_loyalty -= 0.1; 
+!}
 
 We make sure our party cadres are placed within the garrison and the workers' militias. We scout out key locations in the city that we might need to capture.
 
-@revolution
-title: It is time to launch the revolution!
-view-if: player_party = "b" and mrc = 1 and b_in_exco and rev_progress >= 3
+
 go-to: b_revolution
 
