@@ -66,7 +66,7 @@ on-arrival: {!
   Q.moderate_unrest += 10; Q.leninist_unrest -= 5; Q.leftcom_unrest -= 10;
   if (Q.lsr_in_gov == 1) { Q.lsr_in_gov = 0; Q.lsr_relation -= 10; }
   if (Q.m_in_gov == 1) { Q.m_in_gov = 0; Q.centre_m_relation -= 10; }
-  if (Q.sr_in_gov == 1) { Q.sr_in_gov = 0; Q.centr_sr_relation -= 10; }
+  if (Q.sr_in_gov == 1) { Q.sr_in_gov = 0; Q.centre_sr_relation -= 10; }
   if (Q.sdi_in_gov == 1) { Q.sdi_in_gov = 0; Q.sdi_relation -= 10; }
   if (Q.ns_in_gov == 1) { Q.ns_in_gov = 0; Q.ns_relation -= 10; }
   Q.right_m_strength += 5; Q.right_sr_strength += 5;
@@ -78,8 +78,8 @@ on-arrival: {!
   if (Q.trade_minister_party != "Bolshevik") { Q.trade_minister = "Vacant"; Q.trade_minister_party = ""; }
   if (Q.finance_minister_party != "Bolshevik") { Q.finance_minister = "Vacant"; Q.finance_minister_party = ""; }
   if (Q.justice_minister_party != "Bolshevik") { Q.justice_minister = "Vacant"; Q.justice_minister_party = ""; }
-  if (Q.labor_minister != "Bolshevik") { Q.labor_minister = "Vacant"; Q.labor_minister_party = ""; }
-  if (Q.agriculture_minister != "Bolshevik") { Q.agriculture_minister = "Vacant"; Q.agriculture_minister_party = ""; }
+  if (Q.labor_minister_party != "Bolshevik") { Q.labor_minister = "Vacant"; Q.labor_minister_party = ""; }
+  if (Q.agriculture_minister_party != "Bolshevik") { Q.agriculture_minister = "Vacant"; Q.agriculture_minister_party = ""; }
   if (Q.food_minister_party != "Bolshevik") { Q.food_minister = "Vacant"; Q.food_minister_party = ""; }
   if (Q.posts_minister_party != "Bolshevik") { Q.posts_minister = "Vacant"; Q.posts_minister_party = ""; }
   if (Q.nationalities_minister_party != "Bolshevik") { Q.nationalities_minister = "Vacant"; Q.nationalities_minister_party = ""; }
@@ -102,8 +102,8 @@ on-arrival: {!
 
 We terminate the coalition agreement, shocking and angering the other parties. 
 
-[?if vikzhel_unrest >= 50 and vikzhel_strength >= 25 and vikzhel_strike = 1 : Worse, Vikzhel has declared the resumption of their railroad strike, bringing industry back to a standstill. ?]  
-[?if vikzhel_unrest >= 50 and vikzhel_strength >= 25 and vikzhel_strike = 0 : Worse, Vikzhel has declared they are launching their promised railroad strike, bringing our industry to a standstill. ?]  
+[?if vikzhel_unrest >= 50 and vikzhel_strength >= 25 and vikzhel_strike == 1 : Worse, Vikzhel has declared the resumption of their railroad strike, bringing industry back to a standstill. ?]  
+[?if vikzhel_unrest >= 50 and vikzhel_strength >= 25 and vikzhel_strike == 0 : Worse, Vikzhel has declared they are launching their promised railroad strike, bringing our industry to a standstill. ?]  
 
 
 
