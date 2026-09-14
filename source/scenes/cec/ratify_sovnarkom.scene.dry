@@ -15,7 +15,7 @@ on-arrival: {!
 
 = Legislation Review
 
-Both the CEC and Sovnarkom have the ability to pass laws in their own right, though it's nonetheless prudent to have both bodies give their approval to key legislation. A number of recent pieces of legislation are discussed by the CEC and approved without incident. 
+Both the CEC and Sovnarkom have the ability to pass laws in their own right, but it's nonetheless prudent to have both bodies give their approval to key legislation. A number of recent pieces of legislation are discussed by the CEC and approved without incident. 
 
 [?if cec_incident > 0 : On the other hand, the opposition parties take this opportunity to attack a number of recent decrees, causing embarrassment for the government. ?]
 
