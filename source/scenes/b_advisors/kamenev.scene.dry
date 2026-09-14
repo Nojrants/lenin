@@ -11,6 +11,7 @@ Lev Kamenev is a Bolshevik leader who has a more conciliatory position towards t
 - @support_moderate
 - @moderate_relations
 - @soviet_campaigning
+- @ca_support
 - @root: Return to main
 
 @support_moderate
@@ -20,10 +21,10 @@ unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +
 on-arrival: advisor_action_timer = 4; 
 go-to: b_ideology.support_moderate 
 
-@m_relations
+@moderate_relations
 title: Intra-party Outreach
 subtitle: Build cooperative relations with other parties in the CEC. 
-choose-if: advisor_action_timer = 0 and b_resources >= 1
+choose-if: advisor_action_timer = 0 
 unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] weeks before next advisor action. ?]
 on-arrival: advisor_action_timer = 4; 
 go-to: b_inter_party_relationships.moderates
@@ -31,9 +32,18 @@ go-to: b_inter_party_relationships.moderates
 @soviet_campaigning
 title: Soviet Campaigning
 subtitle: Increase our vote share in the soviets.
-choose-if: advisor_action_timer = 0 and b_resources >= 1
+choose-if: advisor_action_timer = 0
 unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] weeks before next advisor action. ?]
-on-arrival: advisor_action_timer = 4; 
+on-arrival: advisor_action_timer = 4; Q.workers_b += 2*(1-Q.b_dissent);
 go-to: minority_party_soviet.s_campaign
+
+@ca_support
+title: Constituent Assembly Campaigning
+subtitle: [?if ca_election_held != 1 : Campaign in preparation of the Constituent Assembly elections. ?][?if ca_election_held == 1 : Campaign in support of the coming Constituent Assembly. ?]
+view-if: ca_held != 1
+choose-if: advisor_action_timer = 0 
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] weeks before next advisor action. ?]
+on-arrival: advisor_action_timer = 4; Q.workers_b += 1*(1-Q.b_dissent);
+go-to: b_media.support_ca
 
 
