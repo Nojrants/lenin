@@ -8,10 +8,22 @@ new-page: true
 = CEC
 
 Central Executive Committee
-  
+
+- @kamenev
+- @other
 - #cec
 - @back: Return to main
 
 @back
 on-arrival: last_cabinet_action = 0
 go-to: root
+
+@kamenev
+title: Chairperson — Kamenev (<span style="color: var(--bolshevik-color);">RCP(b)</span>)
+view-if: soviet_chair == "Kamenev"
+go-to: kamenev
+
+@other
+title: Chairperson — [+ soviet_chair +] [?if soviet_chair_party=="Menshevik": (<span style="color: var(--m-color);">RSDLP</span>)?][?if soviet_chair_party=="Left-SR": (<span style="color: var(--lsr-color);">Left-SR</span>)?][?if soviet_chair_party=="SR": (<span style="color: var(--sr-color);">SR</span>)?][?if soviet_chair_party=="SD-Int": (<span style="color: var(--sdi-color);">SD-Int</span>)?][?if soviet_chair_party=="NS": (<span style="color: var(--ns-color);">NS</span>)?]
+view-if: soviet_chair_party != "Bolshevik"
+choose-if: soviet_chair_party == "Bolshevik"
