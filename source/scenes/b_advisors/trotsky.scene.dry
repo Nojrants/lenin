@@ -39,7 +39,7 @@ title: Support Lenin
 subtitle: Support or adopt Leninist ideology within the party.
 choose-if: advisor_action_timer = 0
 unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] weeks before next advisor action. ?]
-go-to: b_ideology.support_leninist if leninist_strength <= 40; b_ideology.adopt_leninist if leninist_strength > 40 and b_leadership = 1; b_ideology.leninist_continue if b_leadership = 2
+go-to: b_ideology.support_leninist
 
 
 @agitation
