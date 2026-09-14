@@ -2110,14 +2110,14 @@ go-to: cabinet_negotiations
 @local_maslov
 title: Semyon Maslov
 subtitle: {!
-<span style="color: var(--sr-color);">SR</span> — Laywer, statistician, and agronomist with experience in land policy and zemstvo politics.<br>
+<span style="color: var(--sr-color);">SR</span> — Laywer, statistician, and agronomist with experience in land policy and zemstvo politics.<ul>
 Overall skill: ★★☆<br>
 Suitability: ★★★</ul>
 !}
 tags: local_candidates
 choose-if: local_minister != "Maslov"
 unavailable-subtitle: {!
-<span style="color: var(--sr-color);">SR</span> — Laywer, statistician, and agronomist with experience in land policy and zemstvo politics.<br>
+<span style="color: var(--sr-color);">SR</span> — Laywer, statistician, and agronomist with experience in land policy and zemstvo politics.<ul>
 Overall skill: ★★☆<br>
 Suitability: ★★★</ul>
 !}
