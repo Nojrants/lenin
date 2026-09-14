@@ -4,13 +4,13 @@ tags: advisor
 card-image: img/portraits/b/kamenev.jpg
 view-if: kamenev_advisor = 1 and player_party = "b"
 new-page: true 
-go-to: kamenev_main
+go-to: main
 
 = Lev Kamenev
 
 Lev Kamenev is a Bolshevik leader who has a more conciliatory position towards the other socialists.
 
-@kamenev_main
+@main
 
 - @support_moderate
 - @m_relations
