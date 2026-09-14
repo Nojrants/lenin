@@ -29,9 +29,9 @@ What should be our strategy for our newspapers and party organs?
 @support_socialist_unity
 title: Support socialist unity.
 subtitle: -1 resource – Support a united front of all the socialist parties.
-choose-if: b_resources >= 1
+choose-if: resources >= 1
 on-arrival: {!
-  Q.b_resources -= 1; 
+  Q.resources -= 1; 
   Q.sdi_strength += 5; Q.left_m_strength += 5; Q.m_strength += 3; Q.lsr_strength += 5; Q.sr_strength += 3; 
   Q.right_m_strength -= 5; Q.right_sr_strength -= 5; popular_socialist_strength -= 3;
   Q.sdi_relation += 4; Q.left_m_relation += 4; Q.centre_m_relation += 2; Q.lsr_relation += 4; Q.centre_sr_relation += 2;
@@ -47,9 +47,9 @@ This emboldens the left-wings of the various opposition groups, as well as moder
 @oppose_moderates
 title: No more compromises with the petty-bourgeois "socialists"!
 subtitle: -1 resource – Distance ourselves from the moderate socialist parties. 
-choose-if: b_resources >= 1
+choose-if: resources >= 1
 on-arrival: {!
-  Q.b_resources -= 1; 
+  Q.resources -= 1; 
   Q.sdi_strength -= 4; Q.left_m_strength -= 4; Q.m_strength -= 2; Q.lsr_strength -= 4; Q.sr_strength -= 2; 
   Q.right_m_strength += 4; Q.right_sr_strength += 4; popular_socialist_strength += 4;
   Q.sdi_relation -= 5; Q.left_m_relation -= 5; Q.centre_m_relation -= 5; Q.lsr_relation -= 5; Q.centre_sr_relation -= 5;
@@ -66,10 +66,10 @@ This galvanizes support for our party, though hindering relations with all other
 @support_ca
 title: Support the Constituent Assembly!
 subtitle: -1 resource – Promote the coming Constituent Assembly, and our position in it. 
-choose-if: b_resources >= 1 and ca_held = 0
+choose-if: resources >= 1 and ca_held = 0
 view-if: ca_held = 0
 on-arrival: {!
-  Q.b_resources -= 1; 
+  Q.resources -= 1; 
   Q.ca_support += 1; 
   Q.sdi_strength += 2; Q.left_m_strength += 2; Q.m_strength += 1; Q.lsr_strength += 2; Q.sr_strength += 2; 
   Q.right_m_strength -= 3; Q.right_sr_strength -= 3; popular_socialist_strength -= 2;
@@ -89,10 +89,10 @@ This emboldens the moderates with our party, and slightly eases fears among othe
 @oppose_ca
 title: We no longer need the Constituent Assembly!
 subtitle: -1 resource – Delegitimize the upcoming Constituent Assembly. 
-choose-if: b_resources >= 1 and ca_held = 0 and ca_election_held = 1
+choose-if: resources >= 1 and ca_held = 0 and ca_election_held = 1
 view-if: ca_held = 0 and ca_election_held = 1
 on-arrival: {!
-  Q.b_resources -= 1; 
+  Q.resources -= 1; 
   Q.ca_support -= 1; 
   Q.sdi_strength -= 4; Q.left_m_strength -= 4; Q.m_strength -= 2; Q.lsr_strength -= 4; Q.sr_strength -= 2; 
   Q.right_m_strength += 4; Q.right_sr_strength += 4; popular_socialist_strength += 4;
@@ -111,9 +111,9 @@ This alarms the other parties, as well as moderates within our own party.
 @support_b
 title: Build support for the Bolsheviks among the urban workers. 
 subtitle: -1 resource
-choose-if: b_resources >= 1
+choose-if: resources >= 1
 on-arrival: {!
-  Q.b_resources -= 1;
+  Q.resources -= 1;
   Q.b_strength += 2; Q.leninist_strength += 1;
   Q.disillusionment -= 0.1; Q.instability -= 1;
   Q.workers_b += 3*(1-b_dissent);
@@ -125,9 +125,9 @@ Our propaganda campaign encourages support for the Bolshevik party among the wor
 @rural_outreach
 title: Perform outreach to the countryside. 
 subtitle: -1 resource - Build stronger relations with the peasants. 
-choose-if: b_resources >= 1
+choose-if: resources >= 1
 on-arrival: {!
-  Q.b_resources -= 1;
+  Q.resources -= 1;
   Q.b_strength += 2; Q.leninist_strength += 1;
   Q.disillusionment -= 0.1; Q.instability -= 1;
   Q.peasants_b += 3*(1-b_dissent); Q.peasants_unrest -= 4;
@@ -141,9 +141,9 @@ Our propaganda campaign encourages support for the Bolshevik party among the pea
 @militancy
 title: Support militancy and vigilance against counterrevolution. 
 subtitle: -1 resource - Promote military recruitment and labor intensity.   
-choose-if: b_resources >= 1
+choose-if: resources >= 1
 on-arrival: {!
-  Q.b_resources -= 1;
+  Q.resources -= 1;
   Q.b_strength += 1; Q.leninist_strength += 1;
   Q.disillusionment -= 0.05; Q.instability += 1;
   Q.militancy += 8; Q.crime -= 3; Q.war_weariness -= 2; Q.morale += 0.02; Q.discipline += 0.04;
@@ -156,10 +156,10 @@ We push for increased militarization and strength in the face of ongoing crises.
 @support_radicalism
 title: Support revolution and radicalism.
 subtitle: -1 resource - Class conflict, land seizures, and worker rule. 
-unavailable-subtitle: [? if b_resources < 1: Not enough resources. ?]
-choose-if: b_resources >= 1
+unavailable-subtitle: [? if resources < 1: Not enough resources. ?]
+choose-if: resources >= 1
 on-arrival: {!
-  Q.b_resources -= 1; 
+  Q.resources -= 1; 
   Q.soldiers_unrest -= 5; Q.workers_unrest -= 8; Q.peasants_unrest -= 8; Q.kulaks_unrest -= 8; 
   Q.soldiers_strength += 2; Q.workers_strength += 4; Q.peasants_strength += 6; Q.kulaks_strength += 6; Q.bagmen_strength += 2;
   Q.elites_unrest += 6; Q.middle_unrest += 2; Q.intelligentsia_unrest += 4; 
@@ -178,10 +178,10 @@ We enflame the ongoing conflicts in the cities and countryside, rallying the wor
 @support_moderation
 title: Support moderation and consolidation. 
 subtitle: -1 resource - Discipline, authority, and a return to normality. 
-unavailable-subtitle: [? if b_resources < 1: Not enough resources. ?]
-choose-if: b_resources >= 1
+unavailable-subtitle: [? if resources < 1: Not enough resources. ?]
+choose-if: resources >= 1
 on-arrival: {!
-  Q.b_resources -= 1; 
+  Q.resources -= 1; 
   Q.soldiers_unrest += 2; Q.workers_unrest += 4; Q.peasants_unrest += 4; Q.kulaks_unrest += 8;
   Q.soldiers_strength -= 1; Q.workers_strength -= 2; Q.peasants_strength -= 2; Q.kulaks_strength -= 2; 
   Q.elites_unrest -= 2; Q.middle_unrest -= 5; Q.intelligentsia_unrest -= 5;
