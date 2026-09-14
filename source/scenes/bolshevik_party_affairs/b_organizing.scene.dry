@@ -53,7 +53,7 @@ We have increased our organizing among the workers.
 
 @rural
 title: The peasantry in the countryside. 
-subtitle: -1 resources — This will be very difficult, as we do not have a traditional base among the peasantry.
+subtitle: -1 resources
 choose-if: resources >= 1 
 unavailable-subtitle: -1 resources – We lack the resources. 
 on-arrival: {!
