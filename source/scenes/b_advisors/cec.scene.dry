@@ -5,11 +5,12 @@ card-image: img/soviet1.jpg
 view-if: cec_advisor = 1 and player_party = "b"
 new-page: true 
 
-= CEC
+= Central Executive Committee
 
 Central Executive Committee
 
 - @chair_kamenev
+- @chair_sverdlov
 - @other
 - #cec
 - @back: Return to main
@@ -22,6 +23,12 @@ go-to: root
 title: Chairperson — Kamenev (<span style="color: var(--bolshevik-color);">RCP(b)</span>)
 view-if: soviet_chair == "Kamenev"
 go-to: kamenev
+
+@chair_sverdlov
+title: Chairperson — Sverdlov (<span style="color: var(--bolshevik-color);">RCP(b)</span>)
+view-if: soviet_chair == "Sverdlov"
+go-to: sverdlov
+
 
 @other
 title: Chairperson — [+ soviet_chair +] [?if soviet_chair_party=="Menshevik": (<span style="color: var(--m-color);">RSDLP</span>)?][?if soviet_chair_party=="Left-SR": (<span style="color: var(--lsr-color);">Left-SR</span>)?][?if soviet_chair_party=="SR": (<span style="color: var(--sr-color);">SR</span>)?][?if soviet_chair_party=="SD-Int": (<span style="color: var(--sdi-color);">SD-Int</span>)?][?if soviet_chair_party=="NS": (<span style="color: var(--ns-color);">NS</span>)?]
