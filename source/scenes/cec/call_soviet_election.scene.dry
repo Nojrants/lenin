@@ -1,4 +1,5 @@
-title: Call for a soviet election.
+title: Call for a Soviet Congress
+subtitle: Elections will be held within the next two months. 
 new-page: true
 choose-if: soviet_congress_timer > 8
 unavailable-subtitle: A congress is already scheduled for within the next two months. 
@@ -7,4 +8,6 @@ on-arrival: {!
   Q.soviet_congress_timer = 8; 
 !}
 
-We have scheduled elections to the next All-Russian Congress of Soviets. 
+= Soviet Election
+
+We have scheduled the next All-Russian Congress of Soviets to take place in two months from today. Soviets are informed that they should begin holding elections. 
