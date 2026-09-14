@@ -35,6 +35,7 @@ on-arrival: {!
   Q.b_dues -= 1;
   Q.resources += Q.b_dues_income2;
   Q.b_dissent -= 0.1; Q.leninist_dissent -= 4; Q.moderate_dissent -= 4; Q.leftcom_dissent -= 4;
+!}
 
 Our current members appreciate this, but no one decides to join a party because of the low dues.
 
