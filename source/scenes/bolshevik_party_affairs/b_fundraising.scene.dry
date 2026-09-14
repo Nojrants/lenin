@@ -23,7 +23,7 @@ For better or for worse, the party cannot exist without money.
 
 @maintain
 subtitle: [+ b_dues_income +] party funds gained.
-on-arrival: b_resources += b_dues_income; 
+on-arrival: resources += b_dues_income; 
 
 We maintain our current dues.
 
@@ -31,13 +31,28 @@ We maintain our current dues.
 subtitle: [+ b_dues_income2 +] party funds gained.
 choose-if: b_dues > 1
 unavailable-subtitle: We've already abolished dues. 
-on-arrival: b_dues -= 1; b_resources += b_dues_income2; b_dissent -= 0.1; leninist_dissent -= 4; moderate_dissent -= 4; leftcom_dissent -= 4;
+on-arrival: {!
+  Q.b_dues -= 1;
+  Q.resources += Q.b_dues_income2;
+  Q.b_dissent -= 0.1; Q.leninist_dissent -= 4; Q.moderate_dissent -= 4; Q.leftcom_dissent -= 4;
 
 Our current members appreciate this, but no one decides to join a party because of the low dues.
 
 @increase
-subtitle: [+ b_dues_income3 +] party funds gained. [? if hunger >= 15 : Given the present economic situation, this may be painful. ?][? if b_dues >= 4 : Dues are already rather high; increasing them might reduce our membership. ?]
-on-arrival: b_dues += 1; b_resources += b_dues_income3; workers_bolshevik -= 3; underclass_bolshevik -= 3; workers_bolshevik -= 10 if hunger >= 15; underclass_bolshevik -= 10 if hunger >= 15; workers_bolshevik -= 3*b_dues if b_dues >= 5; underclass_bolshevik -= 3*b_dues if b_dues >= 5; leninist_dissent += 4; center_dissent += 4; moderate_dissent += 4; b_dissent += 0.1;
+subtitle: [+ b_dues_income3 +] party funds gained. [? if hunger >= 15 : <br>Given the present economic situation, this may be painful. ?][? if b_dues >= 4 : <br>Dues are already rather high; increasing them might reduce our membership. ?]
+on-arrival: {!
+  Q.b_dues += 1; Q.resources += Q.b_dues_income3;
+  Q.workers_b -= 3; Q.underclass_b -= 3;
+  if (Q.hunger >= 25) {
+    Q.workers_b -= 7; 
+    Q.underclass_b -= 10;
+  }
+  if (Q.b_dues) >= 5 {
+    Q.workers_b -= 3*Q.b_dues 
+    Q.underclass_b -= 3*Q.b_dues
+  }
+  Q.leninist_dissent += 4; Q.moderate_dissent += 4; Q.leftcom_dissent += 4; Q.b_dissent += 0.1;
+!}
 
 Our members grumble at this, and some of the less committed members leave. But now, we have access to additional resources.
 
