@@ -11,42 +11,99 @@ tags: b_party
 
 Social Democrats have been organizing among the working class for decades, and have built a formidable base. However, they may not be enough for the revolution. Which groups should we focus our organizing efforts on?
 
-- @soldiers: Soldiers at the front and in the garrisons.
-- @workers: The urban proletariat, the core of our base.
-#- @middle_class: Can we make in-roads among the middle class?
-- @rural: The peasantry?
+- @soldiers
+- @workers
+- @rural
+- @middle_class
+- @intelligentsia
+- @students
 - @root: We don't need to organize right now.
 - @easy_discard
 
 @soldiers
-subtitle: -1 resource
-choose-if: b_resources >= 1
-unavailable-subtitle: Not enough resources.
-on-arrival: b_resources -= 1; soldiers_b += 6*(1-b_dissent); soldiers_b -= 2 if war_weariness >= 50 and b_war_policy <= 0; soldiers_b -= 2 if war_weariness >= 60 and b_war_policy <= 1; b_soldiers_org += 1 if war_weariness <= 50 or b_war_policy > 1
+title: Soldiers at the front and in the garrisons.
+subtitle: -1 resource2
+choose-if: resources >= 1
+unavailable-subtitle: -1 resources – We lack the resources. 
+on-arrival: {!
+  Q.resources -= 1;
+  Q.soldiers_b += 6*(1-Q.b_dissent); Q.b_soldiers_org += 1;
+  Q.soldiers_unrest -= 8;
+  if (Q.war_weariness >= 50 and Q.b_in_government == 1) {
+    Q.soldiers_b -= 3;
+    Q.b_soldiers_org -= 1;
+    Q.soldiers_unrest += 4; 
+!}
 
-We have increased our organizing among the soldiers. [? if (war_weariness >= 50 and b_war_policy <= 0) or (war_weariness >= 60 and b_war_policy <= 1): Our policy is viewed as too pro-war, and makes it harder to organize among the soldiers. ?]
+We have increased our organizing among the soldiers. [? if Q.war_weariness >= 50 and Q.b_in_government == 1) : Current  war exhaustion limits the effectiveness of our propaganda. ?]
 
 @workers
-subtitle: -1 resource
-choose-if: b_resources >= 1
-unavailable-subtitle: Not enough resources.
-on-arrival: b_resources -= 1; workers_b += 6*(1-b_dissent); b_workers_org += 1; workers_b -= 2 if b_in_gov and prov_gov_legitimacy <= 50;
+title: The urban proletariat, the core of our base.
+subtitle: -1 resources
+choose-if: resources >= 1
+unavailable-subtitle: -1 resources – We lack the resources. 
+on-arrival: {!
+  Q.resources -= 1;
+  Q.workers_b += 6*(1-Q.b_dissent); Q.b_workers_org += 1; 
+  Q.workers_unrest -= 8;
+!}
 
-We have increased our organizing among the workers. [? if b_in_gov and prov_gov_legitimacy <= 50 : Our participation in the unpopular Provisional Government limits our support. ?]
+We have increased our organizing among the workers.
 
-@middle_class
-subtitle: -1 resource - the middle class is not part of our base.
-choose-if: b_resources >= 1
-unavailable-subtitle: Not enough resources.
-on-arrival: b_resources -= 1; b_middle_class += 3*(1-b_dissent); b_middle_class_org += 1
+@rural
+title: The peasantry in the countryside. 
+subtitle: -1 resources — This will be very difficult, as we do not have a traditional base among the peasantry.
+choose-if: resources >= 1 
+unavailable-subtitle: -1 resources – We lack the resources. 
+on-arrival: {!
+  Q.resources -= 1;
+  Q.peasants_b += 5*(1-Q.b_dissent); Q.b_peasants_org += 1
+  Q.kulaks_b += 2*(1-Q.b_dissent);
+  Q.peasants_unrest -= 5; Q.kulaks_unrest -= 5;
+  Q.ca_support_timer -= 0.5; 
+!}
+
+We have increased our organizing among the peasants. 
 
 The middle class has never been a subject of our organizing efforts, but that may change.
 
+@middle_class
+title: The petty-bourgeois businessowners and professionals. 
+subtitle: -1 resources – These groups are not part of our base.
+choose-if: resources >= 1
+unavailable-subtitle: -1 resources – We lack the resources. 
+on-arrival: {!
+  Q.resources -= 1;
+  Q.middle_b += 3*(1-Q.b_dissent); Q.b_middle_class_org += 1;
+  Q.kulaks_b += 2*(1-Q.b_dissent);
+  Q.middle_unrest -= 8; Q.kulaks_unrest -= 3; 
+!}
 
-@rural
-subtitle: -1 resource - this will be very difficult, as we do not have a traditional base among the peasantry.
-choose-if: b_resources >= 1 and b_rural_policy > 0
-unavailable-subtitle: [? if b_resources < 1 : Not enough resources. ?][? if b_rural_policy = 0 : We do not have a rural policy. ?]
-on-arrival: b_resources -= 1; b_peasants += 5*(1-b_dissent); b_peasants_org += 1
+The middle class has never been a subject of our organizing efforts, but that may change.
 
+@intelligentsia
+title: Make appeals to the intelligentsia. 
+subtitle: -1 resources
+choose-if: resources >= 1
+unavailable-subtitle: -1 resources – We lack the resources. 
+on-arrival: {!
+  Q.resources -= 1;
+  Q.intelligentsia_b += 4*(1-Q.b_dissent);
+  Q.intelligentsia_unrest -= 8; 
+  Q.bourgeois_specialists_unrest -= 4; 
+!}
+
+We improve our relations with the country's intellectual elites. 
+
+@students
+title: The students on college campuses. 
+subtitle: -1 resources 
+choose-if: resources >= 1
+unavailable-subtitle: -1 resources – We lack the resources. 
+on-arrival: {!
+  Q.resources -= 1;
+  Q.students_b += 8*(1-Q.b_dissent); 
+  Q.students_unrest -= 8; Q.red_specialists_unrest -= 8;
+  Q.school_loyalty += 0.05; 
+!}
 
