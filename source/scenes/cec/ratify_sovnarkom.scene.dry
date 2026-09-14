@@ -19,14 +19,14 @@ Both the CEC and Sovnarkom have the ability to pass laws in their own right, but
 
 [?if cec_incident > 0 : On the other hand, the opposition parties take this opportunity to attack a number of recent decrees, causing embarrassment for the government. ?]
 
-- @sovnarkom_powers
+- @separation_of_powers
 - @amend
 - @reject
 - @great
 
 
 
-@sovnarkom_powers
+@separation_of_powers
 title: The opposition is demanding a discussion on the separation of powers...
 view-if: sovnarkom_powers_vote != 1
 go-to: sovnarkom_powers
