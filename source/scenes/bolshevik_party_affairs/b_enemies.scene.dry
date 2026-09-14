@@ -132,7 +132,7 @@ on-arrival: {!
   Q.right_m_strength -= ((2+Q.b_workers_org)*(1-Q.b_dissent) - (Q.right_m_strength / 50));
   Q.sr_strength -= ((2+Q.b_workers_org)*(1-Q.b_dissent) - (Q.sr_strength / 50));
   Q.right_sr_strength -= ((2+Q.b_workers_org)*(1-Q.b_dissent) - (Q.right_sr_strength / 50));
-  Q.ns_strength -= ((2+Q.b_workers_org)*(1-Q.b_dissent) - (Q.ns_strength / 50)); 
+  Q.popular_socialist_strength -= ((2+Q.b_workers_org)*(1-Q.b_dissent) - (Q.popular_socialist_strength / 50)); 
   Q.moderate_dissent += 4; 
 !}
 
@@ -152,7 +152,7 @@ on-arrival: {!
   Q.right_m_strength -= ((1+Q.b_workers_org)*(1-Q.b_dissent) - (Q.right_m_strength / 50));
   Q.sr_strength -= ((2+Q.b_workers_org)*(1-Q.b_dissent) - (Q.sr_strength / 50));
   Q.right_sr_strength -= ((1+Q.b_workers_org)*(1-Q.b_dissent) - (Q.right_sr_strength / 50));
-  Q.ns_strength -= ((1+Q.b_workers_org)*(1-Q.b_dissent) - (Q.ns_strength / 50)); 
+  Q.popular_socialist_strength -= ((1+Q.b_workers_org)*(1-Q.b_dissent) - (Q.popular_socialist_strength / 50)); 
 !}
 
 Attacking the prospects of compromise with other groups galvanizes our primary base, though hurting our standing with all moderate forces. 
@@ -169,7 +169,7 @@ on-arrival: {!
   Q.right_m_strength -= ((2+Q.b_workers_org)*(1-Q.b_dissent) - (Q.right_m_strength / 50));
   Q.sr_strength -= ((2+Q.b_workers_org)*(1-Q.b_dissent) - (Q.sr_strength / 50));
   Q.right_sr_strength -= ((2+Q.b_workers_org)*(1-Q.b_dissent) - (Q.right_sr_strength / 50));
-  Q.ns_strength -= ((2+Q.b_workers_org)*(1-Q.b_dissent) - (Q.ns_strength / 50)); 
+  Q.popular_socialist_strength -= ((2+Q.b_workers_org)*(1-Q.b_dissent) - (Q.popular_socialist_strength / 50)); 
 !}
 
 Attacking the proponents of imperialist war angers the right-wings of the various parties, though fellow internationalists welcome this. 
