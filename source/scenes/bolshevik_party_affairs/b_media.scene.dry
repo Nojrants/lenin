@@ -77,7 +77,7 @@ on-arrival: {!
   Q.right_m_relation += 1; Q.right_sr_relation += 1; Q.ns_relation += 1; 
   Q.moderate_strength += 5; Q.leninist_strength -= 5; 
   Q.moderate_dissent -= 5; Q.leninist_dissent += 5;
-  Q.workers_b += 1*(1-b_dissent); Q.peasants_b += 1*(1-b_dissent); Q.soldiers_b += 1*(1-b_dissent);
+  Q.workers_b += 1*(1-Q.b_dissent); Q.peasants_b += 1*(1-Q.b_dissent); Q.soldiers_b += 1*(1-Q.b_dissent);
   Q.democraticity += 2; Q.instability -= 1; 
 !}
 
@@ -116,8 +116,8 @@ on-arrival: {!
   Q.resources -= 1;
   Q.b_strength += 2; Q.leninist_strength += 1;
   Q.disillusionment -= 0.1; Q.instability -= 1;
-  Q.workers_b += 3*(1-b_dissent);
-  Q.soldiers_b += 3*(1-b_dissent);
+  Q.workers_b += 3*(1-Q.b_dissent);
+  Q.soldiers_b += 3*(1-Q.b_dissent);
 !}
 
 Our propaganda campaign encourages support for the Bolshevik party among the workers and in the garrisons. 
@@ -130,8 +130,8 @@ on-arrival: {!
   Q.resources -= 1;
   Q.b_strength += 2; Q.leninist_strength += 1;
   Q.disillusionment -= 0.1; Q.instability -= 1;
-  Q.peasants_b += 3*(1-b_dissent); Q.peasants_unrest -= 4;
-  Q.kulaks_b += 3*(1-b_dissent); Q.kulaks_unrest -= 4;
+  Q.peasants_b += 3*(1-Q.b_dissent); Q.peasants_unrest -= 4;
+  Q.kulaks_b += 3*(1-Q.b_dissent); Q.kulaks_unrest -= 4;
   Q.ca_support -= 1; 
 !}
 
@@ -163,7 +163,7 @@ on-arrival: {!
   Q.soldiers_unrest -= 5; Q.workers_unrest -= 8; Q.peasants_unrest -= 8; Q.kulaks_unrest -= 8; 
   Q.soldiers_strength += 2; Q.workers_strength += 4; Q.peasants_strength += 6; Q.kulaks_strength += 6; Q.bagmen_strength += 2;
   Q.elites_unrest += 6; Q.middle_unrest += 2; Q.intelligentsia_unrest += 4; 
-  Q.workers_b += 2*(1-b_dissent); Q.peasants_b += 2*(1-b_dissent); Q.workers_b += 2*(1-b_dissent); 
+  Q.workers_b += 2*(1-Q.b_dissent); Q.peasants_b += 2*(1-Q.b_dissent); Q.workers_b += 2*(1-Q.b_dissent); 
   Q.instability += 2; Q.militancy += 4; Q.crime += 4; Q.morale -= 0.04; Q.discipline -= 0.04; Q.train_capacity *= 0.95; 
   Q.Q.food_production *= 0.95; Q.food_sold *= 0.99; 
   Q.Q.industries_syndicalized += 5; Q.industry *= 0.95; 
