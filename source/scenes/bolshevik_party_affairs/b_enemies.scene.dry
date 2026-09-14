@@ -125,7 +125,7 @@ Attacking the foreign imperialists appeals to our base, and all those exhausted 
 @mensheviks
 title: Mensheviks, SRs, and all such bourgeois "socialists".  
 on-arrival: {!
-  Q.sdi_relation -= 2; Q.left_m_relation -= 5; Q.m_relation -= 5; Q.right_m_relation -= 5; Q.sr_relation -= 5; Q.right_sr_relation -= 5; Q.ns_relation -= 5; Q.k_relation -= 2; Q.rightist_relation -= 2;
+  Q.sdi_relation -= 2; Q.left_m_relation -= 5; Q.centre_m_relation -= 5; Q.right_m_relation -= 5; Q.sr_relation -= 5; Q.right_sr_relation -= 5; Q.ns_relation -= 5; Q.k_relation -= 2; Q.rightist_relation -= 2;
   Q.sdi_strength -= ((1+Q.b_workers_org)*(1-Q.b_dissent) - (Q.sdi_strength / 50));
   Q.left_m_strength -= ((2+Q.b_workers_org)*(1-Q.b_dissent) - (Q.left_m_strength / 50)); 
   Q.m_strength -= ((2+Q.b_workers_org)*(1-Q.b_dissent) - (Q.m_strength / 50));
@@ -145,7 +145,7 @@ title: Conciliators, compromisers, and collaborators.
 on-arrival: {!
   Q.moderate_dissent += 6; Q.moderate_strength -= 3;
   Q.leftcom_strength += 2*(1-Q.b_dissent); Q.leninist_strength += 6*(1-Q.b_dissent);
-  Q.sdi_relation -= 5; Q.left_m_relation -= 5; Q.m_relation -= 2; Q.right_m_relation -= 2; Q.lsr_relation -= 5; Q.sr_relation -= 2; Q.right_sr_relation -= 2; Q.ns_relation -= 5; Q.k_relation -= 2; Q.rightist_relation -= 2;
+  Q.sdi_relation -= 5; Q.left_m_relation -= 5; Q.centre_m_relation -= 2; Q.right_m_relation -= 2; Q.lsr_relation -= 5; Q.sr_relation -= 2; Q.right_sr_relation -= 2; Q.ns_relation -= 5; Q.k_relation -= 2; Q.rightist_relation -= 2;
   Q.sdi_strength -= ((1+Q.b_workers_org)*(1-Q.b_dissent) - (Q.sdi_strength / 50));
   Q.left_m_strength -= ((2+Q.b_workers_org)*(1-Q.b_dissent) - (Q.left_m_strength / 50)); 
   Q.m_strength -= ((2+Q.b_workers_org)*(1-Q.b_dissent) - (Q.m_strength / 50));
@@ -164,7 +164,7 @@ on-arrival: {!
   Q.soldiers_unrest -= 6; Q.workers_unrest -= 3; Q.peasants_unrest -= 3; Q.underclass_unrest -= 3;
   Q.uk_relation -= 2; Q.france_relation -= 2; 
   Q.war_weariness += 4; 
-  Q.sdi_relation += 5; Q.left_m_relation += 5; Q.m_relation -= 2; Q.right_m_relation -= 5; Q.lsr_relation += 5; Q.sr_relation -= 2; Q.right_sr_relation -= 5; Q.ns_relation -= 5; Q.k_relation -= 5; Q.rightist_relation -= 5;
+  Q.sdi_relation += 5; Q.left_m_relation += 5; Q.centre_m_relation -= 2; Q.right_m_relation -= 5; Q.lsr_relation += 5; Q.sr_relation -= 2; Q.right_sr_relation -= 5; Q.ns_relation -= 5; Q.k_relation -= 5; Q.rightist_relation -= 5;
   Q.m_strength -= ((2+Q.b_workers_org)*(1-Q.b_dissent) - (Q.m_strength / 50));
   Q.right_m_strength -= ((2+Q.b_workers_org)*(1-Q.b_dissent) - (Q.right_m_strength / 50));
   Q.sr_strength -= ((2+Q.b_workers_org)*(1-Q.b_dissent) - (Q.sr_strength / 50));
