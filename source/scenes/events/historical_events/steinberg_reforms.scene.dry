@@ -47,7 +47,7 @@ on-arrival: {!
              
 As one of his first acts in office, the non-Bolshevik Justice Commissar [+ justice_minister +] has begun an ambitious project of reform.
 
-It has been decreed that all prisoners currently held by the government are to be immediately transferred to proper premises, where they are to have their arrests reviewed by judicial commissions. If not remanded for trial, they are to be freed within 24 hours. A similar audit is to be conducted among the Petrograd jails, freeing those not guilty of any specific crime. In other words, this will directly end our current practice of preemptively arresting political opponents before they have committed a crime, in order to prevent them from causing trouble in the first place. 
+It has been decreed that all prisoners currently held by the government are to be immediately transferred to proper premises, where they are to have their arrests reviewed by judicial commissions. If not remanded for trial, they are to be freed within 24 hours. A similar audit is to be conducted among the Petrograd jails, freeing those not guilty of any specific crime. In other words, this will directly end our current practice of preemptively arresting political opponents before they have committed a crime (in order to prevent them from causing trouble in the first place). 
 
 Elsewhere, it has been decreed that only certain agencies may conduct searches and arrests, with the Commissariat to monitor for improper actions. Soviets are being instructed to halt systematic repression, while work has begun on a compendium of revolutionary laws, intended to systematize and guide the work of tribunals. 
 
@@ -86,7 +86,24 @@ on-arrival: {!
   if (Q.welfare_minister_party != "Bolshevik") { Q.welfare_minister = "Vacant"; Q.welfare_minister_party = ""; }
   if (Q.property_minister_party != "Bolshevik") { Q.property_minister = "Vacant"; Q.property_minister_party = ""; }
   if (Q.local_minister_party != "Bolshevik") { Q.local_minister = "Vacant"; Q.local_minister_party = ""; }
+  
+  Q.vikzhel_unrest += 20; 
+  if (Q.vikzhel_unrest >= 50 and vikzhel_strength >= 25) {
+    Q.vikzhel_strike = 1;
+    Q.workers_unrest += 10;
+    Q.previous_train_capacity = Q.train_capacity; 
+  	Q.previous_industry = Q.industry; 
+  	Q.previous_transportation_industry = Q.transportation_industry;
+  	Q.transportation_industry = 0.5; 
+  	Q.train_capacity = Q.previous_train_capacity * 0.8; 
+  	Q.industry = Q.previous_industry * 0.5; 
+  }
 !}
+
+We terminate the coalition agreement, shocking and angering the other parties. 
+
+[?if vikzhel_unrest >= 50 and vikzhel_strength >= 25 and vikzhel_strike = 1 : Worse, Vikzhel has declared the resumption of their railroad strike, bringing industry back to a standstill. ?]  
+[?if vikzhel_unrest >= 50 and vikzhel_strength >= 25 and vikzhel_strike = 0 : Worse, Vikzhel has declared they are launching their promised railroad strike, bringing our industry to a standstill. ?]  
 
 
 
@@ -103,6 +120,8 @@ on-arrival: {!
   if (Q.justice_minister_party != "SD-Int") { Q.sdi_relation -= 5; }
   if (Q.justice_minister_party != "NS") { Q.ns_relation -= 5; }
 !}
+
+The Justice Commissar is reprimanded, leaving our coalition partners disappointed but unsurprised. 
 
 @nothing
 title: There's nothing we can do.
