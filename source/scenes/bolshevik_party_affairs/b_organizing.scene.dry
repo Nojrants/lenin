@@ -29,10 +29,11 @@ on-arrival: {!
   Q.resources -= 1;
   Q.soldiers_b += 6*(1-Q.b_dissent); Q.b_soldiers_org += 1;
   Q.soldiers_unrest -= 8;
-  if (Q.war_weariness >= 50 and Q.b_in_government == 1) {
+  if (Q.war_weariness >= 50 && Q.b_in_government == 1) {
     Q.soldiers_b -= 3;
     Q.b_soldiers_org -= 1;
     Q.soldiers_unrest += 4; 
+  }
 !}
 
 We have increased our organizing among the soldiers. [? if Q.war_weariness >= 50 and Q.b_in_government == 1) : Current  war exhaustion limits the effectiveness of our propaganda. ?]
@@ -57,7 +58,7 @@ choose-if: resources >= 1
 unavailable-subtitle: -1 resources – We lack the resources. 
 on-arrival: {!
   Q.resources -= 1;
-  Q.peasants_b += 5*(1-Q.b_dissent); Q.b_peasants_org += 1
+  Q.peasants_b += 5*(1-Q.b_dissent); Q.b_peasants_org += 1;
   Q.kulaks_b += 2*(1-Q.b_dissent);
   Q.peasants_unrest -= 5; Q.kulaks_unrest -= 5;
   Q.ca_support_timer -= 0.5; 
