@@ -2151,6 +2151,7 @@ on-arrival: {!
   if (Q.local_minister_party == "SD-Int") Q.sdi_represented -= 1;
   Q.local_minister = "Dzyubinsky"; Q.local_minister_party = "NS"; Q.ns_represented += 1;
 !}
+go-to: cabinet_negotiations
 
 @local_vacant
 title: Cancel the proposed commissariat.
