@@ -1,0 +1,79 @@
+title: Coalition Response
+subtitle: Our coalition partners aren't happy...
+new-page: true
+view-if: ca_disbanded = 1 and coalition_government = 1
+max-visits: 1
+tags: event
+on-arrival: {!
+  if (Q.foreign_minister_party != "Bolshevik" && Q.foreign_minister_party != "Left-SR" || ) { Q.foreign_minister = "Vacant"; Q.foreign_minister_party = ""; }
+  if (Q.war_minister_party != "Bolshevik" && Q.war_minister_party != "Left-SR") { Q.war_minister = "Vacant"; Q.war_minister_party = ""; }
+  if (Q.education_minister_party != "Bolshevik" && Q.education_minister_party != "Left-SR") { Q.education_minister = "Vacant"; Q.education_minister_party = ""; }
+  if (Q.interior_minister_party != "Bolshevik" && Q.interior_minister_party != "Left-SR") { Q.interior_minister = "Vacant"; Q.interior_minister_party = ""; }
+  if (Q.transport_minister_party != "Bolshevik" && Q.transport_minister_party != "Left-SR") { Q.transport_minister = "Vacant"; Q.transport_minister_party = ""; }
+  if (Q.trade_minister_party != "Bolshevik" && Q.trade_minister_party != "Left-SR") { Q.trade_minister = "Vacant"; Q.trade_minister_party = ""; }
+  if (Q.finance_minister_party != "Bolshevik" && Q.finance_minister_party != "Left-SR") { Q.finance_minister = "Vacant"; Q.finance_minister_party = ""; }
+  if (Q.justice_minister_party != "Bolshevik" && Q.justice_minister_party != "Left-SR") { Q.justice_minister = "Vacant"; Q.justice_minister_party = ""; }
+  if (Q.labor_minister_party != "Bolshevik" && Q.labor_minister_party != "Left-SR") { Q.labor_minister = "Vacant"; Q.labor_minister_party = ""; }
+  if (Q.agriculture_minister_party != "Bolshevik" && Q.agriculture_minister_party != "Left-SR") { Q.agriculture_minister = "Vacant"; Q.agriculture_minister_party = ""; }
+  if (Q.food_minister_party != "Bolshevik" && Q.food_minister_party != "Left-SR") { Q.food_minister = "Vacant"; Q.food_minister_party = ""; }
+  if (Q.posts_minister_party != "Bolshevik" && Q.posts_minister_party != "Left-SR") { Q.posts_minister = "Vacant"; Q.posts_minister_party = ""; }
+  if (Q.nationalities_minister_party != "Bolshevik" && Q.nationalities_minister_party != "Left-SR") { Q.nationalities_minister = "Vacant"; Q.nationalities_minister_party = ""; }
+  if (Q.welfare_minister_party != "Bolshevik" && Q.welfare_minister_party != "Left-SR") { Q.welfare_minister = "Vacant"; Q.welfare_minister_party = ""; }
+  if (Q.property_minister_party != "Bolshevik" && Q.property_minister_party != "Left-SR") { Q.property_minister = "Vacant"; Q.property_minister_party = ""; }
+  if (Q.local_minister_party != "Bolshevik" && Q.local_minister_party != "Left-SR") { Q.local_minister = "Vacant"; Q.local_minister_party = ""; }
+!}
+
+= Coalition Response
+
+In response to our dissolution of the Constituent Assembly, our coalition partners issued a severe rebuke. 
+
+[?if lsr_relation >= 65 : Most of the opposition parties withdraw their commissars from the government. Only the Left-SRs tentatively approve of the dissolution, although they now expect to receive additional posts in the government to maintain the coalition. ?]
+[?if lsr_relation < 65 : All commissars belonging to the opposition parties have resigned. Although the Left-SRs tentatively agree with us about the dissolution, the deterioration of relations between our parties have led to them withdrawing their support as well. ?]
+
+- @lsr_negotiations
+- @so_be_it
+
+@so_be_it
+title: Let them all resign. 
+on-arrival:  {!
+  Q.democraticity -= 1; Q.instability += 5; Q.coalition_government = 0;
+  Q.moderate_unrest += 10; Q.leninist_unrest -= 5; Q.leftcom_unrest -= 10;
+  
+  if (Q.foreign_minister_party != "Bolshevik") { Q.foreign_minister = "Vacant"; Q.foreign_minister_party = ""; }
+  if (Q.war_minister_party != "Bolshevik") { Q.war_minister = "Vacant"; Q.war_minister_party = ""; }
+  if (Q.education_minister_party != "Bolshevik") { Q.education_minister = "Vacant"; Q.education_minister_party = ""; }
+  if (Q.interior_minister_party != "Bolshevik") { Q.interior_minister = "Vacant"; Q.interior_minister_party = ""; }
+  if (Q.transport_minister_party != "Bolshevik") { Q.transport_minister = "Vacant"; Q.transport_minister_party = ""; }
+  if (Q.trade_minister_party != "Bolshevik") { Q.trade_minister = "Vacant"; Q.trade_minister_party = ""; }
+  if (Q.finance_minister_party != "Bolshevik") { Q.finance_minister = "Vacant"; Q.finance_minister_party = ""; }
+  if (Q.justice_minister_party != "Bolshevik") { Q.justice_minister = "Vacant"; Q.justice_minister_party = ""; }
+  if (Q.labor_minister_party != "Bolshevik") { Q.labor_minister = "Vacant"; Q.labor_minister_party = ""; }
+  if (Q.agriculture_minister_party != "Bolshevik") { Q.agriculture_minister = "Vacant"; Q.agriculture_minister_party = ""; }
+  if (Q.food_minister_party != "Bolshevik") { Q.food_minister = "Vacant"; Q.food_minister_party = ""; }
+  if (Q.posts_minister_party != "Bolshevik") { Q.posts_minister = "Vacant"; Q.posts_minister_party = ""; }
+  if (Q.nationalities_minister_party != "Bolshevik") { Q.nationalities_minister = "Vacant"; Q.nationalities_minister_party = ""; }
+  if (Q.welfare_minister_party != "Bolshevik") { Q.welfare_minister = "Vacant"; Q.welfare_minister_party = ""; }
+  if (Q.property_minister_party != "Bolshevik") { Q.property_minister = "Vacant"; Q.property_minister_party = ""; }
+  if (Q.local_minister_party != "Bolshevik") { Q.local_minister = "Vacant"; Q.local_minister_party = ""; 
+
+  Q.vikzhel_unrest += 20; 
+  if (Q.vikzhel_unrest >= 50 && Q.vikzhel_strength >= 25) {
+    Q.vikzhel_strike = 1;
+    Q.workers_unrest += 10;
+    Q.previous_train_capacity = Q.train_capacity; 
+  	Q.previous_industry = Q.industry; 
+  	Q.previous_transportation_industry = Q.transportation_industry;
+  	Q.transportation_industry = 0.5; 
+  	Q.train_capacity = Q.previous_train_capacity * 0.8; 
+  	Q.industry = Q.previous_industry * 0.5; 
+  }
+  !}
+
+[?if vikzhel_unrest >= 50 and vikzhel_strength >= 25 and vikzhel_strike == 1 : Worse, Vikzhel has declared the resumption of their railroad strike, bringing industry back to a standstill. ?]  
+[?if vikzhel_unrest >= 50 and vikzhel_strength >= 25 and vikzhel_strike == 0 : Worse, Vikzhel has declared they are launching their promised railroad strike, bringing our industry to a standstill. ?]  
+
+@lsr_negotiations
+title: Open negotiations with the Left-SRs to save the coalition government. 
+view-if: lsr_relation >= 65
+
+= Coalition Negotiations
