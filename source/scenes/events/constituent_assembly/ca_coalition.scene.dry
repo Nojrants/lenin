@@ -5,7 +5,7 @@ view-if: ca_disbanded = 1 and coalition_government = 1
 max-visits: 1
 tags: event
 on-arrival: {!
-  if (Q.foreign_minister_party != "Bolshevik" && Q.foreign_minister_party != "Left-SR" || ) { Q.foreign_minister = "Vacant"; Q.foreign_minister_party = ""; }
+  if (Q.foreign_minister_party != "Bolshevik" && Q.foreign_minister_party != "Left-SR" ) { Q.foreign_minister = "Vacant"; Q.foreign_minister_party = ""; }
   if (Q.war_minister_party != "Bolshevik" && Q.war_minister_party != "Left-SR") { Q.war_minister = "Vacant"; Q.war_minister_party = ""; }
   if (Q.education_minister_party != "Bolshevik" && Q.education_minister_party != "Left-SR") { Q.education_minister = "Vacant"; Q.education_minister_party = ""; }
   if (Q.interior_minister_party != "Bolshevik" && Q.interior_minister_party != "Left-SR") { Q.interior_minister = "Vacant"; Q.interior_minister_party = ""; }
