@@ -79,6 +79,7 @@ title: Open negotiations with the Left-SRs to save the coalition government.
 view-if: lsr_relation >= 65
 on-arrival: {!
   Q.lsr_positions = 0; Q.commissariats_held = 16;
+  Q.commissariats_held_original = commissariats_held;
   if (Q.foreign_minister_party == "Left-SR") { Q.lsr_positions += 1; }
   if (Q.war_minister_party == "Left-SR") { Q.lsr_positions += 1; }
   if (Q.education_minister_party == "Left-SR") { Q.lsr_positions += 1; }
@@ -96,9 +97,6 @@ on-arrival: {!
   if (Q.property_minister_party == "Left-SR") { Q.lsr_positions += 1; }
   if (Q.local_minister_party == "Left-SR") { Q.lsr_positions += 1; }
   Q.commissariats_held -= Q.lsr_positions;
-  Q.commissariats_held_original = commissariats_held;
-  console.log("Commissariats_held: ", Q.commissariats_held);
-  console.log("commissariats_held_original: ", Q.commissariats_held_original);
 
 !}
 
