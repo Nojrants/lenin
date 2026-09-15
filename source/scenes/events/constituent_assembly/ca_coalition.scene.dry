@@ -456,8 +456,8 @@ Suitability: ★★</ul>
 tags: internal_candidates4
 choose-if: interior_minister != "Alexandrov" 
 on-arrival: {!
-  if (Q.interior_minister_party == "Left-SR") Q.commissariats_held += 1; 
-  Q.interior_minister = "Alexandrov"; Q.interior_minister_party = "Bolshevik"; 
+  if (Q.interior_minister_party != "Left-SR") Q.commissariats_held -= 1; 
+  Q.interior_minister = "Alexandrov"; Q.interior_minister_party = "Left-SR"; 
 !}
 go-to: cabinet_negotiations4
 
@@ -476,7 +476,7 @@ Suitability: ★★</ul>
 tags: internal_candidates4
 choose-if: interior_minister != "Blumkin" 
 on-arrival: {!
-  if (Q.interior_minister_party == "Left-SR") Q.commissariats_held += 1; 
+  if (Q.interior_minister_party != "Left-SR") Q.commissariats_held -= 1; 
   Q.interior_minister = "Blumkin"; Q.interior_minister_party = "Left-SR"; 
 !}
 go-to: cabinet_negotiations4
