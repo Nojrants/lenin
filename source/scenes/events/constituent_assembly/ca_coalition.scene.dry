@@ -441,7 +441,7 @@ on-arrival: {!
 !}
 go-to: cabinet_negotiations2
 
-internal_alexandrov
+@internal_alexandrov
 title: Vyacheslav Alexandrov
 subtitle: {!
 <span style="color: var(--lsr-color);">Left-SR</span> — Experienced revolutionary militant.<ul>
@@ -461,7 +461,7 @@ on-arrival: {!
 !}
 go-to: cabinet_negotiations2
 
-internal_blumkin
+@internal_blumkin
 title: Yakov Blumkin
 subtitle: {!
 <span style="color: var(--lsr-color);">Left-SR</span> — Soldier-agitator with some experience in espionage.<ul>
