@@ -182,8 +182,8 @@ on-arrival: {!
 
 @finalize_deal
 title: Finalize the agreement. 
-unavailable-subtitle: [?if commissariats_held > (commissariats_held_original - 2) : The Left-SRs will not accept. ?][?if (war_minister_party == "Left-SR" and interior_minister_party == "Left-SR") or (foreign_minister_party == "Left-SR" and (war_minister_party == "Left-SR" or interior_minister_party == "Left-SR")) or (commissariats_held <= 8) : The Central Commitee believes we have ceded too much. ?]
-choose-if: (commissariats_held <= (commissariats_held_original - 2)) and ((war_minister_party != "Left-SR") or (interior_minister_party != "Left-SR")) and ((foreign_minister_party != "Left-SR") or ((war_minister_party != "Left-SR") and (interior_minister_party != "Left-SR"))) and (commissariats_held > 8)
+unavailable-subtitle: [?if (commissariats_held > (commissariats_held_original - 2)) or (commissariats_held > 10): The Left-SRs will not accept. ?][?if (war_minister_party == "Left-SR" and interior_minister_party == "Left-SR") or (foreign_minister_party == "Left-SR" and (war_minister_party == "Left-SR" or interior_minister_party == "Left-SR")) or (commissariats_held <= 8) : The Central Commitee believes we have ceded too much. ?]
+choose-if: (commissariats_held <= (commissariats_held_original - 2)) and (commissariats_held <= 10) and ((war_minister_party != "Left-SR") or (interior_minister_party != "Left-SR")) and ((foreign_minister_party != "Left-SR") or ((war_minister_party != "Left-SR") and (interior_minister_party != "Left-SR"))) and (commissariats_held > 8)
 new-page: true
 on-arrival: {!
   Q.coalition_government = 2; Q.lsr_in_gov = 1; 
