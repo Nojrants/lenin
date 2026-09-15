@@ -97,9 +97,10 @@ on-arrival: {!
   if (Q.local_minister_party == "Left-SR") { Q.lsr_positions += 1; }
   Q.commissariats_held -= Q.lsr_positions;
   Q.commissariats_held_original = commissariats_held;
-!}
+  console.log("Commissariats_held: ", Q.commissariats_held);
+  console.log("commissariats_held_original: ", Q.commissariats_held_original);
 
-= Coalition Negotiations
+!}
 
 - #commissariat_assign4
 - @finalize_deal
