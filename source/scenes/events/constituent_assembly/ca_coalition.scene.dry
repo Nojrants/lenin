@@ -209,7 +209,7 @@ go-to: foreign_menu
 
 @foreign_menu
 
-- #foreign_menu3
+- #foreign_candidates4
 
 @foreign_trotsky
 title: Leon Trotsky
@@ -223,7 +223,7 @@ unavailable-subtitle: {!
 Overall skill: ★★★★★<br>
 Suitability: ★★★☆</ul>
 !}
-tags: foreign_menu3
+tags: foreign_candidates4
 choose-if: foreign_minister != "Trotsky" 
 on-arrival: {!
   if (Q.foreign_minister_party == "Left-SR") Q.commissariats_held += 1; 
@@ -239,7 +239,7 @@ Overall skill: ★★★☆<br>
 Suitability: ★★★★</ul>
 !}
 unavailable-subtitle: <span style="color: var(--lsr-color);">Left-SR</span> — Leading party administrator and lawyer.<ul>Overall skill: ★★★☆<br>Suitability: ★★☆</ul>[?if agriculture_minister = "Kamkov" : <br>Kamkov already has a post. ?] 
-tags: foreign_menu3
+tags: foreign_candidates4
 choose-if: foreign_minister != "Kamkov" and agriculture_minister != "Kamkov"
 on-arrival: {!
   if (Q.foreign_minister_party != "Left-SR") Q.commissariats_held -= 1; 
@@ -259,7 +259,7 @@ unavailable-subtitle: {!
 Overall skill: ★★★★<br>
 Suitability: ★★★</ul>
 !}
-tags: foreign_menu3
+tags: foreign_candidates4
 choose-if: foreign_minister != "Spiridonova" 
 on-arrival: {!
   if (Q.foreign_minister_party != "Left-SR") Q.commissariats_held -= 1; 
@@ -269,7 +269,7 @@ go-to: cabinet_negotiations4
 
 @foreign_vacant
 title: Let's leave the position vacant for now. 
-tags: foreign_menu3
+tags: foreign_candidates4
 on-arrival: {!
   if (Q.foreign_minister_party == "Left-SR") Q.commissariats_held += 1; 
   Q.foreign_minister = "Vacant"; Q.foreign_minister_party = "";
@@ -279,7 +279,7 @@ go-to: cabinet_negotiations4
 @foreign_cancel
 title: Cancel reassignment.
 subtitle: [?if foreign_minister != "Vacant": Keep [+ foreign_minister +] in place. ?]
-tags: foreign_menu3
+tags: foreign_candidates4
 go-to: cabinet_negotiations4
 
 
@@ -292,7 +292,7 @@ go-to: military_menu
 
 @military_menu
 
-- #military_menu3
+- #military_candidates4
 
 @military_krylenko
 title: Nikolai Krylenko 
@@ -306,7 +306,7 @@ unavailable-subtitle: {!
 Overall skill: ★★★<br>
 Suitability: ★★★★</ul>
 !} 
-tags: military_menu3 
+tags: military_candidates4 
 choose-if: war_minister != "Krylenko" 
 on-arrival: {!
   if (Q.war_minister_party == "Left-SR") Q.commissariats_held += 1; 
@@ -326,7 +326,7 @@ unavailable-subtitle: {!
 Overall skill: ★★<br>
 Suitability: ★★★★</ul>
 !}
-tags: military_menu3
+tags: military_candidates4
 choose-if: foreign_minister != "Lazimir" 
 on-arrival: {!
   if (Q.war_minister_party != "Left-SR") Q.commissariats_held -= 1; 
@@ -336,7 +336,7 @@ go-to: cabinet_negotiations4
 
 @military_vacant
 title: Let's leave the position vacant for now. 
-tags: military_menu3
+tags: military_candidates4
 on-arrival: {!
   if (Q.war_minister_party == "Left-SR") Q.commissariats_held += 1; 
   Q.war_minister = "Vacant"; Q.war_minister_party = "";
@@ -346,7 +346,7 @@ go-to: cabinet_negotiations4
 @military_cancel
 title: Cancel reassignment.
 subtitle: [?if war_minister != "Vacant": Keep [+ war_minister +] in place. ?]
-tags: military_menu3
+tags: military_candidates4
 go-to: cabinet_negotiations4
 
 
@@ -362,7 +362,7 @@ go-to: enlightenment_menu
 
 @enlightenment_menu
 
-- #enlightenment_candidates3
+- #enlightenment_candidates4
 
 @enlightenment_lunacharsky
 title: Anatoly Lunacharsky
@@ -376,7 +376,7 @@ unavailable-subtitle: {!
 Overall skill: ★★★★<br>
 Suitability: ★★★★★</ul>
 !}
-tags: enlightenment_candidates3
+tags: enlightenment_candidates4
 choose-if: education_minister != "Lunacharsky" 
 on-arrival: {!
   if (Q.education_minister_party == "Left-SR") Q.commissariats_held += 1; 
@@ -391,7 +391,7 @@ subtitle: {!
 Overall skill: ★★★☆<br>
 Suitability: ★☆</ul>
 !}
-tags: enlightenment_candidates3
+tags: enlightenment_candidates4
 choose-if: lsr_relation >= 40 and education_minister != "Natanson" 
 unavailable-subtitle: [?if lsr_relation < 40 : Natanson won't accept this offer.<br> ?]<span style="color: var(--lsr-color);">Left-SR</span> — Party leader and elder statesman; some experience in education.<ul>Overall skill: ★★★☆<br>Suitability: ★☆</ul>
 on-arrival: {!
@@ -402,7 +402,7 @@ go-to: cabinet_negotiations4
 
 @enlightenment_vacant
 title: Let's leave the position vacant for now. 
-tags: enlightenment_candidates3
+tags: enlightenment_candidates4
 on-arrival: {!
   if (Q.education_minister_party == "Left-SR") Q.commissariats_held += 1; 
   Q.education_minister = "Vacant"; Q.education_minister_party = "";
@@ -412,7 +412,7 @@ go-to: cabinet_negotiations4
 @enlightenment_cancel
 title: Cancel reassignment.
 subtitle: [?if education_minister != "Vacant": Keep [+ education_minister +] in place. ?]
-tags: enlightenment_candidates3
+tags: enlightenment_candidates4
 go-to: cabinet_negotiations4
 
 
@@ -426,13 +426,13 @@ go-to: internal_menu
 
 @internal_menu
 
-- #internal_candidates3
+- #internal_candidates4
 
 @internal_rykov
 title: Alexei Rykov
 subtitle: 
 unavailable-subtitle: 
-tags: internal_candidates3
+tags: internal_candidates4
 view-if: moderates_resigned != 1
 choose-if: interior_minister != "Rykov" 
 on-arrival: {!
@@ -453,7 +453,7 @@ unavailable-subtitle: {!
 Overall skill: ★★<br>
 Suitability: ★★</ul>
 !}
-tags: internal_candidates3
+tags: internal_candidates4
 choose-if: interior_minister != "Alexandrov" 
 on-arrival: {!
   if (Q.interior_minister_party == "Left-SR") Q.commissariats_held += 1; 
@@ -473,7 +473,7 @@ unavailable-subtitle: {!
 Overall skill: ★☆<br>
 Suitability: ★★</ul>
 !}
-tags: internal_candidates3
+tags: internal_candidates4
 choose-if: interior_minister != "Blumkin" 
 on-arrival: {!
   if (Q.interior_minister_party == "Left-SR") Q.commissariats_held += 1; 
@@ -483,7 +483,7 @@ go-to: cabinet_negotiations4
 
 @internal_vacant
 title: Let's leave the position vacant for now. 
-tags: internal_candidates3
+tags: internal_candidates4
 on-arrival: {!
   if (Q.interior_minister_party == "Left-SR") Q.commissariats_held += 1; 
   Q.interior_minister = "Vacant"; Q.interior_minister_party = "";
@@ -493,7 +493,7 @@ go-to: cabinet_negotiations4
 @internal_cancel
 title: Cancel reassignment.
 subtitle: [?if interior_minister != "Vacant": Keep [+ interior_minister +] in place. ?]
-tags: internal_candidates3
+tags: internal_candidates4
 go-to: cabinet_negotiations4
 
 
@@ -505,7 +505,7 @@ go-to: transport_menu
 
 @transport_menu
 
-- #transport_candidates3
+- #transport_candidates4
 
 @transport_malkin
 title: Boris Malkin
@@ -519,7 +519,7 @@ unavailable-subtitle: {!
 Overall skill: ★★☆<br>
 Suitability: ★☆</ul>
 !}
-tags: transport_candidates3
+tags: transport_candidates4
 choose-if: transport_minister != "Malkin" 
 on-arrival: {!
   if (Q.transport_minister_party != "Left-SR") Q.commissariats_held -= 1; 
@@ -529,7 +529,7 @@ go-to: cabinet_negotiations4
 
 @transport_vacant
 title: Let's leave the position vacant for now. 
-tags: transport_candidates3
+tags: transport_candidates4
 on-arrival: {!
   if (Q.transport_minister_party == "Left-SR") Q.commissariats_held += 1; 
   Q.transport_minister = "Vacant"; Q.transport_minister_party = "";
@@ -539,7 +539,7 @@ go-to: cabinet_negotiations4
 @transport_cancel
 title: Cancel reassignment.
 subtitle: [?if transport_minister != "Vacant": Keep [+ transport_minister +] in place. ?]
-tags: transport_candidates3
+tags: transport_candidates4
 go-to: cabinet_negotiations4
 
 
@@ -552,7 +552,7 @@ go-to: trade_menu
 
 @trade_menu
 
-- #trade_candidates3
+- #trade_candidates4
 
 @trade_nogin
 title: Viktor Nogin
@@ -566,7 +566,7 @@ unavailable-subtitle: {!
 Overall skill: ★★★<br>
 Suitability: ★★★</ul>
 !}
-tags: trade_candidates3
+tags: trade_candidates4
 choose-if: trade_minister != "Nogin" 
 on-arrival: {!
   if (Q.trade_minister_party == "Left-SR") { Q.commissariats_held += 1; }
@@ -582,7 +582,7 @@ Overall skill: ★★★<br>
 Suitability: ★★</ul>
 !}
 unavailable-subtitle: <span style="color: var(--lsr-color);">Left-SR</span> — Lawyer and party activist<ul>Overall skill: ★★★<br>Suitability: ★★</ul>[?if posts_minister == "Proshian" : <br>Proshian already has a post. ?]
-tags: trade_candidates3
+tags: trade_candidates4
 choose-if: posts_minister != "Proshian" and trade_minister != "Proshian"
 on-arrival: {!
   if (Q.trade_minister_party == "Bolshevik" || Q.posts_minister == "Vacant") Q.commissariats_held -= 1;
@@ -592,7 +592,7 @@ go-to: cabinet_negotiations4
 
 @trade_vacant
 title: Let's leave the position vacant for now. 
-tags: trade_candidates3
+tags: trade_candidates4
 on-arrival: {!
   if (Q.trade_minister_party == "Left-SR") { Q.commissariats_held += 1; }
   Q.trade_minister = "Vacant"; Q.trade_minister_party = "";
@@ -602,7 +602,7 @@ go-to: cabinet_negotiations4
 @trade_cancel
 title: Cancel reassignment.
 subtitle: [?if trade_minister != "Vacant": Keep [+ trade_minister +] in place. ?]
-tags: trade_candidates3
+tags: trade_candidates4
 go-to: cabinet_negotiations4
 
 
@@ -616,7 +616,7 @@ go-to: finance_menu
 
 @finance_menu
 
-- #finance_candidates3
+- #finance_candidates4
 
 @finance_skvortsov
 title: Ivan Skvortsov-Stepanov
@@ -630,7 +630,7 @@ unavailable-subtitle: {!
 Overall skill: ★☆<br>
 Suitability: ★★☆</ul>
 !}
-tags: finance_candidates3
+tags: finance_candidates4
 choose-if: finance_minister != "Skvortsov"  
 on-arrival: {!
   if (Q.finance_minister_party == "Left-SR") { Q.commissariats_held += 1; }
@@ -650,7 +650,7 @@ unavailable-subtitle: {!
 Overall skill: ★★<br>
 Suitability: ★★</ul>
 !}
-tags: finance_candidates3
+tags: finance_candidates4
 choose-if: finance_minister != "Brilliantov"  
 on-arrival: {!
   if (Q.justice_minister_party == "Bolshevik" || Q.justice_minister == "Vacant") Q.commissariats_held -= 1;
@@ -660,7 +660,7 @@ go-to: cabinet_negotiations4
 
 @finance_vacant
 title: Let's leave the position vacant for now. 
-tags: finance_candidates3
+tags: finance_candidates4
 on-arrival: {!
   if (Q.finance_minister_party == "Left-SR") { Q.commissariats_held += 1; }
   Q.finance_minister = "Vacant"; Q.finance_minister_party = "";
@@ -670,7 +670,7 @@ go-to: cabinet_negotiations4
 @finance_cancel
 title: Cancel reassignment.
 subtitle: [?if finance_minister != "Vacant": Keep [+ finance_minister +] in place. ?]
-tags: finance_candidates3
+tags: finance_candidates4
 go-to: cabinet_negotiations4
 
 
@@ -685,7 +685,7 @@ go-to: justice_menu
 
 @justice_menu
 
-- #justice_candidates3
+- #justice_candidates4
 
 @justice_oppokov
 title: Georgy Oppokov
@@ -699,7 +699,7 @@ unavailable-subtitle: {!
 Overall skill: ★★<br>
 Suitability: ★☆</ul>
 !}
-tags: justice_candidates3
+tags: justice_candidates4
 choose-if: justice_minister != "Oppokov"  
 on-arrival: {!
   if (Q.justice_minister_party == "Left-SR") { Q.commissariats_held += 1; }
@@ -719,7 +719,7 @@ unavailable-subtitle: {!
 Overall skill: ★★★<br>
 Suitability: ★★★★</ul>
 !}
-tags: justice_candidates3
+tags: justice_candidates4
 choose-if: justice_minister != "Steinberg"
 on-arrival: {!
   if (Q.justice_minister_party == "Bolshevik" || Q.justice_minister == "Vacant") Q.commissariats_held -= 1;
@@ -729,7 +729,7 @@ go-to: cabinet_negotiations4
 
 @justice_vacant
 title: Let's leave the position vacant for now. 
-tags: justice_candidates3
+tags: justice_candidates4
 on-arrival: {!
   if (Q.justice_minister_party == "Left-SR") { Q.commissariats_held += 1; }
   Q.justice_minister = "Vacant"; Q.justice_minister_party = "";
@@ -739,7 +739,7 @@ go-to: cabinet_negotiations4
 @justice_cancel
 title: Cancel reassignment.
 subtitle: [?if justice_minister != "Vacant": Keep [+ justice_minister +] in place. ?]
-tags: justice_candidates3
+tags: justice_candidates4
 go-to: cabinet_negotiations4
 
 
@@ -752,7 +752,7 @@ go-to: labor_menu
 
 @labor_menu
 
-- #labor_candidates3
+- #labor_candidates4
 
 @labor_shliapnikov
 title: Alexander Shliapnikov
@@ -766,7 +766,7 @@ unavailable-subtitle: {!
 Overall skill: ★★★★<br>
 Suitability: ★★★★</ul>
 !}
-tags: labor_candidates3
+tags: labor_candidates4
 choose-if: labor_minister != "Shliapnikov"  
 on-arrival: {!
   if (Q.labor_minister_party == "Left-SR") { Q.commissariats_held += 1; }
@@ -782,7 +782,7 @@ Overall skill: ★★☆<br>
 Suitability: ★☆</u>
 !}
 unavailable-subtitle: <span style="color: var(--lsr-color);">Left-SR</span> — Former law student, journalist, and expert in local affairs.<br> Overall skill: ★★☆<br>Suitability: ★☆</ul>[?if local_minister == "Trutovsky" : <br>Trutovsky already has a post. ?]
-tags: labor_candidates3
+tags: labor_candidates4
 choose-if: labor_minister != "Trutovsky" and local_minister != "Trutovsky"
 on-arrival: {!
   if (Q.labor_minister_party != "Left-SR") Q.commissariats_held -= 1; 
@@ -792,7 +792,7 @@ go-to: cabinet_negotiations4
 
 @labor_vacant
 title: Let's leave the position vacant for now. 
-tags: labor_candidates3
+tags: labor_candidates4
 on-arrival: {!
   if (Q.labor_minister_party == "Left-SR") { Q.commissariats_held += 1; }
   Q.labor_minister = "Vacant"; Q.labor_minister_party = "";
@@ -802,7 +802,7 @@ go-to: cabinet_negotiations4
 @labor_cancel
 title: Cancel reassignment.
 subtitle: [?if labor_minister != "Vacant": Keep [+ labor_minister +] in place. ?]
-tags: labor_candidates3
+tags: labor_candidates4
 go-to: cabinet_negotiations4
 
 
@@ -815,7 +815,7 @@ go-to: agriculture_menu
 
 @agriculture_menu
 
-- #agriculture_candidates3
+- #agriculture_candidates4
 
 @agriculture_milyutin
 title: Vladimir Milyutin
@@ -829,7 +829,7 @@ unavailable-subtitle: {!
 Overall skill: ★★<br>
 Suitability: ★</ul>
 !}
-tags: agriculture_candidates3
+tags: agriculture_candidates4
 choose-if: agriculture_minister != "Milyutin"  
 on-arrival: {!
   if (Q.agriculture_minister_party == "Left-SR") { Q.commissariats_held += 1; }
@@ -854,7 +854,7 @@ on-arrival: {!
   if (Q.agriculture_minister_party != "Left-SR") Q.commissariats_held -= 1; 
   Q.agriculture_minister = "Kolegayev"; Q.agriculture_minister_party = "Left-SR";
 !}
-tags: agriculture_candidates3
+tags: agriculture_candidates4
 go-to: cabinet_negotiations4
 
 @agriculture_algasov
@@ -870,7 +870,7 @@ on-arrival: {!
   if (Q.agriculture_minister_party != "Left-SR") Q.commissariats_held -= 1; 
   Q.agriculture_minister = "Algasov"; Q.agriculture_minister_party = "Left-SR";
 !}
-tags: agriculture_candidates3
+tags: agriculture_candidates4
 go-to: cabinet_negotiations4
 
 @agriculture_kamkov
@@ -886,12 +886,12 @@ on-arrival: {!
   if (Q.agriculture_minister_party != "Left-SR") Q.commissariats_held -= 1; 
   Q.agriculture_minister = "Kamkov"; Q.agriculture_minister_party = "Left-SR";
 !}
-tags: agriculture_candidates3
+tags: agriculture_candidates4
 go-to: cabinet_negotiations4
 
 @agriculture_vacant
 title: Let's leave the position vacant for now. 
-tags: agriculture_candidates3
+tags: agriculture_candidates4
 on-arrival: {!
   if (Q.agriculture_minister_party == "Left-SR") { Q.commissariats_held += 1; }
   Q.agriculture_minister = "Vacant"; Q.agriculture_minister_party = "";
@@ -901,7 +901,7 @@ go-to: cabinet_negotiations4
 @agriculture_cancel
 title: Cancel reassignment.
 subtitle: [?if agriculture_minister != "Vacant": Keep [+ agriculture_minister +] in place. ?]
-tags: agriculture_candidates3
+tags: agriculture_candidates4
 go-to: cabinet_negotiations4
 
 
@@ -914,7 +914,7 @@ go-to: food_menu
 
 @food_menu
 
-- #food_candidates3
+- #food_candidates4
 
 @food_teodorovich
 title: Ivan Teodorovich
@@ -928,7 +928,7 @@ unavailable-subtitle: {!
 Overall skill: ★★<br>
 Suitability: ★★</ul>
 !}
-tags: food_candidates3
+tags: food_candidates4
 choose-if: food_minister != "Teodorovich"  
 on-arrival: {!
   if (Q.food_minister_party == "Left-SR") { Q.commissariats_held += 1; }
@@ -953,7 +953,7 @@ on-arrival: {!
   if (Q.food_minister_party != "Left-SR") Q.commissariats_held -= 1; 
   Q.food_minister = "Mayorov"; Q.food_minister_party = "Left-SR";
 !}
-tags: food_candidates3
+tags: food_candidates4
 go-to: cabinet_negotiations4
 
 @food_algasov
@@ -969,13 +969,13 @@ on-arrival: {!
   if (Q.food_minister_party != "Left-SR") Q.commissariats_held -= 1; 
   Q.food_minister = "Algasov"; Q.food_minister_party = "Left-SR";
 !}
-tags: food_candidates3
+tags: food_candidates4
 go-to: cabinet_negotiations4
 
 
 @food_vacant
 title: Let's leave the position vacant for now. 
-tags: food_candidates3
+tags: food_candidates4
 on-arrival: {!
   if (Q.food_minister_party == "Left-SR") Q.commissariats_held += 1;
   Q.food_minister = "Vacant"; Q.food_minister_party = "";
@@ -985,7 +985,7 @@ go-to: cabinet_negotiations4
 @food_cancel
 title: Cancel reassignment.
 subtitle: [?if food_minister != "Vacant": Keep [+ food_minister +] in place. ?]
-tags: food_candidates3
+tags: food_candidates4
 go-to: cabinet_negotiations4
 
 
@@ -998,7 +998,7 @@ go-to: posts_menu
 
 @posts_menu
 
-- #posts_candidates3
+- #posts_candidates4
 
 @posts_glebov
 title: Nikolai Glebov-Avilov
@@ -1012,7 +1012,7 @@ unavailable-subtitle: {!
 Overall skill: ★★<br>
 Suitability: ★★</ul>
 !}
-tags: posts_candidates3
+tags: posts_candidates4
 choose-if: posts_minister != "Glebov"  
 on-arrival: {!
   if (Q.posts_minister_party == "Left-SR") { Q.commissariats_held += 1; }
@@ -1029,7 +1029,7 @@ Overall skill: ★★★<br>
 Suitability: ★★</ul>
 !}
 unavailable-subtitle: <span style="color: var(--lsr-color);">Left-SR</span> — Lawyer and party activist<ul>Overall skill: ★★★<br>Suitability: ★★</ul>[?if trade_minister == "Proshian" : <br>Proshian already has a post. ?]
-tags: posts_candidates3
+tags: posts_candidates4
 choose-if: posts_minister != "Proshian" and trade_minister != "Proshian"
 on-arrival: {!
   if (Q.posts_minister_party == "Bolshevik" || Q.posts_minister == "Vacant") Q.commissariats_held -= 1;
@@ -1050,13 +1050,13 @@ on-arrival: {!
   if (Q.posts_minister_party != "Left-SR") Q.commissariats_held -= 1; 
   Q.posts_minister = "Algasov"; Q.posts_minister_party = "Left-SR";
 !}
-tags: posts_candidates3
+tags: posts_candidates4
 go-to: cabinet_negotiations4
 
 
 @posts_vacant
 title: Let's leave the position vacant for now. 
-tags: posts_candidates3
+tags: posts_candidates4
 on-arrival: {!
   if (Q.posts_minister_party == "Left-SR") Q.commissariats_held += 1;
   Q.posts_minister = "Vacant"; Q.posts_minister_party = "";
@@ -1066,7 +1066,7 @@ go-to: cabinet_negotiations4
 @posts_cancel
 title: Cancel reassignment.
 subtitle: [?if posts_minister != "Vacant": Keep [+ posts_minister +] in place. ?]
-tags: posts_candidates3
+tags: posts_candidates4
 go-to: cabinet_negotiations4
                        
 
@@ -1080,7 +1080,7 @@ go-to: nationalities_menu
 
 @nationalities_menu
 
-- #nationalities_candidates3
+- #nationalities_candidates4
 
 @nationalities_stalin
 title: Iosif Stalin
@@ -1094,7 +1094,7 @@ unavailable-subtitle: {!
 Overall skill: ★★★★★<br>
 Suitability: ★★★</ul>
 !}
-tags: nationalities_candidates3
+tags: nationalities_candidates4
 choose-if: nationalities_minister != "Stalin"  
 on-arrival: {!
   if (Q.nationalities_minister_party == "Left-SR") { Q.commissariats_held += 1; }
@@ -1105,7 +1105,7 @@ go-to: cabinet_negotiations4
 
 @nationalities_vacant
 title: Let's leave the position vacant for now. 
-tags: nationalities_candidates3
+tags: nationalities_candidates4
 on-arrival: {!
   if (Q.nationalities_minister_party == "Left-SR") Q.commissariats_held += 1;
   Q.nationalities_minister = "Vacant"; Q.nationalities_minister_party = "";
@@ -1115,7 +1115,7 @@ go-to: cabinet_negotiations4
 @nationalities_cancel
 title: Cancel reassignment.
 subtitle: [?if nationalities_minister != "Vacant": Keep [+ nationalities_minister +] in place. ?]
-tags: nationalities_candidates3
+tags: nationalities_candidates4
 go-to: cabinet_negotiations4
   
 
@@ -1129,7 +1129,7 @@ go-to: property_menu
 
 @property_menu
 
-- #property_candidates3
+- #property_candidates4
 
 @property_karelin
 title: Vladimir Karelin
@@ -1143,7 +1143,7 @@ unavailable-subtitle: {!
 Overall skill: ★★★☆<br>
 Suitability: ★★</ul>
 !}
-tags: property_candidates3
+tags: property_candidates4
 choose-if: property_minister != "Karelin" 
 on-arrival: {!
   if (Q.property_minister_party != "Left-SR") Q.commissariats_held -= 1;
@@ -1159,7 +1159,7 @@ Overall skill: ★★<br>
 Suitability: ★★★</ul>
 !}
 unavailable-subtitle: <span style="color: var(--lsr-color);">Left-SR</span> — Party organizer with managerial experience.<ul>Overall skill: ★★<br>Suitability: ★★</ul>[?if local_minister == "Izmailovich" : <br>Izmailovich already has a post. ?]
-tags: property_candidates3
+tags: property_candidates4
 choose-if: local_minister != "Izmailovich" and property_minister != "Izmailovich"
 on-arrival: {!
   if (Q.property_minister_party != "Left-SR") { Q.commissariats_held -= 1; }
@@ -1169,7 +1169,7 @@ go-to: cabinet_negotiations4
 
 @property_vacant
 title: Cancel the proposed commissariat.
-tags: property_candidates3
+tags: property_candidates4
 on-arrival: {!
   if (Q.property_minister_party == "Left-SR") { Q.commissariats_held += 1; }
   Q.property_minister = "None"; Q.property_minister_party = ""; 
@@ -1180,7 +1180,7 @@ go-to: cabinet_negotiations4
 title: Cancel reassignment.
 subtitle: [?if property_minister != "None": Keep [+ property_minister +] in place. ?]
 view-if: property_minister != "None"
-tags: property_candidates3
+tags: property_candidates4
 go-to: cabinet_negotiations4
 
 
@@ -1194,7 +1194,7 @@ go-to: local_menu
 
 @local_menu
 
-- #local_candidates3
+- #local_candidates4
 
 @local_trutovsky
 title: Vladimir Trutovsky
@@ -1204,7 +1204,7 @@ Overall skill: ★★☆<br>
 Suitability: ★★★★</ul>
 !}
 unavailable-subtitle: <span style="color: var(--lsr-color);">Left-SR</span> — Former law student, journalist, and expert in local affairs.<ul>Overall skill: ★★☆<br>Suitability: ★★★★</ul>[?if labor_minister == "Trutovsky" : <br>Trutovsky already has a post. ?]
-tags: local_candidates3
+tags: local_candidates4
 choose-if: local_minister != "Trutovsky" and labor_minister != "Trutovsky"
 on-arrival: {!
   if (Q.local_minister_party != "Left-SR") { Q.commissariats_held -= 1; }
@@ -1220,7 +1220,7 @@ Overall skill: ★★<br>
 Suitability: ★★</ul>
 !}
 unavailable-subtitle: <span style="color: var(--lsr-color);">Left-SR</span> — Party organizer with managerial experience.<ul>Overall skill: ★★<br>Suitability: ★★</ul>[?if property_minister == "Izmailovich" : <br>Izmailovich already has a post. ?]
-tags: local_candidates3
+tags: local_candidates4
 choose-if: local_minister != "Izmailovich" and property_minister != "Izmailovich"
 on-arrival: {!
   if (Q.local_minister_party != "Left-SR") { Q.commissariats_held -= 1; }
@@ -1242,7 +1242,7 @@ go-to: cabinet_negotiations4
 title: Cancel reassignment.
 subtitle: [?if local_minister != "None": Keep [+ local_minister +] in place. ?]
 view-if: local_minister != "None"
-tags: local_candidates
+tags: local_candidates4
 go-to: cabinet_negotiations4
 
 
