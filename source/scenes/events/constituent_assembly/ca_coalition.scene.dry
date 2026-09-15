@@ -229,7 +229,7 @@ on-arrival: {!
   if (Q.foreign_minister_party == "Left-SR") Q.commissariats_held += 1; 
   Q.foreign_minister = "Trotsky"; Q.foreign_minister_party = "Bolshevik";
 !}
-go-to: cabinet_negotiations2
+go-to: cabinet_negotiations4
 
 @foreign_kamkov
 title: Boris Kamkov
@@ -245,7 +245,7 @@ on-arrival: {!
   if (Q.foreign_minister_party != "Left-SR") Q.commissariats_held -= 1; 
   Q.foreign_minister = "Kamkov"; Q.foreign_minister_party = "Left-SR";
 !}
-go-to: cabinet_negotiations2
+go-to: cabinet_negotiations4
 
 @foreign_spiridonova
 title: Maria Spiridonova
@@ -265,7 +265,7 @@ on-arrival: {!
   if (Q.foreign_minister_party != "Left-SR") Q.commissariats_held -= 1; 
   Q.foreign_minister = "Spiridonova"; Q.foreign_minister_party = "Left-SR";
 !}
-go-to: cabinet_negotiations2
+go-to: cabinet_negotiations4
 
 @foreign_vacant
 title: Let's leave the position vacant for now. 
@@ -274,13 +274,13 @@ on-arrival: {!
   if (Q.foreign_minister_party == "Left-SR") Q.commissariats_held += 1; 
   Q.foreign_minister = "Vacant"; Q.foreign_minister_party = "";
 !}
-go-to: cabinet_negotiations2
+go-to: cabinet_negotiations4
 
 @foreign_cancel
 title: Cancel reassignment.
 subtitle: [?if foreign_minister != "Vacant": Keep [+ foreign_minister +] in place. ?]
 tags: foreign_menu3
-go-to: cabinet_negotiations2
+go-to: cabinet_negotiations4
 
 
 
@@ -312,7 +312,7 @@ on-arrival: {!
   if (Q.war_minister_party == "Left-SR") Q.commissariats_held += 1; 
   Q.war_minister = "Krylenko"; Q.war_minister_party = "Bolshevik";
 !}
-go-to: cabinet_negotiations2
+go-to: cabinet_negotiations4
 
 @military_lazimir
 title: Pavel Lazimir
@@ -332,7 +332,7 @@ on-arrival: {!
   if (Q.war_minister_party != "Left-SR") Q.commissariats_held -= 1; 
   Q.war_minister = "Lazimir"; Q.war_minister_party = "Left-SR";
 !}
-go-to: cabinet_negotiations2
+go-to: cabinet_negotiations4
 
 @military_vacant
 title: Let's leave the position vacant for now. 
@@ -341,13 +341,13 @@ on-arrival: {!
   if (Q.war_minister_party == "Left-SR") Q.commissariats_held += 1; 
   Q.war_minister = "Vacant"; Q.war_minister_party = "";
 !}
-go-to: cabinet_negotiations2
+go-to: cabinet_negotiations4
 
 @military_cancel
 title: Cancel reassignment.
 subtitle: [?if war_minister != "Vacant": Keep [+ war_minister +] in place. ?]
 tags: military_menu3
-go-to: cabinet_negotiations2
+go-to: cabinet_negotiations4
 
 
 
@@ -382,7 +382,7 @@ on-arrival: {!
   if (Q.education_minister_party == "Left-SR") Q.commissariats_held += 1; 
   Q.education_minister = "Lunacharsky"; Q.education_minister_party = "Bolshevik"; 
 !}
-go-to: cabinet_negotiations2
+go-to: cabinet_negotiations4
 
 @enlightenment_natanson
 title: Mark Natanson
@@ -398,7 +398,7 @@ on-arrival: {!
   if (Q.education_minister_party == "Bolshevik" || Q.education_minister == "Vacant") Q.commissariats_held -= 1;
   Q.education_minister = "Natanson"; Q.education_minister_party = "Left-SR"; Q.lsr_represented += 1;
 !}
-go-to: cabinet_negotiations2
+go-to: cabinet_negotiations4
 
 @enlightenment_vacant
 title: Let's leave the position vacant for now. 
@@ -407,13 +407,13 @@ on-arrival: {!
   if (Q.education_minister_party == "Left-SR") Q.commissariats_held += 1; 
   Q.education_minister = "Vacant"; Q.education_minister_party = "";
 !}
-go-to: cabinet_negotiations2
+go-to: cabinet_negotiations4
 
 @enlightenment_cancel
 title: Cancel reassignment.
 subtitle: [?if education_minister != "Vacant": Keep [+ education_minister +] in place. ?]
 tags: enlightenment_candidates3
-go-to: cabinet_negotiations2
+go-to: cabinet_negotiations4
 
 
                        
@@ -439,7 +439,7 @@ on-arrival: {!
   if (Q.interior_minister_party == "Left-SR") Q.commissariats_held += 1; 
   Q.interior_minister = "Rykov"; Q.interior_minister_party = "Bolshevik"; 
 !}
-go-to: cabinet_negotiations2
+go-to: cabinet_negotiations4
 
 @internal_alexandrov
 title: Vyacheslav Alexandrov
@@ -459,7 +459,7 @@ on-arrival: {!
   if (Q.interior_minister_party == "Left-SR") Q.commissariats_held += 1; 
   Q.interior_minister = "Alexandrov"; Q.interior_minister_party = "Bolshevik"; 
 !}
-go-to: cabinet_negotiations2
+go-to: cabinet_negotiations4
 
 @internal_blumkin
 title: Yakov Blumkin
@@ -479,7 +479,7 @@ on-arrival: {!
   if (Q.interior_minister_party == "Left-SR") Q.commissariats_held += 1; 
   Q.interior_minister = "Blumkin"; Q.interior_minister_party = "Bolshevik"; 
 !}
-go-to: cabinet_negotiations2
+go-to: cabinet_negotiations4
 
 @internal_vacant
 title: Let's leave the position vacant for now. 
@@ -488,13 +488,13 @@ on-arrival: {!
   if (Q.interior_minister_party == "Left-SR") Q.commissariats_held += 1; 
   Q.interior_minister = "Vacant"; Q.interior_minister_party = "";
 !}
-go-to: cabinet_negotiations2
+go-to: cabinet_negotiations4
 
 @internal_cancel
 title: Cancel reassignment.
 subtitle: [?if interior_minister != "Vacant": Keep [+ interior_minister +] in place. ?]
 tags: internal_candidates3
-go-to: cabinet_negotiations2
+go-to: cabinet_negotiations4
 
 
 @transport_assign
@@ -525,7 +525,7 @@ on-arrival: {!
   if (Q.transport_minister_party != "Left-SR") Q.commissariats_held -= 1; 
   Q.transport_minister = "Malkin"; Q.transport_minister_party = "Left-SR";
 !}
-go-to: cabinet_negotiations2
+go-to: cabinet_negotiations4
 
 @transport_vacant
 title: Let's leave the position vacant for now. 
@@ -534,13 +534,13 @@ on-arrival: {!
   if (Q.transport_minister_party == "Left-SR") Q.commissariats_held += 1; 
   Q.transport_minister = "Vacant"; Q.transport_minister_party = "";
 !}
-go-to: cabinet_negotiations2
+go-to: cabinet_negotiations4
 
 @transport_cancel
 title: Cancel reassignment.
 subtitle: [?if transport_minister != "Vacant": Keep [+ transport_minister +] in place. ?]
 tags: transport_candidates3
-go-to: cabinet_negotiations2
+go-to: cabinet_negotiations4
 
 
 
@@ -572,7 +572,7 @@ on-arrival: {!
   if (Q.trade_minister_party == "Left-SR") { Q.commissariats_held += 1; }
   Q.trade_minister = "Nogin"; Q.trade_minister_party = "Bolshevik";
 !}
-go-to: cabinet_negotiations2
+go-to: cabinet_negotiations4
 
 @trade_proshian
 title: Prosh Proshian
@@ -588,7 +588,7 @@ on-arrival: {!
   if (Q.trade_minister_party == "Bolshevik" || Q.posts_minister == "Vacant") Q.commissariats_held -= 1;
   Q.trade_minister = "Proshian"; Q.trade_minister_party = "Left-SR";
 !}
-go-to: cabinet_negotiations2
+go-to: cabinet_negotiations4
 
 @trade_vacant
 title: Let's leave the position vacant for now. 
@@ -597,13 +597,13 @@ on-arrival: {!
   if (Q.trade_minister_party == "Left-SR") { Q.commissariats_held += 1; }
   Q.trade_minister = "Vacant"; Q.trade_minister_party = "";
 !}
-go-to: cabinet_negotiations2
+go-to: cabinet_negotiations4
 
 @trade_cancel
 title: Cancel reassignment.
 subtitle: [?if trade_minister != "Vacant": Keep [+ trade_minister +] in place. ?]
 tags: trade_candidates3
-go-to: cabinet_negotiations2
+go-to: cabinet_negotiations4
 
 
 
@@ -636,7 +636,7 @@ on-arrival: {!
   if (Q.finance_minister_party == "Left-SR") { Q.commissariats_held += 1; }
   Q.finance_minister = "Skvortsov"; Q.finance_minister_party = "Bolshevik";
 !}
-go-to: cabinet_negotiations2
+go-to: cabinet_negotiations4
 
 @finance_brilliantov
 title: Alexander Brilliantov
@@ -656,7 +656,7 @@ on-arrival: {!
   if (Q.justice_minister_party == "Bolshevik" || Q.justice_minister == "Vacant") Q.commissariats_held -= 1;
   Q.finance_minister = "Brilliantov"; Q.finance_minister_party = "Left-SR";
 !}
-go-to: cabinet_negotiations2
+go-to: cabinet_negotiations4
 
 @finance_vacant
 title: Let's leave the position vacant for now. 
@@ -665,13 +665,13 @@ on-arrival: {!
   if (Q.finance_minister_party == "Left-SR") { Q.commissariats_held += 1; }
   Q.finance_minister = "Vacant"; Q.finance_minister_party = "";
 !}
-go-to: cabinet_negotiations2
+go-to: cabinet_negotiations4
 
 @finance_cancel
 title: Cancel reassignment.
 subtitle: [?if finance_minister != "Vacant": Keep [+ finance_minister +] in place. ?]
 tags: finance_candidates3
-go-to: cabinet_negotiations2
+go-to: cabinet_negotiations4
 
 
 
@@ -705,7 +705,7 @@ on-arrival: {!
   if (Q.justice_minister_party == "Left-SR") { Q.commissariats_held += 1; }
   Q.justice_minister = "Oppokov"; Q.justice_minister_party = "Bolshevik";
 !}
-go-to: cabinet_negotiations2
+go-to: cabinet_negotiations4
 
 @justice_steinberg
 title: Isaac Steinberg
@@ -725,7 +725,7 @@ on-arrival: {!
   if (Q.justice_minister_party == "Bolshevik" || Q.justice_minister == "Vacant") Q.commissariats_held -= 1;
   Q.justice_minister = "Steinberg"; Q.justice_minister_party = "Left-SR";
 !}
-go-to: cabinet_negotiations2
+go-to: cabinet_negotiations4
 
 @justice_vacant
 title: Let's leave the position vacant for now. 
@@ -734,13 +734,13 @@ on-arrival: {!
   if (Q.justice_minister_party == "Left-SR") { Q.commissariats_held += 1; }
   Q.justice_minister = "Vacant"; Q.justice_minister_party = "";
 !}
-go-to: cabinet_negotiations2
+go-to: cabinet_negotiations4
 
 @justice_cancel
 title: Cancel reassignment.
 subtitle: [?if justice_minister != "Vacant": Keep [+ justice_minister +] in place. ?]
 tags: justice_candidates3
-go-to: cabinet_negotiations2
+go-to: cabinet_negotiations4
 
 
                        
@@ -772,7 +772,7 @@ on-arrival: {!
   if (Q.labor_minister_party == "Left-SR") { Q.commissariats_held += 1; }
   Q.labor_minister = "Shliapnikov"; Q.labor_minister_party = "Bolshevik";
 !}
-go-to: cabinet_negotiations2
+go-to: cabinet_negotiations4
 
 @labor_trutovsky
 title: Vladimir Trutovsky
@@ -788,7 +788,7 @@ on-arrival: {!
   if (Q.labor_minister_party != "Left-SR") Q.commissariats_held -= 1; 
   Q.labor_minister = "Trutovsky"; Q.labor_minister_party = "Left-SR";
 !}
-go-to: cabinet_negotiations2
+go-to: cabinet_negotiations4
 
 @labor_vacant
 title: Let's leave the position vacant for now. 
@@ -797,13 +797,13 @@ on-arrival: {!
   if (Q.labor_minister_party == "Left-SR") { Q.commissariats_held += 1; }
   Q.labor_minister = "Vacant"; Q.labor_minister_party = "";
 !}
-go-to: cabinet_negotiations2
+go-to: cabinet_negotiations4
 
 @labor_cancel
 title: Cancel reassignment.
 subtitle: [?if labor_minister != "Vacant": Keep [+ labor_minister +] in place. ?]
 tags: labor_candidates3
-go-to: cabinet_negotiations2
+go-to: cabinet_negotiations4
 
 
 
@@ -835,7 +835,7 @@ on-arrival: {!
   if (Q.agriculture_minister_party == "Left-SR") { Q.commissariats_held += 1; }
   Q.agriculture_minister = "Milyutin"; Q.agriculture_minister_party = "Bolshevik";
 !}
-go-to: cabinet_negotiations2
+go-to: cabinet_negotiations4
 
 @agriculture_kolegayev
 title: Andrei Kolegayev
@@ -855,7 +855,7 @@ on-arrival: {!
   Q.agriculture_minister = "Kolegayev"; Q.agriculture_minister_party = "Left-SR";
 !}
 tags: agriculture_candidates3
-go-to: cabinet_negotiations2
+go-to: cabinet_negotiations4
 
 @agriculture_algasov
 title: Vladimir Algasov
@@ -871,7 +871,7 @@ on-arrival: {!
   Q.agriculture_minister = "Algasov"; Q.agriculture_minister_party = "Left-SR";
 !}
 tags: agriculture_candidates3
-go-to: cabinet_negotiations2
+go-to: cabinet_negotiations4
 
 @agriculture_kamkov
 title: Boris Kamkov
@@ -887,7 +887,7 @@ on-arrival: {!
   Q.agriculture_minister = "Kamkov"; Q.agriculture_minister_party = "Left-SR";
 !}
 tags: agriculture_candidates3
-go-to: cabinet_negotiations2
+go-to: cabinet_negotiations4
 
 @agriculture_vacant
 title: Let's leave the position vacant for now. 
@@ -896,13 +896,13 @@ on-arrival: {!
   if (Q.agriculture_minister_party == "Left-SR") { Q.commissariats_held += 1; }
   Q.agriculture_minister = "Vacant"; Q.agriculture_minister_party = "";
 !}
-go-to: cabinet_negotiations2
+go-to: cabinet_negotiations4
 
 @agriculture_cancel
 title: Cancel reassignment.
 subtitle: [?if agriculture_minister != "Vacant": Keep [+ agriculture_minister +] in place. ?]
 tags: agriculture_candidates3
-go-to: cabinet_negotiations2
+go-to: cabinet_negotiations4
 
 
 
@@ -934,7 +934,7 @@ on-arrival: {!
   if (Q.food_minister_party == "Left-SR") { Q.commissariats_held += 1; }
   Q.food_minister = "Teodorovich"; Q.food_minister_party = "Bolshevik";
 !}
-go-to: cabinet_negotiations2
+go-to: cabinet_negotiations4
 
 @food_mayorov
 title: Ilya Mayorov
@@ -954,7 +954,7 @@ on-arrival: {!
   Q.food_minister = "Mayorov"; Q.food_minister_party = "Left-SR";
 !}
 tags: food_candidates3
-go-to: cabinet_negotiations2
+go-to: cabinet_negotiations4
 
 @food_algasov
 title: Vladimir Algasov
@@ -970,7 +970,7 @@ on-arrival: {!
   Q.food_minister = "Algasov"; Q.food_minister_party = "Left-SR";
 !}
 tags: food_candidates3
-go-to: cabinet_negotiations2
+go-to: cabinet_negotiations4
 
 
 @food_vacant
@@ -980,13 +980,13 @@ on-arrival: {!
   if (Q.food_minister_party == "Left-SR") Q.commissariats_held += 1;
   Q.food_minister = "Vacant"; Q.food_minister_party = "";
 !}
-go-to: cabinet_negotiations2
+go-to: cabinet_negotiations4
 
 @food_cancel
 title: Cancel reassignment.
 subtitle: [?if food_minister != "Vacant": Keep [+ food_minister +] in place. ?]
 tags: food_candidates3
-go-to: cabinet_negotiations2
+go-to: cabinet_negotiations4
 
 
 
@@ -1018,7 +1018,7 @@ on-arrival: {!
   if (Q.posts_minister_party == "Left-SR") { Q.commissariats_held += 1; }
   Q.posts_minister = "Glebov"; Q.posts_minister_party = "Bolshevik";
 !}
-go-to: cabinet_negotiations2
+go-to: cabinet_negotiations4
 
 
 @posts_proshian
@@ -1035,7 +1035,7 @@ on-arrival: {!
   if (Q.posts_minister_party == "Bolshevik" || Q.posts_minister == "Vacant") Q.commissariats_held -= 1;
   Q.posts_minister = "Proshian"; Q.posts_minister_party = "Left-SR";
 !}
-go-to: cabinet_negotiations2
+go-to: cabinet_negotiations4
 
 @posts_algasov
 title: Vladimir Algasov
@@ -1051,7 +1051,7 @@ on-arrival: {!
   Q.posts_minister = "Algasov"; Q.posts_minister_party = "Left-SR";
 !}
 tags: posts_candidates3
-go-to: cabinet_negotiations2
+go-to: cabinet_negotiations4
 
 
 @posts_vacant
@@ -1061,13 +1061,13 @@ on-arrival: {!
   if (Q.posts_minister_party == "Left-SR") Q.commissariats_held += 1;
   Q.posts_minister = "Vacant"; Q.posts_minister_party = "";
 !}
-go-to: cabinet_negotiations2
+go-to: cabinet_negotiations4
 
 @posts_cancel
 title: Cancel reassignment.
 subtitle: [?if posts_minister != "Vacant": Keep [+ posts_minister +] in place. ?]
 tags: posts_candidates3
-go-to: cabinet_negotiations2
+go-to: cabinet_negotiations4
                        
 
 
@@ -1100,7 +1100,7 @@ on-arrival: {!
   if (Q.nationalities_minister_party == "Left-SR") { Q.commissariats_held += 1; }
   Q.nationalities_minister = "Stalin"; Q.nationalities_minister_party = "Bolshevik";
 !}
-go-to: cabinet_negotiations2
+go-to: cabinet_negotiations4
 
 
 @nationalities_vacant
@@ -1110,13 +1110,13 @@ on-arrival: {!
   if (Q.nationalities_minister_party == "Left-SR") Q.commissariats_held += 1;
   Q.nationalities_minister = "Vacant"; Q.nationalities_minister_party = "";
 !}
-go-to: cabinet_negotiations2
+go-to: cabinet_negotiations4
 
 @nationalities_cancel
 title: Cancel reassignment.
 subtitle: [?if nationalities_minister != "Vacant": Keep [+ nationalities_minister +] in place. ?]
 tags: nationalities_candidates3
-go-to: cabinet_negotiations2
+go-to: cabinet_negotiations4
   
 
 
@@ -1149,7 +1149,7 @@ on-arrival: {!
   if (Q.property_minister_party != "Left-SR") Q.commissariats_held -= 1;
   Q.property_minister = "Karelin"; Q.property_minister_party = "Left-SR";
 !}
-go-to: cabinet_negotiations2
+go-to: cabinet_negotiations4
 
 @property_izmailovich
 title: Aleksandra Izmailovich
@@ -1165,7 +1165,7 @@ on-arrival: {!
   if (Q.property_minister_party != "Left-SR") { Q.commissariats_held -= 1; }
   Q.property_minister = "Izmailovich"; Q.property_minister_party = "Left-SR"; 
 !}
-go-to: cabinet_negotiations2
+go-to: cabinet_negotiations4
 
 @property_vacant
 title: Cancel the proposed commissariat.
@@ -1174,14 +1174,14 @@ on-arrival: {!
   if (Q.property_minister_party == "Left-SR") { Q.commissariats_held += 1; }
   Q.property_minister = "None"; Q.property_minister_party = ""; 
 !}
-go-to: cabinet_negotiations2
+go-to: cabinet_negotiations4
 
 @property_cancel
 title: Cancel reassignment.
 subtitle: [?if property_minister != "None": Keep [+ property_minister +] in place. ?]
 view-if: property_minister != "None"
 tags: property_candidates3
-go-to: cabinet_negotiations2
+go-to: cabinet_negotiations4
 
 
 
@@ -1210,7 +1210,7 @@ on-arrival: {!
   if (Q.local_minister_party != "Left-SR") { Q.commissariats_held -= 1; }
   Q.local_minister = "Trutovsky"; Q.local_minister_party = "Left-SR"; 
 !}
-go-to: cabinet_negotiations2
+go-to: cabinet_negotiations4
 
 @local_izmailovich
 title: Aleksandra Izmailovich
@@ -1226,7 +1226,7 @@ on-arrival: {!
   if (Q.local_minister_party != "Left-SR") { Q.commissariats_held -= 1; }
   Q.local_minister = "Izmailovich"; Q.local_minister_party = "Left-SR"; 
 !}
-go-to: cabinet_negotiations2
+go-to: cabinet_negotiations4
 
 
 @local_vacant
@@ -1236,13 +1236,13 @@ on-arrival: {!
   if (Q.local_minister_party == "Left-SR") { Q.commissariats_held += 1; }
   Q.local_minister = "None"; Q.local_minister_party = ""; 
 !}
-go-to: cabinet_negotiations2
+go-to: cabinet_negotiations4
 
 @local_cancel
 title: Cancel reassignment.
 subtitle: [?if local_minister != "None": Keep [+ local_minister +] in place. ?]
 view-if: local_minister != "None"
 tags: local_candidates
-go-to: cabinet_negotiations2
+go-to: cabinet_negotiations4
 
 
