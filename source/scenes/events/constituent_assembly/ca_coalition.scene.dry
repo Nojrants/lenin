@@ -94,7 +94,7 @@ on-arrival: {!
   if (Q.nationalities_minister_party == "Left-SR") { Q.lsr_positions += 1; }
   if (Q.welfare_minister_party == "Left-SR") { Q.lsr_positions += 1; }
   if (Q.property_minister_party == "Left-SR") { Q.lsr_positions += 1; }
-  if (Q.local_minister_party == "Left-SR") { Q.lsr_positions += 1; 
+  if (Q.local_minister_party == "Left-SR") { Q.lsr_positions += 1; }
   Q.commissariats_held -= Q.lsr_positions;
   Q.commissariats_held_original = commissariats_held;
 !}
