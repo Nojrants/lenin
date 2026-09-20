@@ -157,7 +157,7 @@ on-arrival: {!
 @increase_safety
 title: Enforce safety standards and regulations.
 choose-if: safety_standards < 3 and resources >= 1
-unavailable_subtitle: [?if resources < 1 : We lack the resources. ?][?if safety standards >= 3 : Safety standards are already highly enforced. ?]
+unavailable_subtitle: [?if resources < 1 : We lack the resources. ?][?if safety_standards >= 3 : Safety standards are already highly enforced. ?]
 tags: labor_policy
 subtitle: -1 resources
 on-arrival: {!
@@ -171,7 +171,7 @@ We increase enforcement of safety regulations at factories, and work to improve 
 @decrease_safety
 title: Slacken safety standards and regulations.
 choose-if: safety_standards > 0
-unavailable_subtitle: [?if safety standards = 0 : Safety standards are already nonexistent. ?]
+unavailable_subtitle: [?if safety_standards = 0 : Safety standards are already nonexistent. ?]
 tags: labor_policy
 on-arrival: {!
   Q.safety_standards -= 1;
