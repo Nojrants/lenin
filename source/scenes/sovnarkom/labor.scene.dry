@@ -1,0 +1,245 @@
+title: Labor
+new-page: true
+is-card: true
+on-arrival: labor_policy_timer += 2; week_actions += 1
+view-if: labor_policy_timer == 0 and labor_minister_party = "Bolshevik"
+tags: sovnarkom, government
+card-image: img/labor.jpg
+
+= Labor
+
+- @administration
+- @goto_labor_affairs
+- @unions
+- @policies
+- @programs
+- @labor_null
+- @root: Do not change labor policy
+- @easy_discard
+- @cancel_advisor_action
+
+@labor_null
+title: -------------------------------------------------------------------------------------------------
+go-to: foreign_affairs
+
+@labor_return
+title: Cancel action.
+go-to: labor
+
+  
+@administration
+title: ADMINISTRATION
+
+- @improve_admin
+- @hire_staff
+- @corruption
+- @foreign_return
+
+@improve_admin
+title: Streamline the commissariat
+subtitle: Cut waste and inefficiencies, increase labor intensity
+choose-if: labor_corruption = 0
+unavailable-subtitle: There's nothing more to cut at the moment. 
+on-arrival: labor_expend -= 0.25; efficacy_labor += 0.1 if efficacy_labor < 1; labor_streamline += 8; 
+
+@hire_staff
+title: Hire administrative personnel
+subtitle: -0.5 resources
+on-arrival: efficacy_labor += 0.2 if efficacy_labor < 1; labor_expend += 0.25; resources -= 0.5;
+
+@corruption
+title: Root-out departmental corruption. 
+subtitle: -0.5 resources
+on-arrival: efficacy_labor += 0.1 if efficacy_labor < 1; resources -= 0.5;
+
+
+@unions
+title: UNION AFFAIRS
+
+- #union_options
+- @labor_return
+
+@promote_unions
+title: Promote the industrial unions and drive up recruitment. 
+tags: union_options
+on-arrival: {!
+  Q.unionists += (Q.workers * 100) + (Q.unionists_strength * 5);
+  Q.unionists_strength += 5;
+  Q.unionists_unrest -= 2;
+!}
+
+@union_commissions
+title: Create union commissions in individual enterprises to oversee production. 
+tags: union_options
+max-visits: 1
+on-arrival: {!
+  Q.industries_syndicalized + 5;
+  Q.unionists_strength += 3;
+  Q.unionists_unrest -= 3;
+!}
+
+@subordinate_factory_committees
+title: Subordinate the factory committees, by incorporating them into the unions.
+subtitle: The various bodies spontaneously declared by the workers need to be reined in. 
+tags: union_options
+max-visits: 1
+on-arrival: {!
+  Q.workers_unrest += 10;
+  Q.instability -= 1; Q.industry += 0.05; 
+  Q.unionists_strength += 5; Q.workers_strength -= 5;
+!}
+
+The factory committees emerged as workers spontaneously seized control over their workplaces and established their own management. However, this has led to a decentralized patchwork, with factory committees focusing on their own particular workplace, rather than the interest of the entire economy. Although the process of subordinating the committees inflames tensions and leads to various conflicts on the ground, we are eventually able to organize these committees into a proper system. 
+
+
+
+@programs
+title: POLICIES
+
+- #labor_policy
+- @labor_return
+
+@promote_collegiality
+title: Promote collegial management in enterprises. 
+subtitle: Factories should be managed by elected councils, rather than any single individual. 
+tags: labor_policy
+on-arrival: {!
+  Q.unionists += (Q.workers * 10) + (Q.unionists_strength * 2.5);
+  Q.unionists_unrest -= 5; Q.workers_unrest -= 5;
+!}
+
+@moderate_between_unions
+title: Affirm the rights of non-Bolshevik-aligned unions.
+subtitle: Overt suppression of uncooperative unions is causing controversy. 
+max-visits: 1
+tags: labor_policy
+on-arrival: {!
+  Q.instability += 2; 
+  Q.unionists += (Q.workers * 10) + (Q.unionists_strength * 2.5);
+  Q.unionists_strength += 5; Q.unionists_unrest -= 10;
+  Q.m_strength += 5; Q.left_m_strength += 5; 
+  Q.moderate_strength += 5; 
+!}
+
+By taking a moderate stance in regards to the non-Bolshevik-aligned unions, we're able to greatly ease tensions and mediate a number of local conflicts. The unions in general profit from this, although it especially benefits Menshevik-dominated unions like the Red Printers' Union. 
+
+@labor_propaganda
+title: Conduct propaganda against the bourgeois directors and former owners. 
+subtitle: Inefficiencies in production are the result of sabotage! 
+tags: labor_policy
+on-arrival: {!
+  Q.workers_unrest -= 4; 
+  Q.instability -= 0.5; 
+  Q.bourgeois_specialists_unrest += 10; Q.bourgeois_specialists_strength -= 5; 
+!}
+  
+@institute_piecerates
+title: Embrace the use of piece-rates to determine worker wages. 
+subtitle: This is generally unpopular among workers. 
+tags: labor_policy
+max-visits: 1
+on-arrival: {!
+  Q.workers_unrest += 8;
+  Q.industry += 0.2; 
+!}
+
+@harsh_labor_courts
+title: Charge the comradely courts with punishing labor violations.
+subtitle: Harsher sentences will be given out for absenteeism, poor craftsmenship, drunkenness, etc. 
+tags: labor_policy
+max-visits: 1
+on-arrival: {!
+  Q.unionists -= (Q.workers * 10);
+  Q.workers_unrest += 4; Q.workers_strength += 4; 
+  Q.industry += 0.05;
+!}
+
+@increase_safety
+title: Enforce safety standards and regulations.
+choose-if: safety_standards < 3 and resources >= 1
+unavailable_subtitle: [?if resources < 1 : We lack the resources. ?][?if safety standards >= 3 : Safety standards are already highly enforced. ?]
+tags: labor_policy
+subtitle: -1 resources
+on-arrival: {!
+  Q.resources -= 1; Q.safety_standards += 1;
+  Q.workers_unrest -= 5; Q.workers_b += 3*(1-Q.b_dissent);
+  Q.industry -= 0.05; Q.labor_expend += 0.5; 
+!}
+
+We increase enforcement of safety regulations at factories, and work to improve working conditions. 
+
+@decrease_safety
+title: Slacken safety standards and regulations.
+choose-if: safety_standards > 0
+unavailable_subtitle: [?if safety standards = 0 : Safety standards are already nonexistent. ?]
+tags: labor_policy
+on-arrival: {!
+  Q.safety_standards -= 1;
+  Q.workers_unrest += 5; Q.workers_b -= 3*(1-Q.b_dissent);
+  Q.industry += 0.1; Q.labor_expend -= 0.5; 
+!}
+
+We begin turning a blind-eye to certain labor practices, in the hopes of cutting production costs. 
+
+
+
+  
+@programs
+title: PROGRAMS
+
+- #labor_programs
+- @labor_return
+
+
+@worker_provisions
+title: Institute a system deducting union dues system from wages automatically, in order to fund worker provisions and welfare programs. 
+tags: labor_programs
+choose-if: efficacy_labor >= 0.5
+unavailable-subtitle: We lack the administrative capacity for this. 
+max-visits: 1
+on-arrival: {!
+  Q.unionists += (Q.workers * 100) + (Q.unionists_strength * 5);
+  Q.unionists_unrest -= 5; Q.workers_unrest -= 5;
+  Q.industry += 0.05; 
+  Q.unemployed -= (0.5 + (50 / Q.instability));
+!}
+
+@worker_rations
+title: Create a program to provide housing, rations, and basic necessities to workers. 
+subtitle: -0.5 resources
+tags: labor_programs
+choose-if: efficacy_labor >= 0.5 and resources >= 0.7
+unavailable-subtitle: -0.5 resources – [?if resouces < 0.5 : We lack the resources. ?] [?if efficacy_labor < 0.7 : We lack the administrative capacity for this. ?]
+max-visits: 1
+on-arrival: {!
+  Q.resources -= 0.5; Q.labor_expend += 0.5; 
+  Q.unionists += (Q.workers * 100) + (Q.unionists_strength * 5);
+  Q.unionists_unrest -= 5; Q.workers_unrest -= 5;
+  Q.industry += 0.1; Q.instability -= 0.5;
+  Q.unemployed -= (1 + (50 / Q.instability));
+!}
+
+@bonuses
+title: Charge the unions with setting production norms and administering bonuses. 
+subtitle: -0.5 resources
+tags: labor_programs
+choose-if: efficacy_labor >= 0.5 and resources >= 0.7
+unavailable-subtitle: -0.5 resources – [?if resouces < 0.5 : We lack the resources. ?] [?if efficacy_labor < 0.7 : We lack the administrative capacity for this. ?]
+max-visits: 1
+on-arrival: {!
+  Q.resources -= 0.5; Q.labor_expend += 0.5; 
+  Q.unionists += (Q.workers * 100) + (Q.unionists_strength * 5);
+  Q.unionists_unrest -= 5; Q.workers_unrest -= 5;
+  Q.industry += 0.15; Q.instability -= 0.5;
+  Q.unemployed -= (0.5 + (50 / Q.instability));
+!}
+
+
+@goto_labor_affairs
+title: LABOR AFFAIRS
+
+- #labor_affairs
+- @labor_return
+
+  
+
