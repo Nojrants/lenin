@@ -126,7 +126,7 @@ Q.party_membership_display = (Q.party_membership * 1000).toLocaleString();
 
 >**General unrest:** [+ general_unrest : war_weariness +]
 
->>**Labor:** [+ workers_unrest : war_weariness +]
+>>**Urban:** [+ workers_unrest : war_weariness +]
 
 >>**Rural:** [+ peasants_unrest : war_weariness +]
 
@@ -136,7 +136,7 @@ Q.party_membership_display = (Q.party_membership * 1000).toLocaleString();
 
 = Statistics
 
->**Inflation:** [+ monthly_inflation +]% ([+ inflation +]% p.a.)
+>**Inflation:** [+ monthly_inflation_disp +]% ([+ inflation_disp +]% p.a.)
 
 > **Unemployment:** [+ unemployed +]%
 
