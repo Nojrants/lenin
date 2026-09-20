@@ -6,9 +6,9 @@ tags: event
 
 = Stalin on Trial
 
-Iulius Martov of the <span style="color: var(--left-m-color);">Menshevik Internationalists</span> recently put out an  article in the newspaper "Vpered". Admidst the typical criticisms of the Bolshevik government, he alleged that one of our party leaders, Iosif Stalin, had been expelled from the RSDLP back in 1908, for his orchestration of bank robberies in violation of party discipline. 
+Iulius Martov of the <span style="color: var(--left-m-color);">Menshevik Internationalists</span> recently put out a controversial new article in the newspaper "Vpered". Admidst the typical criticisms of the Bolshevik government, he alleged that one of our party leaders, Iosif Stalin, had been expelled from the RSDLP back in 1908, for his orchestration of bank robberies in violation of party discipline. 
 
-With his honor and credibility on the line, Stalin decided to sue Martov in the Revolutionary Tribunal for the Press. Far from backing down, Martov is now preparing a drawn-out defense in court to prove the accusations. If not handled carefully, this has the potential to spiral into an embarrassing media scandal.
+With his honor and credibility on the line, Stalin has decided to sue Martov in the Revolutionary Tribunal for the Press. Far from backing down, Martov is now preparing a drawn-out defense in court to prove the accusations. If not handled carefully, this has the potential to spiral into an embarrassing media scandal.
 
 - @accept
 - @reject
@@ -22,20 +22,17 @@ on-arrival: {!
   Q.workers_b -= 2; Q.workers_left_m += 1; Q.workers_m += 1; 
 !}
 
-= Stalin on Trial
-
 Stalin begrudgedly drops the case, annoyed at the lack of support from the Party. The <span style="color: var(--m-color);">Mensheviks</span> declare this a tacit admission of guilt, and have a field day mocking us in the opposition press. It appears the incident has weakened our position in the eyes of the public somewhat, while giving Martov an easy win. 
 
 @accept 
 title: We'll see you in court, Martov!
+new-page: true
 
 = Stalin v. Martov
 
 News of the case has attracted considerable interest and curiosity from the public. Before the packed courthouse, Martov immediately lambasts Stalin for wasting everyone's time and resources, especially for bringing such a petty complaint before a court intended for crimes of high treason. 
 
-Though unable to produce documents on-hand, Martov has prepared a list of credible witnesses from the early RSDLP in Georgia, who might testify to Stalin's disciplinary hearing. 
-
-Stalin meanwhile, in addition to wanting Martov's accusation publicly withdrawn, has managed to convince the court that Martov actually "insulted the Soviet government and undermined its prestige", turning this into a referendum on freedom of the press itself. 
+Though unable to produce documents on-hand, Martov has prepared a list of credible witnesses from the early RSDLP in Georgia, who might testify to Stalin's disciplinary hearing. Stalin meanwhile, in addition to wanting Martov's accusation publicly withdrawn, has managed to convince the court that Martov actually "insulted the Soviet government and undermined its prestige", turning this into a referendum on freedom of the press. 
 
 Ultimately, the tribunal comes to a compromise decision: it finds Martov not guilty for insulting Stalin, but guilty for insulting the government, though as punishment it merely issues a censuring. Not satisfied by this though, Stalin is now demanding the verdict be overturned.
 
@@ -50,24 +47,24 @@ on-arrival: {!
   Q.workers_b -= 4; Q.workers_left_m += 3; Q.workers_m += 1; 
 !}
 
-= Stalin v. Martov
-
 Stalin begrudgedly drops the case, although it appears by now the damage is done. The <span style="color: var(--m-color);">Mensheviks</span> have a field day mocking us in the opposition press, using the trial to publicize the brokeness of the judicial system and our Party's corruption. It appears going to trial has only increased the number of eyes on the affair, weakening our position in the eyes of the public somewhat, while giving Martov a clear win.  
 
 @appeal
 title: Have the CEC annul the previous ruling, and try Martov's paper for libel. 
+new-page: true
 on-arrival: {!
   Q.democraticity - 1;
   Q.left_m_relation -= 5; 
+  Q.workers_unrest += 4; 
 !}
   
 = Stalin v. Martov
 
-A prepared statement is read before the CEC by chairman [+ soviet_chair +], declaring the court case annulled. Martov attempts to rush the podium and demand the floor, causing pandamonium in the assembly. Ultimately, Martov is suspended from the CEC for the next three sessions, while the rest of the <span style="color: var(--m-color);">Mensheviks</span> walk out in solidarity. The incident becomes a rallying cry for the opposition, who run countless stories accusing us of suppression and arbitrariness. 
+A prepared statement is read out before the CEC[?if soviet_chair != "Vacant" : by chairman [+ soviet_chair +] ?], declaring the court case annulled. Martov attempts to rush the podium and demand the floor, causing pandamonium in the assembly. Ultimately, Martov is suspended from the CEC for the next three sessions, while the rest of the <span style="color: var(--m-color);">Mensheviks</span> walk out in solidarity. The incident becomes a rallying cry for the opposition, who run countless stories accusing us of suppression and arbitrariness. 
 
-Rather than focusing on just Martov, a libel case is initiated against "Vpered" and its entire editorial team, in an attempt to shut down the troublesome newspaper once and for all. 
+Rather than focusing on just Martov, a libel case is initiated against "Vpered" and its entire editorial team, in an attempt to shut down the troublesome newspaper once and for all. However, this appears to backfire. Suppression of the paper only sparks protests and petitions in the capital, and in the process of litigating the libel charge, the <span style="color: var(--m-color);">Mensheviks</span> present overwhelming evidence of wrongdoing by Bolshevik authorities, turning this into an open investigation into Bolshevik government itself. 
 
-However, it appears that this has backfired. Suppression of the paper has only sparked protests and petitions in the capital, and in the process of litigating the libel charge, the <span style="color: var(--m-color);">Mensheviks</span> present overwhelming evidence of wrongdoing by Bolshevik authorities, turning this into an open investigation into Bolshevik government itself. 
+- @shut_down 
 
 @shut_down  
 title: Shut down the trial! 
@@ -78,7 +75,7 @@ on-arrival: {!
   Q.workers_b -= 5; Q.workers_left_m += 3; Q.workers_m += 3; 
 !}
 
-Unable to stomach any more of this, the Party finally intervenes to shut down the trial. The <span style="color: var(--m-color);">Mensheviks</span> have a field day mocking us in the opposition press, using the trial to publicize the brokeness of the judicial system and our Party's corruption. It appears prolonging the affair has only increased the number of eyes on it, weakening our position in the eyes of the public somewhat, while giving Martov a clear win.  
+Unable to stomach any more of this, the Party finally intervenes to shut down the trial. The <span style="color: var(--m-color);">Mensheviks</span> have a field day mocking us in the opposition press, using the trial to publicize the brokeness of the judicial system and our Party's corruption. It appears prolonging the affair has only increased the number of eyes on it, weakening our position in the eyes of the public, while giving Martov a clear win.  
   
 
 
