@@ -1347,7 +1347,6 @@ Q.timers = [//m_party
             'coalition_actions',
             ];
 Q.advisor_action_timer = 0;
-Q.party_congress_timer = 0;
 Q.labor_unrest_timer = 5;
 Q.report_timer = 4;
 
