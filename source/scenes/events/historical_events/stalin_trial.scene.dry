@@ -2,6 +2,7 @@ title: Stalin on Trial
 subtitle: A legal controversy is brewing between Stalin and Martov...
 new-page: true 
 view-if: year = 1918 and month = 4 and week = 1
+max-visits: 1
 tags: event 
 
 = Stalin on Trial
