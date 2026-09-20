@@ -1,0 +1,57 @@
+title: Labor Affairs
+new-page: true
+is-card: true
+tags: government
+on-arrival: labor_affairs_timer = 4; month_actions += 1; labor_affairs_seen = 1
+view-if: labor_minister_party = "Bolshevik" and labor_affairs_timer = 0 and workers_unrest > 40
+card-image: img/Putilov.jpg
+
+= Labor Affairs
+
+Over the course of revitalizing the economy, we've encountered numerous conflicts on the local level between workers, managers, and party officials. 
+
+[?if workers_unrest > 65 : Recent actions by our government have aggravated the urban workers, leading to a number of serious protests and strikes at major factories, spurred on by Mensheviks and other counterrevolutionaries. ?]
+
+- #labor_affairs
+- @easy_discard
+#- @cancel_advisor_action
+
+@support_labor
+title: Support labor in their demands. 
+subtitle: This will alienate the managers and hurt our bottom line. 
+tags: labor_affairs
+on-arrival: {!
+  Q.workers_strength += 10; Q.workers_unrest -= 10; Q.workers_b += 4*(1-Q.b_dissent);
+  Q.bourgeois_specialists_strength -= 5; Q.bourgeois_specialists_unrest += 10; 
+  Q.apparatchiki_strength -= 2.5; Q.apparatchiki_unrest += 5;
+  Q.moderate_strength += 4; Q.leninist_strength -= 2; 
+  Q.labor_expend += 0.5; Q.industry -= 0.1; 
+!}
+
+Supporting the workers is certainly popular, although giving in to their demands may weaken labor discipline and production. 
+
+@support_employers
+title: Crackdown on the workers. 
+subtitle: This will alienate the workers but restore order. 
+tags: labor_affairs
+on-arrival: {!
+  Q.workers_strength -= 10; Q.workers_unrest += 10; Q.workers_b -= 8*(1-Q.b_dissent);
+  Q.bourgeois_specialists_strength += 5; Q.bourgeois_specialists_unrest -= 5; 
+  Q.apparatchiki_strength += 2.5; Q.apparatchiki_unrest -= 5;
+  Q.moderate_strength -= 4; Q.leninist_strength += 4; 
+  Q.industry += 0.1; 
+!}
+
+The more radical workers despise our suppression, but begrudgedly return to work. 
+
+@balance
+title: Try to strike a compromise between the sides.
+subtitle: Both sides need to share the pain in the current crisis.
+tags: labor_affairs
+on-arrival: {!
+  Q.workers_unrest += 5; Q.workers_b -= 4*(1-Q.b_dissent);
+  Q.industry += 0.05; Q.labor_expend += 0.25; 
+!}
+
+Many workers are unhappy at our compromises, but they will learn to accept that the circumstances necessitate harsh measures. 
+
