@@ -20,7 +20,7 @@ card-image: img/labor.jpg
 
 @labor_null
 title: -------------------------------------------------------------------------------------------------
-go-to: foreign_affairs
+go-to: labor
 
 @labor_return
 title: Cancel action.
@@ -33,7 +33,7 @@ title: ADMINISTRATION
 - @improve_admin
 - @hire_staff
 - @corruption
-- @foreign_return
+- @labor_return
 
 @improve_admin
 title: Streamline the commissariat
