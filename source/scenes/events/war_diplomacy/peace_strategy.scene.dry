@@ -1,5 +1,6 @@
 title: Peace Strategy
 new-page: true
+max-visits: 1
 on-arrival: {!
   Q.german_negotiations = 2;
   Q.seat_total = 63; 
@@ -9,7 +10,6 @@ set-jump: peace_strategy.post_election
 
 @post_election
 go-to: post_election_menu
-on-arrival: 
 on-display: {!
 var data = [
     {"id": "leftcom",
