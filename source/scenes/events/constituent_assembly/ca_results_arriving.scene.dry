@@ -264,8 +264,8 @@ That said, we now need to decide what to do with this information...
 @post_election_menu
 
 - @delay_the_ca
-- @delegitimize_the_ca
 - @schedule_congress
+- @delegitimize_the_ca
 - @support_recalls
 - @monitor_opponents
 - @ca_proceed
@@ -292,7 +292,7 @@ We have pushed back the convocation to the third week of January, buying us some
 
 @schedule_congress
 title: Schedule a soviet congress to be held the same week as the Constituent Assembly. 
-subtitle: In case the Assembly goes awry we can rely on the Congress of Soviets for legitimacy. 
+subtitle: In case the Assembly goes awry we can rely on the Congress of Soviets.
 max-visits: 1
 go-to: post_election_menu
 on-arrival:{!
@@ -303,7 +303,7 @@ We have pushed back the convocation to the third week of January, buying us some
 
 
 @delegitimize_the_ca
-title: Launch a campaign to delegitimize the election results and the Constituent Assembly. 
+title: Launch a campaign to delegitimize the election results and the Assembly. 
 subtitle: We have moved beyond the need for such a body. 
 choose-if: ca_stance != 2
 max-visits: 1
