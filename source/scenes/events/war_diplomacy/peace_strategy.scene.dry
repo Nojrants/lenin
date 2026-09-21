@@ -4,6 +4,18 @@ max-visits: 1
 on-arrival: {!
   Q.german_negotiations = 2;
   Q.seat_total = 63; 
+  if (month = 11) { 
+    Q.leftcom_strength += 35;
+    Q.leninist_strength -= 15;
+  }
+  if (month = 12) {
+    Q.leftcom_strength += 25;
+    Q.leninist_strength -= 10; 
+  }
+  if (month = 1) {
+    Q.leftcom_strength += 15;
+    Q.leninist_strength -= 5; 
+  }
 !}
 go-to: election_algorithm.central_committee
 set-jump: peace_strategy.post_election
