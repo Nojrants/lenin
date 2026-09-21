@@ -46,6 +46,7 @@ max-visits: 1
 go-to: 2nd_soviet_menu
 on-arrival: {!
   Q.soviet_congress_timer = 24;
+  Q.soviet_elections = 2;
 
   Q.anarchist_soviet = Q.anarchist_soviet_votes_dec;
   Q.maximalist_soviet = Q.maximalist_soviet_votes_dec;
