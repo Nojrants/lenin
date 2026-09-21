@@ -62,20 +62,20 @@ if (window && d3) {
 </tr>!}
 
 {!<tr>
-<td><div class="party-box box left_m2"></div>Left-Coms</td>
+<td><div class="party-box box leftcom"></div>Left-Coms</td>
 <td>!}[+ leftcom_delegates +]{!</td>
 <td>!}[+ leftcom_percentage +]%{!</td>
 </tr>!}
 
 {!<tr>
-<td><div class="party-box box m"></div>Leninists</td>
+<td><div class="party-box box leninist"></div>Leninists</td>
 <td>!}[+ leninist_delegates +]{!</td>
 <td>!}[+ leninist_percentage +]%{!</td>
 
 </tr>!}
 
 {!<tr>
-<td><div class="party-box box right_m2"></div>Moderates</td>
+<td><div class="party-box box moderate"></div>Moderates</td>
 <td>!}[+ moderate_delegates +]{!</td>
 <td>!}[+ moderate_percentage +]%{!</td>
 </tr>!}
