@@ -255,13 +255,13 @@ for (var party of Q.parties) {
         "raw:",
         Q[party + "_support"],
         "normalized:",
-        Q[party + "_normalized"].
+        Q[party + "_normalized"]
     );
 }
-console.log("workers_b:", workers_b);
-console.log("workers_m:", workers_m);
-console.log("workers_lsr:", workers_lsr);
-console.log("workers_sr:", workers_sr);
+console.log("workers_b:", Q.workers_b);
+console.log("workers_m:", Q.workers_m);
+console.log("workers_lsr:", Q.workers_lsr);
+console.log("workers_sr:", Q.workers_sr);
 
 
 
@@ -981,25 +981,25 @@ Q.red_specialists += Q.red_graduates;
 Q.bourgeois_specialists += Q.graduates - Q.red_graduates; 
 Q.red_specialists += (Q.students / 4) * Q.finalefficacy_enlightenment * Q.school_funding * Q.party_schools;
 
-console.log("=== UNIVERSITY ===");
-console.log("Capacity:", Q.university_capacity);
-console.log("Eligible:", Q.eligible);
-console.log("Enrolled:", Q.enrolled);
-console.log("Used:", Q.used);
-console.log("Unused:", Q.unused);
-console.log("Remaining:", Q.remaining);
-console.log("Remaining weight:", Q.remaining_weight);
-console.log("Population after enrollment:", {
-    elites: Q.elites,
-    middle: Q.middle,
-    workers: Q.workers,
-    kulaks: Q.kulaks,
-    peasants: Q.peasants,
-    students: Q.students,
-	red_specialists: Q.red_specialists,
-	bourgeois_specialists: Q.bourgeois_specialists,
-	intelligentsia: Q.intelligentsia
-});
+// console.log("=== UNIVERSITY ===");
+// console.log("Capacity:", Q.university_capacity);
+// console.log("Eligible:", Q.eligible);
+// console.log("Enrolled:", Q.enrolled);
+// console.log("Used:", Q.used);
+// console.log("Unused:", Q.unused);
+// console.log("Remaining:", Q.remaining);
+// console.log("Remaining weight:", Q.remaining_weight);
+// console.log("Population after enrollment:", {
+//     elites: Q.elites,
+//     middle: Q.middle,
+//     workers: Q.workers,
+//     kulaks: Q.kulaks,
+//     peasants: Q.peasants,
+//     students: Q.students,
+// 		red_specialists: Q.red_specialists,
+// 		bourgeois_specialists: Q.bourgeois_specialists,
+// 		intelligentsia: Q.intelligentsia
+// });
 
 
 
