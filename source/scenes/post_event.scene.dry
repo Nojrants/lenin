@@ -12,8 +12,6 @@ for (var c of Q.classes) {
     }
 }
 
-console.log("CA timer: ", Q.constituent_assembly_timer);
-
 
 Q.leaders = {};
 // Bolsheviks
@@ -84,8 +82,14 @@ Q.leaders.Dzyubinsky = { auctoritas: 3, administration: 3.5, idealogism: 2.5, mi
 
 
 
-
-
+Q.governing_parties = [];
+if (Q.b_in_gov == 1) Q.governing_parties.push("b");
+if (Q.sdi_in_gov == 1) Q.governing_parties.push("sdi");
+if (Q.m_in_gov == 1) Q.governing_parties.push("m");
+if (Q.lsr_in_gov == 1) Q.governing_parties.push("lsr");
+if (Q.sr_in_gov == 1) Q.governing_parties.push("sr");
+if (Q.ns_in_gov == 1) Q.governing_parties.push("ns");
+if (Q.k_in_gov == 1) Q.governing_parties.push("k");
 
 
 if (Q.prov_gov_legitimacy < 1) Q.prov_gov_legitimacy = 1;
