@@ -314,7 +314,7 @@ for (var faction of Q.b_factions) {
     Q[faction + '_delegates'] =
         Math.round(
             Q[faction + '_normalized'] *
-            seat_total
+            Q.seat_total
         );
 }
 !}
