@@ -7,7 +7,7 @@ go-to: election_algorithm.menshevik_party_election
 set-jump: menshevik_congress_1917.post_election
 on-arrival: {!
     Q.m_modifier = 10;
-    Q.m_strength -= 20;
+    // Q.m_strength -= 20;
 !}
 
 
