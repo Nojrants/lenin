@@ -11,6 +11,10 @@ on-arrival: {!
   Q.monopolies_display = Math.round(100 * Q.monopolies)/100;
   Q.customs_display = Math.round(100 * Q.customs)/100;
   Q.taxation_display = Q.income_tax_display + Q.property_tax_display + Q.business_tax_display + Q.monopolies_display + Q.customs_display;
+  Q.government_functions_display = Math.round(100 * Q.government_functions)/100;
+  Q.interest_display = Math.round(100 * Q.interest)/100;
+  Q.indemnities_display = Math.round(100 * Q.indemnities)/100;
+
 !}
 
 = Financial Report
@@ -45,7 +49,7 @@ on-arrival: {!
 <hr>
 <b>Total Expenditure</b> — <span style="color: var(--level7-color);">[+ expenditure +]</span>
 <hr>
-<b>Government Functions</b> — <span style="color: var(--level7-color);">[+ government_functions +]</span>
+<b>Government Functions</b> — <span style="color: var(--level7-color);">[+ government_functions_display +]</span>
 <ul style="margin-top:6px; margin-bottom:0; padding-left:20px;">
   <li style="margin-bottom:4px;">Sovnarkom: <span style="color: var(--level7-color);">[+ sovnarkom_expend +]</span></li>
   <li style="margin-bottom:4px;">Foreign Affairs: <span style="color: var(--level7-color);">[+ foreignaffairs_expend +]</span></li>
@@ -62,10 +66,10 @@ on-arrival: {!
   <li style="margin-bottom:0;">Welfare: <span style="color: var(--level7-color);">[+ welfare_expend +]</span></li>
 </ul>
 <hr>
-<b>Other Obligations</b> — <span style="color: var(--level7-color);">[+ (interest + indemnities) +]</span>
+<b>Other Obligations</b> — <span style="color: var(--level7-color);">[+ (interest_display + indemnities_display) +]</span>
 <ul style="margin-top:6px; margin-bottom:0; padding-left:20px;">
-  <li style="margin-bottom:8px;">Interest Payments: <span style="color: var(--level7-color);">[+ interest +]</span></li>
-  <li style="margin-bottom:0;">Indemnities: <span style="color: var(--level7-color);">[+ indemnities +]</span></li>
+  <li style="margin-bottom:8px;">Interest Payments: <span style="color: var(--level7-color);">[+ interest_display +]</span></li>
+  <li style="margin-bottom:0;">Indemnities: <span style="color: var(--level7-color);">[+ indemnities_display +]</span></li>
 </ul>
   </div>
   <div style="flex-basis:100%; border:2px solid #666; border-radius:6px; padding:12px;">
@@ -104,10 +108,7 @@ go-to: budget_balancing_menu
 
 @budget_balancing_menu
 
-- @issue_currency
-- @bank_advances
-- @emergency_bonds
-- @emergency_loans
+- #budget_balancing
 
 
 @issue_currency
@@ -115,6 +116,7 @@ title: Issue additional currency.
 choose-if: banks_seized = 1
 unavailable-subtitle: We lack control over the banks. 
 subtitle: +5 resources
+tags: budget_balancing
 on-arrival: resources += 5; monthly_inflation += (1.2 * (instability/12.5)); instability += 1;
 go-to: finance_report
 
@@ -123,6 +125,7 @@ title: Borrow from the State Bank.
 choose-if: banks_seized = 1
 unavailable-subtitle: We lack control over the banks. 
 subtitle: +5 resources
+tags: budget_balancing
 on-arrival: resources += 5; bank_advances += 5; monthly_inflation += (1.2 * (instability/25)); instability += 0.25;
 go-to: finance_report
 
@@ -130,14 +133,14 @@ go-to: finance_report
 @emergency_bonds
 title: Issue emergency bonds
 subtitle: +5 resources
+tags: budget_balancing
 on-arrival: bonds += 5; resources += 5; instability += 0.5; monthly_inflation += (1.2 * (instability/50)); bond_rate += 1 if bonds > 90; bond_rate += 0.5 if ((bonds < 90) and (bonds > 60)); bond_rate += 0.25 if bonds < 60; 
 go-to: finance_report
-
-
 
 @emergency_loans
 title: Seek-out foreign loans
 go-to: emergency_loans_menu
+tags: budget_balancing
 
 @emergency_loans_menu
 
@@ -146,6 +149,10 @@ go-to: emergency_loans_menu
 @cancel_loans
 title: Cancel action
 go-to: budget_balancing_menu
+
+
+
+
 
   
 
