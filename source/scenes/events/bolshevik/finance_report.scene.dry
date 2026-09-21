@@ -88,7 +88,7 @@ on-arrival: {!
 <hr>
 <div style="display:flex; justify-content:space-between; margin:8px 20px; font-size:1.1em;">
   <b>Surplus / Deficit</b>
-  <span>[?if (resources + income - expenditure) > 0 : <span style="color: var(--level1-color);">[+ surplus_display +]</span>?][?if (resources + income - expenditure) < 0 : <span style="color: var(--level7-color);">[+ surplus_display +]</span>?][?if (resources + income - expenditure) == 0 : [+ surplus_display +] ?]</span>
+  <span>[?if (resources + income - expenditure) > 0 : <span style="color: var(--level1-color);">+ [+ surplus_display +]</span>?][?if (resources + income - expenditure) < 0 : <span style="color: var(--level7-color);">- [+ surplus_display +]</span>?][?if (resources + income - expenditure) == 0 : [+ surplus_display +] ?]</span>
 </div>
   </div>
 </div>
