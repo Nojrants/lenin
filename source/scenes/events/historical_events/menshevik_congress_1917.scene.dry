@@ -17,21 +17,6 @@ on-arrival: {!
     Q.centre_left_coalition = Q.left_m_percentage + Q.m_percentage + (Q.m_nonfactional_percentage * Q.m_dissent);
     Q.centre_right_coalition = Q.right_m_percentage + Q.m_percentage + (Q.m_nonfactional_percentage * Q.m_dissent);
 !}
-
-@centre
-title: The <span style="color: var(--m); font-weight: bold;">Centre</span> forces a compromise that leaves neither extreme satisfied. 
-choose-if: m_percentage > 50
-unavailable-subtitle: [+ m_percentage +]% – The Centre lacks the votes for this.  
-
-@right_centre
-title: The <span style="color: var(--m); font-weight: bold;">Centre</span> votes with the <span style="color: var(--right_m2); font-weight: bold;">Defencists</span>.
-choose-if: (right_m_percentage + m_percentage + (m_nonfactional_percentage * m_dissent)) > 50
-unavailable-subtitle: [+ (right_m_percentage + m_percentage + (m_nonfactional_percentage * m_dissent)) +]% – The Centre-Right lacks the votes for this.  
-
-@right
-title: The <span style="color: var(--right_m2); font-weight: bold;">Defencists</span> take full control of the party. 
-choose-if: right_m_percentage > 50
-unavailable-subtitle: [+ right_m_percentage +]% – The Defencists lack the votes for this.  
 on-display: {!
 // do the graphs
 var data = [
