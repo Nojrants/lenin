@@ -276,6 +276,8 @@ subtitle: There's a legitimate argument to be made that this is necessary regard
 max-visits: 1
 go-to: post_election_menu
 on-arrival:{!
+	Q.instability += 1;
+	Q.democraticity -= 1;
 	Q.constituent_assembly_timer = 6;
 	Q.ca_week = Q.week + (Q.constituent_assembly_timer % 4);
 	Q.ca_month = Q.month + (Q.constituent_assembly_timer / 4);
@@ -283,8 +285,6 @@ on-arrival:{!
 	if (Q.ca_month >= 13) {
     Q.ca_month = Q.ca_month % 12;
     Q.ca_year = Q.year + 1;
-	Q.instability += 1;
-	Q.democraticity -= 1;
 	}
 !}
 
@@ -297,7 +297,6 @@ max-visits: 1
 go-to: post_election_menu
 on-arrival:{!
 	Q.soviet_congress_timer = Q.constituent_assembly_timer;
-	}
 !}
 
 We have pushed back the convocation to the third week of January, buying us some more time. Considering the unexpected difficulties encountered in the electoral process, and the breakdown of the transportation network making it difficult for delegates to travel to the capital, rescheduling is arguably a fair move regardless of the election results. Although other parties look to this with skepticism, and are already accusing us of trying to suppress the results. 
