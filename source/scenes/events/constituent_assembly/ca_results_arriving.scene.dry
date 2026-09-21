@@ -79,7 +79,7 @@ if (Q.defensist_assembly_votes_dec) {
     Q.defensist_r_dec = Q.defensist_assembly_votes_dec;
 }
 
-Q.sr_r_dec = Q.sr_assembly_votes_dec;
+Q.sr_r_dec = Math.round(100* Q.sr_assembly_votes_dec)/100;
 Q.ukrainian_sr_r_dec = Q.ukrainian_sr_assembly_votes_dec;
 Q.cossacks_r_dec = Q.cossacks_assembly_votes_dec;
 Q.popular_socialist_r_dec = Q.popular_socialist_assembly_votes_dec;
