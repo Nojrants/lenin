@@ -566,6 +566,9 @@ table {
   --left_m: #c34816;
   --m: #b44314;
   --right_m: #9a3a11;
+  --m: #b44314;
+  --left_m2: #bc123c;
+  --right_m2: #9a7811;
   --d: #fc7a82;
   --i: #ff3c00;
   --k: #DCCA4A;
@@ -604,6 +607,13 @@ table {
 }
 .seat.right_m {
     fill: var(--right_m);
+}
+
+.seat.left_m2 {
+    fill: var(--left_m2);
+}
+.seat.right_m2 {
+    fill: var(--right_m2);
 }
 .seat.defensist {
     fill: var(--d);
@@ -676,6 +686,13 @@ table {
 }
 .box.right_m {
     background-color: var(--right_m);
+}
+
+.box.left_m2 {
+    background-color: var(--left_m2);
+}
+.box.right_m2 {
+    background-color: var(--right_m2);
 }
 .box.defensist {
     background-color: var(--d);
