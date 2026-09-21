@@ -23,8 +23,9 @@ set-jump: peace_strategy.post_election
 @post_election
 go-to: post_election_menu
 on-arrival: {!
-  Q.compromise_coalition = Q.leninist_percentage + Q.moderate_percentage + Q.nonfactional_percentage + (Q.leftcom_percentage / 4);
-  Q.peace_coalition = (Q.leninist_percentage / 3) + Q.moderate_percentage;
+  Q.compromise_coalition = Math.round(100*(Q.leninist_percentage + Q.moderate_percentage + Q.nonfactional_percentage + (Q.leftcom_percentage / 4)))/100;
+  Q.peace_coalition = Math.round(100*((Q.leninist_percentage / 3) + Q.moderate_percentage))/100;
+  Q.leftcom_coalition = Math.round(100*Q.leftcom_percentage)/100;
 !}
 on-display: {!
 var data = [
@@ -67,10 +68,9 @@ if (window && d3) {
 
 = Central Committee
 
-{!<svg id="soviet" style="width: 625px; height: auto;"> </svg>!}
+{!<svg id="soviet" style="width: 625px; height: 300px;"> </svg>!}
 
 {!<table class="soviet-table">!}
-
 {!<tr>
 <th>Faction</th>
 <th style="text-align: center;">Delegates</th>
@@ -105,9 +105,9 @@ if (window && d3) {
 
 Before sending our delegation to Brest-Litovsk, we need to decide on an official strategy. Although all agree it would be better if we could have forced through some kind of international conference to negotiate an end to the entire war, or if revolution had been sparked in the other countries of Europe, neither situation has yet materialized. Though we can try to stale for more time, at a certain point a decision has to be made. An expanded meeting of the Central Committee has been called to deliberate on this. 
 
-According to Lenin and the Leninists, the situation at the front is absolutely hopeless, making further war with Germany an impossibility. Continuing with the unpopular war would only destabilize us further, likely leading to the complete collapse of the Revolution. By agreeing to peace terms now, we may be able to salvage as much from the situation as possible, before Germany becomes even more impatient. Additionally, Lenin argues our withdraw will prolong the Great War overall, and that the longer the war goes on the more likely revolution will be in Germany and elsewhere. 
+According to Lenin and the <span style="color: var(--leninist); font-weight: bold;">Leninists</span>, the situation at the front is absolutely hopeless, making further war with Germany an impossibility. Continuing with the unpopular war would only destabilize us further, likely leading to the complete collapse of the Revolution. By agreeing to peace terms now, we may be able to salvage as much from the situation as possible, before Germany becomes even more impatient. Additionally, Lenin argues our withdraw will prolong the Great War overall, and that the longer the war goes on the more likely revolution will be in Germany and elsewhere. 
 
-However, the left-wing of the leadership (starting to coalesce around Nikolai Bukharin as the "Left Communists"), argues that a separate peace would be downright treasonous to the Revolution. Believing that Germany is far more close to collapse than Lenin is giving them credit, continuing the war will accelerate Germany's imminent collapse. Though must agree Russia shouldn't necessarily go on the offense, they argue that by keeping up the defense against the imperialist onslaught, we can drive up the overextension and weariness of the German army, and increase the likelihood of German soldiers becoming disillusioned against their imperial masters, while also galvanizing our own population to act in defense of the Revolution. Likewise, they point out that without active involvement in the Great War to keep Britain, France, and others placated, there is little in the way of an "ultra-imperialist coalition" forming for the purposes of crushing us totally.
+However, the left-wing of the leadership (starting to coalesce around Nikolai Bukharin as the "<span style="color: var(--leftcom); font-weight: bold;">Left Communists</span>"), argues that a separate peace would be downright treasonous to the Revolution. Believing that Germany is far more close to collapse than Lenin is giving them credit, continuing the war will accelerate Germany's imminent collapse. Though must agree Russia shouldn't necessarily go on the offense, they argue that by keeping up the defense against the imperialist onslaught, we can drive up the overextension and weariness of the German army, and increase the likelihood of German soldiers becoming disillusioned against their imperial masters, while also galvanizing our own population to act in defense of the Revolution. Likewise, they point out that without active involvement in the Great War to keep Britain, France, and others placated, there is little in the way of an "ultra-imperialist coalition" forming for the purposes of crushing us totally.
 
 Meanwhile, Trotsky and a number of other Leninists have floated a seemingly paradoxical compromise: they will officially support "neither peace nor war". They will try to buy as much time as possible, but simply refuse to fight or to accept an unjust peace, hopefully forcing the German proletariat to action. 
 
@@ -118,9 +118,10 @@ Meanwhile, Trotsky and a number of other Leninists have floated a seemingly para
 - @immediate_peace
 
 @leftcom
-title: The Leftcoms are right! No peace but a just peace! 
-subtitle: [+ leftcom_percentage +]% – We will reject anything short of peace without annexations or indemnities. 
-unavailable-subtitle: [+ leftcom_percentage +]% – There are not enough votes for this.
+title: The <span style="color: var(--leftcom); font-weight: bold;">Leftcoms</span> are right! No peace but a just peace! 
+subtitle: [+ leftcom_coalition +]% – We will reject anything short of white peace. 
+unavailable-subtitle: [+ leftcom_coalition +]% – There are not enough votes for this.
+choose-if: leftcom_coalition > 50
 on-arrival: {!
   Q.leftcom_strength += 20; Q.leninist_strength -= 10; Q.moderate_strength -= 10;
   Q.leftcom_dissent -= 20; Q.leninist_dissent += 15; Q.moderate_dissent += 15;
@@ -133,6 +134,7 @@ The Leftcoms assures us this is the right course of action, though Lenin and oth
 title: We will accept the compromise of "neither peace nor war". 
 subtitle: [+ compromise_coalition +]% – We will stale for time and refuse to fight or accept unjust terms. 
 unavailable-subtitle: [+ compromise_coalition +]% – There are not enough votes for this.
+choose-if: compromise_coalition > 50
 on-arrival: {!
   Q.leftcom_strength += 5; 
   Q.leftcom_dissent -= 5; Q.leninist_dissent += 5; Q.moderate_dissent += 5;
@@ -146,6 +148,7 @@ Though still bitterly opposed to anything less than peace, Lenin begrudgedly acc
 title: We have no choice but to accept peace. 
 subtitle: [+ peace_coalition +]% – We will agree to the terms presented by the Germans. 
 unavailable-subtitle: [+ peace_coalition +]% – There are not enough votes for this.
+choose-if: peace_coalition > 50
 on-arrival: {!
   Q.leftcom_strength -= 5; Q.leninist_strength += 5; Q.moderate_strength += 5;
   Q.leftcom_dissent += 25; Q.leninist_dissent -= 5; Q.moderate_dissent -= 5;
