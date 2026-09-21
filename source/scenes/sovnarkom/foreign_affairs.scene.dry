@@ -113,6 +113,7 @@ It is now up to us to prepare our contingent of negotiators and travel to Brest-
 @brest_litovsk
 title: Dispatch a delegation to Brest-Litovsk to negotiate with the Central Powers. 
 view-if: german_negotiations = 1
+go-to: peace_strategy
 on-arrival: german_negotiations = 2;
 
 
