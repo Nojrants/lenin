@@ -1,0 +1,97 @@
+title: Menshevik Party Congress
+new-page: true
+view-if: year = 1917 and month = 12 and week = 1
+max-visits: 1
+tags: event
+go-to: election_algorithm.menshevik_party_election
+set-jump: menshevik_congress_1917.post_election
+
+
+@post_election
+go-to: post_election_menu
+on-display: {!
+// do the graphs
+var data = [
+{"id": "left_m",
+ "legend": "Menshevik-Internationalist",
+ "name": "Menshevik-Internationalist",
+ "seats": Q.left_m_delegates,
+{"id": "m",
+ "legend": "Menshevik-Centre",
+ "name": "Menshevik-Centre",
+ "seats": Q.m_delegates,
+{"id": "right_m",
+ "legend": "Menshevik-Defencist",
+ "name": "Menshevik-Defencist",
+ "seats": Q.right_m_delegates,
+{"id": "other",
+ "legend": "Non-Factional",
+ "name": "Non-Factional",
+ "seats": Q.m_nonfactional_delegates,
+];
+if (window && d3) {
+    var width = 625;
+    var height = 625;
+    var screenWidth = document.getElementById('content').offsetWidth;
+    if (screenWidth < width - 50) {
+        width = screenWidth - 50;
+        height = width;
+        document.getElementById("soviet").style.height = width + "px";
+    }
+    var parliament = d3.parliament();
+    parliament.width(width).height(height).innerRadiusCoef(0.4);
+    parliament.enter.fromCenter(true).smallToBig(true);
+    parliament.exit.toCenter(false).bigToSmall(true);
+    d3.select("#soviet").datum(data).call(parliament);
+}
+!}
+
+= Menshevik Party Congress
+
+{!<svg id="soviet" style="width: 625px; height: 350px;"> </svg>!}
+
+{!<table class="soviet-table">!}
+
+{!<tr>
+<th>Faction</th>
+<th>Delegates</th>
+<th>Vote Share</th>
+</tr>!}
+
+{!<tr>
+<td><div class="party-box box left_m"></div>Menshevik Internationalists</td>
+<td>[+ left_m_delegates +]</td>
+<td>[+ left_m_percentage +]%</td>
+</tr>!}
+
+{!<tr>
+<td><div class="party-box box m"></div>Mensheviks (Centre)</td>
+<td>[+ m_delegates +]</td>
+<td>[+ m_percentage +]%</td>
+</tr>!}
+
+{!<tr>
+<td><div class="party-box box right_m"></div>Menshevik Defencists</td>
+<td>[+ right_m_delegates +]</td>
+<td>[+ right_m_percentage +]%</td>
+</tr>!}
+
+{!<tr>
+<td><div class="party-box box other"></div>Non-Factional</td>
+<td>[+ m_nonfactional_delegates +]</td>
+<td>[+ m_nonfactional_percentage +]%</td>
+</tr>!}
+
+{!</table>!}
+
+
+
+The <span style="color: var(--m-color);">Mensheviks</span> have called for an extraordinary party congress in Petrograd, hoping to ease the growing factional tensions within their ranks and decide on a course of action regarding the <span style="color: var(--b-color);">Bolshevik</span> government.
+
+According to the Defencists, the Bolsheviks could no longer be considered a party of democracy or socialism, making cooperation with them completely untenable. It was their duty now to resist the Bolshevik dictatorship by all means necessary, even taking up arms where opportune. They likewise call for the Mensheviks to refuse to sit in the CEC – so as to not legitimize the Bolshevik seizure of power – while putting all their efforts into defending the Constituent Assembly. 
+
+On the other side of the spectrum, Martov's internationalist wing argues for cautious participation in government and resistance to Bolshevik policy only through peaceful means, in order to prevent at all costs a debilitating civil war.
+
+@post_election_menu
+
+- @congress_3
