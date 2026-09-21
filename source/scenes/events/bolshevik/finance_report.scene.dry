@@ -4,6 +4,14 @@ new-page: true
 view-if: report_timer = 0
 on-arrival: report_timer = 4;
 tags: event
+on-arrival: {!
+  Q.income_tax_display = Math.round(100 * Q.income_tax)/100;
+  Q.property_tax_display = Math.round(100 * Q.property_tax)/100;
+  Q.business_tax_display = Math.round(100 * Q.business_tax)/100;
+  Q.monopolies_display = Math.round(100 * Q.monopolies)/100;
+  Q.customs_display = Math.round(100 * Q.customs)/100;
+  Q.taxation_display = Q.income_tax_display + Q.property_tax_display + Q.business_tax_display + Q.monopolies_display + Q.customs_display;
+!}
 
 = Financial Report
 
@@ -15,13 +23,13 @@ tags: event
 <hr>
 <b>Total Revenue</b> — <span style="color: var(--level1-color);">[+ income +]</span>
 <hr>
-<b>Taxation</b> — <span style="color: var(--level1-color);">[+ (income_tax + property_tax + business_tax + monopolies + customs) +]</span>
+<b>Taxation</b> — <span style="color: var(--level1-color);">[+ taxation_display +]</span>
 <ul style="margin-top:6px; margin-bottom:0; padding-left:20px;">
-  <li style="margin-bottom:4px;">Income Tax: <span style="color: var(--level1-color);">[+ income_tax +]</span></li>
-  <li style="margin-bottom:4px;">Property Tax: <span style="color: var(--level1-color);">[+ property_tax +]</span></li>
-  <li style="margin-bottom:4px;">Business Tax: <span style="color: var(--level1-color);">[+ business_tax +]</span></li>
-  <li style="margin-bottom:4px;">Monopolies: <span style="color: var(--level1-color);">[+ monopolies +]</span></li>
-  <li style="margin-bottom:0;">Customs Duties: <span style="color: var(--level1-color);">[+ customs +]</span></li>
+  <li style="margin-bottom:4px;">Income Tax: <span style="color: var(--level1-color);">[+ income_tax_display +]</span></li>
+  <li style="margin-bottom:4px;">Property Tax: <span style="color: var(--level1-color);">[+ property_tax_display +]</span></li>
+  <li style="margin-bottom:4px;">Business Tax: <span style="color: var(--level1-color);">[+ business_tax_display +]</span></li>
+  <li style="margin-bottom:4px;">Monopolies: <span style="color: var(--level1-color);">[+ monopolies_display +]</span></li>
+  <li style="margin-bottom:0;">Customs Duties: <span style="color: var(--level1-color);">[+ customs_display +]</span></li>
 </ul>
 <br>
 <b>State Enterprises</b> — <span style="color: var(--level1-color);">[+ (railway_revenue + enterprises_revenue) +]</span>
