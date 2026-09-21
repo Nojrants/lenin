@@ -49,9 +49,43 @@ if (window && d3) {
 }
 !}
 
-@post_election_menu
-
 = Central Committee
+
+{!<svg id="soviet" style="width: 625px; height: 350px;"> </svg>!}
+
+{!<table class="soviet-table">!}
+
+{!<tr>
+<th>Faction</th>
+<th style="text-align: center;">Delegates</th>
+<th style="text-align: center;">Percent</th>
+</tr>!}
+
+{!<tr>
+<td><div class="party-box box left_m2"></div>Left-Coms</td>
+<td>!}[+ leftcom_delegates +]{!</td>
+<td>!}[+ leftcom_percentage +]%{!</td>
+</tr>!}
+
+{!<tr>
+<td><div class="party-box box m"></div>Leninists</td>
+<td>!}[+ leninist_delegates +]{!</td>
+<td>!}[+ leninist_percentage +]%{!</td>
+
+</tr>!}
+
+{!<tr>
+<td><div class="party-box box right_m2"></div>Moderates</td>
+<td>!}[+ moderate_delegates +]{!</td>
+<td>!}[+ moderate_percentage +]%{!</td>
+</tr>!}
+
+{!<tr>
+<td><div class="party-box box other"></div>Non-Factional</td>
+<td>!}[+ nonfactional_delegates +]{!</td>
+<td>!}[+ nonfactional_percentage +]%{!</td>
+</tr>!}
+{!</table>!}
 
 Before sending our delegation to Brest-Litovsk, we need to decide on an official strategy. Although all agree it would be better if we could have forced through some kind of international conference to negotiate an end to the entire war, or if revolution had been sparked in the other countries of Europe, neither situation has yet materialized. Though we can try to stale for more time, at a certain point a decision has to be made. An expanded meeting of the Central Committee has been called to deliberate on this. 
 
@@ -60,4 +94,6 @@ According to Lenin and the Leninists, the situation at the front is absolutely h
 However, the left-wing of the leadership (starting to coalesce around Nikolai Bukharin as the "Left Communists"), argues that a separate peace would be downright treasonous to the Revolution. Believing that Germany is far more close to collapse than Lenin is giving them credit, continuing the war will accelerate Germany's imminent collapse. Though must agree Russia shouldn't necessarily go on the offense, they argue that by keeping up the defense against the imperialist onslaught, we can drive up the overextension and weariness of the German army, and increase the likelihood of German soldiers becoming disillusioned against their imperial masters, while also galvanizing our own population to act in defense of the Revolution. Likewise, they point out that without active involvement in the Great War to keep Britain, France, and others placated, there is little in the way of an "ultra-imperialist coalition" forming for the purposes of crushing us totally.
 
 Meanwhile, Trotsky and a number of other Leninists have floated a seemingly paradoxical compromise: they will officially support "neither peace nor war". They will try to buy as much time as possible, but simply refuse to fight or to accept an unjust peace, hopefully forcing the German proletariat to action. 
+
+@post_election_menu
 
