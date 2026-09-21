@@ -1,6 +1,5 @@
 title: Peace Strategy
 new-page: true
-tags: event
 on-arrival: {!
   Q.german_negotiations = 2;
   Q.seat_total = 63; 
