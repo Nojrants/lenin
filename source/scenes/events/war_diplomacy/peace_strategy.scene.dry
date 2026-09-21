@@ -1,6 +1,56 @@
 title: Peace Strategy
 new-page: true
-max-visits: 1
+tags: event
+on-arrival: {!
+  Q.german_negotiations = 2;
+  Q.seat_total = 63; 
+!}
+go-to: election_algorithm.central_committee
+set-jump: peace_strategy.post_election
+
+@post_election
+go-to: post_election_menu
+on-arrival: 
+on-display: {!
+var data = [
+    {"id": "leftcom",
+     "legend": "Left-Coms",
+     "name": "Left-Coms",
+     "seats": Q.leftcom_delegates},
+
+    {"id": "leninist",
+     "legend": "Leninists",
+     "name": "Leninists",
+     "seats": Q.leninist_delegates},
+
+    {"id": "moderate",
+     "legend": "Moderates",
+     "name": "Moderates",
+     "seats": Q.moderate_delegates},
+
+    {"id": "other",
+     "legend": "Non-Factional",
+     "name": "Non-Factional",
+     "seats": Q.nonfactional_delegates}
+];
+if (window && d3) {
+    var width = 625;
+    var height = 625;
+    var screenWidth = document.getElementById('content').offsetWidth;
+    if (screenWidth < width - 50) {
+        width = screenWidth - 50;
+        height = width;
+        document.getElementById("soviet").style.height = width + "px";
+    }
+    var parliament = d3.parliament();
+    parliament.width(width).height(height).innerRadiusCoef(0.4);
+    parliament.enter.fromCenter(true).smallToBig(true);
+    parliament.exit.toCenter(false).bigToSmall(true);
+    d3.select("#soviet").datum(data).call(parliament);
+}
+!}
+
+@post_election_menu
 
 = Central Committee
 
@@ -8,7 +58,7 @@ Before sending our delegation to Brest-Litovsk, we need to decide on an official
 
 According to Lenin and the Leninists, the situation at the front is absolutely hopeless, making further war with Germany an impossibility. Continuing with the unpopular war would only destabilize us further, likely leading to the complete collapse of the Revolution. By agreeing to peace terms now, we may be able to salvage as much from the situation as possible, before Germany becomes even more impatient. Additionally, Lenin argues our withdraw will prolong the Great War overall, and that the longer the war goes on the more likely revolution will be in Germany and elsewhere. 
 
-However, the left-wing of the leadership (starting to coalesce around Nikolai Bukharin), argues that a separate peace would be downright treasonous to the Revolution. Believing that Germany is far more close to collapse than Lenin is giving them credit, continuing the war will accelerate Germany's imminent collapse. Though must agree Russia shouldn't necessarily go on the offense, they argue that by keeping up the defense against the imperialist onslaught, we can drive up the overextension and weariness of the German army, and increase the likelihood of German soldiers becoming disillusioned against their imperial masters, while also galvanizing our own population to act in defense of the Revolution. Likewise, they point out that without active involvement in the Great War to keep Britain, France, and others placated, there is little in the way of an "ultra-imperialist coalition" forming for the purposes of crushing us totally.
+However, the left-wing of the leadership (starting to coalesce around Nikolai Bukharin as the "Left Communists"), argues that a separate peace would be downright treasonous to the Revolution. Believing that Germany is far more close to collapse than Lenin is giving them credit, continuing the war will accelerate Germany's imminent collapse. Though must agree Russia shouldn't necessarily go on the offense, they argue that by keeping up the defense against the imperialist onslaught, we can drive up the overextension and weariness of the German army, and increase the likelihood of German soldiers becoming disillusioned against their imperial masters, while also galvanizing our own population to act in defense of the Revolution. Likewise, they point out that without active involvement in the Great War to keep Britain, France, and others placated, there is little in the way of an "ultra-imperialist coalition" forming for the purposes of crushing us totally.
 
 Meanwhile, Trotsky and a number of other Leninists have floated a seemingly paradoxical compromise: they will officially support "neither peace nor war". They will try to buy as much time as possible, but simply refuse to fight or to accept an unjust peace, hopefully forcing the German proletariat to action. 
 
