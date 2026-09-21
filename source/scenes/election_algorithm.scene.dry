@@ -279,6 +279,6 @@ for (var faction of Q.menshevik_factions) {
             total_delegates
         );
 }
-
+!}
 go-to: jumpScene
 
