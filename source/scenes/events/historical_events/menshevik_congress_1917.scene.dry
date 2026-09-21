@@ -118,7 +118,7 @@ title: The <span style="color: var(--m); font-weight: bold;">Centre</span> votes
 choose-if: (left_m_percentage + m_percentage + (m_nonfactional_percentage * m_dissent)) > 50
 unavailable-subtitle: [+ (left_m_percentage + m_percentage + (m_nonfactional_percentage * m_dissent)) +]% – The Centre-Left lack the votes for this.  
 
-@left_centre
+@centre
 title: The <span style="color: var(--m); font-weight: bold;">Centre</span> forces a compromise that leaves neither extreme satisfied. 
 choose-if: m_percentage > 50
 unavailable-subtitle: [+ m_percentage +]% – The Centre lacks the votes for this.  
