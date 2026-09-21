@@ -4,6 +4,7 @@ view-if: soviet_congress_timer = 0
 go-to: election_algorithm.all_russian_soviet
 set-jump: soviet_election.post_election
 new-page: true
+tags: event
 
 @post_election
 go-to: post_election_menu
