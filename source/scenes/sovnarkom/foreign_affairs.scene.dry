@@ -104,7 +104,7 @@ go-to: foreign_affairs
 @open_negotiations
 title: Send word to the Germans that we wish to negotiate an end to the war. 
 view-if: german_negotiations = 0
-on-arrival: german_negotiations = 1; is_armistice = 1; german_waiting = 2; 
+on-arrival: german_negotiations = 1; is_armistice = 1; german_waiting_timer = 3; 
 
 The Germans have accepted our emissaries and have agreed to hold talks at the headquarters of the Central Powers Armies at Brest-Litovsk. In the meantime, a local ceasefire agreement has been reached, temporarily suspending hostilities along the frontlines for the next two weeks. 
 
