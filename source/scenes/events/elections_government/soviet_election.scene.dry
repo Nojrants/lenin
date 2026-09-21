@@ -1,0 +1,168 @@
+title: All-Russian Congress of Soviets
+subtitle: The election results are in...
+view-if: soviet_congress_timer = 0
+go-to: election_algorithm.all_russian_soviet
+set-jump: soviet_election.post_election
+new-page: true
+
+@post_election
+go-to: post_election_menu
+on-arrival: {!
+  Q.soviet_congress_timer = 24;
+  Q.soviet_elections += 1;
+
+  Q.anarchist_soviet = Q.anarchist_soviet_votes_dec;
+  Q.maximalist_soviet = Q.maximalist_soviet_votes_dec;
+  Q.b_soviet = Q.b_soviet_votes_dec;
+  Q.sdi_soviet = Q.sdi_soviet_votes_dec;
+  Q.left_m_soviet = Q.left_m_soviet_votes_dec;
+  Q.m_soviet = Q.m_soviet_votes_dec;
+  Q.right_m_soviet = Q.right_m_soviet_votes_dec;
+  Q.lsr_soviet = Q.lsr_soviet_votes_dec;
+  Q.sr_soviet = Q.sr_soviet_votes_dec;
+  Q.right_sr_soviet = Q.right_sr_soviet_votes_dec;
+  Q.popular_socialist_soviet = Q.popular_socialist_soviet_votes_dec;
+  Q.other_soviet = Math.round(10*(Q.other_soviet_votes_dec + Q.k_soviet_votes_dec + Q.rightist_soviet_votes_dec))/10;
+
+  Q.b_soviet_display = Math.round(Q.b_soviet*10)/10; 
+  Q.m_soviet_display = Math.round((Q.left_m_soviet + Q.m_soviet + Q.right_m_soviet)*10)/10; 
+  Q.lsr_soviet_display = Math.round(Q.lsr_soviet*10)/10; 
+  Q.sr_soviet_display = Math.round((Q.sr_soviet + Q.right_sr_soviet)*10)/10; 
+  Q.other_soviet_display = Math.round((Q.anarchist_soviet + Q.maximalist_soviet + Q.sdi_soviet + Q.popular_socialist_soviet + Q.other_soviet)*10)/10; 
+  Q.soviet_chair = "Kamenev"; Q.soviet_chair_party="Bolshevik";
+
+  console.log("other_soviet_votes_dec: ", Q.other_soviet_votes_dec);
+  console.log("k_soviet_votes_dec: ", Q.k_soviet_votes_dec);
+  console.log("rightist_soviet_votes_dec: ", Q.rightist_soviet_votes_dec);
+  console.log("other_soviet: ", Q.other_soviet);
+!}
+on-display: {!
+// do the graphs
+var data = [
+{"id": "anarchist",
+ "legend": "Anarchist",
+ "name": "Anarchist",
+ "seats": Math.round(Q.anarchist_soviet*10)},
+{"id": "maximalist",
+ "legend": "SR-Maximalist",
+ "name": "SR-Maximalist",
+ "seats": Math.round(Q.maximalist_soviet*10)},
+{"id": "b",
+ "legend": "Bolshevik",
+ "name": "Bolshevik",
+ "seats": Math.round(Q.b_soviet*10)},
+{"id": "sdi",
+ "legend": "SD-Internationalist",
+ "name": "SD-Internationalist",
+ "seats": Math.round(Q.sdi_soviet_votes_dec*10)},
+{"id": "left_m",
+ "legend": "Menshevik-Internationalist",
+ "name": "Menshevik-Internationalist",
+ "seats": Math.round(Q.left_m_soviet_votes_dec*10)},
+{"id": "m",
+ "legend": "Menshevik-Centre",
+ "name": "Menshevik-Centre",
+ "seats": Math.round(Q.m_soviet_votes_dec*10)},
+{"id": "right_m",
+ "legend": "Menshevik-Defencist",
+ "name": "Menshevik-Defencist",
+ "seats": Math.round(Q.right_m_soviet_votes_dec*10)},
+{"id": "lsr",
+ "legend": "Left-SR",
+ "name": "Left-SR",
+ "seats": Math.round(Q.lsr_soviet_votes_dec*10)},
+{"id": "sr",
+ "legend": "SR",
+ "name": "SR",
+ "seats": Math.round(Q.sr_soviet_votes_dec*10)},
+{"id": "right_sr",
+ "legend": "Right SR",
+ "name": "Right SR",
+ "seats": Math.round(Q.right_sr_soviet_votes_dec*10)},
+{"id": "popular_socialist",
+ "legend": "Popular Socialist",
+ "name": "Popular Socialist",
+ "seats": Math.round(Q.popular_socialist_soviet_votes_dec*10)},
+{"id": "other",
+ "legend": "Other",
+ "name": "Other",
+ "seats": Math.round(Q.other_soviet_votes_dec*10)},
+];
+if (window && d3) {
+    var width = 625;
+    var height = 625;
+    var screenWidth = document.getElementById('content').offsetWidth;
+    if (screenWidth < width - 50) {
+        width = screenWidth - 50;
+        height = width;
+        document.getElementById("soviet").style.height = width + "px";
+    }
+    var parliament = d3.parliament();
+    parliament.width(width).height(height).innerRadiusCoef(0.4);
+    parliament.enter.fromCenter(true).smallToBig(true);
+    parliament.exit.toCenter(false).bigToSmall(true);
+    d3.select("#soviet").datum(data).call(parliament);
+}
+!}
+
+= Congress of Soviets
+
+{!<svg id="soviet" style="width: 625px; height: 350px;"> </svg>!}
+
+{!<table class="soviet-table">!}
+
+{!<tr><th>Party</th><th>Vote Share</th></tr>!}
+
+{!<tr><td><div class="party-box box a"></div>Anarchists</td><td>!}[+ anarchist_soviet +]%{!</td></tr>!}
+
+{!<tr><td><div class="party-box box maximalist"></div>Maximalists</td><td>!}[+ maximalist_soviet +]%{!</td></tr>!}
+
+{!<tr><td><div class="party-box box b"></div>Bolsheviks</td><td>!}[+ b_soviet +]%{!</td></tr>!}
+
+{!<tr><td><div class="party-box box sdi"></div>SD-Internationalists</td><td>!}[+ sdi_soviet +]%{!</td></tr>!}
+
+{!<tr><td><div class="party-box box left_m"></div>Menshevik Internationalists</td><td>!}[+ left_m_soviet +]%{!</td></tr>!}
+
+{!<tr><td><div class="party-box box m"></div>Mensheviks (Centre)</td><td>!}[+ m_soviet +]%{!</td></tr>!}
+
+{!<tr><td><div class="party-box box right_m"></div>Menshevik Defencists</td><td>!}[+ right_m_soviet +]%{!</td></tr>!}
+
+{!<tr><td><div class="party-box box lsr"></div>Left-SRs</td><td>!}[+ lsr_soviet +]%{!</td></tr>!}
+
+{!<tr><td><div class="party-box box sr"></div>SRs</td><td>!}[+ sr_soviet +]%{!</td></tr>!}
+
+{!<tr><td><div class="party-box box right_sr"></div>Right SRs</td><td>!}[+ right_sr_soviet +]%{!</td></tr>!}
+
+{!<tr><td><div class="party-box box popular_socialist"></div>Popular Socialists</td><td>!}[+ popular_socialist_soviet +]%{!</td></tr>!}
+
+{!<tr><td><div class="party-box box other"></div>Others</td><td>!}[+ other_soviet +]%{!</td></tr>!}
+
+{!</table>!}
+
+@post_election_menu
+
+- @congress_3
+- @congress_4
+- @congress_5
+
+@congress_3
+title: Begin the congress...
+view-if: soviet_elections = 3
+go_to: congress_3_menu
+
+@congress_4
+title: Begin the congress...
+view-if: soviet_elections = 4
+
+@congress_5
+title: Begin the congress...
+view-if: soviet_elections = 5
+
+
+
+@congress_3_menu
+
+Test
+
+
+
