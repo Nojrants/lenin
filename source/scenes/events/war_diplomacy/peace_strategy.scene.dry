@@ -66,9 +66,9 @@ if (window && d3) {
 }
 !}
 
-= Central Committee
+= Plenum of the Central Committee
 
-{!<svg id="soviet" style="width: 625px; height: 300px;"> </svg>!}
+{!<svg id="soviet" style="width: 625px; height: 310px;"> </svg>!}
 
 {!<table class="soviet-table">!}
 {!<tr>
