@@ -16,10 +16,7 @@ Following the revolution, there have been reports of increasing crime and disord
 - @investigation
 - @internal_election
 - @internal_null
-- @abolish_police
-- @create_cheka
-- @anti_crime
-- @orphanages
+- #internal_general
 - @root: We do not need new policy.
 - @easy_discard
 - @cancel_advisor_action
@@ -35,6 +32,7 @@ go-to: internal_affairs
 @abolish_police
 title: Dismantle the imperial police system.
 subtitle: Reform the militia system to remove vestiges of the imperial era, and purge known reactionary officers from service. 
+tags: internal_general
 view-if: imperial_police = 0
 on-arrival: imperial_police = 1; city_militia_strength -= 5; city_militia_militancy += 0.05; worker_unrest -= 5; elite_strength -= 2; internal_expend -= 0.25;
 
@@ -44,7 +42,9 @@ We implement a series of reforms replacing the imperial police system fully and 
 title: Create an extraordinary commission to combat counterrevolutionary activity. 
 unavailable-subtitle: We lack the necessary administrative capacity and strength.
 subtitle: -1 resources
+tags: internal_general
 choose-if: cheka_founded = 0 and imperial_police = 1 and city_militia_strength >= 15 and city_militias > 0 and instability >= 60
+view-if: cheka_founded = 0
 on-arrival: {!
     Q.cheka_founded = 1; Q.instability += 1; 
     Q.cheka = 5; Q.cheka_strength = 5; Q.cheka_militancy = 0.2; Q.cheka_loyality = 0.5;
@@ -55,6 +55,38 @@ on-arrival: {!
     Q.intelligentsia_unrest += 5; Q.elite_unrest += 5;
 !}
 
+@anti_crime
+title: Use the militias to combat crime.
+unavailable-subtitle: [?if city_militias < 2 : There aren't enough militiamen to spare. ?][?if city_militia_strength <= 10 : The militias aren't effective enough. ?]
+tags: internal_general
+choose-if: city_militias >= 2 and city_militia_strength > 10
+view-if: crime >= 30
+on-arrival: {!
+    Q.crime -= (Q.city_militias/2) * (1 + (Q.city_militia_strength / 5);
+    Q.instability -= (Q.city_militia_strength / 10);
+!}
+
+We have deployed the city militias to increase security and combat crime in Petrograd and other major cities.
+
+@orphanages
+title: Institute a nationwide orphanage program.  
+subtitle: -2 resources, +1 expenditure
+unavailable-subtitle: We lack the administrative capacity and resources. 
+choose-if: resources>= 2 and imperial_police = 1 and city_militias >= 4 and efficacy_internal >= 0.8
+on-arrival: {!
+    Q.resources -= 2; Q.internal_expend += 1;
+    Q.crime -= 5*(Q.efficacy_internal); Q.instability -= 2; 
+    Q.workers_unrest -= 10; Q.underclass_unrest -= 15; Q.underclass -= 1; Q.workers += 1;
+    Q.intelligentsia_unrest -= 5; 
+!}
+
+
+
+
+
+
+
+
 
 @internal_recruitment
 title: RECRUITMENT
@@ -62,40 +94,75 @@ go-to: internal_recruitment_menu
 
 @internal_recruitment_menu
 
-- @recruit_chekists
-- @strengthen_cheka
-- @recruit_militias
-- @militia_efficacy
-- @recruit_election_officials
+- #internal_recruitment
 - @internal_cancel
 
+@expand_chekists
+title: Expand chekist recruitment to non-Bolshevik socialists. 
+subtitle: This will greatly increase the recruitment pool, at the potential expense of loyalty. 
+tags: internal_recruitment
+view-if: cheka_founded = 1
+on-arrival: {!
+    Q.cheka += 4;
+    Q.cheka_strength += 2 * Q.efficacy_internal;
+    Q.cheka_militancy += 0.02 * Q.efficacy_internal;
+    Q.resources -= 1; Q.internal_expend += 0.1;
+    Q.cheka_loyalty -= 0.2;
+!}
 
 @recruit_chekists
 title: Recruit additional secret police. 
 subtitle: -1 resources
+tags: internal_recruitment
 view-if: cheka_founded = 1
-on-arrival: cheka_strength += 5*(efficacy_internal); cheka_militancy += 0.02*efficacy_internal; resources -= 1; cheka += 1; internal_expend += 0.1;
+choose-if: resources >= 1
+unavailable-subtitle: -1 resources – We lack the resources. 
+on-arrival: {!
+    Q.cheka += 2;
+    Q.cheka_strength += 2 * Q.efficacy_internal;
+    Q.cheka_militancy += 0.02 * Q.efficacy_internal;
+    Q.resources -= 1; Q.internal_expend += 0.1;
+    Q.cheka_loyalty -= 0.05;
+!}
 
 @strengthen_cheka
 title: Build up the secret police apparatus. 
 subtitle: -1 resources
-view-if: cheka_founded = 1 
-on-arrival: cheka_strength += 8*(efficacy_internal); cheka_militancy += 0.05*efficacy_internal; resources -= 1; internal_expend += 0.1;
+tags: internal_recruitment
+view-if: cheka_founded = 1
+choose-if: resources >= 1
+on-arrival: {!
+    Q.cheka_strength += 8 * Q.efficacy_internal; 
+    Q.cheka_militancy += 0.05 * Q.efficacy_internal;
+    Q.resources -= 1; Q.internal_expend += 0.05;
+    Q.cheka_loyalty += 0.1;
+!}
 
 @recruit_militias
 title: Strengthen the militias.
 subtitle: -1 resources
-on-arrival: city_militia_strength += 8*(prov_gov_efficacy); city_militia_militancy += 0.02*prov_gov_efficacy; resources -= 1; city_militias += 1; internal_expend += 0.1;
-
+tags: internal_recruitment
+choose-if: resources >= 1
+on-arrival: {!
+    Q.city_militias += 1; 
+    Q.city_militia_strength += 2*Q.efficacy_internal;
+    Q.city_militia_militancy += 0.02*Q.efficacy_internal;
+    Q.resources -= 1; Q.internal_expend += 0.1;
+!}
 
 We have further strengthened the militias.
 
 @militia_efficacy
 title: Improve the effectiveness and loyalty of the city militias.
-view-if: city_militias >= 1 and city_militias <= 10
-on-arrival: city_militias += 1; city_militia_k_loyalty += 6*prov_gov_efficacy if k_in_gov; city_militia_sr_loyalty += 4*prov_gov_efficacy if sr_in_gov; city_militia_m_loyalty += 4*prov_gov_efficacy if m_in_gov; city_militia_militancy += 0.02*prov_gov_efficacy; internal_expend += 0.05;
-
-We are trying to make the city militias more effective, and more responsive to the Provisional Government.
+subtitle: -1 resources
+tags: internal_recruitment
+view-if: city_militias >= 1 
+choose-if: resources >= 1
+on-arrival: {!
+    Q.city_militia_strength += 4*Q.efficacy_internal;
+    Q.city_militia_militancy += 0.04*Q.efficacy_internal;
+    Q.city_militia_b_loyalty += 6*Q.efficacy_internal;
+!}
 
 
 
@@ -142,107 +209,146 @@ on-arrival: election_officials += 1; election_power += 5; internal_expend += 0.0
 
 
 
-
-@anti_crime
-title: Use the militias to combat crime.
-unavailable-subtitle: Our city militias are not effective enough.
-choose-if: city_militias >= 1
-view-if: crime >= 30
-on-arrival: crime -= 6*city_militias*unrest_modifier; prov_gov_legitimacy += city_militias*3
-
-We have deployed the city militias to increase security and combat crime in Petrograd and other major cities.
-
-
-
-
 @counterrevolutionary_measures
 title:ANTI-COUNTERREVOLUTION
 go-to: counterrevolutionary_measures_menu
 
 @counterrevolutionary_measures_menu
 
-- @rev_tribunals
-- @on_sight
-- @concentration_camps
+- #anti-counterrevolution
 - @internal_cancel
 
 
 @rev_tribunals
 title: Establish revolutionary tribunals. 
 subtitle: -1 resources 
+tags: anti-counterrevolution
 view-if: city_militias >= 1 and instability >= 50
-on-arrival: resources -= 1; crime -= 5; democraticity -= 5; instability += 5; elite_unrest += 10; elites -= 0.05; elite_strength -= 5; worker_unrest -= 3; peasant_unrest -= 5; intelligentsia_unrest += 2; underclass_unrest -= 5; underclass_strength += 5;
+on-arrival: {!
+    Q.resources -= 1;
+    Q.crime -= 5; Q.democraticity -= 1; Q.instability += 2;
+    Q.elites_unrest += 10; Q.elites_strength -= 5;
+    Q.workers_unrest -= 3; Q.peasants_unrest -= 5; Q.intelligentsia_unrest += 2; Q.underclass_unrest -= 5; Q.underclass_strength += 5;
+    Q.cheka_militancy += 0.1;
+    Q.elites -= 0.1; Q.prisoners += 0.1;
+!}
 
 @on_sight
 title: Declare execution without trial for the worst acts of counterrevolution. 
 subtitle: The situation calls for drastic measures. 
+tags: anti-counterrevolution
 view-if: cheka >= 1 and instability >= 60
-on-arrival: crime -= 5; democraticity -= 5; instability += 5; elite_unrest += 10; elites -= 0.05; elite_strength -= 5; peasant_strength -= 5; intelligentsia_unrest += 2; underclass_unrest -= 5; underclass_strength += 5;
+on-arrival: {!
+    Q.crime -= 5; Q.democraticity -= 3; Q.instability += 3;
+    Q.elites_unrest += 10; Q.elites -= 0.05; Q.elite_strength -= 5;
+    Q.peasants_strength -= 5; Q.intelligentsia_unrest += 2; Q.underclass_unrest -= 5; Q.underclass_strength += 5;
+    Q.cheka_militancy += 0.1;
+!}
 
 @concentration_camps
-title: Establish network of concentration camps. 
-subtitle: -3 resources, + 0.5 expenditure
-view-if: city_militias >= 1 and instability >= 60 and cheka_founded = 1 and cheka > 1 and cheka_strength >= 10
-on-arrival: resources -= 3; internal_expend += 0.5; crime -= 5; democraticity -= 5; instability += 10; elite_unrest += 10; elites -= 0.1; elite_strength -= 10; intelligentsia_unrest += 5; intelligentsia -= 0.1; intelligentsia_strength -= 5; underclass_unrest -= 5; worker_strength -= 5; peasant_strength -= 2; kulak_strength -= 1; clergey_strength -= 5; 
+title: Establish a network of concentration camps. 
+subtitle: -2 resources, + 1 expenditure
+tags: anti-counterrevolution
+choose-if: city_militias >= 1 and instability >= 60 and cheka_founded = 1 and cheka > 7 and cheka_strength >= 10
+unavailable-subtitle: [?if (cheka <= 7 or cheka_strength < 10) : We lack the secret policing apparatus for this. ?]
+on-arrival: {!
+    Q.resources -= 2; Q.internal_expend += 1;
+    Q.crime -= 5; Q.democraticity -= 5; Q.instability += 5;
+    Q.elites_unrest += 10; Q.elites_strength -= 10;
+    Q.intelligentsia_unrest += 5; Q.intelligentsia -= 0.1; Q.intelligentsia_strength -= 5;
+    Q.underclass_unrest -= 5; Q.workers_strength -= 5; Q.peasants_strength -= 2; Q.kulaks_strength -= 1; Q.clergy_strength -= 5; 
+    Q.cheka_militancy += 0.25;
+    Q.elites -= 0.5; Q.prisoners += 0.6; 
+!}
 
-@orphanages
-title: Institute a nationwide orphanage program.  
-subtitle: -3 resources, +0.5 expenditure
-unavailable-subtitle: We lack the administrative capacity and resources. 
-choose-if: imperial_police = 1 and city_militias >= 2 and cheka >= 1 and resources > 1
-on-arrival: resources -= 3; internal_expend += 0.5; crime -= 5*(efficacy_internal); worker_unrest -= 10; underclass_unrest -= 15; underclass -= 1; workers += 1; intelligentsia_unrest -= 5; instability -= 5; 
+
+
 
 @investigation
 title: INVESTIGATIONS
 subtitle: We can redirect the attention of the secret police to a particular question. 
 unavailable-subtitle: We lack the secret policing apparatus for this. 
-choose-if: cheka >= 1
+choose-if: cheka >= 5
 go-to: investigation_menu
-
 
 @investigation_menu
 
 What should we turn our attention to?
 
-- @investigate_factories
-- @investigate_army_failings
-- @investigate_dissidents
-- @target_reactionaries
-- @investigate_church
-- @investigate_party_abuses
+- #investigations
 - @internal_cancel
-
 
 @investigate_factories
 title: Sweep industrial centres for signs of sabotage and disloyalty 
 subtitle: -1 resources
-on-arrival: resources -= 1; cheka_militacy += 0.1; worker_strength -= 5; middle_strength -= 2; 
+choose-if: resources >= 1
+unavailable-subtitle: -1 resources – We lack the resources. 
+tag: investigations
+on-arrival: {!
+    Q.resources -= 1; Q.crime -= 1; 
+    Q.cheka_militacy += 0.1;
+    Q.workers_strength -= 5; Q.middle_strength -= 2; 
+    Q.prisoners += 0.01;
+!}
 
 @investigate_army_failings
 title: Conduct an audit regarding military failures on the frontlines. 
 subtitle: -1 resources
-on-arrival: resources -= 1;
+choose-if: resources >= 1
+unavailable-subtitle: -1 resources – We lack the resources. 
+tag: investigations
+on-arrival: {!
+    Q.resources -= 1;
+    Q.discipline += 0.05;
+!}
 
 @investigate_dissidents
 title: Monitor the activities of reactionary elements. 
 subtitle: -1 resources
-on-arrival: resources -= 1; elite_strength -= 5; middle_strength -= 2; clergy_strength -= 2; 
+choose-if: resources >= 1
+unavailable-subtitle: -1 resources – We lack the resources. 
+tag: investigations
+on-arrival: {!
+    Q.resources -= 1;
+    Q.elites_strength -= 5; Q.middle_strength -= 2; Q.clergy_strength -= 2; 
+    Q.prisoners += 0.01;
+!}
 
 @investigate_church
 title: Monitor and suppress members of the clergy. 
 subtitle: -1 resources
-on-arrival: resources -= 1; elite_strength -= 2; clergy_strength -= 5; clergy_unrest += 10; clergy -= 0.01; instability += 2;
+choose-if: resources >= 1
+unavailable-subtitle: -1 resources – We lack the resources. 
+tag: investigations
+on-arrival: {!
+    Q.resources -= 1; Q.instability += 2;
+    Q.elites_strength -= 2; Q.clergy_strength -= 5;
+    Q.clergy_unrest += 10;
+    Q.clergy -= 0.01; Q.prisoners += 0.01;
+!}
 
 @investigate_party_abuses
 title: Look into supposed instances of abuse by Bolshevik members. 
 subtitle: -1 resources
-on-arrival: resources -= 1; worker_unrest -= 6; peasant_unrest -= 6; middle_unrest -= 4; elite_unrest -= 2; democraticity += 2; 
+choose-if: resources >= 1
+unavailable-subtitle: -1 resources – We lack the resources. 
+tag: investigations
+on-arrival: {!
+    Q.resources -= 1; Q.democraticity += 2; 
+    Q.workers_unrest -= 6; Q.peasants_unrest -= 6;
+    Q.middle_unrest -= 4; Q.elites_unrest -= 2; 
+!}
 
 @target_reactionaries
-title: Persecute reactionaries, counterrevolutionaries, and dissidents. 
+title: Arrest known reactionaries, counterrevolutionaries, and dissidents. 
 unavailable-subtitle: Our secret police forces are not effective enough. 
-choose-if: (city_militias >= 1 and city_militia_strength >= 5) or cheka >= 5
-on-arrival: elite_unrest += 10; elites -= 0.1; elite_strength -= 5; middle_unrest += 1; middle -= 0.05; middle_strength -= 2; intelligentsia -= 0.1; intelligentsia_unrest += 2; intelligentsia_strength -= 2; instability += 5; clergy -= 0.05; clergy_unrest += 5;
+choose-if: (city_militias >= 30 and city_militia_strength >= 10) or cheka >= 10
+on-arrival: {!
+    Q.instability += 1;
+    Q.elites_unrest += 10; Q.elites_strength -= 5; Q.middle_unrest += 5; Q.middle_strength -= 2;
+    Q.intelligentsia_unrest += 2; Q.intelligentsia_strength -= 2; Q.clergy_unrest += 5;
+    Q.elites -= 0.05; middle -= 0.025; Q.intelligentsia -= 0.05; clergy -= 0.025; Q.prisoners += 0.15;
+!}
 
 We have arrested members of the former elite identified to be sympathetic to counterrevolution. 
 
