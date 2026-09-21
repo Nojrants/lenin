@@ -162,7 +162,7 @@ for (var c of Q.classes) {
         }
         if (Q.governing_parties.includes(party)) {
             if (unrest < 50) {
-                Q[c + "_" + party] += (50 - unrest) / 10
+                Q[c + "_" + party] += (50 - unrest) / 30
                     * Q.base_attractiveness[c][party]
                     * Math.max(1, Q[party + "_strength"]) / 50
                     * (1 - Q.instability / 200)
@@ -185,7 +185,7 @@ for (var c of Q.classes) {
 					* (1 + (Q.disillusionment / 100))
 					* 0.1;
             } else {
-                Q[c + "_" + party] += (unrest - 50) / 10
+                Q[c + "_" + party] += (unrest - 50) / 30
                     * Q.base_attractiveness[c][party]
                     * 50 / Math.max(1, Q[party + "_strength"])
                     * (1 + Q.instability / 200)
