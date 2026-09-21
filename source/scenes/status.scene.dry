@@ -271,58 +271,14 @@ Nationality policy: [? if player_party = "m": [+ m_nationality_policy : national
 @state
 title: State
 
-= [+ government_form : government_form +]
-
-[+ government_form : leader +]: [+ prime_minister +] ([+ prime_minister_party +])
-
-Interior [+ government_form : minister +]: [+ interior_minister +] ([+ interior_minister_party +])
-
-Foreign [+ government_form : minister +]: [+ foreign_minister +] ([+ foreign_minister_party +])
-
-War [+ government_form : minister +]: [+ war_minister +] ([+ war_minister_party +])
-
-Finance [+ government_form : minister +]: [+ finance_minister +] ([+ finance_minister_party +])
-
-Justice [+ government_form : minister +]: [+ justice_minister +] ([+ justice_minister_party +])
-
-Agriculture [+ government_form : minister +]: [+ agriculture_minister +] ([+ agriculture_minister_party +])
-
-Transport [+ government_form : minister +]: [+ transport_minister +] ([+ transport_minister_party +])
-
-Industry and Trade [+ government_form : minister +]: [+ trade_minister +] ([+ trade_minister_party +])
-
-# there is no content for the education minister for now.
-Education [+ government_form : minister +]: [+ education_minister +] ([+ education_minister_party +])
+workers: [+ workers +]<br>
+workers_unrest: [+ workers_unrest +]<br>
+workers_strength: [+ workers_strength +]<br>
+workers_b: [+ workers_b +]<br>
+workers_m: [+ workers_m +]<br>
 
 
-[? if post_minister: Posts and Telegraph [+ government_form : minister +]: [+ post_minister +] ([+ post_minister_party +]) ?]
 
-[? if labor_minister: Labor [+ government_form : minister +]: [+ labor_minister +] ([+ labor_minister_party +]) ?]
-
-Government efficacy: [+ prov_gov_efficacy : efficacy +]
-
-Government legitimacy: [+ prov_gov_legitimacy : legitimacy +]
-
-= Petrograd Soviet
-
-Chair: [+ soviet_chair +] ([+ soviet_chair_party +])
-
-Executive committee: [? if m_in_exco: Mensheviks, ?] [? if sr_in_exco: SRs ?] [? if b_in_exco: Bolsheviks ?][? if defensist_in_exco:, Menshevik-Defensists ?][? if internationalist_in_exco:, Menshevik-Internationalists ?][? if left_sr_in_exco:, Left-SRs ?][? if right_sr_in_exco:, Right-SRs ?]
-
-Overal composition:
-Mensheviks: [+ m_soviet +]%
-Bolsheviks: [+ b_soviet +]%
-SRs: [+ sr_soviet +]%
-Anarchists: [+ anarchist_soviet +]%
-Others: [+ other_soviet +]%
-[? if defensist_split: Menshevik-Defensists: [+ defensist_soviet_votes_dec +]% ?]
-[? if internationalist_split: Menshevik-Internationalists: [+ internationalist_soviet_votes_dec +]% ?]
-[? if right_sr_split: Right-SRs: [+ right_sr_soviet_votes_dec +]% ?]
-[? if left_sr_split: Left-SRs: [+ left_sr_soviet_votes_dec +]% ?]
-
-Soviet efficacy: [+ soviet_efficacy : efficacy +]
-
-Soviet cooperation with Provisional Government: [+ soviet_cooperation : efficacy +]
 
 @party
 title: Party
