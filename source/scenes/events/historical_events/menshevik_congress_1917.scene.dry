@@ -12,7 +12,7 @@ go-to: post_election_menu
 on-display: {!
 // do the graphs
 var data = [
-    {"id": "left_m",
+    {"id": "left_m2",
      "legend": "Menshevik-Internationalist",
      "name": "Menshevik-Internationalist",
      "seats": Q.left_m_delegates},
@@ -22,7 +22,7 @@ var data = [
      "name": "Menshevik-Centre",
      "seats": Q.m_delegates},
 
-    {"id": "right_m",
+    {"id": "right_m2",
      "legend": "Menshevik-Defencist",
      "name": "Menshevik-Defencist",
      "seats": Q.right_m_delegates},
@@ -62,27 +62,27 @@ if (window && d3) {
 </tr>!}
 
 {!<tr>
-<td><div class="party-box box left_m"></div>Menshevik Internationalists</td>
-<td>[+ left_m_delegates +]</td>
-<td>[+ left_m_percentage +]%</td>
+<td><div class="party-box box left_m2"></div>Menshevik Internationalists</td>
+<td>!}[+ left_m_delegates +]{!</td>
+<td>!}[+ left_m_percentage +]%{!</td>
 </tr>!}
 
 {!<tr>
 <td><div class="party-box box m"></div>Mensheviks (Centre)</td>
-<td>[+ m_delegates +]</td>
-<td>[+ m_percentage +]%</td>
+<td>!}[+ m_delegates +]{!</td>
+<td>!}[+ m_percentage +]%{!</td>
 </tr>!}
 
 {!<tr>
-<td><div class="party-box box right_m"></div>Menshevik Defencists</td>
-<td>[+ right_m_delegates +]</td>
-<td>[+ right_m_percentage +]%</td>
+<td><div class="party-box box right_m2"></div>Menshevik Defencists</td>
+<td>!}[+ right_m_delegates +]{!</td>
+<td>!}[+ right_m_percentage +]%{!</td>
 </tr>!}
 
 {!<tr>
 <td><div class="party-box box other"></div>Non-Factional</td>
-<td>[+ m_nonfactional_delegates +]</td>
-<td>[+ m_nonfactional_percentage +]%</td>
+<td>!}[+ m_nonfactional_delegates +]{!</td>
+<td>!}[+ m_nonfactional_percentage +]%{!</td>
 </tr>!}
 
 {!</table>!}
