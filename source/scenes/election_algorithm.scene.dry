@@ -244,3 +244,40 @@ for (var party of Q.parties) {
 !}
 go-to: jumpScene
 
+
+
+
+######################################### MENSHEVIK PARTY ELECTION
+@menshevik_party_election
+title: Menshevik Party Election
+on-arrival: {!
+
+Q.menshevik_factions = ["left_m", "m", "right_m", "nonfactional"];
+Q.nonfactional_strength = Q.m_dissent / 10; 
+
+var total_strength = 0;
+for (var faction of Q.menshevik_factions) {
+    if (!Q[faction + '_strength'] || Q[faction + '_strength'] < 0) {
+        Q[faction + '_strength'] = 0;
+    }
+    total_strength += Q[faction + '_strength'];
+}
+if (total_strength <= 0) { total_strength = 1; }
+
+for (var faction of Q.menshevik_factions) {
+    Q[faction + '_normalized'] =
+        Q[faction + '_strength'] / total_strength;
+}
+
+
+var total_delegates = 50 + (60 - Q.instability) + (Q.m_strength + Q.left_m_strength + Q.right_m_strength);
+for (var faction of Q.menshevik_factions) {
+    Q[faction + '_delegates'] =
+        Math.round(
+            Q[faction + '_normalized'] *
+            total_delegates
+        );
+}
+
+go-to: jumpScene
+
