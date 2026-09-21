@@ -130,7 +130,7 @@ Q.coalition_taylorist = 0;
 
 
 // Other Parties
-Q.b_strength = 65; 
+Q.b_strength = 45; 
 
 Q.sdi_relation = 40;
 Q.sdi_strength = 5;
