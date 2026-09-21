@@ -6,48 +6,83 @@ on-arrival: report_timer = 4;
 tags: event
 
 = Financial Report
+= Financial Report
 
-The current state of our finances. 
+<div style="display:flex; flex-wrap:wrap; gap:20px; align-items:flex-start;">
+  <div style="flex:1; min-width:300px; border:2px solid #666; border-radius:6px; padding:12px;">
+<div style="font-size:1.2em; font-weight:bold; text-align:center; margin-bottom:8px;">
+  Revenue
+</div>
+<hr>
+<b>Total Revenue:</b> <span style="color: var(--level1-color);">[+ income +]</span>
+<hr>
+<b>Taxation</b> — <span style="color: var(--level1-color);">[+ (income_tax + property_tax + business_tax + monopolies + customs) +]</span>
+<ul style="margin-top:6px; margin-bottom:0; padding-left:20px;">
+  <li style="margin-bottom:4px;">Income Tax: <span style="color: var(--level1-color);">[+ income_tax +]</span></li>
+  <li style="margin-bottom:4px;">Property Tax: <span style="color: var(--level1-color);">[+ property_tax +]</span></li>
+  <li style="margin-bottom:4px;">Business Tax: <span style="color: var(--level1-color);">[+ business_tax +]</span></li>
+  <li style="margin-bottom:4px;">Monopolies: <span style="color: var(--level1-color);">[+ monopolies +]</span></li>
+  <li style="margin-bottom:0;">Customs Duties: <span style="color: var(--level1-color);">[+ customs +]</span></li>
+</ul>
+<br>
+<b>State Enterprises</b> — <span style="color: var(--level1-color);">[+ (railway_revenue + enterprises_revenue) +]</span>
+<ul style="margin-top:6px; margin-bottom:0; padding-left:20px;">
+  <li style="margin-bottom:8px;">Railways: <span style="color: var(--level1-color);">[+ railway_revenue +]</span></li>
+  <li style="margin-bottom:0;">Other Enterprises: <span style="color: var(--level1-color);">[+ enterprises_revenue +]
+  <br><br><br><br><br><br><br><br><br><br></span></li>
+</ul>
+  </div>
+  <div style="flex:1; min-width:300px; border:2px solid #666; border-radius:6px; padding:12px;">
+<div style="font-size:1.2em; font-weight:bold; text-align:center; margin-bottom:8px;">
+  Expenditure
+</div>
+<hr>
+<b>Total Expenditure:</b> <span style="color: var(--level7-color);">[+ expenditure +]</span>
+<hr>
+<b>Government Functions</b> — <span style="color: var(--level7-color);">[+ government_functions +]</span>
+<ul style="margin-top:6px; margin-bottom:0; padding-left:20px;">
+  <li style="margin-bottom:4px;">Sovnarkom: <span style="color: var(--level7-color);">[+ sovnarkom_expend +]</span></li>
+  <li style="margin-bottom:4px;">Foreign Affairs: <span style="color: var(--level7-color);">[+ foreignaffairs_expend +]</span></li>
+  <li style="margin-bottom:4px;">Military: <span style="color: var(--level7-color);">[+ military_expend +]</span></li>
+  <li style="margin-bottom:4px;">Enlightenment: <span style="color: var(--level7-color);">[+ enlightenment_expend +]</span></li>
+  <li style="margin-bottom:4px;">Internal Affairs: <span style="color: var(--level7-color);">[+ internal_expend +]</span></li>
+  <li style="margin-bottom:4px;">Railways: <span style="color: var(--level7-color);">[+ railways_expend +]</span></li>
+  <li style="margin-bottom:4px;">Trade: <span style="color: var(--level7-color);">[+ trade_expend +]</span></li>
+  <li style="margin-bottom:4px;">Finance: <span style="color: var(--level7-color);">[+ finance_expend +]</span></li>
+  <li style="margin-bottom:4px;">Justice: <span style="color: var(--level7-color);">[+ justice_expend +]</span></li>
+  <li style="margin-bottom:4px;">Agriculture: <span style="color: var(--level7-color);">[+ agriculture_expend +]</span></li>
+  <li style="margin-bottom:4px;">Food Supply: <span style="color: var(--level7-color);">[+ foodsupply_expend +]</span></li>
+  <li style="margin-bottom:4px;">Nationalities: <span style="color: var(--level7-color);">[+ nationalities_expend +]</span></li>
+  <li style="margin-bottom:0;">Welfare: <span style="color: var(--level7-color);">[+ welfare_expend +]</span></li>
+</ul>
+<hr>
+<b>Other Obligations</b> — <span style="color: var(--level7-color);">[+ (interest + indemnities) +]</span>
+<ul style="margin-top:6px; margin-bottom:0; padding-left:20px;">
+  <li style="margin-bottom:8px;">Interest Payments: <span style="color: var(--level7-color);">[+ interest +]</span></li>
+  <li style="margin-bottom:0;">Indemnities: <span style="color: var(--level7-color);">[+ indemnities +]</span></li>
+</ul>
+  </div>
+  <div style="flex-basis:100%; border:2px solid #666; border-radius:6px; padding:12px;">
+<div style="display:flex; justify-content:space-between; margin:8px 20px;">
+  <b>Treasury</b>
+  [+ resources +]
+</div>
+<div style="display:flex; justify-content:space-between; margin:8px 20px;">
+  <b>Total Revenue</b>
+  <span style="color: var(--level1-color);">[+ income +]</span>
+</div>
+<div style="display:flex; justify-content:space-between; margin:8px 20px;">
+  <b>Total Expenditure</b>
+  <span style="color: var(--level7-color);">[+ expenditure +]</span>
+</div>
+<hr>
+<div style="display:flex; justify-content:space-between; margin:8px 20px; font-size:1.1em;">
+  <b>Surplus / Deficit</b>
+  <span>[?if (resources + income - expenditure) > 0 : <span style="color: var(--level1-color);">[+ (resources + income - expenditure) +]</span>?][?if (resources + income - expenditure) < 0 : <span style="color: var(--level7-color);">[+ (resources + income - expenditure) +]</span>?][?if (resources + income - expenditure) == 0 : [+ (resources + income - expenditure) +] ?]</span>
+</div>
+  </div>
+</div>
 
->**Current treasury:** [+ resources +]
-
->**Revenue:** [+ income +]
-
->>Taxation: [+ (income_tax + property_tax + business_tax + monopolies + customs) +]
-
->>Enterprises: [+ (railway_revenue + enterprises_revenue) +]
-
->**Expenditure:** [+ expenditure +]
-
->>Government Functions: [+ government_functions +]
-
->> - Foreign Affairs: [+ foreignaffairs_expend +]
-
->> - Military: [+ military_expend +]
-
->> - Enlightenment: [+ enlightmenet_expend +]
-
->> - Internal Affairs: [+ internal_expend +]
-
->> - Railways: [+ railways_expend +]
-
->> - Trade: [+ trade_expend +]
-
->> - Finance: [+ finance_expend +]
-
->> - Justice: [+ justice_expend +]
-
->> - Agriculture: [+ agriculture_expend +]
-
->> - Food Supply: [+ foodsupply_expend +]
-
->> - Nationalities: [+ nationalities_expend +]
-
->> - Welfare: [+ welfare_expend +]
-
->>Interest payments: [+ interest +]
-
->>Indemnities: [+ indemnities +]
 
 
 - @budget_balancing
