@@ -97,7 +97,7 @@ Q.anarchists_legal = 1;
 // bolshevik internals
 // leadership: 1 = moderate internationalists, 2 = leninists
 Q.b_leadership = 2;
-Q.b_factions = ['leninist', 'moderate', 'leftcom'];
+Q.b_factions = ['leninist', 'moderate', 'leftcom', 'nonfactional'];
 
 Q.coalition_leninist = 2;
 Q.coalition_moderate = 1;
