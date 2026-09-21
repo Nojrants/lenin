@@ -14,8 +14,8 @@ on-arrival: {!
 @post_election
 go-to: post_election_menu
 on-arrival: {!
-    Q.centre_left_coalition = Q.left_m_percentage + Q.m_percentage + (Q.m_nonfactional_percentage * Q.m_dissent);
-    Q.centre_right_coalition = Q.right_m_percentage + Q.m_percentage + (Q.m_nonfactional_percentage * Q.m_dissent);
+    Q.centre_left_coalition = Math.round(Q.left_m_percentage + Q.m_percentage + (Q.m_nonfactional_percentage * Q.m_dissent));
+    Q.centre_right_coalition = Math.round(Q.right_m_percentage + Q.m_percentage + (Q.m_nonfactional_percentage * Q.m_dissent));
 !}
 on-display: {!
 // do the graphs
