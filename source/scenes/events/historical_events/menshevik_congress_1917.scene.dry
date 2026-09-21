@@ -7,6 +7,7 @@ go-to: election_algorithm.menshevik_party_election
 set-jump: menshevik_congress_1917.post_election
 on-arrival: {!
     Q.m_modifier = 10;
+    Q.m_strength -= 20;
 !}
 
 
@@ -66,7 +67,7 @@ if (window && d3) {
 
 {!<tr>
 <td><div class="party-box box left_m2"></div>Menshevik Internationalists</td>
-<td>!}[+ left_m_delegates +] ([+ left_m_percentage +]%){!</td>
+<td>!}[+ left_m_delegates +]{!</td>
 <td>!}[+ left_m_percentage +]%{!</td>
 </tr>!}
 
@@ -93,7 +94,7 @@ if (window && d3) {
 
 
 
-The <span style="color: var(--m-color);">Mensheviks</span> have called for an extraordinary party congress in Petrograd, hoping to ease the growing factional tensions within their ranks and decide on a course of action regarding the <span style="color: var(--b-color);">Bolshevik</span> government.
+The <span style="color: var(--m-color); font-weight: bold;">Mensheviks</span> have called for an extraordinary party congress in Petrograd, hoping to ease the growing factional tensions within their ranks and decide on a course of action regarding the <span style="color: var(--b-color);">Bolshevik</span> government.
 
 According to the Defencists, the Bolsheviks could no longer be considered a party of democracy or socialism, making cooperation with them completely untenable. It was their duty now to resist the Bolshevik dictatorship by all means necessary, even taking up arms where opportune. They likewise call for the Mensheviks to refuse to sit in the CEC – so as to not legitimize the Bolshevik seizure of power – while putting all their efforts into defending the Constituent Assembly. 
 
@@ -101,4 +102,15 @@ On the other side of the spectrum, Martov's internationalist wing argues for cau
 
 @post_election_menu
 
+- @internationalist_victory
+- @left_centre
+- @centre
+- @centre
+
+@internationalist_victory
+title: The Internationalists take full control of the party. 
+subtitle: 
+
+@left_centre
+title: 
 
