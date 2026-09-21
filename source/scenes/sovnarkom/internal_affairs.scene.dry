@@ -47,7 +47,7 @@ choose-if: cheka_founded = 0 and imperial_police = 1 and city_militia_strength >
 view-if: cheka_founded = 0
 on-arrival: {!
     Q.cheka_founded = 1; Q.instability += 1; 
-    Q.cheka = 5; Q.cheka_strength = 5; Q.cheka_militancy = 0.2; Q.cheka_loyality = 0.5;
+    Q.cheka = 5; Q.cheka_strength = 5; Q.cheka_militancy = 0.2; Q.cheka_loyalty = 0.5;
     Q.internal_expend += 0.25; 
     Q.city_militia_strength -= 5; Q.crime -= 5; 
     Q.moderate_dissent += 5; Q.leftcom_dissent -= 10; Q.leninist_dissent -= 5;
@@ -62,7 +62,7 @@ tags: internal_general
 choose-if: city_militias >= 2 and city_militia_strength > 10
 view-if: crime >= 30
 on-arrival: {!
-    Q.crime -= (Q.city_militias/2) * (1 + (Q.city_militia_strength / 5);
+    Q.crime -= (Q.city_militias/2) * (1 + (Q.city_militia_strength / 5));
     Q.instability -= (Q.city_militia_strength / 10);
 !}
 
@@ -283,10 +283,10 @@ title: Sweep industrial centres for signs of sabotage and disloyalty
 subtitle: -1 resources
 choose-if: resources >= 1
 unavailable-subtitle: -1 resources – We lack the resources. 
-tag: investigations
+tags: investigations
 on-arrival: {!
     Q.resources -= 1; Q.crime -= 1; 
-    Q.cheka_militacy += 0.1;
+    Q.cheka_militancy += 0.1;
     Q.workers_strength -= 5; Q.middle_strength -= 2; 
     Q.prisoners += 0.01;
 !}
@@ -296,7 +296,7 @@ title: Conduct an audit regarding military failures on the frontlines.
 subtitle: -1 resources
 choose-if: resources >= 1
 unavailable-subtitle: -1 resources – We lack the resources. 
-tag: investigations
+tags: investigations
 on-arrival: {!
     Q.resources -= 1;
     Q.discipline += 0.05;
@@ -307,7 +307,7 @@ title: Monitor the activities of reactionary elements.
 subtitle: -1 resources
 choose-if: resources >= 1
 unavailable-subtitle: -1 resources – We lack the resources. 
-tag: investigations
+tags: investigations
 on-arrival: {!
     Q.resources -= 1;
     Q.elites_strength -= 5; Q.middle_strength -= 2; Q.clergy_strength -= 2; 
@@ -319,7 +319,7 @@ title: Monitor and suppress members of the clergy.
 subtitle: -1 resources
 choose-if: resources >= 1
 unavailable-subtitle: -1 resources – We lack the resources. 
-tag: investigations
+tags: investigations
 on-arrival: {!
     Q.resources -= 1; Q.instability += 2;
     Q.elites_strength -= 2; Q.clergy_strength -= 5;
@@ -332,7 +332,7 @@ title: Look into supposed instances of abuse by Bolshevik members.
 subtitle: -1 resources
 choose-if: resources >= 1
 unavailable-subtitle: -1 resources – We lack the resources. 
-tag: investigations
+tags: investigations
 on-arrival: {!
     Q.resources -= 1; Q.democraticity += 2; 
     Q.workers_unrest -= 6; Q.peasants_unrest -= 6;
@@ -347,7 +347,7 @@ on-arrival: {!
     Q.instability += 1;
     Q.elites_unrest += 10; Q.elites_strength -= 5; Q.middle_unrest += 5; Q.middle_strength -= 2;
     Q.intelligentsia_unrest += 2; Q.intelligentsia_strength -= 2; Q.clergy_unrest += 5;
-    Q.elites -= 0.05; middle -= 0.025; Q.intelligentsia -= 0.05; clergy -= 0.025; Q.prisoners += 0.15;
+    Q.elites -= 0.05; Q.middle -= 0.025; Q.intelligentsia -= 0.05; Q.clergy -= 0.025; Q.prisoners += 0.15;
 !}
 
 We have arrested members of the former elite identified to be sympathetic to counterrevolution. 
