@@ -245,27 +245,24 @@ for (var party of Q.parties) {
 }
 
 console.log("Disillusionment:", Q.disillusionment);
-// console.log("none support:", Q.none_support);
-// for (var party of Q.parties) {
-//     console.log(party + ": " + Q[party + "_normalized"]);
-// }
-// console.log(
-//     "NONE RAW:",
-//     Q.none_support,
-//     "NONE NORMALIZED:",
-//     Q.none_normalized,
-//     "TOTAL:",
-//     total_support
-// );
-// for (var party of Q.parties) {
-//     console.log(
-//         party,
-//         "raw:",
-//         Q[party + "_support"],
-//         "normalized:",
-//         Q[party + "_normalized"]
-//     );
-// }
+console.log("none support:", Q.none_support);
+for (var party of Q.parties) {
+    console.log(party + ": " + Q[party + "_normalized"]);
+}
+for (var party of Q.parties) {
+    console.log(
+        party,
+        "raw:",
+        Q[party + "_support"],
+        "normalized:",
+        Q[party + "_normalized"].
+    );
+}
+console.log("workers_b:", workers_b);
+console.log("workers_m:", workers_m);
+console.log("workers_lsr:", workers_lsr);
+console.log("workers_sr:", workers_sr);
+
 
 
 // set faction strength/dissent to 0
