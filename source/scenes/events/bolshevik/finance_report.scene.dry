@@ -6,15 +6,14 @@ on-arrival: report_timer = 4;
 tags: event
 
 = Financial Report
-= Financial Report
 
-<div style="display:flex; flex-wrap:wrap; gap:20px; align-items:flex-start;">
+<div style="display:flex; flex-wrap:wrap; gap:20px; align-items:stretch;">
   <div style="flex:1; min-width:300px; border:2px solid #666; border-radius:6px; padding:12px;">
 <div style="font-size:1.2em; font-weight:bold; text-align:center; margin-bottom:8px;">
   Revenue
 </div>
 <hr>
-<b>Total Revenue:</b> <span style="color: var(--level1-color);">[+ income +]</span>
+<b>Total Revenue</b> — <span style="color: var(--level1-color);">[+ income +]</span>
 <hr>
 <b>Taxation</b> — <span style="color: var(--level1-color);">[+ (income_tax + property_tax + business_tax + monopolies + customs) +]</span>
 <ul style="margin-top:6px; margin-bottom:0; padding-left:20px;">
@@ -28,8 +27,7 @@ tags: event
 <b>State Enterprises</b> — <span style="color: var(--level1-color);">[+ (railway_revenue + enterprises_revenue) +]</span>
 <ul style="margin-top:6px; margin-bottom:0; padding-left:20px;">
   <li style="margin-bottom:8px;">Railways: <span style="color: var(--level1-color);">[+ railway_revenue +]</span></li>
-  <li style="margin-bottom:0;">Other Enterprises: <span style="color: var(--level1-color);">[+ enterprises_revenue +]
-  <br><br><br><br><br><br><br><br><br><br></span></li>
+  <li style="margin-bottom:0;">Other Enterprises: <span style="color: var(--level1-color);">[+ enterprises_revenue +]</span></li>
 </ul>
   </div>
   <div style="flex:1; min-width:300px; border:2px solid #666; border-radius:6px; padding:12px;">
@@ -37,7 +35,7 @@ tags: event
   Expenditure
 </div>
 <hr>
-<b>Total Expenditure:</b> <span style="color: var(--level7-color);">[+ expenditure +]</span>
+<b>Total Expenditure</b> — <span style="color: var(--level7-color);">[+ expenditure +]</span>
 <hr>
 <b>Government Functions</b> — <span style="color: var(--level7-color);">[+ government_functions +]</span>
 <ul style="margin-top:6px; margin-bottom:0; padding-left:20px;">
@@ -69,11 +67,11 @@ tags: event
 </div>
 <div style="display:flex; justify-content:space-between; margin:8px 20px;">
   <b>Total Revenue</b>
-  <span style="color: var(--level1-color);">[+ income +]</span>
+  <span style="color: var(--level1-color);">+ [+ income +]</span>
 </div>
 <div style="display:flex; justify-content:space-between; margin:8px 20px;">
   <b>Total Expenditure</b>
-  <span style="color: var(--level7-color);">[+ expenditure +]</span>
+  <span style="color: var(--level7-color);">- [+ expenditure +]</span>
 </div>
 <hr>
 <div style="display:flex; justify-content:space-between; margin:8px 20px; font-size:1.1em;">
@@ -82,6 +80,7 @@ tags: event
 </div>
   </div>
 </div>
+
 
 
 
