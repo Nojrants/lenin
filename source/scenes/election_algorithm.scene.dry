@@ -253,7 +253,8 @@ title: Menshevik Party Election
 on-arrival: {!
 
 Q.menshevik_factions = ["left_m", "m", "right_m", "m_nonfactional"];
-Q.m_nonfactional_strength = Q.m_dissent / 10; 
+Q.m_nonfactional_strength = Q.m_dissent * 10; 
+Q.left_m_strength += Q.m_modifier; 
 
 var total_strength = 0;
 for (var faction of Q.menshevik_factions) {
@@ -279,6 +280,7 @@ for (var faction of Q.menshevik_factions) {
             total_delegates
         );
 }
+Q.left_m_strength -= Q.m_modifier; 
 !}
 go-to: jumpScene
 
