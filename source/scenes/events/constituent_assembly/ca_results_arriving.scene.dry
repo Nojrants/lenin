@@ -265,6 +265,7 @@ That said, we now need to decide what to do with this information...
 
 - @delay_the_ca
 - @delegitimize_the_ca
+- @schedule_congress
 - @support_recalls
 - @monitor_opponents
 - @ca_proceed
@@ -284,6 +285,18 @@ on-arrival:{!
     Q.ca_year = Q.year + 1;
 	Q.instability += 1;
 	Q.democraticity -= 1;
+	}
+!}
+
+We have pushed back the convocation to the third week of January, buying us some more time. Considering the unexpected difficulties encountered in the electoral process, and the breakdown of the transportation network making it difficult for delegates to travel to the capital, rescheduling is arguably a fair move regardless of the election results. Although other parties look to this with skepticism, and are already accusing us of trying to suppress the results. 
+
+@schedule_congress
+title: Schedule a soviet congress to be held the same week as the Constituent Assembly. 
+subtitle: In case the Assembly goes awry we can rely on the Congress of Soviets for legitimacy. 
+max-visits: 1
+go-to: post_election_menu
+on-arrival:{!
+	Q.soviet_congress_timer = Q.constituent_assembly_timer;
 	}
 !}
 
