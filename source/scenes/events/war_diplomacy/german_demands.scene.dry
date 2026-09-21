@@ -1,0 +1,18 @@
+title: German Demands
+new-page: true
+view-if: german_waiting_timer = 0 and german_negotiations = 1
+max-visits: 1
+tags: event
+
+= German Demands
+
+Despite agreeing to a ceasefire a few weeks ago and pledging to open peace negotiations, we have yet to send a formal delegation to Brest-Litovsk as requested. The Germans are now demanding that we either make a serious effort to begin negotiations, or the armistice is forfeited. 
+
+We had hoped that a change in the international situation would have materialized by now, but in lieu of revolution occurring abroad, or the other major powers agreeing to peace negotiations, the Central Committee now has to decide on how to treat with the Germans alone. 
+
+- @goto_peace_strategy
+
+@goto_peace_strategy
+title: What is the position of the Central Committee? 
+go-to: peace_strategy
+
