@@ -168,7 +168,7 @@ left_m_relation =   :   [+ left_m_relation +]<br>
 left_m_strength =   :   [+ left_m_strength +]<br>
 
 centre_m_relation   :   [+ centre_m_relation +]<br>
-centre_m_strength   :   [+ centre_m_strength +]<br>
+centre_m_strength   :   [+ m_strength +]<br>
 
 right_m_relation    :   [+ right_m_relation +]<br>
 right_m_strength    :   [+ right_m_strength +]<br>
@@ -177,7 +177,7 @@ lsr_relation        :   [+ lsr_relation +]<br>
 lsr_strength        :   [+ lsr_strength +]<br>
  
 centre_sr_relatio   :   [+ centre_sr_relation +]<br>
-centre_sr_strengt   :   [+ centre_sr_strength +]<br>
+centre_sr_strengt   :   [+ sr_strength +]<br>
 
 right_sr_relation   :   [+ right_sr_relation +]<br>
 right_sr_strength   :   [+ right_sr_strength +]<br>
