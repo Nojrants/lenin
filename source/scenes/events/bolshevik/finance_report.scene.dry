@@ -60,6 +60,7 @@ on-arrival: {!
   <li style="margin-bottom:4px;">Trade: <span style="color: var(--level7-color);">[+ trade_expend +]</span></li>
   <li style="margin-bottom:4px;">Finance: <span style="color: var(--level7-color);">[+ finance_expend +]</span></li>
   <li style="margin-bottom:4px;">Justice: <span style="color: var(--level7-color);">[+ justice_expend +]</span></li>
+  <li style="margin-bottom:4px;">Labor: <span style="color: var(--level7-color);">[+ labor_expend +]</span></li>
   <li style="margin-bottom:4px;">Agriculture: <span style="color: var(--level7-color);">[+ agriculture_expend +]</span></li>
   <li style="margin-bottom:4px;">Food Supply: <span style="color: var(--level7-color);">[+ foodsupply_expend +]</span></li>
   <li style="margin-bottom:4px;">Nationalities: <span style="color: var(--level7-color);">[+ nationalities_expend +]</span></li>
