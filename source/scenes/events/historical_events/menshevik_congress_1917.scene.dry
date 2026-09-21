@@ -5,6 +5,9 @@ max-visits: 1
 tags: event
 go-to: election_algorithm.menshevik_party_election
 set-jump: menshevik_congress_1917.post_election
+on-arrival: {!
+    Q.m_modifier = 10;
+!}
 
 
 @post_election
@@ -58,31 +61,26 @@ if (window && d3) {
 {!<tr>
 <th>Faction</th>
 <th>Delegates</th>
-<th>Vote Share</th>
 </tr>!}
 
 {!<tr>
 <td><div class="party-box box left_m2"></div>Menshevik Internationalists</td>
-<td>!}[+ left_m_delegates +]{!</td>
-<td>!}[+ left_m_percentage +]%{!</td>
+<td>!}[+ left_m_delegates +] ([+ left_m_percentage +]%){!</td>
 </tr>!}
 
 {!<tr>
 <td><div class="party-box box m"></div>Mensheviks (Centre)</td>
-<td>!}[+ m_delegates +]{!</td>
-<td>!}[+ m_percentage +]%{!</td>
+<td>!}[+ m_delegates +] ([+ m_percentage +]%){!</td>
 </tr>!}
 
 {!<tr>
 <td><div class="party-box box right_m2"></div>Menshevik Defencists</td>
-<td>!}[+ right_m_delegates +]{!</td>
-<td>!}[+ right_m_percentage +]%{!</td>
+<td>!}[+ right_m_delegates +] ([+ right_m_percentage +]%){!</td>
 </tr>!}
 
 {!<tr>
 <td><div class="party-box box other"></div>Non-Factional</td>
-<td>!}[+ m_nonfactional_delegates +]{!</td>
-<td>!}[+ m_nonfactional_percentage +]%{!</td>
+<td>!}[+ m_nonfactional_delegates +] ([+ m_nonfactional_percentage +]%){!</td>
 </tr>!}
 
 {!</table>!}
