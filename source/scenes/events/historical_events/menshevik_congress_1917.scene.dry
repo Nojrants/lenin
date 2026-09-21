@@ -12,22 +12,25 @@ go-to: post_election_menu
 on-display: {!
 // do the graphs
 var data = [
-{"id": "left_m",
- "legend": "Menshevik-Internationalist",
- "name": "Menshevik-Internationalist",
- "seats": Q.left_m_delegates,
-{"id": "m",
- "legend": "Menshevik-Centre",
- "name": "Menshevik-Centre",
- "seats": Q.m_delegates,
-{"id": "right_m",
- "legend": "Menshevik-Defencist",
- "name": "Menshevik-Defencist",
- "seats": Q.right_m_delegates,
-{"id": "other",
- "legend": "Non-Factional",
- "name": "Non-Factional",
- "seats": Q.m_nonfactional_delegates,
+    {"id": "left_m",
+     "legend": "Menshevik-Internationalist",
+     "name": "Menshevik-Internationalist",
+     "seats": Q.left_m_delegates},
+
+    {"id": "m",
+     "legend": "Menshevik-Centre",
+     "name": "Menshevik-Centre",
+     "seats": Q.m_delegates},
+
+    {"id": "right_m",
+     "legend": "Menshevik-Defencist",
+     "name": "Menshevik-Defencist",
+     "seats": Q.right_m_delegates},
+
+    {"id": "other",
+     "legend": "Non-Factional",
+     "name": "Non-Factional",
+     "seats": Q.m_nonfactional_delegates}
 ];
 if (window && d3) {
     var width = 625;
@@ -94,4 +97,4 @@ On the other side of the spectrum, Martov's internationalist wing argues for cau
 
 @post_election_menu
 
-- @congress_3
+
