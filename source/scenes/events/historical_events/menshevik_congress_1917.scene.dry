@@ -66,20 +66,20 @@ if (window && d3) {
 </tr>!}
 
 {!<tr>
-<td><div class="party-box box left_m2"></div>Menshevik Internationalists</td>
+<td><div class="party-box box left_m2"></div>Internationalists</td>
 <td>!}[+ left_m_delegates +]{!</td>
 <td>!}[+ left_m_percentage +]%{!</td>
 </tr>!}
 
 {!<tr>
-<td><div class="party-box box m"></div>Mensheviks (Centre)</td>
+<td><div class="party-box box m"></div>Centre</td>
 <td>!}[+ m_delegates +]{!</td>
 <td>!}[+ m_percentage +]%{!</td>
 
 </tr>!}
 
 {!<tr>
-<td><div class="party-box box right_m2"></div>Menshevik Defencists</td>
+<td><div class="party-box box right_m2"></div>Defencists</td>
 <td>!}[+ right_m_delegates +]{!</td>
 <td>!}[+ right_m_percentage +]%{!</td>
 </tr>!}
@@ -102,15 +102,4 @@ On the other side of the spectrum, Martov's internationalist wing argues for cau
 
 @post_election_menu
 
-- @internationalist_victory
-- @left_centre
-- @centre
-- @centre
-
-@internationalist_victory
-title: The Internationalists take full control of the party. 
-subtitle: 
-
-@left_centre
-title: 
 
