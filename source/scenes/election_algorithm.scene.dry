@@ -252,8 +252,8 @@ go-to: jumpScene
 title: Menshevik Party Election
 on-arrival: {!
 
-Q.menshevik_factions = ["left_m", "m", "right_m", "nonfactional"];
-Q.nonfactional_strength = Q.m_dissent / 10; 
+Q.menshevik_factions = ["left_m", "m", "right_m", "m_nonfactional"];
+Q.m_nonfactional_strength = Q.m_dissent / 10; 
 
 var total_strength = 0;
 for (var faction of Q.menshevik_factions) {
