@@ -7,13 +7,12 @@ body {
   --level6-color: #cd4545;
   --level7-color: #8b0000;
   --bolshevik-color: #9B1616;
-  --bolshevik-moderate-color: #D83934;
   --sdi-color: #b47561;
   --left-m-color2: #810c3f;
   --left-m-color: #c34816;
   --m-color: #b44314;
   --right_m-color: #9a3a11;
-  --right-m-color2: #9a7811
+  --right-m-color2: #9a7811;
   --lsr-color: #295627;
   --sr-color: #40853d;
   --right-sr-color: #67a365;
@@ -585,6 +584,21 @@ table {
   --rightist: #0030ff;
   --cossack: #758fff;
   --none: #cccccc;
+
+  --leftcom: #460a0a;
+  --leninist: #D83934;
+  --moderate: #c78a1c;
+}
+
+
+.seat.leftcom {
+    fill: var(--leftcom);
+}
+.seat.leninist {
+    fill: var(--leninist);
+}
+.seat.moderate {
+    fill: var(--moderate);
 }
 
 .seat.anarchist {
@@ -666,6 +680,16 @@ table {
 
 
 /* boxes... */
+.box.leftcom {
+    background-color: var(--leftcom);
+}
+.box.leninist {
+    background-color: var(--leninist);
+}
+.box.moderate {
+    background-color: var(--moderate);
+}
+
 .box.a {
     background-color: var(--anarchist);
 }
