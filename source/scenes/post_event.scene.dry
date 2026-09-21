@@ -251,7 +251,7 @@ if (Q.is_peace != 1) {
 	Q.workers_sr *= 0.95; Q.soldiers_sr *= 0.95;
 	Q.workers_left_m +=(Q.workers_m * 0.05); Q.soldiers_left_m += (Q.soldiers_m * 0.05);
 	Q.workers_m *= 0.95; Q.soldiers_m *= 0.95;
-	// Q.workers_sdi += 1; Q.workers_lsr += 1; Q.workers_left_m += 1; Q.workers_anarchist += 1; Q.workers_maximalist += 1;
+	Q.workers_sdi += 1; Q.workers_lsr += 1; Q.workers_left_m += 1; Q.workers_anarchist += 1; Q.workers_maximalist += 1;
 }
 
 
