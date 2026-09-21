@@ -2,9 +2,9 @@ title: Financial Report
 subtitle: Monthly accounting
 new-page: true
 view-if: report_timer = 0
-on-arrival: report_timer = 4;
 tags: event
 on-arrival: {!
+  Q.report_timer = 4;
   Q.income_tax_display = Math.round(100 * Q.income_tax)/100;
   Q.property_tax_display = Math.round(100 * Q.property_tax)/100;
   Q.business_tax_display = Math.round(100 * Q.business_tax)/100;
