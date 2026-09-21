@@ -83,6 +83,9 @@ Q.ipr_change = 6;
 Q.b_dissent = 0.15;
 Q.b_dissent_percent = 15;
 
+Q.m_dissent = 0.35;
+Q.m_dissent_percent = 35;
+
 Q.parties_legal = 1; 
 Q.kadets_legal = 1;
 Q.mensheviks_legal = 1;
