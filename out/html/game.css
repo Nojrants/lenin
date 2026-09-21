@@ -823,19 +823,20 @@ table {
     width: 85%;
 }
 
-.soviet-table td:last-child {
-    width: 15%;
-    text-align: center;
-}
-
 .soviet-table th:first-child {
     text-align: left;
 }
 
-.soviet-table th:last-child {
+.soviet-table th:nth-child(2),
+.soviet-table th:nth-child(3),
+.soviet-table td:nth-child(2),
+.soviet-table td:nth-child(3) {
     text-align: center;
     white-space: nowrap;
 }
+
+
+
 
 .party-box {
     display: inline-block;
