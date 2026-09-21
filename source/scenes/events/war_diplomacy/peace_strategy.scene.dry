@@ -22,6 +22,10 @@ set-jump: peace_strategy.post_election
 
 @post_election
 go-to: post_election_menu
+on-arrival: {!
+  Q.compromise_coalition = Q.leninist_percentage + Q.moderate_percentage + Q.nonfactional_percentage + (Q.leftcom_percentage / 4);
+  Q.peace_coalition = (Q.leninist_percentage / 3) + Q.moderate_percentage;
+!}
 on-display: {!
 var data = [
     {"id": "leftcom",
@@ -63,7 +67,7 @@ if (window && d3) {
 
 = Central Committee
 
-{!<svg id="soviet" style="width: 625px; height: 350px;"> </svg>!}
+{!<svg id="soviet" style="width: 625px; height: auto;"> </svg>!}
 
 {!<table class="soviet-table">!}
 
@@ -74,7 +78,7 @@ if (window && d3) {
 </tr>!}
 
 {!<tr>
-<td><div class="party-box box leftcom"></div>Left-Coms</td>
+<td><div class="party-box box leftcom"></div>Leftcoms</td>
 <td>!}[+ leftcom_delegates +]{!</td>
 <td>!}[+ leftcom_percentage +]%{!</td>
 </tr>!}
@@ -108,4 +112,49 @@ However, the left-wing of the leadership (starting to coalesce around Nikolai Bu
 Meanwhile, Trotsky and a number of other Leninists have floated a seemingly paradoxical compromise: they will officially support "neither peace nor war". They will try to buy as much time as possible, but simply refuse to fight or to accept an unjust peace, hopefully forcing the German proletariat to action. 
 
 @post_election_menu
+
+- @leftcom
+- @compromise
+- @immediate_peace
+
+@leftcom
+title: The Leftcoms are right! No peace but a just peace! 
+subtitle: [+ leftcom_percentage +]% – We will reject anything short of peace without annexations or indemnities. 
+unavailable-subtitle: [+ leftcom_percentage +]% – There are not enough votes for this.
+on-arrival: {!
+  Q.leftcom_strength += 20; Q.leninist_strength -= 10; Q.moderate_strength -= 10;
+  Q.leftcom_dissent -= 20; Q.leninist_dissent += 15; Q.moderate_dissent += 15;
+  Q.peace_position = 1; Q.german_waiting_timer = 7; 
+!}
+
+The Leftcoms assures us this is the right course of action, though Lenin and others are bitterly annoyed. Our contingent heads to Brest-Litovsk with these instructions in mind. 
+
+@compromise
+title: We will accept the compromise of "neither peace nor war". 
+subtitle: [+ compromise_coalition +]% – We will stale for time and refuse to fight or accept unjust terms. 
+unavailable-subtitle: [+ compromise_coalition +]% – There are not enough votes for this.
+on-arrival: {!
+  Q.leftcom_strength += 5; 
+  Q.leftcom_dissent -= 5; Q.leninist_dissent += 5; Q.moderate_dissent += 5;
+  Q.peace_position = 2; Q.german_waiting_timer = 7; 
+!}
+
+Though still bitterly opposed to anything less than peace, Lenin begrudgedly accepts Trotsky's compromise strategy. Our contingent heads to Brest-Litovsk with these instructions in mind. 
+
+
+@immediate_peace
+title: We have no choice but to accept peace. 
+subtitle: [+ peace_coalition +]% – We will agree to the terms presented by the Germans. 
+unavailable-subtitle: [+ peace_coalition +]% – There are not enough votes for this.
+on-arrival: {!
+  Q.leftcom_strength -= 5; Q.leninist_strength += 5; Q.moderate_strength += 5;
+  Q.leftcom_dissent += 25; Q.leninist_dissent -= 5; Q.moderate_dissent -= 5;
+  Q.peace_position = 3; Q.german_waiting_timer = 7; 
+!}
+
+Lenin assures the Central Committee that peace is the only available option, though the Leftcoms are enraged by the decision. Our contingent heads to Brest-Litovsk with these instructions in mind. 
+
+
+
+
 
