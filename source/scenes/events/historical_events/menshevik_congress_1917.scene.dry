@@ -7,7 +7,7 @@ go-to: election_algorithm.menshevik_party_election
 set-jump: menshevik_congress_1917.post_election
 on-arrival: {!
     Q.m_modifier = 10;
-    Q.m_strength -= 10;
+    Q.m_strength -= 5;
 !}
 
 
@@ -116,26 +116,43 @@ On the other side of the spectrum, Martov's internationalist wing argues for cau
 title: The <span style="color: var(--left_m2); font-weight: bold;">Internationalists</span> take full control of the party. 
 choose-if: left_m_percentage > 50
 unavailable-subtitle: [+ left_m_percentage +]% – The Internationalists lack the votes for this.  
+on-arrival: {!
+    Q.left_m_strength += 4; Q.right_m_strength -= 8; 
+!}
 
 @left_centre
 title: The <span style="color: var(--m); font-weight: bold;">Centre</span> votes with the <span style="color: var(--left_m2); font-weight: bold;">Internationalists</span>.
 choose-if: centre_left_coalition > 50
 unavailable-subtitle: [+ centre_left_coalition +]% – The Centre-Left lack the votes for this.  
+on-arrival: {!
+    Q.m_dissent -= 10;
+    Q.m_strength += 4; Q.left_m_strength += 2; Q.right_m_strength -= 6; 
+!}
 
 @centre
 title: The <span style="color: var(--m); font-weight: bold;">Centre</span> forces a compromise that leaves neither extreme satisfied. 
 choose-if: m_percentage > 50
 unavailable-subtitle: [+ m_percentage +]% – The Centre lacks the votes for this.  
+on-arrival: {!
+    Q.m_dissent -= 10;
+    Q.m_strength += 4; Q.left_m_strength -= 2; Q.right_m_strength -= 2; 
+!}
 
 @right_centre
 title: The <span style="color: var(--m); font-weight: bold;">Centre</span> votes with the <span style="color: var(--right_m2); font-weight: bold;">Defencists</span>.
 choose-if: centre_right_coalition > 50
 unavailable-subtitle: [+ centre_right_coalition +]% – The Centre-Right lacks the votes for this.  
+on-arrival: {!
+    Q.m_dissent -= 10;
+    Q.m_strength += 4; Q.left_m_strength -= 6; Q.right_m_strength += 4; 
+!}
 
 @right
 title: The <span style="color: var(--right_m2); font-weight: bold;">Defencists</span> take full control of the party. 
 choose-if: right_m_percentage > 50
 unavailable-subtitle: [+ right_m_percentage +]% – The Defencists lack the votes for this.  
-
+on-arrival: {!
+    Q.left_m_strength -= 8; Q.right_m_strength += 4; 
+!}
 
 
