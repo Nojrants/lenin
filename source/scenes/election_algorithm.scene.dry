@@ -274,7 +274,7 @@ for (var faction of Q.menshevik_factions) {
         Math.round(Q[faction + '_normalized'] * 1000) / 10;
 }
 
-var total_delegates = 50 + (60 - Q.instability) + (Q.m_strength + Q.left_m_strength + Q.right_m_strength);
+var total_delegates = 30 + (60 - Q.instability) + (Q.m_strength + Q.left_m_strength + Q.right_m_strength);
 for (var faction of Q.menshevik_factions) {
     Q[faction + '_delegates'] =
         Math.round(
