@@ -121,7 +121,7 @@ Q.vperedist_strength = 2;
 Q.vperedist_dissent = 0;
 Q.vperedist_split = 0;
 
-Q.nonfactional_strength = 0;
+Q.nonfactional_strength = 10;
 Q.nonfactional_dissent = 0;
 Q.nonfactional_split = 0;
 
