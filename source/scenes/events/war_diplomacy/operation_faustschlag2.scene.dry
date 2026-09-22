@@ -62,8 +62,6 @@ on-arrival: {!
 
   
 @defeat_desc
-on-arrival: {!
-  if (Q.leninist_strength > 
 
 [? if northern_progress = -2 : The Germans have captured Riga, and are marching ever closer to Petrograd. ?]
 [? if northern_progress = -3 : The Germans have taken Tallinn in Estonia, and are marching ever closer to Petrograd. ?]
