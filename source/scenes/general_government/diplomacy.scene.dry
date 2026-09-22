@@ -21,6 +21,10 @@ title: Germany
 tags: diplomacy
 go-to: germany_menu
 
+@diplomacy_cancel
+title: Cancel action.
+go-to: diplomacy
+
 
 
   
@@ -30,7 +34,7 @@ new-page: true
 = United Kingdom
 
 - #uk_menu
-- @diplomacy: Cancel action. 
+- @diplomacy_cancel
 
 @uk_improve
 title: Conduct a diplomatic visit to improve relations. 
@@ -62,7 +66,7 @@ new-page: true
 = France
 
 - #france_menu
-- @diplomacy: Cancel action. 
+- @diplomacy_cancel
 
 @france_improve
 title: Conduct a diplomatic visit to improve relations. 
@@ -84,7 +88,7 @@ new-page: true
 = United States
 
 - #us_menu
-- @diplomacy: Cancel action. 
+- @diplomacy_cancel
 
 @us_improve
 title: Conduct a diplomatic visit to improve relations. 
@@ -105,7 +109,7 @@ new-page: true
 = Germany
 
 - #germany_menu
-- @diplomacy: Cancel action. 
+- @diplomacy_cancel
 
 @germany_improve
 title: Conduct a diplomatic visit to improve relations. 
