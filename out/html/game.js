@@ -148,17 +148,22 @@
   window.displayText = function(text) {
       return text;
   };
+  
 
-    window.showAchievement = function(name) {
+  window.showAchievement = function(name, description, image) {
       var notification = document.getElementById('achievement-notification');
-
-      notification.querySelector('.achievement-name').textContent = name;
+  
+      notification.querySelector('.achievement-title').textContent = name;
+      notification.querySelector('.achievement-description').textContent = description;
+      notification.querySelector('.achievement-image img').src = image;
+  
       notification.classList.add('show');
-
+  
       setTimeout(function() {
           notification.classList.remove('show');
       }, 5000);
   };
+  
 
   // This function allows you to do something in response to signals.
   window.handleSignal = function(signal, event, scene_id) {
