@@ -214,8 +214,8 @@ on-arrival: {!
 
 @3_sverdlov
 title: Yakov Sverdlov (<span style="color: var(--b);">Bolshevik — Leninist</span>)
-subtitle: [+ coalition6 +]% – Considered the default choice. 
-unavailable-subtitle: [+ coalition6 +]% – Considered the default choice. 
+subtitle: [+ coalition6 +]% – This is considered the default choice. 
+unavailable-subtitle: [+ coalition6 +]% – This is considered the default choice. 
 choose-if: coalition6 > 50
 go-to: congress_3_menu
 on-arrival: {!
