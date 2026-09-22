@@ -882,7 +882,7 @@ hr {
     left: 70%;
     width: 500px;
     display: flex;
-    align-items: center;
+    align-items: stretch;
     z-index: 9999;
     opacity: 0;
     transform: translate(-50%, 120%);
@@ -901,15 +901,14 @@ hr {
 
 .achievement-image {
     width: 120px;
-    height: 120px;
+    min-height: 120px;
     flex: 0 0 120px;
-    align-self: center;
     background-color: #c00000;
     box-sizing: border-box;
 }
 
 .achievement-image img {
-    width: 100%;
+    width: 120px;
     height: 100%;
     object-fit: cover;
     display: block;
@@ -920,16 +919,16 @@ hr {
     box-sizing: border-box;
     background-color: #e6f0ee;
     text-align: center;
-    padding: 12px 18px;
+    padding: 10px 18px;
 }
 
 .achievement-header {
     font-weight: bold;
     font-size: 90%;
-    padding: 7px 10px;
-    margin: -12px -18px 8px;
-    background-color: #c9ded9;
-    border-bottom: 1px solid #91b5ad;
+    padding: 4px 10px;
+    margin: -10px -18px 6px;
+    background-color: #dceae7;
+    border-bottom: 1px solid #b8cfca;
 }
 
 .achievement-title {
