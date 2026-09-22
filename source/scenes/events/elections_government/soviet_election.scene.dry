@@ -199,7 +199,7 @@ We prepare to create a new CEC, which is roughly proportional to the party compo
 
 
 @3_kamenev
-title: Lev Kamenev – <span style="color: var(--m); font-weight: bold;">Bolshevik (Moderate)</span>
+title: Lev Kamenev – <span style="color: var(--b); font-weight: bold;">Bolshevik (Moderate)</span>
 subtitle: [+ coalition5 +]% – This would prop-up the remaining Moderates. 
 unavailable-subtitle: [+ coalition5 +]% – This would prop-up the remaining Moderates. 
 choose-if: coalition5 > 50
@@ -212,7 +212,7 @@ on-arrival: {!
 !}
 
 @3_sverdlov
-title: Yakov Sverdlov – <span style="color: var(--m); font-weight: bold;">Bolshevik (Leninist)</span>
+title: Yakov Sverdlov – <span style="color: var(--b); font-weight: bold;">Bolshevik (Leninist)</span>
 subtitle: [+ coalition6 +]% – Considered the default choice. 
 unavailable-subtitle: [+ coalition6 +]% – Considered the default choice. 
 choose-if: coalition6 > 50
