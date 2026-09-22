@@ -183,6 +183,7 @@ if (Q.mensheviks_legal == 1 && Q.left_m_support < 33) { Q.left_m_support += 3; Q
 if (Q.mensheviks_legal == 1 && Q.sdi_support < 1) { Q.sdi_support += 1; }
 if (Q.lsr_legal == 1 && Q.lsr_support < 3) { Q.lsr_support += 3; }
 if (Q.sr_legal == 1 && Q.sr_support < 2) { Q.sr_support += 2; }
+if (Q.anarchists_legal == 1 && Q.maximalist_support < 2) { Q.maximalist_support += 2; Q.anarchist_support += 1; }
 
 // 2. normalize support (fraction)
 // 3. Round to integers
