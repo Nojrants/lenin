@@ -142,121 +142,72 @@
     }
   };
 
-
   // This function allows you to modify the text before it's displayed.
   // E.g. wrapping chat-like messages in spans.
   window.displayText = function(text) {
       return text;
   };
 
-  window.displayText = function(text) {
-    return text;
-};
 
-window.achievements = {
-    golden_age_of_the_peoples_commissars: {
-        name: "Golden Age of the People's Commissars",
-        description: "Assemble an all-star composition in the Council of People's Commissars.",
-        image: "img/portraits/b/lenin.jpg"
-    },
-
-    vikzhel_averted: {
-        name: "Vikzhel Negotiator",
-        description: "Avert the Vikzhel Strike by negotiating a coalition agreement.",
-        image: "img/train.jpg"
-    },
-
-    lsr_coalition: {
-        name: "Children of October",
-        description: "Form a coalition government between the Bolsheviks and Left-SRs.",
-        image: "img/train.jpg"
-    },
-
-    game_completed: {
-        name: "Game Over",
-        description: "Complete the game.",
-        image: "img/portraits/b/lenin.jpg"
-    }
-};
-
-window.showAchievement = function(name, description, image) {
-    var notification = document.getElementById('achievement-notification');
-
-    notification.querySelector('.achievement-title').textContent = name;
-    notification.querySelector('.achievement-description').textContent = description;
-    notification.querySelector('.achievement-image img').src = image;
-
-    notification.classList.add('show');
-
-    setTimeout(function() {
-        notification.classList.remove('show');
-    }, 10000);
-};
-
-window.unlockAchievement = function(id) {
-    var achievement = window.achievements[id];
-
-    if (!achievement) {
-        console.log("Unknown achievement: " + id);
-        return;
-    }
-
-    var variable = "game_achievement_" + id;
-
-    if (game.state.qualities[variable] == 1) {
-        return;
-    }
-
-    game.state.qualities[variable] = 1;
-
-    window.showAchievement(
-        achievement.name,
-        achievement.description,
-        achievement.image
-    );
-};
-
-window.handleSignal = function(signal, event, scene_id) {
-};
   
+  window.achievements = {
+      golden_age_of_the_peoples_commissars: {
+          name: "Golden Age of the People's Commissars",
+          description: "Assemble an all-star composition in the Council of People's Commissars.",
+          image: "img/portraits/b/lenin.jpg"
+      },
+
+      vikzhel_averted: {
+          name: "Vikzhel Negotiator",
+          description: "Avert the Vikzhel Strike by negotiating a coalition agreement.",
+          image: "img/train.jpg"
+      },
+
+      lsr_coalition: {
+          name: "Children of October",
+          description: "Form a coalition government between the Bolsheviks and Left-SRs.",
+          image: "img/train.jpg"
+      },
+
+      game_completed: {
+          name: "Game Over",
+          description: "Complete the game.",
+          image: "img/portraits/b/lenin.jpg"
+      }
+  };
+
+  window.showAchievement = function(name, description, image) {
+      var notification = document.getElementById('achievement-notification');
+
+      notification.querySelector('.achievement-title').textContent = name;
+      notification.querySelector('.achievement-description').textContent = description;
+      notification.querySelector('.achievement-image img').src = image;
+
+      notification.classList.add('show');
+
+      setTimeout(function() {
+          notification.classList.remove('show');
+      }, 10000);
+  };
+
+
+  // Displays an achievement notification.
+  // The actual achievement is still unlocked by this.achieve().
+  window.unlockAchievement = function(id) {
+      var achievement = window.achievements[id];
+
+      if (!achievement) {
+          console.log("Unknown achievement: " + id);
+          return;
+      }
+
+      window.showAchievement(
+          achievement.name,
+          achievement.description,
+          achievement.image
+      );
+  };
   
-
-window.showAchievement = function(name, description, image) {
-    var notification = document.getElementById('achievement-notification');
-
-    notification.querySelector('.achievement-title').textContent = name;
-    notification.querySelector('.achievement-description').textContent = description;
-    notification.querySelector('.achievement-image img').src = image;
-
-    notification.classList.add('show');
-
-    setTimeout(function() {
-        notification.classList.remove('show');
-    }, 6000);
-};
-
-window.unlockAchievement = function(id) {
-    var achievement = window.achievements[id];
-
-    if (!achievement) {
-        console.log("Unknown achievement: " + id);
-        return;
-    }
-
-    var variable = "game_achievement_" + id;
-
-    if (game.state.qualities[variable] == 1) {
-        return;
-    }
-
-    game.state.qualities[variable] = 1;
-
-    window.showAchievement(
-        achievement.name,
-        achievement.description,
-        achievement.image
-    );
-};
   
 
   // This function allows you to do something in response to signals.
