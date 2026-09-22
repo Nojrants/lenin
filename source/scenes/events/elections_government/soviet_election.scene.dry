@@ -200,7 +200,7 @@ We prepare to create a new CEC, which is roughly proportional to the party compo
 
 
 @3_kamenev
-title: Lev Kamenev (<span style="color: var(--b);">Bolshevik — Moderate</span>)
+title: <b>Lev Kamenev</b> (<span style="color: var(--b);">Bolshevik — Moderate</span>)
 subtitle: [+ coalition5 +]% – This would prop-up the remaining Moderates. 
 unavailable-subtitle: [+ coalition5 +]% – This would prop-up the remaining Moderates. 
 choose-if: coalition5 > 50
@@ -213,7 +213,7 @@ on-arrival: {!
 !}
 
 @3_sverdlov
-title: Yakov Sverdlov (<span style="color: var(--b);">Bolshevik — Leninist</span>)
+title: <b>Yakov Sverdlov</b> (<span style="color: var(--b);">Bolshevik — Leninist</span>)
 subtitle: [+ coalition6 +]% – Considered the default choice. 
 unavailable-subtitle: [+ coalition6 +]% – Considered the default choice. 
 choose-if: coalition6 > 50
@@ -226,7 +226,7 @@ on-arrival: {!
 !}
 
 @3_spiridonova
-title: Maria Spiridonova (<span style="color: var(--lsr);">Left-SR</span>)
+title: <b>Maria Spiridonova</b> (<span style="color: var(--lsr);">Left-SR</span>)
 subtitle: [+ coalition7 +]% – This would shore up our alliance, but cede considerable leverage. 
 unavailable-subtitle: [+ coalition7 +]% – This would shore up our alliance, but cede considerable leverage. 
 choose-if: coalition7 > 50
@@ -240,7 +240,7 @@ on-arrival: {!
 !}
 
 @3_martov
-title: Iulius Martov (<span style="color: var(--m);">Menshevik – Internationalist</span>)
+title: <b>Iulius Martov</b> (<span style="color: var(--m);">Menshevik – Internationalist</span>)
 subtitle: [+ coalition8 +]% – The opposition puts forth their preferred candidate. 
 unavailable-subtitle: [+ coalition8 +]% – The opposition puts forth their preferred candidate. 
 choose-if: coalition8 > 50
