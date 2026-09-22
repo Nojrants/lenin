@@ -10,11 +10,9 @@ card-image: img/foreign.PNG
 = Foreign Affairs
 
 - @administration
+- @diplomacy
 - @foreign_null
-- @secret_treaties
-- @open_negotiations
-- @brest_litovsk
-- @prisoner_exchanges
+- #foreign_special
 - @root: Do not change foreign policy
 - @easy_discard
 - @cancel_advisor_action
@@ -31,35 +29,48 @@ go-to: foreign_affairs
 @administration
 title: ADMINISTRATION
 
-- @improve_admin
-- @hire_staff
-- @corruption
-- @foreign_return
+Departmental efficacy: [+ efficacy_foreign : efficacy +]
 
+- #foreign_administration
+- @foreign_return
 
 @improve_admin
 title: Streamline the commissariat
 subtitle: Cut waste and inefficiencies, increase labor intensity
-choose-if: foreign_corruption = 0
+tags: foreign_administration
+choose-if: foreign_streamline_timer = 0
 unavailable-subtitle: There's nothing more to cut at the moment. 
 on-arrival: foreign_expend -= 0.25; efficacy_foreign += 0.1 if efficacy_foreign < 1; foreign_streamline += 8; 
 
 @hire_staff
 title: Hire administrative personnel
 subtitle: -0.5 resources
+tags: foreign_administration
 on-arrival: efficacy_foreign += 0.2 if efficacy_foreign < 1; foreign_expend += 0.25; resources -= 0.5;
 
 @corruption
 title: Root-out departmental corruption. 
 subtitle: -0.5 resources
-on-arrival: efficacy_foreign += 0.1 if efficacy_foreign < 1; resources -= 0.5;
+tags: foreign_administration
+choose-if: foreign_corruption_timer = 0 and resources >= 0.5
+unavailable-subtitle: [?if foreign_corruption_timer != 0 : We have already rooted out corruption. ?][?if resources < 0.5 : We lack the resources for an anti-corruption drive. ?]
+on-arrival: efficacy_foreign += 0.2 if efficacy_foreign < 1; resources -= 0.5;
 
+
+@diplomacy
+title: DIPLOMACY
+
+Here we can decide to conduct diplomacy with specific countries. 
+
+- #diplomacy
+- @foreign_return
 
 
 
 @secret_treaties
 title: Decide what to do with the secret treaties of the previous governments.  
 subtitle: We inherited numerous documents of note...
+tags: foreign_special
 new-page: true
 view-if: secret_treaties != 1
 
@@ -94,39 +105,30 @@ subtitle: Begin secret talks with the allies, promising to withhold publication 
 choose-if: foreign_minister_faction != "Left"
 unavailable-subtitle: The current people's commissar is from the radical left-wing of the Party, and won't allow this. 
 
-
 @leave_them_be
 title: Leave them be for now. 
 go-to: foreign_affairs
 
 
-
-@open_negotiations
-title: Send word to the Germans that we wish to negotiate an end to the war. 
-view-if: german_negotiations = 0
-on-arrival: german_negotiations = 1; is_armistice = 1; german_waiting_timer = 3; 
-
-The Germans have accepted our emissaries and have agreed to hold talks at the headquarters of the Central Powers Armies at Brest-Litovsk. In the meantime, a local ceasefire agreement has been reached, temporarily suspending hostilities along the frontlines for the next two weeks. 
-
-It is now up to us to prepare our contingent of negotiators and travel to Brest-Litovsk. 
-
-@brest_litovsk
-title: Dispatch a delegation to Brest-Litovsk to negotiate with the Central Powers. 
-view-if: german_negotiations = 1
-go-to: peace_strategy
-on-arrival: german_negotiations = 2;
-
-
-
-@prisoner_exchanges
-title: Open negotiations with the British for the release of known Russian revolutionaries being held by them. 
-subtitle: We could offer the release of British subjects in our custody in exchange. 
-choose-if: uk_relation >= 20
-unavailable-subtitle: The British refuse to work with us! 
-on-arrival: uk_relation += 5; chicherin_travel_timer = 8; chicherin_negotiation = 1;
+@call_for_peace
+title: Issue a statement to all belligerents in the Great War, calling for general peace negotiations. 
+tags: foreign_special
+new-page: true
 max-visits: 1
+view-if: call_for_peace != 1 and german_negotiations < 1
+on-arrival: {!
+  Q.call_for_peace = 1; Q.german_revolution += 1;
+  Q.uk_relation -= 4; Q.france_relation -= 4; Q.us_relation -= 2; 
+!}
 
-The talks prove fruitful, as we manage to arrange for a number of exchanges. Notably, the experienced diplomat and long-standing social-democrat Georgy Chicherin has been released from Brixton Prison, and is now on his way to Russia. In turn, we have released from custody the former ambassador to the Russian Empire, George Buchanan.
+= Call for Peace
+
+The call for peace is issued to all belligerents in the Great War. However, it appears are pleas have fallen on deaf ears, as none of the major powers take the statement seriously. Moreover, the Allied Powers grow uneased by our lack of resolve toward the war effort. 
+
+
+
+
+
 
 
 
