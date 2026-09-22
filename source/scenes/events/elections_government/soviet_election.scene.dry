@@ -149,7 +149,7 @@ if (window && d3) {
 @congress_3
 title: Begin the congress...
 view-if: soviet_elections = 3
-go_to: congress_3_menu
+go-to: congress_3_menu
 on-arrival: {!
   Q.coalition1 = Math.round(100*(Q.anarchist_soviet + Q.maximalist_soviet + Q.b_soviet + (Q.lsr_soviet * 0.9) + (Q.other_soviet * 0.5)))/100; 
   Q.coalition2 = Math.round(100*(Q.anarchist_soviet + Q.maximalist_soviet + Q.b_soviet + Q.lsr_soviet + (Q.other_soviet * 0.8) + (Q.sdi_soviet * 0.3))/100; 
