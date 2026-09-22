@@ -192,7 +192,7 @@ window.showAchievement = function(name, description, image) {
 
     setTimeout(function() {
         notification.classList.remove('show');
-    }, 10000);
+    }, 6000);
 };
 
 
