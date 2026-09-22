@@ -174,7 +174,7 @@ for (var party of Q.parties) {
     total_support += party_support;
 }
 
-console.log("total_support:", Q.total_support);
+console.log("total_support:", total_support);
 console.log("b_support:", Q.b_support);
 console.log("left_m_support:", Q.left_m_support);
 
