@@ -879,7 +879,7 @@ hr {
 #achievement-notification {
     position: fixed;
     bottom: 60px;
-    left: 50%;
+    left: 75%;
     width: 450px;
     display: flex;
     align-items: stretch;
