@@ -465,6 +465,14 @@ Q.finalefficacy_sovnarkom =
     + (0.25 * (
         (Q.leaders[Q.prime_minister].auctoritas / 5)
         + (Q.leaders[Q.prime_minister].administration / 5)
+	    + (Q.leaders[Q.prime_minister].idealogism / 10)
+	    + (Q.leaders[Q.prime_minister].military / 20)
+	    + (Q.leaders[Q.prime_minister].economic / 20)
+	    + (Q.leaders[Q.prime_minister].partyorg / 20)
+	    + (Q.leaders[Q.prime_minister].diplomacy / 10)
+	    + (Q.leaders[Q.prime_minister].culture / 20)
+	    + (Q.leaders[Q.prime_minister].legalism / 10)
+	    + (Q.leaders[Q.prime_minister].nationalities / 20)
     ))
     + (0.125 * (
         Q.leaders[Q.deputy_pm].administration / 5
@@ -473,121 +481,217 @@ Q.finalefficacy_sovnarkom =
 Q.finalefficacy_foreign =
     Q.efficacy_foreign
     + (0.25 * (
-        (Q.leaders[Q.foreign_minister].auctoritas / 20)
+        (Q.leaders[Q.foreign_minister].auctoritas / 10)
         + (Q.leaders[Q.foreign_minister].administration / 10)
-        + (Q.leaders[Q.foreign_minister].diplomacy / 4)
+        + (Q.leaders[Q.foreign_minister].idealogism / 20)
+        + (Q.leaders[Q.foreign_minister].military / 20)
+        + (Q.leaders[Q.foreign_minister].economic / 20)
+        + (Q.leaders[Q.foreign_minister].partyorg / 20)
+        + (Q.leaders[Q.foreign_minister].diplomacy / 5)
+        + (Q.leaders[Q.foreign_minister].culture / 20)
+        + (Q.leaders[Q.foreign_minister].legalism / 15)
+        + (Q.leaders[Q.foreign_minister].nationalities / 15)
     ));
 
 Q.finalefficacy_military =
     Q.efficacy_military
     + (0.25 * (
-        (Q.leaders[Q.war_minister].auctoritas / 20)
+        (Q.leaders[Q.war_minister].auctoritas / 10)
         + (Q.leaders[Q.war_minister].administration / 10)
+        + (Q.leaders[Q.war_minister].idealogism / 20)
         + (Q.leaders[Q.war_minister].military / 5)
+        + (Q.leaders[Q.war_minister].economic / 20)
+        + (Q.leaders[Q.war_minister].partyorg / 20)
+        + (Q.leaders[Q.war_minister].diplomacy / 20)
+        + (Q.leaders[Q.war_minister].culture / 20)
+        + (Q.leaders[Q.war_minister].legalism / 20)
+        + (Q.leaders[Q.war_minister].nationalities / 20)
     ));
 
 Q.finalefficacy_enlightenment =
     Q.efficacy_enlightenment
     + (0.25 * (
-        (Q.leaders[Q.education_minister].auctoritas / 20)
+        (Q.leaders[Q.education_minister].auctoritas / 10)
         + (Q.leaders[Q.education_minister].administration / 10)
+        + (Q.leaders[Q.education_minister].idealogism / 10)
+        + (Q.leaders[Q.education_minister].military / 20)
+        + (Q.leaders[Q.education_minister].economic / 20)
+        + (Q.leaders[Q.education_minister].partyorg / 20)
+        + (Q.leaders[Q.education_minister].diplomacy / 20)
         + (Q.leaders[Q.education_minister].culture / 5)
+        + (Q.leaders[Q.education_minister].legalism / 15)
+        + (Q.leaders[Q.education_minister].nationalities / 15)
     ));
 
 Q.finalefficacy_internal =
     Q.efficacy_internal
     + (0.25 * (
-        (Q.leaders[Q.interior_minister].auctoritas / 20)
+        (Q.leaders[Q.interior_minister].auctoritas / 10)
         + (Q.leaders[Q.interior_minister].administration / 10)
+        + (Q.leaders[Q.interior_minister].idealogism / 15)
         + (Q.leaders[Q.interior_minister].military / 5)
+        + (Q.leaders[Q.interior_minister].economic / 20)
+        + (Q.leaders[Q.interior_minister].partyorg / 15)
+        + (Q.leaders[Q.interior_minister].diplomacy / 20)
+        + (Q.leaders[Q.interior_minister].culture / 20)
+        + (Q.leaders[Q.interior_minister].legalism / 10)
+        + (Q.leaders[Q.interior_minister].nationalities / 15)
     ));
 
 Q.finalefficacy_railways =
     Q.efficacy_railways
     + (0.25 * (
-        (Q.leaders[Q.transport_minister].auctoritas / 20)
+        (Q.leaders[Q.transport_minister].auctoritas / 10)
         + (Q.leaders[Q.transport_minister].administration / 10)
+        + (Q.leaders[Q.transport_minister].idealogism / 20)
         + (Q.leaders[Q.transport_minister].military / 10)
         + (Q.leaders[Q.transport_minister].economic / 10)
+        + (Q.leaders[Q.transport_minister].partyorg / 20)
+        + (Q.leaders[Q.transport_minister].diplomacy / 20)
+        + (Q.leaders[Q.transport_minister].culture / 20)
+        + (Q.leaders[Q.transport_minister].legalism / 20)
+        + (Q.leaders[Q.transport_minister].nationalities / 20)
     ));
 
 Q.finalefficacy_trade =
     Q.efficacy_trade
     + (0.25 * (
-        (Q.leaders[Q.trade_minister].auctoritas / 20)
+        (Q.leaders[Q.trade_minister].auctoritas / 10)
         + (Q.leaders[Q.trade_minister].administration / 10)
+        + (Q.leaders[Q.trade_minister].idealogism / 20)
+        + (Q.leaders[Q.trade_minister].military / 20)
         + (Q.leaders[Q.trade_minister].economic / 5)
+        + (Q.leaders[Q.trade_minister].partyorg / 20)
         + (Q.leaders[Q.trade_minister].diplomacy / 10)
+        + (Q.leaders[Q.trade_minister].culture / 15)
+        + (Q.leaders[Q.trade_minister].legalism / 15)
+        + (Q.leaders[Q.trade_minister].nationalities / 20)
     ));
 
 Q.finalefficacy_finance =
     Q.efficacy_finance
     + (0.25 * (
-        (Q.leaders[Q.finance_minister].auctoritas / 20)
+        (Q.leaders[Q.finance_minister].auctoritas / 10)
         + (Q.leaders[Q.finance_minister].administration / 10)
+        + (Q.leaders[Q.finance_minister].idealogism / 20)
+        + (Q.leaders[Q.finance_minister].military / 20)
         + (Q.leaders[Q.finance_minister].economic / 5)
+        + (Q.leaders[Q.finance_minister].partyorg / 20)
+        + (Q.leaders[Q.finance_minister].diplomacy / 20)
+        + (Q.leaders[Q.finance_minister].culture / 20)
+        + (Q.leaders[Q.finance_minister].legalism / 20)
+        + (Q.leaders[Q.finance_minister].nationalities / 20)
     ));
 
 Q.finalefficacy_justice =
     Q.efficacy_justice
     + (0.25 * (
-        (Q.leaders[Q.justice_minister].auctoritas / 20)
+        (Q.leaders[Q.justice_minister].auctoritas / 10)
         + (Q.leaders[Q.justice_minister].administration / 10)
-        + (Q.leaders[Q.justice_minister].legalism / 10)
+        + (Q.leaders[Q.justice_minister].idealogism / 15)
+        + (Q.leaders[Q.justice_minister].military / 20)
+        + (Q.leaders[Q.justice_minister].economic / 20)
+        + (Q.leaders[Q.justice_minister].partyorg / 20)
+        + (Q.leaders[Q.justice_minister].diplomacy / 10)
+        + (Q.leaders[Q.justice_minister].culture / 15)
+        + (Q.leaders[Q.justice_minister].legalism / 5)
+        + (Q.leaders[Q.justice_minister].nationalities / 15)
     ));
 
 Q.finalefficacy_agriculture =
     Q.efficacy_agriculture
     + (0.25 * (
-        (Q.leaders[Q.agriculture_minister].auctoritas / 20)
+        (Q.leaders[Q.agriculture_minister].auctoritas / 10)
         + (Q.leaders[Q.agriculture_minister].administration / 10)
+        + (Q.leaders[Q.agriculture_minister].idealogism / 20)
+        + (Q.leaders[Q.agriculture_minister].military / 15)
         + (Q.leaders[Q.agriculture_minister].economic / 5)
+        + (Q.leaders[Q.agriculture_minister].partyorg / 20)
+        + (Q.leaders[Q.agriculture_minister].diplomacy / 15)
+        + (Q.leaders[Q.agriculture_minister].culture / 15)
+        + (Q.leaders[Q.agriculture_minister].legalism / 20)
+        + (Q.leaders[Q.agriculture_minister].nationalities / 15)
     ));
 
 Q.finalefficacy_foodsupply =
     Q.efficacy_foodsupply
     + (0.25 * (
-        (Q.leaders[Q.food_minister].auctoritas / 20)
+        (Q.leaders[Q.food_minister].auctoritas / 10)
         + (Q.leaders[Q.food_minister].administration / 10)
+        + (Q.leaders[Q.food_minister].idealogism / 20)
+        + (Q.leaders[Q.food_minister].military / 15)
         + (Q.leaders[Q.food_minister].economic / 5)
+        + (Q.leaders[Q.food_minister].partyorg / 15)
+        + (Q.leaders[Q.food_minister].diplomacy / 15)
+        + (Q.leaders[Q.food_minister].culture / 20)
+        + (Q.leaders[Q.food_minister].legalism / 15)
+        + (Q.leaders[Q.food_minister].nationalities / 20)
     ));
 
 Q.finalefficacy_labor =
     Q.efficacy_labor
     + (0.25 * (
-        (Q.leaders[Q.labor_minister].auctoritas / 20)
+        (Q.leaders[Q.labor_minister].auctoritas / 10)
         + (Q.leaders[Q.labor_minister].administration / 10)
+        + (Q.leaders[Q.labor_minister].idealogism / 20)
+        + (Q.leaders[Q.labor_minister].military / 15)
         + (Q.leaders[Q.labor_minister].economic / 5)
+        + (Q.leaders[Q.labor_minister].partyorg / 15)
         + (Q.leaders[Q.labor_minister].diplomacy / 10)
+        + (Q.leaders[Q.labor_minister].culture / 20)
+        + (Q.leaders[Q.labor_minister].legalism / 20)
+        + (Q.leaders[Q.labor_minister].nationalities / 15)
     ));
 
 Q.finalefficacy_posts =
     Q.efficacy_posts
     + (0.25 * (
-        (Q.leaders[Q.posts_minister].auctoritas / 20)
+        (Q.leaders[Q.posts_minister].auctoritas / 10)
         + (Q.leaders[Q.posts_minister].administration / 10)
+        + (Q.leaders[Q.posts_minister].idealogism / 20)
+        + (Q.leaders[Q.posts_minister].military / 15)
         + (Q.leaders[Q.posts_minister].economic / 5)
+        + (Q.leaders[Q.posts_minister].partyorg / 20)
+        + (Q.leaders[Q.posts_minister].diplomacy / 15)
+        + (Q.leaders[Q.posts_minister].culture / 20)
+        + (Q.leaders[Q.posts_minister].legalism / 20)
+        + (Q.leaders[Q.posts_minister].nationalities / 20)
     ));
 
 Q.finalefficacy_nationalities =
     Q.efficacy_nationalities
     + (0.25 * (
-        (Q.leaders[Q.nationalities_minister].auctoritas / 20)
+        (Q.leaders[Q.nationalities_minister].auctoritas / 10)
         + (Q.leaders[Q.nationalities_minister].administration / 10)
+        + (Q.leaders[Q.nationalities_minister].idealogism / 15)
+        + (Q.leaders[Q.nationalities_minister].military / 20)
+        + (Q.leaders[Q.nationalities_minister].economic / 20)
+        + (Q.leaders[Q.nationalities_minister].partyorg / 15)
+        + (Q.leaders[Q.nationalities_minister].diplomacy / 15)
+        + (Q.leaders[Q.nationalities_minister].culture / 10)
+        + (Q.leaders[Q.nationalities_minister].legalism / 20)
         + (Q.leaders[Q.nationalities_minister].nationalities / 5)
     ));
 
 Q.finalefficacy_welfare =
     Q.efficacy_welfare
     + (0.25 * (
-        (Q.leaders[Q.welfare_minister].auctoritas / 20)
+        (Q.leaders[Q.welfare_minister].auctoritas / 10)
         + (Q.leaders[Q.welfare_minister].administration / 10)
+        + (Q.leaders[Q.welfare_minister].idealogism / 20)
+        + (Q.leaders[Q.welfare_minister].military / 15)
         + (Q.leaders[Q.welfare_minister].economic / 5)
-        + (Q.leaders[Q.welfare_minister].culture / 20)
+        + (Q.leaders[Q.welfare_minister].partyorg / 15)
+        + (Q.leaders[Q.welfare_minister].diplomacy / 15)
+        + (Q.leaders[Q.welfare_minister].culture / 15)
+        + (Q.leaders[Q.welfare_minister].legalism / 10)
+        + (Q.leaders[Q.welfare_minister].nationalities / 15)
     ));
 
+console.log("Dreamteam score: ", (Q.finalefficacy_sovnarkom + Q.finalefficacy_foreign + Q.finalefficacy_military + Q.finalefficacy_enlightenment + Q.finalefficacy_internal + Q.finalefficacy_railways + Q.finalefficacy_trade + Q.finalefficacy_finance + Q.finalefficacy_justice + Q.finalefficacy_agriculture + Q.finalefficacy_foodsupply + Q.finalefficacy_labor + Q.finalefficacy_posts + Q.finalefficacy_nationalities + Q.finalefficacy_welfare));
 if (Q.finalefficacy_sovnarkom + Q.finalefficacy_foreign + Q.finalefficacy_military + Q.finalefficacy_enlightenment + Q.finalefficacy_internal + Q.finalefficacy_railways + Q.finalefficacy_trade + Q.finalefficacy_finance + Q.finalefficacy_justice + Q.finalefficacy_agriculture + Q.finalefficacy_foodsupply + Q.finalefficacy_labor + Q.finalefficacy_posts + Q.finalefficacy_nationalities + Q.finalefficacy_welfare >= 21) {
-    Q.dreamteam = 1;
+    this.achieve('golden_age_of_the_peoples_commissars');
+    window.unlockAchievement('golden_age_of_the_peoples_commissars');
 }
 
 
