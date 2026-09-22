@@ -939,8 +939,9 @@ hr {
 }
 
 .achievement-description {
-    margin-top: 5px;
+    margin-top: 4px;
     padding: 0 18px;
-    font-size: 90%;
+    font-size: 85%;
+    line-height: 1.2;
     color: #444;
 }
