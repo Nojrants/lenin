@@ -23,7 +23,7 @@ go-to: germany_menu
 
 @diplomacy_cancel
 title: Cancel action.
-go-to: diplomacy
+go-to: foreign_affairs.diplomacy
 
 
 
