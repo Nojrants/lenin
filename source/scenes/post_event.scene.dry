@@ -486,7 +486,7 @@ Q.foreign_minister_stats =
         + (Q.leaders[Q.foreign_minister].military / 20)
         + (Q.leaders[Q.foreign_minister].economic / 20)
         + (Q.leaders[Q.foreign_minister].partyorg / 20)
-        + (Q.leaders[Q.foreign_minister].diplomacy / 5)
+        + (Q.leaders[Q.foreign_minister].diplomacy / 2)
         + (Q.leaders[Q.foreign_minister].culture / 20)
         + (Q.leaders[Q.foreign_minister].legalism / 15)
         + (Q.leaders[Q.foreign_minister].nationalities / 15)
