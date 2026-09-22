@@ -173,6 +173,17 @@ for (var party of Q.parties) {
     Q[party + '_support'] = party_support;
     total_support += party_support;
 }
+
+console.log("total_support:", Q.total_support);
+console.log("b_support:", Q.b_support);
+console.log("left_m_support:", Q.left_m_support);
+
+
+if (Q.mensheviks_legal == 1 && Q.left_m_support < 33) { Q.left_m_support += 3; Q.m_support += 2; }
+if (Q.mensheviks_legal == 1 && Q.sdi_support < 1) { Q.sdi_support += 1; }
+if (Q.lsr_legal == 1 && Q.lsr_support < 3) { Q.lsr_support += 3; }
+if (Q.sr_legal == 1 && Q.sr_support < 2) { Q.sr_support += 2; }
+
 // 2. normalize support (fraction)
 // 3. Round to integers
 // TODO: round to 1 decimal instead of rounding to integers
