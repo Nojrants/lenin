@@ -149,6 +149,17 @@
       return text;
   };
 
+    window.showAchievement = function(name) {
+      var notification = document.getElementById('achievement-notification');
+
+      notification.querySelector('.achievement-name').textContent = name;
+      notification.classList.add('show');
+
+      setTimeout(function() {
+          notification.classList.remove('show');
+      }, 5000);
+  };
+
   // This function allows you to do something in response to signals.
   window.handleSignal = function(signal, event, scene_id) {
   };
