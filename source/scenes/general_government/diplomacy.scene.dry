@@ -37,8 +37,8 @@ title: Conduct a diplomatic visit to improve relations.
 tags: uk_menu
 on-arrival: {!
   Q.uk_relation += 10;
-  if (Q.german_negotiations >= 1) Q.uk_relation -= 2;
-  if (Q.brest_signed == 1 and Q.great_war_ended != 1) Q.uk_relation -= 6;
+  if (Q.german_negotiations >= 1 && Q.great_war_ended != 1) Q.uk_relation -= 2;
+  if (Q.brest_signed == 1 && Q.great_war_ended != 1) Q.uk_relation -= 6;
 !}
 
 We send a diplomatic mission to the United Kingdom. [?if german_negotiations >= 1 and great_war_ended != 1 : It seems our separate negotiations with the Germans have strained relations. ?]
@@ -69,8 +69,8 @@ title: Conduct a diplomatic visit to improve relations.
 tags: france_menu
 on-arrival: {!
   Q.france_relation += 10;
-  if (Q.german_negotiations >= 1) Q.france_relation -= 2;
-  if (Q.brest_signed == 1 and Q.great_war_ended != 1) Q.france_relation -= 6;
+  if (Q.german_negotiations >= 1 && Q.great_war_ended != 1) Q.france_relation -= 2;
+  if (Q.brest_signed == 1 && Q.great_war_ended != 1) Q.france_relation -= 6;
 !}
 
 We send a diplomatic mission to France. [?if german_negotiations >= 1 and great_war_ended != 1 : It seems our separate negotiations with the Germans have strained relations. ?]
@@ -91,8 +91,8 @@ title: Conduct a diplomatic visit to improve relations.
 tags: us_menu
 on-arrival: {!
   Q.us_relation += 10;
-  if (Q.german_negotiations >= 1) Q.us_relation -= 1;
-  if (Q.brest_signed == 1 and Q.great_war_ended != 1) Q.us_relation -= 4;
+  if (Q.german_negotiations >= 1 && Q.great_war_ended != 1) Q.us_relation -= 1;
+  if (Q.brest_signed == 1 && Q.great_war_ended != 1) Q.us_relation -= 4;
 !}
 
 We send a diplomatic mission to the United States. [?if german_negotiations >= 1 and great_war_ended != 1 : It seems our separate negotiations with the Germans have strained relations. ?]
