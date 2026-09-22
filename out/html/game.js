@@ -212,6 +212,53 @@ window.showAchievement = function(name, description, image) {
           achievement.image
       );
   };
+
+window.renderAchievements = function() {
+    var qualities = window.dendryUI.dendryEngine.state.qualities;
+
+    var playthrough = document.getElementById('achievement-playthrough');
+    var overall = document.getElementById('achievement-overall');
+    var incomplete = document.getElementById('achievement-incomplete');
+
+    if (!playthrough || !overall || !incomplete) return;
+
+    playthrough.innerHTML = '';
+    overall.innerHTML = '';
+    incomplete.innerHTML = '';
+
+    Object.keys(window.achievements).forEach(function(id) {
+        if (id == 'game_completed') return;
+
+        var achievement = window.achievements[id];
+
+        var table = '<table style="border-collapse: collapse; width: 100%;">' +
+            '<tr>' +
+            '<td style="width: 60px; height: 60px; vertical-align: middle; text-align: center; border: 2px solid #c00000; background-color: rgba(192, 0, 0, 0.1);">' +
+            '<img src="' + achievement.image + '" alt="Achievement Icon" style="width: 100%; height: 100%; object-fit: cover; display: block;">' +
+            '</td>' +
+            '<td style="border: 2px solid #c00000; background-color: rgba(91, 154, 141, 0.1);">' +
+            '<div style="padding-left: 0.5em;">' +
+            '<div style="font-weight: bold;">' + achievement.name + '</div>' +
+            '<div style="font-size: 90%; color: #444;">- ' + achievement.description + '</div>' +
+            '</div>' +
+            '</td>' +
+            '</tr>' +
+            '</table>';
+
+        if (qualities['game_achievement_' + id]) {
+            playthrough.innerHTML += table;
+        }
+
+        if (qualities['achievement_' + id]) {
+            overall.innerHTML += table;
+        } else {
+            incomplete.innerHTML += table;
+        }
+    });
+};
+
+
+  
   
   
 
