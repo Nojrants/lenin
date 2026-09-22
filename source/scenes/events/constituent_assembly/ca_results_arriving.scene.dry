@@ -41,14 +41,14 @@ Q.k_r = Math.round(800*Q.k_assembly_votes_dec/100);
 Q.b_r = Math.round(800*Q.b_assembly_votes_dec/100);
 Q.m_r = Math.round(800*Q.m_assembly_votes_dec/100);
 
-console.log("left SR", Q.left_sr_assembly_votes_dec);
+console.log("left SR", Q.lsr_assembly_votes_dec);
 console.log("right SR", Q.right_sr_assembly_votes_dec);
 console.log("SR", Q.sr_assembly_votes_dec);
 
 
-// if (Q.left_sr_assembly_votes_dec) {
-//     Q.sr_assembly_votes_dec = Q.sr_assembly_votes_dec + Q.left_sr_assembly_votes_dec;
-// }
+if (Q.lsr_assembly_votes_dec) {
+     Q.sr_assembly_votes_dec = Q.sr_assembly_votes_dec + Q.lsr_assembly_votes_dec;
+ }
 if (Q.right_sr_assembly_votes_dec) {
      Q.sr_assembly_votes_dec = Q.sr_assembly_votes_dec + Q.right_sr_assembly_votes_dec;
  }
