@@ -999,6 +999,7 @@ choose-if: commissariats_held <= commissariats_promised and m_represented >= 1 a
 unavailable-subtitle: The other parties will not accept. [?if commissariats_held <= commissariats_promised : We have not granted enough appointments. ?] [?if sr_represented < 1 : The SRs expect a position. ?] [?if lsr_represented < 1 : The Left-SRs expect a position. ?] [?if m_represented < 1 : The Mensheviks expect a position. ?] [?if sdi_represented < 1 : The SD-Internationalists expect a position. ?] [?if ns_represented < 1 : The Popular Socialists expect a position. ?]
 achievement: vikzhel_averted
 on-arrival: {!
+	window.unlockAchievement('vikzhel_averted');
   Q.coalition_government = 1; 
   if (Q.m_represented >= 1) Q.m_in_gov = 1; 
   if (Q.sr_represented >= 1) Q.sr_in_gov = 1;
