@@ -4,7 +4,7 @@ new-page: true
 max-visits: 1
 tags: event
 view-if: german_waiting_timer = 0 and german_negotiations = 3
-on-arrival: enemy_front = best_enemy_front; front = best_front; attacking = 0; in_defensive_battle = 1; german_offensive_timer = 1 if refuse_treaty
+on-arrival: enemy_front = best_enemy_front; front = best_front; attacking = 0; in_defensive_battle = 1; german_offensive_timer = 1 if refuse_treaty; instability += 10
 set-jump: operation_faustschlag.post_battle
 go-to: battle
 
