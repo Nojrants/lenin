@@ -9,7 +9,7 @@ go-to: uk_menu
 @france
 title: France
 tags: diplomacy
-go-to:france_menu
+go-to: france_menu
   
 @us
 title: United States
@@ -36,7 +36,7 @@ new-page: true
 title: Conduct a diplomatic visit to improve relations. 
 tags: uk_menu
 on-arrival: {!
-  Q.uk_relation += 10
+  Q.uk_relation += 10;
   if (Q.german_negotiations >= 1) Q.uk_relation -= 2;
   if (Q.brest_signed == 1 and Q.great_war_ended != 1) Q.uk_relation -= 6;
 !}
@@ -68,7 +68,7 @@ new-page: true
 title: Conduct a diplomatic visit to improve relations. 
 tags: france_menu
 on-arrival: {!
-  Q.france_relation += 10
+  Q.france_relation += 10;
   if (Q.german_negotiations >= 1) Q.france_relation -= 2;
   if (Q.brest_signed == 1 and Q.great_war_ended != 1) Q.france_relation -= 6;
 !}
@@ -90,7 +90,7 @@ new-page: true
 title: Conduct a diplomatic visit to improve relations. 
 tags: us_menu
 on-arrival: {!
-  Q.us_relation += 10
+  Q.us_relation += 10;
   if (Q.german_negotiations >= 1) Q.us_relation -= 1;
   if (Q.brest_signed == 1 and Q.great_war_ended != 1) Q.us_relation -= 4;
 !}
@@ -112,7 +112,7 @@ title: Conduct a diplomatic visit to improve relations.
 tags: germany_menu
 view-if: brest_signed = 1
 on-arrival: {!
-  Q.germany_relation += 10
+  Q.germany_relation += 10;
 !}
 
 We send a diplomatic mission to Germany. 
