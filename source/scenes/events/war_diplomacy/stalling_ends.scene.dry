@@ -25,7 +25,7 @@ title: We reject the terms unequivocally.
 unavailable-subtitle: The Central Committee hasn't acquiesced to this position. 
 choose-if: peace_position = 1
 on-arrival: {!
-  Q.german_negotiations = 3;
+  Q.german_negotiations = 3; Q.german_waiting_timer = 1; 
   Q.leftcom_strength += 10; Q.leninist_strength -= 5; Q.moderate_strength -= 5;
   Q.leftcom_dissent -= 10; Q.leninist_dissent += 15; Q.moderate_dissent += 10;
 !}
@@ -37,7 +37,7 @@ title: We declare "no peace, no war" and walk out.
 unavailable-subtitle: The Central Committee hasn't acquiesced to this position. 
 choose-if: peace_position = 2
 on-arrival: {!
-  Q.german_negotiations = 3;
+  Q.german_negotiations = 3; Q.german_waiting_timer = 1; 
   Q.leftcom_strength += 5;
   Q.leftcom_dissent -= 5; Q.leninist_dissent += 10; Q.moderate_dissent += 5;
 !}
@@ -50,7 +50,7 @@ title: Regrettably, we accept the terms.
 unavailable-subtitle: The Central Committee hasn't acquiesced to this position. 
 choose-if: peace_position = 3
 on-arrival: {!
-  Q.german_negotiations = 5; Q.is_peace = 1; 
+  Q.german_negotiations = 5; 
   Q.leftcom_strength -= 10; Q.leninist_strength += 5; Q.moderate_strength += 5;
   Q.leftcom_dissent += 20; Q.leninist_dissent -= 15; Q.moderate_dissent -= 10;
 !}
