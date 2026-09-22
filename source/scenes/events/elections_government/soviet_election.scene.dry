@@ -151,11 +151,21 @@ title: Begin the congress...
 view-if: soviet_elections = 3
 go-to: congress_3_menu
 on-arrival: {!
+  Q.soviet_elections += 1;
   Q.coalition1 = Math.round(100*(Q.anarchist_soviet + Q.maximalist_soviet + Q.b_soviet + (Q.lsr_soviet * 0.9) + (Q.other_soviet * 0.5)))/100; 
   Q.coalition2 = Math.round(100*(Q.anarchist_soviet + Q.maximalist_soviet + Q.b_soviet + Q.lsr_soviet + (Q.other_soviet * 0.8) + (Q.sdi_soviet * 0.3)))/100; 
   Q.coalition3 = Math.round(100*(Q.anarchist_soviet + Q.maximalist_soviet + Q.b_soviet + Q.lsr_soviet + (Q.other_soviet * 0.8) + (Q.sdi_soviet * 0.5) + (Q.left_m_soviet * 0.4)))/100; 
   Q.coalition4 = Math.round(100*((Q.b_soviet * (Q.leninist_strength / (Q.leninist_strength + Q.leftcom_strength))) + (Q.other_soviet * 0.5) + (Q.sdi_soviet * 0.2) + (Q.left_m_soviet * 0.4)))/100;
+  
+  Q.coalition5 = Math.round(100*((Q.anarchist_soviet * 0.5) + (Q.maximalist_soviet * 0.8) + Q.b_soviet + (Q.lsr_soviet * 0.9) + (Q.other_soviet * 0.8) + (Q.left_m_soviet * 0.1) + (Q.sdi_soviet * 0.1)))/100; 
+  Q.coalition6 = Math.round(100*((Q.anarchist_soviet * 0.5) + (Q.maximalist_soviet * 0.9) + Q.b_soviet + (Q.lsr_soviet * 0.8) + (Q.other_soviet * 0.7)))/100; 
+  Q.coalition7 = Math.round(100*((Q.anarchist_soviet * 0.6) + (Q.maximalist_soviet * 1) + Q.b_soviet + (Q.lsr_soviet * 1) + (Q.other_soviet * 0.6) + (Q.sr_soviet * 0.5) + (Q.left_m_soviet * 0.2) + (Q.sdi_soviet * 0.2)))/100; 
+  Q.coalition8 = Math.round(100*((Q.anarchist_soviet * 0) + (Q.maximalist_soviet * 0.2) + (Q.b_soviet * (Q.moderate_strength / (Q.moderate_strength + Q.leninist_strength))) + (Q.lsr_soviet * 0.75) + (Q.sr_soviet * 0.9) + (Q.right_sr_soviet * 0.8) + (Q.left_m_soviet * 1) + (Q.m_soviet * 1) + (Q.right_m_soviet * 1) + (Q.sdi_soviet) + (Q.ns_soviet * 0.1) + (Q.other_soviet * 0.5)))/100; 
+  Q.coalition9 = Math.round(100*((Q.anarchist_soviet * 0) + (Q.maximalist_soviet * 0) + (Q.lsr_soviet * 0.3) + (Q.sr_soviet) + (Q.right_sr_soviet) + (Q.left_m_soviet * 1) + (Q.m_soviet * 1) + (Q.right_m_soviet * 1) + (Q.sdi_soviet) + (Q.ns_soviet) + (Q.other_soviet * 0.3)))/100; 
 !}
+
+As expected, the Congress of Soviets is much more amenable to our party than the Constituent Assembly, and should hopefully approve the latter's dissolution. 
+
 
 @congress_4
 title: Begin the congress...
@@ -169,20 +179,107 @@ view-if: soviet_elections = 5
 
 @congress_3_menu
 
-As expected, the Congress of Soviets is much more amenable to our party than the Constituent Assembly, and should hopefully approve the latter's dissolution. 
-
 - #congress3_decisions
+
+@cec_election3
+title: Elect a new Central Executive Committee...
+max-visits: 1
+tags: congress3_decisions
+go-to: cec_election3_menu
+
+@cec_election3_menu
+
+We prepare to create a new CEC, which is roughly proportional to the party composition at the Congress. Who shall be elected as chairman? 
+
+- @3_sverdlov
+- @3_kamenev
+- @3_spiridonova
+- @3_martov
+- @3_chernov
+
+
+@3_kamenev
+title: Lev Kamenev – <span style="color: var(--m); font-weight: bold;">Bolshevik (Moderate)</span>
+subtitle: [+ coalition5 +]% – This would prop-up the remaining Moderates. 
+unavailable-subtitle: [+ coalition5 +]% – This would prop-up the remaining Moderates. 
+choose-if: coalition5 > 50
+go-to: congress_3_menu
+on-arrival: {!
+  Q.soviet_chair = "Kamenev";
+  Q.soviet_chair_party = "Bolshevik";
+  Q.moderate_strength += 10; Q.leninist_strength -= 3; Q.leftcom_strength -= 3;
+  Q.moderate_dissent -= 5;
+!}
+
+@3_sverdlov
+title: Yakov Sverdlov – <span style="color: var(--m); font-weight: bold;">Bolshevik (Leninist)</span>
+subtitle: [+ coalition6 +]% – Considered the default choice. 
+unavailable-subtitle: [+ coalition6 +]% – Considered the default choice. 
+choose-if: coalition6 > 50
+go-to: congress_3_menu
+on-arrival: {!
+  Q.soviet_chair = "Sverdlov";
+  Q.soviet_chair_party = "Bolshevik";
+  Q.moderate_strength -= 5; Q.leninist_strength += 10; 
+  Q.moderate_dissent += 5; Q.leninist_dissent -= 5;
+!}
+
+@3_spiridonova
+title: Maria Spiridonova – <span style="color: var(--lsr); font-weight: bold;">Left-SR</span>
+subtitle: [+ coalition7 +]% – This would shore up our alliance, but cede considerable leverage. 
+unavailable-subtitle: [+ coalition7 +]% – This would shore up our alliance, but cede considerable leverage. 
+choose-if: coalition7 > 50
+go-to: congress_3_menu
+on-arrival: {!
+  Q.soviet_chair = "Spiridonova";
+  Q.soviet_chair_party = "Left-SR";
+  Q.lsr_strength += 10; Q.lsr_relation += 10; 
+  Q.leninist_strength -= 5; Q.moderate_strength += 2; Q.leftcom_strength += 5;
+  Q.leninist_dissent += 5; Q.moderate_dissent -= 2; Q.leftcom_dissent -= 5;
+!}
+
+@3_martov
+title: Iulius Martov – <span style="color: var(--m); font-weight: bold;">Menshevik (Internationalist)</span>
+subtitle: [+ coalition8 +]% – The opposition puts forth their preferred candidate. 
+unavailable-subtitle: [+ coalition8 +]% – The opposition puts forth their preferred candidate. 
+choose-if: coalition8 > 50
+go-to: congress_3_menu
+on-arrival: {!
+  Q.soviet_chair = "Martov";
+  Q.soviet_chair_party = "Menshevik";
+  Q.left_m_strength += 10; Q.m_strength += 5; Q.right_m_strength -= 2;
+  Q.left_m_relation += 5; 
+  Q.leninist_strength -= 10; Q.moderate_strength += 5; Q.leftcom_strength += 2;
+  Q.leninist_dissent += 10; Q.moderate_dissent -= 5; Q.leftcom_dissent -= 2;
+!}
+
+@3_chernov
+title: Viktor Chernov – <span style="color: var(--sr); font-weight: bold;">SR (Centre)</span>
+subtitle: [+ coalition9 +]% – The right-wing backs their protest candidate. 
+unavailable-subtitle: [+ coalition9 +]% – The right-wing submits a protest candidate. 
+choose-if: coalition9 > 50
+go-to: congress_3_menu
+on-arrival: {!
+  Q.soviet_chair = "Chernov";
+  Q.soviet_chair_party = "SR";
+  Q.sr_strength += 10; Q.right_sr_strength += 5; 
+  Q.sr_relation += 5; 
+  Q.leninist_strength -= 10; Q.moderate_strength += 5; Q.leftcom_strength -= 5;
+  Q.leninist_dissent += 10; Q.moderate_dissent -= 5; Q.leftcom_dissent += 5;
+!}
+
 
 @dissolve_ca
 title: Affirm the dissolution of the Constituent Assembly. 
-subtitle: [+ coalition1 +]% – Ratify the decision and expunge all references to the Assembly henceforth. 
+subtitle: [+ coalition1 +]% – Ratify the decision and expunge all references to the Assembly. 
 max-visits: 1
 choose-if: coalition1 > 50
 unavailable-subtitle: [+ coalition1 +]% – We lack the votes for this. 
 tags: congress3_decisions
 go-to: congress_3_menu
 on-arrival: {!
-  Q.democraticity += 2; Q.ca_support_timer -= 1;
+  Q.democraticity += 1; Q.ca_support_timer -= 1;
+  Q.leninist_strength += 5; Q.leftcom_strength += 3; Q.moderate_strength -= 5;
   Q.workers_unrest -= 2; Q.soldiers_unrest -= 2; Q.peasants_unrest -= 2; 
 !}
 
@@ -198,6 +295,7 @@ unavailable-subtitle: [+ coalition2 +]% – We lack the votes for this.
 go-to: congress_3_menu
 on-arrival: {!
   Q.democraticity += 1; 
+  Q.leninist_strength += 5; Q.leftcom_strength += 3; 
   Q.workers_unrest -= 5; Q.soldiers_unrest -= 5; Q.peasants_unrest -= 5; 
 !}
 
@@ -212,7 +310,8 @@ choose-if: coalition3 > 50
 unavailable-subtitle: [+ coalition3 +]% – We lack the votes for this. 
 go-to: congress_3_menu
 on-arrival: {!
-  Q.democraticity += 3; Q.instability -= 1;
+  Q.democraticity += 2; Q.instability -= 1;
+  Q.constitution_progress = 1;
 !}
 
 The proposal for a new constitution is approved. 
@@ -236,10 +335,7 @@ The peace treaty is approved.
 title: Conclude the congress...
 max-visits: 1
 tags: congress3_decisions
+choose-if: cec_election3_seen = 1
 go-to: root
-on-arrival: {!
-  Q.democraticity -= 1; Q.instability -= 5; 
-  Q.war_weariness -= 10; Q.disillusionment -= 0.5; 
-!}
 
 The Congress of Soviets ends and the delegates head home, entrusting governance to the Central Executive Committee they selected. 
