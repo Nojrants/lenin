@@ -24,13 +24,13 @@ on-arrival: {!
   Q.right_sr_strength -= 5; Q.sr_strength += 5; Q.lsr_strength += 10;
   Q.soldiers_lsr += 15; Q.soldiers_left_m += 5; Q.soldiers_sdi += 5;
   Q.soldiers_unrest += 15; Q.workers_unrest += 10; Q.peasants_unrest += 5;
-  if (german_negotiations >= 2) { Q.leftcom_strength -= 10; Q.leninist_strength += 5; }
+  if (Q.german_negotiations >= 2) { Q.leftcom_strength -= 10; Q.leninist_strength += 5; }
   if (Q.b_in_gov == 1) { Q.soldiers_b -= 15; }
   if (Q.lsr_in_gov == 1) { Q.soldiers_lsr -= 5; }
   if (Q.sr_in_gov == 1) { Q.soldiers_sr -= 5; }            
   if (Q.m_in_gov == 1) { Q.soldiers_m -= 5; }
   if (Q.ns_in_gov == 1) { Q.soldiers_ns -= 5; }
-  if (Q.sdi_in_gov == 1) { Q.soldiers_bsdi -= 5; }
+  if (Q.sdi_in_gov == 1) { Q.soldiers_sdi -= 5; }
   Q.morale *= 0.8; Q.discipline *= 0.7; Q.train_capacity *= 0.85; Q.military_progress -= 2;
 !}
 
