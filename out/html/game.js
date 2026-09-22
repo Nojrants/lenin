@@ -148,7 +148,7 @@
       return text;
   };
 
-window.achievementSound = new Audio('music/achieve.mp3');  
+  
   window.achievements = {
       golden_age_of_the_peoples_commissars: {
           name: "Golden Age of the People's Commissars",
@@ -174,20 +174,26 @@ window.achievementSound = new Audio('music/achieve.mp3');
           image: "img/portraits/b/lenin.jpg"
       }
   };
+  
+window.achievementSound = new Audio('music/achieve.mp3');  
+window.showAchievement = function(name, description, image) {
+    var notification = document.getElementById('achievement-notification');
 
-  window.showAchievement = function(name, description, image) {
-      var notification = document.getElementById('achievement-notification');
+    notification.querySelector('.achievement-title').textContent = name;
+    notification.querySelector('.achievement-description').textContent = description;
+    notification.querySelector('.achievement-image img').src = image;
 
-      notification.querySelector('.achievement-title').textContent = name;
-      notification.querySelector('.achievement-description').textContent = description;
-      notification.querySelector('.achievement-image img').src = image;
+    window.achievementSound.currentTime = 0;
+    window.achievementSound.play().catch(function(error) {
+        console.log("Achievement sound failed:", error);
+    });
 
-      notification.classList.add('show');
+    notification.classList.add('show');
 
-      setTimeout(function() {
-          notification.classList.remove('show');
-      }, 10000);
-  };
+    setTimeout(function() {
+        notification.classList.remove('show');
+    }, 10000);
+};
 
 
   // Displays an achievement notification.
