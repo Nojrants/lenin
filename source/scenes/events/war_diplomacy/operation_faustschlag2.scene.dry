@@ -1,0 +1,107 @@
+title: Operation Faustschlag
+subtitle: The Germans continue the advance...
+new-page: true
+max-visits: 1
+tags: event
+view-if: german_negotiations = 4
+on-arrival: enemy_front = best_enemy_front; front = best_front; attacking = 0; in_defensive_battle = 1; german_offensive_timer = 1 if refuse_treaty
+set-jump: operation_faustschlag.post_battle
+go-to: battle
+
+= Operation Faustschlag
+
+As it turns out, the Germans weren't bluffing at Brest-Litovsk. They have launched their offense, and their forces are rapidly advancing across the entire front, capturing an immense amount of territory. We are being informed that our own forces are crumbling at the sight of the enemy, with most retreating without putting up any resistance. Chaos and mass desertions are occurring all along the front. 
+
+@post_battle
+go-to: defeat_2 if battle_outcome = -2; defeat_1 if battle_outcome = -1 
+on-arrival: in_defensive_battle = 0;
+
+
+@defeat_2
+go-to: defeat_desc
+on-arrival: {!
+  Q.right_m_strength -= 5; Q.left_m_strength += 5; Q.m_strength += 5;
+  Q.right_sr_strength -= 5; Q.sr_strength += 5; Q.lsr_strength += 10;
+  Q.soldiers_lsr += 15; Q.soldiers_left_m += 5; Q.soldiers_sdi += 5;
+  Q.soldiers_unrest += 15; Q.workers_unrest += 10; Q.peasants_unrest += 5;
+  if (Q.german_negotiations >= 2) { Q.leftcom_strength -= 10; Q.leninist_strength += 5; }
+  if (Q.b_in_gov == 1) { Q.soldiers_b -= 15; }
+  if (Q.lsr_in_gov == 1) { Q.soldiers_lsr -= 5; }
+  if (Q.sr_in_gov == 1) { Q.soldiers_sr -= 5; }            
+  if (Q.m_in_gov == 1) { Q.soldiers_m -= 5; }
+  if (Q.ns_in_gov == 1) { Q.soldiers_ns -= 5; }
+  if (Q.sdi_in_gov == 1) { Q.soldiers_sdi -= 5; }
+  Q.morale *= 0.65; Q.discipline *= 0.5; Q.train_capacity *= 0.8; Q.military_progress -= 2; Q.northern_progress -= 1; Q.southwestern_progress -= -1; Q.western_progress -= 1;
+!}
+
+>Our casualties: [+ friendly_casualties +]0,000 troops
+
+>Enemy casualties: [+ hostile_casualties +]0,000 troops
+
+
+@defeat_1
+go-to: defeat_desc
+on-arrival: {!
+  Q.right_m_strength -= 2.5; Q.left_m_strength += 2.5; Q.m_strength += 2.5;
+  Q.right_sr_strength -= 2.5; Q.sr_strength += 2.5; Q.lsr_strength += 5;
+  Q.soldiers_lsr += 7.5; Q.soldiers_left_m += 2.5; Q.soldiers_sdi += 2.5;
+  Q.soldiers_unrest += 7.5; Q.workers_unrest += 5; Q.peasants_unrest += 2.5;
+  if (german_negotiations >= 1) { Q.leftcom_strength -= 5; Q.leninist_strength += 2.5; }
+  if (Q.b_in_gov == 1) { Q.soldiers_b -= 7.5; }
+  if (Q.lsr_in_gov == 1) { Q.soldiers_lsr -= 2.5; }
+  if (Q.sr_in_gov == 1) { Q.soldiers_sr -= 2.5; }            
+  if (Q.m_in_gov == 1) { Q.soldiers_m -= 2.5; }
+  if (Q.ns_in_gov == 1) { Q.soldiers_ns -= 2.5; }
+  if (Q.sdi_in_gov == 1) { Q.soldiers_bsdi -= 2.5; }
+  Q.morale *= 0.75; Q.discipline *= 0.65; Q.train_capacity *= 0.9; Q.military_progress -= 1; Q.northern_progress -= 1; Q.southwestern_progress -= -1; Q.western_progress -= 1;
+!}
+
+>Our casualties: [+ friendly_casualties +]0,000 troops
+
+>Enemy casualties: [+ hostile_casualties +]0,000 troops
+
+  
+@defeat_desc
+on-arrival: {!
+  if (Q.leninist_strength > 
+
+[? if northern_progress = -2 : The Germans have captured Riga, and are marching ever closer to Petrograd. ?]
+[? if northern_progress = -3 : The Germans have taken Tallinn in Estonia, and are marching ever closer to Petrograd. ?]
+[? if northern_progress = -4 : The Germans are now at the gates of Petrograd! ?]
+[? if western_progress = -3 : In the centre, they've occupied most of Belarussia through Minsk, and are threatening central Russia. ?]
+[? if western_progress = -4 : In the centre, they've entered Russia proper and are in a position to threaten many major cities. ?]
+[? if southwestern_progress >= -1 : The Germans have pushed the front further back in Galicia and western Ukraine. ?]
+[? if southwestern_progress = -2 : The Germans have entered Ukraine and are threatening Kyiv. ?]
+[? if southwestern_progress = -3 : In the south, virtually all of Ukraine has been occupied. ?]
+[? if southwestern_progress < -3 : In the south, they've now fortified their position in Ukraine and have advanced into the Don region, threatening our food supply. ?]
+
+
+An emergency meeting of the Central Committee is called, where Lenin desperately argues for accepting the peace terms. Still unconvinced, Bukharin argues that the German offensive was anticipated, and that they should keep up the defense. 
+
+[?if peace_position = 2 and (leninist_strength > leftcom_strength) : Trotsky however, fulfilling a verbal agreement he made with Lenin prior, is prepared to abstain so that Lenin's course of action will be approved. 
+
+- @continue
+- @peace
+
+@continue
+title: We will stay the course and prepare to fight to the last man. 
+unavailable-subtitle: The <span style="color: var(--leftcom); font-weight: bold;">Leftcoms</span> do not have the strength to convince the Central Committee. 
+choose-if: peace_position = 1 and leftcom_strength > leninist_strength 
+on-arrival: {! 
+  Q.german_negotiations = 4;
+  Q.leftcom_strength += 5; Q.leninist_strength -= 5; Q.moderate_strength -= 5;
+  Q.leftcom_dissent -= 5; Q.leninist_dissent += 25; Q.moderate_dissent += 10;
+!}
+
+The Central Committee reluctantly decides to continue the fight against Germany, though tensions remain highly charged...
+
+@peace
+title: We must make peace with the Germans. 
+unavailable-subtitle: The <span style="color: var(--leninist); font-weight: bold;">Leninists</span> do not have the strength to convince the Central Committee. 
+on-arrival: {! 
+  Q.german_negotiations = 5;
+  Q.leftcom_strength -= 5; Q.leninist_strength += 5; Q.moderate_strength += 5;
+  Q.leftcom_dissent += 15; Q.leninist_dissent -= 15; Q.moderate_dissent -= 10;
+!}
+
+The Central Committee reluctantly accepts the need for peace, though tensions remain highly charged...
