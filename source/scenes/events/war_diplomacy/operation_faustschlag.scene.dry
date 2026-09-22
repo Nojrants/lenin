@@ -13,7 +13,7 @@ go-to: battle
 As it turns out, the Germans weren't bluffing at Brest-Litovsk. They have launched their offense, and their forces are rapidly advancing across the entire front, capturing an immense amount of territory. We are being informed that our own forces are crumbling at the sight of the enemy, with most retreating without putting up any resistance. Chaos and mass desertions are occurring all along the front. 
 
 @post_battle
-go-to: defeat_2 if battle_outcome = -2; defeat_1 if battle_outcome = -1; 
+go-to: defeat_2 if battle_outcome = -2; defeat_1 if battle_outcome = -1 
 on-arrival: in_defensive_battle = 0;
 
 
