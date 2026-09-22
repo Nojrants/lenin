@@ -879,8 +879,9 @@ hr {
 #achievement-notification {
     position: fixed;
     bottom: 60px;
-    left: 75%;
+    left: 70%;
     width: 450px;
+    height: 76px;
     display: flex;
     align-items: stretch;
     z-index: 9999;
@@ -899,10 +900,12 @@ hr {
 }
 
 .achievement-image {
-    width: 60px;
+    width: 70px;
+    height: 70px;
     flex-shrink: 0;
     border-right: 2px solid #c00000;
     background-color: rgba(192, 0, 0, 0.9);
+    box-sizing: border-box;
 }
 
 .achievement-image img {
@@ -917,6 +920,9 @@ hr {
     background-color: rgba(255, 255, 255, 0.9);
     box-sizing: border-box;
     padding: 8px 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .achievement-title {
