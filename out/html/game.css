@@ -875,22 +875,15 @@ hr {
 }
 
 
+
 #achievement-notification {
     position: fixed;
     bottom: 60px;
     left: 50%;
-    width: 400px;
-    padding: 10px;
+    width: 450px;
     display: flex;
-    align-items: center;
-    box-sizing: border-box;
-
-    border: 2px solid #c00000;
-    background-color: rgba(91, 154, 141, 0.1);
-
-    color: #222;
+    align-items: stretch;
     z-index: 9999;
-
     opacity: 0;
     transform: translate(-50%, 120%);
     pointer-events: none;
@@ -903,20 +896,27 @@ hr {
 }
 
 .achievement-image {
-    width: 70px;
-    height: 70px;
+    width: 60px;
+    height: 60px;
     flex-shrink: 0;
-    margin-right: 12px;
+    border: 2px solid #c00000;
+    background-color: rgba(192, 0, 0, 0.1);
 }
 
 .achievement-image img {
     width: 100%;
     height: 100%;
-    object-fit: contain;
+    object-fit: cover;
+    display: block;
 }
 
 .achievement-info {
-    padding-left: 0.5em;
+    flex: 1;
+    min-height: 60px;
+    border: 2px solid #c00000;
+    background-color: rgba(91, 154, 141, 0.1);
+    box-sizing: border-box;
+    padding: 8px 10px;
 }
 
 .achievement-title {
