@@ -50,7 +50,6 @@ title: Regrettably, we accept the terms.
 unavailable-subtitle: The Central Committee hasn't acquiesced to this position. 
 choose-if: peace_position = 3
 on-arrival: {!
-  Q.german_negotiations = 5; 
   Q.leftcom_strength -= 10; Q.leninist_strength += 5; Q.moderate_strength += 5;
   Q.leftcom_dissent += 20; Q.leninist_dissent -= 15; Q.moderate_dissent -= 10;
 !}
