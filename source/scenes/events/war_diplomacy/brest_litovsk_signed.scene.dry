@@ -1,0 +1,5 @@
+title: Treaty of Brest-Litovsk
+new-page: true
+view-if: german_negotiations = 5
+max-visits: 1
+tags: event
