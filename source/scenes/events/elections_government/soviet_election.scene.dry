@@ -160,8 +160,8 @@ on-arrival: {!
   Q.coalition5 = Math.round(100*((Q.anarchist_soviet * 0.5) + (Q.maximalist_soviet * 0.8) + Q.b_soviet + (Q.lsr_soviet * 0.9) + (Q.other_soviet * 0.8) + (Q.left_m_soviet * 0.1) + (Q.sdi_soviet * 0.1)))/100; 
   Q.coalition6 = Math.round(100*((Q.anarchist_soviet * 0.5) + (Q.maximalist_soviet * 0.9) + Q.b_soviet + (Q.lsr_soviet * 0.8) + (Q.other_soviet * 0.7)))/100; 
   Q.coalition7 = Math.round(100*((Q.anarchist_soviet * 0.6) + (Q.maximalist_soviet * 1) + Q.b_soviet + (Q.lsr_soviet * 1) + (Q.other_soviet * 0.6) + (Q.sr_soviet * 0.5) + (Q.left_m_soviet * 0.2) + (Q.sdi_soviet * 0.2)))/100; 
-  Q.coalition8 = Math.round(100*((Q.maximalist_soviet * 0.2) + (Q.b_soviet * (Q.moderate_strength / (Q.moderate_strength + Q.leninist_strength))) + (Q.lsr_soviet * 0.75) + (Q.sr_soviet * 0.9) + (Q.right_sr_soviet * 0.8) + (Q.left_m_soviet * 1) + (Q.m_soviet * 1) + (Q.right_m_soviet * 1) + (Q.sdi_soviet) + (Q.ns_soviet * 0.1) + (Q.other_soviet * 0.5)))/100; 
-  Q.coalition9 = Math.round(100*((Q.lsr_soviet * 0.3) + (Q.sr_soviet) + (Q.right_sr_soviet) + (Q.left_m_soviet * 1) + (Q.m_soviet * 1) + (Q.right_m_soviet * 1) + (Q.sdi_soviet) + (Q.ns_soviet) + (Q.other_soviet * 0.3)))/100; 
+  Q.coalition8 = Math.round(100*((Q.maximalist_soviet * 0.2) + (Q.b_soviet * (Q.moderate_strength / (Q.moderate_strength + Q.leninist_strength))) + (Q.lsr_soviet * 0.75) + (Q.sr_soviet * 0.9) + (Q.right_sr_soviet * 0.8) + (Q.left_m_soviet * 1) + (Q.m_soviet * 1) + (Q.right_m_soviet * 1) + (Q.sdi_soviet) + (Q.popular_socialist_soviet * 0.1) + (Q.other_soviet * 0.5)))/100; 
+  Q.coalition9 = Math.round(100*((Q.lsr_soviet * 0.3) + (Q.sr_soviet) + (Q.right_sr_soviet) + (Q.left_m_soviet * 1) + (Q.m_soviet * 1) + (Q.right_m_soviet * 1) + (Q.sdi_soviet) + (Q.popular_socialist_soviet) + (Q.other_soviet * 0.3)))/100; 
 !}
 
 As expected, the Congress of Soviets is much more amenable to our party than the Constituent Assembly, and should hopefully approve the latter's dissolution. 
