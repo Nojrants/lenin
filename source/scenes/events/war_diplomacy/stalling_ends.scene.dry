@@ -1,0 +1,57 @@
+title: News from Brest-Litvosk
+new-page: true
+view-if: german_waiting_timer = 0 and german_negotiations = 2
+max-visits: 1
+tags: event
+
+= Brest-Litvosk
+
+We have stalled for as long as possible, but at this point the Germans are issuing an ultimatum: either accept peace terms immediately or they will launch a renewed offensive. 
+  
+The terms are as follows:<ul>
+  <li>Recognition of the independence of Poland, Lithuania, Courland, and portions of the Baltic region (implicitly, these are to become German puppet states).</li>
+  <li>Two</li>
+  <li>Three</li>
+</ul>
+  
+On the other hand, it's debatable just how prepared the Germans actually are for such an offensive. We're aware that they've already begun moving some units to the Western Front, and their forces are no doubt suffering from the same exhaustion our own forces had. It's now time to issue our response...
+
+- @reject
+- @compromise
+- @peace
+
+@reject
+title: We reject the terms unequivocally. 
+unavailable-subtitle: The Central Committee hasn't acquiesced to this position. 
+choose-if: peace_position = 1
+on-arrival: {!
+  Q.german_negotiations = 3;
+  Q.leftcom_strength += 10; Q.leninist_strength -= 5; Q.moderate_strength -= 5;
+  Q.leftcom_dissent -= 10; Q.leninist_dissent += 15; Q.moderate_dissent += 10;
+!}
+
+Astonished by our refusal, the Germans announce they are resuming the war with us immediately. 
+
+@compromise
+title: We declare "no peace, no war" and walk out. 
+unavailable-subtitle: The Central Committee hasn't acquiesced to this position. 
+choose-if: peace_position = 2
+on-arrival: {!
+  Q.german_negotiations = 3;
+  Q.leftcom_strength += 5;
+  Q.leftcom_dissent -= 5; Q.leninist_dissent += 10; Q.moderate_dissent += 5;
+!}
+
+Puzzled by our response, the Germans announce they are resuming the war with us immediately. 
+
+
+@peace
+title: Regrettably, we accept the terms. 
+unavailable-subtitle: The Central Committee hasn't acquiesced to this position. 
+choose-if: peace_position = 3
+on-arrival: {!
+  Q.german_negotiations = 5; Q.is_peace = 1; 
+  Q.leftcom_strength -= 10; Q.leninist_strength += 5; Q.moderate_strength += 5;
+  Q.leftcom_dissent += 20; Q.leninist_dissent -= 15; Q.moderate_dissent -= 10;
+!}
+go-to: brest_litovsk_signed
