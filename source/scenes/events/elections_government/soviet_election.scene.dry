@@ -188,6 +188,7 @@ tags: congress3_decisions
 go-to: cec_election3_menu
 
 @cec_election3_menu
+on-arrival: cec_election3_seen = 1
 
 We prepare to create a new CEC, which is roughly proportional to the party composition at the Congress. Who shall be elected as chairman? 
 
