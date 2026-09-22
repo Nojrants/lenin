@@ -880,8 +880,7 @@ hr {
     position: fixed;
     bottom: 60px;
     left: 70%;
-    width: 450px;
-    height: 76px;
+    width: 550px;
     display: flex;
     align-items: stretch;
     z-index: 9999;
@@ -900,12 +899,11 @@ hr {
 }
 
 .achievement-image {
-    width: 70px;
-    height: 70px;
+    width: 90px;
+    height: 90px;
     flex-shrink: 0;
     border-right: 2px solid #c00000;
     background-color: rgba(192, 0, 0, 0.9);
-    box-sizing: border-box;
 }
 
 .achievement-image img {
@@ -917,12 +915,10 @@ hr {
 
 .achievement-info {
     flex: 1;
-    background-color: rgba(255, 255, 255, 0.9);
+    min-height: 90px;
     box-sizing: border-box;
-    padding: 8px 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    padding: 12px 14px;
+    background-color: rgba(255, 255, 255, 0.9);
 }
 
 .achievement-title {
@@ -930,7 +926,7 @@ hr {
 }
 
 .achievement-description {
-    margin-top: 4px;
+    margin-top: 6px;
     font-size: 90%;
     color: #444;
 }
