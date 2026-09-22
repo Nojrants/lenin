@@ -31,7 +31,7 @@ on-arrival: {!
   if (Q.m_in_gov == 1) { Q.soldiers_m -= 5; }
   if (Q.ns_in_gov == 1) { Q.soldiers_ns -= 5; }
   if (Q.sdi_in_gov == 1) { Q.soldiers_sdi -= 5; }
-  Q.morale *= 0.8; Q.discipline *= 0.7; Q.train_capacity *= 0.85; Q.military_progress -= 3; Q.northern_progress -= 1; Q.southwestern_progress == -3; Q.western_progress == -3; 
+  Q.morale *= 0.8; Q.discipline *= 0.7; Q.train_capacity *= 0.85; Q.military_progress -= 2; Q.northern_progress -= 2; Q.western_progress == -3; Q.southwestern_progress == -3; 
 !}
 
 >Our casualties: [+ friendly_casualties +]0,000 troops
@@ -53,7 +53,7 @@ on-arrival: {!
   if (Q.m_in_gov == 1) { Q.soldiers_m -= 2.5; }
   if (Q.ns_in_gov == 1) { Q.soldiers_ns -= 2.5; }
   if (Q.sdi_in_gov == 1) { Q.soldiers_bsdi -= 2.5; }
-  Q.morale *= 0.9; Q.discipline *= 0.8; Q.train_capacity *= 0.95; Q.military_progress -= 1;
+  Q.morale *= 0.9; Q.discipline *= 0.8; Q.train_capacity *= 0.95; Q.military_progress -= 2; Q.northern_progress -= 1; Q.western_progress == -3; Q.southwestern_progress == -3; 
 !}
 
 >Our casualties: [+ friendly_casualties +]0,000 troops
