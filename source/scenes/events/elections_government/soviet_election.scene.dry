@@ -1,6 +1,6 @@
 title: All-Russian Congress of Soviets
 subtitle: The election results are in...
-view-if: soviet_congress_timer = 0
+view-if: soviet_congress_timer = 0 and ca_held = 1
 go-to: election_algorithm.all_russian_soviet
 set-jump: soviet_election.post_election
 new-page: true
@@ -150,6 +150,12 @@ if (window && d3) {
 title: Begin the congress...
 view-if: soviet_elections = 3
 go_to: congress_3_menu
+on-arrival: {!
+  Q.coalition1 = Math.round(100*(Q.anarchist_soviet + Q.maximalist_soviet + Q.b_soviet + (Q.lsr_soviet * 0.9) + (Q.other_soviet * 0.5)))/100; 
+  Q.coalition2 = Math.round(100*(Q.anarchist_soviet + Q.maximalist_soviet + Q.b_soviet + Q.lsr_soviet + (Q.other_soviet * 0.8) + (Q.sdi_soviet * 0.3))/100; 
+  Q.coalition3 = Math.round(100*(Q.anarchist_soviet + Q.maximalist_soviet + Q.b_soviet + Q.lsr_soviet + (Q.other_soviet * 0.8) + (Q.sdi_soviet * 0.5) + (Q.left_m_soviet * 0.4))/100; 
+  Q.coalition4 = Math.round(100*((Q.b_soviet * (Q.leninist_strength / (Q.leninist_strength + Q.leftcom_strength))) + (Q.other_soviet * 0.5) + (Q.sdi_soviet * 0.2) + (Q.left_m_soviet * 0.4))/100; 
+!}
 
 @congress_4
 title: Begin the congress...
@@ -163,7 +169,77 @@ view-if: soviet_elections = 5
 
 @congress_3_menu
 
-Test
+As expected, the Congress of Soviets is much more amenable to our party than the Constituent Assembly, and should hopefully approve the latter's dissolution. 
 
+- #congress3_decisions
 
+@dissolve_ca
+title: Affirm the dissolution of the Constituent Assembly. 
+subtitle: [+ coalition1 +]% – Ratify the decision and expunge all references to the Assembly henceforth. 
+max-visits: 1
+choose-if: coalition1 > 50
+unavailable-subtitle: [+ coalition1 +]% – We lack the votes for this. 
+tags: congress3_decisions
+go-to: congress_3_menu
+on-arrival: {!
+  Q.democraticity += 2; Q.ca_support_timer -= 1;
+  Q.workers_unrest -= 2; Q.soldiers_unrest -= 2; Q.peasants_unrest -= 2; 
+!}
 
+The dissolution of the Constituent Assembly is approved. 
+
+@declaration
+title: Approve the "Declaration of the Rights of the Working and Exploited People".  
+subtitle: [+ coalition2 +]% – This will serve as a foundational document for the new republic. 
+max-visits: 1
+tags: congress3_decisions
+choose-if: coalition2 > 50
+unavailable-subtitle: [+ coalition2 +]% – We lack the votes for this. 
+go-to: congress_3_menu
+on-arrival: {!
+  Q.democraticity += 1; 
+  Q.workers_unrest -= 5; Q.soldiers_unrest -= 5; Q.peasants_unrest -= 5; 
+!}
+
+The declaration is approved. 
+
+@constitution
+title: Formally declare a "Soviet Republic", and charge the CEC with drafting a constitution. 
+subtitle: [+ coalition3 +]% – We will create a system based around soviet power. 
+max-visits: 1
+tags: congress3_decisions
+choose-if: coalition3 > 50
+unavailable-subtitle: [+ coalition3 +]% – We lack the votes for this. 
+go-to: congress_3_menu
+on-arrival: {!
+  Q.democraticity += 3; Q.instability -= 1;
+!}
+
+The proposal for a new constitution is approved. 
+
+@peace_treaty
+title: Present a peace treaty for the Congress to approve. 
+subtitle: [+ coalition4 +]% – This will formalize the agreement with Germany. 
+max-visits: 1
+tags: congress3_decisions
+choose-if: coalition4 > 50
+unavailable-subtitle: [+ coalition4 +]% – [?if coalition4 <= 50 : We lack the votes for this. ?][?if brest_signed != 1 : We have no peace treaty to present. ?]
+go-to: congress_3_menu
+on-arrival: {!
+  Q.democraticity -= 1; Q.instability -= 5; 
+  Q.war_weariness -= 10; Q.disillusionment -= 0.5; 
+!}
+
+The peace treaty is approved. 
+
+@conclude
+title: Conclude the congress...
+max-visits: 1
+tags: congress3_decisions
+go-to: root
+on-arrival: {!
+  Q.democraticity -= 1; Q.instability -= 5; 
+  Q.war_weariness -= 10; Q.disillusionment -= 0.5; 
+!}
+
+The Congress of Soviets ends and the delegates head home, entrusting governance to the Central Executive Committee they selected. 
