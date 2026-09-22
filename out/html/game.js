@@ -148,8 +148,7 @@
       return text;
   };
 
-
-  
+window.achievementSound = new Audio('music/achieve.mp3');  
   window.achievements = {
       golden_age_of_the_peoples_commissars: {
           name: "Golden Age of the People's Commissars",
