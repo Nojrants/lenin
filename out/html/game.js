@@ -353,3 +353,9 @@ window.renderAchievements = function() {
   };
 
 }());
+
+setInterval(function() {
+    if (document.getElementById('achievement-playthrough')) {
+        window.renderAchievements();
+    }
+}, 500);
