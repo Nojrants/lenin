@@ -152,8 +152,8 @@ view-if: soviet_elections = 3
 go-to: congress_3_menu
 on-arrival: {!
   Q.coalition1 = Math.round(100*(Q.anarchist_soviet + Q.maximalist_soviet + Q.b_soviet + (Q.lsr_soviet * 0.9) + (Q.other_soviet * 0.5)))/100; 
-  Q.coalition2 = Math.round(100*(Q.anarchist_soviet + Q.maximalist_soviet + Q.b_soviet + Q.lsr_soviet + (Q.other_soviet * 0.8) + (Q.sdi_soviet * 0.3))/100; 
-  Q.coalition3 = Math.round(100*(Q.anarchist_soviet + Q.maximalist_soviet + Q.b_soviet + Q.lsr_soviet + (Q.other_soviet * 0.8) + (Q.sdi_soviet * 0.5) + (Q.left_m_soviet * 0.4))/100; 
+  Q.coalition2 = Math.round(100*(Q.anarchist_soviet + Q.maximalist_soviet + Q.b_soviet + Q.lsr_soviet + (Q.other_soviet * 0.8) + (Q.sdi_soviet * 0.3)))/100; 
+  Q.coalition3 = Math.round(100*(Q.anarchist_soviet + Q.maximalist_soviet + Q.b_soviet + Q.lsr_soviet + (Q.other_soviet * 0.8) + (Q.sdi_soviet * 0.5) + (Q.left_m_soviet * 0.4)))/100; 
   Q.coalition4 = Math.round(100*((Q.b_soviet * (Q.leninist_strength / (Q.leninist_strength + Q.leftcom_strength))) + (Q.other_soviet * 0.5) + (Q.sdi_soviet * 0.2) + (Q.left_m_soviet * 0.4)))/100;
 !}
 
