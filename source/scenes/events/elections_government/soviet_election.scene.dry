@@ -160,8 +160,8 @@ on-arrival: {!
   Q.coalition5 = Math.round(100*((Q.anarchist_soviet * 0.5) + (Q.maximalist_soviet * 0.8) + Q.b_soviet + (Q.lsr_soviet * 0.9) + (Q.other_soviet * 0.8) + (Q.left_m_soviet * 0.1) + (Q.sdi_soviet * 0.1)))/100; 
   Q.coalition6 = Math.round(100*((Q.anarchist_soviet * 0.5) + (Q.maximalist_soviet * 0.9) + Q.b_soviet + (Q.lsr_soviet * 0.8) + (Q.other_soviet * 0.7)))/100; 
   Q.coalition7 = Math.round(100*((Q.anarchist_soviet * 0.6) + (Q.maximalist_soviet * 1) + Q.b_soviet + (Q.lsr_soviet * 1) + (Q.other_soviet * 0.6) + (Q.sr_soviet * 0.5) + (Q.left_m_soviet * 0.2) + (Q.sdi_soviet * 0.2)))/100; 
-  Q.coalition8 = Math.round(100*((Q.anarchist_soviet * 0) + (Q.maximalist_soviet * 0.2) + (Q.b_soviet * (Q.moderate_strength / (Q.moderate_strength + Q.leninist_strength))) + (Q.lsr_soviet * 0.75) + (Q.sr_soviet * 0.9) + (Q.right_sr_soviet * 0.8) + (Q.left_m_soviet * 1) + (Q.m_soviet * 1) + (Q.right_m_soviet * 1) + (Q.sdi_soviet) + (Q.ns_soviet * 0.1) + (Q.other_soviet * 0.5)))/100; 
-  Q.coalition9 = Math.round(100*((Q.anarchist_soviet * 0) + (Q.maximalist_soviet * 0) + (Q.lsr_soviet * 0.3) + (Q.sr_soviet) + (Q.right_sr_soviet) + (Q.left_m_soviet * 1) + (Q.m_soviet * 1) + (Q.right_m_soviet * 1) + (Q.sdi_soviet) + (Q.ns_soviet) + (Q.other_soviet * 0.3)))/100; 
+  Q.coalition8 = Math.round(100*((Q.maximalist_soviet * 0.2) + (Q.b_soviet * (Q.moderate_strength / (Q.moderate_strength + Q.leninist_strength))) + (Q.lsr_soviet * 0.75) + (Q.sr_soviet * 0.9) + (Q.right_sr_soviet * 0.8) + (Q.left_m_soviet * 1) + (Q.m_soviet * 1) + (Q.right_m_soviet * 1) + (Q.sdi_soviet) + (Q.ns_soviet * 0.1) + (Q.other_soviet * 0.5)))/100; 
+  Q.coalition9 = Math.round(100*((Q.lsr_soviet * 0.3) + (Q.sr_soviet) + (Q.right_sr_soviet) + (Q.left_m_soviet * 1) + (Q.m_soviet * 1) + (Q.right_m_soviet * 1) + (Q.sdi_soviet) + (Q.ns_soviet) + (Q.other_soviet * 0.3)))/100; 
 !}
 
 As expected, the Congress of Soviets is much more amenable to our party than the Constituent Assembly, and should hopefully approve the latter's dissolution. 
@@ -199,7 +199,7 @@ We prepare to create a new CEC, which is roughly proportional to the party compo
 
 
 @3_kamenev
-title: Lev Kamenev – <span style="color: var(--b); font-weight: bold;">Bolshevik (Moderate)</span>
+title: Lev Kamenev (<span style="color: var(--b);">Bolshevik — Moderate</span>)
 subtitle: [+ coalition5 +]% – This would prop-up the remaining Moderates. 
 unavailable-subtitle: [+ coalition5 +]% – This would prop-up the remaining Moderates. 
 choose-if: coalition5 > 50
@@ -212,7 +212,7 @@ on-arrival: {!
 !}
 
 @3_sverdlov
-title: Yakov Sverdlov – <span style="color: var(--b); font-weight: bold;">Bolshevik (Leninist)</span>
+title: Yakov Sverdlov (<span style="color: var(--b);">Bolshevik — Leninist</span>)
 subtitle: [+ coalition6 +]% – Considered the default choice. 
 unavailable-subtitle: [+ coalition6 +]% – Considered the default choice. 
 choose-if: coalition6 > 50
@@ -225,7 +225,7 @@ on-arrival: {!
 !}
 
 @3_spiridonova
-title: Maria Spiridonova – <span style="color: var(--lsr); font-weight: bold;">Left-SR</span>
+title: Maria Spiridonova (<span style="color: var(--lsr);">Left-SR</span>)
 subtitle: [+ coalition7 +]% – This would shore up our alliance, but cede considerable leverage. 
 unavailable-subtitle: [+ coalition7 +]% – This would shore up our alliance, but cede considerable leverage. 
 choose-if: coalition7 > 50
@@ -239,7 +239,7 @@ on-arrival: {!
 !}
 
 @3_martov
-title: Iulius Martov – <span style="color: var(--m); font-weight: bold;">Menshevik (Internationalist)</span>
+title: Iulius Martov (<span style="color: var(--m);">Menshevik – Internationalist</span>)
 subtitle: [+ coalition8 +]% – The opposition puts forth their preferred candidate. 
 unavailable-subtitle: [+ coalition8 +]% – The opposition puts forth their preferred candidate. 
 choose-if: coalition8 > 50
@@ -254,9 +254,9 @@ on-arrival: {!
 !}
 
 @3_chernov
-title: Viktor Chernov – <span style="color: var(--sr); font-weight: bold;">SR (Centre)</span>
-subtitle: [+ coalition9 +]% – The right-wing backs their protest candidate. 
-unavailable-subtitle: [+ coalition9 +]% – The right-wing submits a protest candidate. 
+title: Viktor Chernov (<span style="color: var(--sr);">SR – Centre</span>)
+subtitle: [+ coalition9 +]% – The right-wing has a protest candidate in mind. 
+unavailable-subtitle: [+ coalition9 +]% – The right-wing has a protest candidate in mind. 
 choose-if: coalition9 > 50
 go-to: congress_3_menu
 on-arrival: {!
@@ -267,6 +267,7 @@ on-arrival: {!
   Q.leninist_strength -= 10; Q.moderate_strength += 5; Q.leftcom_strength -= 5;
   Q.leninist_dissent += 10; Q.moderate_dissent -= 5; Q.leftcom_dissent += 5;
 !}
+
 
 
 @dissolve_ca
