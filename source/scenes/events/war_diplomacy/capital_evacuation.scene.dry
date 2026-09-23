@@ -2,7 +2,7 @@ title: Evacuation of Petrograd?
 new-page: true
 max-visits: 1
 tags: event
-view-if: northern_progress <= -3 or german_negotiations = 4
+view-if: (northern_progress <= -3 or german_negotiations = 4) and brest_signed != 1
 
 = Evacuation of Petrograd
 
