@@ -26,6 +26,12 @@ window.showMap = function() {
     }
 };
 
+document.addEventListener("click", function(event) {
+    if (event.target.closest("#game-map")) {
+        console.log("Map clicked");
+    }
+});
+
 window.showStats = function() {
     if (window.dendryUI.dendryEngine.state.sceneId.startsWith('library')) {
         window.dendryUI.dendryEngine.goToScene('backSpecialScene');
