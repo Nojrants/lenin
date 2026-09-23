@@ -571,7 +571,7 @@ fetch(
 Province hover and click behavior.
 */
 document.addEventListener(
-    'pointerover',
+    'mouseover',
     function(event) {
 
         var province =
@@ -587,16 +587,6 @@ document.addEventListener(
             !window.mapProvinces[
                 province.id
             ]
-        ) {
-            return;
-        }
-
-        var from =
-            event.relatedTarget;
-
-        if (
-            from &&
-            province.contains(from)
         ) {
             return;
         }
@@ -609,7 +599,7 @@ document.addEventListener(
 );
 
 document.addEventListener(
-    'pointerout',
+    'mouseout',
     function(event) {
 
         var province =
@@ -618,24 +608,6 @@ document.addEventListener(
             );
 
         if (!province) {
-            return;
-        }
-
-        if (
-            !window.mapProvinces[
-                province.id
-            ]
-        ) {
-            return;
-        }
-
-        var to =
-            event.relatedTarget;
-
-        if (
-            to &&
-            province.contains(to)
-        ) {
             return;
         }
 
