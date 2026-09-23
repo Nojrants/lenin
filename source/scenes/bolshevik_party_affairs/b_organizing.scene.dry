@@ -22,7 +22,7 @@ Social Democrats have been organizing among the working class for decades, and h
 
 @soldiers
 title: Soldiers at the front and in the garrisons.
-subtitle: -1 resource2
+subtitle: -1 resources
 choose-if: resources >= 1
 unavailable-subtitle: -1 resources – We lack the resources. 
 on-arrival: {!
