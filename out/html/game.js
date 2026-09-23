@@ -496,7 +496,7 @@ window.renderGameMap = function() {
         );
 
         text.style.fontSize =
-            '24px';
+            '30px';
 
         text.textContent =
             data.divisions;
