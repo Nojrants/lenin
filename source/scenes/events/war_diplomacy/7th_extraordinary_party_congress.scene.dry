@@ -1,0 +1,13 @@
+title: Extraordinary Party Congress Called!
+new-page: true
+max-visits: 1
+tags: event
+view-if: german_negotiations = 4 or german_negotiations = 5
+on-arrival: {!
+  if (Q.party_congress_timer > 4) Q.party_congress_timer = 4;
+  Q.b_dissent * 1.1; 
+!}
+
+[?if german_negotiations = 4 : Incensed by the refusal to make peace with the Germans, Lenin has demanded an extraordinary party congress be convened within the month. Here he hopes to persuade the party-at-large to overturn the decisions of the Central Committee, and force through a peace agreement. Given the desperate circumstances and short notice, it's likely this congress will be poorly attended, giving the Leninists the advantage. Nonetheless, the Leftcoms maintain the fight for a revolutionary war. ?]
+[?if german_negotiations = 5 : With the Central Committee having tentatively approved peace with Germany, Lenin is calling for an extraordinary party congress to be convened within the month, where he can have the party-at-large give its stamp of approval to the peace treaty as well. Given the desperate circumstances and short notice, it's likely this congress will be poorly attended, giving the Leninists the advantage. Nonetheless, the Leftcoms hope to build opposition to the treaty among the delegates. ?]
+
