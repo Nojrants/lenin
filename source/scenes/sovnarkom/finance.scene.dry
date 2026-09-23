@@ -10,161 +10,160 @@ card-image: img/finance.PNG
 
 = Economy Overview
 
-= Economy Overview
+<div class="economy-container">
 
-<table class="economy-table">
+    <div class="economy-column">
 
-<tr>
-    <th colspan="2">MACROECONOMY</th>
-</tr>
+        <div class="economy-box">
+            <h3>Macroeconomy</h3>
 
-<tr>
-    <td>Economic Growth</td>
-    <td class="positive">+4.2%</td>
-</tr>
-<tr>
-    <td>Inflation</td>
-    <td class="negative">12.5%</td>
-</tr>
-<tr>
-    <td>Unemployment</td>
-    <td class="negative">7.3%</td>
-</tr>
-<tr>
-    <td>National Debt</td>
-    <td>42.1%</td>
-</tr>
-<tr>
-    <td>Budget Balance</td>
-    <td class="negative">−2.4%</td>
-</tr>
+            <div class="economy-row">
+                <span>Economic Growth</span>
+                <span class="positive">+4.2%</span>
+            </div>
+            <div class="economy-row">
+                <span>Inflation</span>
+                <span class="negative">12.5%</span>
+            </div>
+            <div class="economy-row">
+                <span>Unemployment</span>
+                <span class="negative">7.3%</span>
+            </div>
+            <div class="economy-row">
+                <span>National Debt</span>
+                <span>42.1%</span>
+            </div>
+            <div class="economy-row">
+                <span>Budget Balance</span>
+                <span class="negative">−2.4%</span>
+            </div>
+        </div>
 
+        <div class="economy-box">
+            <h3>Production</h3>
 
-<tr>
-    <th colspan="2">PRODUCTION</th>
-</tr>
+            <div class="economy-row">
+                <span>Industrial Output</span>
+                <span class="positive">+15%</span>
+            </div>
+            <div class="economy-row">
+                <span>Agricultural Output</span>
+                <span class="positive">+6%</span>
+            </div>
+            <div class="economy-row">
+                <span>Factory Utilization</span>
+                <span>78%</span>
+            </div>
+            <div class="economy-row">
+                <span>Rail Capacity</span>
+                <span class="negative">61%</span>
+            </div>
+        </div>
 
-<tr>
-    <td>Industrial Output</td>
-    <td class="positive">+15%</td>
-</tr>
-<tr>
-    <td>Agricultural Output</td>
-    <td class="positive">+6%</td>
-</tr>
-<tr>
-    <td>Factory Utilization</td>
-    <td>78%</td>
-</tr>
-<tr>
-    <td>Rail Capacity</td>
-    <td class="negative">61%</td>
-</tr>
+        <div class="economy-box">
+            <h3>Trade & Finance</h3>
 
+            <div class="economy-row">
+                <span>Exports</span>
+                <span class="positive">320M₽</span>
+            </div>
+            <div class="economy-row">
+                <span>Imports</span>
+                <span>270M₽</span>
+            </div>
+            <div class="economy-row">
+                <span>Trade Balance</span>
+                <span class="positive">+50M₽</span>
+            </div>
+            <div class="economy-row">
+                <span>Currency Stability</span>
+                <span class="positive">72</span>
+            </div>
+            <div class="economy-row">
+                <span>Investment</span>
+                <span class="positive">64</span>
+            </div>
+        </div>
 
-<tr>
-    <th colspan="2">TRADE & FINANCE</th>
-</tr>
-
-<tr>
-    <td>Exports</td>
-    <td class="positive">320M₽</td>
-</tr>
-<tr>
-    <td>Imports</td>
-    <td>270M₽</td>
-</tr>
-<tr>
-    <td>Trade Balance</td>
-    <td class="positive">+50M₽</td>
-</tr>
-<tr>
-    <td>Currency Stability</td>
-    <td class="positive">72</td>
-</tr>
-<tr>
-    <td>Investment</td>
-    <td class="positive">64</td>
-</tr>
-
-</table>
-
-<table class="economy-table">
-
-<tr>
-    <th colspan="2">POPULATION</th>
-</tr>
-
-<tr>
-    <td>Living Standards</td>
-    <td class="positive">68</td>
-</tr>
-<tr>
-    <td>Poverty</td>
-    <td class="negative">23%</td>
-</tr>
-<tr>
-    <td>Literacy</td>
-    <td class="positive">81%</td>
-</tr>
-<tr>
-    <td>Crime</td>
-    <td class="negative">34</td>
-</tr>
-<tr>
-    <td>Disillusionment</td>
-    <td class="negative">41</td>
-</tr>
+    </div>
 
 
-<tr>
-    <th colspan="2">LABOUR</th>
-</tr>
+    <div class="economy-column">
 
-<tr>
-    <td>Employment</td>
-    <td class="positive">92%</td>
-</tr>
-<tr>
-    <td>Average Wage</td>
-    <td class="positive">145₽</td>
-</tr>
-<tr>
-    <td>Skilled Workers</td>
-    <td>58%</td>
-</tr>
-<tr>
-    <td>Labour Unrest</td>
-    <td class="negative">37</td>
-</tr>
+        <div class="economy-box">
+            <h3>Population</h3>
 
+            <div class="economy-row">
+                <span>Living Standards</span>
+                <span class="positive">68</span>
+            </div>
+            <div class="economy-row">
+                <span>Poverty</span>
+                <span class="negative">23%</span>
+            </div>
+            <div class="economy-row">
+                <span>Literacy</span>
+                <span class="positive">81%</span>
+            </div>
+            <div class="economy-row">
+                <span>Crime</span>
+                <span class="negative">34</span>
+            </div>
+            <div class="economy-row">
+                <span>Disillusionment</span>
+                <span class="negative">41</span>
+            </div>
+        </div>
 
-<tr>
-    <th colspan="2">ECONOMIC CONDITIONS</th>
-</tr>
+        <div class="economy-box">
+            <h3>Labour</h3>
 
-<tr>
-    <td>Business Confidence</td>
-    <td class="positive">58</td>
-</tr>
-<tr>
-    <td>Bank Solvency</td>
-    <td class="positive">81</td>
-</tr>
-<tr>
-    <td>Interest Rate</td>
-    <td>5.5%</td>
-</tr>
-<tr>
-    <td>Corruption</td>
-    <td class="negative">46</td>
-</tr>
-<tr>
-    <td>State Capacity</td>
-    <td class="positive">63</td>
-</tr>
+            <div class="economy-row">
+                <span>Employment</span>
+                <span class="positive">92%</span>
+            </div>
+            <div class="economy-row">
+                <span>Average Wage</span>
+                <span class="positive">145₽</span>
+            </div>
+            <div class="economy-row">
+                <span>Skilled Workers</span>
+                <span>58%</span>
+            </div>
+            <div class="economy-row">
+                <span>Labour Unrest</span>
+                <span class="negative">37</span>
+            </div>
+        </div>
 
-</table>
+        <div class="economy-box">
+            <h3>Economic Conditions</h3>
+
+            <div class="economy-row">
+                <span>Business Confidence</span>
+                <span class="positive">58</span>
+            </div>
+            <div class="economy-row">
+                <span>Bank Solvency</span>
+                <span class="positive">81</span>
+            </div>
+            <div class="economy-row">
+                <span>Interest Rate</span>
+                <span>5.5%</span>
+            </div>
+            <div class="economy-row">
+                <span>Corruption</span>
+                <span class="negative">46</span>
+            </div>
+            <div class="economy-row">
+                <span>State Capacity</span>
+                <span class="positive">63</span>
+            </div>
+        </div>
+
+    </div>
+
+</div>
 
 
 
