@@ -8,15 +8,191 @@ card-image: img/finance.PNG
 
 = Fiscal Policy
 
-For the past few years, the Tsarist regime has been printing money and taking loans from the western allies to finance the war, leading to spiraling inflation. We must bring our fiscal affairs back into balance somehow. Taxation, bonds, and controlling the budget are potential levers.
+= Economy Overview
 
-Current tax levels:
+<div class="economy-container">
 
->**Income Tax:** [+ income_tax : taxation +]
+<div class="economy-column">
 
->**Wealth Tax:** [+ wealth_tax_rate : taxation +]
+<div class="economy-box">
+<h3>Macroeconomy</h3>
 
->Business Tax: [+ business_tax_rate : taxation +]
+GDP Growth
+: [color=#4CAF50]+{Q.gdp_growth}%[/color]
+
+Inflation
+: [color=#E53935]{Q.inflation}%[/color]
+
+Unemployment
+: [color=#E53935]{Q.unemployment}%[/color]
+
+National Debt
+: {Q.national_debt}%
+
+Budget Balance
+: [color=#4CAF50]+{Q.budget_balance}%[/color]
+
+Currency Stability
+: {Q.currency_stability}
+</div>
+
+<div class="economy-box">
+<h3>Public Finances</h3>
+
+Revenue
+: [color=#4CAF50]{Q.total_revenue}₽[/color]
+
+Expenditure
+: [color=#E53935]{Q.total_expenditure}₽[/color]
+
+Deficit / Surplus
+: [color=#4CAF50]{Q.budget_result}₽[/color]
+
+Tax Efficiency
+: {Q.tax_efficiency}
+
+Debt Service
+: [color=#E53935]{Q.debt_service_cost}₽[/color]
+</div>
+
+</div>
+
+<div class="economy-column">
+
+<div class="economy-box">
+<h3>Industry & Trade</h3>
+
+Industrial Output
+: [color=#4CAF50]+{Q.industrial_growth}%[/color]
+
+Agricultural Output
+: [color=#4CAF50]+{Q.agricultural_growth}%[/color]
+
+Exports
+: [color=#4CAF50]{Q.exports}₽[/color]
+
+Imports
+: [color=#E53935]{Q.imports}₽[/color]
+
+Trade Balance
+: [color=#4CAF50]{Q.trade_balance}₽[/color]
+
+Rail Capacity
+: {Q.rail_capacity}
+</div>
+
+<div class="economy-box">
+<h3>Investment</h3>
+
+Domestic Investment
+: {Q.domestic_investment}
+
+Foreign Investment
+: {Q.foreign_investment}
+
+Business Confidence
+: {Q.business_confidence}
+
+Bank Solvency
+: {Q.bank_solvency}
+
+Interest Rate
+: {Q.interest_rate}%
+</div>
+
+</div>
+
+<div class="economy-column">
+
+<div class="economy-box">
+<h3>Population</h3>
+
+Living Standards
+: [color=#4CAF50]{Q.living_standards}[/color]
+
+Poverty
+: [color=#E53935]{Q.poverty}[/color]
+
+Literacy
+: [color=#4CAF50]{Q.literacy}%[/color]
+
+Crime
+: [color=#E53935]{Q.crime}[/color]
+
+Disillusionment
+: [color=#E53935]{Q.disillusionment}[/color]
+
+Population Growth
+: [color=#4CAF50]{Q.population_growth}%[/color]
+</div>
+
+<div class="economy-box">
+<h3>Labour</h3>
+
+Employment
+: {Q.employment}
+
+Skilled Workers
+: {Q.skilled_workers}
+
+Factory Utilization
+: {Q.factory_utilization}%
+
+Average Wage
+: {Q.average_wage}₽
+
+Labour Unrest
+: [color=#E53935]{Q.labour_unrest}[/color]
+</div>
+
+</div>
+
+<div class="economy-column">
+
+<div class="economy-box">
+<h3>Economic Outlook</h3>
+
+Growth Trend
+: [color=#4CAF50]{Q.growth_trend}[/color]
+
+Investor Sentiment
+: {Q.investor_sentiment}
+
+Market Confidence
+: {Q.market_confidence}
+
+Economic Stability
+: {Q.economic_stability}
+
+Corruption
+: [color=#E53935]{Q.corruption}[/color]
+
+State Capacity
+: [color=#4CAF50]{Q.state_capacity}[/color]
+</div>
+
+<div class="economy-box">
+<h3>Summary</h3>
+
+Economic Health
+: {Q.economic_health}
+
+Strengths
+: {Q.economic_strengths}
+
+Weaknesses
+: {Q.economic_weaknesses}
+
+Risk Level
+: [color=#E53935]{Q.economic_risk}[/color]
+
+Forecast
+: {Q.economic_forecast}
+</div>
+
+</div>
+
+</div>
 
 - @taxation
 - @banking
