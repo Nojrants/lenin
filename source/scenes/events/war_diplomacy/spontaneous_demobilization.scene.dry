@@ -1,0 +1,61 @@
+title: Spontaneous Demobilization
+subtitle: The army at the front is collapsing...
+new-page: true
+view-if: month = 11 and week = 3
+max-visits: 1
+tags: event
+on-arrival: {!
+  Q.morale *= 0.8; Q.discipline *= 0.6; Q.war_weariness += 10; 
+  Q.instability += 5; Q.train_capacity *= 0.85;
+  Q.soldiers_unrest -= 15; Q.peasants_unrest += 5; 
+  Q.soldiers_b += 1; 
+  Q.northern_front_soldiers -= 35;
+  Q.western_front_soldiers -= 45;
+  Q.southwestern_front_soldiers -= 100;
+  Q.romanian_front_soldiers -= 50;
+  Q.caucasus_front_soldiers -= 25;
+  Q.reserve_soldiers -= 10; 
+  Q.soldiers -= 4; Q.peasants += 3.5; Q.workers += 0.5;  
+  Q.military_expend -= 5;
+  Q.bagmen_strength += 5; 
+!}
+
+= Demobilization
+
+News of our seizure of power has reached the frontlines, accelerating the ongoing process of "spontaneous demobilization" by the soldiers. Convinced of the futility of continuing the war, and the coming peace we've promised, soldiers are taking it upon themselves to head home en masse. As soviets and committees are established and taken over by local Bolsheviks, they sanction and encourage this process, much to the chagrin of other parties and the old military command. 
+
+Though certainly driving up our support among the soldiers, this demobilization has also caused a number of logistical problems. Railways and roads are clogged with over-capacity, as soldiers mob the transportation lines (or even commandeer them by force), temporarily making it impossible to coordinate domestic shipping and communication. Local governments are overwhelmed by this sudden influx of people. Further challenges will likely present themselves once the soldiers actually start arriving home. Though at the same time, there's not much we could realistically do to stop this even if we wanted to. 
+
+- @encourage
+- @slow
+
+@encourage
+title: Let the soldiers go home.
+on-arrival: {!
+  Q.instability += 2; Q.train_capacity *= 0.95;
+  Q.soldiers_unrest -= 5; Q.peasants_unrest += 5; 
+  Q.soldiers_b += 2; 
+  Q.bagmen_strength += 5; 
+!}
+
+We encourage the process of demobilization.
+
+@slow
+title: Try to restore order, slow the demobilization! 
+on-arrival: {!
+  Q.military_expend += 1; Q.railways_expend += 0.5;
+  Q.instability -= 2; 
+  Q.soldiers_unrest += 10; Q.b_strength -= 5;
+  Q.discipline += 0.1; Q.war_weariness += 5; 
+  Q.northern_front_soldiers += 5;
+  Q.western_front_soldiers += 5;
+  Q.southwestern_front_soldiers += 5;
+  Q.romanian_front_soldiers += 5;
+  Q.caucasus_front_soldiers += 5;
+  Q.reserve_soldiers += 15; 
+  Q.soldiers += 0.5; Q.peasants -= 0.25; Q.workers -= 0.25;  
+!}             
+
+We instruct our party members to halt the demobilization efforts, though it's unclear how much these orders are actually heeded. 
+
+  
