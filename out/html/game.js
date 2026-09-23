@@ -1233,28 +1233,34 @@ scene_id
 ) {
 };
 
+
 window.onNewPage = function() {
 
-var scene =
-    window.dendryUI.dendryEngine
-        .state.sceneId;
+    var scene =
+        window.dendryUI.dendryEngine
+            .state.sceneId;
 
-if (
-    scene != 'root' &&
-    !window.justLoaded
-) {
+    if (
+        scene != 'root' &&
+        !window.justLoaded
+    ) {
+        window.dendryUI.autosave();
+    }
 
-    window.dendryUI.autosave();
+    if (window.justLoaded) {
+        window.justLoaded = false;
+    }
 
-}
-
-if (window.justLoaded) {
-
-    window.justLoaded = false;
-
-}
-
+    if (
+        window.updateSidebar &&
+        window.dendryUI &&
+        window.dendryUI.dendryEngine
+    ) {
+        window.updateSidebar();
+    }
 };
+
+
 
 window.updateSidebar = function() {
 
