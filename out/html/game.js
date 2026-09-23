@@ -234,6 +234,10 @@ window.showMap = function() {
         window.dendryUI.dendryEngine.goToScene('backSpecialScene');
     } else {
         window.dendryUI.dendryEngine.goToScene('map');
+
+        setTimeout(function() {
+            window.loadGameMap();
+        }, 0);
     }
 };
 
@@ -296,14 +300,6 @@ document.addEventListener('click', function(event) {
     console.log('Control:', data.control);
 });
 
-
-/*
- * Load the map when the page is ready.
- */
-
-window.addEventListener('load', function() {
-    window.loadGameMap();
-});
 
 
 
