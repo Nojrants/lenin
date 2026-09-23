@@ -1523,14 +1523,18 @@ if (
 }, 500);
 
 
-function metric_color(value) {
-    if (value > 0) {
-        return "var(--level1-color)";
+function metric_color(value, positive_is_good = true) {
+    if (value == 0) {
+        return "inherit";
     }
 
-    if (value < 0) {
-        return "var(--level7-color)";
+    if (positive_is_good) {
+        return value > 0
+            ? "var(--level1-color)"
+            : "var(--level7-color)";
     }
 
-    return "inherit";
+    return value > 0
+        ? "var(--level7-color)"
+        : "var(--level1-color)";
 }
