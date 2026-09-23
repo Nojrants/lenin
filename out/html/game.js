@@ -12,8 +12,6 @@
   var main = function(dendryUI) {
     ui = dendryUI;
     game = ui.game;
-
-    // Add your custom code here.
   };
 
   var TITLE = "Social Democracy: Petrograd 1917" + '_' + "Autumn Chen";
@@ -39,6 +37,225 @@
       }
   };
 
+
+  /*
+   * TEST PROVINCE DATA
+   *
+   * More provinces can be added here as the SVG is completed.
+   *
+   * controller:
+   *   bolsheviks
+   *   mensheviks
+   *   sr
+   *   neutral
+   *
+   * divisions determines the strength of the province.
+   */
+
+  window.mapProvinces = {
+
+      petrograd: {
+          controller: 'bolsheviks',
+          divisions: 5
+      },
+
+      novgorod: {
+          controller: 'sr',
+          divisions: 2
+      },
+
+      tver: {
+          controller: 'mensheviks',
+          divisions: 1
+      },
+
+      moscow: {
+          controller: 'bolsheviks',
+          divisions: 4
+      }
+
+  };
+
+
+  /*
+   * MAP COLORS
+   */
+
+  window.mapControllerColors = {
+      bolsheviks: '#c00000',
+      mensheviks: '#d69b00',
+      sr: '#4d7f45',
+      neutral: '#888888'
+  };
+
+
+  /*
+   * Get the color for a province.
+   *
+   * More divisions = stronger/more opaque control.
+   */
+
+  window.getMapProvinceOpacity = function(divisions) {
+      var opacity = 0.30 + (divisions * 0.12);
+
+      if (opacity > 0.90) {
+          opacity = 0.90;
+      }
+
+      return opacity;
+  };
+
+
+  /*
+   * Render the provinces and division counters.
+   */
+
+  window.renderGameMap = function() {
+      var container = document.getElementById('map-container');
+
+      if (!container) {
+          return;
+      }
+
+      var svg = container.querySelector('svg');
+
+      if (!svg) {
+          return;
+      }
+
+      /*
+       * Remove old division counters if the map is being rendered again.
+       */
+
+      var oldLabels = svg.querySelector('#map-division-labels');
+
+      if (oldLabels) {
+          oldLabels.remove();
+      }
+
+
+      /*
+       * Apply province colors.
+       */
+
+      Object.keys(window.mapProvinces).forEach(function(id) {
+
+          var provinceData = window.mapProvinces[id];
+          var province = svg.querySelector('#' + id);
+
+          if (!province) {
+              console.log('Map province not found in SVG:', id);
+              return;
+          }
+
+          var color = window.mapControllerColors[provinceData.controller];
+
+          if (!color) {
+              color = window.mapControllerColors.neutral;
+          }
+
+          province.style.fill = color;
+          province.style.fillOpacity =
+              window.getMapProvinceOpacity(provinceData.divisions);
+
+          province.style.stroke = '#222';
+          province.style.strokeWidth = '1';
+          province.style.cursor = 'pointer';
+      });
+
+
+      /*
+       * Create the layer containing the division counters.
+       */
+
+      var labelLayer = document.createElementNS(
+          'http://www.w3.org/2000/svg',
+          'g'
+      );
+
+      labelLayer.setAttribute('id', 'map-division-labels');
+
+      svg.appendChild(labelLayer);
+
+
+      /*
+       * Add a division counter to every defined province.
+       */
+
+      Object.keys(window.mapProvinces).forEach(function(id) {
+
+          var provinceData = window.mapProvinces[id];
+          var province = svg.querySelector('#' + id);
+
+          if (!province) {
+              return;
+          }
+
+          var box;
+
+          try {
+              box = province.getBBox();
+          } catch (error) {
+              console.log('Could not determine map position for:', id);
+              return;
+          }
+
+          var x = box.x + (box.width / 2);
+          var y = box.y + (box.height / 2);
+
+
+          /*
+           * Counter circle.
+           */
+
+          var circle = document.createElementNS(
+              'http://www.w3.org/2000/svg',
+              'circle'
+          );
+
+          circle.setAttribute('cx', x);
+          circle.setAttribute('cy', y);
+          circle.setAttribute('r', 13);
+
+          circle.style.fill = '#ffffff';
+          circle.style.stroke = '#222222';
+          circle.style.strokeWidth = '2';
+          circle.style.pointerEvents = 'none';
+
+          labelLayer.appendChild(circle);
+
+
+          /*
+           * Division number.
+           */
+
+          var text = document.createElementNS(
+              'http://www.w3.org/2000/svg',
+              'text'
+          );
+
+          text.setAttribute('x', x);
+          text.setAttribute('y', y);
+          text.setAttribute('text-anchor', 'middle');
+          text.setAttribute('dominant-baseline', 'central');
+
+          text.textContent = provinceData.divisions;
+
+          text.style.fontFamily = 'Arial, sans-serif';
+          text.style.fontSize = '14px';
+          text.style.fontWeight = 'bold';
+          text.style.fill = '#111111';
+          text.style.pointerEvents = 'none';
+
+          labelLayer.appendChild(text);
+      });
+  };
+
+
+  /*
+   * Load the SVG map.
+   */
+
   window.loadGameMap = function() {
       var container = document.getElementById('map-container');
 
@@ -51,32 +268,68 @@
               return response.text();
           })
           .then(function(svg) {
+
               container.innerHTML = svg;
+
+              window.renderGameMap();
           })
           .catch(function(error) {
               console.error('Failed to load game map:', error);
           });
   };
 
+
+  /*
+   * Province click handling.
+   */
+
   document.addEventListener('click', function(event) {
-      var province = event.target.closest('#map-container svg [id]');
+
+      var province = event.target.closest(
+          '#map-container svg [id]'
+      );
 
       if (!province) {
           return;
       }
 
-      console.log('Province clicked:', province.id);
+      var id = province.id;
+      var provinceData = window.mapProvinces[id];
+
+      /*
+       * Ignore SVG elements that aren't provinces
+       * defined in our map data.
+       */
+
+      if (!provinceData) {
+          return;
+      }
+
+      console.log(
+          'Province clicked:',
+          id,
+          provinceData
+      );
+
   });
 
 
+  /*
+   * OPTIONS
+   */
+
   window.showOptions = function() {
       var save_element = document.getElementById('options');
+
       window.populateOptions();
+
       save_element.style.display = "block";
+
       if (!save_element.onclick) {
           save_element.onclick = function(evt) {
               var target = evt.target;
               var save_element = document.getElementById('options');
+
               if (target == save_element) {
                   window.hideOptions();
               }
@@ -153,7 +406,9 @@
       window.dendryUI.saveSettings();
   };
 
+
   // populates the checkboxes in the options view
+
   window.populateOptions = function() {
     var disable_bg = window.dendryUI.disable_bg;
     var animate = window.dendryUI.animate;
@@ -191,8 +446,9 @@
     }
   };
 
+
   // This function allows you to modify the text before it's displayed.
-  // E.g. wrapping chat-like messages in spans.
+
   window.displayText = function(text) {
       return text;
   };
@@ -224,6 +480,7 @@
       }
   };
   
+
   window.achievementSound = new Audio('music/achieve.mp3');
 
   window.showAchievement = function(name, description, image) {
@@ -234,6 +491,7 @@
       notification.querySelector('.achievement-image img').src = image;
 
       window.achievementSound.currentTime = 0;
+
       window.achievementSound.play().catch(function(error) {
           console.log("Achievement sound failed:", error);
       });
@@ -248,6 +506,7 @@
 
   // Displays an achievement notification.
   // The actual achievement is still unlocked by this.achieve().
+
   window.unlockAchievement = function(id) {
       var achievement = window.achievements[id];
 
@@ -262,6 +521,7 @@
           achievement.image
       );
   };
+
 
   window.renderAchievements = function() {
       var qualities = window.dendryUI.dendryEngine.state.qualities;
@@ -309,10 +569,13 @@
 
 
   // This function allows you to do something in response to signals.
+
   window.handleSignal = function(signal, event, scene_id) {
   };
   
+
   // This function runs on a new page. Right now, this auto-saves.
+
   window.onNewPage = function() {
       var scene = window.dendryUI.dendryEngine.state.sceneId;
 
@@ -325,17 +588,30 @@
       }
   };
 
+
   // tabbed browsing
+
   window.updateSidebar = function() {
       $('#qualities').empty();
+
       var scene = dendryUI.game.scenes[window.statusTab];
+
       dendryUI.dendryEngine._runActions(scene.onArrival);
-      var displayContent = dendryUI.dendryEngine._makeDisplayContent(scene.content, true);
-      $('#qualities').append(dendryUI.contentToHTML.convert(displayContent));
+
+      var displayContent =
+          dendryUI.dendryEngine._makeDisplayContent(scene.content, true);
+
+      $('#qualities').append(
+          dendryUI.contentToHTML.convert(displayContent)
+      );
   };
 
+
   window.changeTab = function(newTab, tabId) {
-      if (tabId == 'poll_tab' && dendryUI.dendryEngine.state.qualities.historical_mode) {
+      if (
+          tabId == 'poll_tab' &&
+          dendryUI.dendryEngine.state.qualities.historical_mode
+      ) {
           window.alert('Polls are not available in historical mode.');
           return;
       }
@@ -344,10 +620,12 @@
       var tabButtons = document.getElementsByClassName('tab_button');
 
       for (i = 0; i < tabButtons.length; i++) {
-          tabButtons[i].className = tabButtons[i].className.replace(' active', '');
+          tabButtons[i].className =
+              tabButtons[i].className.replace(' active', '');
       }
 
       tabButton.className += ' active';
+
       window.statusTab = newTab;
       window.updateSidebar();
   };
@@ -357,6 +635,7 @@
       window.updateSidebar();
   };
 
+
   /*
    * This function copied from the code for Infinite Space Battle Simulator
    *
@@ -365,11 +644,14 @@
    * max and min - numbers
    * colors - if true/1, will use some color scheme - green to yellow to red for high to low
    * */
+
   window.generateBar = function(quality, qualityName, max, min, colors) {
       var bar = document.createElement('div');
       bar.className = 'bar';
+
       var value = document.createElement('div');
       value.className = 'barValue';
+
       var width = (quality - min)/(max - min);
 
       if (width > 1) {
@@ -381,7 +663,8 @@
       value.style.width = Math.round(width*100) + '%';
 
       if (colors) {
-          value.style.backgroundColor = window.probToColor(width*100);
+          value.style.backgroundColor =
+              window.probToColor(width*100);
       }
 
       bar.textContent = qualityName + ': ' + quality;
@@ -391,6 +674,7 @@
       }
 
       bar.appendChild(value);
+
       return bar;
   };
 
@@ -399,22 +683,30 @@
   window.statusTab = "status";
   window.dendryModifyUI = main;
 
-  console.log("Modifying stats: see dendryUI.dendryEngine.state.qualities");
+  console.log(
+      "Modifying stats: see dendryUI.dendryEngine.state.qualities"
+  );
+
 
   window.onload = function() {
-      window.dendryUI.loadSettings({show_portraits: false});
+
+      window.dendryUI.loadSettings({
+          show_portraits: false
+      });
 
       if (window.dendryUI.dark_mode) {
           document.body.classList.add('dark-mode');
       }
 
-      window.pinnedCardsDescription = "Advisor cards - actions are only usable once per 6 months.";
+      window.pinnedCardsDescription =
+          "Advisor cards - actions are only usable once per 6 months.";
 
       // Load the map after the page has loaded.
       window.loadGameMap();
   };
 
 }());
+
 
 setInterval(function() {
     if (document.getElementById('achievement-playthrough')) {
