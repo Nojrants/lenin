@@ -17,30 +17,36 @@
   var TITLE = "Social Democracy: Petrograd 1917" + '_' + "Autumn Chen";
 
 
- /*
+
+  
+/*
  * MAP
  */
 
 window.mapProvinces = {
     petrograd: {
+        name: 'Petrograd',
         controller: 'bolsheviks',
         divisions: 5,
         control: 100
     },
 
     novgorod: {
+        name: 'Novgorod',
         controller: 'sr',
         divisions: 2,
         control: 70
     },
 
     tver: {
+        name: 'Tver',
         controller: 'mensheviks',
         divisions: 1,
         control: 40
     },
 
     moscow: {
+        name: 'Moscow',
         controller: 'bolsheviks',
         divisions: 4,
         control: 85
@@ -49,9 +55,7 @@ window.mapProvinces = {
 
 
 /*
- * Party colors
- *
- * These correspond directly to the CSS variables in game.css.
+ * Party colors.
  */
 
 window.mapPartyColors = {
@@ -68,7 +72,24 @@ window.mapPartyColors = {
 
 
 /*
- * Get a party's base color from game.css.
+ * Party display names.
+ */
+
+window.mapPartyNames = {
+    bolsheviks: 'Bolsheviks',
+    sdi: 'Social Democrats',
+    left_m: 'Left Mensheviks',
+    mensheviks: 'Mensheviks',
+    right_m: 'Right Mensheviks',
+    lsr: 'Left SRs',
+    sr: 'Socialist-Revolutionaries',
+    right_sr: 'Right SRs',
+    ns: 'Popular Socialists'
+};
+
+
+/*
+ * Get party color.
  */
 
 window.getMapPartyColor = function(controller) {
@@ -87,13 +108,7 @@ window.getMapPartyColor = function(controller) {
 
 
 /*
- * Lighten a party color according to territorial control.
- *
- * 100 control = full party color
- * 75 control  = 25% white
- * 50 control  = 50% white
- * 25 control  = 75% white
- * 0 control   = white
+ * Get province color based on degree of control.
  */
 
 window.getMapProvinceColor = function(controller, control) {
@@ -102,6 +117,132 @@ window.getMapProvinceColor = function(controller, control) {
     control = Math.max(0, Math.min(100, control));
 
     return 'color-mix(in srgb, ' + color + ' ' + control + '%, white)';
+};
+
+
+/*
+ * Create the map layout.
+ */
+
+window.createMapLayout = function() {
+    var container = document.getElementById('map-container');
+
+    if (!container) {
+        return;
+    }
+
+    container.innerHTML = '';
+
+    var layout = document.createElement('div');
+    layout.className = 'map-layout';
+
+    var frame = document.createElement('div');
+    frame.className = 'map-frame';
+
+    var panel = document.createElement('div');
+    panel.className = 'map-province-panel';
+    panel.id = 'map-province-panel';
+
+    layout.appendChild(frame);
+    layout.appendChild(panel);
+
+    container.appendChild(layout);
+
+    return frame;
+};
+
+
+/*
+ * Display province information.
+ */
+
+window.showMapProvince = function(provinceId) {
+    var data = window.mapProvinces[provinceId];
+    var panel = document.getElementById('map-province-panel');
+
+    if (!data || !panel) {
+        return;
+    }
+
+    /*
+     * Remove previous selection.
+     */
+
+    document.querySelectorAll(
+        '#map-container svg .map-province-selected'
+    ).forEach(function(province) {
+        province.classList.remove('map-province-selected');
+    });
+
+
+    /*
+     * Select the new province.
+     */
+
+    var province = document.querySelector(
+        '#map-container svg #' + provinceId
+    );
+
+    if (province) {
+        province.classList.add('map-province-selected');
+    }
+
+
+    /*
+     * Populate the information panel.
+     */
+
+    var partyName = window.mapPartyNames[data.controller] || data.controller;
+
+    panel.innerHTML =
+        '<h2>' + (data.name || provinceId) + '</h2>' +
+
+        '<div class="province-stat">' +
+            '<div class="province-stat-label">Controller</div>' +
+            '<div class="province-stat-value">' +
+                partyName +
+            '</div>' +
+        '</div>' +
+
+        '<div class="province-stat">' +
+            '<div class="province-stat-label">Control</div>' +
+            '<div class="province-stat-value">' +
+                data.control + '%' +
+            '</div>' +
+        '</div>' +
+
+        '<div class="province-stat">' +
+            '<div class="province-stat-label">Divisions</div>' +
+            '<div class="province-stat-value">' +
+                data.divisions +
+            '</div>' +
+        '</div>';
+
+    panel.classList.add('active');
+
+    window.selectedMapProvince = provinceId;
+};
+
+
+/*
+ * Deselect province.
+ */
+
+window.clearMapProvince = function() {
+    document.querySelectorAll(
+        '#map-container svg .map-province-selected'
+    ).forEach(function(province) {
+        province.classList.remove('map-province-selected');
+    });
+
+    var panel = document.getElementById('map-province-panel');
+
+    if (panel) {
+        panel.classList.remove('active');
+        panel.innerHTML = '';
+    }
+
+    window.selectedMapProvince = null;
 };
 
 
@@ -116,27 +257,20 @@ window.renderGameMap = function() {
         return;
     }
 
-    var svg = container.querySelector('svg');
+    var svg = container.querySelector('.map-frame svg');
 
     if (!svg) {
         return;
     }
-
-    /*
-     * Remove counters from a previous render.
-     */
 
     svg.querySelectorAll('.map-division-counter').forEach(function(counter) {
         counter.remove();
     });
 
 
-    /*
-     * Render each province.
-     */
-
     Object.keys(window.mapProvinces).forEach(function(provinceId) {
         var data = window.mapProvinces[provinceId];
+
         var province = svg.querySelector('#' + provinceId);
 
         if (!province) {
@@ -144,8 +278,9 @@ window.renderGameMap = function() {
             return;
         }
 
+
         /*
-         * Province color.
+         * Color province.
          */
 
         province.style.fill = window.getMapProvinceColor(
@@ -167,21 +302,25 @@ window.renderGameMap = function() {
 
         var bbox = province.getBBox();
 
-        var x = data.label ? data.label[0] : bbox.x + bbox.width / 2;
-        var y = data.label ? data.label[1] : bbox.y + bbox.height / 2;
+        var x = data.label
+            ? data.label[0]
+            : bbox.x + bbox.width / 2;
+
+        var y = data.label
+            ? data.label[1]
+            : bbox.y + bbox.height / 2;
+
 
         var group = document.createElementNS(
             'http://www.w3.org/2000/svg',
             'g'
         );
 
-        group.setAttribute('class', 'map-division-counter');
-        group.style.pointerEvents = 'none';
+        group.setAttribute(
+            'class',
+            'map-division-counter'
+        );
 
-
-        /*
-         * Counter circle.
-         */
 
         var circle = document.createElementNS(
             'http://www.w3.org/2000/svg',
@@ -191,16 +330,9 @@ window.renderGameMap = function() {
         circle.setAttribute('cx', x);
         circle.setAttribute('cy', y);
         circle.setAttribute('r', 12);
-        circle.setAttribute('fill', '#fff');
-        circle.setAttribute('stroke', '#000');
-        circle.setAttribute('stroke-width', '1');
 
         group.appendChild(circle);
 
-
-        /*
-         * Division number.
-         */
 
         var text = document.createElementNS(
             'http://www.w3.org/2000/svg',
@@ -211,10 +343,7 @@ window.renderGameMap = function() {
         text.setAttribute('y', y);
         text.setAttribute('text-anchor', 'middle');
         text.setAttribute('dominant-baseline', 'central');
-        text.setAttribute('font-family', 'Arial, sans-serif');
         text.setAttribute('font-size', '12');
-        text.setAttribute('font-weight', 'bold');
-        text.setAttribute('fill', '#000');
 
         text.textContent = data.divisions;
 
@@ -222,36 +351,6 @@ window.renderGameMap = function() {
 
         svg.appendChild(group);
     });
-};
-
-
-/*
- * Map navigation.
- */
-
-window.showMap = function() {
-    var container = document.getElementById('map-container');
-
-    if (window.dendryUI.dendryEngine.state.sceneId.startsWith('map')) {
-        container.classList.remove('active');
-        window.dendryUI.dendryEngine.goToScene('backSpecialScene');
-    } else {
-        window.dendryUI.dendryEngine.goToScene('map');
-
-        setTimeout(function() {
-            container.classList.add('active');
-            window.loadGameMap();
-        }, 0);
-    }
-};
-
-
-window.showStats = function() {
-    if (window.dendryUI.dendryEngine.state.sceneId.startsWith('library')) {
-        window.dendryUI.dendryEngine.goToScene('backSpecialScene');
-    } else {
-        window.dendryUI.dendryEngine.goToScene('library');
-    }
 };
 
 
@@ -266,12 +365,18 @@ window.loadGameMap = function() {
         return;
     }
 
+    var frame = window.createMapLayout();
+
+    if (!frame) {
+        return;
+    }
+
     fetch('img/European Russia Map.svg')
         .then(function(response) {
             return response.text();
         })
         .then(function(svg) {
-            container.innerHTML = svg;
+            frame.innerHTML = svg;
 
             window.renderGameMap();
         })
@@ -282,27 +387,100 @@ window.loadGameMap = function() {
 
 
 /*
- * Province clicking.
+ * Province hover and click behavior.
  */
 
-document.addEventListener('click', function(event) {
-    var province = event.target.closest('#map-container svg [id]');
+document.addEventListener('mouseover', function(event) {
+    var province = event.target.closest(
+        '#map-container svg [id]'
+    );
 
     if (!province) {
         return;
     }
 
-    var data = window.mapProvinces[province.id];
-
-    if (!data) {
+    if (!window.mapProvinces[province.id]) {
         return;
     }
 
-    console.log('Province clicked:', province.id);
-    console.log('Controller:', data.controller);
-    console.log('Divisions:', data.divisions);
-    console.log('Control:', data.control);
+    province.classList.add('map-province-hover');
 });
+
+
+document.addEventListener('mouseout', function(event) {
+    var province = event.target.closest(
+        '#map-container svg [id]'
+    );
+
+    if (!province) {
+        return;
+    }
+
+    province.classList.remove('map-province-hover');
+});
+
+
+document.addEventListener('click', function(event) {
+    var province = event.target.closest(
+        '#map-container svg [id]'
+    );
+
+    if (!province) {
+        return;
+    }
+
+    if (!window.mapProvinces[province.id]) {
+        return;
+    }
+
+    if (window.selectedMapProvince === province.id) {
+        window.clearMapProvince();
+    } else {
+        window.showMapProvince(province.id);
+    }
+});
+
+
+/*
+ * Map navigation.
+ */
+
+window.showMap = function() {
+    var container = document.getElementById('map-container');
+
+    if (window.dendryUI.dendryEngine.state.sceneId.startsWith('map')) {
+        if (container) {
+            container.classList.remove('active');
+        }
+
+        window.clearMapProvince();
+
+        window.dendryUI.dendryEngine.goToScene(
+            'backSpecialScene'
+        );
+
+    } else {
+
+        window.dendryUI.dendryEngine.goToScene('map');
+
+        setTimeout(function() {
+            if (container) {
+                container.classList.add('active');
+            }
+
+            window.loadGameMap();
+        }, 0);
+    }
+};
+
+
+window.showStats = function() {
+    if (window.dendryUI.dendryEngine.state.sceneId.startsWith('library')) {
+        window.dendryUI.dendryEngine.goToScene('backSpecialScene');
+    } else {
+        window.dendryUI.dendryEngine.goToScene('library');
+    }
+};
 
 
 
