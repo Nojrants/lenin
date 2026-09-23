@@ -17,422 +17,298 @@
   var TITLE = "Social Democracy: Petrograd 1917" + '_' + "Autumn Chen";
 
 
-  /*
-   * MAP
-   */
-
-  window.showMap = function() {
-      if (window.dendryUI.dendryEngine.state.sceneId.startsWith('map')) {
-          window.dendryUI.dendryEngine.goToScene('backSpecialScene');
-      } else {
-          window.dendryUI.dendryEngine.goToScene('map');
-      }
-  };
-
-  window.showStats = function() {
-      if (window.dendryUI.dendryEngine.state.sceneId.startsWith('library')) {
-          window.dendryUI.dendryEngine.goToScene('backSpecialScene');
-      } else {
-          window.dendryUI.dendryEngine.goToScene('library');
-      }
-  };
-
-
-  /*
-   * TEST PROVINCE DATA
-   *
-   * control:
-   *   100 = full party color
-   *   0 = completely white
-   *
-   * divisions:
-   *   Number of divisions stationed in the province.
-   *
-   * label:
-   *   Optional [x, y] position for the division counter.
-   *   If omitted, the center of the province is used.
-   */
-
-  window.mapProvinces = {
-
-      petrograd: {
-          controller: 'bolsheviks',
-          divisions: 5,
-          control: 100
-      },
-
-      novgorod: {
-          controller: 'sr',
-          divisions: 2,
-          control: 70
-      },
-
-      tver: {
-          controller: 'mensheviks',
-          divisions: 1,
-          control: 40
-      },
-
-      moscow: {
-          controller: 'bolsheviks',
-          divisions: 4,
-          control: 85
-      }
-
-  };
-
-
-  /*
-   * Find an existing CSS variable for a party.
-   *
-   * This searches the variables already defined in game.css,
-   * so the map does not need its own duplicate color definitions.
-   */
-
-  window.getMapPartyColor = function(controller) {
-
-      var aliases = {
-          bolsheviks: [
-              'bolshevik',
-              'bolsheviks'
-          ],
-
-          mensheviks: [
-              'menshevik',
-              'mensheviks'
-          ],
+ /*
+ * MAP
+ */
+
+window.mapProvinces = {
+    petrograd: {
+        controller: 'bolsheviks',
+        divisions: 5,
+        control: 100
+    },
+
+    novgorod: {
+        controller: 'sr',
+        divisions: 2,
+        control: 70
+    },
+
+    tver: {
+        controller: 'mensheviks',
+        divisions: 1,
+        control: 40
+    },
+
+    moscow: {
+        controller: 'bolsheviks',
+        divisions: 4,
+        control: 85
+    }
+};
+
+
+/*
+ * Party colors
+ *
+ * These correspond directly to the CSS variables in game.css.
+ */
+
+window.mapPartyColors = {
+    bolsheviks: '--bolshevik-color',
+    sdi: '--sdi-color',
+    left_m: '--left-m-color',
+    mensheviks: '--m-color',
+    right_m: '--right_m-color',
+    lsr: '--lsr-color',
+    sr: '--sr-color',
+    right_sr: '--right-sr-color',
+    ns: '--ns-color'
+};
 
-          sr: [
-              'sr',
-              'socialist-revolutionary',
-              'socialist_revolutionary'
-          ]
-      };
+
+/*
+ * Get a party's base color from game.css.
+ */
 
-      var names = aliases[controller];
+window.getMapPartyColor = function(controller) {
+    var variable = window.mapPartyColors[controller];
 
-      if (!names) {
-          return '#888888';
-      }
+    if (!variable) {
+        return '#999';
+    }
 
-      var styles = getComputedStyle(document.documentElement);
+    var color = getComputedStyle(document.body)
+        .getPropertyValue(variable)
+        .trim();
 
-      for (var i = 0; i < styles.length; i++) {
+    return color || '#999';
+};
 
-          var property = styles[i];
 
-          if (property.indexOf('--') !== 0) {
-              continue;
-          }
+/*
+ * Lighten a party color according to territorial control.
+ *
+ * 100 control = full party color
+ * 75 control  = 25% white
+ * 50 control  = 50% white
+ * 25 control  = 75% white
+ * 0 control   = white
+ */
 
-          var propertyName = property.toLowerCase();
+window.getMapProvinceColor = function(controller, control) {
+    var color = window.getMapPartyColor(controller);
 
-          for (var j = 0; j < names.length; j++) {
+    control = Math.max(0, Math.min(100, control));
 
-              if (propertyName.indexOf(names[j]) !== -1) {
+    return 'color-mix(in srgb, ' + color + ' ' + control + '%, white)';
+};
 
-                  var value = styles
-                      .getPropertyValue(property)
-                      .trim();
 
-                  if (value) {
-                      return value;
-                  }
-              }
-          }
-      }
+/*
+ * Render province colors and division counters.
+ */
 
-      return '#888888';
-  };
+window.renderGameMap = function() {
+    var container = document.getElementById('map-container');
 
+    if (!container) {
+        return;
+    }
+
+    var svg = container.querySelector('svg');
 
-  /*
-   * Produce a lighter shade of the party color based on control.
-   *
-   * 100 control = full party color
-   * 75 control  = 25% white
-   * 50 control  = 50% white
-   * 25 control  = 75% white
-   * 0 control   = white
-   */
+    if (!svg) {
+        return;
+    }
 
-  window.getMapProvinceColor = function(controller, control) {
+    /*
+     * Remove counters from a previous render.
+     */
 
-      var color = window.getMapPartyColor(controller);
+    svg.querySelectorAll('.map-division-counter').forEach(function(counter) {
+        counter.remove();
+    });
 
-      control = Number(control);
 
-      if (isNaN(control)) {
-          control = 0;
-      }
+    /*
+     * Render each province.
+     */
 
-      if (control < 0) {
-          control = 0;
-      }
+    Object.keys(window.mapProvinces).forEach(function(provinceId) {
+        var data = window.mapProvinces[provinceId];
+        var province = svg.querySelector('#' + provinceId);
 
-      if (control > 100) {
-          control = 100;
-      }
+        if (!province) {
+            console.warn('Province not found in SVG:', provinceId);
+            return;
+        }
 
-      return 'color-mix(in srgb, ' +
-          color + ' ' +
-          control + '%, white)';
-  };
+        /*
+         * Province color.
+         */
 
+        province.style.fill = window.getMapProvinceColor(
+            data.controller,
+            data.control
+        );
 
-  /*
-   * Render the provinces and division counters.
-   */
+        province.style.stroke = '#000';
+        province.style.strokeWidth = '1';
 
-  window.renderGameMap = function() {
 
-      var container = document.getElementById('map-container');
+        /*
+         * Division counter.
+         */
 
-      if (!container) {
-          return;
-      }
+        if (data.divisions === undefined) {
+            return;
+        }
 
-      var svg = container.querySelector('svg');
+        var bbox = province.getBBox();
 
-      if (!svg) {
-          return;
-      }
+        var x = data.label ? data.label[0] : bbox.x + bbox.width / 2;
+        var y = data.label ? data.label[1] : bbox.y + bbox.height / 2;
 
+        var group = document.createElementNS(
+            'http://www.w3.org/2000/svg',
+            'g'
+        );
 
-      /*
-       * Remove old division counters if the map
-       * is being rendered again.
-       */
+        group.setAttribute('class', 'map-division-counter');
+        group.style.pointerEvents = 'none';
 
-      var oldLabels = svg.querySelector('#map-division-labels');
 
-      if (oldLabels) {
-          oldLabels.remove();
-      }
+        /*
+         * Counter circle.
+         */
 
+        var circle = document.createElementNS(
+            'http://www.w3.org/2000/svg',
+            'circle'
+        );
 
-      /*
-       * Apply province colors.
-       */
+        circle.setAttribute('cx', x);
+        circle.setAttribute('cy', y);
+        circle.setAttribute('r', 12);
+        circle.setAttribute('fill', '#fff');
+        circle.setAttribute('stroke', '#000');
+        circle.setAttribute('stroke-width', '1');
 
-      Object.keys(window.mapProvinces).forEach(function(id) {
+        group.appendChild(circle);
 
-          var provinceData = window.mapProvinces[id];
-          var province = svg.querySelector('#' + id);
 
-          if (!province) {
-              console.log(
-                  'Map province not found in SVG:',
-                  id
-              );
+        /*
+         * Division number.
+         */
 
-              return;
-          }
+        var text = document.createElementNS(
+            'http://www.w3.org/2000/svg',
+            'text'
+        );
 
-          province.style.fill =
-              window.getMapProvinceColor(
-                  provinceData.controller,
-                  provinceData.control
-              );
+        text.setAttribute('x', x);
+        text.setAttribute('y', y);
+        text.setAttribute('text-anchor', 'middle');
+        text.setAttribute('dominant-baseline', 'central');
+        text.setAttribute('font-family', 'Arial, sans-serif');
+        text.setAttribute('font-size', '12');
+        text.setAttribute('font-weight', 'bold');
+        text.setAttribute('fill', '#000');
 
-          province.style.stroke = '#222';
-          province.style.strokeWidth = '1';
-          province.style.cursor = 'pointer';
-      });
+        text.textContent = data.divisions;
 
+        group.appendChild(text);
 
-      /*
-       * Create the layer containing division counters.
-       */
+        svg.appendChild(group);
+    });
+};
 
-      var labelLayer = document.createElementNS(
-          'http://www.w3.org/2000/svg',
-          'g'
-      );
 
-      labelLayer.setAttribute(
-          'id',
-          'map-division-labels'
-      );
+/*
+ * Map navigation.
+ */
 
-      svg.appendChild(labelLayer);
+window.showMap = function() {
+    if (window.dendryUI.dendryEngine.state.sceneId.startsWith('map')) {
+        window.dendryUI.dendryEngine.goToScene('backSpecialScene');
+    } else {
+        window.dendryUI.dendryEngine.goToScene('map');
+    }
+};
 
 
-      /*
-       * Add a division counter to every defined province.
-       */
+window.showStats = function() {
+    if (window.dendryUI.dendryEngine.state.sceneId.startsWith('library')) {
+        window.dendryUI.dendryEngine.goToScene('backSpecialScene');
+    } else {
+        window.dendryUI.dendryEngine.goToScene('library');
+    }
+};
 
-      Object.keys(window.mapProvinces).forEach(function(id) {
 
-          var provinceData = window.mapProvinces[id];
-          var province = svg.querySelector('#' + id);
+/*
+ * Load the SVG map.
+ */
 
-          if (!province) {
-              return;
-          }
+window.loadGameMap = function() {
+    var container = document.getElementById('map-container');
 
-          var x;
-          var y;
+    if (!container) {
+        return;
+    }
 
+    fetch('img/European Russia Map.svg')
+        .then(function(response) {
+            return response.text();
+        })
+        .then(function(svg) {
+            container.innerHTML = svg;
 
-          /*
-           * Use manually specified label position if one exists.
-           */
+            window.renderGameMap();
+        })
+        .catch(function(error) {
+            console.error('Failed to load game map:', error);
+        });
+};
 
-          if (
-              provinceData.label &&
-              provinceData.label.length >= 2
-          ) {
 
-              x = provinceData.label[0];
-              y = provinceData.label[1];
+/*
+ * Province clicking.
+ */
 
-          } else {
+document.addEventListener('click', function(event) {
+    var province = event.target.closest('#map-container svg [id]');
 
-              /*
-               * Otherwise use the center of the SVG bounding box.
-               */
+    if (!province) {
+        return;
+    }
 
-              var box;
+    var data = window.mapProvinces[province.id];
 
-              try {
-                  box = province.getBBox();
-              } catch (error) {
-                  console.log(
-                      'Could not determine map position for:',
-                      id
-                  );
+    if (!data) {
+        return;
+    }
 
-                  return;
-              }
+    console.log('Province clicked:', province.id);
+    console.log('Controller:', data.controller);
+    console.log('Divisions:', data.divisions);
+    console.log('Control:', data.control);
+});
 
-              x = box.x + (box.width / 2);
-              y = box.y + (box.height / 2);
-          }
 
+/*
+ * Load the map when the page is ready.
+ */
 
-          /*
-           * Counter circle.
-           */
+window.addEventListener('load', function() {
+    window.loadGameMap();
+});
 
-          var circle = document.createElementNS(
-              'http://www.w3.org/2000/svg',
-              'circle'
-          );
 
-          circle.setAttribute('cx', x);
-          circle.setAttribute('cy', y);
-          circle.setAttribute('r', 13);
 
-          circle.style.fill = '#ffffff';
-          circle.style.stroke = '#222222';
-          circle.style.strokeWidth = '2';
-          circle.style.pointerEvents = 'none';
 
-          labelLayer.appendChild(circle);
-
-
-          /*
-           * Division number.
-           */
-
-          var text = document.createElementNS(
-              'http://www.w3.org/2000/svg',
-              'text'
-          );
-
-          text.setAttribute('x', x);
-          text.setAttribute('y', y);
-          text.setAttribute('text-anchor', 'middle');
-          text.setAttribute(
-              'dominant-baseline',
-              'central'
-          );
-
-          text.textContent = provinceData.divisions;
-
-          text.style.fontFamily =
-              'Arial, sans-serif';
-
-          text.style.fontSize = '14px';
-          text.style.fontWeight = 'bold';
-          text.style.fill = '#111111';
-          text.style.pointerEvents = 'none';
-
-          labelLayer.appendChild(text);
-      });
-  };
-
-
-  /*
-   * Load the SVG map.
-   */
-
-  window.loadGameMap = function() {
-
-      var container =
-          document.getElementById('map-container');
-
-      if (!container) {
-          return;
-      }
-
-      fetch('img/European Russia Map.svg')
-
-          .then(function(response) {
-              return response.text();
-          })
-
-          .then(function(svg) {
-
-              container.innerHTML = svg;
-
-              window.renderGameMap();
-          })
-
-          .catch(function(error) {
-              console.error(
-                  'Failed to load game map:',
-                  error
-              );
-          });
-  };
-
-
-  /*
-   * Province click handling.
-   */
-
-  document.addEventListener('click', function(event) {
-
-      var province = event.target.closest(
-          '#map-container svg [id]'
-      );
-
-      if (!province) {
-          return;
-      }
-
-      var id = province.id;
-      var provinceData =
-          window.mapProvinces[id];
-
-      /*
-       * Ignore SVG elements that aren't provinces
-       * currently defined in our map data.
-       */
-
-      if (!provinceData) {
-          return;
-      }
-
-      console.log(
-          'Province clicked:',
-          id,
-          provinceData
-      );
-  });
-
+  
 
   /*
    * OPTIONS
