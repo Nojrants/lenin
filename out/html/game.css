@@ -1023,7 +1023,9 @@ hr {
 }
 
 .map-province-hover {
-    filter: brightness(1.15);
+    filter: brightness(1.2);
+    stroke: #fff !important;
+    stroke-width: 3 !important;
 }
 
 .map-province-selected {
