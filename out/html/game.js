@@ -26,12 +26,6 @@ window.showMap = function() {
     }
 };
 
-document.addEventListener("click", function(event) {
-    if (event.target.closest("#game-map")) {
-        console.log("Map clicked");
-    }
-});
-
 window.showStats = function() {
     if (window.dendryUI.dendryEngine.state.sceneId.startsWith('library')) {
         window.dendryUI.dendryEngine.goToScene('backSpecialScene');
@@ -39,6 +33,12 @@ window.showStats = function() {
         window.dendryUI.dendryEngine.goToScene('library');
     }
 };
+
+fetch("img/European Russia Map.svg")
+    .then(response => response.text())
+    .then(svg => {
+        document.getElementById("map-container").innerHTML = svg;
+    });
   
   window.showOptions = function() {
       var save_element = document.getElementById('options');
