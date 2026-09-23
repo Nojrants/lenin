@@ -36,7 +36,7 @@ on-arrival: {!
 
 @support_leftcoms
 title: Promote the course of the Leftcoms. 
-view-if: german_negotiations >= 1
+view-if: german_negotiations >= 2
 tags: support
 on-arrival: {!
   Q.b_dissent *= 1.05;
