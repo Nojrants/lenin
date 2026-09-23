@@ -318,173 +318,199 @@ window.selectedMapProvince =
 
 Render province colors and division counters.
 */
-
 window.renderGameMap = function() {
 
-var container =
-    document.getElementById(
-        'map-container'
-    );
-
-if (!container) {
-    return;
-}
-
-var svg =
-    container.querySelector(
-        '.map-frame svg'
-    );
-
-if (!svg) {
-    return;
-}
-
-
-svg.querySelectorAll(
-    '.map-division-counter'
-).forEach(function(counter) {
-
-    counter.remove();
-
-});
-
-
-Object.keys(
-    window.mapProvinces
-).forEach(function(provinceId) {
-
-    var data =
-        window.mapProvinces[
-            provinceId
-        ];
-
-    var province =
-        svg.querySelector(
-            '#' + provinceId
+    var container =
+        document.getElementById(
+            'map-container'
         );
 
-    if (!province) {
-
-        console.warn(
-            'Province not found in SVG:',
-            provinceId
-        );
-
+    if (!container) {
         return;
     }
 
-
-    province.style.fill =
-        window.getMapProvinceColor(
-            data.controller,
-            data.control
+    var svg =
+        container.querySelector(
+            '.map-frame svg'
         );
 
-    province.style.stroke =
-        '#000';
-
-    province.style.strokeWidth =
-        '1';
-
-
-    if (
-        data.divisions === undefined
-    ) {
+    if (!svg) {
         return;
     }
 
+    svg.querySelectorAll(
+        '.map-division-counter'
+    ).forEach(function(counter) {
 
-    var bbox =
-        province.getBBox();
+        counter.remove();
 
-    var x =
-        data.label
-            ? data.label[0]
-            : bbox.x + bbox.width / 2;
+    });
 
-    var y =
-        data.label
-            ? data.label[1]
-            : bbox.y + bbox.height / 2;
+    Object.keys(
+        window.mapProvinces
+    ).forEach(function(provinceId) {
 
+        var data =
+            window.mapProvinces[
+                provinceId
+            ];
 
-    var group =
-        document.createElementNS(
-            'http://www.w3.org/2000/svg',
-            'g'
+        var province =
+            svg.querySelector(
+                '#' + provinceId
+            );
+
+        if (!province) {
+
+            console.warn(
+                'Province not found in SVG:',
+                provinceId
+            );
+
+            return;
+        }
+
+        province.style.fill =
+            window.getMapProvinceColor(
+                data.controller,
+                data.control
+            );
+
+        province.style.stroke =
+            '#000';
+
+        province.style.strokeWidth =
+            '1';
+
+        if (
+            data.divisions === undefined
+        ) {
+            return;
+        }
+
+        /*
+         * Get the visual center of the province and
+         * convert it into the coordinate system of
+         * the root SVG.
+         */
+        var bbox =
+            province.getBBox();
+
+        var localCenter =
+            new DOMPoint(
+                bbox.x + bbox.width / 2,
+                bbox.y + bbox.height / 2
+            );
+
+        var provinceMatrix =
+            province.getScreenCTM();
+
+        var svgMatrix =
+            svg.getScreenCTM();
+
+        if (
+            !provinceMatrix ||
+            !svgMatrix
+        ) {
+            return;
+        }
+
+        var screenCenter =
+            localCenter.matrixTransform(
+                provinceMatrix
+            );
+
+        var svgCenter =
+            screenCenter.matrixTransform(
+                svgMatrix.inverse()
+            );
+
+        var x =
+            data.label
+                ? data.label[0]
+                : svgCenter.x;
+
+        var y =
+            data.label
+                ? data.label[1]
+                : svgCenter.y;
+
+        var group =
+            document.createElementNS(
+                'http://www.w3.org/2000/svg',
+                'g'
+            );
+
+        group.setAttribute(
+            'class',
+            'map-division-counter'
         );
 
-    group.setAttribute(
-        'class',
-        'map-division-counter'
-    );
+        var circle =
+            document.createElementNS(
+                'http://www.w3.org/2000/svg',
+                'circle'
+            );
 
-
-    var circle =
-        document.createElementNS(
-            'http://www.w3.org/2000/svg',
-            'circle'
+        circle.setAttribute(
+            'cx',
+            x
         );
 
-    circle.setAttribute(
-        'cx',
-        x
-    );
-
-    circle.setAttribute(
-        'cy',
-        y
-    );
-
-    circle.setAttribute(
-        'r',
-        12
-    );
-
-    group.appendChild(circle);
-
-
-    var text =
-        document.createElementNS(
-            'http://www.w3.org/2000/svg',
-            'text'
+        circle.setAttribute(
+            'cy',
+            y
         );
 
-    text.setAttribute(
-        'x',
-        x
-    );
+        circle.setAttribute(
+            'r',
+            18
+        );
 
-    text.setAttribute(
-        'y',
-        y
-    );
+        group.appendChild(circle);
 
-    text.setAttribute(
-        'text-anchor',
-        'middle'
-    );
+        var text =
+            document.createElementNS(
+                'http://www.w3.org/2000/svg',
+                'text'
+            );
 
-    text.setAttribute(
-        'dominant-baseline',
-        'central'
-    );
+        text.setAttribute(
+            'x',
+            x
+        );
 
-    text.setAttribute(
-        'font-size',
-        '12'
-    );
+        text.setAttribute(
+            'y',
+            y
+        );
 
-    text.textContent =
-        data.divisions;
+        text.setAttribute(
+            'text-anchor',
+            'middle'
+        );
 
-    group.appendChild(text);
+        text.setAttribute(
+            'dominant-baseline',
+            'central'
+        );
 
-    svg.appendChild(group);
+        text.setAttribute(
+            'font-size',
+            '16'
+        );
 
-});
+        text.textContent =
+            data.divisions;
 
+        group.appendChild(text);
+
+        svg.appendChild(group);
+
+    });
 };
+
+
 
 /*
 
