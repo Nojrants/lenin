@@ -385,6 +385,9 @@ window.loadGameMap = function() {
                     'preserveAspectRatio',
                     'xMidYMid meet'
                 );
+        
+                mapSvg.style.width = '100%';
+                mapSvg.style.height = '100%';
             }
         
             window.renderGameMap();
