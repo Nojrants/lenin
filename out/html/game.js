@@ -608,11 +608,6 @@ window.showMap = function() {
             );
         }
 
-        if (content) {
-            content.classList.remove(
-                'map-hidden'
-            );
-        }
 
         window.clearMapProvince();
 
@@ -632,11 +627,6 @@ window.showMap = function() {
 
     setTimeout(function() {
 
-        if (content) {
-            content.classList.add(
-                'map-hidden'
-            );
-        }
 
         if (container) {
             container.classList.add(
