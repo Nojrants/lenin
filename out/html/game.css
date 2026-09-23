@@ -949,6 +949,10 @@ hr {
 
 
 
+/*
+ * MAP
+ */
+
 #map-container {
     display: none;
     width: 100%;
@@ -961,12 +965,146 @@ hr {
     display: block;
 }
 
-#map-container svg {
+/*
+ * Main map layout.
+ */
+
+.map-layout {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    gap: 15px;
+    box-sizing: border-box;
+}
+
+/*
+ * Central map frame.
+ */
+
+.map-frame {
+    flex: 1 1 auto;
+    min-width: 0;
+    height: 100%;
+    border: 2px solid var(--border-color);
+    background: var(--content-bg-color);
+    box-sizing: border-box;
+    overflow: hidden;
+    position: relative;
+}
+
+/*
+ * SVG itself.
+ */
+
+.map-frame svg {
     width: 100%;
     height: 100%;
     display: block;
 }
 
-#map-container svg path {
+/*
+ * Province interaction.
+ */
+
+.map-frame svg path {
     cursor: pointer;
+    transition:
+        filter 0.1s ease,
+        stroke-width 0.1s ease;
+}
+
+/*
+ * Province currently under the cursor.
+ */
+
+.map-frame svg path.map-province-hover {
+    filter: brightness(1.15);
+    stroke: #000;
+    stroke-width: 2;
+}
+
+/*
+ * Province currently selected.
+ */
+
+.map-frame svg path.map-province-selected {
+    filter: brightness(1.15);
+    stroke: #000;
+    stroke-width: 3;
+}
+
+/*
+ * Right-hand province information panel.
+ */
+
+.map-province-panel {
+    flex: 0 0 300px;
+    height: 100%;
+    border: 2px solid var(--border-color);
+    background: var(--content-bg-color);
+    box-sizing: border-box;
+    padding: 18px;
+    overflow-y: auto;
+    display: none;
+}
+
+.map-province-panel.active {
+    display: block;
+}
+
+/*
+ * Province panel contents.
+ */
+
+.map-province-panel h2 {
+    margin: 0 0 18px 0;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border-color);
+    font-size: 1.5em;
+    line-height: 120%;
+}
+
+.map-province-panel .province-stat {
+    margin-bottom: 14px;
+}
+
+.map-province-panel .province-stat-label {
+    font-size: 0.8em;
+    text-transform: uppercase;
+    opacity: 0.65;
+    line-height: 120%;
+}
+
+.map-province-panel .province-stat-value {
+    font-size: 1.1em;
+    line-height: 140%;
+}
+
+/*
+ * Division counter.
+ */
+
+.map-division-counter {
+    pointer-events: none;
+}
+
+.map-division-counter circle {
+    fill: var(--content-bg-color);
+    stroke: var(--border-color);
+}
+
+.map-division-counter text {
+    fill: var(--text-color);
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+}
+
+/*
+ * On narrower windows, allow the panel to become slightly narrower.
+ */
+
+@media (max-width: 1000px) {
+    .map-province-panel {
+        flex-basis: 240px;
+    }
 }
