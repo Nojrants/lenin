@@ -299,18 +299,18 @@ Q.general_unrest = ((Q.elites_unrest * Q.elites) + (Q.middle_unrest * Q.middle) 
 // starting financials
 
 Q.sovnarkom_expend = 0.25;
-Q.internal_expend = 1;
+Q.internal_expend = 0.75;
 Q.foreignaffairs_expend = 0.5;
-Q.military_expend = 10;
+Q.military_expend = 12;
 Q.enlightenment_expend = 0.5;
-Q.railways_expend = 2;
+Q.railways_expend = 1.75;
 Q.trade_expend = 0.5;
-Q.finance_expend = 1;
+Q.finance_expend = 0.5;
 Q.justice_expend = 0.5;
-Q.agriculture_expend = 2;
-Q.foodsupply_expend = 3;
-Q.posts_expend = 1; 
-Q.nationalities_expend = 0.5;
+Q.agriculture_expend = 0.75;
+Q.foodsupply_expend = 1.5;
+Q.posts_expend = 0.5; 
+Q.nationalities_expend = 0.25;
 Q.welfare_expend = 0;
 
 Q.government_functions = (
