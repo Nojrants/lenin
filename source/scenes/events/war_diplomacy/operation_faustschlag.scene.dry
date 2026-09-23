@@ -14,7 +14,7 @@ As it turns out, the Germans weren't bluffing at Brest-Litovsk. They have launch
 
 @post_battle
 go-to: defeat_2 if battle_outcome = -2; defeat_1 if battle_outcome = -1 
-on-arrival: in_defensive_battle = 0;
+on-arrival: in_defensive_battle = 0; german_waiting_timer = 1;
 
 
 @defeat_2
