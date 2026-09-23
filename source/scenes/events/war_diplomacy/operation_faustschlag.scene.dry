@@ -13,7 +13,7 @@ go-to: battle
 As it turns out, the Germans weren't bluffing at Brest-Litovsk. They have launched their offense, and their forces are rapidly advancing across the entire front, capturing an immense amount of territory. We are being informed that our own forces are crumbling at the sight of the enemy, with most retreating without putting up any resistance. Chaos and mass desertions are occurring all along the front. 
 
 @post_battle
-go-to: defeat_2 if battle_outcome = -2; defeat_1 if battle_outcome = -1 
+go-to: defeat_2 if battle_outcome = -2; defeat_1 if battle_outcome = -1; victory if battle_outcome >= 0
 on-arrival: in_defensive_battle = 0; german_waiting_timer = 1;
 
 
@@ -60,6 +60,20 @@ on-arrival: {!
 
 >Enemy casualties: [+ hostile_casualties +]0,000 troops
 
+@victory
+go-to: defeat_desc
+on-arrival: {!
+  Q.leftcom_strength += 15; Q.leninist_strength -= 5; Q.moderate_strength -= 5
+  Q.lsr_strength += 5;
+  Q.soldiers_unrest += 5; Q.workers_unrest += 2; Q.peasants_unrest += 2;
+  Q.morale *= 1.05; Q.discipline *= 0.95; Q.train_capacity *= 0.95; Q.military_progress -= 1; Q.northern_progress -= 1; Q.western_progress = -2; Q.southwestern_progress = -2; 
+!}
+
+>Our casualties: [+ friendly_casualties +]0,000 troops
+
+>Enemy casualties: [+ hostile_casualties +]0,000 troops
+
+And yet at the same time, it appears the German advance does eventually slow, and our own forces manage to regroup and stabilize the front, preventing a complete collapse. 
   
 @defeat_desc
 
@@ -67,9 +81,9 @@ on-arrival: {!
 [? if northern_progress = -3 : The Germans have taken Tallinn in Estonia, and are marching ever closer to Petrograd. ?]
 [? if northern_progress = -4 : The Germans are at the gates of Petrograd! ?]
 [? if western_progress = -3 : In the centre, they've occupied most of Belarussia through Minsk, and are threatening central Russia. ?]
-[? if western_progress = -4 : The Germans have entered Russia proper and are in a position to threaten many major cities. ?]
-[? if southwestern_progress >= -1 : The Germans have pushed the front further back in Galicia and western Ukraine. ?]
-[? if southwestern_progress = -2 : The Germans have entered Ukraine and are threatening Kyiv. ?]
+[? if western_progress = -4 : In the centre, they've entered Russia proper and are in a position to threaten many major cities. ?]
+[? if southwestern_progress >= -1 : In the centre, they've  pushed the front further back in Galicia and western Ukraine. ?]
+[? if southwestern_progress = -2 : In the south, they've entered Ukraine and are threatening Kyiv. ?]
 [? if southwestern_progress = -3 : In the south, virtually all of Ukraine has been occupied. ?]
 
 An emergency meeting of the Central Committee is called, where Lenin desperately argues for accepting the peace terms. Still unconvinced, Bukharin argues that the German offensive was anticipated, and that they should keep up the defense. 
