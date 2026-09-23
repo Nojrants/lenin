@@ -646,7 +646,7 @@ window.showMap = function() {
     
         window.loadGameMap();
     
-    }, 50);
+    }, 0);
 
 
 window.showStats = function() {
@@ -1306,7 +1306,7 @@ console.log(
 );
 
 
-window.addEventListener('load', function() {
+window.onload = function() {
   
     window.dendryUI.loadSettings({
         show_portraits: false
