@@ -8,163 +8,198 @@ card-image: img/finance.PNG
 
 = Fiscal Policy
 
-= Economy Overview
+<div style="display:flex; flex-wrap:wrap; gap:20px; align-items:stretch;">
 
-<div class="economy-container">
+  <!-- LEFT COLUMN -->
+  <div style="flex:1; min-width:300px; border:2px solid #666; border-radius:6px; padding:12px;">
 
-    <div class="economy-column">
+    <div style="font-size:1.2em; font-weight:bold; text-align:center; margin-bottom:8px;">
+      Macroeconomy
+    </div>
+    <hr>
 
-        <div class="economy-box">
-            <h3>Macroeconomy</h3>
-
-            <div class="economy-row">
-                <span>Economic Growth</span>
-                <span class="positive">+4.2%</span>
-            </div>
-            <div class="economy-row">
-                <span>Inflation</span>
-                <span class="negative">12.5%</span>
-            </div>
-            <div class="economy-row">
-                <span>Unemployment</span>
-                <span class="negative">7.3%</span>
-            </div>
-            <div class="economy-row">
-                <span>National Debt</span>
-                <span>42.1%</span>
-            </div>
-            <div class="economy-row">
-                <span>Budget Balance</span>
-                <span class="negative">−2.4%</span>
-            </div>
-        </div>
-
-        <div class="economy-box">
-            <h3>Production</h3>
-
-            <div class="economy-row">
-                <span>Industrial Output</span>
-                <span class="positive">+15%</span>
-            </div>
-            <div class="economy-row">
-                <span>Agricultural Output</span>
-                <span class="positive">+6%</span>
-            </div>
-            <div class="economy-row">
-                <span>Factory Utilization</span>
-                <span>78%</span>
-            </div>
-            <div class="economy-row">
-                <span>Rail Capacity</span>
-                <span class="negative">61%</span>
-            </div>
-        </div>
-
-        <div class="economy-box">
-            <h3>Trade & Finance</h3>
-
-            <div class="economy-row">
-                <span>Exports</span>
-                <span class="positive">320M₽</span>
-            </div>
-            <div class="economy-row">
-                <span>Imports</span>
-                <span>270M₽</span>
-            </div>
-            <div class="economy-row">
-                <span>Trade Balance</span>
-                <span class="positive">+50M₽</span>
-            </div>
-            <div class="economy-row">
-                <span>Currency Stability</span>
-                <span class="positive">72</span>
-            </div>
-            <div class="economy-row">
-                <span>Investment</span>
-                <span class="positive">64</span>
-            </div>
-        </div>
-
+    <div style="display:flex; justify-content:space-between; margin:8px 20px;">
+      <b>Economic Growth</b>
+      <span style="color: var(--level1-color);">[+ gdp_growth_display +]</span>
     </div>
 
-
-    <div class="economy-column">
-
-        <div class="economy-box">
-            <h3>Population</h3>
-
-            <div class="economy-row">
-                <span>Living Standards</span>
-                <span class="positive">68</span>
-            </div>
-            <div class="economy-row">
-                <span>Poverty</span>
-                <span class="negative">23%</span>
-            </div>
-            <div class="economy-row">
-                <span>Literacy</span>
-                <span class="positive">81%</span>
-            </div>
-            <div class="economy-row">
-                <span>Crime</span>
-                <span class="negative">34</span>
-            </div>
-            <div class="economy-row">
-                <span>Disillusionment</span>
-                <span class="negative">41</span>
-            </div>
-        </div>
-
-        <div class="economy-box">
-            <h3>Labour</h3>
-
-            <div class="economy-row">
-                <span>Employment</span>
-                <span class="positive">92%</span>
-            </div>
-            <div class="economy-row">
-                <span>Average Wage</span>
-                <span class="positive">145₽</span>
-            </div>
-            <div class="economy-row">
-                <span>Skilled Workers</span>
-                <span>58%</span>
-            </div>
-            <div class="economy-row">
-                <span>Labour Unrest</span>
-                <span class="negative">37</span>
-            </div>
-        </div>
-
-        <div class="economy-box">
-            <h3>Economic Conditions</h3>
-
-            <div class="economy-row">
-                <span>Business Confidence</span>
-                <span class="positive">58</span>
-            </div>
-            <div class="economy-row">
-                <span>Bank Solvency</span>
-                <span class="positive">81</span>
-            </div>
-            <div class="economy-row">
-                <span>Interest Rate</span>
-                <span>5.5%</span>
-            </div>
-            <div class="economy-row">
-                <span>Corruption</span>
-                <span class="negative">46</span>
-            </div>
-            <div class="economy-row">
-                <span>State Capacity</span>
-                <span class="positive">63</span>
-            </div>
-        </div>
-
+    <div style="display:flex; justify-content:space-between; margin:8px 20px;">
+      <b>Inflation</b>
+      <span style="color: var(--level7-color);">[+ inflation_display +]</span>
     </div>
+
+    <div style="display:flex; justify-content:space-between; margin:8px 20px;">
+      <b>Unemployment</b>
+      <span style="color: var(--level7-color);">[+ unemployment_display +]</span>
+    </div>
+
+    <div style="display:flex; justify-content:space-between; margin:8px 20px;">
+      <b>National Debt</b>
+      [+ national_debt_display +]
+    </div>
+
+    <div style="display:flex; justify-content:space-between; margin:8px 20px;">
+      <b>Budget Balance</b>
+      <span style="color: var(--level7-color);">[+ budget_balance_display +]</span>
+    </div>
+
+    <hr>
+
+    <div style="font-size:1.2em; font-weight:bold; text-align:center; margin-bottom:8px;">
+      Production
+    </div>
+    <hr>
+
+    <div style="display:flex; justify-content:space-between; margin:8px 20px;">
+      <b>Industrial Output</b>
+      <span style="color: var(--level1-color);">[+ industrial_output_display +]</span>
+    </div>
+
+    <div style="display:flex; justify-content:space-between; margin:8px 20px;">
+      <b>Agricultural Output</b>
+      <span style="color: var(--level1-color);">[+ agricultural_output_display +]</span>
+    </div>
+
+    <div style="display:flex; justify-content:space-between; margin:8px 20px;">
+      <b>Factory Utilization</b>
+      [+ factory_utilization_display +]
+    </div>
+
+    <div style="display:flex; justify-content:space-between; margin:8px 20px;">
+      <b>Rail Capacity</b>
+      <span style="color: var(--level7-color);">[+ rail_capacity_display +]</span>
+    </div>
+
+    <hr>
+
+    <div style="font-size:1.2em; font-weight:bold; text-align:center; margin-bottom:8px;">
+      Trade & Finance
+    </div>
+    <hr>
+
+    <div style="display:flex; justify-content:space-between; margin:8px 20px;">
+      <b>Exports</b>
+      <span style="color: var(--level1-color);">[+ exports_display +]</span>
+    </div>
+
+    <div style="display:flex; justify-content:space-between; margin:8px 20px;">
+      <b>Imports</b>
+      [+ imports_display +]
+    </div>
+
+    <div style="display:flex; justify-content:space-between; margin:8px 20px;">
+      <b>Trade Balance</b>
+      <span style="color: var(--level1-color);">[+ trade_balance_display +]</span>
+    </div>
+
+    <div style="display:flex; justify-content:space-between; margin:8px 20px;">
+      <b>Currency Stability</b>
+      <span style="color: var(--level1-color);">[+ currency_stability_display +]</span>
+    </div>
+
+    <div style="display:flex; justify-content:space-between; margin:8px 20px;">
+      <b>Investment</b>
+      <span style="color: var(--level1-color);">[+ investment_display +]</span>
+    </div>
+
+  </div>
+
+
+  <!-- RIGHT COLUMN -->
+  <div style="flex:1; min-width:300px; border:2px solid #666; border-radius:6px; padding:12px;">
+
+    <div style="font-size:1.2em; font-weight:bold; text-align:center; margin-bottom:8px;">
+      Population
+    </div>
+    <hr>
+
+    <div style="display:flex; justify-content:space-between; margin:8px 20px;">
+      <b>Living Standards</b>
+      <span style="color: var(--level1-color);">[+ living_standards_display +]</span>
+    </div>
+
+    <div style="display:flex; justify-content:space-between; margin:8px 20px;">
+      <b>Poverty</b>
+      <span style="color: var(--level7-color);">[+ poverty_display +]</span>
+    </div>
+
+    <div style="display:flex; justify-content:space-between; margin:8px 20px;">
+      <b>Literacy</b>
+      <span style="color: var(--level1-color);">[+ literacy_display +]</span>
+    </div>
+
+    <div style="display:flex; justify-content:space-between; margin:8px 20px;">
+      <b>Crime</b>
+      <span style="color: var(--level7-color);">[+ crime_display +]</span>
+    </div>
+
+    <div style="display:flex; justify-content:space-between; margin:8px 20px;">
+      <b>Disillusionment</b>
+      <span style="color: var(--level7-color);">[+ disillusionment_display +]</span>
+    </div>
+
+    <hr>
+
+    <div style="font-size:1.2em; font-weight:bold; text-align:center; margin-bottom:8px;">
+      Labour
+    </div>
+    <hr>
+
+    <div style="display:flex; justify-content:space-between; margin:8px 20px;">
+      <b>Employment</b>
+      <span style="color: var(--level1-color);">[+ employment_display +]</span>
+    </div>
+
+    <div style="display:flex; justify-content:space-between; margin:8px 20px;">
+      <b>Average Wage</b>
+      <span style="color: var(--level1-color);">[+ average_wage_display +]</span>
+    </div>
+
+    <div style="display:flex; justify-content:space-between; margin:8px 20px;">
+      <b>Skilled Workers</b>
+      [+ skilled_workers_display +]
+    </div>
+
+    <div style="display:flex; justify-content:space-between; margin:8px 20px;">
+      <b>Labour Unrest</b>
+      <span style="color: var(--level7-color);">[+ labour_unrest_display +]</span>
+    </div>
+
+    <hr>
+
+    <div style="font-size:1.2em; font-weight:bold; text-align:center; margin-bottom:8px;">
+      Economic Conditions
+    </div>
+    <hr>
+
+    <div style="display:flex; justify-content:space-between; margin:8px 20px;">
+      <b>Business Confidence</b>
+      <span style="color: var(--level1-color);">[+ business_confidence_display +]</span>
+    </div>
+
+    <div style="display:flex; justify-content:space-between; margin:8px 20px;">
+      <b>Bank Solvency</b>
+      <span style="color: var(--level1-color);">[+ bank_solvency_display +]</span>
+    </div>
+
+    <div style="display:flex; justify-content:space-between; margin:8px 20px;">
+      <b>Interest Rate</b>
+      [+ interest_rate_display +]
+    </div>
+
+    <div style="display:flex; justify-content:space-between; margin:8px 20px;">
+      <b>Corruption</b>
+      <span style="color: var(--level7-color);">[+ corruption_display +]</span>
+    </div>
+
+    <div style="display:flex; justify-content:space-between; margin:8px 20px;">
+      <b>State Capacity</b>
+      <span style="color: var(--level1-color);">[+ state_capacity_display +]</span>
+    </div>
+
+  </div>
 
 </div>
-
 
 
 - @taxation
