@@ -14,10 +14,6 @@ day: 'numeric'
 var main = function(dendryUI) {
     ui = dendryUI;
     game = ui.game;
-
-    if (window.updateSidebar) {
-        window.updateSidebar();
-    }
 };
 
 var TITLE = "Social Democracy: Petrograd 1917" + '_' + "Autumn Chen";
@@ -1259,86 +1255,67 @@ window.onNewPage = function() {
 
 
 window.updateSidebar = function() {
+    $('#qualities').empty();
 
-$('#qualities').empty();
+    var scene =
+        dendryUI.game.scenes[
+            window.statusTab
+        ];
 
-var scene =
-    dendryUI.game.scenes[
-        window.statusTab
-    ];
+    dendryUI.dendryEngine._runActions(
+        scene.onArrival
+    );
 
-dendryUI.dendryEngine._runActions(
-    scene.onArrival
-);
-
-var displayContent =
-    dendryUI.dendryEngine
-        ._makeDisplayContent(
+    var displayContent =
+        dendryUI.dendryEngine._makeDisplayContent(
             scene.content,
             true
         );
 
-$('#qualities').append(
-    dendryUI.contentToHTML.convert(
-        displayContent
-    )
-);
-
+    $('#qualities').append(
+        dendryUI.contentToHTML.convert(
+            displayContent
+        )
+    );
 };
 
-window.changeTab = function(
-newTab,
-tabId
-) {
-
-if (
-    tabId == 'poll_tab' &&
-    dendryUI.dendryEngine
-        .state.qualities.historical_mode
-) {
-
-    window.alert(
-        'Polls are not available in historical mode.'
-    );
-
-    return;
-}
-
-
-var tabButton =
-    document.getElementById(
-        tabId
-    );
-
-var tabButtons =
-    document.getElementsByClassName(
-        'tab_button'
-    );
-
-
-for (
-    i = 0;
-    i < tabButtons.length;
-    i++
-) {
-
-    tabButtons[i].className =
-        tabButtons[i].className
-            .replace(' active', '');
-
-}
-
-
-tabButton.className +=
-    ' active';
-
-window.statusTab =
-    newTab;
-
-window.updateSidebar();
-
+window.onDisplayContent = function() {
+    window.updateSidebar();
 };
 
+    
+window.changeTab = function(newTab, tabId) {
+    if (
+        tabId == 'poll_tab' &&
+        dendryUI.dendryEngine.state.qualities.historical_mode
+    ) {
+        window.alert(
+            'Polls are not available in historical mode.'
+        );
+        return;
+    }
+
+    var tabButton =
+        document.getElementById(tabId);
+
+    var tabButtons =
+        document.getElementsByClassName('tab_button');
+
+    for (i = 0; i < tabButtons.length; i++) {
+        tabButtons[i].className =
+            tabButtons[i].className.replace(
+                ' active',
+                ''
+            );
+    }
+
+    tabButton.className += ' active';
+
+    window.statusTab = newTab;
+    window.updateSidebar();
+};
+
+    
 window.generateBar = function(
 quality,
 qualityName,
