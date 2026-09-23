@@ -230,12 +230,16 @@ window.renderGameMap = function() {
  */
 
 window.showMap = function() {
+    var container = document.getElementById('map-container');
+
     if (window.dendryUI.dendryEngine.state.sceneId.startsWith('map')) {
+        container.classList.remove('active');
         window.dendryUI.dendryEngine.goToScene('backSpecialScene');
     } else {
         window.dendryUI.dendryEngine.goToScene('map');
 
         setTimeout(function() {
+            container.classList.add('active');
             window.loadGameMap();
         }, 0);
     }
