@@ -1,0 +1,75 @@
+title: The Peace Question
+new-page: true
+view-if: german_negotiations >= 1 and brest_signed != 1 and peace_question_timer = 0
+on-arrival: week_actions += 1; peace_question_timer = 2
+tags: b_party, government
+is-card: true
+card-image: img/theses1.PNG
+
+= The Peace Question
+
+News of the recent negotiations with the Germans have sparked a lively debate within the Party, spearheaded by the <span style="color: var(--leftcom); font-weight: bold;">Left Communists</span>. As the situation continues to develop, we must now prepare our response.
+  
+- #peace_question
+
+@studying_the_peace
+title: Commission articles in the party press explaining the need for an immediate peace. 
+subtitle: This option is available because we have Lenin as advisor. 
+view-if: lenin_advisor = 1
+tags: peace_question
+max-visits: 1
+on-arrival: {!
+  Q.leninist_strength += 8; Q.leftcom_strength -= 8;
+  Q.leninist_dissent -= 5; Q.leftcom_dissent -= 5;
+  Q.instability -= 1; 
+!}
+             
+Though lamenting the "horrible peace", Lenin pens an article in Pravda arguing why it's an absolute necessity. As he explains, the Soviet government is is need of a temporary "breathing space" to consolidate itself, lest the first socialist state be destroyed before revolution can be sparked around the world. The German terms were the price of survival, while the country rebuilt itself, stabilized, and prepared. 
+
+@pro-war
+title: Propagandize in defense of signing a peace treaty. 
+tags: peace_question
+on-arrival: {!
+  Q.war_weariness += 5; Q.discipline -= 0.1; Q.b_dissent *= 1.05;
+  Q.workers_unrest -= 3; Q.soldiers_unrest -= 5;
+  Q.leninist_strength += 5; Q.leftcom_strength -= 5;
+  Q.leninist_dissent -= 5; Q.leftcom_dissent -= 5;
+!}
+  
+@socialist_fatherland
+title: The socialist fatherland is in danger! Defend the Revolution! 
+subtitle: Issue desperate calls to fight back if the Germans press the advance. 
+tags: peace_question
+max-visits: 1
+on-arrival: {!
+  Q.instability += 2;
+  Q.war_weariness -= 5; Q.morale += 0.3;
+  Q.leftcom_strength += 2; Q.cheka_militancy += 0.1;
+  Q.peasants_unrest += 4; Q.kulaks_unrest += 6;
+!}
+
+Though calling for peace overall, Lenin declares that if the Germans mean to destroy the Revolution we must fight back. 
+
+
+@revolutionary_war
+title: Propagandize in favor of a revolutionary war of defense! 
+tags: peace_question
+on-arrival: {!
+    Q.discipline += 0.1; Q.morale += 0.1; Q.b_dissent *= 1.05;
+    Q.leftcom_strength += 8; Q.leninist_strength -= 5;
+    Q.leftcom_dissent -= 5; Q.leninist_dissent += 8;
+!}
+
+With the advent of the socialist revolution, it is our duty to defend it against the imperialists at all cost. 
+
+@defer
+title: We defer from making a decision until the situation changes. 
+tags: peace_question
+on-arrival: {!
+    Q.leftcom_strength += 1; Q.leninist_strength += 1; Q.moderate_strength += 3; 
+    Q.leftcom_dissent -= 2; Q.leninist_dissent += 4; Q.b_dissent *= 0.98; 
+!}
+
+Perhaps it's best to let our party members debate the issue on their own for now. 
+
+  
