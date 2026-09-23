@@ -464,7 +464,7 @@ window.renderGameMap = function() {
 
         circle.setAttribute(
             'r',
-            18
+            36
         );
 
         group.appendChild(circle);
@@ -497,7 +497,7 @@ window.renderGameMap = function() {
 
         text.setAttribute(
             'font-size',
-            '16'
+            '24'
         );
 
         text.textContent =
