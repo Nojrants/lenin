@@ -1521,3 +1521,16 @@ if (
 }
 
 }, 500);
+
+
+function metric_color(value) {
+    if (value > 0) {
+        return "var(--level1-color)";
+    }
+
+    if (value < 0) {
+        return "var(--level7-color)";
+    }
+
+    return "inherit";
+}
