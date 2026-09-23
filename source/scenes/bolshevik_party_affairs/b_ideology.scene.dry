@@ -1,8 +1,7 @@
 title: Questions of Ideology
 new-page: true
-view-if: b_ideology_timer <= 0 and lenin_available = 1
+view-if: b_ideology_timer <= 0
 on-arrival: b_ideology_timer += 2; week_actions += 1
-frequency: 100
 is-card: true
 card-image: img/portraits/taburin_sd.jpg
 tags: b_party
@@ -13,31 +12,43 @@ Within the Bolsheviks, there are several ideological currents. Most Bolsheviks w
 
 Which ideological current should be supported?
 
-- @support_moderate
-- @support_leninist
-- @support_left
-- @support_vpered
-- @support_unity
+- #support
 - @root: No, we will not change any of our ideological positions.
 - @easy_discard
 
 @support_moderate
 title: Promote the course of the Moderates. 
+tags: support
 on-arrival: {!
+  Q.b_dissent *= 1.05;
   Q.moderate_strength += 10; Q.leninist_strength -= 5; Q.leftcom_strength -= 5;
   Q.moderate_dissent -= 5; Q.leninist_dissent += 10; Q.leftcom_dissent += 10; 
 !}
 
 @support_leninist
 title: Promote the course of the Leninists. 
+tags: support
 on-arrival: {!
+  Q.b_dissent *= 1.05;
   Q.moderate_strength -= 5; Q.leninist_strength += 10; Q.leftcom_strength -= 5;
   Q.moderate_dissent += 5; Q.leninist_dissent -= 5; Q.leftcom_dissent += 5; 
 !}
 
+@support_leftcoms
+title: Promote the course of the Leftcoms. 
+view-if: german_negotiations >= 1
+tags: support
+on-arrival: {!
+  Q.b_dissent *= 1.05;
+  Q.moderate_strength -= 2; Q.leninist_strength -= 5; Q.leftcom_strength += 10;
+  Q.moderate_dissent += 5; Q.leninist_dissent += 5; Q.leftcom_dissent -= 5; 
+!}
+
 @support_left
 title: Promote further radicalism and extremism. 
+tags: support
 on-arrival: {!
+  Q.b_dissent *= 1.05;
   Q.moderate_strength -= 5; Q.leftcom_strength += 5; Q.vperedist_strength += 2;
   Q.moderate_dissent += 5; Q.leftcom_dissent -= 10; Q.vperedist_dissent -= 5;
 !}
@@ -45,6 +56,7 @@ on-arrival: {!
 @support_vpered
 title: Promote the avant-garde projects of the Vperedists. 
 on-arrival: {!
+  Q.b_dissent *= 1.05;
   Q.leftcom_strength += 2; Q.vperedist_strength += 10;
   Q.leninist_dissent += 5; Q.leftcom_dissent -= 5; Q.vperedist_dissent -= 10;
 !}
@@ -53,6 +65,7 @@ on-arrival: {!
 title: Call for greater party unity among the factions. 
 on-arrival: {!
   Q.moderate_dissent -= 5; Q.leninist_dissent -= 5; Q.leftcom_dissent -= 5; Q.vperedist_dissent -= 5;
+  Q.moderante_strength -= 3; Q.leftcom_strength -= 3; Q.vperedist_strength -= 3; 
   Q.b_dissent * 0.75; 
 !}
 
