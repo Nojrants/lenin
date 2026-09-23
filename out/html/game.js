@@ -18,28 +18,57 @@
 
   var TITLE = "Social Democracy: Petrograd 1917" + '_' + "Autumn Chen";
 
-window.showMap = function() {
-    if (window.dendryUI.dendryEngine.state.sceneId.startsWith('map')) {
-        window.dendryUI.dendryEngine.goToScene('backSpecialScene');
-    } else {
-        window.dendryUI.dendryEngine.goToScene('map');
-    }
-};
 
-window.showStats = function() {
-    if (window.dendryUI.dendryEngine.state.sceneId.startsWith('library')) {
-        window.dendryUI.dendryEngine.goToScene('backSpecialScene');
-    } else {
-        window.dendryUI.dendryEngine.goToScene('library');
-    }
-};
+  /*
+   * MAP
+   */
 
-fetch("img/European Russia Map.svg")
-    .then(response => response.text())
-    .then(svg => {
-        document.getElementById("map-container").innerHTML = svg;
-    });
-  
+  window.showMap = function() {
+      if (window.dendryUI.dendryEngine.state.sceneId.startsWith('map')) {
+          window.dendryUI.dendryEngine.goToScene('backSpecialScene');
+      } else {
+          window.dendryUI.dendryEngine.goToScene('map');
+      }
+  };
+
+  window.showStats = function() {
+      if (window.dendryUI.dendryEngine.state.sceneId.startsWith('library')) {
+          window.dendryUI.dendryEngine.goToScene('backSpecialScene');
+      } else {
+          window.dendryUI.dendryEngine.goToScene('library');
+      }
+  };
+
+  window.loadGameMap = function() {
+      var container = document.getElementById('map-container');
+
+      if (!container) {
+          return;
+      }
+
+      fetch('img/European Russia Map.svg')
+          .then(function(response) {
+              return response.text();
+          })
+          .then(function(svg) {
+              container.innerHTML = svg;
+          })
+          .catch(function(error) {
+              console.error('Failed to load game map:', error);
+          });
+  };
+
+  document.addEventListener('click', function(event) {
+      var province = event.target.closest('#map-container svg [id]');
+
+      if (!province) {
+          return;
+      }
+
+      console.log('Province clicked:', province.id);
+  });
+
+
   window.showOptions = function() {
       var save_element = document.getElementById('options');
       window.populateOptions();
@@ -117,6 +146,7 @@ fetch("img/European Russia Map.svg")
       document.body.classList.remove('dark-mode');
       window.dendryUI.saveSettings();
   };
+
   window.enableDarkMode = function() {
       window.dendryUI.dark_mode = true;
       document.body.classList.add('dark-mode');
@@ -129,26 +159,31 @@ fetch("img/European Russia Map.svg")
     var animate = window.dendryUI.animate;
     var disable_audio = window.dendryUI.disable_audio;
     var show_portraits = window.dendryUI.show_portraits;
+
     if (disable_bg) {
         $('#backgrounds_no')[0].checked = true;
     } else {
         $('#backgrounds_yes')[0].checked = true;
     }
+
     if (animate) {
         $('#animate_yes')[0].checked = true;
     } else {
         $('#animate_no')[0].checked = true;
     }
+
     if (disable_audio) {
         $('#audio_no')[0].checked = true;
     } else {
         $('#audio_yes')[0].checked = true;
     }
+
     if (show_portraits) {
         $('#images_yes')[0].checked = true;
     } else {
         $('#images_no')[0].checked = true;
     }
+
     if (window.dendryUI.dark_mode) {
         $('#dark_mode')[0].checked = true;
     } else {
@@ -162,7 +197,7 @@ fetch("img/European Russia Map.svg")
       return text;
   };
 
-  
+
   window.achievements = {
       golden_age_of_the_peoples_commissars: {
           name: "Golden Age of the People's Commissars",
@@ -189,25 +224,26 @@ fetch("img/European Russia Map.svg")
       }
   };
   
-window.achievementSound = new Audio('music/achieve.mp3');  
-window.showAchievement = function(name, description, image) {
-    var notification = document.getElementById('achievement-notification');
+  window.achievementSound = new Audio('music/achieve.mp3');
 
-    notification.querySelector('.achievement-title').textContent = name;
-    notification.querySelector('.achievement-description').textContent = description;
-    notification.querySelector('.achievement-image img').src = image;
+  window.showAchievement = function(name, description, image) {
+      var notification = document.getElementById('achievement-notification');
 
-    window.achievementSound.currentTime = 0;
-    window.achievementSound.play().catch(function(error) {
-        console.log("Achievement sound failed:", error);
-    });
+      notification.querySelector('.achievement-title').textContent = name;
+      notification.querySelector('.achievement-description').textContent = description;
+      notification.querySelector('.achievement-image img').src = image;
 
-    notification.classList.add('show');
+      window.achievementSound.currentTime = 0;
+      window.achievementSound.play().catch(function(error) {
+          console.log("Achievement sound failed:", error);
+      });
 
-    setTimeout(function() {
-        notification.classList.remove('show');
-    }, 6000);
-};
+      notification.classList.add('show');
+
+      setTimeout(function() {
+          notification.classList.remove('show');
+      }, 6000);
+  };
 
 
   // Displays an achievement notification.
@@ -227,54 +263,50 @@ window.showAchievement = function(name, description, image) {
       );
   };
 
-window.renderAchievements = function() {
-    var qualities = window.dendryUI.dendryEngine.state.qualities;
+  window.renderAchievements = function() {
+      var qualities = window.dendryUI.dendryEngine.state.qualities;
 
-    var playthrough = document.getElementById('achievement-playthrough');
-    var overall = document.getElementById('achievement-overall');
-    var incomplete = document.getElementById('achievement-incomplete');
+      var playthrough = document.getElementById('achievement-playthrough');
+      var overall = document.getElementById('achievement-overall');
+      var incomplete = document.getElementById('achievement-incomplete');
 
-    if (!playthrough || !overall || !incomplete) return;
+      if (!playthrough || !overall || !incomplete) return;
 
-    playthrough.innerHTML = '';
-    overall.innerHTML = '';
-    incomplete.innerHTML = '';
+      playthrough.innerHTML = '';
+      overall.innerHTML = '';
+      incomplete.innerHTML = '';
 
-    Object.keys(window.achievements).forEach(function(id) {
-        if (id == 'game_completed') return;
+      Object.keys(window.achievements).forEach(function(id) {
+          if (id == 'game_completed') return;
 
-        var achievement = window.achievements[id];
+          var achievement = window.achievements[id];
 
-        var table = '<table style="border-collapse: collapse; width: 100%;">' +
-            '<tr>' +
-            '<td style="width: 60px; height: 60px; vertical-align: middle; text-align: center; border: 2px solid #c00000; background-color: rgba(192, 0, 0, 0.1);">' +
-            '<img src="' + achievement.image + '" alt="Achievement Icon" style="width: 100%; height: 100%; object-fit: cover; display: block;">' +
-            '</td>' +
-            '<td style="border: 2px solid #c00000; background-color: rgba(91, 154, 141, 0.1);">' +
-            '<div style="padding-left: 0.5em;">' +
-            '<div style="font-weight: bold;">' + achievement.name + '</div>' +
-            '<div style="font-size: 90%; color: #444;">- ' + achievement.description + '</div>' +
-            '</div>' +
-            '</td>' +
-            '</tr>' +
-            '</table>';
+          var table = '<table style="border-collapse: collapse; width: 100%;">' +
+              '<tr>' +
+              '<td style="width: 60px; height: 60px; vertical-align: middle; text-align: center; border: 2px solid #c00000; background-color: rgba(192, 0, 0, 0.1);">' +
+              '<img src="' + achievement.image + '" alt="Achievement Icon" style="width: 100%; height: 100%; object-fit: cover; display: block;">' +
+              '</td>' +
+              '<td style="border: 2px solid #c00000; background-color: rgba(91, 154, 141, 0.1);">' +
+              '<div style="padding-left: 0.5em;">' +
+              '<div style="font-weight: bold;">' + achievement.name + '</div>' +
+              '<div style="font-size: 90%; color: #444;">- ' + achievement.description + '</div>' +
+              '</div>' +
+              '</td>' +
+              '</tr>' +
+              '</table>';
 
-        if (qualities['game_achievement_' + id]) {
-            playthrough.innerHTML += table;
-        }
+          if (qualities['game_achievement_' + id]) {
+              playthrough.innerHTML += table;
+          }
 
-        if (qualities['achievement_' + id]) {
-            overall.innerHTML += table;
-        } else {
-            incomplete.innerHTML += table;
-        }
-    });
-};
+          if (qualities['achievement_' + id]) {
+              overall.innerHTML += table;
+          } else {
+              incomplete.innerHTML += table;
+          }
+      });
+  };
 
-
-  
-  
-  
 
   // This function allows you to do something in response to signals.
   window.handleSignal = function(signal, event, scene_id) {
@@ -282,13 +314,15 @@ window.renderAchievements = function() {
   
   // This function runs on a new page. Right now, this auto-saves.
   window.onNewPage = function() {
-    var scene = window.dendryUI.dendryEngine.state.sceneId;
-    if (scene != 'root' && !window.justLoaded) {
-        window.dendryUI.autosave();
-    }
-    if (window.justLoaded) {
-        window.justLoaded = false;
-    }
+      var scene = window.dendryUI.dendryEngine.state.sceneId;
+
+      if (scene != 'root' && !window.justLoaded) {
+          window.dendryUI.autosave();
+      }
+
+      if (window.justLoaded) {
+          window.justLoaded = false;
+      }
   };
 
   // tabbed browsing
@@ -305,16 +339,18 @@ window.renderAchievements = function() {
           window.alert('Polls are not available in historical mode.');
           return;
       }
+
       var tabButton = document.getElementById(tabId);
       var tabButtons = document.getElementsByClassName('tab_button');
+
       for (i = 0; i < tabButtons.length; i++) {
-        tabButtons[i].className = tabButtons[i].className.replace(' active', '');
+          tabButtons[i].className = tabButtons[i].className.replace(' active', '');
       }
+
       tabButton.className += ' active';
       window.statusTab = newTab;
       window.updateSidebar();
   };
-
 
 
   window.onDisplayContent = function() {
@@ -335,19 +371,25 @@ window.renderAchievements = function() {
       var value = document.createElement('div');
       value.className = 'barValue';
       var width = (quality - min)/(max - min);
+
       if (width > 1) {
           width = 1;
       } else if (width < 0) {
           width = 0;
       }
+
       value.style.width = Math.round(width*100) + '%';
+
       if (colors) {
           value.style.backgroundColor = window.probToColor(width*100);
       }
+
       bar.textContent = qualityName + ': ' + quality;
+
       if (colors) {
           bar.textContent += '/' + max;
       }
+
       bar.appendChild(value);
       return bar;
   };
@@ -356,14 +398,20 @@ window.renderAchievements = function() {
   window.justLoaded = true;
   window.statusTab = "status";
   window.dendryModifyUI = main;
+
   console.log("Modifying stats: see dendryUI.dendryEngine.state.qualities");
 
   window.onload = function() {
-    window.dendryUI.loadSettings({show_portraits: false});
-    if (window.dendryUI.dark_mode) {
-        document.body.classList.add('dark-mode');
-    }
-    window.pinnedCardsDescription = "Advisor cards - actions are only usable once per 6 months.";
+      window.dendryUI.loadSettings({show_portraits: false});
+
+      if (window.dendryUI.dark_mode) {
+          document.body.classList.add('dark-mode');
+      }
+
+      window.pinnedCardsDescription = "Advisor cards - actions are only usable once per 6 months.";
+
+      // Load the map after the page has loaded.
+      window.loadGameMap();
   };
 
 }());
