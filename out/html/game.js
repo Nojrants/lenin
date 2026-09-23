@@ -631,23 +631,22 @@ window.showMap = function() {
     engine.goToScene('map');
 
     setTimeout(function() {
-
+    
         if (content) {
             content.classList.add(
                 'map-hidden'
             );
         }
-
+    
         if (container) {
             container.classList.add(
                 'active'
             );
         }
-
+    
         window.loadGameMap();
-
-    }, 0);
-};
+    
+    }, 50);
 
 
 window.showStats = function() {
@@ -1307,8 +1306,8 @@ console.log(
 );
 
 
-window.onload = function() {
-
+window.addEventListener('load', function() {
+  
     window.dendryUI.loadSettings({
         show_portraits: false
     });
