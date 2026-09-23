@@ -1,6 +1,6 @@
 title: The Peace Question
 new-page: true
-view-if: german_negotiations >= 1 and brest_signed != 1 and peace_question_timer = 0
+view-if: german_negotiations >= 2 and brest_signed != 1 and peace_question_timer = 0
 on-arrival: week_actions += 1; peace_question_timer = 2
 tags: b_party, government
 is-card: true
