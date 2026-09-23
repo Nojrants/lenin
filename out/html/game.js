@@ -495,10 +495,8 @@ window.renderGameMap = function() {
             'central'
         );
 
-        text.setAttribute(
-            'font-size',
-            '24'
-        );
+        text.style.fontSize =
+            '24px';
 
         text.textContent =
             data.divisions;
