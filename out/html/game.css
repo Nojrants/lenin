@@ -945,3 +945,20 @@ hr {
     line-height: 1.25;
     color: #444;
 }
+
+#map-container {
+    width: 100%;
+    height: calc(100vh - 100px);
+    overflow: hidden;
+    position: relative;
+}
+
+#map-container svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+#map-container svg path {
+    cursor: pointer;
+}
