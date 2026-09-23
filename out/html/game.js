@@ -1,3 +1,4 @@
+```javascript
 (function() {
   var game;
   var ui;
@@ -170,7 +171,9 @@ window.showMapProvince = function(provinceId) {
     document.querySelectorAll(
         '#map-container svg .map-province-selected'
     ).forEach(function(province) {
-        province.classList.remove('map-province-selected');
+        province.classList.remove(
+            'map-province-selected'
+        );
     });
 
 
@@ -183,7 +186,9 @@ window.showMapProvince = function(provinceId) {
     );
 
     if (province) {
-        province.classList.add('map-province-selected');
+        province.classList.add(
+            'map-province-selected'
+        );
     }
 
 
@@ -464,20 +469,13 @@ window.loadGameMap = function() {
         .then(function(svg) {
 
             /*
-             * Insert the SVG without changing
-             * its internal coordinate system.
+             * Insert the SVG exactly as supplied.
+             *
+             * Do not modify its viewBox or
+             * preserveAspectRatio.
              */
 
             frame.innerHTML = svg;
-
-            var mapSvg =
-                frame.querySelector('svg');
-
-            if (mapSvg) {
-                mapSvg.style.width = '100%';
-                mapSvg.style.height = '100%';
-                mapSvg.style.display = 'block';
-            }
 
             window.renderGameMap();
         })
@@ -588,6 +586,11 @@ window.showMap = function() {
             'map-container'
         );
 
+    var content =
+        document.getElementById(
+            'content'
+        );
+
     var engine =
         window.dendryUI.dendryEngine;
 
@@ -603,6 +606,12 @@ window.showMap = function() {
         if (container) {
             container.classList.remove(
                 'active'
+            );
+        }
+
+        if (content) {
+            content.classList.remove(
+                'map-hidden'
             );
         }
 
@@ -624,13 +633,17 @@ window.showMap = function() {
 
     setTimeout(function() {
 
-        if (!container) {
-            return;
+        if (content) {
+            content.classList.add(
+                'map-hidden'
+            );
         }
 
-        container.classList.add(
-            'active'
-        );
+        if (container) {
+            container.classList.add(
+                'active'
+            );
+        }
 
         window.loadGameMap();
 
@@ -1313,13 +1326,6 @@ window.onload = function() {
 };
 
 
-/*
- * Do NOT load the map here.
- *
- * It is loaded only when the Map button
- * is clicked.
- */
-
 }());
 
 
@@ -1334,3 +1340,4 @@ setInterval(function() {
     }
 
 }, 500);
+```
