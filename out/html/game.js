@@ -377,7 +377,16 @@ window.loadGameMap = function() {
         })
         .then(function(svg) {
             frame.innerHTML = svg;
-
+        
+            var mapSvg = frame.querySelector('svg');
+        
+            if (mapSvg) {
+                mapSvg.setAttribute(
+                    'preserveAspectRatio',
+                    'xMidYMid meet'
+                );
+            }
+        
             window.renderGameMap();
         })
         .catch(function(error) {
