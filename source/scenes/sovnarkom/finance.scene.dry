@@ -10,189 +10,163 @@ card-image: img/finance.PNG
 
 = Economy Overview
 
-<div class="economy-container">
+= Economy Overview
 
-<div class="economy-column">
+<table class="economy-table">
 
-<div class="economy-box">
-<h3>Macroeconomy</h3>
+<tr>
+    <th colspan="2">MACROECONOMY</th>
+</tr>
 
-GDP Growth
-: [color=#4CAF50]+{Q.gdp_growth}%[/color]
+<tr>
+    <td>Economic Growth</td>
+    <td class="positive">+4.2%</td>
+</tr>
+<tr>
+    <td>Inflation</td>
+    <td class="negative">12.5%</td>
+</tr>
+<tr>
+    <td>Unemployment</td>
+    <td class="negative">7.3%</td>
+</tr>
+<tr>
+    <td>National Debt</td>
+    <td>42.1%</td>
+</tr>
+<tr>
+    <td>Budget Balance</td>
+    <td class="negative">−2.4%</td>
+</tr>
 
-Inflation
-: [color=#E53935]{Q.inflation}%[/color]
 
-Unemployment
-: [color=#E53935]{Q.unemployment}%[/color]
+<tr>
+    <th colspan="2">PRODUCTION</th>
+</tr>
 
-National Debt
-: {Q.national_debt}%
+<tr>
+    <td>Industrial Output</td>
+    <td class="positive">+15%</td>
+</tr>
+<tr>
+    <td>Agricultural Output</td>
+    <td class="positive">+6%</td>
+</tr>
+<tr>
+    <td>Factory Utilization</td>
+    <td>78%</td>
+</tr>
+<tr>
+    <td>Rail Capacity</td>
+    <td class="negative">61%</td>
+</tr>
 
-Budget Balance
-: [color=#4CAF50]+{Q.budget_balance}%[/color]
 
-Currency Stability
-: {Q.currency_stability}
-</div>
+<tr>
+    <th colspan="2">TRADE & FINANCE</th>
+</tr>
 
-<div class="economy-box">
-<h3>Public Finances</h3>
+<tr>
+    <td>Exports</td>
+    <td class="positive">320M₽</td>
+</tr>
+<tr>
+    <td>Imports</td>
+    <td>270M₽</td>
+</tr>
+<tr>
+    <td>Trade Balance</td>
+    <td class="positive">+50M₽</td>
+</tr>
+<tr>
+    <td>Currency Stability</td>
+    <td class="positive">72</td>
+</tr>
+<tr>
+    <td>Investment</td>
+    <td class="positive">64</td>
+</tr>
 
-Revenue
-: [color=#4CAF50]{Q.total_revenue}₽[/color]
+</table>
 
-Expenditure
-: [color=#E53935]{Q.total_expenditure}₽[/color]
+<table class="economy-table">
 
-Deficit / Surplus
-: [color=#4CAF50]{Q.budget_result}₽[/color]
+<tr>
+    <th colspan="2">POPULATION</th>
+</tr>
 
-Tax Efficiency
-: {Q.tax_efficiency}
+<tr>
+    <td>Living Standards</td>
+    <td class="positive">68</td>
+</tr>
+<tr>
+    <td>Poverty</td>
+    <td class="negative">23%</td>
+</tr>
+<tr>
+    <td>Literacy</td>
+    <td class="positive">81%</td>
+</tr>
+<tr>
+    <td>Crime</td>
+    <td class="negative">34</td>
+</tr>
+<tr>
+    <td>Disillusionment</td>
+    <td class="negative">41</td>
+</tr>
 
-Debt Service
-: [color=#E53935]{Q.debt_service_cost}₽[/color]
-</div>
 
-</div>
+<tr>
+    <th colspan="2">LABOUR</th>
+</tr>
 
-<div class="economy-column">
+<tr>
+    <td>Employment</td>
+    <td class="positive">92%</td>
+</tr>
+<tr>
+    <td>Average Wage</td>
+    <td class="positive">145₽</td>
+</tr>
+<tr>
+    <td>Skilled Workers</td>
+    <td>58%</td>
+</tr>
+<tr>
+    <td>Labour Unrest</td>
+    <td class="negative">37</td>
+</tr>
 
-<div class="economy-box">
-<h3>Industry & Trade</h3>
 
-Industrial Output
-: [color=#4CAF50]+{Q.industrial_growth}%[/color]
+<tr>
+    <th colspan="2">ECONOMIC CONDITIONS</th>
+</tr>
 
-Agricultural Output
-: [color=#4CAF50]+{Q.agricultural_growth}%[/color]
+<tr>
+    <td>Business Confidence</td>
+    <td class="positive">58</td>
+</tr>
+<tr>
+    <td>Bank Solvency</td>
+    <td class="positive">81</td>
+</tr>
+<tr>
+    <td>Interest Rate</td>
+    <td>5.5%</td>
+</tr>
+<tr>
+    <td>Corruption</td>
+    <td class="negative">46</td>
+</tr>
+<tr>
+    <td>State Capacity</td>
+    <td class="positive">63</td>
+</tr>
 
-Exports
-: [color=#4CAF50]{Q.exports}₽[/color]
+</table>
 
-Imports
-: [color=#E53935]{Q.imports}₽[/color]
 
-Trade Balance
-: [color=#4CAF50]{Q.trade_balance}₽[/color]
-
-Rail Capacity
-: {Q.rail_capacity}
-</div>
-
-<div class="economy-box">
-<h3>Investment</h3>
-
-Domestic Investment
-: {Q.domestic_investment}
-
-Foreign Investment
-: {Q.foreign_investment}
-
-Business Confidence
-: {Q.business_confidence}
-
-Bank Solvency
-: {Q.bank_solvency}
-
-Interest Rate
-: {Q.interest_rate}%
-</div>
-
-</div>
-
-<div class="economy-column">
-
-<div class="economy-box">
-<h3>Population</h3>
-
-Living Standards
-: [color=#4CAF50]{Q.living_standards}[/color]
-
-Poverty
-: [color=#E53935]{Q.poverty}[/color]
-
-Literacy
-: [color=#4CAF50]{Q.literacy}%[/color]
-
-Crime
-: [color=#E53935]{Q.crime}[/color]
-
-Disillusionment
-: [color=#E53935]{Q.disillusionment}[/color]
-
-Population Growth
-: [color=#4CAF50]{Q.population_growth}%[/color]
-</div>
-
-<div class="economy-box">
-<h3>Labour</h3>
-
-Employment
-: {Q.employment}
-
-Skilled Workers
-: {Q.skilled_workers}
-
-Factory Utilization
-: {Q.factory_utilization}%
-
-Average Wage
-: {Q.average_wage}₽
-
-Labour Unrest
-: [color=#E53935]{Q.labour_unrest}[/color]
-</div>
-
-</div>
-
-<div class="economy-column">
-
-<div class="economy-box">
-<h3>Economic Outlook</h3>
-
-Growth Trend
-: [color=#4CAF50]{Q.growth_trend}[/color]
-
-Investor Sentiment
-: {Q.investor_sentiment}
-
-Market Confidence
-: {Q.market_confidence}
-
-Economic Stability
-: {Q.economic_stability}
-
-Corruption
-: [color=#E53935]{Q.corruption}[/color]
-
-State Capacity
-: [color=#4CAF50]{Q.state_capacity}[/color]
-</div>
-
-<div class="economy-box">
-<h3>Summary</h3>
-
-Economic Health
-: {Q.economic_health}
-
-Strengths
-: {Q.economic_strengths}
-
-Weaknesses
-: {Q.economic_weaknesses}
-
-Risk Level
-: [color=#E53935]{Q.economic_risk}[/color]
-
-Forecast
-: {Q.economic_forecast}
-</div>
-
-</div>
-
-</div>
 
 - @taxation
 - @banking
