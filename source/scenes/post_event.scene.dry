@@ -716,7 +716,7 @@ if (Q.dreamteam_score >= 14) {
 }
 
 
-if (Q.sovnarkom_expend < 0.25) Q.sovnarkom_expend = 0.25;
+if (Q.sovnarkom_expend < 0.1) Q.sovnarkom_expend = 0.1;
 if (Q.internal_expend < 0.25) Q.internal_expend = 0.25;
 if (Q.foreignaffairs_expend < 0.25) Q.foreignaffairs_expend = 0.25;
 if (Q.military_expend < 0.25) Q.military_expend = 0.25;
@@ -727,6 +727,7 @@ if (Q.finance_expend < 0.25) Q.finance_expend = 0.25;
 if (Q.justice_expend < 0.25) Q.justice_expend = 0.25;
 if (Q.agriculture_expend < 0.25) Q.agriculture_expend = 0.25;
 if (Q.foodsupply_expend < 0.25) Q.foodsupply_expend = 0.25;
+if (Q.labor_expend < 0.25) Q.labor_expend = 0.25;
 if (Q.nationalities_expend < 0.25) Q.nationalities_expend = 0.25;
 if (Q.welfare_expend < 0.25 && Q.welfare_founded != 1) Q.welfare_expend = 0;
 if (Q.welfare_expend < 0.25 && Q.welfare_founded == 1) Q.welfare_expend = 0.25;
