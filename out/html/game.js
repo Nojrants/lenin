@@ -1,4 +1,3 @@
-```javascript
 (function() {
   var game;
   var ui;
@@ -1340,4 +1339,3 @@ setInterval(function() {
     }
 
 }, 500);
-```
