@@ -1,0 +1,40 @@
+title: Evacuation of Petrograd?
+new-page: true
+max-visits: 1
+tags: event
+view-if: northern_progress <= -3 or german_negotiations = 4
+
+= Evacuation of Petrograd
+
+With the Germans pressing the advance toward Petrograd, there is murmuring about the need to evacuate government offices and personnel from the city. Worse case scenario, if the city of Petrograd falls we must be prepared to keep up the fight from somewhere else. The city of Moscow is the most obvious choice for a temporary capital, with many government functions already being performed from there.
+
+On the other hand, abandoning the "birthplace of the Revolution" may damage morale, as a tacit admission that we expect the city to fall. Not to mention, the evacuation will be a complicated and costly endeavor. One is reminded of our own propaganda against Kerensky, back when he proposed moving the capital all those weeks ago.
+
+
+- @flee
+- @stay
+
+@flee
+title: Quietly initiate the relocation to Moscow as a temporary capital. 
+subtitle: -1 resources 
+unavailable-subtitle: -1 resources – We lack the resources. 
+on-arrival: {!
+  Q.capital = "Moscow"; 
+  Q.resources -= 1; Q.instability += 3; 
+  Q.morale -= 0.01; Q.discipline -= 0.01;
+  Q.train_capacity *= 0.9; Q.industry *= 0.95; 
+  Q.sovnarkom_efficacy -= 0.1; 
+!}
+
+Gradually we begin evacuating government infrastructure and personnel to Moscow. When the final move is made, the relocation occurs relatively smoothly, although it will take some time to return to full capacity. We announce that this is by no means an abandonment of Petrograd, though the news causes a mild panic nonetheless, and many people flee into the surrounding periphery. 
+
+@stay
+title: We will stay and defend Petrograd! 
+on-arrival: {!
+  Q.capital = "Petrograd";
+  Q.instability += 2;
+  Q.morale += 0.01; 
+  Q.leftcom_strength += 5; 
+!} 
+
+We announce that we will stay in Petrograd, and begin raising the defenses.  
