@@ -12,8 +12,12 @@ day: 'numeric'
 };
 
 var main = function(dendryUI) {
-ui = dendryUI;
-game = ui.game;
+    ui = dendryUI;
+    game = ui.game;
+
+    if (window.updateSidebar) {
+        window.updateSidebar();
+    }
 };
 
 var TITLE = "Social Democracy: Petrograd 1917" + '_' + "Autumn Chen";
@@ -1249,14 +1253,6 @@ window.onNewPage = function() {
 
     if (window.justLoaded) {
         window.justLoaded = false;
-    }
-
-    if (
-        window.updateSidebar &&
-        window.dendryUI &&
-        window.dendryUI.dendryEngine
-    ) {
-        window.updateSidebar();
     }
 };
 
