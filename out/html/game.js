@@ -570,56 +570,83 @@ fetch(
 
 Province hover and click behavior.
 */
-
 document.addEventListener(
-'mouseover',
-function(event) {
+    'pointerover',
+    function(event) {
 
-    var province =
-        event.target.closest(
-            '#map-container svg path[id]'
+        var province =
+            event.target.closest(
+                '#map-container svg path[id]'
+            );
+
+        if (!province) {
+            return;
+        }
+
+        if (
+            !window.mapProvinces[
+                province.id
+            ]
+        ) {
+            return;
+        }
+
+        var from =
+            event.relatedTarget;
+
+        if (
+            from &&
+            province.contains(from)
+        ) {
+            return;
+        }
+
+        province.classList.add(
+            'map-province-hover'
         );
 
-    if (!province) {
-        return;
     }
-
-    if (
-        !window.mapProvinces[
-            province.id
-        ]
-    ) {
-        return;
-    }
-
-    province.classList.add(
-        'map-province-hover'
-    );
-
-}
-
 );
 
 document.addEventListener(
-'mouseout',
-function(event) {
+    'pointerout',
+    function(event) {
 
-    var province =
-        event.target.closest(
-            '#map-container svg path[id]'
+        var province =
+            event.target.closest(
+                '#map-container svg path[id]'
+            );
+
+        if (!province) {
+            return;
+        }
+
+        if (
+            !window.mapProvinces[
+                province.id
+            ]
+        ) {
+            return;
+        }
+
+        var to =
+            event.relatedTarget;
+
+        if (
+            to &&
+            province.contains(to)
+        ) {
+            return;
+        }
+
+        province.classList.remove(
+            'map-province-hover'
         );
 
-    if (!province) {
-        return;
     }
-
-    province.classList.remove(
-        'map-province-hover'
-    );
-
-}
-
 );
+
+
 
 document.addEventListener(
 'click',
