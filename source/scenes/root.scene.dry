@@ -1349,6 +1349,7 @@ Q.timers = [//m_party
             'ca_preparations',
             'ca_support',
             'coalition_actions',
+            'peace_question',
             ];
 Q.advisor_action_timer = 0;
 Q.labor_unrest_timer = 5;
