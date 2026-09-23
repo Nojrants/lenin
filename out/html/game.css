@@ -946,11 +946,19 @@ hr {
     color: #444;
 }
 
+
+
+
 #map-container {
+    display: none;
     width: 100%;
     height: calc(100vh - 100px);
     overflow: hidden;
     position: relative;
+}
+
+#map-container.active {
+    display: block;
 }
 
 #map-container svg {
