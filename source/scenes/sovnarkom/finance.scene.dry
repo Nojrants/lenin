@@ -4,7 +4,7 @@ is-card: true
 view-if: fiscal_policy_timer == 0 and finance_minister_party = "Bolshevik"
 tags: sovnarkom, government
 card-image: img/finance.PNG
-on-arrival: on-arrival: {!
+on-arrival: {!
     Q.gdp_growth = 0;
     Q.gdp_growth_display = 1;
 
