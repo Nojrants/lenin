@@ -110,10 +110,10 @@ on-arrival: {!
       </div>
       <div style="display:flex; gap:8px; margin:0; padding:0; border-top:2px solid #666;">
         <div style="flex:1; min-width:0; padding:3px 0; line-height:1.2; white-space:nowrap;">
-          <b>Total Revenue</b><span style="float:right;">[+ income +]</span>
+          <b>Total</b><span style="float:right;">[+ income +]</span>
         </div>
         <div style="flex:1; min-width:0; padding:3px 0; line-height:1.2; white-space:nowrap;">
-          <b>Total Expenditure</b><span style="float:right;">[+ expenditure +]</span>
+          <b>Total</b><span style="float:right;">[+ expenditure +]</span>
         </div>
       </div>
     </div>
