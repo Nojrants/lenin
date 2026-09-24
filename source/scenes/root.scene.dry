@@ -307,6 +307,7 @@ Q.railways_expend = 1.75;
 Q.trade_expend = 0.5;
 Q.finance_expend = 0.5;
 Q.justice_expend = 0.5;
+Q.labor_expend = 0.5;
 Q.agriculture_expend = 0.75;
 Q.foodsupply_expend = 1.5;
 Q.posts_expend = 0.5; 
