@@ -18,82 +18,155 @@ on-arrival: {!
 !}
 
 = Financial Report
+<table style="width:100%; table-layout:fixed; border-collapse:collapse;">
+<tr>
 
-<div style="display:flex; flex-wrap:wrap; gap:20px; align-items:stretch;">
-  <div style="flex:1; min-width:300px; border:2px solid #666; border-radius:6px; padding:12px;">
-<div style="font-size:1.2em; font-weight:bold; text-align:center; margin-bottom:8px;">
-  Revenue
-</div>
-<hr>
-<b>Total Revenue</b> — <span style="color: var(--level1-color);">[+ income +]</span>
-<hr>
-<b>Taxation</b> — <span style="color: var(--level1-color);">[+ taxation_display +]</span>
-<ul style="margin-top:6px; margin-bottom:0; padding-left:20px;">
-  <li style="margin-bottom:4px;">Income Tax: <span style="color: var(--level1-color);">[+ income_tax_display +]</span></li>
-  <li style="margin-bottom:4px;">Property Tax: <span style="color: var(--level1-color);">[+ property_tax_display +]</span></li>
-  <li style="margin-bottom:4px;">Business Tax: <span style="color: var(--level1-color);">[+ business_tax_display +]</span></li>
-  <li style="margin-bottom:4px;">Monopolies: <span style="color: var(--level1-color);">[+ monopolies_display +]</span></li>
-  <li style="margin-bottom:0;">Customs Duties: <span style="color: var(--level1-color);">[+ customs_display +]</span></li>
-</ul>
-<br>
-<b>State Enterprises</b> — <span style="color: var(--level1-color);">[+ (railway_revenue + enterprises_revenue) +]</span>
-<ul style="margin-top:6px; margin-bottom:0; padding-left:20px;">
-  <li style="margin-bottom:8px;">Railways: <span style="color: var(--level1-color);">[+ railway_revenue +]</span></li>
-  <li style="margin-bottom:0;">Other Enterprises: <span style="color: var(--level1-color);">[+ enterprises_revenue +]</span></li>
-</ul>
-  </div>
-  <div style="flex:1; min-width:300px; border:2px solid #666; border-radius:6px; padding:12px;">
-<div style="font-size:1.2em; font-weight:bold; text-align:center; margin-bottom:8px;">
-  Expenditure
-</div>
-<hr>
-<b>Total Expenditure</b> — <span style="color: var(--level7-color);">[+ expenditure +]</span>
-<hr>
-<b>Government Functions</b> — <span style="color: var(--level7-color);">[+ government_functions_display +]</span>
-<ul style="margin-top:6px; margin-bottom:0; padding-left:20px;">
-  <li style="margin-bottom:4px;">Sovnarkom: <span style="color: var(--level7-color);">[+ sovnarkom_expend +]</span></li>
-  <li style="margin-bottom:4px;">Foreign Affairs: <span style="color: var(--level7-color);">[+ foreignaffairs_expend +]</span></li>
-  <li style="margin-bottom:4px;">Military: <span style="color: var(--level7-color);">[+ military_expend +]</span></li>
-  <li style="margin-bottom:4px;">Enlightenment: <span style="color: var(--level7-color);">[+ enlightenment_expend +]</span></li>
-  <li style="margin-bottom:4px;">Internal Affairs: <span style="color: var(--level7-color);">[+ internal_expend +]</span></li>
-  <li style="margin-bottom:4px;">Railways: <span style="color: var(--level7-color);">[+ railways_expend +]</span></li>
-  <li style="margin-bottom:4px;">Trade: <span style="color: var(--level7-color);">[+ trade_expend +]</span></li>
-  <li style="margin-bottom:4px;">Finance: <span style="color: var(--level7-color);">[+ finance_expend +]</span></li>
-  <li style="margin-bottom:4px;">Justice: <span style="color: var(--level7-color);">[+ justice_expend +]</span></li>
-  <li style="margin-bottom:4px;">Labor: <span style="color: var(--level7-color);">[+ labor_expend +]</span></li>
-  <li style="margin-bottom:4px;">Agriculture: <span style="color: var(--level7-color);">[+ agriculture_expend +]</span></li>
-  <li style="margin-bottom:4px;">Food Supply: <span style="color: var(--level7-color);">[+ foodsupply_expend +]</span></li>
-  <li style="margin-bottom:4px;">Nationalities: <span style="color: var(--level7-color);">[+ nationalities_expend +]</span></li>
-  <li style="margin-bottom:0;">Welfare: <span style="color: var(--level7-color);">[+ welfare_expend +]</span></li>
-</ul>
-<hr>
-<b>Other Obligations</b> — <span style="color: var(--level7-color);">[+ (interest_display + indemnities_display) +]</span>
-<ul style="margin-top:6px; margin-bottom:0; padding-left:20px;">
-  <li style="margin-bottom:8px;">Interest Payments: <span style="color: var(--level7-color);">[+ interest_display +]</span></li>
-  <li style="margin-bottom:0;">Indemnities: <span style="color: var(--level7-color);">[+ indemnities_display +]</span></li>
-</ul>
-  </div>
-  <div style="flex-basis:100%; border:2px solid #666; border-radius:6px; padding:12px;">
-<div style="display:flex; justify-content:space-between; margin:8px 20px;">
-  <b>Treasury</b>
-  [+ resources +]
-</div>
-<div style="display:flex; justify-content:space-between; margin:8px 20px;">
-  <b>Total Revenue</b>
-  <span style="color: var(--level1-color);">+ [+ income +]</span>
-</div>
-<div style="display:flex; justify-content:space-between; margin:8px 20px;">
-  <b>Total Expenditure</b>
-  <span style="color: var(--level7-color);">- [+ expenditure +]</span>
-</div>
-<hr>
-<div style="display:flex; justify-content:space-between; margin:8px 20px; font-size:1.1em;">
-  <b>Surplus / Deficit</b>
-  <span>[?if (resources + income - expenditure) > 0 : <span style="color: var(--level1-color);">+ [+ surplus_display +]</span>?][?if (resources + income - expenditure) < 0 : <span style="color: var(--level7-color);">- [+ surplus_display +]</span>?][?if (resources + income - expenditure) == 0 : [+ surplus_display +] ?]</span>
-</div>
-  </div>
-</div>
+<td style="width:50%; vertical-align:top; padding:5px;">
 
+  <div style="border:2px solid #666; border-radius:6px; padding:0; margin-bottom:10px; font-size:0.85em; overflow:hidden;">
+    <div style="background:#e8e8e8; border-bottom:1px solid #ccc; padding:4px 6px; font-size:1.2em; line-height:1.2; font-weight:bold; text-align:center; white-space:nowrap;">
+      Macroeconomy
+    </div>
+
+    <div style="padding:3px 8px; line-height:1.2; white-space:nowrap;"><b>Economic Growth</b><span style="float:right;">[+ gdp_growth_display +]</span></div>
+    <div style="padding:3px 8px; line-height:1.2; background:rgba(215,205,180,0.12); white-space:nowrap;"><b>Inflation</b><span style="float:right;">[+ monthly_inflation_disp +]% ([+ inflation_disp +]% p.a.)</span></div>
+    <div style="padding:3px 8px; line-height:1.2; white-space:nowrap;"><b>Unemployment</b><span style="float:right;">[+ unemployment_display +]</span></div>
+    <div style="padding:3px 8px; line-height:1.2; background:rgba(215,205,180,0.12); white-space:nowrap;"><b>National Debt</b><span style="float:right;">[+ national_debt_display +]</span></div>
+    <div style="padding:3px 8px; line-height:1.2; white-space:nowrap;"><b>Budget Balance</b><span style="float:right;">[+ budget_balance_display +]</span></div>
+  </div>
+
+  <div style="border:2px solid #666; border-radius:6px; padding:0; margin-bottom:10px; font-size:0.85em; overflow:hidden;">
+    <div style="background:#e8e8e8; border-bottom:1px solid #ccc; padding:4px 6px; font-size:1.2em; line-height:1.2; font-weight:bold; text-align:center; white-space:nowrap;">
+      Production
+    </div>
+
+    <div style="padding:3px 8px; line-height:1.2; white-space:nowrap;"><b>Industrial Output</b><span style="float:right;">[+ industrial_output_display +]</span></div>
+    <div style="padding:3px 8px; line-height:1.2; background:rgba(215,205,180,0.12); white-space:nowrap;"><b>Agricultural Output</b><span style="float:right;">[+ agricultural_output_display +]</span></div>
+    <div style="padding:3px 8px; line-height:1.2; white-space:nowrap;"><b>Factory Utilization</b><span style="float:right;">[+ factory_utilization_display +]</span></div>
+    <div style="padding:3px 8px; line-height:1.2; background:rgba(215,205,180,0.12); white-space:nowrap;"><b>Rail Capacity</b><span style="float:right;">[+ rail_capacity_display +]</span></div>
+  </div>
+
+  <div style="border:2px solid #666; border-radius:6px; padding:0; font-size:0.85em; overflow:hidden;">
+    <div style="background:#e8e8e8; border-bottom:1px solid #ccc; padding:4px 6px; font-size:1.2em; line-height:1.2; font-weight:bold; text-align:center; white-space:nowrap;">
+      Balance of Payments
+    </div>
+
+    <div style="display:flex; gap:4px; padding:0 3px; border-bottom:1px solid #666;">
+      <div style="flex:1; min-width:0; padding:3px 0; text-align:center; font-weight:bold; white-space:nowrap;">
+        Current Account
+      </div>
+      <div style="flex:1; min-width:0; padding:3px 0; text-align:center; font-weight:bold; white-space:nowrap;">
+        Capital Account
+      </div>
+    </div>
+
+    <div style="display:flex; align-items:flex-start; gap:4px; padding:0 3px 4px 3px;">
+
+      <div style="flex:1; min-width:0;">
+        <div style="padding:3px 0; white-space:nowrap; border-bottom:1px dotted #aaa;">Merchandise Exports<span style="float:right;">[+ exports_display +]</span></div>
+        <div style="padding:3px 0; white-space:nowrap; background:rgba(215,205,180,0.12); border-bottom:1px dotted #aaa;">Merchandise Imports<span style="float:right;">[+ imports_display +]</span></div>
+        <div style="padding:3px 0; white-space:nowrap; border-bottom:1px dotted #aaa;">Trade Balance<span style="float:right;">[+ trade_balance_display +]</span></div>
+        <div style="padding:3px 0; white-space:nowrap; background:rgba(215,205,180,0.12); border-bottom:1px dotted #aaa;">Services &amp; Income, Net<span style="float:right;">[+ services_income_display +]</span></div>
+        <div style="padding:4px 0; white-space:nowrap; border-top:2px solid #666;"><b>Current Account</b><span style="float:right;">[+ current_account_display +]</span></div>
+      </div>
+
+      <div style="flex:1; min-width:0;">
+        <div style="padding:3px 0; white-space:nowrap; border-bottom:1px dotted #aaa;">Long-Term Capital, Net<span style="float:right;">[+ long_term_capital_display +]</span></div>
+        <div style="padding:3px 0; white-space:nowrap; background:rgba(215,205,180,0.12); border-bottom:1px dotted #aaa;">Short-Term Capital, Net<span style="float:right;">[+ short_term_capital_display +]</span></div>
+        <div style="padding:4px 0; white-space:nowrap; border-top:2px solid #666;"><b>Capital Account</b><span style="float:right;">[+ capital_account_display +]</span></div>
+        <div style="padding:3px 0; white-space:nowrap; background:rgba(215,205,180,0.12); border-bottom:1px dotted #aaa;">Errors &amp; Omissions<span style="float:right;">[+ errors_omissions_display +]</span></div>
+        <div style="padding:4px 0; white-space:nowrap;"><b>Change in Reserves</b><span style="float:right;">[+ reserve_change_display +]</span></div>
+      </div>
+
+    </div>
+  </div>
+
+</td>
+
+<td style="width:50%; vertical-align:top; padding:5px;">
+
+  <div style="border:2px solid #666; border-radius:6px; padding:0; margin-bottom:10px; font-size:0.85em; overflow:hidden;">
+
+    <div style="background:#e8e8e8; border-bottom:1px solid #ccc; padding:4px 6px; font-size:1.2em; line-height:1.2; font-weight:bold; text-align:center; white-space:nowrap;">
+      Budget
+    </div>
+
+    <div style="display:flex; gap:4px; padding:0 3px; border-bottom:1px solid #666;">
+      <div style="flex:1; min-width:0; padding:3px 0; text-align:center; font-weight:bold; white-space:nowrap;">
+        Revenue
+      </div>
+      <div style="flex:1; min-width:0; padding:3px 0; text-align:center; font-weight:bold; white-space:nowrap;">
+        Expenditure
+      </div>
+    </div>
+
+    <div style="display:flex; align-items:flex-start; gap:4px; padding:0 3px;">
+
+      <div style="flex:1; min-width:0;">
+        <div style="padding:3px 0; white-space:nowrap; border-bottom:1px dotted #aaa;">Income Tax<span style="float:right;">[+ income_tax_display +]</span></div>
+        <div style="padding:3px 0; white-space:nowrap; border-bottom:1px dotted #aaa;">Property Tax<span style="float:right;">[+ property_tax_display +]</span></div>
+        <div style="padding:3px 0; white-space:nowrap; border-bottom:1px dotted #aaa;">Business Tax<span style="float:right;">[+ business_tax_display +]</span></div>
+        <div style="padding:3px 0; white-space:nowrap; border-bottom:1px dotted #aaa;">Monopolies<span style="float:right;">[+ monopolies_display +]</span></div>
+        <div style="padding:3px 0; white-space:nowrap; border-bottom:1px dotted #aaa;">Customs<span style="float:right;">[+ customs_display +]</span></div>
+        <div style="padding:3px 0; white-space:nowrap; border-bottom:1px dotted #aaa;">Railways<span style="float:right;">[+ railway_revenue +]</span></div>
+        <div style="padding:3px 0; white-space:nowrap;">Enterprises<span style="float:right;">[+ enterprises_revenue +]</span></div>
+      </div>
+
+      <div style="flex:1; min-width:0;">
+        <div style="padding:3px 0; white-space:nowrap; border-bottom:1px dotted #aaa;">Government<span style="float:right;">[+ government_functions_display +]</span></div>
+
+        <div style="padding:2px 0 2px 8px; white-space:nowrap; border-bottom:1px dotted #aaa;">Sovnarkom<span style="float:right;">[+ sovnarkom_expend +]</span></div>
+        <div style="padding:2px 0 2px 8px; white-space:nowrap; border-bottom:1px dotted #aaa;">Foreign Affairs<span style="float:right;">[+ foreignaffairs_expend +]</span></div>
+        <div style="padding:2px 0 2px 8px; white-space:nowrap; border-bottom:1px dotted #aaa;">Military<span style="float:right;">[+ military_expend +]</span></div>
+        <div style="padding:2px 0 2px 8px; white-space:nowrap; border-bottom:1px dotted #aaa;">Enlightenment<span style="float:right;">[+ enlightenment_expend +]</span></div>
+        <div style="padding:2px 0 2px 8px; white-space:nowrap; border-bottom:1px dotted #aaa;">Internal Affairs<span style="float:right;">[+ internal_expend +]</span></div>
+        <div style="padding:2px 0 2px 8px; white-space:nowrap; border-bottom:1px dotted #aaa;">Railways<span style="float:right;">[+ railways_expend +]</span></div>
+        <div style="padding:2px 0 2px 8px; white-space:nowrap; border-bottom:1px dotted #aaa;">Trade<span style="float:right;">[+ trade_expend +]</span></div>
+        <div style="padding:2px 0 2px 8px; white-space:nowrap; border-bottom:1px dotted #aaa;">Finance<span style="float:right;">[+ finance_expend +]</span></div>
+        <div style="padding:2px 0 2px 8px; white-space:nowrap; border-bottom:1px dotted #aaa;">Justice<span style="float:right;">[+ justice_expend +]</span></div>
+        <div style="padding:2px 0 2px 8px; white-space:nowrap; border-bottom:1px dotted #aaa;">Labor<span style="float:right;">[+ labor_expend +]</span></div>
+        <div style="padding:2px 0 2px 8px; white-space:nowrap; border-bottom:1px dotted #aaa;">Agriculture<span style="float:right;">[+ agriculture_expend +]</span></div>
+        <div style="padding:2px 0 2px 8px; white-space:nowrap; border-bottom:1px dotted #aaa;">Food Supply<span style="float:right;">[+ foodsupply_expend +]</span></div>
+        <div style="padding:2px 0 2px 8px; white-space:nowrap; border-bottom:1px dotted #aaa;">Nationalities<span style="float:right;">[+ nationalities_expend +]</span></div>
+        <div style="padding:2px 0 2px 8px; white-space:nowrap; border-bottom:1px dotted #aaa;">Welfare<span style="float:right;">[+ welfare_expend +]</span></div>
+
+        <div style="padding:3px 0; white-space:nowrap; border-bottom:1px dotted #aaa;">Interest<span style="float:right;">[+ interest_display +]</span></div>
+        <div style="padding:3px 0; white-space:nowrap;">Indemnities<span style="float:right;">[+ indemnities_display +]</span></div>
+      </div>
+
+    </div>
+
+    <div style="display:flex; gap:4px; padding:0 3px 4px 3px; border-top:2px solid #666;">
+
+      <div style="flex:1; min-width:0; padding:4px 0; white-space:nowrap;">
+        <b>Total Revenue</b><span style="float:right;">[+ income +]</span>
+      </div>
+
+      <div style="flex:1; min-width:0; padding:4px 0; white-space:nowrap;">
+        <b>Total Expenditure</b><span style="float:right;">[+ expenditure +]</span>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div style="border:2px solid #666; border-radius:6px; padding:0; margin-bottom:10px; font-size:0.85em; overflow:hidden;">
+    <div style="background:#e8e8e8; border-bottom:1px solid #ccc; padding:4px 6px; font-size:1.2em; line-height:1.2; font-weight:bold; text-align:center; white-space:nowrap;">
+      Labour
+    </div>
+    <!-- Labour metrics go here -->
+  </div>
+
+  <div style="border:2px solid #666; border-radius:6px; padding:0; font-size:0.85em; overflow:hidden;">
+    <div style="background:#e8e8e8; border-bottom:1px solid #ccc; padding:4px 6px; font-size:1.2em; line-height:1.2; font-weight:bold; text-align:center; white-space:nowrap;">
+      Economic Conditions
+    </div>
+    <!-- Economic Conditions metrics go here -->
+  </div>
+
+</td>
+</tr>
+</table>
 
 
 
