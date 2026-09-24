@@ -1,10 +1,102 @@
 title: Finance
 new-page: true
 is-card: true
-on-arrival: fiscal_policy_timer += 2; week_actions += 1
 view-if: fiscal_policy_timer == 0 and finance_minister_party = "Bolshevik"
 tags: sovnarkom, government
 card-image: img/finance.PNG
+on-arrival: on-arrival: {!
+    Q.gdp_growth = 0;
+    Q.gdp_growth_display = 1;
+
+    Q.inflation = 0;
+    Q.monthly_inflation_disp = 0;
+    Q.inflation_disp = 0;
+
+    Q.unemployment = 0;
+    Q.unemployment_display = 0;
+
+    Q.national_debt = 0;
+    Q.national_debt_display = 0;
+
+    Q.budget_balance = 0;
+    Q.budget_balance_display = 0;
+
+    Q.industrial_output = 0;
+    Q.industrial_output_display = 0;
+
+    Q.agricultural_output = 0;
+    Q.agricultural_output_display = 0;
+
+    Q.factory_utilization = 0;
+    Q.factory_utilization_display = 0;
+
+    Q.rail_capacity = 0;
+    Q.rail_capacity_display = 0;
+
+    Q.exports = 0;
+    Q.exports_display = 0;
+
+    Q.imports = 0;
+    Q.imports_display = 0;
+
+    Q.trade_balance = 0;
+    Q.trade_balance_display = 0;
+
+    Q.services_income = 0;
+    Q.services_income_display = 0;
+
+    Q.current_account = 0;
+    Q.current_account_display = 0;
+
+    Q.long_term_capital = 0;
+    Q.long_term_capital_display = 0;
+
+    Q.short_term_capital = 0;
+    Q.short_term_capital_display = 0;
+
+    Q.capital_account = 0;
+    Q.capital_account_display = 0;
+
+    Q.errors_omissions = 0;
+    Q.errors_omissions_display = 0;
+
+    Q.reserve_change = 0;
+    Q.reserve_change_display = 0;
+
+    Q.income_tax_display = 0;
+    Q.property_tax_display = 0;
+    Q.business_tax_display = 0;
+    Q.monopolies_display = 0;
+    Q.customs_display = 0;
+
+    Q.railway_revenue = 0;
+    Q.enterprises_revenue = 0;
+
+    Q.government_functions_display = 0;
+
+    Q.sovnarkom_expend = 0;
+    Q.foreignaffairs_expend = 0;
+    Q.military_expend = 0;
+    Q.enlightenment_expend = 0;
+    Q.internal_expend = 0;
+    Q.railways_expend = 0;
+    Q.trade_expend = 0;
+    Q.finance_expend = 0;
+    Q.justice_expend = 0;
+    Q.labor_expend = 0;
+    Q.agriculture_expend = 0;
+    Q.foodsupply_expend = 0;
+    Q.nationalities_expend = 0;
+    Q.welfare_expend = 0;
+
+    Q.interest_display = 0;
+    Q.indemnities_display = 0;
+
+    Q.income = 0;
+    Q.expenditure = 0;
+  Q.fiscal_policy_timer += 2; Q.week_actions += 1
+!}
+
 
 = Fiscal Policy
 
