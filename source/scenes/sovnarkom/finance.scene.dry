@@ -6,6 +6,15 @@ tags: sovnarkom, government
 card-image: img/finance.PNG
 on-arrival: {!
   Q.fiscal_policy_timer += 2; Q.week_actions += 1
+  Q.income_tax_display = Math.round(100 * Q.income_tax)/100;
+  Q.property_tax_display = Math.round(100 * Q.property_tax)/100;
+  Q.business_tax_display = Math.round(100 * Q.business_tax)/100;
+  Q.monopolies_display = Math.round(100 * Q.monopolies)/100;
+  Q.customs_display = Math.round(100 * Q.customs)/100;
+  Q.taxation_display = Q.income_tax_display + Q.property_tax_display + Q.business_tax_display + Q.monopolies_display + Q.customs_display;
+  Q.government_functions_display = Math.round(100 * Q.government_functions)/100;
+  Q.interest_display = Math.round(100 * Q.interest)/100;
+  Q.indemnities_display = Math.round(100 * Q.indemnities)/100;
 !}
 
 = Fiscal Policy
