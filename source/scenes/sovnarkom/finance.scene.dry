@@ -101,353 +101,349 @@ on-arrival: {!
 
 = Fiscal Policy
 
-= Fiscal Policy
-
 <table style="width:100%; table-layout:fixed; border-collapse:collapse;">
 <tr>
 
-<td style="width:50%; vertical-align:top; padding:0 5px 0 0;">
+<!-- LEFT COLUMN -->
+<td style="width:50%; vertical-align:top; padding:5px;">
 
-<!-- MACROECONOMY -->
+  <!-- MACROECONOMY -->
+  <div style="border:2px solid #666; border-radius:6px; padding:8px; margin-bottom:10px; font-size:0.85em;">
 
-<div style="border:2px solid #666; border-radius:6px; padding:8px; margin-bottom:10px; box-sizing:border-box; font-size:0.85em;">
+    <div style="background:#e8e8e8; border:1px solid #ccc; border-radius:4px; padding:4px 6px; margin:-3px -3px 8px -3px; font-size:1.2em; font-weight:bold; text-align:center;">
+      Macroeconomy
+    </div>
 
-<div style="font-size:1.2em; font-weight:bold; text-align:center;">
-Macroeconomy
-</div>
+    <div style="display:flex; justify-content:space-between; margin:0 4px; padding:4px 8px; background:rgba(215,205,180,0.06);">
+      <b>Economic Growth</b>
+      <span>[+ gdp_growth_display +]</span>
+    </div>
 
-<div style="border-top:1px solid #888; margin:6px 0;"></div>
+    <div style="display:flex; justify-content:space-between; margin:0 4px; padding:4px 8px; background:rgba(215,205,180,0.12);">
+      <b>Inflation</b>
+      <span>[+ monthly_inflation_disp +]% ([+ inflation_disp +]% p.a.)</span>
+    </div>
 
-<table style="width:100%; border-collapse:collapse;">
-<tr>
-<td style="padding:4px 8px;"><b>Economic Growth</b></td>
-<td style="padding:4px 8px; text-align:right;">[+ gdp_growth_display +]</td>
-</tr>
-<tr>
-<td style="padding:4px 8px;"><b>Inflation</b></td>
-<td style="padding:4px 8px; text-align:right;">[+ monthly_inflation_disp +]% ([+ inflation_disp +]% p.a.)</td>
-</tr>
-<tr>
-<td style="padding:4px 8px;"><b>Unemployment</b></td>
-<td style="padding:4px 8px; text-align:right;">[+ unemployment_display +]</td>
-</tr>
-<tr>
-<td style="padding:4px 8px;"><b>National Debt</b></td>
-<td style="padding:4px 8px; text-align:right;">[+ national_debt_display +]</td>
-</tr>
-<tr>
-<td style="padding:4px 8px;"><b>Budget Balance</b></td>
-<td style="padding:4px 8px; text-align:right;">[+ budget_balance_display +]</td>
-</tr>
-</table>
+    <div style="display:flex; justify-content:space-between; margin:0 4px; padding:4px 8px; background:rgba(215,205,180,0.06);">
+      <b>Unemployment</b>
+      <span>[+ unemployment_display +]</span>
+    </div>
 
-</div>
+    <div style="display:flex; justify-content:space-between; margin:0 4px; padding:4px 8px; background:rgba(215,205,180,0.12);">
+      <b>National Debt</b>
+      <span>[+ national_debt_display +]</span>
+    </div>
 
+    <div style="display:flex; justify-content:space-between; margin:0 4px; padding:4px 8px; background:rgba(215,205,180,0.06);">
+      <b>Budget Balance</b>
+      <span>[+ budget_balance_display +]</span>
+    </div>
 
-<!-- PRODUCTION -->
+  </div>
 
-<div style="border:2px solid #666; border-radius:6px; padding:8px; margin-bottom:10px; box-sizing:border-box; font-size:0.85em;">
+  <!-- PRODUCTION -->
+  <div style="border:2px solid #666; border-radius:6px; padding:8px; margin-bottom:10px; font-size:0.85em;">
 
-<div style="font-size:1.2em; font-weight:bold; text-align:center;">
-Production
-</div>
+    <div style="background:#e8e8e8; border:1px solid #ccc; border-radius:4px; padding:4px 6px; margin:-3px -3px 8px -3px; font-size:1.2em; font-weight:bold; text-align:center;">
+      Production
+    </div>
 
-<div style="border-top:1px solid #888; margin:6px 0;"></div>
+    <div style="display:flex; justify-content:space-between; margin:0 4px; padding:4px 8px; background:rgba(215,205,180,0.06);">
+      <b>Industrial Output</b>
+      <span>[+ industrial_output_display +]</span>
+    </div>
 
-<table style="width:100%; border-collapse:collapse;">
-<tr>
-<td style="padding:4px 8px;"><b>Industrial Output</b></td>
-<td style="padding:4px 8px; text-align:right;">[+ industrial_output_display +]</td>
-</tr>
-<tr>
-<td style="padding:4px 8px;"><b>Agricultural Output</b></td>
-<td style="padding:4px 8px; text-align:right;">[+ agricultural_output_display +]</td>
-</tr>
-<tr>
-<td style="padding:4px 8px;"><b>Factory Utilization</b></td>
-<td style="padding:4px 8px; text-align:right;">[+ factory_utilization_display +]</td>
-</tr>
-<tr>
-<td style="padding:4px 8px;"><b>Rail Capacity</b></td>
-<td style="padding:4px 8px; text-align:right;">[+ rail_capacity_display +]</td>
-</tr>
-</table>
+    <div style="display:flex; justify-content:space-between; margin:0 4px; padding:4px 8px; background:rgba(215,205,180,0.12);">
+      <b>Agricultural Output</b>
+      <span>[+ agricultural_output_display +]</span>
+    </div>
 
-</div>
+    <div style="display:flex; justify-content:space-between; margin:0 4px; padding:4px 8px; background:rgba(215,205,180,0.06);">
+      <b>Factory Utilization</b>
+      <span>[+ factory_utilization_display +]</span>
+    </div>
 
+    <div style="display:flex; justify-content:space-between; margin:0 4px; padding:4px 8px; background:rgba(215,205,180,0.12);">
+      <b>Rail Capacity</b>
+      <span>[+ rail_capacity_display +]</span>
+    </div>
 
-<!-- BALANCE OF PAYMENTS -->
+  </div>
 
-<div style="border:2px solid #666; border-radius:6px; padding:8px; box-sizing:border-box; font-size:0.85em;">
+  <!-- BALANCE OF PAYMENTS -->
+  <div style="border:2px solid #666; border-radius:6px; padding:8px; font-size:0.85em;">
 
-<div style="font-size:1.2em; font-weight:bold; text-align:center;">
-Balance of Payments
-</div>
+    <div style="background:#e8e8e8; border:1px solid #ccc; border-radius:4px; padding:4px 6px; margin:-3px -3px 8px -3px; font-size:1.2em; font-weight:bold; text-align:center;">
+      Balance of Payments
+    </div>
 
-<div style="border-top:1px solid #888; margin:6px 0;"></div>
+    <div style="display:flex; gap:12px;">
 
-<table style="width:100%; border-collapse:collapse; table-layout:fixed;">
-<tr>
+      <!-- CURRENT ACCOUNT -->
+      <div style="flex:1;">
 
-<td style="width:50%; vertical-align:top; padding:0 8px 0 0;">
+        <div style="background:#eeeeee; border:1px solid #d0d0d0; border-radius:4px; padding:3px 5px; margin-bottom:5px; text-align:center; font-weight:bold;">
+          Current Account
+        </div>
 
-<div style="text-align:center; font-weight:bold; margin-bottom:5px;">
-Current Account
-</div>
+        <div style="display:flex; padding:4px 0; background:rgba(215,205,180,0.06); border-bottom:1px dotted #aaa;">
+          <span style="flex:1; text-align:left;">Merchandise Exports</span>
+          <span style="flex:0 0 70px; text-align:right;">[+ exports_display +]</span>
+        </div>
 
-<table style="width:100%; border-collapse:collapse;">
-<tr>
-<td style="border-bottom:1px dotted #888; padding:4px 0;">Merchandise Exports</td>
-<td style="width:80px; border-bottom:1px dotted #888; padding:4px 0; text-align:right;">[+ exports_display +]</td>
-</tr>
-<tr>
-<td style="border-bottom:1px dotted #888; padding:4px 0;">Merchandise Imports</td>
-<td style="width:80px; border-bottom:1px dotted #888; padding:4px 0; text-align:right;">[+ imports_display +]</td>
-</tr>
-<tr>
-<td style="border-bottom:1px dotted #888; padding:4px 0;">Trade Balance</td>
-<td style="width:80px; border-bottom:1px dotted #888; padding:4px 0; text-align:right;">[+ trade_balance_display +]</td>
-</tr>
-<tr>
-<td style="border-bottom:1px dotted #888; padding:4px 0;">Services &amp; Income, Net</td>
-<td style="width:80px; border-bottom:1px dotted #888; padding:4px 0; text-align:right;">[+ services_income_display +]</td>
-</tr>
-<tr>
-<td style="padding:5px 0;"><b>Current Account</b></td>
-<td style="width:80px; padding:5px 0; text-align:right;"><b>[+ current_account_display +]</b></td>
-</tr>
-</table>
+        <div style="display:flex; padding:4px 0; background:rgba(215,205,180,0.12); border-bottom:1px dotted #aaa;">
+          <span style="flex:1; text-align:left;">Merchandise Imports</span>
+          <span style="flex:0 0 70px; text-align:right;">[+ imports_display +]</span>
+        </div>
 
-</td>
+        <div style="display:flex; padding:4px 0; background:rgba(215,205,180,0.06); border-bottom:1px dotted #aaa;">
+          <span style="flex:1; text-align:left;">Trade Balance</span>
+          <span style="flex:0 0 70px; text-align:right;">[+ trade_balance_display +]</span>
+        </div>
 
-<td style="width:50%; vertical-align:top; padding:0 0 0 8px;">
+        <div style="display:flex; padding:4px 0; background:rgba(215,205,180,0.12); border-bottom:1px dotted #aaa;">
+          <span style="flex:1; text-align:left;">Services &amp; Income, Net</span>
+          <span style="flex:0 0 70px; text-align:right;">[+ services_income_display +]</span>
+        </div>
 
-<div style="text-align:center; font-weight:bold; margin-bottom:5px;">
-Capital Account
-</div>
+        <div style="display:flex; padding:5px 0; border-top:2px solid #666;">
+          <b style="flex:1; text-align:left;">Current Account</b>
+          <span style="flex:0 0 70px; text-align:right;">[+ current_account_display +]</span>
+        </div>
 
-<table style="width:100%; border-collapse:collapse;">
-<tr>
-<td style="border-bottom:1px dotted #888; padding:4px 0;">Long-Term Capital, Net</td>
-<td style="width:80px; border-bottom:1px dotted #888; padding:4px 0; text-align:right;">[+ long_term_capital_display +]</td>
-</tr>
-<tr>
-<td style="border-bottom:1px dotted #888; padding:4px 0;">Short-Term Capital, Net</td>
-<td style="width:80px; border-bottom:1px dotted #888; padding:4px 0; text-align:right;">[+ short_term_capital_display +]</td>
-</tr>
-<tr>
-<td style="border-bottom:2px solid #666; padding:4px 0;"><b>Capital Account</b></td>
-<td style="width:80px; border-bottom:2px solid #666; padding:4px 0; text-align:right;"><b>[+ capital_account_display +]</b></td>
-</tr>
-<tr>
-<td style="border-bottom:1px dotted #888; padding:4px 0;">Errors &amp; Omissions</td>
-<td style="width:80px; border-bottom:1px dotted #888; padding:4px 0; text-align:right;">[+ errors_omissions_display +]</td>
-</tr>
-<tr>
-<td style="padding:5px 0;"><b>Change in Reserves</b></td>
-<td style="width:80px; padding:5px 0; text-align:right;"><b>[+ reserve_change_display +]</b></td>
-</tr>
-</table>
+      </div>
 
-</td>
+      <!-- CAPITAL ACCOUNT -->
+      <div style="flex:1;">
 
-</tr>
-</table>
+        <div style="background:#eeeeee; border:1px solid #d0d0d0; border-radius:4px; padding:3px 5px; margin-bottom:5px; text-align:center; font-weight:bold;">
+          Capital Account
+        </div>
 
-</div>
+        <div style="display:flex; padding:4px 0; background:rgba(215,205,180,0.06); border-bottom:1px dotted #aaa;">
+          <span style="flex:1; text-align:left;">Long-Term Capital, Net</span>
+          <span style="flex:0 0 70px; text-align:right;">[+ long_term_capital_display +]</span>
+        </div>
+
+        <div style="display:flex; padding:4px 0; background:rgba(215,205,180,0.12); border-bottom:1px dotted #aaa;">
+          <span style="flex:1; text-align:left;">Short-Term Capital, Net</span>
+          <span style="flex:0 0 70px; text-align:right;">[+ short_term_capital_display +]</span>
+        </div>
+
+        <div style="display:flex; padding:5px 0; border-top:2px solid #666;">
+          <b style="flex:1; text-align:left;">Capital Account</b>
+          <span style="flex:0 0 70px; text-align:right;">[+ capital_account_display +]</span>
+        </div>
+
+        <div style="display:flex; padding:4px 0; background:rgba(215,205,180,0.06); border-bottom:1px dotted #aaa;">
+          <span style="flex:1; text-align:left;">Errors &amp; Omissions</span>
+          <span style="flex:0 0 70px; text-align:right;">[+ errors_omissions_display +]</span>
+        </div>
+
+        <div style="display:flex; padding:5px 0; background:rgba(215,205,180,0.12);">
+          <b style="flex:1; text-align:left;">Change in Reserves</b>
+          <span style="flex:0 0 70px; text-align:right;">[+ reserve_change_display +]</span>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
 
 </td>
 
+<!-- RIGHT COLUMN -->
+<td style="width:50%; vertical-align:top; padding:5px;">
 
-<td style="width:50%; vertical-align:top; padding:0 0 0 5px;">
+  <!-- BUDGET -->
+  <div style="border:2px solid #666; border-radius:6px; padding:8px; margin-bottom:10px; font-size:0.75em;">
 
-<!-- BUDGET -->
+    <div style="background:#e8e8e8; border:1px solid #ccc; border-radius:4px; padding:4px 6px; margin:-3px -3px 8px -3px; font-size:1.2em; font-weight:bold; text-align:center;">
+      Budget
+    </div>
 
-<div style="border:2px solid #666; border-radius:6px; padding:8px; margin-bottom:10px; box-sizing:border-box;">
+    <div style="display:flex; gap:12px; align-items:stretch;">
 
-<div style="font-size:1.2em; font-weight:bold; text-align:center;">
-Budget
-</div>
+      <!-- REVENUE -->
+      <div style="flex:1; display:flex; flex-direction:column;">
 
-<div style="border-top:1px solid #888; margin:6px 0;"></div>
+        <div style="background:#eeeeee; border:1px solid #d0d0d0; border-radius:4px; padding:3px 5px; margin-bottom:5px; text-align:center; font-weight:bold;">
+          Revenue
+        </div>
 
-<div style="font-size:0.75em;">
+        <div style="display:flex; padding:4px 0; border-bottom:1px dotted #aaa;">
+          <span style="flex:1; text-align:left;">Income Tax</span>
+          <span style="flex:0 0 70px; text-align:right;">[+ income_tax_display +]</span>
+        </div>
 
-<table style="width:100%; border-collapse:collapse; table-layout:fixed;">
-<tr>
+        <div style="display:flex; padding:4px 0; border-bottom:1px dotted #aaa;">
+          <span style="flex:1; text-align:left;">Property Tax</span>
+          <span style="flex:0 0 70px; text-align:right;">[+ property_tax_display +]</span>
+        </div>
 
-<td style="width:50%; vertical-align:top; padding:0 8px 0 0;">
+        <div style="display:flex; padding:4px 0; border-bottom:1px dotted #aaa;">
+          <span style="flex:1; text-align:left;">Business Tax</span>
+          <span style="flex:0 0 70px; text-align:right;">[+ business_tax_display +]</span>
+        </div>
 
-<div style="text-align:center; font-weight:bold; margin-bottom:5px;">
-Revenue
-</div>
+        <div style="display:flex; padding:4px 0; border-bottom:1px dotted #aaa;">
+          <span style="flex:1; text-align:left;">Monopolies</span>
+          <span style="flex:0 0 70px; text-align:right;">[+ monopolies_display +]</span>
+        </div>
 
-<table style="width:100%; border-collapse:collapse;">
-<tr>
-<td style="border-bottom:1px dotted #888; padding:4px 0;">Income Tax</td>
-<td style="width:70px; border-bottom:1px dotted #888; padding:4px 0; text-align:right;">[+ income_tax_display +]</td>
-</tr>
-<tr>
-<td style="border-bottom:1px dotted #888; padding:4px 0;">Property Tax</td>
-<td style="width:70px; border-bottom:1px dotted #888; padding:4px 0; text-align:right;">[+ property_tax_display +]</td>
-</tr>
-<tr>
-<td style="border-bottom:1px dotted #888; padding:4px 0;">Business Tax</td>
-<td style="width:70px; border-bottom:1px dotted #888; padding:4px 0; text-align:right;">[+ business_tax_display +]</td>
-</tr>
-<tr>
-<td style="border-bottom:1px dotted #888; padding:4px 0;">Monopolies</td>
-<td style="width:70px; border-bottom:1px dotted #888; padding:4px 0; text-align:right;">[+ monopolies_display +]</td>
-</tr>
-<tr>
-<td style="border-bottom:1px dotted #888; padding:4px 0;">Customs</td>
-<td style="width:70px; border-bottom:1px dotted #888; padding:4px 0; text-align:right;">[+ customs_display +]</td>
-</tr>
-<tr>
-<td style="border-bottom:1px dotted #888; padding:4px 0;">Railways</td>
-<td style="width:70px; border-bottom:1px dotted #888; padding:4px 0; text-align:right;">[+ railway_revenue +]</td>
-</tr>
-<tr>
-<td style="padding:4px 0;">Enterprises</td>
-<td style="width:70px; padding:4px 0; text-align:right;">[+ enterprises_revenue +]</td>
-</tr>
-</table>
+        <div style="display:flex; padding:4px 0; border-bottom:1px dotted #aaa;">
+          <span style="flex:1; text-align:left;">Customs</span>
+          <span style="flex:0 0 70px; text-align:right;">[+ customs_display +]</span>
+        </div>
+
+        <div style="display:flex; padding:4px 0; border-bottom:1px dotted #aaa;">
+          <span style="flex:1; text-align:left;">Railways</span>
+          <span style="flex:0 0 70px; text-align:right;">[+ railway_revenue +]</span>
+        </div>
+
+        <div style="display:flex; padding:4px 0;">
+          <span style="flex:1; text-align:left;">Enterprises</span>
+          <span style="flex:0 0 70px; text-align:right;">[+ enterprises_revenue +]</span>
+        </div>
+
+        <div style="margin-top:auto; border-top:2px solid #666; padding-top:6px;">
+          <div style="display:flex; justify-content:space-between; padding:4px 8px; font-weight:bold;">
+            <span>Total Revenue</span>
+            <span>[+ income +]</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- EXPENDITURE -->
+      <div style="flex:1; display:flex; flex-direction:column;">
+
+        <div style="background:#eeeeee; border:1px solid #d0d0d0; border-radius:4px; padding:3px 5px; margin-bottom:5px; text-align:center; font-weight:bold;">
+          Expenditure
+        </div>
+
+        <div style="display:flex; padding:4px 0; border-bottom:1px dotted #aaa;">
+          <span style="flex:1; text-align:left;">Government</span>
+          <span style="flex:0 0 70px; text-align:right;">[+ government_functions_display +]</span>
+        </div>
+
+        <div style="display:flex; padding:3px 0; margin-left:12px; font-size:0.95em; border-bottom:1px dotted #aaa;">
+          <span style="flex:1; text-align:left;">Sovnarkom</span>
+          <span style="flex:0 0 70px; text-align:right;">[+ sovnarkom_expend +]</span>
+        </div>
+
+        <div style="display:flex; padding:3px 0; margin-left:12px; font-size:0.95em; border-bottom:1px dotted #aaa;">
+          <span style="flex:1; text-align:left;">Foreign Affairs</span>
+          <span style="flex:0 0 70px; text-align:right;">[+ foreignaffairs_expend +]</span>
+        </div>
+
+        <div style="display:flex; padding:3px 0; margin-left:12px; font-size:0.95em; border-bottom:1px dotted #aaa;">
+          <span style="flex:1; text-align:left;">Military</span>
+          <span style="flex:0 0 70px; text-align:right;">[+ military_expend +]</span>
+        </div>
+
+        <div style="display:flex; padding:3px 0; margin-left:12px; font-size:0.95em; border-bottom:1px dotted #aaa;">
+          <span style="flex:1; text-align:left;">Enlightenment</span>
+          <span style="flex:0 0 70px; text-align:right;">[+ enlightenment_expend +]</span>
+        </div>
+
+        <div style="display:flex; padding:3px 0; margin-left:12px; font-size:0.95em; border-bottom:1px dotted #aaa;">
+          <span style="flex:1; text-align:left;">Internal Affairs</span>
+          <span style="flex:0 0 70px; text-align:right;">[+ internal_expend +]</span>
+        </div>
+
+        <div style="display:flex; padding:3px 0; margin-left:12px; font-size:0.95em; border-bottom:1px dotted #aaa;">
+          <span style="flex:1; text-align:left;">Railways</span>
+          <span style="flex:0 0 70px; text-align:right;">[+ railways_expend +]</span>
+        </div>
+
+        <div style="display:flex; padding:3px 0; margin-left:12px; font-size:0.95em; border-bottom:1px dotted #aaa;">
+          <span style="flex:1; text-align:left;">Trade</span>
+          <span style="flex:0 0 70px; text-align:right;">[+ trade_expend +]</span>
+        </div>
+
+        <div style="display:flex; padding:3px 0; margin-left:12px; font-size:0.95em; border-bottom:1px dotted #aaa;">
+          <span style="flex:1; text-align:left;">Finance</span>
+          <span style="flex:0 0 70px; text-align:right;">[+ finance_expend +]</span>
+        </div>
+
+        <div style="display:flex; padding:3px 0; margin-left:12px; font-size:0.95em; border-bottom:1px dotted #aaa;">
+          <span style="flex:1; text-align:left;">Justice</span>
+          <span style="flex:0 0 70px; text-align:right;">[+ justice_expend +]</span>
+        </div>
+
+        <div style="display:flex; padding:3px 0; margin-left:12px; font-size:0.95em; border-bottom:1px dotted #aaa;">
+          <span style="flex:1; text-align:left;">Labor</span>
+          <span style="flex:0 0 70px; text-align:right;">[+ labor_expend +]</span>
+        </div>
+
+        <div style="display:flex; padding:3px 0; margin-left:12px; font-size:0.95em; border-bottom:1px dotted #aaa;">
+          <span style="flex:1; text-align:left;">Agriculture</span>
+          <span style="flex:0 0 70px; text-align:right;">[+ agriculture_expend +]</span>
+        </div>
+
+        <div style="display:flex; padding:3px 0; margin-left:12px; font-size:0.95em; border-bottom:1px dotted #aaa;">
+          <span style="flex:1; text-align:left;">Food Supply</span>
+          <span style="flex:0 0 70px; text-align:right;">[+ foodsupply_expend +]</span>
+        </div>
+
+        <div style="display:flex; padding:3px 0; margin-left:12px; font-size:0.95em; border-bottom:1px dotted #aaa;">
+          <span style="flex:1; text-align:left;">Nationalities</span>
+          <span style="flex:0 0 70px; text-align:right;">[+ nationalities_expend +]</span>
+        </div>
+
+        <div style="display:flex; padding:3px 0; margin-left:12px; font-size:0.95em; border-bottom:1px dotted #aaa;">
+          <span style="flex:1; text-align:left;">Welfare</span>
+          <span style="flex:0 0 70px; text-align:right;">[+ welfare_expend +]</span>
+        </div>
+
+        <div style="display:flex; padding:4px 0; border-bottom:1px dotted #aaa;">
+          <span style="flex:1; text-align:left;">Interest</span>
+          <span style="flex:0 0 70px; text-align:right;">[+ interest_display +]</span>
+        </div>
+
+        <div style="display:flex; padding:4px 0; border-bottom:1px dotted #aaa;">
+          <span style="flex:1; text-align:left;">Indemnities</span>
+          <span style="flex:0 0 70px; text-align:right;">[+ indemnities_display +]</span>
+        </div>
+
+        <div style="margin-top:auto; border-top:2px solid #666; padding-top:6px;">
+          <div style="display:flex; justify-content:space-between; padding:4px 8px; font-weight:bold;">
+            <span>Total Expenditure</span>
+            <span>[+ expenditure +]</span>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- LABOUR -->
+  <div style="border:2px solid #666; border-radius:6px; padding:8px; margin-bottom:10px; font-size:0.85em;">
+
+    <div style="background:#e8e8e8; border:1px solid #ccc; border-radius:4px; padding:4px 6px; margin:-3px -3px 8px -3px; font-size:1.2em; font-weight:bold; text-align:center;">
+      Labour
+    </div>
+
+    <!-- Labour metrics go here -->
+
+  </div>
+
+  <!-- ECONOMIC CONDITIONS -->
+  <div style="border:2px solid #666; border-radius:6px; padding:8px; font-size:0.85em;">
+
+    <div style="background:#e8e8e8; border:1px solid #ccc; border-radius:4px; padding:4px 6px; margin:-3px -3px 8px -3px; font-size:1.2em; font-weight:bold; text-align:center;">
+      Economic Conditions
+    </div>
+
+    <!-- Economic Conditions metrics go here -->
+
+  </div>
 
 </td>
-
-<td style="width:50%; vertical-align:top; padding:0 0 0 8px;">
-
-<div style="text-align:center; font-weight:bold; margin-bottom:5px;">
-Expenditure
-</div>
-
-<table style="width:100%; border-collapse:collapse;">
-<tr>
-<td style="border-bottom:1px dotted #888; padding:4px 0;">Government Functions</td>
-<td style="width:70px; border-bottom:1px dotted #888; padding:4px 0; text-align:right;">[+ government_functions_display +]</td>
-</tr>
-<tr>
-<td style="border-bottom:1px dotted #888; padding:3px 0 3px 12px;">Sovnarkom</td>
-<td style="width:70px; border-bottom:1px dotted #888; padding:3px 0; text-align:right;">[+ sovnarkom_expend +]</td>
-</tr>
-<tr>
-<td style="border-bottom:1px dotted #888; padding:3px 0 3px 12px;">Foreign Affairs</td>
-<td style="width:70px; border-bottom:1px dotted #888; padding:3px 0; text-align:right;">[+ foreignaffairs_expend +]</td>
-</tr>
-<tr>
-<td style="border-bottom:1px dotted #888; padding:3px 0 3px 12px;">Military</td>
-<td style="width:70px; border-bottom:1px dotted #888; padding:3px 0; text-align:right;">[+ military_expend +]</td>
-</tr>
-<tr>
-<td style="border-bottom:1px dotted #888; padding:3px 0 3px 12px;">Enlightenment</td>
-<td style="width:70px; border-bottom:1px dotted #888; padding:3px 0; text-align:right;">[+ enlightenment_expend +]</td>
-</tr>
-<tr>
-<td style="border-bottom:1px dotted #888; padding:3px 0 3px 12px;">Internal Affairs</td>
-<td style="width:70px; border-bottom:1px dotted #888; padding:3px 0; text-align:right;">[+ internal_expend +]</td>
-</tr>
-<tr>
-<td style="border-bottom:1px dotted #888; padding:3px 0 3px 12px;">Railways</td>
-<td style="width:70px; border-bottom:1px dotted #888; padding:3px 0; text-align:right;">[+ railways_expend +]</td>
-</tr>
-<tr>
-<td style="border-bottom:1px dotted #888; padding:3px 0 3px 12px;">Trade</td>
-<td style="width:70px; border-bottom:1px dotted #888; padding:3px 0; text-align:right;">[+ trade_expend +]</td>
-</tr>
-<tr>
-<td style="border-bottom:1px dotted #888; padding:3px 0 3px 12px;">Finance</td>
-<td style="width:70px; border-bottom:1px dotted #888; padding:3px 0; text-align:right;">[+ finance_expend +]</td>
-</tr>
-<tr>
-<td style="border-bottom:1px dotted #888; padding:3px 0 3px 12px;">Justice</td>
-<td style="width:70px; border-bottom:1px dotted #888; padding:3px 0; text-align:right;">[+ justice_expend +]</td>
-</tr>
-<tr>
-<td style="border-bottom:1px dotted #888; padding:3px 0 3px 12px;">Labour</td>
-<td style="width:70px; border-bottom:1px dotted #888; padding:3px 0; text-align:right;">[+ labor_expend +]</td>
-</tr>
-<tr>
-<td style="border-bottom:1px dotted #888; padding:3px 0 3px 12px;">Agriculture</td>
-<td style="width:70px; border-bottom:1px dotted #888; padding:3px 0; text-align:right;">[+ agriculture_expend +]</td>
-</tr>
-<tr>
-<td style="border-bottom:1px dotted #888; padding:3px 0 3px 12px;">Food Supply</td>
-<td style="width:70px; border-bottom:1px dotted #888; padding:3px 0; text-align:right;">[+ foodsupply_expend +]</td>
-</tr>
-<tr>
-<td style="border-bottom:1px dotted #888; padding:3px 0 3px 12px;">Nationalities</td>
-<td style="width:70px; border-bottom:1px dotted #888; padding:3px 0; text-align:right;">[+ nationalities_expend +]</td>
-</tr>
-<tr>
-<td style="border-bottom:1px dotted #888; padding:3px 0 3px 12px;">Welfare</td>
-<td style="width:70px; border-bottom:1px dotted #888; padding:3px 0; text-align:right;">[+ welfare_expend +]</td>
-</tr>
-<tr>
-<td style="border-bottom:1px dotted #888; padding:4px 0;">Interest</td>
-<td style="width:70px; border-bottom:1px dotted #888; padding:4px 0; text-align:right;">[+ interest_display +]</td>
-</tr>
-<tr>
-<td style="padding:4px 0;">Indemnities</td>
-<td style="width:70px; padding:4px 0; text-align:right;">[+ indemnities_display +]</td>
-</tr>
-</table>
-
-</td>
-
-</tr>
-</table>
-
-<div style="border-top:2px solid #666; margin-top:8px; padding-top:6px;">
-
-<table style="width:100%; border-collapse:collapse;">
-<tr>
-<td style="width:50%; padding:4px 8px 4px 0;"><b>Total Revenue</b></td>
-<td style="width:50%; padding:4px 0; text-align:right;"><b>[+ income +]</b></td>
-</tr>
-<tr>
-<td style="padding:4px 8px 4px 0;"><b>Total Expenditure</b></td>
-<td style="padding:4px 0; text-align:right;"><b>[+ expenditure +]</b></td>
-</tr>
-</table>
-
-</div>
-
-</div>
-
-</div>
-
-
-<!-- LABOUR -->
-
-<div style="border:2px solid #666; border-radius:6px; padding:8px; margin-bottom:10px; box-sizing:border-box; font-size:0.85em;">
-
-<div style="font-size:1.2em; font-weight:bold; text-align:center;">
-Labour
-</div>
-
-<div style="border-top:1px solid #888; margin:6px 0;"></div>
-
-<!-- Labour metrics go here -->
-
-</div>
-
-
-<!-- ECONOMIC CONDITIONS -->
-
-<div style="border:2px solid #666; border-radius:6px; padding:8px; box-sizing:border-box; font-size:0.85em;">
-
-<div style="font-size:1.2em; font-weight:bold; text-align:center;">
-Economic Conditions
-</div>
-
-<div style="border-top:1px solid #888; margin:6px 0;"></div>
-
-<!-- Economic Conditions metrics go here -->
-
-</div>
-
-</td>
-
 </tr>
 </table>
 
