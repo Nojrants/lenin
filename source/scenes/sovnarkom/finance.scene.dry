@@ -97,13 +97,10 @@ on-arrival: {!
   Q.fiscal_policy_timer += 2; Q.week_actions += 1
 !}
 
-
-
 = Fiscal Policy
 
 <table style="width:100%; table-layout:fixed; border-collapse:collapse;">
 <tr>
-
 <td style="width:50%; vertical-align:top; padding:5px;">
 
   <div style="border:2px solid #666; border-radius:6px; padding:0; margin-bottom:10px; font-size:0.85em; overflow:hidden;">
