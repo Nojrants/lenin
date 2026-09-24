@@ -101,371 +101,356 @@ on-arrival: {!
 
 = Fiscal Policy
 
-<div style="display:flex; flex-wrap:wrap; gap:20px; align-items:flex-start; width:100%;">
-
-  <!-- LEFT COLUMN -->
-
-  <div style="flex:1; min-width:300px;">
-
-    <!-- MACROECONOMY -->
-
-    <div style="border:2px solid #666; border-radius:6px; padding:12px; margin-bottom:20px;">
-
-      <div style="font-weight:bold; text-align:center;">
-        Macroeconomy
-      </div>
-      <hr>
-
-      <table style="width:100%; border-collapse:collapse;">
-        <tr>
-          <td>Economic Growth</td>
-          <td style="text-align:right;">[+ gdp_growth_display +]</td>
-        </tr>
-        <tr>
-          <td>Inflation</td>
-          <td style="text-align:right;">[+ monthly_inflation_disp +]% ([+ inflation_disp +]% p.a.)</td>
-        </tr>
-        <tr>
-          <td>Unemployment</td>
-          <td style="text-align:right;">[+ unemployment_display +]</td>
-        </tr>
-        <tr>
-          <td>National Debt</td>
-          <td style="text-align:right;">[+ national_debt_display +]</td>
-        </tr>
-        <tr>
-          <td>Budget Balance</td>
-          <td style="text-align:right;">[+ budget_balance_display +]</td>
-        </tr>
-      </table>
-
-    </div>
-
-
-    <!-- PRODUCTION -->
-
-    <div style="border:2px solid #666; border-radius:6px; padding:12px; margin-bottom:20px;">
-
-      <div style="font-weight:bold; text-align:center;">
-        Production
-      </div>
-      <hr>
-
-      <table style="width:100%; border-collapse:collapse;">
-        <tr>
-          <td>Industrial Output</td>
-          <td style="text-align:right;">[+ industrial_output_display +]</td>
-        </tr>
-        <tr>
-          <td>Agricultural Output</td>
-          <td style="text-align:right;">[+ agricultural_output_display +]</td>
-        </tr>
-        <tr>
-          <td>Factory Utilization</td>
-          <td style="text-align:right;">[+ factory_utilization_display +]</td>
-        </tr>
-        <tr>
-          <td>Rail Capacity</td>
-          <td style="text-align:right;">[+ rail_capacity_display +]</td>
-        </tr>
-      </table>
-
-    </div>
-
-
-    <!-- BALANCE OF PAYMENTS -->
-
-    <div style="border:2px solid #666; border-radius:6px; padding:12px;">
-
-      <div style="font-weight:bold; text-align:center;">
-        Balance of Payments
-      </div>
-      <hr>
-
-      <table style="width:100%; border-collapse:collapse;">
-        <tr>
-          <td style="width:50%; vertical-align:top; padding-right:12px;">
-
-            <div style="font-weight:bold; text-align:center;">
-              Current Account
-            </div>
-
-            <table style="width:100%; border-collapse:collapse;">
-              <tr>
-                <td>Merchandise Exports</td>
-                <td style="text-align:right;">[+ exports_display +]</td>
-              </tr>
-              <tr>
-                <td>Merchandise Imports</td>
-                <td style="text-align:right;">[+ imports_display +]</td>
-              </tr>
-              <tr>
-                <td>Trade Balance</td>
-                <td style="text-align:right;">[+ trade_balance_display +]</td>
-              </tr>
-              <tr>
-                <td>Services &amp; Income, Net</td>
-                <td style="text-align:right;">[+ services_income_display +]</td>
-              </tr>
-              <tr>
-                <td><b>Current Account</b></td>
-                <td style="text-align:right;"><b>[+ current_account_display +]</b></td>
-              </tr>
-            </table>
-
-          </td>
-
-          <td style="width:50%; vertical-align:top; padding-left:12px;">
-
-            <div style="font-weight:bold; text-align:center;">
-              Capital Account
-            </div>
-
-            <table style="width:100%; border-collapse:collapse;">
-              <tr>
-                <td>Long-Term Capital, Net</td>
-                <td style="text-align:right;">[+ long_term_capital_display +]</td>
-              </tr>
-              <tr>
-                <td>Short-Term Capital, Net</td>
-                <td style="text-align:right;">[+ short_term_capital_display +]</td>
-              </tr>
-              <tr>
-                <td><b>Capital Account</b></td>
-                <td style="text-align:right;"><b>[+ capital_account_display +]</b></td>
-              </tr>
-              <tr>
-                <td>Errors &amp; Omissions</td>
-                <td style="text-align:right;">[+ errors_omissions_display +]</td>
-              </tr>
-              <tr>
-                <td><b>Change in Reserves</b></td>
-                <td style="text-align:right;"><b>[+ reserve_change_display +]</b></td>
-              </tr>
-            </table>
-
-          </td>
-        </tr>
-      </table>
-
-    </div>
-
-  </div>
-
-
-  <!-- RIGHT COLUMN -->
-
-  <div style="flex:1; min-width:300px;">
-
-    <!-- BUDGET -->
-
-    <div style="border:2px solid #666; border-radius:6px; padding:12px; margin-bottom:20px; font-size:0.9em;">
-
-      <div style="font-weight:bold; text-align:center;">
-        Budget
-      </div>
-      <hr>
-
-      <table style="width:100%; border-collapse:collapse; table-layout:fixed;">
-        <tr>
-
-          <!-- REVENUE -->
-
-          <td style="width:50%; vertical-align:top; padding-right:10px;">
-
-            <div style="font-weight:bold; text-align:center;">
-              Revenue
-            </div>
-
-            <br>
-
-            <div style="font-weight:bold;">
-              Taxation
-            </div>
-
-            <ul style="margin-top:6px; margin-bottom:10px; padding-left:20px;">
-              <li>Income Tax
-                <span style="float:right;">[+ income_tax_display +]</span>
-              </li>
-              <li>Property Tax
-                <span style="float:right;">[+ property_tax_display +]</span>
-              </li>
-              <li>Business Tax
-                <span style="float:right;">[+ business_tax_display +]</span>
-              </li>
-              <li>Customs
-                <span style="float:right;">[+ customs_display +]</span>
-              </li>
-            </ul>
-
-            <div style="font-weight:bold;">
-              State Enterprises
-            </div>
-
-            <ul style="margin-top:6px; margin-bottom:0; padding-left:20px;">
-              <li>Monopolies
-                <span style="float:right;">[+ monopolies_display +]</span>
-              </li>
-              <li>Railways
-                <span style="float:right;">[+ railway_revenue +]</span>
-              </li>
-              <li>Enterprises
-                <span style="float:right;">[+ enterprises_revenue +]</span>
-              </li>
-            </ul>
-
-          </td>
-
-
-          <!-- EXPENDITURE -->
-
-          <td style="width:50%; vertical-align:top; padding-left:10px;">
-
-            <div style="font-weight:bold; text-align:center;">
-              Expenditure
-            </div>
-
-            <br>
-
-            <div style="font-weight:bold;">
-              Government Functions
-            </div>
-
-            <ul style="margin-top:6px; margin-bottom:10px; padding-left:20px;">
-              <li>Sovnarkom
-                <span style="float:right;">[+ sovnarkom_expend +]</span>
-              </li>
-              <li>Foreign Affairs
-                <span style="float:right;">[+ foreignaffairs_expend +]</span>
-              </li>
-              <li>Military
-                <span style="float:right;">[+ military_expend +]</span>
-              </li>
-              <li>Enlightenment
-                <span style="float:right;">[+ enlightenment_expend +]</span>
-              </li>
-              <li>Internal Affairs
-                <span style="float:right;">[+ internal_expend +]</span>
-              </li>
-              <li>Railways
-                <span style="float:right;">[+ railways_expend +]</span>
-              </li>
-              <li>Trade
-                <span style="float:right;">[+ trade_expend +]</span>
-              </li>
-              <li>Finance
-                <span style="float:right;">[+ finance_expend +]</span>
-              </li>
-              <li>Justice
-                <span style="float:right;">[+ justice_expend +]</span>
-              </li>
-              <li>Labour
-                <span style="float:right;">[+ labor_expend +]</span>
-              </li>
-              <li>Agriculture
-                <span style="float:right;">[+ agriculture_expend +]</span>
-              </li>
-              <li>Food Supply
-                <span style="float:right;">[+ foodsupply_expend +]</span>
-              </li>
-              <li>Nationalities
-                <span style="float:right;">[+ nationalities_expend +]</span>
-              </li>
-              <li>Welfare
-                <span style="float:right;">[+ welfare_expend +]</span>
-              </li>
-            </ul>
-
-            <div style="font-weight:bold;">
-              Other Obligations
-            </div>
-
-            <ul style="margin-top:6px; margin-bottom:0; padding-left:20px;">
-              <li>Interest
-                <span style="float:right;">[+ interest_display +]</span>
-              </li>
-              <li>Indemnities
-                <span style="float:right;">[+ indemnities_display +]</span>
-              </li>
-            </ul>
-
-          </td>
-
-        </tr>
-      </table>
-
-      <hr>
-
-      <table style="width:100%; border-collapse:collapse;">
-        <tr>
-          <td style="width:50%;"><b>Total Revenue</b></td>
-          <td style="width:50%; text-align:right;"><b>[+ income +]</b></td>
-        </tr>
-        <tr>
-          <td><b>Total Expenditure</b></td>
-          <td style="text-align:right;"><b>[+ expenditure +]</b></td>
-        </tr>
-      </table>
-
-    </div>
-
-
-    <!-- LABOUR -->
-
-    <div style="border:2px solid #666; border-radius:6px; padding:12px; margin-bottom:20px;">
-
-      <div style="font-weight:bold; text-align:center;">
-        Labour
-      </div>
-      <hr>
-
-      <table style="width:100%; border-collapse:collapse;">
-        <tr>
-          <td>Wages</td>
-          <td style="text-align:right;">[+ wages_display +]</td>
-        </tr>
-        <tr>
-          <td>Employment</td>
-          <td style="text-align:right;">[+ employment_display +]</td>
-        </tr>
-        <tr>
-          <td>Labour Productivity</td>
-          <td style="text-align:right;">[+ labour_productivity_display +]</td>
-        </tr>
-      </table>
-
-    </div>
-
-
-    <!-- ECONOMIC CONDITIONS -->
-
-    <div style="border:2px solid #666; border-radius:6px; padding:12px;">
-
-      <div style="font-weight:bold; text-align:center;">
-        Economic Conditions
-      </div>
-      <hr>
-
-      <table style="width:100%; border-collapse:collapse;">
-        <tr>
-          <td>Consumer Prices</td>
-          <td style="text-align:right;">[+ consumer_prices_display +]</td>
-        </tr>
-        <tr>
-          <td>Food Supply</td>
-          <td style="text-align:right;">[+ food_supply_display +]</td>
-        </tr>
-        <tr>
-          <td>Living Standards</td>
-          <td style="text-align:right;">[+ living_standards_display +]</td>
-        </tr>
-      </table>
-
-    </div>
-
-  </div>
+= Fiscal Policy
+
+<table style="width:100%; table-layout:fixed; border-collapse:collapse;">
+<tr>
+
+<td style="width:50%; vertical-align:top; padding:0 10px 0 0;">
+
+<!-- MACROECONOMY -->
+
+<div style="border:2px solid #666; border-radius:6px; padding:12px; margin-bottom:20px;">
+
+<div style="font-size:1.2em; font-weight:bold; text-align:center;">
+Macroeconomy
+</div>
+
+<div style="border-top:1px solid #888; margin:8px 0;"></div>
+
+<table style="width:100%; border-collapse:collapse;">
+<tr>
+<td style="padding:6px 20px;"><b>Economic Growth</b></td>
+<td style="padding:6px 20px; text-align:right;">[+ gdp_growth_display +]</td>
+</tr>
+<tr>
+<td style="padding:6px 20px;"><b>Inflation</b></td>
+<td style="padding:6px 20px; text-align:right;">[+ monthly_inflation_disp +]% ([+ inflation_disp +]% p.a.)</td>
+</tr>
+<tr>
+<td style="padding:6px 20px;"><b>Unemployment</b></td>
+<td style="padding:6px 20px; text-align:right;">[+ unemployment_display +]</td>
+</tr>
+<tr>
+<td style="padding:6px 20px;"><b>National Debt</b></td>
+<td style="padding:6px 20px; text-align:right;">[+ national_debt_display +]</td>
+</tr>
+<tr>
+<td style="padding:6px 20px;"><b>Budget Balance</b></td>
+<td style="padding:6px 20px; text-align:right;">[+ budget_balance_display +]</td>
+</tr>
+</table>
 
 </div>
+
+
+<!-- PRODUCTION -->
+
+<div style="border:2px solid #666; border-radius:6px; padding:12px; margin-bottom:20px;">
+
+<div style="font-size:1.2em; font-weight:bold; text-align:center;">
+Production
+</div>
+
+<div style="border-top:1px solid #888; margin:8px 0;"></div>
+
+<table style="width:100%; border-collapse:collapse;">
+<tr>
+<td style="padding:6px 20px;"><b>Industrial Output</b></td>
+<td style="padding:6px 20px; text-align:right;">[+ industrial_output_display +]</td>
+</tr>
+<tr>
+<td style="padding:6px 20px;"><b>Agricultural Output</b></td>
+<td style="padding:6px 20px; text-align:right;">[+ agricultural_output_display +]</td>
+</tr>
+<tr>
+<td style="padding:6px 20px;"><b>Factory Utilization</b></td>
+<td style="padding:6px 20px; text-align:right;">[+ factory_utilization_display +]</td>
+</tr>
+<tr>
+<td style="padding:6px 20px;"><b>Rail Capacity</b></td>
+<td style="padding:6px 20px; text-align:right;">[+ rail_capacity_display +]</td>
+</tr>
+</table>
+
+</div>
+
+
+<!-- BALANCE OF PAYMENTS -->
+
+<div style="border:2px solid #666; border-radius:6px; padding:12px;">
+
+<div style="font-size:1.2em; font-weight:bold; text-align:center;">
+Balance of Payments
+</div>
+
+<div style="border-top:1px solid #888; margin:8px 0;"></div>
+
+<table style="width:100%; border-collapse:collapse; table-layout:fixed;">
+<tr>
+
+<td style="width:50%; vertical-align:top; padding:0 10px 0 0;">
+
+<div style="text-align:center; font-weight:bold; margin-bottom:6px;">
+Current Account
+</div>
+
+<table style="width:100%; border-collapse:collapse;">
+<tr>
+<td style="border-bottom:1px dotted #888; padding:5px 0;">Merchandise Exports</td>
+<td style="width:80px; border-bottom:1px dotted #888; padding:5px 0; text-align:right;">[+ exports_display +]</td>
+</tr>
+<tr>
+<td style="border-bottom:1px dotted #888; padding:5px 0;">Merchandise Imports</td>
+<td style="width:80px; border-bottom:1px dotted #888; padding:5px 0; text-align:right;">[+ imports_display +]</td>
+</tr>
+<tr>
+<td style="border-bottom:1px dotted #888; padding:5px 0;">Trade Balance</td>
+<td style="width:80px; border-bottom:1px dotted #888; padding:5px 0; text-align:right;">[+ trade_balance_display +]</td>
+</tr>
+<tr>
+<td style="border-bottom:1px dotted #888; padding:5px 0;">Services &amp; Income, Net</td>
+<td style="width:80px; border-bottom:1px dotted #888; padding:5px 0; text-align:right;">[+ services_income_display +]</td>
+</tr>
+<tr>
+<td style="padding:6px 0;"><b>Current Account</b></td>
+<td style="width:80px; padding:6px 0; text-align:right;"><b>[+ current_account_display +]</b></td>
+</tr>
+</table>
+
+</td>
+
+<td style="width:50%; vertical-align:top; padding:0 0 0 10px;">
+
+<div style="text-align:center; font-weight:bold; margin-bottom:6px;">
+Capital Account
+</div>
+
+<table style="width:100%; border-collapse:collapse;">
+<tr>
+<td style="border-bottom:1px dotted #888; padding:5px 0;">Long-Term Capital, Net</td>
+<td style="width:80px; border-bottom:1px dotted #888; padding:5px 0; text-align:right;">[+ long_term_capital_display +]</td>
+</tr>
+<tr>
+<td style="border-bottom:1px dotted #888; padding:5px 0;">Short-Term Capital, Net</td>
+<td style="width:80px; border-bottom:1px dotted #888; padding:5px 0; text-align:right;">[+ short_term_capital_display +]</td>
+</tr>
+<tr>
+<td style="border-bottom:2px solid #666; padding:5px 0;"><b>Capital Account</b></td>
+<td style="width:80px; border-bottom:2px solid #666; padding:5px 0; text-align:right;"><b>[+ capital_account_display +]</b></td>
+</tr>
+<tr>
+<td style="border-bottom:1px dotted #888; padding:5px 0;">Errors &amp; Omissions</td>
+<td style="width:80px; border-bottom:1px dotted #888; padding:5px 0; text-align:right;">[+ errors_omissions_display +]</td>
+</tr>
+<tr>
+<td style="padding:6px 0;"><b>Change in Reserves</b></td>
+<td style="width:80px; padding:6px 0; text-align:right;"><b>[+ reserve_change_display +]</b></td>
+</tr>
+</table>
+
+</td>
+
+</tr>
+</table>
+
+</div>
+
+</td>
+
+
+<td style="width:50%; vertical-align:top; padding:0 0 0 10px;">
+
+<!-- BUDGET -->
+
+<div style="border:2px solid #666; border-radius:6px; padding:12px; margin-bottom:20px;">
+
+<div style="font-size:1.2em; font-weight:bold; text-align:center;">
+Budget
+</div>
+
+<div style="border-top:1px solid #888; margin:8px 0;"></div>
+
+<div style="font-size:0.9em;">
+
+<table style="width:100%; border-collapse:collapse; table-layout:fixed;">
+<tr>
+
+<td style="width:50%; vertical-align:top; padding:0 10px 0 0;">
+
+<div style="text-align:center; font-weight:bold; margin-bottom:6px;">
+Revenue
+</div>
+
+<table style="width:100%; border-collapse:collapse;">
+<tr>
+<td style="border-bottom:1px dotted #888; padding:5px 0;">Income Tax</td>
+<td style="width:80px; border-bottom:1px dotted #888; padding:5px 0; text-align:right;">[+ income_tax_display +]</td>
+</tr>
+<tr>
+<td style="border-bottom:1px dotted #888; padding:5px 0;">Property Tax</td>
+<td style="width:80px; border-bottom:1px dotted #888; padding:5px 0; text-align:right;">[+ property_tax_display +]</td>
+</tr>
+<tr>
+<td style="border-bottom:1px dotted #888; padding:5px 0;">Business Tax</td>
+<td style="width:80px; border-bottom:1px dotted #888; padding:5px 0; text-align:right;">[+ business_tax_display +]</td>
+</tr>
+<tr>
+<td style="border-bottom:1px dotted #888; padding:5px 0;">Monopolies</td>
+<td style="width:80px; border-bottom:1px dotted #888; padding:5px 0; text-align:right;">[+ monopolies_display +]</td>
+</tr>
+<tr>
+<td style="border-bottom:1px dotted #888; padding:5px 0;">Customs</td>
+<td style="width:80px; border-bottom:1px dotted #888; padding:5px 0; text-align:right;">[+ customs_display +]</td>
+</tr>
+<tr>
+<td style="border-bottom:1px dotted #888; padding:5px 0;">Railways</td>
+<td style="width:80px; border-bottom:1px dotted #888; padding:5px 0; text-align:right;">[+ railway_revenue +]</td>
+</tr>
+<tr>
+<td style="padding:5px 0;">Enterprises</td>
+<td style="width:80px; padding:5px 0; text-align:right;">[+ enterprises_revenue +]</td>
+</tr>
+</table>
+
+</td>
+
+<td style="width:50%; vertical-align:top; padding:0 0 0 10px;">
+
+<div style="text-align:center; font-weight:bold; margin-bottom:6px;">
+Expenditure
+</div>
+
+<table style="width:100%; border-collapse:collapse;">
+<tr>
+<td style="border-bottom:1px dotted #888; padding:5px 0;">Government Functions</td>
+<td style="width:80px; border-bottom:1px dotted #888; padding:5px 0; text-align:right;">[+ government_functions_display +]</td>
+</tr>
+<tr>
+<td style="border-bottom:1px dotted #888; padding:4px 0 4px 12px;">Sovnarkom</td>
+<td style="width:80px; border-bottom:1px dotted #888; padding:4px 0; text-align:right;">[+ sovnarkom_expend +]</td>
+</tr>
+<tr>
+<td style="border-bottom:1px dotted #888; padding:4px 0 4px 12px;">Foreign Affairs</td>
+<td style="width:80px; border-bottom:1px dotted #888; padding:4px 0; text-align:right;">[+ foreignaffairs_expend +]</td>
+</tr>
+<tr>
+<td style="border-bottom:1px dotted #888; padding:4px 0 4px 12px;">Military</td>
+<td style="width:80px; border-bottom:1px dotted #888; padding:4px 0; text-align:right;">[+ military_expend +]</td>
+</tr>
+<tr>
+<td style="border-bottom:1px dotted #888; padding:4px 0 4px 12px;">Enlightenment</td>
+<td style="width:80px; border-bottom:1px dotted #888; padding:4px 0; text-align:right;">[+ enlightenment_expend +]</td>
+</tr>
+<tr>
+<td style="border-bottom:1px dotted #888; padding:4px 0 4px 12px;">Internal Affairs</td>
+<td style="width:80px; border-bottom:1px dotted #888; padding:4px 0; text-align:right;">[+ internal_expend +]</td>
+</tr>
+<tr>
+<td style="border-bottom:1px dotted #888; padding:4px 0 4px 12px;">Railways</td>
+<td style="width:80px; border-bottom:1px dotted #888; padding:4px 0; text-align:right;">[+ railways_expend +]</td>
+</tr>
+<tr>
+<td style="border-bottom:1px dotted #888; padding:4px 0 4px 12px;">Trade</td>
+<td style="width:80px; border-bottom:1px dotted #888; padding:4px 0; text-align:right;">[+ trade_expend +]</td>
+</tr>
+<tr>
+<td style="border-bottom:1px dotted #888; padding:4px 0 4px 12px;">Finance</td>
+<td style="width:80px; border-bottom:1px dotted #888; padding:4px 0; text-align:right;">[+ finance_expend +]</td>
+</tr>
+<tr>
+<td style="border-bottom:1px dotted #888; padding:4px 0 4px 12px;">Justice</td>
+<td style="width:80px; border-bottom:1px dotted #888; padding:4px 0; text-align:right;">[+ justice_expend +]</td>
+</tr>
+<tr>
+<td style="border-bottom:1px dotted #888; padding:4px 0 4px 12px;">Labour</td>
+<td style="width:80px; border-bottom:1px dotted #888; padding:4px 0; text-align:right;">[+ labor_expend +]</td>
+</tr>
+<tr>
+<td style="border-bottom:1px dotted #888; padding:4px 0 4px 12px;">Agriculture</td>
+<td style="width:80px; border-bottom:1px dotted #888; padding:4px 0; text-align:right;">[+ agriculture_expend +]</td>
+</tr>
+<tr>
+<td style="border-bottom:1px dotted #888; padding:4px 0 4px 12px;">Food Supply</td>
+<td style="width:80px; border-bottom:1px dotted #888; padding:4px 0; text-align:right;">[+ foodsupply_expend +]</td>
+</tr>
+<tr>
+<td style="border-bottom:1px dotted #888; padding:4px 0 4px 12px;">Nationalities</td>
+<td style="width:80px; border-bottom:1px dotted #888; padding:4px 0; text-align:right;">[+ nationalities_expend +]</td>
+</tr>
+<tr>
+<td style="border-bottom:1px dotted #888; padding:4px 0 4px 12px;">Welfare</td>
+<td style="width:80px; border-bottom:1px dotted #888; padding:4px 0; text-align:right;">[+ welfare_expend +]</td>
+</tr>
+<tr>
+<td style="border-bottom:1px dotted #888; padding:5px 0;">Interest</td>
+<td style="width:80px; border-bottom:1px dotted #888; padding:5px 0; text-align:right;">[+ interest_display +]</td>
+</tr>
+<tr>
+<td style="padding:5px 0;">Indemnities</td>
+<td style="width:80px; padding:5px 0; text-align:right;">[+ indemnities_display +]</td>
+</tr>
+</table>
+
+</td>
+
+</tr>
+</table>
+
+
+<div style="border-top:2px solid #666; margin-top:10px; padding-top:8px;">
+
+<table style="width:100%; border-collapse:collapse;">
+<tr>
+<td style="width:50%; padding:5px 10px 5px 0;"><b>Total Revenue</b></td>
+<td style="width:50%; padding:5px 0; text-align:right;"><b>[+ income +]</b></td>
+</tr>
+<tr>
+<td style="padding:5px 10px 5px 0;"><b>Total Expenditure</b></td>
+<td style="padding:5px 0; text-align:right;"><b>[+ expenditure +]</b></td>
+</tr>
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- LABOUR -->
+
+<div style="border:2px solid #666; border-radius:6px; padding:12px; margin-bottom:20px; box-sizing:border-box;">
+
+<div style="font-size:1.2em; font-weight:bold; text-align:center;">
+Labour
+</div>
+
+<div style="border-top:1px solid #888; margin:8px 0;"></div>
+
+<!-- Labour metrics go here -->
+
+</div>
+
+
+<!-- ECONOMIC CONDITIONS -->
+
+<div style="border:2px solid #666; border-radius:6px; padding:12px; box-sizing:border-box;">
+
+<div style="font-size:1.2em; font-weight:bold; text-align:center;">
+Economic Conditions
+</div>
+
+<div style="border-top:1px solid #888; margin:8px 0;"></div>
+
+<!-- Economic Conditions metrics go here -->
+
+</div>
+
+</td>
+
+</tr>
+</table>
 
 
 
