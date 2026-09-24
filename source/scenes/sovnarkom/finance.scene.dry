@@ -103,7 +103,7 @@ on-arrival: {!
 <tr>
 <td style="width:50%; vertical-align:top; padding:0 5px 5px 5px;">
   <div style="border:3px solid #666; border-radius:6px; padding:0; margin-bottom:10px; font-size:0.85em; overflow:hidden;">
-    <div style="background:#e8e8e8; border-bottom:1px solid #ccc; padding:5px 6px; font-size:1.2em; line-height:1.2; font-weight:bold; text-align:center; white-space:nowrap;">
+    <div style="background:#e8e8e8; border-bottom:1px solid #ccc; padding:5px 6px; margin-bottom:6px; font-size:1.2em; line-height:1.2; font-weight:bold; text-align:center; white-space:nowrap;">
       Macroeconomy
     </div>
     <div style="padding:3px 8px; line-height:1.2; white-space:nowrap;"><b>Economic Growth</b><span style="float:right;">[+ gdp_growth_display +]</span></div>
@@ -113,7 +113,7 @@ on-arrival: {!
     <div style="padding:3px 8px; line-height:1.2; white-space:nowrap;"><b>Budget Balance</b><span style="float:right;">[+ budget_balance_display +]</span></div>
   </div>
   <div style="border:3px solid #666; border-radius:6px; padding:0; margin-bottom:10px; font-size:0.85em; overflow:hidden;">
-    <div style="background:#e8e8e8; border-bottom:1px solid #ccc; padding:5px 6px; font-size:1.2em; line-height:1.2; font-weight:bold; text-align:center; white-space:nowrap;">
+    <div style="background:#e8e8e8; border-bottom:1px solid #ccc; padding:5px 6px; margin-bottom:6px; font-size:1.2em; line-height:1.2; font-weight:bold; text-align:center; white-space:nowrap;">
       Production
     </div>
     <div style="padding:3px 8px; line-height:1.2; white-space:nowrap;"><b>Industrial Output</b><span style="float:right;">[+ industrial_output_display +]</span></div>
@@ -122,10 +122,10 @@ on-arrival: {!
     <div style="padding:3px 8px; line-height:1.2; background:rgba(215,205,180,0.12); white-space:nowrap;"><b>Rail Capacity</b><span style="float:right;">[+ rail_capacity_display +]</span></div>
   </div>
   <div style="border:3px solid #666; border-radius:6px; padding:0; font-size:0.85em; overflow:hidden;">
-    <div style="background:#e8e8e8; border-bottom:1px solid #ccc; padding:5px 6px; font-size:1.2em; line-height:1.2; font-weight:bold; text-align:center; white-space:nowrap;">
+    <div style="background:#e8e8e8; border-bottom:1px solid #ccc; padding:5px 6px; margin-bottom:6px; font-size:1.2em; line-height:1.2; font-weight:bold; text-align:center; white-space:nowrap;">
       Balance of Payments
     </div>
-    <div style="font-size:0.9em; margin:0; padding:0;">
+    <div style="font-size:0.9em; margin:0; padding:0 8px;">
       <div style="display:flex; gap:8px; margin:0; padding:0; border-bottom:1px solid #666;">
         <div style="flex:1; min-width:0; padding:3px 0; line-height:1.2; text-align:center; font-weight:bold; white-space:nowrap;">
           Current Account
@@ -155,10 +155,10 @@ on-arrival: {!
 </td>
 <td style="width:50%; vertical-align:top; padding:0 5px 5px 5px;">
   <div style="border:3px solid #666; border-radius:6px; padding:0; margin-bottom:10px; font-size:0.85em; overflow:hidden;">
-    <div style="background:#e8e8e8; border-bottom:1px solid #ccc; padding:5px 6px; margin:0; font-size:1.2em; line-height:1.2; font-weight:bold; text-align:center; white-space:nowrap;">
+    <div style="background:#e8e8e8; border-bottom:1px solid #ccc; padding:5px 6px; margin:0 0 6px 0; font-size:1.2em; line-height:1.2; font-weight:bold; text-align:center; white-space:nowrap;">
       Budget
     </div>
-    <div style="font-size:0.9em; margin:0; padding:0;">
+    <div style="font-size:0.9em; margin:0; padding:0 8px;">
       <div style="display:flex; gap:8px; margin:0; padding:0; border-bottom:1px solid #666;">
         <div style="flex:1; min-width:0; padding:3px 0; line-height:1.2; text-align:center; font-weight:bold; white-space:nowrap;">
           Revenue
@@ -208,13 +208,13 @@ on-arrival: {!
     </div>
   </div>
   <div style="border:3px solid #666; border-radius:6px; padding:0; margin-bottom:10px; font-size:0.85em; overflow:hidden;">
-    <div style="background:#e8e8e8; border-bottom:1px solid #ccc; padding:5px 6px; font-size:1.2em; line-height:1.2; font-weight:bold; text-align:center; white-space:nowrap;">
+    <div style="background:#e8e8e8; border-bottom:1px solid #ccc; padding:5px 6px; margin-bottom:6px; font-size:1.2em; line-height:1.2; font-weight:bold; text-align:center; white-space:nowrap;">
       Labour
     </div>
     <!-- Labour metrics go here -->
   </div>
   <div style="border:3px solid #666; border-radius:6px; padding:0; font-size:0.85em; overflow:hidden;">
-    <div style="background:#e8e8e8; border-bottom:1px solid #ccc; padding:5px 6px; font-size:1.2em; line-height:1.2; font-weight:bold; text-align:center; white-space:nowrap;">
+    <div style="background:#e8e8e8; border-bottom:1px solid #ccc; padding:5px 6px; margin-bottom:6px; font-size:1.2em; line-height:1.2; font-weight:bold; text-align:center; white-space:nowrap;">
       Economic Conditions
     </div>
     <!-- Economic Conditions metrics go here -->
