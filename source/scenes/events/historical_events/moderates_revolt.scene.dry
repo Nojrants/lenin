@@ -23,7 +23,7 @@ on-arrival: {!
     Q.moderates_resigned = 1;
     Q.moderate_strength -= 5; Q.moderate_dissent += 30;
     Q.right_m_strength += 5; Q.right_sr_strength += 5;
-    b_dissent += 0.1;
+    Q.b_dissent += 0.1;
 
     if (
         Q.soviet_chair == "Kamenev" ||
