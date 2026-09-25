@@ -1,7 +1,7 @@
 title: Revolt of the Bolshevik Moderates
 subtitle: They have issued their ultimatum. 
 new-page: true
-view-if: year = 1917 and month = 11 and week >= 2 and moderate_strength > 20 and moderate_dissent > 20 and lenin_anger >= 1
+view-if: (year = 1917 and month = 11 and week >= 2) and coalition_government < 1 and moderate_dissent > 30 and (moderate_strength > 20 or lenin_anger >= 1)
 max-visits: 1
 tags: event
 
@@ -21,9 +21,23 @@ title: Let them resign.
 on-arrival: {!
     Q.instability += 3;
     Q.moderates_resigned = 1;
-    Q.moderate_strength -= 5;
-    Q.moderate_dissent += 30;
+    Q.moderate_strength -= 5; Q.moderate_dissent += 30;
+    Q.right_m_strength += 5; Q.right_sr_strength += 5;
+    b_dissent += 0.1;
 
+    if (
+        Q.soviet_chair == "Kamenev" ||
+        Q.soviet_chair == "Rykov" ||
+        Q.soviet_chair == "Zinoviev" ||
+        Q.soviet_chair == "Nogin" ||
+        Q.soviet_chair == "Milyutin" ||
+        Q.soviet_chair == "Teodorovich" ||
+        Q.soviet_chair == "Riazanov" ||
+        Q.soviet_chair == "Larin"
+    ) {
+        Q.soviet_chair = "Vacant";
+        Q.soviet_chair_party = "";
+    }
     if (
         Q.deputy_pm == "Kamenev" ||
         Q.deputy_pm == "Rykov" ||
@@ -257,6 +271,6 @@ unavailable-subtitle: Tensions are too high to consider this.
 title: Call Lenin's bluff and demand a Party Congress to litigate the issue. 
 choose-if: moderate_strength >= 30
 unavailable-subtitle: The Moderates lack the strength to consider this. 
-on-arrival: party_congress_timer = 8 if party_congress_timer > 8; moderate_strength += 5; moderate_dissent += 10; 
+on-arrival: party_congress_timer = 8 if party_congress_timer > 8; moderate_strength += 5; moderate_dissent += 10; b_dissent += 0.2;
 
 Rather than resigning, the Moderates instead force through the convening of a Party Congress. Now both sides will have the opportunity to campaign in support of their respective views, and have their case heard before representatives of the Party at-large. 
