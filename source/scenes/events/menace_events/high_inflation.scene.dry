@@ -6,7 +6,7 @@ tags: event
 on-arrival: {!
   Q.capital_flight_progress += 0.5;
   Q.industry *= 0.99; Q.crime_rate += 3; Q.food_sold -= 0.002;
-  Q,high_inflation_timer = 6;
+  Q.high_inflation_timer = 6;
   Q.workers_unrest += 2; 
 !}
 
