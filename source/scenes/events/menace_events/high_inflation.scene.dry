@@ -7,9 +7,6 @@ on-arrival: {!
   Q.capital_flight_progress += 0.5;
   Q.industry *= 0.99; Q.crime_rate += 3; Q.food_sold -= 0.002;
   Q,high_inflation_timer = 6;
-  if (Q.inflation >= 5) Q,high_inflation_timer = 4;
-  if (Q.inflation >= 15) Q,high_inflation_timer = 4;
-  if (Q.inflation >= 25) Q,high_inflation_timer = 4;
   Q.workers_unrest += 2; 
 !}
 
