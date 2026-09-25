@@ -1000,7 +1000,7 @@ unavailable-subtitle: The other parties will not accept. [?if commissariats_held
 achievement: vikzhel_averted
 on-arrival: {!
 	window.unlockAchievement('vikzhel_averted');
-  Q.coalition_government = 1; 
+  Q.coalition_government = 1; Q.coalition_actions_timer = 1;
   if (Q.m_represented >= 1) Q.m_in_gov = 1; 
   if (Q.sr_represented >= 1) Q.sr_in_gov = 1;
   if (Q.lsr_represented >= 1) Q.lsr_in_gov = 1;
