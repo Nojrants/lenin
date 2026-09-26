@@ -343,6 +343,22 @@ Q.efficacy_posts = 0.5;
 Q.efficacy_nationalities = 0.5;
 Q.efficacy_welfare = 0.5;
 
+Q.finalefficacy_sovnarkom      = Q.efficacy_sovnarkom;   
+Q.finalefficacy_foreign        = Q.efficacy_foreign;       
+Q.finalefficacy_military       = Q.efficacy_military;      
+Q.finalefficacy_enlightenment  = Q.efficacy_enlightenment; 
+Q.finalefficacy_internal       = Q.efficacy_internal;      
+Q.finalefficacy_railways       = Q.efficacy_railways;      
+Q.finalefficacy_trade          = Q.efficacy_trade;         
+Q.finalefficacy_finance        = Q.efficacy_finance;       
+Q.finalefficacy_justice        = Q.efficacy_justice;       
+Q.finalefficacy_agriculture    = Q.efficacy_agriculture;   
+Q.finalefficacy_foodsupply     = Q.efficacy_foodsupply;    
+Q.finalefficacy_labor          = Q.efficacy_labor;         
+Q.finalefficacy_posts          = Q.efficacy_posts;         
+Q.finalefficacy_nationalities  = Q.efficacy_nationalities; 
+Q.finalefficacy_welfare        = Q.efficacy_welfare;       
+
 Q.income_tax_rate_1 = 1.5;
 Q.income_tax_rate_2 = 1.25;
 Q.income_tax_rate_3 = 1;
