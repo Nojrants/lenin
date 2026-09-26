@@ -708,7 +708,9 @@ console.log("food_supply_urban: ", Q.food_supply_urban);
 console.log("food_transport_capacity: ", Q.food_transport_capacity);
 console.log("urban_stockpile_release: ", Q.urban_stockpile_release);
 console.log("hunger: ", Q.hunger);
-
+console.log("food_sold: ", Q.food_sold);
+console.log("urban_stockpile: ", Q.urban_stockpile);
+console.log("stockpile_release_multiplier: ", Q.stockpile_release_multiplier);
 
 
 if (Q.hunger > 10) {
