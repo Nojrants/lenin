@@ -633,30 +633,58 @@ if (Q.unemployed > 40) { Q.unemployed = 40; }
 Q.unemployed = Math.round(100*Q.unemployed)/100;
 
 
+
 // Food Production
-Q.rural_population = 145000000*((Q.peasants + Q.kulaks))/100;
-Q.urban_population = 145000000*(100 - (Q.peasants + Q.kulaks))/100;
-Q.soldiers_population = 145000000*(Q.soldiers)/100;
+Q.food_production = 132000 * Q.ag_output;
 
-Q.food_demand_urban = Q.urban_population*500/1000000;// in million kg/year
-Q.food_demand_rural = Q.rural_population*500/1000000; // million kg/year - minimal demand; lower than this would provoke famine/violence
-Q.food_demand_military = Q.soldiers_population*700/1000000; // million kg/year
+Q.rural_population = 145000000 * ((Q.peasants + Q.kulaks) / 100);
+Q.urban_population = 145000000 * ((100 - (Q.peasants + Q.kulaks + Q.soldiers)) / 100);
+Q.soldiers_population = 145000000 * (Q.soldiers / 100);
 
-// hunger is the % of food consumption that isn't satisfied.
-Q.food_supply_urban = Q.food_production*Q.food_sold;
-Q.food_transport_capacity = Q.effective_rail_throughput * 0.15;  
-// food transport capacity is an upper bound on food supply
+Q.food_demand_urban = Q.urban_population * 500 / 1000000;
+Q.food_demand_rural = Q.rural_population * 500 / 1000000;
+Q.food_demand_military = Q.soldiers_population * 700 / 1000000;
+
+// Urban food supply before stockpile
+Q.food_supply_urban = Q.food_production * Q.food_sold;
+
+// Transportation limits urban supply
+Q.food_transport_capacity = Q.effective_rail_throughput * 0.15;
 if (Q.food_supply_urban > Q.food_transport_capacity) {
     Q.food_supply_urban = Q.food_transport_capacity;
 }
 
-Q.hunger = 100*(Q.food_demand_urban - Q.food_supply_urban)/Q.food_demand_urban; 
+// Calculate surplus before stockpile release
+var food_surplus = Math.max(
+    0,
+    Q.food_supply_urban - Q.food_demand_urban
+);
+
+Q.urban_stockpile += food_surplus;
+
+// Release stockpile to cover shortage
+Q.urban_stockpile_release = Math.min(
+    Q.urban_stockpile * Q.stockpile_release_multiplier,
+    Math.max(0, Q.food_demand_urban - Q.food_supply_urban)
+);
+
+Q.urban_stockpile -= Q.urban_stockpile_release;
+Q.food_supply_urban += Q.urban_stockpile_release;
+
+// Hunger
+Q.hunger = 100 * (
+    Q.food_demand_urban - Q.food_supply_urban
+) / Q.food_demand_urban;
+
 if (Q.hunger < 0) {
-    Q.hunger = 0; 
+    Q.hunger = 0;
 }
+
+// Display values
 Q.food_demand_urban = Math.round(Q.food_demand_urban);
 Q.food_supply_urban = Math.round(Q.food_supply_urban);
 Q.hunger = Math.round(Q.hunger);
+Q.urban_stockpile = Math.round(Q.urban_stockpile);
 
 // rural hunger
 Q.food_supply_rural = Q.food_production*(1 - Q.food_sold)*(1 - Q.food_requisitioned);
