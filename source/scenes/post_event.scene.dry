@@ -474,6 +474,9 @@ if (Q.war_weariness > 99) Q.war_weariness = 99;
 
 // CALCULATING COUNTRY-WIDE STATS
 
+Q.resources = Math.round(Q.resources * 10) /10; 
+
+
 // industrial production ////////////////////////////////////////
 Q.military_production = Q.military_industry*Q.industry/100;
 Q.civilian_production = Q.civilian_industry*Q.industry/100;
@@ -598,10 +601,6 @@ Q.ag_capacity = (Q.ag_land/100)**0.40 * (Q.ag_labor/100)**0.25 * (Q.ag_capital/1
               * (Q.ag_inputs/100)**0.15 * (Q.ag_productivity/100) * (1 + (Q.finalefficacy_agriculture - 0.5));;
 Q.ag_output = Q.ag_capacity * (0.50 + 0.20*Q.ag_weather/100 + 0.20*Q.civilian_transport/100 + 0.10*Q.ag_stability/100);
 Q.ag_gdp = Q.ag_output * 100;
-
-Q.food_production = 132000 * Q.ag_output;
-
-Q.resources = Math.round(Q.resources * 10) /10; 
 
 
 
