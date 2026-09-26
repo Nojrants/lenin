@@ -464,9 +464,11 @@ Q.land_reform_progress = 0;
 Q.food_production = 132000 * Q.ag_output;
 Q.food_sold = 0.135; // fraction of food production reaching cities
 Q.food_requisitioned = 0.08;
+Q.urban_stockpile = 1500;
+Q.stockpile_release_multiplier = 0.2;
 
 Q.rural_population = 145000000 * ((Q.peasants + Q.kulaks) / 100);
-Q.urban_population = 145000000 * ((100 - (Q.peasants + Q.kulaks)) / 100);
+Q.urban_population = 145000000 * ((100 - (Q.peasants + Q.kulaks + Q.soldiers)) / 100);
 Q.soldiers_population = 145000000 * (Q.soldiers / 100);
 
 Q.food_demand_urban = Q.urban_population * 500 / 1000000;
@@ -492,7 +494,7 @@ Q.urban_stockpile += food_surplus;
 
 // Release stockpile to cover shortage
 Q.urban_stockpile_release = Math.min(
-    Q.urban_stockpile * 0.20,
+    Q.urban_stockpile * Q.stockpile_release_multiplier,
     Math.max(0, Q.food_demand_urban - Q.food_supply_urban)
 );
 
