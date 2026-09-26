@@ -654,6 +654,7 @@ if (Q.food_supply_urban > Q.food_transport_capacity) { Q.food_supply_urban = Q.f
 // Calculate surplus before stockpile release
 Q.food_surplus = Math.max(0, Q.food_supply_urban - Q.food_demand_urban);
 
+Q.urban_stockpile = Q.urban_stockpile || 1500;
 Q.urban_stockpile += Q.food_surplus;
 
 // Release stockpile to cover shortage
