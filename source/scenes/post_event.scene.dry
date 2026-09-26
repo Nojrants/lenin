@@ -571,7 +571,7 @@ Q.industrial_changes = 0;
 // Transportation
 Q.train_capacity = Math.round(Q.train_capacity);
 Q.civilian_rail_throughput = Q.train_capacity * Q.civilian_trains / 100;
-Q.effective_rail_throughput = Q.civilian_rail_throughput * Q.efficacy_railways / 0.5; 
+Q.effective_rail_throughput = Q.civilian_rail_throughput * (1 + (Q.finalefficacy_railways - 0.5)); 
 Q.civilian_transport = Math.min(100, Q.effective_rail_throughput / 1000);  
 
 // Industrial Output
@@ -595,7 +595,7 @@ Q.ag_productivity = Math.max(0, Q.ag_productivity);
 Q.ag_stability = Math.max(0, 100 - Q.instability);
 
 Q.ag_capacity = (Q.ag_land/100)**0.40 * (Q.ag_labor/100)**0.25 * (Q.ag_capital/100)**0.20
-              * (Q.ag_inputs/100)**0.15 * (Q.ag_productivity/100) * Q.efficacy_agriculture / 0.5;
+              * (Q.ag_inputs/100)**0.15 * (Q.ag_productivity/100) * (1 + (Q.finalefficacy_agriculture - 0.5));;
 Q.ag_output = Q.ag_capacity * (0.50 + 0.20*Q.ag_weather/100 + 0.20*Q.civilian_transport/100 + 0.10*Q.ag_stability/100);
 Q.ag_gdp = Q.ag_output * 100;
 
