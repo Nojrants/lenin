@@ -653,10 +653,7 @@ Q.food_transport_capacity = Q.effective_rail_throughput * 0.15;
 if (Q.food_supply_urban > Q.food_transport_capacity) { Q.food_supply_urban = Q.food_transport_capacity; }
 
 // Calculate surplus before stockpile release
-var food_surplus = Math.max(
-    0,
-    Q.food_supply_urban - Q.food_demand_urban
-);
+Q.food_surplus = Math.max(0, Q.food_supply_urban - Q.food_demand_urban);
 
 Q.urban_stockpile += food_surplus;
 
@@ -711,6 +708,8 @@ console.log("hunger: ", Q.hunger);
 console.log("food_sold: ", Q.food_sold);
 console.log("urban_stockpile: ", Q.urban_stockpile);
 console.log("stockpile_release_multiplier: ", Q.stockpile_release_multiplier);
+console.log("food_surplus: ", Q.food_surplus);
+
 
 
 if (Q.hunger > 10) {
