@@ -1,0 +1,28 @@
+title: Negotiating a Peace
+view-if: german_negotiations = 0 and month = 12
+new-page: true
+max-visits: 1
+tags: event
+
+= Negotiating a Peace
+
+It seems our efforts to incite a general peace in the Great War has not borne fruit, with the other major belligerents ignoring our declarations. The war continues on, continually burdening the country and the working-class. As such, there is debate now within the government about whether or not we should approach the Germans and open peace negotiations with them alone. Though not exactly what we had initially promised, this may be the only way to preserve the revolution...
+
+
+- @open_negotiations
+- @decline
+
+@open_negotiations
+title: Send a message to the Germans requesting a peace conference. 
+go-to: diplomacy.open_negotiations
+
+@decline
+title: There is no need to negotiation with them, the world revolution is imminent! 
+on-arrival: {!
+  Q.war_weariness += 5; Q.instability += 0.5;
+  Q.workers_unrest += 5; Q.peasants_unrest += 5;
+  Q.leftcom_strength += 5; 
+!}
+
+The idea of a peace conference is rejected. Hopefully our gamble pays off. 
+    
