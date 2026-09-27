@@ -76,8 +76,7 @@ on-arrival:  {!
   }
   !}
 
-[?if vikzhel_unrest >= 50 and vikzhel_strength >= 25 and vikzhel_strike == 1 : Worse, Vikzhel has declared the resumption of their railroad strike, bringing industry back to a standstill. ?]  
-[?if vikzhel_unrest >= 50 and vikzhel_strength >= 25 and vikzhel_strike == 0 : Worse, Vikzhel has declared they are launching their promised railroad strike, bringing our industry to a standstill. ?]  
+[?if vikzhel_strike == 1 : Worse, Vikzhel has declared they are launching their promised railroad strike, bringing industry to a standstill. ?]  
 
 @cabinet_negotiations4
 title: Open negotiations with the Left-SRs to save the coalition government. 
