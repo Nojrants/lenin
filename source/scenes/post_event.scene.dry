@@ -1380,6 +1380,7 @@ if (Q.week_actions >= 1 && Q.current_player >= Q.n_players) {
                              'hunger': Q.hunger,
 							 'gdp': Q.gdp_index
 });
+window.economicRecords = Q.economic_records;
 
     // Update Soviet representation on every new week
     var petrograd_classes = ["workers", "soldiers"];
