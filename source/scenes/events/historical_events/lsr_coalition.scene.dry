@@ -455,10 +455,16 @@ on-arrival: {!
 
   if (Q.vikzhel_strike == 1) {
     Q.vikzhel_strike_ended = 1;
+    Q.vikzhel_strike = 0;
     Q.workers_unrest -= 10;
-    Q.train_capacity = Q.previous_train_capacity;
-    Q.industry = Q.previous_industry;
-    Q.transportation_industry = Q.previous_transportation_industry;
+
+	Q.military_trains = Math.max(Q.previous_military_trains + Q.military_trains, Q.previous_military_trains);
+	Q.civilian_transport = Math.max(Q.previous_civilian_transport + Q.civilian_transport, previous_civilian_transport);
+	Q.transportation_industry = Math.max(Q.previous_transportation_industry + Q.transportation_industry, Q.transportation_industry);
+	Q.industry = Math.max(Q.previous_industry + Q.industry, Q.industry);
+  Q.ag_transport * 1.1; 
+
+
   }
 !}
 
