@@ -1,0 +1,10 @@
+title: economy_graph
+new-page: true
+
+= Economic Statistics
+
+<div id="gdp_chart"></div>
+
+<script>
+drawGDPChart();
+</script>
