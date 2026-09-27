@@ -507,7 +507,7 @@ if (Q.agricultural_industry_production >= 5) {
 }
 if (Q.rural_hunger > 0) {
 	Q.food_sold -= 0.01;
-	Q.rural_unrest += 1;
+	Q.peasants_unrest += 1;
 }
 
 // civilian production effects on inflation and food_sold /////////
@@ -618,7 +618,7 @@ if (Q.monthly_inflation >= 20) {
 	Q.unemployed += (Q.monthly_inflation - 10) * 0.005;
 	Q.workers_unrest += Q.monthly_inflation / 10; 
 	Q.underclass_unrest += Q.monthly_inflation / 10; 
-	Q.food_sold *= (1 - (Q.monthly_inflation / 400));
+	Q.food_sold *= (1 - (Q.monthly_inflation / 800));
 }
 Q.unemployed += ((Math.random() * 2 - 1) + (Q.instability / 50)) / 4;
 
@@ -635,6 +635,7 @@ Q.unemployed = Math.round(100*Q.unemployed)/100;
 
 // Food Production
 Q.food_production = 132000 * Q.ag_output;
+Q.food_sold = Math.max(0.01, Math.min(1, Q.food_sold));
 
 Q.rural_population = 145000000 * ((Q.peasants + Q.kulaks) / 100);
 Q.urban_population = 145000000 * ((100 - (Q.peasants + Q.kulaks + Q.soldiers)) / 100);
