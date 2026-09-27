@@ -644,6 +644,30 @@ if (window && d3) {
     lines_3.width(width).height(300);
     d3.select("#economic_history").datum(Q.economic_records).call(lines_3);
 
+
+   var maxGDP = d3.max(Q.economic_records, d => d.gdp);
+
+   var lines_gdp = d3.linegraph(
+       true,
+       true,
+       ['gdp'],
+       {'gdp': '#000000'},
+       {'gdp': 'GDP (1913 = 100)'},
+       maxGDP + 5,
+       0,
+       2,
+       1917,
+       2
+   );
+   
+   lines_gdp.width(width).height(300);
+   
+   d3.select("#gdp_history")
+       .datum(Q.economic_records)
+       .call(lines_gdp);
+
+
+
 }
 !}
 
@@ -682,4 +706,8 @@ if (window && d3) {
 = Economic history
 
 {!<svg id="economic_history" style="width: 500px; height: 300px;"> </svg>!}
+
+= GDP
+
+{!<svg id="gdp_history" style="width: 500px; height: 300px;"> </svg>!}
 
