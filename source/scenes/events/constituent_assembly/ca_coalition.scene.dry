@@ -62,12 +62,17 @@ on-arrival:  {!
   if (Q.vikzhel_unrest >= 50 && Q.vikzhel_strength >= 25) {
     Q.vikzhel_strike = 1;
     Q.workers_unrest += 10;
-    Q.previous_train_capacity = Q.train_capacity; 
-  	Q.previous_industry = Q.industry; 
+
+  	Q.previous_military_trains = Q.military_trains;
+  	Q.previous_civilian_transport = Q.civilian_transport; 
   	Q.previous_transportation_industry = Q.transportation_industry;
+  	Q.previous_industry = Q.industry; 
+  
+  	Q.military_trains *= 0.1;
+  	Q.civilian_transport *= 0.5;
   	Q.transportation_industry = 0.5; 
-  	Q.train_capacity = Q.previous_train_capacity * 0.8; 
   	Q.industry = Q.previous_industry * 0.5; 
+  	Q.ag_transport * 0.9; 
   }
   !}
 
