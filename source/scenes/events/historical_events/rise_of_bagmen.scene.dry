@@ -28,6 +28,7 @@ Lenin and others within our own party, however, worry that this would be a dange
 - @detachments
 - @cheka
 - @specialists
+- @production
 
 
 
@@ -121,6 +122,23 @@ on-arrival: {!
   Q.unionists_strength -= 2; Q.unionists_unrest += 5;
 !}
 
+@production
+title: The problem is production—send our people into the countryside to coax the peasants and restore order in the village. 
+subtitle: -0.5 resources – This could inflame tensions with the peasants. 
+choose-if: resources >= 0.5
+unavailable-subtitle: -0.5 resources – We lack the resources. 
+max-visits: 1
+go-to: bagmen_menu
+on-arrival: {!
+  Q.resources -= 0.5; Q.agriculture_expend += 0.25; Q.efficacy_foodsupply += 0.1;
+  Q.bagmen_strength -= 2; Q.bagmen_unrest += 5; Q.instability += 0.5;
+  Q.cheka_strength += 1; Q.cheka_militancy += 0.1; Q.cheka_loyalty -= 0.1;
+  Q.left_m_relation -= 5; Q.centre_m_relation -= 5; Q.right_m_relation -= 5;
+  Q.moderate_strength -= 4; Q.leninist_strength += 2; Q.leftcom_strength += 4;
+  Q.moderate_unrest += 3; Q.leninist_unrest -= 2; Q.leftcom_unrest -= 4;
+  Q.peasants_strength -= 2; Q.kulaks_strength -= 4;
+  Q.peasants_unrest += 6; Q.kulaks_unrest += 6; 
+!}
 
 
 
