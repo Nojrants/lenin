@@ -649,7 +649,7 @@ Q.food_demand_military = Q.soldiers_population * 700 / 1000000;
 Q.food_supply_urban = Q.food_production * Q.food_sold;
 
 // Transportation limits urban supply
-Q.food_transport_capacity = Q.effective_rail_throughput * 0.15;
+Q.food_transport_capacity = (Q.effective_rail_throughput * 0.15) - (Q.bagmen_strength * 500);
 if (Q.food_supply_urban > Q.food_transport_capacity) { Q.food_supply_urban = Q.food_transport_capacity; }
 
 // Calculate surplus before stockpile release
@@ -755,6 +755,10 @@ if (Q.crime > 20) {
 		Q.disillusionment -= 0.5 + (Q.democraticity / 400);
 }
 if (Q.disillusionment < 0) Q.disillusionment = 0;
+
+// Bagmen
+Q.bagmen_strength += (Q.hunger / 50) + (Q.instability / 80) + ((0.15 - Q.food_sold)*10) + (1 - Q.discipline); 
+
 
 
 for (var c of Q.classes) {
