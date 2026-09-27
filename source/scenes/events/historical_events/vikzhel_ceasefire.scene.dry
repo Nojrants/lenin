@@ -26,12 +26,16 @@ on-arrival: {!
   Q.moderate_dissent += 10; Q.leninist_dissent -= 5; Q.leftcom_dissent -= 5;
   Q.vikzhel_strike = 1; Q.vikzhel_unrest += 20; Q.workers_unrest += 10; 
 
-  Q.previous_train_capacity = Q.train_capacity; 
-	Q.previous_industry = Q.industry; 
+	Q.previous_military_trains = Q.military_trains;
+	Q.previous_civilian_transport = Q.civilian_transport; 
 	Q.previous_transportation_industry = Q.transportation_industry;
+	Q.previous_industry = Q.industry; 
+
+	Q.military_trains *= 0.1;
+	Q.civilian_transport *= 0.5;
 	Q.transportation_industry = 0.5; 
-	Q.train_capacity = Q.previous_train_capacity * 0.8; 
 	Q.industry = Q.previous_industry * 0.5; 
+	Q.ag_transport * 0.9; 
 !}
 
 Our refusal to cooperate entirely shocks the other parties, seemingly proving the right socialists correct after all—more than likely compromise will be impossible from here on out. Likewise, we receive immense condemnation from various interest groups, and even some members of our own party.
@@ -465,12 +469,16 @@ on-arrival: {!
   Q.moderate_dissent += 10; Q.leninist_dissent -= 5; Q.leftcom_dissent -= 5;
   Q.vikzhel_strike = 1; Q.vikzhel_unrest += 20; Q.workers_unrest += 10; 
 
-  Q.previous_train_capacity = Q.train_capacity; 
-	Q.previous_industry = Q.industry; 
+	Q.previous_military_trains = Q.military_trains;
+	Q.previous_civilian_transport = Q.civilian_transport; 
 	Q.previous_transportation_industry = Q.transportation_industry;
+	Q.previous_industry = Q.industry; 
+
+	Q.military_trains *= 0.1;
+	Q.civilian_transport *= 0.5;
 	Q.transportation_industry = 0.5; 
-	Q.train_capacity = Q.previous_train_capacity * 0.8; 
 	Q.industry = Q.previous_industry * 0.5; 
+	Q.ag_transport * 0.9; 
 !}
 
 = Negotiations Collapse
@@ -926,12 +934,16 @@ on-arrival: {!
   Q.moderate_dissent += 10; Q.leninist_dissent -= 5; Q.leftcom_dissent -= 5;
   Q.vikzhel_strike = 1; Q.vikzhel_unrest += 20; Q.workers_unrest += 10; 
 
-  Q.previous_train_capacity = Q.train_capacity; 
-	Q.previous_industry = Q.industry; 
+	Q.previous_military_trains = Q.military_trains;
+	Q.previous_civilian_transport = Q.civilian_transport; 
 	Q.previous_transportation_industry = Q.transportation_industry;
+	Q.previous_industry = Q.industry; 
+
+	Q.military_trains *= 0.1;
+	Q.civilian_transport *= 0.5;
 	Q.transportation_industry = 0.5; 
-	Q.train_capacity = Q.previous_train_capacity * 0.8; 
 	Q.industry = Q.previous_industry * 0.5; 
+	Q.ag_transport * 0.9; 
 
   if (Q.education_minister_party != "Bolshevik") {
     Q.education_minister = "Vacant";
