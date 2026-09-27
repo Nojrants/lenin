@@ -650,7 +650,7 @@ Q.food_demand_military = Q.soldiers_population * 700 / 1000000;
 Q.food_supply_urban = Q.food_production * (Q.food_sold + (Q.bagmen_strength / 400));
 
 // Transportation limits urban supply
-Q.food_transport_capacity = (Q.effective_rail_throughput * 0.15) - (Q.bagmen_strength * 500);
+Q.food_transport_capacity = Math.max(0, (Q.effective_rail_throughput * 0.15) - Math.min(0.5, (Q.bagmen_strength / 500)));
 if (Q.food_supply_urban > Q.food_transport_capacity) { Q.food_supply_urban = Q.food_transport_capacity; }
 
 // Calculate surplus before stockpile release
