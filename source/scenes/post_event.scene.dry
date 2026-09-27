@@ -758,7 +758,7 @@ if (Q.crime > 20) {
 if (Q.disillusionment < 0) Q.disillusionment = 0;
 
 // Bagmen
-Q.bagmen_strength += (Q.hunger / 50) + (Q.instability / 80) + ((0.15 - Q.food_sold)*10) + (1 - Q.discipline) + (0.5 - Q.food_price) + (0.75 - Q.efficacy_railways); 
+Q.bagmen_strength += (Q.hunger / 300) + (Q.instability / 200) + ((0.15 - Q.food_sold)*5) + ((1 - Q.discipline)/5) - (Q.food_price) + (0.75 - Q.efficacy_railways); 
 
 
 
