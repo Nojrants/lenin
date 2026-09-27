@@ -567,6 +567,7 @@ if (Q.transportation_production >= 5) {
 	}
 }
 
+
 // industrial changes
 Q.industrial_changes = 0;
 
@@ -646,7 +647,7 @@ Q.food_demand_rural = Q.rural_population * 500 / 1000000;
 Q.food_demand_military = Q.soldiers_population * 700 / 1000000;
 
 // Urban food supply before stockpile
-Q.food_supply_urban = Q.food_production * Q.food_sold;
+Q.food_supply_urban = Q.food_production * (Q.food_sold + (Q.bagmen_strength / 400));
 
 // Transportation limits urban supply
 Q.food_transport_capacity = (Q.effective_rail_throughput * 0.15) - (Q.bagmen_strength * 500);
