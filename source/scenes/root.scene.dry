@@ -371,7 +371,7 @@ Q.income_tax_efficacy = 0.3;
 Q.wealth_tax_efficacy = 0.5; 
 Q.business_tax_efficacy = 0.7; 
 
-Q.loans_high = 10;
+Q.loans_high = 14;
 Q.loans_med = 6;
 Q.loans_low = 6;
 Q.bonds = 30;
