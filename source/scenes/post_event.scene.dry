@@ -810,6 +810,19 @@ for (var c of Q.classes) {
 
 Q.general_unrest = ((Q.elites_unrest * Q.elites) + (Q.middle_unrest * Q.middle) + (Q.clergy_unrest * Q.clergy) + (Q.workers_unrest * Q.workers) + (Q.peasants_unrest * Q.peasants) + (Q.kulaks_unrest * Q.kulaks) + (Q.intelligentsia_unrest * Q.intelligentsia) + (Q.soldiers_unrest * Q.soldiers) + (Q.underclass_unrest * Q.underclass) + (Q.students_unrest * Q.students)) / 100;
 
+Q.migration = ((Q.workers_unrest - 50) * 0.0005
+            + (Q.hunger - 10) * 0.01
+            + (Q.disillusionment - 20) * 0.001
+            + (Q.instability - 40) * 0.0001
+            + (Q.unemployed - 8) * 0.005
+			- (Q.industry_gdp - 90) * 0.002
+			- (100 - Q.industry_labor) * 0.002) / 5;
+
+Q.workers -= Q.migration;
+Q.peasants += Q.migration;
+Q.unemployed -= ((Q.unemployed - 8) * 0.005);
+
+
 for (var c of Q.classes) {
     var class_votes = 0;
     for (var party of Q.parties) {
