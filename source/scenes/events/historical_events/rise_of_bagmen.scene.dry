@@ -34,7 +34,7 @@ Lenin and others within our own party, however, worry that this would be a dange
 
 @menshevik
 title: Implement a full "Menshevik"-style program, by raising grain prices, opening negotiations with the bagmen, and implementing new regulations and taxes. 
-subtitle: This will embolden our <span style="color: var(--m-color); font-weight: bold;">Mensheviks</span> opponents. [?if coalition_government >= 1 : Though the current multi-party coalition makes this more feasible. ?][?if (food_minister_party != "Bolshevik" and food_minister != "Vacant") or (agriculture_minister_party != "Bolshevik" and agriculture_minister != "Vacant") : And with the opposition presently controlling food-related commissariats, they have already begun setting the groundwork for this. ?]
+subtitle: This will embolden our <span style="color: var(--m-color); font-weight: bold;">Mensheviks</span> opponents. [?if coalition_government >= 1 : The current multi-party coalition makes this more feasible. ?][?if (food_minister_party != "Bolshevik" and food_minister != "Vacant") or (agriculture_minister_party != "Bolshevik" and agriculture_minister != "Vacant") : With the opposition presently controlling food-related commissariats, they have already begun setting the groundwork for this. ?]
 choose-if: (coalition_government >= 1) or ((leftcom_strength + (leninist_strength / 2)) < ((moderate_strength + (leninist_strength / 5)))) or ((left_m_relation + centre_m_relation) > 80)
 unavailable-subtitle: The centre-left of the party leadership is too strongly opposed, fearing this would embolden our <span style="color: var(--m-color); font-weight: bold;">Mensheviks</span> opponents.
 max-visits: 1
