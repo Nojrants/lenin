@@ -401,6 +401,14 @@ Q.b_soldiers_org = 1;
 Q.government_form = 01;
 
 
+// GDP
+Q.gdp_index =
+    (Q.ag_gdp * 0.45) +
+    (Q.industry_gdp * 0.40) +
+    (Q.trade_gdp * 0.10) +
+    (Q.government_gdp * 0.05);
+
+Q.gdp_index = Math.round(Q.gdp_index * 10) / 10;
 
 
 
