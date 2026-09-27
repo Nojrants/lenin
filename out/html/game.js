@@ -1547,7 +1547,7 @@ function metric_color(value, positive_is_good = true) {
 
 window.drawGDPChart = function() {
 
-    var records = Q.economic_records || [];
+    var records = window.economicRecords || [];
     var chart = document.getElementById("gdp_chart");
 
     if (!chart) return;
