@@ -1512,7 +1512,7 @@ Q.economic_records = [
         'gdp': 82
     },
     {
-        'date': new Date(1917, 11, 1),
+        'date': new Date(1917, 10, 4),
         'inflation': Q.monthly_inflation,
         'unemployment': Q.unemployed,
         'industry': 100,
