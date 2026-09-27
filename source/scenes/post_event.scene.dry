@@ -502,7 +502,7 @@ if (Q.agricultural_industry_production >= 5) {
 	}
 } else {
 	if (Q.food_sold > 0.07 + (Q.agricultural_industry_production - 1)/100) {
-		Q.food_sold -= 0.002;
+		Q.food_sold -= 0.001;
 	}
 }
 if (Q.rural_hunger > 0) {
@@ -619,7 +619,7 @@ if (Q.monthly_inflation >= 20) {
 	Q.unemployed += (Q.monthly_inflation - 10) * 0.005;
 	Q.workers_unrest += Q.monthly_inflation / 10; 
 	Q.underclass_unrest += Q.monthly_inflation / 10; 
-	Q.food_sold *= (1 - (Q.monthly_inflation / 800));
+	Q.food_sold *= (1 - (Q.monthly_inflation / 1000));
 }
 Q.unemployed += ((Math.random() * 2 - 1) + (Q.instability / 50)) / 4;
 
