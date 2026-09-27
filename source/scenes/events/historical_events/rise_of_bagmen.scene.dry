@@ -29,6 +29,8 @@ Lenin and others within our own party, however, worry that this would be a dange
 - @cheka
 - @specialists
 - @production
+- @nothing
+
 
 
 
@@ -143,6 +145,7 @@ on-arrival: {!
   Q.peasants_unrest += 6; Q.kulaks_unrest += 6; 
 !}
 
-
-
+@nothing
+title: We've done all we can. 
+go-to: root
 
