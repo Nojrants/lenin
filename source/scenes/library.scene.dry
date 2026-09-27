@@ -615,11 +615,32 @@ if (window && d3) {
     // economic stats
     var minInflation = d3.min(Q.economic_records, d => d.inflation);
     var maxInflation = d3.max(Q.economic_records, d => d.inflation);
-    var maxProduction = d3.max(Q.economic_records, d => d.industry);
-    var lines_3 = d3.linegraph(true, true, ['inflation', 'hunger', 'industry', 'unemployment'],
-            {'inflation': '#0000FF', 'hunger': '#FF00FF', 'industry': '#00FF00', 'unemployment': '#FF0000'},
-            {'inflation': 'Inflation', 'hunger': 'Hunger', 'industry': 'Production', 'unemployment': 'Unemployment'},
-            maxInflation + 5, 0, 2, 1917, 2);
+    
+    var lines_3 = d3.linegraph(
+        true,
+        true,
+        ['inflation', 'hunger', 'industry', 'unemployment', 'gdp'],
+        {
+            'inflation': '#0000FF',
+            'hunger': '#FF00FF',
+            'industry': '#00FF00',
+            'unemployment': '#FF0000',
+            'gdp': '#000000'
+        },
+        {
+            'inflation': 'Inflation',
+            'hunger': 'Hunger',
+            'industry': 'Production',
+            'unemployment': 'Unemployment',
+            'gdp': 'GDP'
+        },
+        maxInflation + 5,
+        0,
+        2,
+        1917,
+        2
+    );
+    
     lines_3.width(width).height(300);
     d3.select("#economic_history").datum(Q.economic_records).call(lines_3);
 
