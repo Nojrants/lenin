@@ -1377,7 +1377,9 @@ if (Q.week_actions >= 1 && Q.current_player >= Q.n_players) {
                              'inflation': Q.inflation,
                              'unemployment': Q.unemployed,
                              'industry': Q.industry,
-                             'hunger': Q.hunger});
+                             'hunger': Q.hunger,
+							 'gdp': Q.gdp_index
+});
 
     // Update Soviet representation on every new week
     var petrograd_classes = ["workers", "soldiers"];
