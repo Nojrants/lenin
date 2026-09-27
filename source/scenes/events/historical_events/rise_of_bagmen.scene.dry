@@ -42,8 +42,8 @@ go-to: bagmen_menu
 on-arrival: {!
   Q.foodsupply_expend += 1; Q.efficacy_foodsupply += 0.2; Q.efficacy_railways += 0.1;
   if (Q.food_minister_party != "Bolshevik" && Q.food_minister != "Vacant") { Q.efficacy_foodsupply += 0.05; }
-  if (Q.agriculture_minister_party != "Bolshevik" and Q.agriculture_minister != "Vacant") { Q.efficacy_agriculture += 0.05; }
-  if (Q.transport_minister_party != "Bolshevik" and Q.transport_minister != "Vacant") { Q.efficacy_railways += 0.05; }
+  if (Q.agriculture_minister_party != "Bolshevik" && Q.agriculture_minister != "Vacant") { Q.efficacy_agriculture += 0.05; }
+  if (Q.transport_minister_party != "Bolshevik" && Q.transport_minister != "Vacant") { Q.efficacy_railways += 0.05; }
   Q.train_capacity *= 1.10; Q.food_sold += 0.05; Q.food_price += 0.50; 
   Q.railway_revenue * 1.2; Q.business_tax += 0.15; 
   Q.bagmen_strength -= 5; Q.bagmen_unrest -= 10; Q.instability -= 1; 
