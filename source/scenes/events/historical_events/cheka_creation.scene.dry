@@ -1,17 +1,18 @@
 title: Creation of an "Extraordinary Commission"
 subtitle: We must remain vigiliant in the fight against counterrevolution. 
 new-page: true
-view-if: coalition_government >= 1 and cheka_founded = 0
+view-if: cheka_founded = 0 and (coalition_government >= 1 or (month = 12 and week = 4))
 max-visits: 1
 tags: event
 
 = Extraordinary Commission 
 
-With the advent of a coalition government, there are some within the Bolshevik leadership who fear the non-Bolshevik commissars will now impede our anti-counterrevolutionary efforts, through legal and governmental meddling. In particular, hardline Bolsheviks within the Military Revolutionary Committee have petitioned for some kind of special commission, to take up their work free from outside interference. 
+[?if coalition_government >= 1 : With the advent of a coalition government, there are some within the Bolshevik leadership who fear the non-Bolshevik commissars will now impede our anti-counterrevolutionary efforts, through legal and governmental meddling. In particular, hardline Bolsheviks within the Military Revolutionary Committee have petitioned for some kind of special commission, to take up their work free from outside interference. ?] 
+
+[?if coalition_government = 0 : In the wake of the ongoing crises and acts of rebellion by counterrevolutionary forces, a number of Bolshevik hardliners – primarily from among the Military Revolutionary Committee – have petitioned for all our various-counterrevolutionary efforts to be consolidated under one roof. ?]
 
 It has been proposed that we create an "Extraordinary Commission for Combating Counter-Revolution and Sabotage" (Cheka), which will inherit the functions of the Military Revolutionary Committee. Such a body would be free of opposition parties, and commanded by experienced Bolshevik militants. 
 
-  
 - @create
 - @reject
 
