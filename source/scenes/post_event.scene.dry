@@ -1154,6 +1154,11 @@ Q.business_tax =
     ((Q.business_tax_efficacy / 4 * 3) + (Q.finalefficacy_finance / 4))
 );
 
+if (Q.bagmen_tax = 1) {
+	Q.business_tax += (Q.bagmen_strength / 200);
+	Q.bagmen_strength * 0.98;
+}
+
 Q.interest = (
     (Q.loans_high * 0.16) +
     (Q.loans_med * 0.12) +
