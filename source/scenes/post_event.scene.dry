@@ -864,24 +864,24 @@ if (Q.is_peace != 1 || Q.brest_signed != 1) {
 }
 
 
-console.log("Disillusionment:", Q.disillusionment);
-console.log("none support:", Q.none_support);
-for (var party of Q.parties) {
-    console.log(party + ": " + Q[party + "_normalized"]);
-}
-for (var party of Q.parties) {
-    console.log(
-        party,
-        "raw:",
-        Q[party + "_support"],
-        "normalized:",
-        Q[party + "_normalized"]
-    );
-}
-console.log("workers_b:", Q.workers_b);
-console.log("workers_m:", Q.workers_m);
-console.log("workers_lsr:", Q.workers_lsr);
-console.log("workers_sr:", Q.workers_sr);
+// console.log("Disillusionment:", Q.disillusionment);
+// console.log("none support:", Q.none_support);
+// for (var party of Q.parties) {
+//     console.log(party + ": " + Q[party + "_normalized"]);
+// }
+// for (var party of Q.parties) {
+//     console.log(
+//         party,
+//         "raw:",
+//         Q[party + "_support"],
+//         "normalized:",
+//         Q[party + "_normalized"]
+//     );
+// }
+// console.log("workers_b:", Q.workers_b);
+// console.log("workers_m:", Q.workers_m);
+// console.log("workers_lsr:", Q.workers_lsr);
+// console.log("workers_sr:", Q.workers_sr);
 
 
 // set faction strength/dissent to 0
