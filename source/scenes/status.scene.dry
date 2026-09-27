@@ -194,6 +194,11 @@ k_strength          :   [+ k_strength +]<br>
 rightist_relation   :   [+ rightist_relation +]<br>
 rightist_strength   :   [+ rightist_strength +]<br>
 
+bagmen  :   [+ bagmen +]<br>
+bagmen_unrest  :   [+ bagmen_unrest +]<br>
+bagmen_strength  :   [+ bagmen_strength +]<br>
+
+
 = Inter-party Relationships
 
 >**Anarchists:** [+ anarchist_relation : relationships +]
