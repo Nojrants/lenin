@@ -820,7 +820,7 @@ Q.migration = ((Q.workers_unrest - 50) * 0.0005
 
 Q.workers -= Q.migration;
 Q.peasants += Q.migration;
-Q.unemployed -= ((Q.unemployed - 8) * 0.005);
+Q.unemployed -= Q.migration; 
 
 
 for (var c of Q.classes) {
@@ -1170,9 +1170,9 @@ Q.business_tax =
     ((Q.business_tax_efficacy / 4 * 3) + (Q.finalefficacy_finance / 4))
 );
 
-if (Q.bagmen_tax = 1) {
+if (Q.bagmen_tax == 1) {
 	Q.business_tax += (Q.bagmen_strength / 200);
-	Q.bagmen_strength * 0.98;
+	Q.bagmen_strength *= 0.98;
 }
 
 Q.interest = (
