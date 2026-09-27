@@ -6,7 +6,7 @@ max-visits: 1
 tags: event
 on-arrival: {!
   Q.morale *= 0.8; Q.discipline *= 0.6; Q.war_weariness += 10; 
-  Q.instability += 5; Q.train_capacity *= 0.85;
+  Q.instability += 5; Q.train_capacity *= 0.95;
   Q.soldiers_unrest -= 15; Q.peasants_unrest += 5; 
   Q.soldiers_b += 1; 
   Q.northern_front_soldiers -= 35;
@@ -32,7 +32,7 @@ Though certainly driving up our support among the soldiers, this demobilization 
 @encourage
 title: Let the soldiers go home.
 on-arrival: {!
-  Q.instability += 2; Q.train_capacity *= 0.95;
+  Q.instability += 2; Q.train_capacity *= 0.97;
   Q.soldiers_unrest -= 5; Q.peasants_unrest += 5; 
   Q.soldiers_b += 2; 
   Q.bagmen_strength += 5; 
