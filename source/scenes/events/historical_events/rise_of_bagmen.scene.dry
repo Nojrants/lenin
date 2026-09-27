@@ -47,7 +47,7 @@ on-arrival: {!
   if (Q.agriculture_minister_party != "Bolshevik" && Q.agriculture_minister != "Vacant") { Q.efficacy_agriculture += 0.05; }
   if (Q.transport_minister_party != "Bolshevik" && Q.transport_minister != "Vacant") { Q.efficacy_railways += 0.05; }
   Q.train_capacity *= 1.10; Q.food_sold += 0.05; Q.food_price += 0.50; 
-  Q.railway_revenue * 1.2; Q.business_tax += 0.15; 
+  Q.railway_revenue * 1.2; Q.bagmen_tax = 1; 
   Q.bagmen_strength -= 5; Q.bagmen_unrest -= 10; Q.instability -= 1; 
   Q.cheka_strength -= 2; Q.cheka_militancy -= 0.2; Q.cheka_loyalty -= 0.1;
   Q.left_m_strength += 5; Q.m_strength += 4; Q.right_m_strength += 2;
