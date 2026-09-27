@@ -625,6 +625,22 @@ Q.government_realization = 0.40 + 0.30*(Q.government_stability/100) + 0.30*(Q.de
 Q.government_gdp = Q.government_capacity * 100 * Q.government_realization;
 
 
+// GDP
+Q.gdp_index =
+    (Q.ag_gdp * 0.45) +
+    (Q.industry_gdp * 0.40) +
+    (Q.trade_gdp * 0.10) +
+    (Q.government_gdp * 0.05);
+
+Q.gdp_index = Math.round(Q.gdp_index * 10) / 10;
+
+console.log("ag_gdp: ", Q.ag_gdp);
+console.log("industry_gdp: ", Q.industry_gdp);
+console.log("trade_gdp: ", Q.trade_gdp);
+console.log("government_gdp: ", Q.government_gdp);
+console.log("gdp_index: ", Q.gdp_index);
+
+
 
 
 // inflation
