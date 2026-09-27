@@ -1,0 +1,127 @@
+title: Rise of the Bagmen
+new-page: true
+view-if: month != 11 and month != 12 and bagmen_strength > 15
+max-visits: 1
+tags: event
+on-arrival: {!
+  // Q.bagmen = (Q.bagmen_strength / 500);
+  // Q.soldiers -= Q.bagmen * 0.6; 
+  // Q.peasants -= Q.bagmen * 0.4;
+  Q.bagmen_strength += 5;
+  Q.instability += 1; 
+  Q.railway_revenue *= 0.85; 
+!}
+go-to: bagmen_menu
+
+= Rise of the Bagmen
+
+With the spontaneous demobilization of the army, and the breakdown in the transportation sector in general, we are struggling to effectively transport grain from the countryside to the cities. In this vacuum, a large number of demobilized soldiers and rural folk have realized that they can take advantage of the situation. These so-called "bagmen" (meshochniki) have begun buying up food and transporting it to the cities themselves. As they can offer more to the peasants than the government's fixed prices, the bagmen are undercutting the food-supply agencies at the point of purchase, while the exceptional demand in the cities ensures they make a hefty profit for their trouble as well. Worse, these profiteers clog up the railways with their shipments (or even hijack the trains entirely), putting further strain on the transportation network. 
+
+Several proposals are being floated on how to deal with this phenomenon. The <span style="color: var(--m-color); font-weight: bold;">Mensheviks</span> claim it was our own policy of emboldening the soldiers, as well as our attempts to wrest control of the railways from Vikzhel and other local authorities, that ballooned the problem in the first place. Nonetheless, their economic specialists (many of whom with experience from previous governments) claim we can still solve the crisis by raising the government price paid for grain, and also by working with the bagmen in the short-term, either by negotiating for their "companies" for more favorable terms, or even hiring them as contractors in the food-procurement agencies. Though this would in some sense legitimize the profiteers and speculators, the opposition claims that competitive pricing and cooperation with the "private sector", rather than merely fighting it, is the quickest way to right the ship. Meanwhile the bagmen could be regulated and taxed (with those funds paying for transportation repair), until eventually being phased out of existence. 
+  
+Lenin and others within our own party, however, worry that this would be a dangerous concession to the bagmen marauders (and implicitly, to the Mensheviks). Most <span style="color: var(--b-color); font-weight: bold;">Bolsheviks</span> are calling for tighter restrictions and punishments against speculators, not cooperation with them. Our experts claim that the grain monopoly can only truly function if the speculators, and their deviant petty-bourgeois consciousness, are eradicated swiftly and decisively, and once order has been restored to the railways. [?if cheka_founded = 1 : The Cheka lobbies in favor of this "strong hand" approach, with local chekists already battling with bagmen to mixed results. ?]
+
+@bagmen_menu
+  
+- @menshevik
+- @propaganda
+- @detachments
+- @cheka
+- @specialists
+
+
+
+@menshevik
+title: Implement a full "Menshevik"-style program, by raising grain prices, opening negotiations with the bagmen, and implementing new regulations and taxes. 
+subtitle: This will embolden our <span style="color: var(--m-color); font-weight: bold;">Mensheviks</span> opponents. [?if coalition_government >= 1 : Though the current multi-party coalition makes this more feasible. ?][?if (food_minister_party != "Bolshevik" and food_minister != "Vacant") or (agriculture_minister_party != "Bolshevik" and agriculture_minister != "Vacant") : And with the opposition presently controlling food-related commissariats, they have already begun setting the groundwork for this. ?]
+choose-if: (coalition_government >= 1) or ((leftcom_strength + (leninist_strength / 2)) < ((moderate_strength + (leninist_strength / 3)))) or ((left_m_relation + centre_m_relation) > 80)
+unavailable-subtitle: The centre-left of the party leadership is too strongly opposed, fearing this would embolden our <span style="color: var(--m-color); font-weight: bold;">Mensheviks</span> opponents.
+max-visits: 1
+go-to: bagmen_menu
+on-arrival: {!
+  Q.foodsupply_expend += 1; Q.efficacy_foodsupply += 0.2; Q.efficacy_railways += 0.1;
+  Q.train_capacity *= 1.10; Q.food_sold += 0.05; Q.food_price += 0.50; 
+  Q.railway_revenue * 1.2; Q.business_tax += 0.15; 
+  Q.bagmen_strength -= 5; Q.bagmen_unrest -= 10; Q.instability -= 1; 
+  Q.cheka_strength -= 2; Q.cheka_militancy -= 0.2; Q.cheka_loyalty -= 0.1;
+  Q.left_m_strength += 5; Q.m_strength += 4; Q.right_m_strength += 2;
+  Q.left_m_relation += 5; Q.centre_m_relation += 5; Q.right_m_relation += 5;
+  Q.moderate_strength += 6; Q.leninist_strength -= 3; Q.leftcom_strength -= 8;
+  Q.moderate_unrest -= 5; Q.leftcom_unrest += 5;
+  Q.peasants_strength += 2; Q.kulaks_strength += 4;
+  Q.peasants_unrest -= 4; Q.kulaks_unrest -= 8; 
+!}
+
+@propaganda
+title: Launch a propaganda campaign against the bagmen, deriding them as petty-bourgeois mauraders and saboteurs! 
+subtitle: -0.5 resources – This will galvanize our base against the bagmen. 
+choose-if: resources >= 0.5
+unavailable-subtitle: -0.5 resources – We lack the resources. 
+max-visits: 1
+go-to: bagmen_menu
+on-arrival: {!
+  Q.resources -= 0.5; 
+  Q.bagmen_strength -= 1; Q.bagmen_unrest += 5; Q.instability += 0.5; 
+  Q.leninist_strength += 2; Q.leftcom_strength += 3;
+  Q.leninist_unrest -= 5; Q.leftcom_unrest -= 5;
+  Q.workers_unrest -= 5; Q.soldiers_unrest -= 4; Q.peasants_unrest += 2; Q.kulaks_unrest += 4;
+!}
+
+@detachments
+title: Station "antiprofiteering detachments" at railway stops and strategic checkpoints, to police for bagmen activities. 
+subtitle: -0.5 resources 
+choose-if: resources >= 0.5
+unavailable-subtitle: -0.5 resources – We lack the resources. 
+max-visits: 1
+go-to: bagmen_menu
+on-arrival: {!
+  Q.resources -= 0.5; Q.internal_expend += 0.2; Q.efficacy_railways -= 0.1; 
+  Q.railway_revenue *= 1.1; 
+  Q.bagmen_strength -= 4; Q.bagmen_unrest += 5; 
+  Q.cheka_strength += 2; Q.cheka_militancy += 0.1; 
+  Q.leninist_strength += 1; Q.leftcom_strength += 2;
+  Q.leninist_unrest -= 3; Q.leftcom_unrest -= 3;
+  Q.workers_unrest -= 3; Q.soldiers_unrest -= 2; Q.peasants_unrest += 1; Q.kulaks_unrest += 2;
+  Q.vikzhel_strength -= 2;
+!}
+
+@cheka
+title: Activate the Cheka to crush the bagmen and restore order. 
+view-if: cheka_founded = 1
+max-visits: 1
+go-to: bagmen_menu
+on-arrival: {!
+  Q.internal_expend += 0.45; Q.efficacy_railways -= 0.1; 
+  Q.bagmen_strength -= 8; Q.bagmen_unrest += 10; 
+  Q.cheka_strength += 3; Q.cheka_militancy += 0.3; 
+  Q.left_m_relation -= 5; Q.centre_m_relation -= 5; Q.right_m_relation -= 5;
+  Q.moderate_strength -= 2; Q.leninist_strength += 3; Q.leftcom_strength += 2;
+  Q.moderate_unrest += 3; Q.leninist_unrest -= 5;
+  Q.peasants_strength -= 2; Q.kulaks_strength -= 4;
+  Q.peasants_unrest += 4; Q.kulaks_unrest += 8; 
+  Q.vikzhel_strength -= 5;
+!}
+
+@specialists
+title: Empower technical specialists on the railways and raise salaries to promote talent. 
+subtitle: -0.5 resources – This will be unpopular among unionists and leftists. 
+choose-if: resources >= 0.5
+unavailable-subtitle: -0.5 resources – We lack the resources. 
+max-visits: 1
+go-to: bagmen_menu
+on-arrival: {!
+  Q.resources -= 0.5; Q.railways_expend += 0.25; Q.efficacy_railways += 0.15; 
+  Q.bagmen_strength -= 2; Q.bagmen_unrest += 2; Q.instability += 0.5;
+  Q.cheka_strength -= 1; Q.cheka_militancy -= 0.1; 
+  Q.left_m_relation -= 5; Q.centre_m_relation -= 5; Q.right_m_relation -= 5;
+  Q.moderate_strength += 2; Q.leninist_strength += 3; Q.leftcom_strength -= 2;
+  Q.leftcom_unrest += 8;
+  Q.bourgeois_specialists_strength += 5; Q.bourgeois_specialists_unrest -= 5;
+  Q.vikzhel_strength -= 3; Q.vikzhel_unrest += 10;      
+  Q.unionists_strength -= 2; Q.unionists_unrest += 5;
+!}
+
+
+
+
+
