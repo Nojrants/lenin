@@ -1502,6 +1502,25 @@ Q.lenin_spec = "";
 Q.soviet_support_records = [];
 Q.economic_records = [];
 
+Q.economic_records = [
+    {
+        'date': new Date(1917, 3, 1),
+        'inflation': 5.8,
+        'unemployment': 2,
+        'industry': 100,
+        'hunger': 15,
+        'gdp': 82
+    },
+    {
+        'date': new Date(1917, 11, 1),
+        'inflation': Q.monthly_inflation,
+        'unemployment': Q.unemployed,
+        'industry': 100,
+        'hunger': Q.hunger,
+        'gdp': 53
+    }
+];
+
 !}
 go-to: intros
 
