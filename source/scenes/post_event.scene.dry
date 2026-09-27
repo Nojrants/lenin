@@ -605,6 +605,7 @@ Q.ag_capacity = (Q.ag_land/100)**0.40 * (Q.ag_labor/100)**0.25 * (Q.ag_capital/1
 Q.ag_output = Q.ag_capacity * (0.50 + 0.20*Q.ag_weather/100 + 0.20*Q.ag_transport/100 + 0.10*Q.ag_stability/100);
 Q.ag_gdp = Q.ag_output * 100;
 
+Q.food_sold += ((35 - Q.peasants_unrest)/40000) + ((35 - Q.kulaks_unrest)/30000);
 
 
 // inflation
