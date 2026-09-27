@@ -648,16 +648,16 @@ if (window && d3) {
    var maxGDP = d3.max(Q.economic_records, d => d.gdp);
 
    var lines_gdp = d3.linegraph(
-       true,
-       true,
-       ['gdp'],
-       {'gdp': '#000000'},
-       {'gdp': 'GDP (1913 = 100)'},
-       maxGDP + 5,
-       150,
-       2,
-       1917,
-       2
+      true,
+      true,
+      ['gdp'],
+      {'gdp': '#000000'},
+      {'gdp': 'GDP (1913 = 100)'},
+      150,
+      0,
+      2,
+      1917,
+      2
    );
    
    lines_gdp.width(width).height(300);
