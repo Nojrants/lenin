@@ -9,7 +9,7 @@ Herein contains relevant information about revolutionary Russia in 1917.
 
 @menu
 
-- @economy_graph
+- @goto_economy_graph
 - @government: The structure of the Provisional Government
 - @timeline: Timeline of recent Russian history
 - @soviet_: Details of the Petrograd Soviet
@@ -22,19 +22,9 @@ Herein contains relevant information about revolutionary Russia in 1917.
 - @backSpecialScene: Exit library.
 
 
-@economy_graph
-title: Economic Statistics
-new-page: true
-go-to: menu
+@goto_economy_graph
+go-to: economy_graph
 
-
-= Economic Statistics
-
-<div id="gdp_chart"></div>
-
-<script>
-drawGDPChart();
-</script>
 
 
 @government
