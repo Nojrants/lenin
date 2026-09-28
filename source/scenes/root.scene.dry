@@ -925,7 +925,7 @@ Q.classes = ['elites', 'middle', 'clergy', 'workers', 'peasants', 'kulaks', 'sol
 Q.minorities = ['ukrainians', 'kyrgyz_kazakh', 'tatar', 'other_turkic', 'jews', 'latvians', 'estonians', 'georgians', 'armenians', 'others'];
 Q.major_parties = ['m', 'b', 'sr', 'k'];
 // parties represented in the soviets
-Q.soviet_parties = ['m', 'b', 'sr', 'anarchist', 'other'];
+Q.soviet_parties = ['left_m', 'm', 'right_m', 'sdi', 'b', 'lsr', 'sr', 'anarchist', 'maximalist', 'other'];
 Q.parties = ['anarchist', 'maximalist', 'b', 'sdi', 'left_m', 'm', 'right_m', 'lsr', 'sr', 'right_sr', 'popular_socialist', 'k', 'rightist', 'other', 'none'];
 Q.minority_parties = ['ukrainian_sr', 'alash', 'musavat', 'dashnak', 'jewish_socialists', 'jewish_national_list', 'muslim_socialists', 'turkic_muslim_parties', 'cossacks'];
 
@@ -1500,6 +1500,17 @@ Q.lenin_spec = "";
 // Records of stats
 Q.soviet_support_records = [];
 Q.economic_records = [];
+
+Q.soviet_support_records = [
+    {
+        date: new Date(1917, 6, 3), 
+        b: 18.1,
+        m: 38.4,
+        sr: 37.2,
+        other: 6.2
+    }
+];
+
 
 Q.economic_records = [
     {
