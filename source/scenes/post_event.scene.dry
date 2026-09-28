@@ -1410,11 +1410,22 @@ if (Q.week_actions >= 1 && Q.current_player >= Q.n_players) {
 	        (party_support_results.sdi || 0) +
 			(party_support_results.maximalist || 0) + 
 			(party_support_results.anarchist || 0);
-			party_support_results.sdi = 0;
+		party_support_results.sdi = 0;
 		party_support_results.maximalist = 0;
 		party_support_results.anarchist = 0;
+
+	console.log("party_support_results.sr:", party_support_results.sr);
+	console.log("party_support_results.right_sr:", party_support_results.right_sr);
+	console.log("party_support_results.lsr:", party_support_results.lsr);
+	console.log("party_support_results.left_m:", party_support_results.left_m);
+	console.log("party_support_results.m:", party_support_results.m);
+	console.log("party_support_results.right_m:", party_support_results.right_m);
+	console.log("party_support_results.sdi:", party_support_results.sdi);
+	console.log("party_support_results.anarchist:", party_support_results.anarchist);
+	console.log("party_support_results.maximalist:", party_support_results.maximalist);
     }
     Q.soviet_support_records.push(party_support_results);
+
 
     Q.economic_records.push({'date': new Date(Q.year, Q.month - 1, 1+Q.week*7),
                              'inflation': Q.inflation,
