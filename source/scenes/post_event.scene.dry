@@ -1381,6 +1381,11 @@ if (Q.week_actions >= 1 && Q.current_player >= Q.n_players) {
         Q.month = 1;
         Q.year += 1;
     }
+
+if (Q.year = 1917 && Q.month = 11 && Q.week = 1) Q.gdp_index = 53; 
+if (Q.year = 1917 && Q.month = 11 && Q.week = 2) Q.gdp_index = 49; 
+
+
     // update records
     if (Q.time > 0) {
         var party_support_results = {'date': new Date(Q.year, Q.month - 1, 1+Q.week*7)};
