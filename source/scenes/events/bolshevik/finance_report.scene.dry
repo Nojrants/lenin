@@ -10,12 +10,12 @@ on-arrival: {!
   Q.business_tax_display = Math.round(100 * Q.business_tax)/100;
   Q.monopolies_display = Math.round(100 * Q.monopolies)/100;
   Q.customs_display = Math.round(100 * Q.customs)/100;
-  Q.taxation_display = Q.income_tax_display + Q.property_tax_display + Q.business_tax_display + Q.monopolies_display + Q.customs_display;
+  Q.taxation_display = Math.round(100 * Q.income_tax_display + Q.property_tax_display + Q.business_tax_display + Q.monopolies_display + Q.customs_display)/100;
   Q.government_functions_display = Math.round(100 * Q.government_functions)/100;
 
   Q.interest = 0;
-  for (var debt of Q.debt) {
-      Q.interest += debt.principal * debt.rate;
+  for (var loans of Q.loans) {
+      Q.interest += loans.principal * loans.rate;
   }
   Q.interest += (
       (Q.bonds * (Q.bond_rate / 100)) +
