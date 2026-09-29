@@ -56,11 +56,14 @@ on-arrival: efficacy_enlightenment += 0.1 if efficacy_enlightenment < 1; resourc
 
 @funding
 title: FUNDING
+go-to: funding_menu
 
 >Education:<br>
 >>Lower Schools: [+ lower_school_funding +]<br>
 >>Universities: [+ lower_school_funding +]<br>
 >>Construction: [+ school_construction +]<br>
+
+@funding_menu
 
 - #education_funding
 - @enlightenment_return
@@ -68,12 +71,12 @@ title: FUNDING
 @lower_school_funding
 title: Lower school funding – [+ lower_school_funding +]
 tags: education_funding
-go-to: funding
+go-to: funding_menu
 
 @increase_lower_school_funding
 title: – 🔼 Increase funding
 tags: education_funding
-go-to: funding
+go-to: funding_menu
 choose-if: lower_school_funding < 2
 unavailable-subtitle: Funding is already maxed. 
 on-arrival: {!
@@ -87,7 +90,7 @@ title: – 🔻 Increase funding
 choose-if: lower_school_funding > 0
 unavailable-subtitle: Funding is already non-existent. 
 tags: education_funding
-go-to: funding
+go-to: funding_menu
 on-arrival: {!
   Q.lower_school_funding -= 0.1;
   Q.enlightenment_expend -= 0.1;
@@ -97,12 +100,12 @@ on-arrival: {!
 @school_funding
 title: University funding – [+ school_funding +]
 tags: education_funding
-go-to: funding
+go-to: funding_menu
 
 @increase_school_funding
 title: – 🔼 Increase funding
 tags: education_funding
-go-to: funding
+go-to: funding_menu
 choose-if: school_funding < 2
 unavailable-subtitle: Funding is already maxed. 
 on-arrival: {!
@@ -115,7 +118,7 @@ title: – 🔻 Increase funding
 choose-if: school_funding > 0
 unavailable-subtitle: Funding is already non-existent. 
 tags: education_funding
-go-to: funding
+go-to: funding_menu
 on-arrival: {!
   Q.school_funding -= 0.1; Q.enlightenment_expend -= 0.1; Q.school_loyalty -= 0.05;
   Q.workers_unrest += 1; Q.peasants_unrest += 1; Q.kulaks_unrest += 0.5; Q.middle_unrest += 0.5; Q.intelligentsia_unrest += 2; Q.elites_unrest += 1;
@@ -124,12 +127,12 @@ on-arrival: {!
 @school_construction
 title: Subsidies for school construction – [+ school_construction +]
 tags: education_funding
-go-to: funding
+go-to: funding_menu
 
 @increase_school_construction
 title: – 🔼 Increase funding
 tags: education_funding
-go-to: funding
+go-to: funding_menu
 choose-if: school_construction < 2
 unavailable-subtitle: Funding is already maxed. 
 on-arrival: {!
@@ -142,7 +145,7 @@ title: – 🔻 Increase funding
 choose-if: school_funding > 0
 unavailable-subtitle: Funding is already non-existent. 
 tags: education_funding
-go-to: funding
+go-to: funding_menu
 on-arrival: {!
   Q.school_construction += 0.1; Q.enlightenment_expend += 0.1;
   Q.workers_unrest += 0.5; Q.peasants_unrest += 0.5; Q.kulaks_unrest += 0.25; Q.middle_unrest += 0.25; Q.intelligentsia_unrest += 0.5;
