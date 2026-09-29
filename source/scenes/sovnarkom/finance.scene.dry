@@ -182,7 +182,7 @@ on-arrival: banks_seized = 1; resources += 4; elite_unrest += 5; middle_unrest +
 title: Repudiate all outstanding loans.
 subtitle: This will free-up resources but substantially impact our foreign relations. 
 view-if: repudiation = 0
-choose-if: loans >= 0
+choose-if: Q.loans.length > 0
 unavailable-subtitle: We have no outstanding loans. 
 on-arrival: {!
   Q.repudiation = 1; 
