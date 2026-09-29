@@ -46,7 +46,7 @@ on-arrival: {!
     Q.resources += 1;
   }
   Q.elites_wealth -= 1; Q.resources += 1;
-  Q.capital_flight_progress += 0.5; Q.monthly_inflation *= 0.95; Q.instability += 3;
+  Q.capital_flight_progress += 0.5; Q.monthly_inflation *= 0.95; Q.instability += 2;
   Q.elites_unrest += 5; Q.middle_unrest += 2.5; Q.workers_unrest -= 5; Q.peasants_unrest -= 5; Q.kulaks_unrest -= 5; Q.intelligentsia_unrest += 2; 
 !}
 
