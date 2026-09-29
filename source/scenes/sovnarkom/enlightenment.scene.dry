@@ -14,6 +14,7 @@ The <b>People's Commissariat for Enlightenment</b> (Narkompros) is charged with 
 - @administration
 - @funding
 - @education
+- @enlightenment_null
 - @root: We do not need new policy.
 - @easy_discard
 - @cancel_advisor_action
