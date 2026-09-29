@@ -12,162 +12,98 @@ on-arrival: {!
   Q.customs_display = Math.round(100 * Q.customs)/100;
   Q.taxation_display = Q.income_tax_display + Q.property_tax_display + Q.business_tax_display + Q.monopolies_display + Q.customs_display;
   Q.government_functions_display = Math.round(100 * Q.government_functions)/100;
+
+  Q.interest = 0;
+  for (var debt of Q.debt) {
+      Q.interest += debt.principal * debt.rate;
+  }
+  Q.interest += (
+      (Q.bonds * (Q.bond_rate / 100)) +
+      (Q.bank_advances * 0.02)
+  );
   Q.interest_display = Math.round(100 * Q.interest)/100;
+
   Q.indemnities_display = Math.round(100 * Q.indemnities)/100;
   Q.surplus_display = Math.round(100 * Q.resources + Q.income - Q.expenditure)/100;
+  Q.bond_sale = Math.round(5 - (Q.bonds / 30)); 
 !}
 
 = Financial Report
 
-<table style="width:100%; table-layout:fixed; border-collapse:collapse;">
-<tr>
-
-<td style="width:50%; vertical-align:top; padding:5px;">
-
-  <div style="border:2px solid #666; border-radius:6px; padding:0; margin-bottom:10px; font-size:0.85em; overflow:hidden;">
-    <div style="background:#e8e8e8; border-bottom:1px solid #ccc; padding:4px 6px; font-size:1.2em; line-height:1.2; font-weight:bold; text-align:center; white-space:nowrap;">
-      Macroeconomy
-    </div>
-
-    <div style="padding:3px 8px; line-height:1.2; white-space:nowrap;"><b>Economic Growth</b><span style="float:right;">[+ gdp_growth_display +]</span></div>
-    <div style="padding:3px 8px; line-height:1.2; background:rgba(215,205,180,0.12); white-space:nowrap;"><b>Inflation</b><span style="float:right;">[+ monthly_inflation_disp +]% ([+ inflation_disp +]% p.a.)</span></div>
-    <div style="padding:3px 8px; line-height:1.2; white-space:nowrap;"><b>Unemployment</b><span style="float:right;">[+ unemployment_display +]</span></div>
-    <div style="padding:3px 8px; line-height:1.2; background:rgba(215,205,180,0.12); white-space:nowrap;"><b>National Debt</b><span style="float:right;">[+ national_debt_display +]</span></div>
-    <div style="padding:3px 8px; line-height:1.2; white-space:nowrap;"><b>Budget Balance</b><span style="float:right;">[+ budget_balance_display +]</span></div>
+<div style="display:flex; flex-wrap:wrap; gap:20px; align-items:stretch;">
+  <div style="flex:1; min-width:300px; border:2px solid #666; border-radius:6px; padding:12px;">
+<div style="font-size:1.2em; font-weight:bold; text-align:center; margin-bottom:8px;">
+  Revenue
+</div>
+<hr>
+<b>Total Revenue</b> — <span style="color: var(--level1-color);">[+ income +]</span>
+<hr>
+<b>Taxation</b> — <span style="color: var(--level1-color);">[+ taxation_display +]</span>
+<ul style="margin-top:6px; margin-bottom:0; padding-left:20px;">
+  <li style="margin-bottom:4px;">Income Tax: <span style="color: var(--level1-color);">[+ income_tax_display +]</span></li>
+  <li style="margin-bottom:4px;">Property Tax: <span style="color: var(--level1-color);">[+ property_tax_display +]</span></li>
+  <li style="margin-bottom:4px;">Business Tax: <span style="color: var(--level1-color);">[+ business_tax_display +]</span></li>
+  <li style="margin-bottom:4px;">Monopolies: <span style="color: var(--level1-color);">[+ monopolies_display +]</span></li>
+  <li style="margin-bottom:0;">Customs Duties: <span style="color: var(--level1-color);">[+ customs_display +]</span></li>
+</ul>
+<br>
+<b>State Enterprises</b> — <span style="color: var(--level1-color);">[+ (railway_revenue + enterprises_revenue) +]</span>
+<ul style="margin-top:6px; margin-bottom:0; padding-left:20px;">
+  <li style="margin-bottom:8px;">Railways: <span style="color: var(--level1-color);">[+ railway_revenue +]</span></li>
+  <li style="margin-bottom:0;">Other Enterprises: <span style="color: var(--level1-color);">[+ enterprises_revenue +]</span></li>
+</ul>
   </div>
-
-  <div style="border:2px solid #666; border-radius:6px; padding:0; margin-bottom:10px; font-size:0.85em; overflow:hidden;">
-    <div style="background:#e8e8e8; border-bottom:1px solid #ccc; padding:4px 6px; font-size:1.2em; line-height:1.2; font-weight:bold; text-align:center; white-space:nowrap;">
-      Production
-    </div>
-
-    <div style="padding:3px 8px; line-height:1.2; white-space:nowrap;"><b>Industrial Output</b><span style="float:right;">[+ industrial_output_display +]</span></div>
-    <div style="padding:3px 8px; line-height:1.2; background:rgba(215,205,180,0.12); white-space:nowrap;"><b>Agricultural Output</b><span style="float:right;">[+ agricultural_output_display +]</span></div>
-    <div style="padding:3px 8px; line-height:1.2; white-space:nowrap;"><b>Factory Utilization</b><span style="float:right;">[+ factory_utilization_display +]</span></div>
-    <div style="padding:3px 8px; line-height:1.2; background:rgba(215,205,180,0.12); white-space:nowrap;"><b>Rail Capacity</b><span style="float:right;">[+ rail_capacity_display +]</span></div>
+  <div style="flex:1; min-width:300px; border:2px solid #666; border-radius:6px; padding:12px;">
+<div style="font-size:1.2em; font-weight:bold; text-align:center; margin-bottom:8px;">
+  Expenditure
+</div>
+<hr>
+<b>Total Expenditure</b> — <span style="color: var(--level7-color);">[+ expenditure +]</span>
+<hr>
+<b>Government Functions</b> — <span style="color: var(--level7-color);">[+ government_functions_display +]</span>
+<ul style="margin-top:6px; margin-bottom:0; padding-left:20px;">
+  <li style="margin-bottom:4px;">Sovnarkom: <span style="color: var(--level7-color);">[+ sovnarkom_expend +]</span></li>
+  <li style="margin-bottom:4px;">Foreign Affairs: <span style="color: var(--level7-color);">[+ foreignaffairs_expend +]</span></li>
+  <li style="margin-bottom:4px;">Military: <span style="color: var(--level7-color);">[+ military_expend +]</span></li>
+  <li style="margin-bottom:4px;">Enlightenment: <span style="color: var(--level7-color);">[+ enlightenment_expend +]</span></li>
+  <li style="margin-bottom:4px;">Internal Affairs: <span style="color: var(--level7-color);">[+ internal_expend +]</span></li>
+  <li style="margin-bottom:4px;">Railways: <span style="color: var(--level7-color);">[+ railways_expend +]</span></li>
+  <li style="margin-bottom:4px;">Trade: <span style="color: var(--level7-color);">[+ trade_expend +]</span></li>
+  <li style="margin-bottom:4px;">Finance: <span style="color: var(--level7-color);">[+ finance_expend +]</span></li>
+  <li style="margin-bottom:4px;">Justice: <span style="color: var(--level7-color);">[+ justice_expend +]</span></li>
+  <li style="margin-bottom:4px;">Labor: <span style="color: var(--level7-color);">[+ labor_expend +]</span></li>
+  <li style="margin-bottom:4px;">Agriculture: <span style="color: var(--level7-color);">[+ agriculture_expend +]</span></li>
+  <li style="margin-bottom:4px;">Food Supply: <span style="color: var(--level7-color);">[+ foodsupply_expend +]</span></li>
+  <li style="margin-bottom:4px;">Nationalities: <span style="color: var(--level7-color);">[+ nationalities_expend +]</span></li>
+  <li style="margin-bottom:0;">Welfare: <span style="color: var(--level7-color);">[+ welfare_expend +]</span></li>
+</ul>
+<hr>
+<b>Other Obligations</b> — <span style="color: var(--level7-color);">[+ (interest_display + indemnities_display) +]</span>
+<ul style="margin-top:6px; margin-bottom:0; padding-left:20px;">
+  <li style="margin-bottom:8px;">Interest Payments: <span style="color: var(--level7-color);">[+ interest_display +]</span></li>
+  <li style="margin-bottom:0;">Indemnities: <span style="color: var(--level7-color);">[+ indemnities_display +]</span></li>
+</ul>
   </div>
-
-  <div style="border:2px solid #666; border-radius:6px; padding:0; font-size:0.85em; overflow:hidden;">
-    <div style="background:#e8e8e8; border-bottom:1px solid #ccc; padding:4px 6px; font-size:1.2em; line-height:1.2; font-weight:bold; text-align:center; white-space:nowrap;">
-      Balance of Payments
-    </div>
-
-    <div style="display:flex; gap:4px; padding:0 3px; border-bottom:1px solid #666;">
-      <div style="flex:1; min-width:0; padding:3px 0; text-align:center; font-weight:bold; white-space:nowrap;">
-        Current Account
-      </div>
-      <div style="flex:1; min-width:0; padding:3px 0; text-align:center; font-weight:bold; white-space:nowrap;">
-        Capital Account
-      </div>
-    </div>
-
-    <div style="display:flex; align-items:flex-start; gap:4px; padding:0 3px 4px 3px;">
-
-      <div style="flex:1; min-width:0;">
-        <div style="padding:3px 0; white-space:nowrap; border-bottom:1px dotted #aaa;">Merchandise Exports<span style="float:right;">[+ exports_display +]</span></div>
-        <div style="padding:3px 0; white-space:nowrap; background:rgba(215,205,180,0.12); border-bottom:1px dotted #aaa;">Merchandise Imports<span style="float:right;">[+ imports_display +]</span></div>
-        <div style="padding:3px 0; white-space:nowrap; border-bottom:1px dotted #aaa;">Trade Balance<span style="float:right;">[+ trade_balance_display +]</span></div>
-        <div style="padding:3px 0; white-space:nowrap; background:rgba(215,205,180,0.12); border-bottom:1px dotted #aaa;">Services &amp; Income, Net<span style="float:right;">[+ services_income_display +]</span></div>
-        <div style="padding:4px 0; white-space:nowrap; border-top:2px solid #666;"><b>Current Account</b><span style="float:right;">[+ current_account_display +]</span></div>
-      </div>
-
-      <div style="flex:1; min-width:0;">
-        <div style="padding:3px 0; white-space:nowrap; border-bottom:1px dotted #aaa;">Long-Term Capital, Net<span style="float:right;">[+ long_term_capital_display +]</span></div>
-        <div style="padding:3px 0; white-space:nowrap; background:rgba(215,205,180,0.12); border-bottom:1px dotted #aaa;">Short-Term Capital, Net<span style="float:right;">[+ short_term_capital_display +]</span></div>
-        <div style="padding:4px 0; white-space:nowrap; border-top:2px solid #666;"><b>Capital Account</b><span style="float:right;">[+ capital_account_display +]</span></div>
-        <div style="padding:3px 0; white-space:nowrap; background:rgba(215,205,180,0.12); border-bottom:1px dotted #aaa;">Errors &amp; Omissions<span style="float:right;">[+ errors_omissions_display +]</span></div>
-        <div style="padding:4px 0; white-space:nowrap;"><b>Change in Reserves</b><span style="float:right;">[+ reserve_change_display +]</span></div>
-      </div>
-
-    </div>
+  <div style="flex-basis:100%; border:2px solid #666; border-radius:6px; padding:12px;">
+<div style="display:flex; justify-content:space-between; margin:8px 20px;">
+  <b>Treasury</b>
+  [+ resources +]
+</div>
+<div style="display:flex; justify-content:space-between; margin:8px 20px;">
+  <b>Total Revenue</b>
+  <span style="color: var(--level1-color);">+ [+ income +]</span>
+</div>
+<div style="display:flex; justify-content:space-between; margin:8px 20px;">
+  <b>Total Expenditure</b>
+  <span style="color: var(--level7-color);">- [+ expenditure +]</span>
+</div>
+<hr>
+<div style="display:flex; justify-content:space-between; margin:8px 20px; font-size:1.1em;">
+  <b>Surplus / Deficit</b>
+  <span>[?if surplus_display > 0 : <span style="color: var(--level1-color);">+ [+ surplus_display +]</span>?][?if surplus_display < 0 : <span style="color: var(--level7-color);">- [+ surplus_display +]</span>?][?if surplus_display == 0 : [+ surplus_display +] ?]</span>
+</div>
   </div>
-
-</td>
-
-<td style="width:50%; vertical-align:top; padding:5px;">
-
-  <div style="border:2px solid #666; border-radius:6px; padding:0; margin-bottom:10px; font-size:0.85em; overflow:hidden;">
-
-    <div style="background:#e8e8e8; border-bottom:1px solid #ccc; padding:4px 6px; font-size:1.2em; line-height:1.2; font-weight:bold; text-align:center; white-space:nowrap;">
-      Budget
-    </div>
-
-    <div style="display:flex; gap:4px; padding:0 3px; border-bottom:1px solid #666;">
-      <div style="flex:1; min-width:0; padding:3px 0; text-align:center; font-weight:bold; white-space:nowrap;">
-        Revenue
-      </div>
-      <div style="flex:1; min-width:0; padding:3px 0; text-align:center; font-weight:bold; white-space:nowrap;">
-        Expenditure
-      </div>
-    </div>
-
-    <div style="display:flex; align-items:flex-start; gap:4px; padding:0 3px;">
-
-      <div style="flex:1; min-width:0;">
-        <div style="padding:3px 0; white-space:nowrap; border-bottom:1px dotted #aaa;">Income Tax<span style="float:right;">[+ income_tax_display +]</span></div>
-        <div style="padding:3px 0; white-space:nowrap; border-bottom:1px dotted #aaa;">Property Tax<span style="float:right;">[+ property_tax_display +]</span></div>
-        <div style="padding:3px 0; white-space:nowrap; border-bottom:1px dotted #aaa;">Business Tax<span style="float:right;">[+ business_tax_display +]</span></div>
-        <div style="padding:3px 0; white-space:nowrap; border-bottom:1px dotted #aaa;">Monopolies<span style="float:right;">[+ monopolies_display +]</span></div>
-        <div style="padding:3px 0; white-space:nowrap; border-bottom:1px dotted #aaa;">Customs<span style="float:right;">[+ customs_display +]</span></div>
-        <div style="padding:3px 0; white-space:nowrap; border-bottom:1px dotted #aaa;">Railways<span style="float:right;">[+ railway_revenue +]</span></div>
-        <div style="padding:3px 0; white-space:nowrap;">Enterprises<span style="float:right;">[+ enterprises_revenue +]</span></div>
-      </div>
-
-      <div style="flex:1; min-width:0;">
-        <div style="padding:3px 0; white-space:nowrap; border-bottom:1px dotted #aaa;">Government<span style="float:right;">[+ government_functions_display +]</span></div>
-
-        <div style="padding:2px 0 2px 8px; white-space:nowrap; border-bottom:1px dotted #aaa;">Sovnarkom<span style="float:right;">[+ sovnarkom_expend +]</span></div>
-        <div style="padding:2px 0 2px 8px; white-space:nowrap; border-bottom:1px dotted #aaa;">Foreign Affairs<span style="float:right;">[+ foreignaffairs_expend +]</span></div>
-        <div style="padding:2px 0 2px 8px; white-space:nowrap; border-bottom:1px dotted #aaa;">Military<span style="float:right;">[+ military_expend +]</span></div>
-        <div style="padding:2px 0 2px 8px; white-space:nowrap; border-bottom:1px dotted #aaa;">Enlightenment<span style="float:right;">[+ enlightenment_expend +]</span></div>
-        <div style="padding:2px 0 2px 8px; white-space:nowrap; border-bottom:1px dotted #aaa;">Internal Affairs<span style="float:right;">[+ internal_expend +]</span></div>
-        <div style="padding:2px 0 2px 8px; white-space:nowrap; border-bottom:1px dotted #aaa;">Railways<span style="float:right;">[+ railways_expend +]</span></div>
-        <div style="padding:2px 0 2px 8px; white-space:nowrap; border-bottom:1px dotted #aaa;">Trade<span style="float:right;">[+ trade_expend +]</span></div>
-        <div style="padding:2px 0 2px 8px; white-space:nowrap; border-bottom:1px dotted #aaa;">Finance<span style="float:right;">[+ finance_expend +]</span></div>
-        <div style="padding:2px 0 2px 8px; white-space:nowrap; border-bottom:1px dotted #aaa;">Justice<span style="float:right;">[+ justice_expend +]</span></div>
-        <div style="padding:2px 0 2px 8px; white-space:nowrap; border-bottom:1px dotted #aaa;">Labor<span style="float:right;">[+ labor_expend +]</span></div>
-        <div style="padding:2px 0 2px 8px; white-space:nowrap; border-bottom:1px dotted #aaa;">Agriculture<span style="float:right;">[+ agriculture_expend +]</span></div>
-        <div style="padding:2px 0 2px 8px; white-space:nowrap; border-bottom:1px dotted #aaa;">Food Supply<span style="float:right;">[+ foodsupply_expend +]</span></div>
-        <div style="padding:2px 0 2px 8px; white-space:nowrap; border-bottom:1px dotted #aaa;">Nationalities<span style="float:right;">[+ nationalities_expend +]</span></div>
-        <div style="padding:2px 0 2px 8px; white-space:nowrap; border-bottom:1px dotted #aaa;">Welfare<span style="float:right;">[+ welfare_expend +]</span></div>
-
-        <div style="padding:3px 0; white-space:nowrap; border-bottom:1px dotted #aaa;">Interest<span style="float:right;">[+ interest_display +]</span></div>
-        <div style="padding:3px 0; white-space:nowrap;">Indemnities<span style="float:right;">[+ indemnities_display +]</span></div>
-      </div>
-
-    </div>
-
-    <div style="display:flex; gap:4px; padding:0 3px 4px 3px; border-top:2px solid #666;">
-
-      <div style="flex:1; min-width:0; padding:4px 0; white-space:nowrap;">
-        <b>Total Revenue</b><span style="float:right;">[+ income +]</span>
-      </div>
-
-      <div style="flex:1; min-width:0; padding:4px 0; white-space:nowrap;">
-        <b>Total Expenditure</b><span style="float:right;">[+ expenditure +]</span>
-      </div>
-
-    </div>
-
-  </div>
-
-  <div style="border:2px solid #666; border-radius:6px; padding:0; margin-bottom:10px; font-size:0.85em; overflow:hidden;">
-    <div style="background:#e8e8e8; border-bottom:1px solid #ccc; padding:4px 6px; font-size:1.2em; line-height:1.2; font-weight:bold; text-align:center; white-space:nowrap;">
-      Labour
-    </div>
-    <!-- Labour metrics go here -->
-  </div>
-
-  <div style="border:2px solid #666; border-radius:6px; padding:0; font-size:0.85em; overflow:hidden;">
-    <div style="background:#e8e8e8; border-bottom:1px solid #ccc; padding:4px 6px; font-size:1.2em; line-height:1.2; font-weight:bold; text-align:center; white-space:nowrap;">
-      Economic Conditions
-    </div>
-    <!-- Economic Conditions metrics go here -->
-  </div>
-
-</td>
-</tr>
-</table>
+</div>
 
 
 
@@ -204,13 +140,19 @@ tags: budget_balancing
 on-arrival: resources += 5; bank_advances += 5; monthly_inflation += (1.2 * (instability/25)); instability += 0.25;
 go-to: finance_report
 
-
 @emergency_bonds
 title: Issue emergency bonds
-subtitle: +5 resources
+subtitle: +[+ bond_sale +] resources – Existing debt lowers bond sales. 
 tags: budget_balancing
-on-arrival: bonds += 5; resources += 5; instability += 0.5; monthly_inflation += (1.2 * (instability/50)); bond_rate += 1 if bonds > 90; bond_rate += 0.5 if ((bonds < 90) and (bonds > 60)); bond_rate += 0.25 if bonds < 60; 
 go-to: finance_report
+on-arrival: {!
+  Q.bonds += Q.bond_sale; Q.resources += Q.bond_sale;
+  Q.bond_sale = Math.max(1, Math.round(5 - (Q.bonds / 30))); 
+  Q.instability += 0.5; Q.monthly_inflation += (1.2 * (Q.instability/50));
+  if (Q.bonds > 90) Q.bond_rate += 1;
+  if ((Q.bonds < 90) && (Q.bonds > 60)) Q.bond_rate += 0.5;
+  if (bonds < 60) bond_rate += 0.25; 
+!}
 
 @emergency_loans
 title: Seek-out foreign loans
@@ -218,12 +160,109 @@ go-to: emergency_loans_menu
 tags: budget_balancing
 
 @emergency_loans_menu
+on-arrival: {!
+  Q.uk_offer = Math.max(0, Math.round((Q.uk_relation / 10) - ((Q.loans_high + Q.loans_med + Q.loans_l0) / 10)));
+  Q.uk_rate = Math.max(3, Math.round(((Q.loans_high + Q.loans_med + Q.loans_l0) / 1.5) - (Q.uk_relation / 25) + (Q.instability /40)));
+!}
 
+- #emergency_loans
 - @cancel_loans
+
+@emergency_loan_uk
+title: United Kingdom
+subtitle: +[+ uk_offer +] at [+ uk_rate +]% interest rate. 
+unavailable-subtitle: They are unwilling to loan to us right now. 
+choose-if: uk_relation > 50 and uk_offer > 0
+tags: emergency_loans
+go-to: emergency_loans_menu
+on-arrival: {!
+  Q.uk_relation -= 5; 
+  Q.resources += uk_offer;
+  Q.debt.push({
+    principal: Q.uk_offer,
+    rate: Q.uk_rate,
+    lender: "Britain"
+  });
+!}
+
+
 
 @cancel_loans
 title: Cancel action
 go-to: budget_balancing_menu
+
+
+@organize_expropriations
+title: Conduct emergency expropriations from the elites. 
+choose-if: elites_wealth > 5
+unavailable-subtitle: There is nothing left to expropriate. 
+tags: budget_balancing
+go-to: finance_report
+on-arrival: {!
+  if (Q.elites_wealth >= 30) {
+    Q.elites_wealth -= 2;
+    Q.resources += 1;
+  }
+  if (Q.elites_wealth >= 20) {
+    Q.elites_wealth -= 2;
+    Q.resources += 1;
+  }
+  if (Q.elites_wealth >= 10) {
+    Q.elites_wealth -= 1;
+    Q.resources += 1;
+  }
+  if (Q.middle_wealth >= 20) {
+    Q.middle_wealth -= 2;
+    Q.resources += 1;
+  }
+  Q.elites_wealth -= 1; Q.resources += 1;
+  Q.capital_flight_progress += 0.5; Q.monthly_inflation *= 0.95; Q.instability += 2;
+  Q.elites_unrest += 5; Q.middle_unrest += 2.5; Q.workers_unrest -= 5; Q.peasants_unrest -= 5; Q.kulaks_unrest -= 5; Q.intelligentsia_unrest += 2; 
+!}
+
+@raise_taxes 
+title: Raise current taxation rates across the board. 
+choose-if: finance_minister_party = "Bolshevik"
+unavailable-subtitle: We don't control financial policy. 
+tags: budget_balancing
+go-to: finance_report
+on-arrival: {!
+  Q.wealth_tax_rate += 0.5; Q.business_tax_rate += 0.5; 
+  Q.income_tax_rate_1 += 0.5; Q.income_tax_rate_2 += 0.5; Q.income_tax_rate_3 += 0.5; Q.income_tax_rate_4 += 0.5; Q.income_tax_rate_5 += 0.5;
+  Q.capital_flight_progress += 0.5; Q.monthly_inflation *= 0.85;
+  if (Q.income_tax_rate_1 >= 2.5) Q.capital_flight_progress += 1;
+  Q.elites_unrest += 2.5; Q.middle_unrest += 2.5; Q.workers_unrest += 5; Q.peasants_unrest += 5; Q.kulaks_unrest += 5;
+!}
+
+@slash_welfare
+title: Cut funding for welfare programs.  
+choose-if: welfare_minister_party = "Bolshevik" and welfare_expend > 0.25
+unavailable-subtitle: [?if welfare_minister_party != "Bolshevik" : We don't control welfare policy. ?][?if welfare_expend <= 0.25 : Welfare is already negligable. ?]
+tags: budget_balancing
+go-to: finance_report
+on-arrival: {!
+  Q.welfare_expend *= 0.5; 
+  Q.workers_unrest += 5; Q.underclass_unrest += 10;
+  Q.monthly_inflation *= 0.9;
+!}
+
+@austerity
+title: Impose a program of full austerity.
+subtitle: Raise taxes, cut government spending.
+view-if: prime_minister_party = "Bolshevik" or finance_minister_party = "Bolshevik"
+tags: budget_balancing
+go-to: finance_report
+on-arrival: {!
+  Q.wealth_tax_rate += 0.25; Q.business_tax_rate += 0.25; 
+  Q.income_tax_rate_1 += 0.25; Q.income_tax_rate_2 += 0.25; Q.income_tax_rate_3 += 0.25; Q.income_tax_rate_4 += 0.25; Q.income_tax_rate_5 += 0.25;
+  Q.capital_flight_progress += 0.25; Q.train_capacity *= 0.999; 
+  Q.elites_unrest += 2.5; Q.middle_unrest += 2.5; Q.workers_unrest += 5; Q.peasants_unrest += 5; Q.kulaks_unrest += 5;
+  Q.efficacy_finance -= 0.1; Q.efficacy_foreign -= 0.1; Q.efficacy_military -= 0.1; Q.efficacy_enlightenment -= 0.1; Q.efficacy_internal -= 0.1; Q.efficacy_railways -= 0.1; Q.efficacy_trade -= 0.1; Q.efficacy_justice -= 0.1; Q.efficacy_agriculture -= 0.1; Q.efficacy_foodsupply -= 0.1; Q.efficacy_nationalities -= 0.1; Q.efficacy_welfare -= 0.1;
+  Q.foreignaffairs_expend -= 0.25; Q.military_expend -= 0.25; Q.enlightmenet_expend -= 0.25; Q.railways_expend -= 0.25; Q.trade_expend -= 0.25; Q.finance_expend -= 0.25; Q.justice_expend -= 0.25; Q.agriculture_expend -= 0.25; Q.foodsupply_expend -= 0.25; Q.nationalities_expend -= 0.25;
+  Q.welfare_expend *= 0.5;
+  Q.monthly_inflation *= 0.8; 
+!}
+
 
 
 
