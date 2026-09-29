@@ -1382,8 +1382,8 @@ if (Q.week_actions >= 1 && Q.current_player >= Q.n_players) {
         Q.year += 1;
     }
 
-if (Q.year = 1917 && Q.month = 11 && Q.week = 1) Q.gdp_index = 53; 
-if (Q.year = 1917 && Q.month = 11 && Q.week = 2) Q.gdp_index = 49; 
+if (Q.year == 1917 && Q.month == 11 && Q.week == 1) Q.gdp_index = 53; 
+if (Q.year == 1917 && Q.month == 11 && Q.week == 2) Q.gdp_index = 49; 
 
 
     // update records
