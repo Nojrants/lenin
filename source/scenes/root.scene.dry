@@ -371,13 +371,86 @@ Q.income_tax_efficacy = 0.3;
 Q.wealth_tax_efficacy = 0.5; 
 Q.business_tax_efficacy = 0.7; 
 
-Q.loans_high = 14;
-Q.loans_med = 6;
-Q.loans_low = 6;
+// Q.loans_high = 14;
+// Q.loans_med = 6;
+// Q.loans_low = 6;
 Q.bonds = 30;
 Q.bond_rate = 5; 
 Q.bank_advances = 0;
 Q.indemnities = 0;
+
+Q.loans = [
+    {
+        principal: 1.5,
+        rate: 0.16,
+        lender: "Britain"
+    },
+    {
+        principal: 1.5,
+        rate: 0.12,
+        lender: "Britain"
+    },
+    {
+        principal: 2.5,
+        rate: 0.08,
+        lender: "Britain"
+    },
+    {
+        principal: 1,
+        rate: 0.05,
+        lender: "Britain"
+    },
+    {
+        principal: 0.5,
+        rate: 0.16,
+        lender: "France"
+    },
+    {
+        principal: 1.5,
+        rate: 0.08,
+        lender: "France"
+    },
+    {
+        principal: 2.5,
+        rate: 0.04,
+        lender: "France"
+    },
+    {
+        principal: 0.5,
+        rate: 0.12,
+        lender: "USA"
+    },
+    {
+        principal: 0.25,
+        rate: 0.12,
+        lender: "Japan"
+    },
+    {
+        principal: 0.1,
+        rate: 0.15,
+        lender: "Italy"
+    },
+    {
+        principal: 3,
+        rate: 0.16,
+        lender: "Russia"
+    },
+    {
+        principal: 5,
+        rate: 0.12,
+        lender: "Russia"
+    },
+    {
+        principal: 6,
+        rate: 0.08,
+        lender: "Russia"
+    },
+    {
+        principal: 10,
+        rate: 0.04,
+        lender: "Russia"
+    }
+];
 
 Q.monopolies = 2;
 Q.customs = 2;
