@@ -1212,8 +1212,8 @@ if (Q.bagmen_tax == 1) {
 
 
 Q.interest = 0;
-for (var debt of Q.debt) {
-    Q.interest += debt.principal * debt.rate;
+for (var debt of Q.loans) {
+    Q.interest += loans.principal * loans.rate;
 }
 
 Q.interest += (
