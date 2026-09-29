@@ -13,8 +13,17 @@ on-arrival: {!
   Q.customs_display = Math.round(100 * Q.customs)/100;
   Q.taxation_display = Q.income_tax_display + Q.property_tax_display + Q.business_tax_display + Q.monopolies_display + Q.customs_display;
   Q.government_functions_display = Math.round(100 * Q.government_functions)/100;
+  Q.interest = 0;
+  for (var loans of Q.loans) {
+      Q.interest += loans.principal * loans.rate;
+  }
+  Q.interest += (
+      (Q.bonds * (Q.bond_rate / 100)) +
+      (Q.bank_advances * 0.02)
+  );
   Q.interest_display = Math.round(100 * Q.interest)/100;
   Q.indemnities_display = Math.round(100 * Q.indemnities)/100;
+
 !}
 
 = Fiscal Policy
@@ -175,7 +184,14 @@ subtitle: This will free-up resources but substantially impact our foreign relat
 view-if: repudiation = 0
 choose-if: loans >= 0
 unavailable-subtitle: We have no outstanding loans. 
-on-arrival: repudiation = 1; loans_high = 0; loans_med = 0; loans_low = 0; bonds *= 0.65; uk_relation -= 35; france_relation -= 40; usa_relation -= 35; italy_relation -= 30; japan_relation -= 30; germany_relation -= 5; austria_relation -= 5; ottoman_relation -= 5; instability += 10; monthly_inflation += 0.5; capital_flight_progress += 1; 
+on-arrival: {!
+  Q.repudiation = 1; 
+  Q.loans = Q.loans.filter(function(loan) { return loan.lender == "Russia"; });
+  Q.bonds *= 0.65;
+  Q.uk_relation -= 35; Q.france_relation -= 40; Q.usa_relation -= 35; Q.italy_relation -= 30;
+  Q.japan_relation -= 30; Q.germany_relation -= 5; Q.austria_relation -= 5; Q.ottoman_relation -= 5;
+  Q.instability += 10; Q.monthly_inflation += 0.5; Q.capital_flight_progress += 1; 
+!}
 
 @finance_return
 title: Cancel action
