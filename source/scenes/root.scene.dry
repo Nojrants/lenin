@@ -1514,12 +1514,20 @@ Q.soviet_support_records = [
 
 Q.economic_records = [
     {
+        'date': new Date(1917, 1, 1),
+        'inflation': 3.5,
+        'unemployment': 1.8,
+        'industry': 100,
+        'hunger': 5,
+        'gdp': 84
+    },
+    {
         'date': new Date(1917, 3, 1),
         'inflation': 5.8,
         'unemployment': 2,
         'industry': 100,
         'hunger': 15,
-        'gdp': 82
+        'gdp': 79
     },
     {
         'date': new Date(1917, 10, 4),
