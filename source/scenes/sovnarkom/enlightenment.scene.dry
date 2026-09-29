@@ -9,9 +9,18 @@ card-image: img/culture.PNG
 
 = Enlightenment
 
-Text
+The <b>People's Commissariat for Enlightenment</b> (Narkompros) is charged with administration of public education, cultural affairs, and the arts. 
 
-- @enlightenment_recruitment
+- @administration
+- @funding
+- @education
+
+
+
+
+
+
+enlightenment_recruitment
 - @rabfaki
 - @found_party_schools
 - @sponsor_colleges
@@ -22,7 +31,7 @@ Text
 - @easy_discard
 - @cancel_advisor_action
 
-@enlightenment_cancel
+@enlightenment_return
 title: Cancel action
 go-to: enlightenment
 
@@ -30,38 +39,196 @@ go-to: enlightenment
 title: ------------------------------------------------------------------------
 go-to: enlightenment
 
-@enlightenment_recruitment
-title: Recruit administrative staff.
-on-arrival: enlightenment_expend += 0.1; 
+
+@administration
+title: ADMINISTRATION
+
+- @improve_admin
+- @hire_staff
+- @corruption
+- @enlightenment_return
+
+@improve_admin
+title: Streamline the commissariat
+subtitle: Cut waste and inefficiencies, increase labor intensity
+choose-if: enlightenment_corruption = 0
+unavailable-subtitle: There's nothing more to cut at the moment. 
+on-arrival: enlightenment_expend -= 0.25; efficacy_enlightenment += 0.1 if efficacy_enlightenment < 1; enlightenment_streamline += 8; 
+
+@hire_staff
+title: Hire administrative personnel
+subtitle: -0.5 resources
+on-arrival: efficacy_enlightenment += 0.2 if efficacy_enlightenment < 1; enlightenment_expend += 0.25; resources -= 0.5;
+
+@corruption
+title: Root-out departmental corruption. 
+subtitle: -0.5 resources
+on-arrival: efficacy_enlightenment += 0.1 if efficacy_enlightenment < 1; resources -= 0.5;
 
 
-@rabfaki
-title: Found a network of worker educational centres. 
+@funding
+title: FUNDING
+
+>Education:<br>
+>>Lower Schools: [+ lower_school_funding +]<br>
+>>Universities: [+ lower_school_funding +]<br>
+>>Construction: [+ school_construction +]<br>
+
+- #education_funding
+- @enlightenment_return
+
+@lower_school_funding
+title: Lower school funding – [+ lower_school_funding +]
+tags: education_funding
+go-to: funding
+
+@increase_lower_school_funding
+title: – 🔼 Increase funding
+tags: education_funding
+go-to: funding
+choose-if: lower_school_funding < 2
+unavailable-subtitle: Funding is already maxed. 
+on-arrival: {!
+  Q.lower_school_funding += 0.1;
+  Q.enlightenment_expend += 0.1;
+  Q.workers_unrest -= 2; Q.peasants_unrest -= 2; Q.kulaks_unrest -= 1.5; Q.middle_unrest -= 1.5;
+!}
+
+@decrease_lower_school_funding
+title: – 🔻 Increase funding
+choose-if: lower_school_funding > 0
+unavailable-subtitle: Funding is already non-existent. 
+tags: education_funding
+go-to: funding
+on-arrival: {!
+  Q.lower_school_funding -= 0.1;
+  Q.enlightenment_expend -= 0.1;
+  Q.workers_unrest += 2; Q.peasants_unrest += 2; Q.kulaks_unrest += 1.5; Q.middle_unrest += 1.5;
+!}
+
+@school_funding
+title: University funding – [+ school_funding +]
+tags: education_funding
+go-to: funding
+
+@increase_school_funding
+title: – 🔼 Increase funding
+tags: education_funding
+go-to: funding
+choose-if: school_funding < 2
+unavailable-subtitle: Funding is already maxed. 
+on-arrival: {!
+  Q.school_funding += 0.1; Q.enlightenment_expend += 0.1; Q.school_loyalty += 0.05;
+  Q.workers_unrest -= 1; Q.peasants_unrest -= 1; Q.kulaks_unrest -= 0.5; Q.middle_unrest -= 0.5; Q.intelligentsia_unrest -= 2; Q.elites_unrest -= 1;
+!}
+
+@decrease_school_funding
+title: – 🔻 Increase funding
+choose-if: school_funding > 0
+unavailable-subtitle: Funding is already non-existent. 
+tags: education_funding
+go-to: funding
+on-arrival: {!
+  Q.school_funding -= 0.1; Q.enlightenment_expend -= 0.1; Q.school_loyalty -= 0.05;
+  Q.workers_unrest += 1; Q.peasants_unrest += 1; Q.kulaks_unrest += 0.5; Q.middle_unrest += 0.5; Q.intelligentsia_unrest += 2; Q.elites_unrest += 1;
+!}
+
+@school_construction
+title: Subsidies for school construction – [+ school_construction +]
+tags: education_funding
+go-to: funding
+
+@increase_school_construction
+title: – 🔼 Increase funding
+tags: education_funding
+go-to: funding
+choose-if: school_construction < 2
+unavailable-subtitle: Funding is already maxed. 
+on-arrival: {!
+  Q.school_construction += 0.1; Q.enlightenment_expend += 0.1;
+  Q.workers_unrest -= 0.5; Q.peasants_unrest -= 0.5; Q.kulaks_unrest -= 0.25; Q.middle_unrest -= 0.25; Q.intelligentsia_unrest -= 0.5;
+!}
+
+@decrease_school_construction
+title: – 🔻 Increase funding
+choose-if: school_funding > 0
+unavailable-subtitle: Funding is already non-existent. 
+tags: education_funding
+go-to: funding
+on-arrival: {!
+  Q.school_construction += 0.1; Q.enlightenment_expend += 0.1;
+  Q.workers_unrest += 0.5; Q.peasants_unrest += 0.5; Q.kulaks_unrest += 0.25; Q.middle_unrest += 0.25; Q.intelligentsia_unrest += 0.5;
+!}
+
+
+
+
+@education
+title: EDUCATION
+
+- #education_options
+- @enlightenment_return
+
+
+@literacy
+title: Launch a mass campaign to eradicate illiteracy. 
 subtitle: -2 resources, +0.5 expenditure
 choose-if: resources >= 2
 unavailable-subtitle: -2 resources - We lack the necessary resources. 
-on-arrival: resources -= 2; enlightenment_expend += 0.5;
+tags: education_options
+on-arrival: {!
+  Q.resources -= 2; Q.enlightenment_expend += 0.5; 
+  Q.urban_schools += 50; Q.rural_schools += 100; 
+  Q.instability -= 1; Q.disillusionment -= 5;
+  Q.workers_unrest -= 5; Q.peasants_unrest -= 10; Q.kulaks_unrest -= 5; Q.intelligentsia_unrest -= 5; 
+!}
 
-@found_party_schools
-title: Found a party school to train the next generation of Bolshevik leaders. 
-subtitle: -2 resources
+@rabfaki
+title: Found a network of "rabfaki", or worker educational centres. 
+subtitle: -2 resources, +0.5 expenditure
 choose-if: resources >= 2
 unavailable-subtitle: -2 resources - We lack the necessary resources. 
-on-arrival: party_school = 1; resouces -= 2; enlightenment_expend += 0.25;
-
+tags: education_options
+max-visits: 1
+on-arrival: {!
+  Q.resources -= 2; Q.enlightenment_expend += 0.5;
+  Q.urban_schools += 50;
+  Q.instability -= 0.25; Q.disillusionment -= 2;
+  Q.workers_unrest -= 10; Q.intelligentsia_unrest -= 5; 
+!}
 
 @sponsor_colleges
 title: Sponsor creation of new universities
 subtitle: -2 resources
 choose-if: resources >= 2
 unavailable-subtitle: -2 resources - We lack the necessary resources. 
-on-arrival: enlightenment_expend += 0.25
+tags: education_options
+on-arrival: {!
+  Q.resources -= 2; Q.enlightenment_expend += 0.5;
+  Q.higher_schools += 2; 
+  Q.instability -= 0.5; Q.disillusionment -= 4;
+  Q.workers_unrest -= 5; Q.intelligentsia_unrest -= 5; 
+!}
+
+@found_party_schools
+title: Found a party school to train the next generation of Bolshevik leaders. 
+subtitle: -1 resources
+choose-if: resources >= 1
+tags: education_options
+unavailable-subtitle: -1 resources - We lack the necessary resources. 
+on-arrival: {!
+  Q.resouces -= 1; Q.enlightenment_expend += 0.25;  
+  Q.party_school += 1;
+  Q.workers_unrest -= 2; Q.intelligentsia_unrest -= 2; Q.red_specialists_unrest -= 5;  
+  Q.bourgeois_specialists_strength -= 5; Q.red_specialists_strength += 10; 
+!}
 
 @recruit_party_educators
 title: Recruit Bolsheviks to teach seminars at the party schools. 
 subtitle: -1 resources
 choose-if: resources >=1
 unavailable-subtitle: -1 resources - We lack the necessary resources. 
+tags: education_options
 on-arrival: resources -= 1
 
 @negotiate_professors
