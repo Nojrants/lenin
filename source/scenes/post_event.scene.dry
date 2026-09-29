@@ -1243,7 +1243,9 @@ Q.income = Math.round(
 ) / 100;
 
 Q.publicdebt = Math.round(
-    Q.loans.principal + 
+    Q.loans.reduce(function(total, loan) {
+        return total + loan.principal;
+    }, 0) +
     Q.bonds +
     Q.bank_advances
 );
