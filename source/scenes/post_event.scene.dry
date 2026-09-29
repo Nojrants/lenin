@@ -1251,8 +1251,8 @@ Q.publicdebt = Math.round(
 
 
 // EDUCATION
-Q.urban_literacy += Q.urban_schools * 0.00007;
-Q.rural_literacy += Q.rural_schools * 0.00005;
+Q.urban_literacy += Q.urban_schools * 0.00007 * Q.lower_school_funding;
+Q.rural_literacy += Q.rural_schools * 0.00005 * Q.lower_school_funding;
 Q.university_capacity = (Q.higher_schools * 0.0000007);
 
 Q.university_policy = {
