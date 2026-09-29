@@ -60,7 +60,7 @@ go-to: funding_menu
 
 >Education:<br>
 >>Lower Schools: [+ lower_school_funding +]<br>
->>Universities: [+ lower_school_funding +]<br>
+>>Universities: [+ school_funding +]<br>
 >>Construction: [+ school_construction +]<br>
 
 @funding_menu
