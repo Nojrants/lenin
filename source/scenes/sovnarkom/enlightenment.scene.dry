@@ -56,27 +56,25 @@ on-arrival: efficacy_enlightenment += 0.1 if efficacy_enlightenment < 1; resourc
 
 @funding
 title: FUNDING
-go-to: funding_menu
+new-page: true
+on-arrival: {!
+  Q.lower_school_funding = Math.round(1000*Q.lower_school_funding)/1000;
+  Q.school_funding = Math.round(1000*Q.school_funding)/1000;
+  Q.school_construction = Math.round(1000*Q.school_construction)/1000;
+!}
 
 >Education:<br>
 >>Lower Schools: [+ lower_school_funding +]<br>
 >>Universities: [+ school_funding +]<br>
 >>Construction: [+ school_construction +]<br>
 
-@funding_menu
-
 - #education_funding
 - @enlightenment_return
 
-@lower_school_funding
-title: Lower school funding – [+ lower_school_funding +]
-tags: education_funding
-go-to: funding_menu
-
 @increase_lower_school_funding
-title: – 🔼 Increase funding
+title: 🔼 Increase lower school funding
 tags: education_funding
-go-to: funding_menu
+go-to: funding
 choose-if: lower_school_funding < 2
 unavailable-subtitle: Funding is already maxed. 
 on-arrival: {!
@@ -86,26 +84,21 @@ on-arrival: {!
 !}
 
 @decrease_lower_school_funding
-title: – 🔻 Increase funding
+title: 🔻 Decrease lower school funding
 choose-if: lower_school_funding > 0
 unavailable-subtitle: Funding is already non-existent. 
 tags: education_funding
-go-to: funding_menu
+go-to: funding
 on-arrival: {!
   Q.lower_school_funding -= 0.1;
   Q.enlightenment_expend -= 0.1;
   Q.workers_unrest += 2; Q.peasants_unrest += 2; Q.kulaks_unrest += 1.5; Q.middle_unrest += 1.5;
 !}
 
-@school_funding
-title: University funding – [+ school_funding +]
-tags: education_funding
-go-to: funding_menu
-
 @increase_school_funding
-title: – 🔼 Increase funding
+title: 🔼 Increase university funding
 tags: education_funding
-go-to: funding_menu
+go-to: funding
 choose-if: school_funding < 2
 unavailable-subtitle: Funding is already maxed. 
 on-arrival: {!
@@ -114,25 +107,20 @@ on-arrival: {!
 !}
 
 @decrease_school_funding
-title: – 🔻 Increase funding
+title: 🔻 Decrease university funding
 choose-if: school_funding > 0
 unavailable-subtitle: Funding is already non-existent. 
 tags: education_funding
-go-to: funding_menu
+go-to: funding
 on-arrival: {!
   Q.school_funding -= 0.1; Q.enlightenment_expend -= 0.1; Q.school_loyalty -= 0.05;
   Q.workers_unrest += 1; Q.peasants_unrest += 1; Q.kulaks_unrest += 0.5; Q.middle_unrest += 0.5; Q.intelligentsia_unrest += 2; Q.elites_unrest += 1;
 !}
 
-@school_construction
-title: Subsidies for school construction – [+ school_construction +]
-tags: education_funding
-go-to: funding_menu
-
 @increase_school_construction
-title: – 🔼 Increase funding
+title: 🔼 Increase school construction subsidies
 tags: education_funding
-go-to: funding_menu
+go-to: funding
 choose-if: school_construction < 2
 unavailable-subtitle: Funding is already maxed. 
 on-arrival: {!
@@ -141,11 +129,11 @@ on-arrival: {!
 !}
 
 @decrease_school_construction
-title: – 🔻 Increase funding
+title: 🔻 Decrease school construction subsidies
 choose-if: school_funding > 0
 unavailable-subtitle: Funding is already non-existent. 
 tags: education_funding
-go-to: funding_menu
+go-to: funding
 on-arrival: {!
   Q.school_construction += 0.1; Q.enlightenment_expend += 0.1;
   Q.workers_unrest += 0.5; Q.peasants_unrest += 0.5; Q.kulaks_unrest += 0.25; Q.middle_unrest += 0.25; Q.intelligentsia_unrest += 0.5;
