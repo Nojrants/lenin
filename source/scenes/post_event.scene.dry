@@ -1243,9 +1243,7 @@ Q.income = Math.round(
 ) / 100;
 
 Q.publicdebt = Math.round(
-    Q.loans_high +
-    Q.loans_med +
-    Q.loans_low +
+    Q.loans.principal + 
     Q.bonds +
     Q.bank_advances
 );
