@@ -290,6 +290,23 @@ Q.bagmen_strength = 0;
 Q.general_unrest = ((Q.elites_unrest * Q.elites) + (Q.middle_unrest * Q.middle) + (Q.clergy_unrest * Q.clergy) + (Q.workers_unrest * Q.workers) + (Q.peasants_unrest * Q.peasants) + (Q.kulaks_unrest * Q.kulaks) + (Q.intelligentsia_unrest * Q.intelligentsia) + (Q.soldiers_unrest * Q.soldiers) + (Q.underclass_unrest * Q.underclass) + (Q.students_unrest * Q.students)) / 100;
 
 
+// Education
+
+Q.party_schools = 0;
+Q.lower_school_funding = 0.5; 
+Q.school_funding = 0.5; 
+Q.school_construction = 0; 
+Q.school_loyalty = 0.2; 
+Q.higher_schools = 11;
+Q.urban_schools = 200; 
+Q.rural_schools = 300; 
+Q.urban_literacy = 55;
+Q.rural_literacy = 30;
+Q.elite_university_access = 1.0;
+Q.middle_university_access = 0.8;
+Q.workers_university_access = 0.5;
+Q.kulaks_university_access = 0.3;
+Q.peasants_university_access = 0.2;
 
 
 // starting financials
@@ -298,7 +315,7 @@ Q.sovnarkom_expend = 0.25;
 Q.internal_expend = 0.75;
 Q.foreignaffairs_expend = 0.5;
 Q.military_expend = 12.5;
-Q.enlightenment_expend = 0.5;
+Q.enlightenment_expend = 0.25 + Q.school_funding + Q.lower_school_funding;
 Q.railways_expend = 1.75;
 Q.trade_expend = 0.5;
 Q.finance_expend = 0.5;
@@ -872,20 +889,6 @@ Q.cheka = 0;
 Q.cheka_strength = 0;
 Q.cheka_militancy = 0;
 Q.cheka_loyalty = 0;
-
-Q.party_schools = 0;
-Q.school_funding = 0.5; 
-Q.school_loyalty = 0.2; 
-Q.higher_schools = 11;
-Q.urban_schools = 200; 
-Q.rural_schools = 300; 
-Q.urban_literacy = 55;
-Q.rural_literacy = 30;
-Q.elite_university_access = 1.0;
-Q.middle_university_access = 0.8;
-Q.workers_university_access = 0.5;
-Q.kulaks_university_access = 0.3;
-Q.peasants_university_access = 0.2;
 
 
 
