@@ -24,6 +24,8 @@ on-arrival: {!
   Q.interest_display = Math.round(100 * Q.interest)/100;
   Q.indemnities_display = Math.round(100 * Q.indemnities)/100;
 
+  Q.loans_exist = Q.loans.length > 0;
+
 !}
 
 = Fiscal Policy
@@ -182,7 +184,7 @@ on-arrival: banks_seized = 1; resources += 4; elite_unrest += 5; middle_unrest +
 title: Repudiate all outstanding loans.
 subtitle: This will free-up resources but substantially impact our foreign relations. 
 view-if: repudiation = 0
-choose-if: loans.length > 0
+choose-if: loans_exist
 unavailable-subtitle: We have no outstanding loans. 
 on-arrival: {!
   Q.repudiation = 1; 
