@@ -1210,10 +1210,13 @@ if (Q.bagmen_tax == 1) {
 	Q.bagmen_strength *= 0.98;
 }
 
-Q.interest = (
-    (Q.loans_high * 0.16) +
-    (Q.loans_med * 0.12) +
-    (Q.loans_low * 0.08) +
+
+Q.interest = 0;
+for (var debt of Q.debt) {
+    Q.interest += debt.principal * debt.rate;
+}
+
+Q.interest += (
     (Q.bonds * (Q.bond_rate / 100)) +
     (Q.bank_advances * 0.02)
 );
