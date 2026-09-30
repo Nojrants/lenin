@@ -151,7 +151,7 @@ on-arrival: {!
   Q.instability += 0.5; Q.monthly_inflation += (1.2 * (Q.instability/50));
   if (Q.bonds > 90) Q.bond_rate += 1;
   if ((Q.bonds < 90) && (Q.bonds > 60)) Q.bond_rate += 0.5;
-  if (bonds < 60) bond_rate += 0.25; 
+  if (Q.bonds < 60) Q.bond_rate += 0.25; 
 !}
 
 @emergency_loans
