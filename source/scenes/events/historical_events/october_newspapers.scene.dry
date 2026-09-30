@@ -34,8 +34,7 @@ title: Let the Menshevik press fight amongst itself, their complaints don't matt
 on-arrival: {!
   Q.newspapers_seen = 1; 
   Q.left_m_strength += 3; Q.m_strength += 2; Q.right_m_strength += 2; Q.popular_socialist_strength += 1;
-  Q.left_m_relation += 5;
-  Q.moderate_strength += 4; Q.leninist_strength -= 4; Q.leftcom_strength -= 3;
+  Q.leninist_strength -= 4; Q.leftcom_strength -= 3;
   Q.moderate_unrest -= 5; Q.leninist_unrest -= 5;
 !}
 
