@@ -4,8 +4,13 @@ new-page: true
 view-if: month = 11 and week = 2
 max-visits: 1
 tags: event
-on-arrival: efficacy_sovnarkom -= 0.1; efficacy_finance -= 0.5; efficacy_foreign -= 0.5; efficacy_military -= 0.3; efficacy_enlightenment -= 0.3; efficacy_internal -= 0.3; efficacy_railways -= 0.3; efficacy_trade -= 0.5; efficacy_justice -= 0.5; efficacy_agriculture -= 0.5; efficacy_foodsupply -= 0.5; efficacy_posts -= 0.5; efficacy_nationalities -= 0.3; efficacy_welfare -= 0.5; middle_unrest += 20; intelligentsia_unrest += 5; instability += 3; bourgeois_specialist_unrest += 15; 
 go-to: civil_servants_options
+on-arrival: {!
+  Q.efficacy_sovnarkom -= 0.1; Q.efficacy_finance -= 0.5; Q.efficacy_foreign -= 0.5; Q.efficacy_military -= 0.3; Q.efficacy_enlightenment -= 0.3; Q.efficacy_internal -= 0.3; Q.efficacy_railways -= 0.3; Q.efficacy_trade -= 0.5; Q.efficacy_justice -= 0.5; Q.efficacy_agriculture -= 0.5; Q.efficacy_foodsupply -= 0.5; Q.efficacy_posts -= 0.5; Q.efficacy_nationalities -= 0.3; Q.efficacy_welfare -= 0.5;
+  Q.bourgeois_specialists * 0.75; Q.bourgeois_specialists_unrest += 15; 
+  Q.middle_unrest += 20; Q.intelligentsia_unrest += 5;
+  Q.instability += 3; 
+!}
 
 = Civil Servants' Strike
 
@@ -26,7 +31,14 @@ title: Raise salaries significantly to try and entice people back to work.
 subtitle: -1 resources – This may be unpopular among our base, especially given present conditions. 
 max-visits: 1
 go-to: civil_servants_options
-on-arrival: resources -= 1; efficacy_finance += 0.05; efficacy_foreign += 0.05; efficacy_military += 0.05; efficacy_enlightenment += 0.05; efficacy_internal += 0.05; efficacy_railways += 0.05; efficacy_trade += 0.05; efficacy_justice += 0.05; efficacy_agriculture += 0.05; efficacy_foodsupply += 0.05; efficacy_posts += 0.05; efficacy_nationalities += 0.05; efficacy_welfare += 0.05; foreignaffairs_expend += 0.10; military_expend += 0.10; enlightmenet_expend += 0.10; railways_expend += 0.10; trade_expend += 0.10; finance_expend += 0.10; justice_expend += 0.10; agriculture_expend += 0.10; foodsupply_expend += 0.10; posts_expend += 0.10; nationalities_expend += 0.10; welfare_expend += 0.10; monthly_inflation += 0.1; middle_unrest -= 5; intelligentsia_unrest -= 2; bourgeois_specialist_unrest -= 10; labor_unrest += 10; leninist_strength -= 5; instability -= 1;
+on-arrival: {!
+  Q.resources -= 1; Q.monthly_inflation += 0.1; Q.instability -= 1;
+  Q.efficacy_finance += 0.05; Q.efficacy_foreign += 0.05; Q.efficacy_military += 0.05; Q.efficacy_enlightenment += 0.05; Q.efficacy_internal += 0.05; Q.efficacy_railways += 0.05; Q.efficacy_trade += 0.05; Q.efficacy_justice += 0.05; Q.efficacy_agriculture += 0.05; Q.efficacy_foodsupply += 0.05; Q.efficacy_posts += 0.05; Q.efficacy_nationalities += 0.05; Q.efficacy_welfare += 0.05;
+  Q.foreignaffairs_expend += 0.10; Q.military_expend += 0.10; Q.enlightmenet_expend += 0.10; Q.railways_expend += 0.10; Q.trade_expend += 0.10; Q.finance_expend += 0.10; Q.justice_expend += 0.10; Q.agriculture_expend += 0.10; Q.foodsupply_expend += 0.10; Q.posts_expend += 0.10; Q.nationalities_expend += 0.10; Q.welfare_expend += 0.10;
+  Q.middle_unrest -= 5; Q.intelligentsia_unrest -= 2;
+  Q.bourgeois_specialists * 1.05; Q.bourgeois_specialists_unrest -= 5; workers_unrest += 10;
+  Q.leninist_strength -= 5;
+!}
 
 The Revolution was premised on the idea of overthrowing the old order and replacing it, and so having to appease and reward the old servants of capital instead is an embarrassing state of affairs. Workers grumble about more money going into the pockets of elites. It's also hard to shake the accusation that we caved easily to pressure, hurting our public standing. But that said, the increased salaries do seem to lessen the damage somewhat, eventually luring some employees back to work. 
 
