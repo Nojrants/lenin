@@ -567,15 +567,24 @@ if (Q.transportation_production >= 5) {
 	}
 }
 
-
 // industrial changes
 Q.industrial_changes = 0;
+
+
+// Specialists
+Q.specialists_required = 10 * (Q.industry / 100);
+Q.bourgeois_specialist_effectiveness = Math.max(0, 1 - (Q.bourgeois_specialists_unrest/100) * (0.5 + (Q.bourgeois_specialists_strength/100)));
+Q.red_specialist_effectiveness = Math.max(0, 1 - (Q.red_specialists_unrest/100) * (0.5 + (Q.red_specialists_strength/100)) * 0.3); 
+Q.total_specialists = Q.bourgeois_specialists + Q.red_specialists;
+Q.specialist_availability = Math.min(1, Q.total_specialists / Q.specialists_required);
+Q.specialist_quality = (Q.bourgeois_specialists*Q.bourgeois_specialist_effectiveness + Q.red_specialists*Q.red_specialist_effectiveness) / Math.max(0.01, Q.total_specialists);
+Q.specialist_capacity = Q.specialist_availability * Q.specialist_quality * 100; 
 
 
 // Transportation
 Q.train_capacity = Math.round(Q.train_capacity);
 Q.civilian_rail_throughput = Q.train_capacity * Q.civilian_trains / 100;
-Q.effective_rail_throughput = Q.civilian_rail_throughput * (1 + (Q.finalefficacy_railways - 0.5)); 
+Q.effective_rail_throughput = Q.civilian_rail_throughput * (1 + (Q.finalefficacy_railways - 0.5)) * (Q.specialist_capacity/100);
 Q.civilian_transport = Math.min(100, Q.effective_rail_throughput / 1000);  
 if (Q.vikzhel_strike != 1) { Q.ag_transport = Q.civilian_transport; }
 
@@ -584,8 +593,8 @@ if (Q.vikzhel_strike != 1) { Q.ag_transport = Q.civilian_transport; }
 Q.industry_labor = Math.max(0, 100 - Q.unemployed * 2);
 Q.industry_stability = Math.max(0, 100 - Q.instability);
 Q.industry_realization = 0.35 + 0.30*(Q.industry_labor/100) + 0.20*(Q.civilian_transport/100) + 0.15*(Q.industry_stability/100);
-Q.industry_gdp = Q.industry * Q.industry_realization;
-Q.factory_utilization = Q.industry_realization * 100;
+Q.industry_gdp = Q.industry * Q.industry_realization * (Q.specialist_capacity/100); 
+Q.factory_utilization = Q.industry_realization * (Q.specialist_capacity/100) * 100;
 Q.industrial_output = Q.industry_gdp;
 
 // Agriculture
@@ -615,14 +624,14 @@ Q.trade_stability = Math.max(0, 100 - Q.instability);
 Q.trade_capacity = ((Q.ag_gdp + Q.industry_gdp) / 200) * (1 + (Q.finalefficacy_trade - 0.5));
 Q.trade_realization = 0.30 + 0.30*(Q.trade_marketization/100) + 0.20*(Q.civilian_transport/100) + 0.20*(Q.trade_stability/100)
                      - Math.min(0.15, Q.bagmen_strength/500);
-Q.trade_gdp = Q.trade_capacity * 100 * Q.trade_realization;
+Q.trade_gdp = Q.trade_capacity * 100 * Q.trade_realization * (0.5 + 0.5*(Q.specialist_capacity/100));
 
 
 // Government
 Q.government_stability = Math.max(0, 100 - Q.instability);
 Q.government_capacity = (Q.government_functions / Q.government_functions_baseline) * (1 + (Q.finalefficacy_sovnarkom - 0.5));
 Q.government_realization = 0.40 + 0.30*(Q.government_stability/100) + 0.30*(Q.democraticity/50);
-Q.government_gdp = Q.government_capacity * 100 * Q.government_realization;
+Q.government_gdp = Q.government_capacity * 100 * Q.government_realization * (0.5 + 0.5*(Q.specialist_capacity/100));
 
 
 // GDP
