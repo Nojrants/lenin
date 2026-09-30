@@ -110,15 +110,15 @@ Q.party_membership_display = (Q.party_membership * 1000).toLocaleString();
 
 >**Chair: ** [+ soviet_chair +] [?if soviet_chair_party=="Bolshevik": (<span style="color: var(--bolshevik-color);">RCP(b)</span>)?][?if soviet_chair_party=="Menshevik": (<span class="tooltip-text" title="Menshevik" style="color: var(--m-color);">RSDLP</span>)?][?if soviet_chair_party=="Left-SR": (<span class="tooltip-text" title="Left-SR" style="color: var(--lsr-color);">Left-SR</span>)?][?if soviet_chair_party=="SR": (<span class="tooltip-text" title="Socialist Revolutionary" style="color: var(--sr-color);">SR</span>)?][?if soviet_chair_party=="SD-Int": (<span class="tooltip-text" title="Social-Democratic Internationalist" style="color: var(--sdi-color);">SD-Int</span>)?][?if soviet_chair_party=="NS": (<span class="tooltip-text" title="Popular Socialist" style="color: var(--ns-color);">NS</span>)?]
 
->> **<span style="color: var(--bolshevik-color);">Bolsheviks</span>:** [+ b_soviet_display +]%
+>> **<span style="color: var(--bolshevik-color);">Bolsheviks</span>:** [+ b_cec_display +]%
 
->> **<span style="color: var(--m-color);">Mensheviks</span>:** [+ m_soviet_display +]%
+>> **<span style="color: var(--m-color);">Mensheviks</span>:** [+ m_cec_display +]%
 
->> **<span style="color: var(--lsr-color);">Left-SRs</span>:** [+ lsr_soviet_display +]%
+>> **<span style="color: var(--lsr-color);">Left-SRs</span>:** [+ lsr_cec_display +]%
 
->> **<span style="color: var(--sr-color);">SRs</span>:** [+ sr_soviet_display +]%
+>> **<span style="color: var(--sr-color);">SRs</span>:** [+ sr_cec_display +]%
 
->> **<span style="color: var(--other-color);">Others</span>:** [+ other_soviet_display +]%
+>> **<span style="color: var(--other-color);">Others</span>:** [+ other_cec_display +]%
 
 <hr>
 
