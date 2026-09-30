@@ -1,6 +1,6 @@
 title: Vikzhel calls for negotiations!
 new-page: true
-view-if: year = 1917 and month = 11 and week = 2
+view-if: year = 1917 and month = 11 and week = 2 and newspapers_seen = 1
 max-visits: 1
 face-image: 
 tags: event
