@@ -81,7 +81,7 @@ on-arrival: {!
   Q.other_soviet_display = Math.round((Q.anarchist_soviet + Q.maximalist_soviet + Q.sdi_soviet + Q.popular_socialist_soviet + Q.other_soviet)*10)/10; 
   Q.soviet_chair = "Kamenev"; Q.soviet_chair_party="Bolshevik";
 
-  Q.cec_seats = 110;
+  Q.cec_seats = 119;
   Q.anarchist_cec = 0;
   Q.maximalist_cec = 1;
   Q.b_cec = 77;
