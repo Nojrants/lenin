@@ -10,6 +10,19 @@ on-arrival: {!
   Q.lsr_soviet_display = 0;
   Q.sr_soviet_display = 37.2; 
   Q.other_soviet_display = 6.2;
+
+  Q.cec_seats = 256;
+  Q.anarchist_cec = 0;
+  Q.maximalist_cec = 0;
+  Q.b_cec = 35;
+  Q.sdi_cec = 0;
+  Q.left_m_cec = 0;
+  Q.m_cec = 115;
+  Q.right_m_cec = 0;
+  Q.lsr_cec = 0;
+  Q.sr_cec = 100;
+  Q.popular_socialist_cec = 5;
+  Q.other_cec = 1;
 !}
 
 
