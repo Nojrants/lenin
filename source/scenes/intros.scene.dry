@@ -24,11 +24,11 @@ on-arrival: {!
   Q.popular_socialist_cec = 5;
   Q.other_cec = 1;
 
-  Q.b_cec_display = Math.round((Q.b_cec/Q.cec_seats)*10)/10;
-  Q.m_cec_display = Math.round(((Q.left_m_cec + Q.m_cec + Q.right_m_cec)/Q.cec_seats)*10)/10;
-  Q.lsr_cec_display = Math.round((Q.lsr_cec/Q.cec_seats)*10)/10;
-  Q.sr_cec_display = Math.round((Q.sr_cec/Q.cec_seats)*10)/10;
-  Q.other_cec_display = Math.round(((Q.anarchist_cec + Q.maximalist_cec + Q.popular_socialist_cec + Q.other_cec)/Q.cec_seats)*10)/10;
+  Q.b_cec_display = Math.round((Q.b_cec/Q.cec_seats)*1000)/10;
+  Q.m_cec_display = Math.round(((Q.left_m_cec + Q.m_cec + Q.right_m_cec)/Q.cec_seats)*1000)/10;
+  Q.lsr_cec_display = Math.round((Q.lsr_cec/Q.cec_seats)*1000)/10;
+  Q.sr_cec_display = Math.round((Q.sr_cec/Q.cec_seats)*1000)/10;
+  Q.other_cec_display = Math.round(((Q.anarchist_cec + Q.maximalist_cec + Q.popular_socialist_cec + Q.other_cec)/Q.cec_seats)*1000)/10;
 !}
 
 
@@ -100,11 +100,11 @@ on-arrival: {!
   Q.popular_socialist_cec = 0;
   Q.other_cec = 4;
 
-  Q.b_cec_display = Math.round((Q.b_cec_seats/Q.cec_seats)*10)/10;
-  Q.m_cec_display = Math.round(((Q.left_m_cec + Q.m_cec + Q.right_cec)/Q.cec_seats)*10)/10;
-  Q.lsr_cec_display = Math.round((Q.lsr_cec/Q.cec_seats)*10)/10;
-  Q.sr_cec_display = Math.round((Q.sr_cec/Q.cec_seats)*10)/10;
-  Q.other_cec_display = Math.round(((Q.anarchist_cec + Q.maximalist_cec + Q.popular_socialist_cec + Q.other_cec)/Q.cec_seats)*10)/10;
+  Q.b_cec_display = Math.round((Q.b_cec/Q.cec_seats)*1000)/10;
+  Q.m_cec_display = Math.round(((Q.left_m_cec + Q.m_cec + Q.right_m_cec)/Q.cec_seats)*1000)/10;
+  Q.lsr_cec_display = Math.round((Q.lsr_cec/Q.cec_seats)*1000)/10;
+  Q.sr_cec_display = Math.round((Q.sr_cec/Q.cec_seats)*1000)/10;
+  Q.other_cec_display = Math.round(((Q.anarchist_cec + Q.maximalist_cec + Q.popular_socialist_cec + Q.other_cec)/Q.cec_seats)*1000)/10;
 !}
 on-display: {!
 // do the graphs
