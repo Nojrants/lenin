@@ -1,0 +1,42 @@
+title: Fate of the Socialist Newspapers
+new-page: true
+view-if: year = 1917 and month = 11 and week = 2
+max-visits: 1
+tags: event
+
+= Socialist Newspapers
+
+Although the <span style="color: var(--m); font-weight: bold;">Menshevik Internationalists</span> claimed a majority of Menshevik delegates at the recent Congress of Soviets, and have repeatedly pushed through resolutions calling for tentative cooperation and negotiations with our party, the <span style="color: var(--m); font-weight: bold;">Menshevik Defencist</span> wing remains a fiery vocal minority. The past week their newspapers have launched nonstop criticism of our seizure of power, but also of their own Central Committee, arguing that the Menshevik majority errs in their toleration of us. 
+  
+Adding fuel to the fire is the actions of our own government, which have not been favorable to the Defencists or their allies, undercutting the argument of the Internationalists. These issues will likely come to a head when the Mensheviks hold a party congress, or should negotiations continue in favor of an all-socialist coalition government.
+
+The question now is, how should we handle the situation?
+
+- @arrest
+- @ignore
+
+@arrest
+title: Shut down those disruptive newspapers, and arrest the worst ringleaders. 
+on-arrival: {!
+  Q.newspapers_seen = 1; 
+  Q.democraticity -= 1; Q.instability -= 1;
+  Q.left_m_strength -= 4; Q.m_strength -= 4; Q.right_m_strength -= 3; Q.popular_socialist_strength -= 1;
+  Q.left_m_relation -= 5; Q.m_relation -= 5; Q.right_m_relation -= 5; Q.ns_relation -= 5;
+  Q.moderate_strength -= 4; Q.leninist_strength += 4; Q.leftcom_strength += 3;
+  Q.moderate_unrest += 5; Q.leninist_unrest += 5;
+!}
+
+A series of raids are conducted shutting down the worst newspapers. However, it appears that at the moment we lack the necessary apparatus to ensure any of these closures stick, as many of the newspapers simply rebrand and relaunch their publications. Perhaps the main thing the raids produce is worse relations between us and the Mensheviks, harming our ability to negotiate with them in the future. 
+
+
+@ignore
+title: Let the Menshevik press fight amongst itself, their complaints don't matter to us. 
+on-arrival: {!
+  Q.newspapers_seen = 1; 
+  Q.left_m_strength += 3; Q.m_strength += 2; Q.right_m_strength += 2; Q.popular_socialist_strength += 1;
+  Q.left_m_relation += 5;
+  Q.moderate_strength += 4; Q.leninist_strength -= 4; Q.leftcom_strength -= 3;
+  Q.moderate_unrest -= 5; Q.leninist_unrest -= 5;
+!}
+
+We leave
