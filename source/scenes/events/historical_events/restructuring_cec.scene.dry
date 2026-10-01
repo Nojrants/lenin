@@ -491,14 +491,14 @@ tags: finish_cec_restructure
 @finish2
 title: Finalize the new CEC structure, with consent of the other parties. 
 view-if: coalition_government = 1
-choose-if: ((neutral_peasants = 1 and add_duma >= 2) or (add_peasants = 4 and add_duma >= 3 and add_unions >= 2)) and (add_soldiers >= 1 and add_unions >= 1 and add_duma >= 1) and cec_seats >= 420 
+choose-if: ((neutral_peasants = 1 and add_duma >= 2) or (add_peasants = 4 and add_duma >= 3 and add_unions >= 2)) and (add_soldiers >= 1 and add_unions >= 1 and add_duma >= 1) and cec_seats >= 375 
 unavailable-subtitle: The other parties don't approve of the proposal. 
 tags: finish_cec_restructure
 
 @finish3
 title: Finalize the new CEC structure, with consent of the Left-SRs
 view-if: coalition_government = 2
-choose-if: ((peasants_compromise = 1) or (add_peasants = 4 and add_soldiers >= 3 and add_unions >= 2 and add_duma >= 1)) and cec_seats >= 360 
+choose-if: ((peasants_compromise = 1) or (add_peasants = 4 and add_soldiers >= 3 and add_unions >= 2 and add_duma >= 1)) and cec_seats >= 350 
 unavailable-subtitle: The Left-SRs don't approve of the proposal. 
 tags: finish_cec_restructure
 
