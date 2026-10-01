@@ -3,6 +3,7 @@ new-page: true
 view-if: (coalition_government = 1 and month = 11 and week = 3) or (coalition_government = 2 and month = 12 and week = 2) or (month = 12 and week = 2)
 max-visits: 1
 tags: event
+go-to: restructure_menu
 on-arrival: {!
   Q.add_peasants = 0;
   Q.add_soldiers = 0;
@@ -34,6 +35,8 @@ At the same time, overly expanding the CEC could have the unintended consequence
 >>Additional union seats: [+ new_union_seats +]<br>
 >>Additional duma seats: [+ new_duma_seats +]<br>
 >><b>Total seats:</b> [+ cec_seats +] 
+
+@restructure_menu
  
 - #cec_restructure_offers
 - @null
@@ -42,10 +45,10 @@ At the same time, overly expanding the CEC could have the unintended consequence
 
 @peasants_compromise
 title: Add 108 seats from the peasant congress (mostly Bolshevik and Left-SR) to match our existing 108 seats.
-subtitle: The Left-SRs consider this a fair compromise on the peasants' soviets issue. 
+subtitle: The Left-SRs consider this a fair compromise.
 tags: cec_restructure_offers
 view-if: coalition_government != 1 and peasants_compromise != 1
-go-to: restructuring_cec
+go-to: restructure_menu
 on-arrival: {!
 	Q.peasants_compromise = 1;
  	 Q.new_peasant_seats += 108;
@@ -77,7 +80,7 @@ on-arrival: {!
 title: Cancel the 108 seats from the peasant soviets. 
 tags: cec_restructure_offers
 view-if: peasants_compromise = 1
-go-to: restructuring_cec
+go-to: restructure_menu
 on-arrival: {!
 	Q.peasants_compromise = 0;
   	Q.new_peasant_seats -= 108;
@@ -107,10 +110,10 @@ on-arrival: {!
 
 @neutral_peasants
 title: Add 160 seats from the peasant congress, fairly accounting for all socialist parties. 
-subtitle: The other parties consider this a fair compromise on the peasants' soviets issue. 
+subtitle: The other parties consider this a fair compromise.
 tags: cec_restructure_offers
 view-if: coalition_government = 1 and neutral_peasants != 1
-go-to: restructuring_cec
+go-to: restructure_menu
 on-arrival: {!
 	Q.neutral_peasants = 1;
 	Q.new_peasant_seats += 160;
@@ -142,7 +145,7 @@ on-arrival: {!
 title: Cancel the 160 seats from the peasant soviets. 
 tags: cec_restructure_offers
 view-if: neutral_peasants = 1
-go-to: restructuring_cec
+go-to: restructure_menu
 on-arrival: {!
 	Q.neutral_peasants = 0;
 	Q.new_peasant_seats -= 160;
@@ -174,7 +177,7 @@ on-arrival: {!
 title: Add 25 seats for peasant delegates.
 tags: cec_restructure_offers
 choose-if: add_peasants < 4
-go-to: restructuring_cec
+go-to: restructure_menu
 on-arrival: {!
 	Q.add_peasants += 1;
 	Q.new_peasant_seats += 25;
@@ -223,7 +226,7 @@ on-arrival: {!
 title: Remove 25 seats for peasant delegates.
 tags: cec_restructure_offers
 choose-if: add_peasants > 0
-go-to: restructuring_cec
+go-to: restructure_menu
 on-arrival: {!
 	Q.add_peasants -= 1;
 	Q.new_peasant_seats -= 25;
@@ -272,7 +275,7 @@ on-arrival: {!
 title: Add 25 seats for soldiers' delegates.
 tags: cec_restructure_offers
 choose-if: add_soldiers < 4
-go-to: restructuring_cec
+go-to: restructure_menu
 on-arrival: {!
 	Q.add_soldiers += 1;
   Q.new_soldier_seats += 25;
@@ -306,7 +309,7 @@ on-arrival: {!
 title: Remove 25 seats for soldiers' delegates.
 tags: cec_restructure_offers
 choose-if: add_soldiers > 0
-go-to: restructuring_cec
+go-to: restructure_menu
 on-arrival: {!
 	Q.add_soldiers -= 1;
   Q.new_soldier_seats -= 25;
@@ -340,7 +343,7 @@ on-arrival: {!
 title: Add 25 seats for trade union delegates. 
 tags: cec_restructure_offers
 choose-if: add_unions < 4
-go-to: restructuring_cec
+go-to: restructure_menu
 on-arrival: {!
 	Q.add_unions += 1;
   Q.new_union_seats += 25;
@@ -373,7 +376,7 @@ on-arrival: {!
 title: Remove 25 seats for soldiers' delegates.
 tags: cec_restructure_offers
 choose-if: add_unions > 0
-go-to: restructuring_cec
+go-to: restructure_menu
 on-arrival: {!
 	Q.add_unions -= 1;
   Q.new_union_seats -= 25;
@@ -406,7 +409,7 @@ on-arrival: {!
 title: Add 25 seats for duma representatives. 
 tags: cec_restructure_offers
 choose-if: add_duma < 4
-go-to: restructuring_cec
+go-to: restructure_menu
 on-arrival: {!
 	Q.add_duma += 1;
   Q.new_duma_seats += 25;
@@ -439,7 +442,7 @@ on-arrival: {!
 title: Remove 25 seats for soldiers' delegates.
 tags: cec_restructure_offers
 choose-if: add_duma > 0
-go-to: restructuring_cec
+go-to: restructure_menu
 on-arrival: {!
 	Q.add_duma -= 1;
   Q.new_duma_seats -= 25;
@@ -470,7 +473,7 @@ on-arrival: {!
 
 @null
 title: ------------------------------------------------------------------------
-go-to: restructuring_cec
+go-to: restructure_menu
 
 
 @finish
