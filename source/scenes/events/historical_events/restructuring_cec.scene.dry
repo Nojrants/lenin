@@ -378,7 +378,7 @@ on-arrival: {!
 !}
 
 @remove_unions
-title: Remove 25 seats for soldiers' delegates.
+title: Remove 25 seats for trade union delegates.
 tags: cec_restructure_offers
 choose-if: add_unions > 0
 go-to: restructure_menu
@@ -444,7 +444,7 @@ on-arrival: {!
 !}
 
 @remove_duma
-title: Remove 25 seats for soldiers' delegates.
+title: Remove 25 seats for duma representatives. 
 tags: cec_restructure_offers
 choose-if: add_duma > 0
 go-to: restructure_menu
