@@ -1,0 +1,279 @@
+title: Economic Reforms
+subtitle: Our coalition partners have proposed some changes...
+new-page: true
+view-if: coalition_government >= 1 and coalition_actions_timer = 0 and ((finance_minister_party != "Bolshevik" and finance_minister_party != "") or (trade_minister_party != "Bolshevik" and trade_minister_party != "") or (labor_minister_party != "Bolshevik" and labor_minister_party != "")) and (month = 12 and week >= 2)
+max-visits: 1
+tags: event
+on-arrival: {!
+  Q.coalition_actions_timer = 2;
+
+  if (Q.finance_minister_party != "Bolshevik" && Q.finance_minister_party != "") {
+      if (Q.income <= Q.expenditure * 1.5) {
+        if (Q.income_tax_rate_1 < 3.5) Q.income_tax_rate_1 = 3;
+        if (Q.income_tax_rate_2 < 3) Q.income_tax_rate_2 = 2.5;
+        if (Q.income_tax_rate_3 < 2.5) Q.income_tax_rate_3 = 2;
+        if (Q.income_tax_rate_4 < 1) Q.income_tax_rate_4 = 1;
+        if (Q.income_tax_rate_5 < 0.75) Q.income_tax_rate_5 = 0.75;
+        if (Q.business_tax_rate < 2) Q.business_tax_rate = 2;
+      }
+      Q.efficacy_finance += 0.15; 
+      Q.income_tax_efficacy += 0.1;
+      Q.wealth_tax_efficacy += 0.1;
+      Q.business_tax_efficacy += 0.2;
+  }
+  if (Q.trade_minister_party != "Bolshevik" && Q.trade_minister_party != "") {
+      Q.efficacy_trade += 0.15; 
+
+      if (Q.trade_minister_party == "Menshevik" || Q.trade_minister_party == "SD-Int") { 
+          Q.workers_unrest -= 5; Q.middle_unrest -= 5;
+          Q.workers_strength += 5; Q.middle_strength += 5; 
+          Q.trade_stability_modifier += 5; 
+          Q.workers_b += 2; Q.workers_m += 5; Q.workers_left_m += 5; Q.workers_sdi += 2; 
+        }
+        if (Q.trade_minister_party == "NS") { 
+          Q.workers_unrest -= 5; Q.middle_unrest -= 5;
+          Q.workers_strength += 5; Q.middle_strength += 5; 
+          Q.trade_stability_modifier += 5; 
+          Q.workers_b += 2; Q.workers_popular_socialist += 5;
+        }
+        if (Q.trade_minister_party == "Left-SR") { 
+          Q.workers_unrest -= 5;
+          Q.workers_strength += 5; 
+          Q.workers_b += 2; Q.workers_lsr += 5;
+        }
+        if (Q.trade_minister_party == "SR") { 
+          Q.workers_unrest -= 5; Q.middle_unrest -= 5;
+          Q.workers_strength += 5; Q.middle_strength += 5; 
+          Q.workers_b += 2; Q.workers_sr += 5;
+        }
+
+      }
+  if (Q.labor_minister_party != "Bolshevik" && Q.labor_minister_party != "") {
+      Q.efficacy_labor += 0.15; 
+      Q.unionists *= 1.5; Q.unionists_strength += 10; 
+
+        if (Q.labor_minister_party == "Menshevik" || Q.labor_minister_party == "SD-Int") { 
+          Q.workers_unrest -= 10; Q.middle_unrest -= 5; Q.unionist_unrest -= 10; 
+          Q.workers_strength += 10; Q.middle_strength += 10; Q.unionist_strength += 10;
+          Q.industry_stability_modifier += 5; 
+          Q.workers_b += 2; Q.workers_m += 5; Q.workers_left_m += 5; Q.workers_sdi += 5; 
+          Q.labor_expend += 0.5; 
+        }
+        if (Q.labor_minister_party == "NS") { 
+          Q.workers_unrest -= 5; Q.middle_unrest -= 5; Q.unionist_unrest -= 5; 
+          Q.workers_strength += 5; Q.middle_strength += 10; Q.unionist_strength += 5;
+          Q.industry_stability_modifier += 5; 
+          Q.workers_b += 2; Q.workers_popular_socialist += 5;
+          Q.labor_expend += 0.25; 
+        }
+        if (Q.labor_minister_party == "Left-SR") { 
+          Q.workers_unrest -= 5; Q.middle_unrest -= 2; Q.unionist_unrest -= 2; 
+          Q.workers_strength += 5; Q.middle_strength += 2; Q.unionist_strength += 2;
+          Q.workers_b += 2; Q.workers_lsr += 5;
+          Q.labor_expend += 0.5; 
+        }
+        if (Q.labor_minister_party == "SR") { 
+          Q.workers_unrest -= 10; Q.middle_unrest -= 5; Q.unionist_unrest -= 5; 
+          Q.workers_strength += 5; Q.middle_strength += 10; Q.unionist_strength += 5;
+          Q.workers_b += 2; Q.workers_sr += 5;
+          Q.labor_expend += 0.5; 
+        }
+    
+  }
+  if (Q.transport_minister_party  != "Bolshevik" && Q.transport_minister_party  != "") {
+      Q.efficacy_railways += 0.15; 
+      Q.vikzhel_strength += 5; 
+
+        if (Q.transport_minister_party == "Menshevik" || Q.transport_minister_party == "SD-Int") { 
+          Q.workers_unrest -= 5; Q.unionist_unrest -= 10; Q.vikzhel_unrest -= 5;
+          Q.workers_strength += 5; Q.unionist_strength += 5; Q.vikzhel_strength += 5; 
+          Q.train_capacity * 1.15;
+          Q.workers_b += 2; Q.workers_m += 5; Q.workers_left_m += 5; Q.workers_sdi += 5; 
+          Q.railways_expend += 0.5; Q.railway_revenue += 0.1;
+        }
+        if (Q.transport_minister_party == "NS") { 
+          Q.workers_unrest -= 5; Q.unionist_unrest -= 5; Q.vikzhel_unrest -= 2;
+          Q.workers_strength += 5; Q.unionist_strength += 2; Q.vikzhel_strength += 2; 
+          Q.train_capacity * 1.05;
+          Q.workers_b += 2; Q.workers_popular_socialist += 5;
+          Q.railways_expend += 0.5; Q.railway_revenue += 0.2;
+        }
+        if (Q.transport_minister_party == "Left-SR") { 
+          Q.workers_unrest -= 5; Q.unionist_unrest -= 5; Q.vikzhel_unrest -= 2;
+          Q.workers_strength += 5; Q.unionist_strength += 2; Q.vikzhel_strength += 2; 
+          Q.train_capacity * 1.05;
+          Q.workers_b += 2; Q.workers_lsr += 5;
+          Q.railways_expend += 0.25; 
+        }
+        if (Q.transport_minister_party == "SR") { 
+          Q.workers_unrest -= 5; Q.unionist_unrest -= 5; Q.vikzhel_unrest -= 5;
+          Q.workers_strength += 5; Q.unionist_strength += 2; Q.vikzhel_strength += 8; 
+          Q.train_capacity * 1.1;
+          Q.workers_b += 2; Q.workers_sr += 5;
+          Q.railways_expend += 0.25; 
+        }
+
+      
+  }
+             
+  if (Q.agriculture_minister_party  != "Bolshevik" && Q.agriculture_minister_party  != "") {
+      Q.efficacy_agriculture += 0.15; 
+      Q.food_sold += 0.005;
+
+        if (Q.agriculture_minister_party == "Menshevik" || Q.agriculture_minister_party == "SD-Int") { 
+          Q.peasants_unrest -= 10; Q.kulaks_unrest -= 5;
+          Q.peasants_strength += 5; Q.kulaks_strength += 10; 
+          Q.ag_stability_modifier += 8; Q.ag_productivity *= 1.03; Q.ag_capital * 1.03; 
+          Q.instability -= 1; 
+          Q.peasants_b += 2; Q.peasants_m += 5; Q.peasants_left_m += 5; Q.peasants_sdi += 2; 
+          Q.agriculture_expend += 0.75; 
+        }
+        if (Q.agriculture_minister_party == "NS") { 
+          Q.peasants_unrest -= 5; Q.kulaks_unrest -= 5;
+          Q.peasants_strength += 2.5; Q.kulaks_strength += 10; 
+          Q.ag_stability_modifier += 12; Q.ag_productivity *= 1.01; Q.ag_capital * 1.05; 
+          Q.peasants_b += 2; Q.peasants_popular_socialist += 5; 
+          Q.agriculture_expend += 0.5; 
+        }
+        if (Q.agriculture_minister_party == "Left-SR") { 
+          Q.peasants_unrest -= 15; Q.kulaks_unrest -= 10;
+          Q.peasants_strength += 10; Q.kulaks_strength += 5; 
+          Q.ag_productivity *= 1.05; Q.ag_land * 95; 
+          Q.peasants_b += 2; Q.peasants_lsr += 5; 
+          Q.instability += 1; 
+          Q.food_sold += 0.005;
+        }
+        if (Q.agriculture_minister_party == "SR") { 
+          Q.peasants_unrest -= 10; Q.kulaks_unrest -= 5;
+          Q.peasants_strength += 10; Q.kulaks_strength += 10; 
+          Q.ag_productivity *= 1.05; Q.ag_land * 99; 
+          Q.peasants_b += 2; Q.peasants_sr += 5;
+          Q.food_sold += 0.005;
+          Q.efficacy_agriculture += 0.05;
+          Q.agriculture_expend += 0.5; 
+        }
+  }
+             
+  if (Q.food_minister_party  != "Bolshevik" && Q.agriculture_minister_party  != "") {
+      Q.efficacy_foodsupply += 0.15; 
+      Q.food_sold += 0.005;
+    
+      if (Q.food_minister_party == "Menshevik" || Q.food_minister_party == "SD-Int") { 
+          Q.peasants_unrest -= 5; Q.kulaks_unrest -= 5;
+          Q.peasants_strength += 5; Q.kulaks_strength += 10; 
+          Q.ag_stability_modifier += 4;
+          Q.peasants_b += 2; Q.peasants_m += 5; Q.peasants_left_m += 5; Q.peasants_sdi += 2; 
+          Q.foodsupply_expend += 0.75; Q.food_price += 0.5; 
+          Q.food_sold += 0.03;
+        }
+        if (Q.food_minister_party == "NS") { 
+          Q.peasants_unrest -= 5; Q.kulaks_unrest -= 5;
+          Q.peasants_strength += 5; Q.kulaks_strength += 10; 
+          Q.ag_stability_modifier += 4;
+          Q.peasants_b += 2; Q.peasants_popular_socialist += 5; 
+          Q.foodsupply_expend += 0.75; Q.food_price += 0.5; 
+          Q.food_sold += 0.025;
+        }
+        if (Q.food_minister_party == "Left-SR") { 
+          Q.peasants_unrest -= 10; Q.kulaks_unrest -= 5;
+          Q.peasants_strength += 5; Q.kulaks_strength += 5; 
+          Q.ag_productivity *= 1.02; 
+          Q.peasants_b += 2; Q.peasants_lsr += 5; 
+          Q.foodsupply_expend += 0.5; Q.food_price += 0.25; 
+          Q.food_sold += 0.01;
+        }
+        if (Q.food_minister_party == "SR") { 
+          Q.peasants_unrest -= 5; Q.kulaks_unrest -= 5;
+          Q.peasants_strength += 5; Q.kulaks_strength += 10; 
+          Q.ag_productivity *= 1.02; Q.ag_inputs *= 1.05; 
+          Q.peasants_b += 2; Q.peasants_sr += 5;
+          Q.food_sold += 0.005;
+          Q.foodsupply_expend += 0.65; Q.food_price += 0.5; 
+          Q.food_sold += 0.025;
+        }
+  }
+             
+  Q.bourgeois_specialists += 1; Q.bourgeois_specialists_unrest -= 10; Q.bourgeois_specialists_strength += 5; 
+!}
+
+= Economic Reforms
+             
+From their posts in the economy-related commissariats, our coalition partners have begun implementing some changes. 
+
+[?if (finance_minister_party != "Bolshevik" and finance_minister_party != ""): In light of the poor financial situation, the finance commissariat has declared a new progressive tax scheme (mostly raising taxes on the rich). At the same time, a number of agreements are being negotiated to strategically work with former capitalist owners, in order to stabilize our finances. ?]
+
+[?if (transport_minister_party != "Bolshevik" and transport_minister_party != ""): The railways commissariat has managed to stabilize the transportation situation somewhat, working with the transit unions to implement changes. In the process, it seems Vikzhel has been strengthened and legitimized. ?]
+
+[?if ((agriculture_minister_party != "Bolshevik" and agriculture_minister_party != "") or (food_minister_party != "Bolshevik" and food_minister_party != "")) : In the countryside, they are overseeing the process of land reform, while also implementing a number of policies meant to incentivize productivity and trade (namely, raising the price paid for grain by the state). ?]
+
+Though carrying out the nationalization of large enterprises and major sectors as directed, our partners have sanctioned continued private ownership over small firms, as well as private partnerships in select struggling industries. In particular, they are also heavily encouraging the creation of cooperatives, offering tax incentives and assistance. Such policies also seem to persuade many protesting civil servants to return to work. Meanwhile, a number of laws and programs have been declared to democratize the workplace and protect workers' interests. 
+
+
+- @crash_government
+- @limit
+- @learn
+
+
+@crash_government
+title: This is all too much, we're terminating the coalition agreement!
+on-arrival: {!
+  Q.instability += 2; Q.democraticity -= 2; Q.coalition_government = 0; 
+  Q.moderate_unrest += 10; Q.leninist_unrest -= 5; Q.leftcom_unrest -= 10;
+  if (Q.lsr_in_gov == 1) { Q.lsr_in_gov = 0; Q.lsr_relation -= 10; }
+  if (Q.m_in_gov == 1) { Q.m_in_gov = 0; Q.centre_m_relation -= 10; }
+  if (Q.sr_in_gov == 1) { Q.sr_in_gov = 0; Q.centre_sr_relation -= 10; }
+  if (Q.sdi_in_gov == 1) { Q.sdi_in_gov = 0; Q.sdi_relation -= 10; }
+  if (Q.ns_in_gov == 1) { Q.ns_in_gov = 0; Q.ns_relation -= 10; }
+  Q.right_m_strength += 5; Q.right_sr_strength += 5;
+  if (Q.foreign_minister_party != "Bolshevik") { Q.foreign_minister = "Vacant"; Q.foreign_minister_party = ""; }
+  if (Q.war_minister_party != "Bolshevik") { Q.war_minister = "Vacant"; Q.war_minister_party = ""; }
+  if (Q.education_minister_party != "Bolshevik") { Q.education_minister = "Vacant"; Q.education_minister_party = ""; }
+  if (Q.interior_minister_party != "Bolshevik") { Q.interior_minister = "Vacant"; Q.interior_minister_party = ""; }
+  if (Q.transport_minister_party != "Bolshevik") { Q.transport_minister = "Vacant"; Q.transport_minister_party = ""; }
+  if (Q.trade_minister_party != "Bolshevik") { Q.trade_minister = "Vacant"; Q.trade_minister_party = ""; }
+  if (Q.finance_minister_party != "Bolshevik") { Q.finance_minister = "Vacant"; Q.finance_minister_party = ""; }
+  if (Q.justice_minister_party != "Bolshevik") { Q.justice_minister = "Vacant"; Q.justice_minister_party = ""; }
+  if (Q.labor_minister_party != "Bolshevik") { Q.labor_minister = "Vacant"; Q.labor_minister_party = ""; }
+  if (Q.agriculture_minister_party != "Bolshevik") { Q.agriculture_minister = "Vacant"; Q.agriculture_minister_party = ""; }
+  if (Q.food_minister_party != "Bolshevik") { Q.food_minister = "Vacant"; Q.food_minister_party = ""; }
+  if (Q.posts_minister_party != "Bolshevik") { Q.posts_minister = "Vacant"; Q.posts_minister_party = ""; }
+  if (Q.nationalities_minister_party != "Bolshevik") { Q.nationalities_minister = "Vacant"; Q.nationalities_minister_party = ""; }
+  if (Q.welfare_minister_party != "Bolshevik") { Q.welfare_minister = "Vacant"; Q.welfare_minister_party = ""; }
+  if (Q.property_minister_party != "Bolshevik") { Q.property_minister = "Vacant"; Q.property_minister_party = ""; }
+  if (Q.local_minister_party != "Bolshevik") { Q.local_minister = "Vacant"; Q.local_minister_party = ""; }
+  
+  Q.vikzhel_unrest += 20; 
+  if (Q.vikzhel_unrest >= 50 && Q.vikzhel_strength >= 25) {
+    Q.vikzhel_strike = 1;
+    Q.workers_unrest += 10;
+
+    Q.previous_military_trains = Q.military_trains;
+  	Q.previous_civilian_transport = Q.civilian_transport; 
+  	Q.previous_transportation_industry = Q.transportation_industry;
+  	Q.previous_industry = Q.industry; 
+  
+  	Q.military_trains *= 0.1;
+  	Q.civilian_transport *= 0.5;
+  	Q.transportation_industry = 0.5; 
+  	Q.industry = Q.previous_industry * 0.5; 
+  	Q.ag_transport * 0.9; 
+  }
+!}
+
+@limit
+title: We'll have to double-check the legislation of course, and probably amend a lot of this. 
+on-arrival: {!
+  Q.efficacy_sovnarkom -= 0.1;
+  Q.leninist_strength += 2; Q.leftcom_strength += 1; 
+!}
+
+@learn
+title: Perhaps we could learn a thing or two from their initiative. 
+on-arrival: {!
+  Q.moderate_strength += 5; Q.leninist_strength -= 2; Q.leftcom_strength -= 5; 
+  Q.sdi_relation += 5; Q.left_m_relation += 5; Q.centre_m_relation += 5; Q.right_m_relation += 2;
+  Q.lsr_relation += 5; Q.sr_relation += 5; Q.right_sr_relation += 2; Q.ns_relation += 5;
+!}
+
+
+             
