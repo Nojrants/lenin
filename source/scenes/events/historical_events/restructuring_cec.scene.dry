@@ -477,27 +477,27 @@ go-to: restructuring_cec
 title: Finalize the new CEC structure. 
 view-if: coalition_government = 0
 choose-if: (peasants_compromise = 1 or neutral_peasants = 1 or add_peasants >= 2) and cec_seats >= 200
-subtitle-unavailable: [?if peasants_compromise != 1 and neutral_peasants != 1 and add_peasants < 2 : We haven't adequately addressed the peasant soviet issue. ?][?if cec_seats < 290 : We haven't adequately added to the CEC's composition. ?]
+unavailable-subtitle: [?if peasants_compromise != 1 and neutral_peasants != 1 and add_peasants < 2 : We haven't adequately addressed the peasant soviet issue. ?][?if cec_seats < 290 : We haven't adequately added to the CEC's composition. ?]
 tags: finish_cec_restructure
 
 @finish2
 title: Finalize the new CEC structure, with consent of the other parties. 
 view-if: coalition_government = 1
 choose-if: ((neutral_peasants = 1 and add_duma >= 2) or (add_peasants = 4 and add_duma >= 3 and add_union2 >= 2)) and (add_soldiers >= 1 and add_unions >= 1 and add_duma >= 1) and cec_seats >= 420 
-subtitle-unavailable: The other parties don't approve of the proposal. 
+unavailable-subtitle: The other parties don't approve of the proposal. 
 
 @finish3
 title: Finalize the new CEC structure, with consent of the Left-SRs
 view-if: coalition_government = 2
 choose-if: ((peasants_compromise = 1) or (add_peasants = 4 and add_soldiers >= 3 and add_unions >= 2 and add_duma >= 1)) and cec_seats >= 360 
-subtitle-unavailable: The Left-SRs don't approve of the proposal. 
+unavailable-subtitle: The Left-SRs don't approve of the proposal. 
 
 @finish4
 title: Finalize the new CEC structure, without the consent of the other parties. 
 subtitle: This will terminate our coalition agreement. 
 view-if: coalition_government >= 1
 choose-if: (peasants_compromise = 1 or neutral_peasants = 1 or add_peasants >= 2) and cec_seats >= 200
-subtitle-unavailable: [?if peasants_compromise != 1 and neutral_peasants != 1 and add_peasants < 2 : We haven't adequately addressed the peasant soviet issue. ?][?if cec_seats < 290 : We haven't adequately added to the CEC's composition. ?]
+unavailable-subtitle: [?if peasants_compromise != 1 and neutral_peasants != 1 and add_peasants < 2 : We haven't adequately addressed the peasant soviet issue. ?][?if cec_seats < 290 : We haven't adequately added to the CEC's composition. ?]
 on-arrival: {!
   Q.democraticity -= 1; Q.instability += 5; Q.coalition_government = 0;
   Q.moderate_unrest += 10; Q.leninist_unrest -= 5; Q.leftcom_unrest -= 10;
