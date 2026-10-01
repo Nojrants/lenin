@@ -1,0 +1,543 @@
+title: Restructuring the CEC
+new-page: true
+view-if: (coalition_government = 1 and month = 11 and week = 3) or (coalition_government = 2 and month = 12 and week = 2) or (month = 12 and week = 2)
+max-visits: 1
+tags: event
+on-arrival: {!
+  Q.add_peasants = 0;
+  Q.add_soldiers = 0;
+  Q.add_unions = 0;
+  Q.add_duma = 0;
+
+  Q.new_peasant_seats = 0;
+  Q.new_soldier_seats = 0;
+  Q.new_union_seats = 0;
+  Q.new_duma_seats = 0;
+!}
+
+= Restructuring the CEC
+
+Ever since the moderate socialists walked out at the 2nd Congress of Soviets, the CEC has been operating with only 119 members (108 from the Bolsheviks and Left-SRs), though it was assumed the moderates would eventually return and take up additional seats. There is also the issue of how to incorporate the peasant soviets, which up to this point have been operating under a separate apparatus (the recent Peasants' Congress being attended by some 350 separate delegates). Some sort of restructuring of the CEC is required, though hopefully without having to sacrifice our party's lead within the body. 
+
+[?if coalition_government = 1 : Now that we have negotiated a coalition agreement, our coalition partners are expecting that the overhaul will more fairly reflect the distribution of forces and the various interest groups of the working-class movement. Our own party and the Left-SRs stand to benefit most from incorporation of peasant and soldier soviets, while the right-wing is pushing for representation for the trade unions and city dumas. Though the dumas are bourgeois institutions at heart, the opposition argues that they nonetheless represent an important democratic institution, having been elected by new rules of universal suffrage. ?] 
+
+[?if coalition_government = 2 : Now that we have negotiated a coalition agreement, the Left-SRs are expecting a favorable incorporation of the peasant soviets, as well as other various working-class bodies. The Left-SRs and our own party likely have the most to gain from representation for peasant and soldiers' soviets. Meanwhile moderate socialists still hold out hope that we will extend representation to the trade unions and city dumas. Though the dumas are bourgeois institutions at heart, the opposition argues that they nonetheless represent an important democratic institution, having been elected by new rules of universal suffrage. ?] 
+
+[?if coalition_government < 1 : Though we failed to form a coalition agreement with any other parties, it's still prudent that we address the structure of the CEC. The Left-SRs and our own party likely have the most to gain from representation for peasant and soldiers' soviets. Meanwhile moderate socialists still hold out hope that we will extend representation to the trade unions and city dumas. Though the dumas are bourgeois institutions at heart, the opposition argues that they nonetheless represent an important democratic institution, having been elected by new rules of universal suffrage. ?] 
+
+At the same time, overly expanding the CEC could have the unintended consequence of making it more wieldly and harder to arrange for regular meetings. 
+
+>New CEC composition:<br>
+>>Existing seats: 119<br>
+>>Additional peasant seats: [+ new_peasant_seats +]<br>
+>>Additional soldier seats: [+ new_soldier_seats +]<br>
+>>Additional union seats: [+ new_union_seats +]<br>
+>>Additional duma seats: [+ new_duma_seats +]<br>
+>><b>Total seats:</b> [+ cec_seats +] 
+ 
+- #cec_restructure_offers
+- @null
+- @finish
+
+
+@108_peasants
+title: Add 108 seats from the peasant congress (mostly Bolshevik and Left-SR) to match our existing 108 seats.
+subtitle: The Left-SRs consider this a fair compromise on the peasants' soviets issue. 
+tags: cec_restructure_offers
+view-if: coalition_government != 1 and 108_peasants != 1
+go-to: restructuring_cec
+on-arrival: {!
+	Q.108_peasants = 1;
+  Q.new_peasant_seats += 108;
+	
+	Q.cec_seats += 108;
+	Q.anarchist_cec += 1;
+	Q.maximalist_cec += 4;	
+	Q.b_cec += 18;
+	Q.sdi_cec += 7;
+	Q.left_m_cec += 0;
+	Q.m_cec += 0;
+	Q.right_m_cec += 0;
+	Q.lsr_cec += 76;
+	Q.sr_cec += 0;
+	Q.popular_socialist_cec += 0;
+	Q.other_cec += 2;
+	
+	Q.b_cec_display = Math.round((Q.b_cec/Q.cec_seats)*1000)/10;
+	Q.m_cec_display = Math.round(((Q.left_m_cec + Q.m_cec + Q.right_m_cec)/Q.cec_seats)*1000)/10;
+	Q.lsr_cec_display = Math.round((Q.lsr_cec/Q.cec_seats)*1000)/10;
+	Q.sr_cec_display = Math.round((Q.sr_cec/Q.cec_seats)*1000)/10;
+	Q.other_cec_display = Math.round(((Q.anarchist_cec + Q.maximalist_cec + Q.popular_socialist_cec + Q.other_cec)/Q.cec_seats)*1000)/10;
+	
+	Q.lsr_strength += 15; Q.b_strength += 5;
+	Q.lsr_relation += 5; 
+!}
+
+@108_peasants_cancel
+title: Cancel the 108 seats from the peasant soviets. 
+tags: cec_restructure_offers
+view-if: 108_peasants = 1
+go-to: restructuring_cec
+on-arrival: {!
+	Q.108_peasants = 0;
+  Q.new_peasant_seats -= 108;
+	
+	Q.cec_seats -= 108;
+	Q.anarchist_cec -= 1;
+	Q.maximalist_cec -= 4;	
+	Q.b_cec -= 18;
+	Q.sdi_cec -= 7;
+	Q.left_m_cec -= 0;
+	Q.m_cec -= 0;
+	Q.right_m_cec -= 0;
+	Q.lsr_cec -= 76;
+	Q.sr_cec -= 0;
+	Q.popular_socialist_cec -= 0;
+	Q.other_cec -= 2;
+	
+	Q.b_cec_display = Math.round((Q.b_cec/Q.cec_seats)*1000)/10;
+	Q.m_cec_display = Math.round(((Q.left_m_cec + Q.m_cec + Q.right_m_cec)/Q.cec_seats)*1000)/10;
+	Q.lsr_cec_display = Math.round((Q.lsr_cec/Q.cec_seats)*1000)/10;
+	Q.sr_cec_display = Math.round((Q.sr_cec/Q.cec_seats)*1000)/10;
+	Q.other_cec_display = Math.round(((Q.anarchist_cec + Q.maximalist_cec + Q.popular_socialist_cec + Q.other_cec)/Q.cec_seats)*1000)/10;
+	
+	Q.lsr_strength -= 15; Q.b_strength -= 5;
+	Q.lsr_relation -= 5; 
+!}
+
+@neutral_peasants
+title: Add 160 seats from the peasant congress, fairly accounting for all socialist parties. 
+subtitle: The other parties consider this a fair compromise on the peasants' soviets issue. 
+tags: cec_restructure_offers
+view-if: coalition_government = 1 and neutral_peasants != 1
+go-to: restructuring_cec
+on-arrival: {!
+	Q.neutral_peasants = 1;
+	Q.new_peasant_seats += 160;
+
+	Q.cec_seats += 160;
+	Q.anarchist_cec += 4;
+	Q.maximalist_cec += 4;	
+	Q.b_cec += 18;
+	Q.sdi_cec += 7;
+	Q.left_m_cec += 2;
+	Q.m_cec += 0;
+	Q.right_m_cec += 0;
+	Q.lsr_cec += 76;
+	Q.sr_cec += 44;
+	Q.popular_socialist_cec += 1;
+	Q.other_cec += 4;
+	
+	Q.b_cec_display = Math.round((Q.b_cec/Q.cec_seats)*1000)/10;
+	Q.m_cec_display = Math.round(((Q.left_m_cec + Q.m_cec + Q.right_m_cec)/Q.cec_seats)*1000)/10;
+	Q.lsr_cec_display = Math.round((Q.lsr_cec/Q.cec_seats)*1000)/10;
+	Q.sr_cec_display = Math.round((Q.sr_cec/Q.cec_seats)*1000)/10;
+	Q.other_cec_display = Math.round(((Q.anarchist_cec + Q.maximalist_cec + Q.popular_socialist_cec + Q.other_cec)/Q.cec_seats)*1000)/10;
+	
+	Q.lsr_strength += 10; Q.sr_strength += 5; Q.b_strength += 2;
+	Q.lsr_relation += 5; Q.sr_relation += 5; Q.left_m_relation += 2; Q.m_relation += 2;
+!}
+
+@neutral_peasants_cancel
+title: Cancel the 160 seats from the peasant soviets. 
+tags: cec_restructure_offers
+view-if: neutral_peasants = 1
+go-to: restructuring_cec
+on-arrival: {!
+	Q.neutral_peasants = 0;
+	Q.new_peasant_seats -= 160;
+
+	Q.cec_seats -= 160;
+	Q.anarchist_cec -= 4;
+	Q.maximalist_cec -= 4;	
+	Q.b_cec -= 18;
+	Q.sdi_cec -= 7;
+	Q.left_m_cec -= 2;
+	Q.m_cec -= 0;
+	Q.right_m_cec -= 0;
+	Q.lsr_cec -= 76;
+	Q.sr_cec -= 44;
+	Q.popular_socialist_cec -= 1;
+	Q.other_cec -= 4;
+	
+	Q.b_cec_display = Math.round((Q.b_cec/Q.cec_seats)*1000)/10;
+	Q.m_cec_display = Math.round(((Q.left_m_cec + Q.m_cec + Q.right_m_cec)/Q.cec_seats)*1000)/10;
+	Q.lsr_cec_display = Math.round((Q.lsr_cec/Q.cec_seats)*1000)/10;
+	Q.sr_cec_display = Math.round((Q.sr_cec/Q.cec_seats)*1000)/10;
+	Q.other_cec_display = Math.round(((Q.anarchist_cec + Q.maximalist_cec + Q.popular_socialist_cec + Q.other_cec)/Q.cec_seats)*1000)/10;
+	
+	Q.lsr_strength -= 10; Q.sr_strength -= 5; Q.b_strength -= 2;
+	Q.lsr_relation -= 5; Q.sr_relation -= 5; Q.left_m_relation -= 2; Q.m_relation -= 2;
+!}
+
+@add_peasants
+title: Add 25 seats for peasant delegates.
+tags: cec_restructure_offers
+choose-if: add_peasants < 4
+go-to: restructuring_cec
+on-arrival: {!
+	Q.add_peasants += 1;
+	Q.new_peasant_seats += 25;
+
+	Q.cec_seats += 25;
+	
+	if (coalition_government) = 1 {
+		Q.anarchist_cec += 2;
+		Q.maximalist_cec += 1;	
+		Q.b_cec += 3;
+		Q.sdi_cec += 0;
+		Q.left_m_cec += 0;
+		Q.m_cec += 0;
+		Q.right_m_cec += 0;
+		Q.lsr_cec += 13;
+		Q.sr_cec += 10;
+		Q.popular_socialist_cec += 0;
+		Q.other_cec += 2;
+	}
+	
+	if (coalition_government) != 1 {
+		Q.anarchist_cec += 2;
+		Q.maximalist_cec += 1;	
+		Q.b_cec += 5;
+		Q.sdi_cec += 0;
+		Q.left_m_cec += 0;
+		Q.m_cec += 0;
+		Q.right_m_cec += 0;
+		Q.lsr_cec += 13;
+		Q.sr_cec += 2;
+		Q.popular_socialist_cec += 0;
+		Q.other_cec += 2;
+	}
+	
+	Q.b_cec_display = Math.round((Q.b_cec/Q.cec_seats)*1000)/10;
+	Q.m_cec_display = Math.round(((Q.left_m_cec + Q.m_cec + Q.right_m_cec)/Q.cec_seats)*1000)/10;
+	Q.lsr_cec_display = Math.round((Q.lsr_cec/Q.cec_seats)*1000)/10;
+	Q.sr_cec_display = Math.round((Q.sr_cec/Q.cec_seats)*1000)/10;
+	Q.other_cec_display = Math.round(((Q.anarchist_cec + Q.maximalist_cec + Q.popular_socialist_cec + Q.other_cec)/Q.cec_seats)*1000)/10;
+	
+	Q.lsr_strength += 2; Q.sr_strength += 1; Q.b_strength += 1;
+	Q.lsr_relation += 2; Q.sr_relation += 1; 
+!}
+
+@remove_peasants
+title: Remove 25 seats for peasant delegates.
+tags: cec_restructure_offers
+choose-if: add_peasants > 0
+go-to: restructuring_cec
+on-arrival: {!
+	Q.add_peasants -= 1;
+	Q.new_peasant_seats -= 25;
+
+	Q.cec_seats -= 25;
+	
+	if (coalition_government) = 1 {
+		Q.anarchist_cec -= 2;
+		Q.maximalist_cec -= 1;	
+		Q.b_cec -= 3;
+		Q.sdi_cec -= 0;
+		Q.left_m_cec -= 0;
+		Q.m_cec -= 0;
+		Q.right_m_cec -= 0;
+		Q.lsr_cec -= 13;
+		Q.sr_cec -= 10;
+		Q.popular_socialist_cec -= 0;
+		Q.other_cec -= 2;
+	}
+	
+	if (coalition_government) != 1 {
+		Q.anarchist_cec -= 2;
+		Q.maximalist_cec -= 1;	
+		Q.b_cec -= 5;
+		Q.sdi_cec -= 0;
+		Q.left_m_cec -= 0;
+		Q.m_cec -= 0;
+		Q.right_m_cec -= 0;
+		Q.lsr_cec -= 13;
+		Q.sr_cec -= 2;
+		Q.popular_socialist_cec -= 0;
+		Q.other_cec -= 2;
+	}
+	
+	Q.b_cec_display = Math.round((Q.b_cec/Q.cec_seats)*1000)/10;
+	Q.m_cec_display = Math.round(((Q.left_m_cec + Q.m_cec + Q.right_m_cec)/Q.cec_seats)*1000)/10;
+	Q.lsr_cec_display = Math.round((Q.lsr_cec/Q.cec_seats)*1000)/10;
+	Q.sr_cec_display = Math.round((Q.sr_cec/Q.cec_seats)*1000)/10;
+	Q.other_cec_display = Math.round(((Q.anarchist_cec + Q.maximalist_cec + Q.popular_socialist_cec + Q.other_cec)/Q.cec_seats)*1000)/10;
+	
+	Q.lsr_strength -= 2; Q.sr_strength -= 1; Q.b_strength -= 1;
+	Q.lsr_relation -= 2; Q.sr_relation -= 1; 
+!}
+
+@add_soldiers
+title: Add 25 seats for soldiers' delegates.
+tags: cec_restructure_offers
+choose-if: add_soldiers < 4
+go-to: restructuring_cec
+on-arrival: {!
+	Q.add_soldiers += 1;
+  Q.new_soldier_seats += 25;
+
+	
+	Q.cec_seats += 25;
+	
+	Q.anarchist_cec += 1;
+	Q.maximalist_cec += 1;	
+	Q.b_cec += 6;
+	Q.sdi_cec += 1;
+	Q.left_m_cec += 2;
+	Q.m_cec += 1;
+	Q.right_m_cec += 0;
+	Q.lsr_cec += 6;
+	Q.sr_cec += 2;
+	Q.popular_socialist_cec += 0;
+	Q.other_cec += 1;
+	
+	Q.b_cec_display = Math.round((Q.b_cec/Q.cec_seats)*1000)/10;
+	Q.m_cec_display = Math.round(((Q.left_m_cec + Q.m_cec + Q.right_m_cec)/Q.cec_seats)*1000)/10;
+	Q.lsr_cec_display = Math.round((Q.lsr_cec/Q.cec_seats)*1000)/10;
+	Q.sr_cec_display = Math.round((Q.sr_cec/Q.cec_seats)*1000)/10;
+	Q.other_cec_display = Math.round(((Q.anarchist_cec + Q.maximalist_cec + Q.popular_socialist_cec + Q.other_cec)/Q.cec_seats)*1000)/10;
+	
+	Q.lsr_strength += 2; Q.left_m_strength += 0.5; Q.sr_strength += 0.5; Q.b_strength += 1;
+	Q.lsr_relation += 1; Q.sr_relation += 0.5; Q.left_m_relation += 0.5; 
+!}
+
+@remove_soldiers
+title: Remove 25 seats for soldiers' delegates.
+tags: cec_restructure_offers
+choose-if: add_soldiers > 0
+go-to: restructuring_cec
+on-arrival: {!
+	Q.add_soldiers -= 1;
+  Q.new_soldier_seats -= 25;
+	
+	Q.cec_seats -= 25;
+	
+	Q.anarchist_cec -= 1;
+	Q.maximalist_cec -= 1;	
+	Q.b_cec -= 6;
+	Q.sdi_cec -= 1;
+	Q.left_m_cec -= 2;
+	Q.m_cec -= 1;
+	Q.right_m_cec -= 0;
+	Q.lsr_cec -= 6;
+	Q.sr_cec -= 2;
+	Q.popular_socialist_cec -= 0;
+	Q.other_cec -= 1;
+	
+	Q.b_cec_display = Math.round((Q.b_cec/Q.cec_seats)*1000)/10;
+	Q.m_cec_display = Math.round(((Q.left_m_cec + Q.m_cec + Q.right_m_cec)/Q.cec_seats)*1000)/10;
+	Q.lsr_cec_display = Math.round((Q.lsr_cec/Q.cec_seats)*1000)/10;
+	Q.sr_cec_display = Math.round((Q.sr_cec/Q.cec_seats)*1000)/10;
+	Q.other_cec_display = Math.round(((Q.anarchist_cec + Q.maximalist_cec + Q.popular_socialist_cec + Q.other_cec)/Q.cec_seats)*1000)/10;
+	
+	Q.lsr_strength -= 2; Q.left_m_strength -= 0.5; Q.sr_strength -= 0.5; Q.b_strength -= 1;
+	Q.lsr_relation -= 1; Q.sr_relation -= 0.5; Q.left_m_relation -= 0.5; 
+!}
+
+
+@add_unions
+title: Add 25 seats for trade union delegates. 
+tags: cec_restructure_offers
+choose-if: add_unions < 4
+go-to: restructuring_cec
+on-arrival: {!
+	Q.add_unions += 1;
+  Q.new_union_seats += 25;
+	
+	Q.cec_seats += 25;
+	
+	Q.anarchist_cec += 0;
+	Q.maximalist_cec += 0;	
+	Q.b_cec += 11;
+	Q.sdi_cec += 1;
+	Q.left_m_cec += 2;
+	Q.m_cec += 2;
+	Q.right_m_cec += 1;
+	Q.lsr_cec += 4;
+	Q.sr_cec += 2;
+	Q.popular_socialist_cec += 0;
+	Q.other_cec += 2;
+	
+	Q.b_cec_display = Math.round((Q.b_cec/Q.cec_seats)*1000)/10;
+	Q.m_cec_display = Math.round(((Q.left_m_cec + Q.m_cec + Q.right_m_cec)/Q.cec_seats)*1000)/10;
+	Q.lsr_cec_display = Math.round((Q.lsr_cec/Q.cec_seats)*1000)/10;
+	Q.sr_cec_display = Math.round((Q.sr_cec/Q.cec_seats)*1000)/10;
+	Q.other_cec_display = Math.round(((Q.anarchist_cec + Q.maximalist_cec + Q.popular_socialist_cec + Q.other_cec)/Q.cec_seats)*1000)/10;
+	
+	Q.left_m_strength += 1; Q.m_strength += 1; Q.right_m_strength += 0.5; Q.lsr_strength += 1; Q.sr_strength += 0.5; Q.b_strength += 2;
+	Q.left_m_relation += 2; Q.centre_m_relation += 1; Q.right_m_relation += 0.5; Q.lsr_relation += 1; Q.centre_sr_relation += 0.5; 
+!}
+
+@remove_unions
+title: Remove 25 seats for soldiers' delegates.
+tags: cec_restructure_offers
+choose-if: add_unions > 0
+go-to: restructuring_cec
+on-arrival: {!
+	Q.add_unions -= 1;
+  Q.new_union_seats -= 25;
+	
+	Q.cec_seats -= 25;
+	
+	Q.anarchist_cec -= 0;
+	Q.maximalist_cec -= 0;	
+	Q.b_cec -= 11;
+	Q.sdi_cec -= 1;
+	Q.left_m_cec -= 2;
+	Q.m_cec -= 2;
+	Q.right_m_cec -= 1;
+	Q.lsr_cec -= 3;
+	Q.sr_cec -= 2;
+	Q.popular_socialist_cec -= 0;
+	Q.other_cec -= 2;
+	
+	Q.b_cec_display = Math.round((Q.b_cec/Q.cec_seats)*1000)/10;
+	Q.m_cec_display = Math.round(((Q.left_m_cec + Q.m_cec + Q.right_m_cec)/Q.cec_seats)*1000)/10;
+	Q.lsr_cec_display = Math.round((Q.lsr_cec/Q.cec_seats)*1000)/10;
+	Q.sr_cec_display = Math.round((Q.sr_cec/Q.cec_seats)*1000)/10;
+	Q.other_cec_display = Math.round(((Q.anarchist_cec + Q.maximalist_cec + Q.popular_socialist_cec + Q.other_cec)/Q.cec_seats)*1000)/10;
+	
+	Q.left_m_strength -= 1; Q.m_strength -= 1; Q.right_m_strength -= 0.5; Q.lsr_strength -= 1; Q.sr_strength -= 0.5; Q.b_strength -= 2;
+	Q.left_m_relation -= 2; Q.centre_m_relation -= 1; Q.right_m_relation -= 0.5; Q.lsr_relation -= 1; Q.centre_sr_relation -= 0.5; 
+!}
+
+@add_duma
+title: Add 25 seats for duma representatives. 
+tags: cec_restructure_offers
+choose-if: add_duma < 4
+go-to: restructuring_cec
+on-arrival: {!
+	Q.add_duma += 1;
+  Q.new_duma_seats += 25;
+	
+	Q.cec_seats += 25;
+	
+	Q.anarchist_cec += 0;
+	Q.maximalist_cec += 0;	
+	Q.b_cec += 3;
+	Q.sdi_cec += 1;
+	Q.left_m_cec += 1;
+	Q.m_cec += 4;
+	Q.right_m_cec += 4;
+	Q.lsr_cec += 2;
+	Q.sr_cec += 5;
+	Q.popular_socialist_cec += 1;
+	Q.other_cec += 4;
+	
+	Q.b_cec_display = Math.round((Q.b_cec/Q.cec_seats)*1000)/10;
+	Q.m_cec_display = Math.round(((Q.left_m_cec + Q.m_cec + Q.right_m_cec)/Q.cec_seats)*1000)/10;
+	Q.lsr_cec_display = Math.round((Q.lsr_cec/Q.cec_seats)*1000)/10;
+	Q.sr_cec_display = Math.round((Q.sr_cec/Q.cec_seats)*1000)/10;
+	Q.other_cec_display = Math.round(((Q.anarchist_cec + Q.maximalist_cec + Q.popular_socialist_cec + Q.other_cec)/Q.cec_seats)*1000)/10;
+	
+	Q.left_m_strength += 1; Q.m_strength += 1; Q.right_m_strength += 0.5; Q.lsr_strength += 1; Q.sr_strength += 0.5; Q.b_strength += 2;
+	Q.left_m_relation += 2; Q.centre_m_relation += 1; Q.right_m_relation += 0.5; Q.lsr_relation += 1; Q.centre_sr_relation += 0.5; 
+!}
+
+@remove_duma
+title: Remove 25 seats for soldiers' delegates.
+tags: cec_restructure_offers
+choose-if: add_duma > 0
+go-to: restructuring_cec
+on-arrival: {!
+	Q.add_duma -= 1;
+  Q.new_duma_seats -= 25;
+	
+	Q.cec_seats -= 25;
+	
+	Q.anarchist_cec -= 0;
+	Q.maximalist_cec -= 0;	
+	Q.b_cec -= 3;
+	Q.sdi_cec -= 1;
+	Q.left_m_cec -= 1;
+	Q.m_cec -= 4;
+	Q.right_m_cec -= 4;
+	Q.lsr_cec -= 2;
+	Q.sr_cec -= 5;
+	Q.popular_socialist_cec -= 1;
+	Q.other_cec -= 4;
+	
+	Q.b_cec_display = Math.round((Q.b_cec/Q.cec_seats)*1000)/10;
+	Q.m_cec_display = Math.round(((Q.left_m_cec + Q.m_cec + Q.right_m_cec)/Q.cec_seats)*1000)/10;
+	Q.lsr_cec_display = Math.round((Q.lsr_cec/Q.cec_seats)*1000)/10;
+	Q.sr_cec_display = Math.round((Q.sr_cec/Q.cec_seats)*1000)/10;
+	Q.other_cec_display = Math.round(((Q.anarchist_cec + Q.maximalist_cec + Q.popular_socialist_cec + Q.other_cec)/Q.cec_seats)*1000)/10;
+	
+	Q.left_m_strength -= 1; Q.m_strength -= 1; Q.right_m_strength -= 0.5; Q.lsr_strength -= 1; Q.sr_strength -= 0.5; Q.b_strength -= 2;
+	Q.left_m_relation -= 2; Q.centre_m_relation -= 1; Q.right_m_relation -= 0.5; Q.lsr_relation -= 1; Q.centre_sr_relation -= 0.5; 
+!}
+
+@null
+title: ------------------------------------------------------------------------
+go-to: restructuring_cec
+
+
+@finish
+title: Finalize the new CEC structure. 
+view-if: coalition_government = 0
+choose-if: (108_peasants = 1 or neutral_peasants = 1 or add_peasants >= 2) and cec_seats >= 200
+subtitle-unavailable: [?if 108_peasants != 1 and neutral_peasants != 1 and add_peasants < 2 : We haven't adequately addressed the peasant soviet issue. ?][?if cec_seats < 290 : We haven't adequately added to the CEC's composition. ?]
+tags: finish_cec_restructure
+
+@finish2
+title: Finalize the new CEC structure, with consent of the other parties. 
+view-if: coalition_government = 1
+choose-if: ((neutral_peasants = 1 and add_duma >= 2) or (add_peasants = 4 and add_duma >= 3 and add_union2 >= 2)) and (add_soldiers >= 1 and add_unions >= 1 and add_duma >= 1) and cec_seats >= 420 
+subtitle-unavailable: The other parties don't approve of the proposal. 
+
+@finish3
+title: Finalize the new CEC structure, with consent of the Left-SRs
+view-if: coalition_government = 2
+choose-if: ((108_peasants = 1) or (add_peasants = 4 and add_soldiers >= 3 and add_unions >= 2 and add_duma >= 1)) and cec_seats >= 360 
+subtitle-unavailable: The Left-SRs don't approve of the proposal. 
+
+@finish4
+title: Finalize the new CEC structure, without the consent of the other parties. 
+subtitle: This will terminate our coalition agreement. 
+view-if: coalition_government >= 1
+choose-if: (108_peasants = 1 or neutral_peasants = 1 or add_peasants >= 2) and cec_seats >= 200
+subtitle-unavailable: [?if 108_peasants != 1 and neutral_peasants != 1 and add_peasants < 2 : We haven't adequately addressed the peasant soviet issue. ?][?if cec_seats < 290 : We haven't adequately added to the CEC's composition. ?]
+on-arrival: {!
+  Q.democraticity -= 1; Q.instability += 5; Q.coalition_government = 0;
+  Q.moderate_unrest += 10; Q.leninist_unrest -= 5; Q.leftcom_unrest -= 10;
+  Q.lsr_in_gov = 0; Q.m_in_gov = 0; Q.sr_in_gov = 0; Q.ns_in_gov = 0; Q.sdi_in_gov = 0;
+  
+  if (Q.foreign_minister_party != "Bolshevik") { Q.foreign_minister = "Vacant"; Q.foreign_minister_party = ""; }
+  if (Q.war_minister_party != "Bolshevik") { Q.war_minister = "Vacant"; Q.war_minister_party = ""; }
+  if (Q.education_minister_party != "Bolshevik") { Q.education_minister = "Vacant"; Q.education_minister_party = ""; }
+  if (Q.interior_minister_party != "Bolshevik") { Q.interior_minister = "Vacant"; Q.interior_minister_party = ""; }
+  if (Q.transport_minister_party != "Bolshevik") { Q.transport_minister = "Vacant"; Q.transport_minister_party = ""; }
+  if (Q.trade_minister_party != "Bolshevik") { Q.trade_minister = "Vacant"; Q.trade_minister_party = ""; }
+  if (Q.finance_minister_party != "Bolshevik") { Q.finance_minister = "Vacant"; Q.finance_minister_party = ""; }
+  if (Q.justice_minister_party != "Bolshevik") { Q.justice_minister = "Vacant"; Q.justice_minister_party = ""; }
+  if (Q.labor_minister_party != "Bolshevik") { Q.labor_minister = "Vacant"; Q.labor_minister_party = ""; }
+  if (Q.agriculture_minister_party != "Bolshevik") { Q.agriculture_minister = "Vacant"; Q.agriculture_minister_party = ""; }
+  if (Q.food_minister_party != "Bolshevik") { Q.food_minister = "Vacant"; Q.food_minister_party = ""; }
+  if (Q.posts_minister_party != "Bolshevik") { Q.posts_minister = "Vacant"; Q.posts_minister_party = ""; }
+  if (Q.nationalities_minister_party != "Bolshevik") { Q.nationalities_minister = "Vacant"; Q.nationalities_minister_party = ""; }
+  if (Q.welfare_minister_party != "Bolshevik") { Q.welfare_minister = "Vacant"; Q.welfare_minister_party = ""; }
+  if (Q.property_minister_party != "Bolshevik") { Q.property_minister = "Vacant"; Q.property_minister_party = ""; }
+  if (Q.local_minister_party != "Bolshevik") { Q.local_minister = "Vacant"; Q.local_minister_party = ""; }
+
+  Q.vikzhel_unrest += 20; 
+  if (Q.vikzhel_unrest >= 50 && Q.vikzhel_strength >= 25) {
+    Q.vikzhel_strike = 1;
+    Q.workers_unrest += 10;
+
+  	Q.previous_military_trains = Q.military_trains;
+  	Q.previous_civilian_transport = Q.civilian_transport; 
+  	Q.previous_transportation_industry = Q.transportation_industry;
+  	Q.previous_industry = Q.industry; 
+  
+  	Q.military_trains *= 0.1;
+  	Q.civilian_transport *= 0.5;
+  	Q.transportation_industry = 0.5; 
+  	Q.industry = Q.previous_industry * 0.5; 
+  	Q.ag_transport * 0.9; 
+  }
+  !}
+ 
+We force through the plan to restructure the CEC, without the approval of any other parties. The opposition immediately lodges its protests and breaks off any agreements with us. 
+  
+[?if vikzhel_strike == 1 : Worse, Vikzhel has declared they are launching their promised railroad strike, bringing industry to a standstill. ?]  
