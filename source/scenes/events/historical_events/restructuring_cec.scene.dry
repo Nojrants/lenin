@@ -40,15 +40,15 @@ At the same time, overly expanding the CEC could have the unintended consequence
 - @finish
 
 
-@108_peasants
+@peasants_compromise
 title: Add 108 seats from the peasant congress (mostly Bolshevik and Left-SR) to match our existing 108 seats.
 subtitle: The Left-SRs consider this a fair compromise on the peasants' soviets issue. 
 tags: cec_restructure_offers
-view-if: coalition_government != 1 and 108_peasants != 1
+view-if: coalition_government != 1 and peasants_compromise != 1
 go-to: restructuring_cec
 on-arrival: {!
-	Q.108_peasants = 1;
-  Q.new_peasant_seats += 108;
+	Q.peasants_compromise = 1;
+ 	 Q.new_peasant_seats += 108;
 	
 	Q.cec_seats += 108;
 	Q.anarchist_cec += 1;
@@ -73,14 +73,14 @@ on-arrival: {!
 	Q.lsr_relation += 5; 
 !}
 
-@108_peasants_cancel
+@peasants_compromise_cancel
 title: Cancel the 108 seats from the peasant soviets. 
 tags: cec_restructure_offers
-view-if: 108_peasants = 1
+view-if: peasants_compromise = 1
 go-to: restructuring_cec
 on-arrival: {!
-	Q.108_peasants = 0;
-  Q.new_peasant_seats -= 108;
+	Q.peasants_compromise = 0;
+  	Q.new_peasant_seats -= 108;
 	
 	Q.cec_seats -= 108;
 	Q.anarchist_cec -= 1;
@@ -181,7 +181,7 @@ on-arrival: {!
 
 	Q.cec_seats += 25;
 	
-	if (coalition_government) = 1 {
+	if (coalition_government == 1) {
 		Q.anarchist_cec += 2;
 		Q.maximalist_cec += 1;	
 		Q.b_cec += 3;
@@ -195,7 +195,7 @@ on-arrival: {!
 		Q.other_cec += 2;
 	}
 	
-	if (coalition_government) != 1 {
+	if (coalition_government != 1) {
 		Q.anarchist_cec += 2;
 		Q.maximalist_cec += 1;	
 		Q.b_cec += 5;
@@ -230,7 +230,7 @@ on-arrival: {!
 
 	Q.cec_seats -= 25;
 	
-	if (coalition_government) = 1 {
+	if (coalition_government == 1) {
 		Q.anarchist_cec -= 2;
 		Q.maximalist_cec -= 1;	
 		Q.b_cec -= 3;
@@ -244,7 +244,7 @@ on-arrival: {!
 		Q.other_cec -= 2;
 	}
 	
-	if (coalition_government) != 1 {
+	if (coalition_government != 1) {
 		Q.anarchist_cec -= 2;
 		Q.maximalist_cec -= 1;	
 		Q.b_cec -= 5;
@@ -476,8 +476,8 @@ go-to: restructuring_cec
 @finish
 title: Finalize the new CEC structure. 
 view-if: coalition_government = 0
-choose-if: (108_peasants = 1 or neutral_peasants = 1 or add_peasants >= 2) and cec_seats >= 200
-subtitle-unavailable: [?if 108_peasants != 1 and neutral_peasants != 1 and add_peasants < 2 : We haven't adequately addressed the peasant soviet issue. ?][?if cec_seats < 290 : We haven't adequately added to the CEC's composition. ?]
+choose-if: (peasants_compromise = 1 or neutral_peasants = 1 or add_peasants >= 2) and cec_seats >= 200
+subtitle-unavailable: [?if peasants_compromise != 1 and neutral_peasants != 1 and add_peasants < 2 : We haven't adequately addressed the peasant soviet issue. ?][?if cec_seats < 290 : We haven't adequately added to the CEC's composition. ?]
 tags: finish_cec_restructure
 
 @finish2
@@ -489,15 +489,15 @@ subtitle-unavailable: The other parties don't approve of the proposal.
 @finish3
 title: Finalize the new CEC structure, with consent of the Left-SRs
 view-if: coalition_government = 2
-choose-if: ((108_peasants = 1) or (add_peasants = 4 and add_soldiers >= 3 and add_unions >= 2 and add_duma >= 1)) and cec_seats >= 360 
+choose-if: ((peasants_compromise = 1) or (add_peasants = 4 and add_soldiers >= 3 and add_unions >= 2 and add_duma >= 1)) and cec_seats >= 360 
 subtitle-unavailable: The Left-SRs don't approve of the proposal. 
 
 @finish4
 title: Finalize the new CEC structure, without the consent of the other parties. 
 subtitle: This will terminate our coalition agreement. 
 view-if: coalition_government >= 1
-choose-if: (108_peasants = 1 or neutral_peasants = 1 or add_peasants >= 2) and cec_seats >= 200
-subtitle-unavailable: [?if 108_peasants != 1 and neutral_peasants != 1 and add_peasants < 2 : We haven't adequately addressed the peasant soviet issue. ?][?if cec_seats < 290 : We haven't adequately added to the CEC's composition. ?]
+choose-if: (peasants_compromise = 1 or neutral_peasants = 1 or add_peasants >= 2) and cec_seats >= 200
+subtitle-unavailable: [?if peasants_compromise != 1 and neutral_peasants != 1 and add_peasants < 2 : We haven't adequately addressed the peasant soviet issue. ?][?if cec_seats < 290 : We haven't adequately added to the CEC's composition. ?]
 on-arrival: {!
   Q.democraticity -= 1; Q.instability += 5; Q.coalition_government = 0;
   Q.moderate_unrest += 10; Q.leninist_unrest -= 5; Q.leftcom_unrest -= 10;
