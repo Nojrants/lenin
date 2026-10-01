@@ -568,7 +568,7 @@ Q.industrial_output = Q.industry_gdp;
 
 
 // Agriculture, with 1913 = 100
-Q.Q.ag_stability_modifier = 0;
+Q.ag_stability_modifier = 0;
 Q.ag_land = 95;
 Q.ag_labor_participation = 95; 
 Q.ag_labor = (Q.peasants * Q.ag_labor_participation / 100) / 75 * 100;
@@ -579,7 +579,7 @@ Q.ag_weather = 100;
 Q.ag_stability = Math.max(0, 100 - Q.instability) + Q.ag_stability_modifier;
 
 Q.ag_capacity = (Q.ag_land/100)**0.40 * (Q.ag_labor/100)**0.25 * (Q.ag_capital/100)**0.20
-              * (Q.ag_inputs/100)**0.15 * (Q.ag_productivity/100) * (1 + (Q.finalefficacy_agriculture - 0.5));;
+              * (Q.ag_inputs/100)**0.15 * (Q.ag_productivity/100) * (1 + (Q.finalefficacy_agriculture - 0.5));
 
 Q.ag_output = Q.ag_capacity * (0.50 + 0.20*Q.ag_weather/100 + 0.20*Q.ag_transport/100 + 0.10*Q.ag_stability/100);
 Q.ag_gdp = Q.ag_output * 100;
