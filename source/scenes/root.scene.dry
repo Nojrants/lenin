@@ -558,8 +558,9 @@ Q.ag_transport = Q.civilian_transport;
 
 
 // Factories
+Q.industry_stability_modifier = 0;
 Q.industry_labor = Math.max(0, 100 - Q.unemployed * 2);
-Q.industry_stability = Math.max(0, 100 - Q.instability);
+Q.industry_stability = Math.max(0, 100 - Q.instability) + Q.industry_stability_modifier;
 Q.industry_realization = 0.35 + 0.30*(Q.industry_labor/100) + 0.20*(Q.civilian_transport/100) + 0.15*(Q.industry_stability/100);
 Q.industry_gdp = Q.industry * Q.industry_realization * (Q.specialist_capacity/100); 
 Q.factory_utilization = Q.industry_realization * (Q.specialist_capacity/100) * 100;
@@ -567,14 +568,15 @@ Q.industrial_output = Q.industry_gdp;
 
 
 // Agriculture, with 1913 = 100
+Q.Q.ag_stability_modifier = 0;
 Q.ag_land = 95;
 Q.ag_labor_participation = 95; 
 Q.ag_labor = (Q.peasants * Q.ag_labor_participation / 100) / 75 * 100;
 Q.ag_capital = 75;
 Q.ag_inputs = 75;      
-Q.ag_productivity = 98;
+Q.ag_productivity = 95;
 Q.ag_weather = 100;     
-Q.ag_stability = Math.max(0, 100 - Q.instability);
+Q.ag_stability = Math.max(0, 100 - Q.instability) + Q.ag_stability_modifier;
 
 Q.ag_capacity = (Q.ag_land/100)**0.40 * (Q.ag_labor/100)**0.25 * (Q.ag_capital/100)**0.20
               * (Q.ag_inputs/100)**0.15 * (Q.ag_productivity/100) * (1 + (Q.finalefficacy_agriculture - 0.5));;
@@ -587,8 +589,9 @@ Q.land_reform_progress = 0;
 
 
 // Trade
+Q.trade_stability_modifier = 0;
 Q.trade_marketization = Math.max(0, 100 - Q.industries_nationalized - Q.industries_syndicalized);
-Q.trade_stability = Math.max(0, 100 - Q.instability);
+Q.trade_stability = Math.max(0, 100 - Q.instability) + Q.trade_stability_modifier;
 
 Q.trade_capacity = ((Q.ag_gdp + Q.industry_gdp) / 200) * (1 + (Q.finalefficacy_trade - 0.5));
 Q.trade_realization = 0.30 + 0.30*(Q.trade_marketization/100) + 0.20*(Q.civilian_transport/100) + 0.20*(Q.trade_stability/100)
