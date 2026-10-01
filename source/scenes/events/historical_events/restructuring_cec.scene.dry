@@ -3,7 +3,6 @@ new-page: true
 view-if: (coalition_government = 1 and month = 11 and week = 3) or (coalition_government = 2 and month = 12 and week = 2) or (month = 12 and week = 2)
 max-visits: 1
 tags: event
-go-to: restructure_menu
 on-arrival: {!
   Q.add_peasants = 0;
   Q.add_soldiers = 0;
