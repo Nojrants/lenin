@@ -261,7 +261,7 @@ on-arrival: {!
 !}
 
 @limit
-title: We'll have to double-check the legislation of course, and probably amend a lot of this. 
+title: We'll have to double-check the legislation of course, and amend a lot of this. 
 on-arrival: {!
   Q.efficacy_sovnarkom -= 0.1;
   Q.leninist_strength += 2; Q.leftcom_strength += 1; 
