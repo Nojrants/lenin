@@ -104,7 +104,7 @@ At the same time, socialists around the world applaud our actions as truly revol
 @bargaining_chips
 title: Perhaps we can use this info to gain some leverage with the Entente instead. 
 subtitle: Begin secret talks with the allies, promising to withhold publication in exchange for favorable terms. 
-choose-if: foreign_minister != "Trotsky" and foreign_minister.faction != "Leftist"
+choose-if: foreign_minister != "Trotsky" and foreign_minister != "Ioffe"
 unavailable-subtitle: The current people's commissar is from the radical left-wing of the Party, and won't allow this. 
 
 @leave_them_be
