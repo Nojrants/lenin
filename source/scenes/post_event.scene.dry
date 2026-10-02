@@ -655,6 +655,7 @@ console.log("industry_gdp: ", Q.industry_gdp);
 console.log("trade_gdp: ", Q.trade_gdp);
 console.log("government_gdp: ", Q.government_gdp);
 console.log("gdp_index: ", Q.gdp_index);
+console.log("bagmen_strength: ", Q.bagmen_strength);
 
 
 
@@ -1441,15 +1442,15 @@ if (Q.year == 1917 && Q.month == 11 && Q.week == 2) Q.gdp_index = 49;
 		party_support_results.maximalist = 0;
 		party_support_results.anarchist = 0;
 
-	console.log("party_support_results.sr:", party_support_results.sr);
-	console.log("party_support_results.right_sr:", party_support_results.right_sr);
-	console.log("party_support_results.lsr:", party_support_results.lsr);
-	console.log("party_support_results.left_m:", party_support_results.left_m);
-	console.log("party_support_results.m:", party_support_results.m);
-	console.log("party_support_results.right_m:", party_support_results.right_m);
-	console.log("party_support_results.sdi:", party_support_results.sdi);
-	console.log("party_support_results.anarchist:", party_support_results.anarchist);
-	console.log("party_support_results.maximalist:", party_support_results.maximalist);
+		//	console.log("party_support_results.sr:", party_support_results.sr);
+		//	console.log("party_support_results.right_sr:", party_support_results.right_sr);
+		//	console.log("party_support_results.lsr:", party_support_results.lsr);
+		//	console.log("party_support_results.left_m:", party_support_results.left_m);
+		//	console.log("party_support_results.m:", party_support_results.m);
+		//	console.log("party_support_results.right_m:", party_support_results.right_m);
+		//	console.log("party_support_results.sdi:", party_support_results.sdi);
+		//	console.log("party_support_results.anarchist:", party_support_results.anarchist);
+		//	console.log("party_support_results.maximalist:", party_support_results.maximalist);
     }
     Q.soviet_support_records.push(party_support_results);
 
