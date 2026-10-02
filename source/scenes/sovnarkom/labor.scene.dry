@@ -236,7 +236,7 @@ on-arrival: {!
 
 
 @goto_labor_affairs
-title: LABOR AFFAIRS
+title: LABOR RELATIONS
 
 - #labor_affairs
 - @labor_return
