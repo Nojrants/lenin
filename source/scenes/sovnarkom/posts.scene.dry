@@ -6,9 +6,9 @@ view-if: posts_policy_timer == 0 and posts_minister_party = "Bolshevik"
 tags: sovnarkom, government
 card-image: img/posts.PNG
 
-The <b>People's Commissariat for Posts & Telegraphs</b> (Narkompochtel) is charged with administration of communications and the postal service. 
-  
 = Posts & Telegrams
+
+The <b>People's Commissariat for Posts & Telegraphs</b> (Narkompochtel) is charged with administration of communications and the postal service. 
 
 - @administration
 - @postal
