@@ -74,9 +74,11 @@ tags: foreign_special
 new-page: true
 view-if: secret_treaties != 1
 
+= Secret Treaties
+
 Upon coming to power, we captured a plethora of foreign documents and correspondences dating to both the Imperial Russian government and the Provisional Governemnt of 1917. We now have concrete proof for a number of embarrasing arrangements behind closed doors:
 
->**Constaninople Agreement** (1915) - Russia was promised (bribed with?) future ownership over Constantinople and the Bosporus straits. And yet the Tsar claimed it was a defense war?!
+>**Constaninople Agreement** (1915) - Russia was promised (bribed with?) future ownership over Constantinople and the Bosporus straits. And yet the Tsar claimed it was a defensive war?!
 
 >**Sykes–Picot Agreement** (1916) - Britain and France have pre-divided the former Ottoman Empire amongst themselves! So much for national self-determination...
 
@@ -102,7 +104,7 @@ At the same time, socialists around the world applaud our actions as truly revol
 @bargaining_chips
 title: Perhaps we can use this info to gain some leverage with the Entente instead. 
 subtitle: Begin secret talks with the allies, promising to withhold publication in exchange for favorable terms. 
-choose-if: foreign_minister_faction != "Left"
+choose-if: foreign_minister != "Trotsky" and foreign_minister.faction != "Leftist"
 unavailable-subtitle: The current people's commissar is from the radical left-wing of the Party, and won't allow this. 
 
 @leave_them_be
