@@ -163,7 +163,7 @@ title: NEWSPAPERS
 - @posts_return
 
 
-@build_telegrams
+@crackdown_newspapers
 title: Crack down on hostile newspapers and hinder their distribution. 
 subtitle: -0.5 resources
 choose-if: resources >= 0.5
