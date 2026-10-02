@@ -63,7 +63,13 @@ title: DIPLOMACY
 Here we can decide to conduct diplomacy with specific countries. 
 
 - #diplomacy
+- @diplomacy_null
 - @foreign_return
+
+@diplomacy_null
+title: -------------------------------------------------------------------------------------------------
+go-to: diplomacy
+
 
 
 
