@@ -1432,7 +1432,7 @@ Q.timers = [//m_party
             // prov_gov
             'agricultural_policy', 'food_policy', 'fiscal_policy',
             'foreign_policy', 'judiciary', 'labor_policy', 'labor_affairs',
-            'military_policy', 'education_policy', 'posts_policy'
+            'military_policy', 'education_policy', 'posts_policy',
             'internal_security', 'transport_policy',
             'industrial_policy', 'civil_rights',
             'shuffle_cabinet', 'social_policy',
