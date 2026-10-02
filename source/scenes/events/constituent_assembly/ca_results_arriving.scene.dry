@@ -214,7 +214,7 @@ data.forEach(d => {
 
 = Constituent Assembly Results
 
-{!<svg id="constituent_assembly" style="width: 625px; height: 350px;"> </svg>!}
+{!<svg id="constituent_assembly" style="width: 625px; height: 310px;"> </svg>!}
 
 {!<table class="soviet-table">!}
 {!<tr><th>Party</th><th>Vote Share</th></tr>!}
@@ -251,7 +251,7 @@ Most districts are now reporting results, and it's clear that we have lost.
 
 The Socialist-Revolutionaries have emerged in first place, and once combined with other moderate socialists, they are poised to control the Constituent Assembly. 
 
-If it's any consolation, the election does prove support for the Bolsheviks in a number of specific places: With strong turnout in the city of Petrograd, we manage to secure a plurality (45%), followed by the Kadets in a distant second (26%), though we receive a slight majority in the working-class districts of the city specifically. We also receive a strong majority among soldiers of the Petrograd Garrison (75%), the Baltic Fleet, and fronts closest to the city. 
+If it's any consolation, the election does prove support for the Bolsheviks in a number of specific places: With strong turnout in the city of Petrograd, we manage to secure a plurality (45%), followed by the Kadets in a distant second (26%), and we receive a slight majority in the working-class districts of the city specifically. We also receive a strong majority among soldiers of the Petrograd Garrison (75%), the Baltic Fleet, and fronts closest to the city. 
 
 Though failing to achieve a majority in urban districts overall, we do receive a slight plurality (33%) over other socialists (~30%). Among soldiers at the front, the SRs manage to defeat us (40.7%), though we are not far behind them (39.5%). 
 
