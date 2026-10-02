@@ -14,7 +14,7 @@ The Council of People's Commissars (Sovnarkom).
 - @sovnarkom_administration
 - @change_sovnarkom_composition
 - @sovnarkom_null
-- @cut_officialdom
+- #sovnarkom_special
 - @found_welfare
 - @root: Do not change policy
 - @easy_discard
@@ -66,15 +66,70 @@ on-arrival: resources -= 0.5; efficacy_sovnarkom += 0.1 if efficacy_sovnarkom < 
 @cut_officialdom
 title: Eliminate government "officialdom".
 subtitle: Cut unnecessary privileges and reduce all salaries to worker' wages.
+tags: sovnarkom_special
 view-if: officialdom = 0
 on-arrival: officialdom = 1; efficacy_sovnarkom += 0.1 if efficacy_sovnarkom < 1; efficacy_finance -= 0.05; efficacy_foreign -= 0.05; efficacy_military -= 0.05; efficacy_enlightenment -= 0.05; efficacy_internal -= 0.05; efficacy_railways -= 0.05; efficacy_trade -= 0.05; efficacy_justice -= 0.05; efficacy_agriculture -= 0.05; efficacy_foodsupply -= 0.05; efficacy_nationalities -= 0.05; efficacy_welfare -= 0.05; sovnarkom_expend -= 0.25; foreignaffairs_expend -= 0.5; military_expend -= 0.5; enlightmenet_expend -= 0.5; railways_expend -= 0.5; trade_expend -= 0.5; finance_expend -= 0.5; justice_expend -= 0.5; agriculture_expend -= 0.5; foodsupply_expend -= 0.5; nationalities_expend -= 0.5; welfare_expend -= 0.5; monthly_inflation -= 0.1; labor_unrest -= 5; intelligentsia_unrest -= 5; 
 
 @found_welfare
 title: Found a new People's Commissariat for Welfare. 
 subtitle: We need a dedicated commissariat focusing on the people's general welfare. 
+tags: sovnarkom_special
 view-if: welfare_founded = 0
 on-arrival: welfare_founded = 1; efficacy_welfare += 0.5 if efficacy_welfare < 1; welfare_expend += 0.5; labor_unrest -= 5; peasant_unrest -= 2; intelligentsia_unrest -= 2; 
 go-to: welfare_commissar_menu
+
+@terminate_coalition
+title: Terminate the coalition agreement! 
+tags: sovnarkom_special
+view-if: coalition_agreement >= 1
+on-arrival: {!
+  Q.instability += 2; Q.democraticity -= 2; Q.coalition_government = 0; 
+  Q.moderate_unrest += 10; Q.leninist_unrest -= 5; Q.leftcom_unrest -= 10;
+  if (Q.lsr_in_gov == 1) { Q.lsr_in_gov = 0; Q.lsr_relation -= 10; }
+  if (Q.m_in_gov == 1) { Q.m_in_gov = 0; Q.centre_m_relation -= 10; }
+  if (Q.sr_in_gov == 1) { Q.sr_in_gov = 0; Q.centre_sr_relation -= 10; }
+  if (Q.sdi_in_gov == 1) { Q.sdi_in_gov = 0; Q.sdi_relation -= 10; }
+  if (Q.ns_in_gov == 1) { Q.ns_in_gov = 0; Q.ns_relation -= 10; }
+  Q.right_m_strength += 5; Q.right_sr_strength += 5;
+  if (Q.foreign_minister_party != "Bolshevik") { Q.foreign_minister = "Vacant"; Q.foreign_minister_party = ""; }
+  if (Q.war_minister_party != "Bolshevik") { Q.war_minister = "Vacant"; Q.war_minister_party = ""; }
+  if (Q.education_minister_party != "Bolshevik") { Q.education_minister = "Vacant"; Q.education_minister_party = ""; }
+  if (Q.interior_minister_party != "Bolshevik") { Q.interior_minister = "Vacant"; Q.interior_minister_party = ""; }
+  if (Q.transport_minister_party != "Bolshevik") { Q.transport_minister = "Vacant"; Q.transport_minister_party = ""; }
+  if (Q.trade_minister_party != "Bolshevik") { Q.trade_minister = "Vacant"; Q.trade_minister_party = ""; }
+  if (Q.finance_minister_party != "Bolshevik") { Q.finance_minister = "Vacant"; Q.finance_minister_party = ""; }
+  if (Q.justice_minister_party != "Bolshevik") { Q.justice_minister = "Vacant"; Q.justice_minister_party = ""; }
+  if (Q.labor_minister_party != "Bolshevik") { Q.labor_minister = "Vacant"; Q.labor_minister_party = ""; }
+  if (Q.agriculture_minister_party != "Bolshevik") { Q.agriculture_minister = "Vacant"; Q.agriculture_minister_party = ""; }
+  if (Q.food_minister_party != "Bolshevik") { Q.food_minister = "Vacant"; Q.food_minister_party = ""; }
+  if (Q.posts_minister_party != "Bolshevik") { Q.posts_minister = "Vacant"; Q.posts_minister_party = ""; }
+  if (Q.nationalities_minister_party != "Bolshevik") { Q.nationalities_minister = "Vacant"; Q.nationalities_minister_party = ""; }
+  if (Q.welfare_minister_party != "Bolshevik") { Q.welfare_minister = "Vacant"; Q.welfare_minister_party = ""; }
+  if (Q.property_minister_party != "Bolshevik") { Q.property_minister = "Vacant"; Q.property_minister_party = ""; }
+  if (Q.local_minister_party != "Bolshevik") { Q.local_minister = "Vacant"; Q.local_minister_party = ""; }
+  
+  Q.vikzhel_unrest += 20; 
+  if (Q.vikzhel_unrest >= 50 && Q.vikzhel_strength >= 25) {
+    Q.vikzhel_strike = 1;
+    Q.workers_unrest += 10;
+
+    Q.previous_military_trains = Q.military_trains;
+  	Q.previous_civilian_transport = Q.civilian_transport; 
+  	Q.previous_transportation_industry = Q.transportation_industry;
+  	Q.previous_industry = Q.industry; 
+  
+  	Q.military_trains *= 0.1;
+  	Q.civilian_transport *= 0.5;
+  	Q.transportation_industry = 0.5; 
+  	Q.industry = Q.previous_industry * 0.5; 
+  	Q.ag_transport * 0.9; 
+  }
+!}
+
+
+
+
+
 
 @welfare_commissar_menu
 
