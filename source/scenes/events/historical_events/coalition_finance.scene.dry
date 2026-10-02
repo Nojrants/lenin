@@ -1,11 +1,11 @@
 title: Economic Reforms
 subtitle: Our coalition partners have proposed some changes...
 new-page: true
-view-if: coalition_government >= 1 and coalition_actions_timer = 0 and ((finance_minister_party != "Bolshevik" and finance_minister_party != "") or (trade_minister_party != "Bolshevik" and trade_minister_party != "") or (labor_minister_party != "Bolshevik" and labor_minister_party != "")) and (month = 12 and week >= 2)
+view-if: coalition_actions = 1 and coalition_government >= 1 and coalition_actions_timer = 0 and ((finance_minister_party != "Bolshevik" and finance_minister_party != "") or (trade_minister_party != "Bolshevik" and trade_minister_party != "") or (labor_minister_party != "Bolshevik" and labor_minister_party != "")) and (month = 12 and week >= 2)
 max-visits: 1
 tags: event
 on-arrival: {!
-  Q.coalition_actions_timer = 2;
+  Q.coalition_actions_timer = 2; Q.coalition_actions = 2; 
 
   if (Q.finance_minister_party != "Bolshevik" && Q.finance_minister_party != "") {
       if (Q.income <= Q.expenditure * 1.5) {
