@@ -1,0 +1,132 @@
+title: Justice
+new-page: true
+is-card: true
+on-arrival: judiciary_timer += 2; week_actions += 1
+view-if: judiciary_timer == 0 and justice_minister_party = "Bolshevik"
+tags: sovnarkom, government
+card-image: img/justice.PNG
+
+= Justice
+
+The <b>People's Commissariat for Justice</b> (Narkomyust) is charged with administration of courts, prisons, and judicial affairs. 
+
+- @administration
+- @legal
+- @procurator
+- @justice_null
+- #justice_special
+- @root: Do not change communications policy
+- @easy_discard
+- @cancel_advisor_action
+
+@justice_null
+title: -------------------------------------------------------------------------------------------------
+go-to: justice
+
+@justice_return
+title: Cancel action.
+go-to: justice
+
+
+@abolish_justice
+title: Abolish the imperial judicial system. 
+subtitle: Institute revolutionary courts, appoint new magistrates, abolish old rules. 
+max-visits: 1
+tags: justice_special
+on-arrival: {!
+  Q.efficacy_justice -= 0.2;
+  Q.justice_expend -= 0.25; 
+  Q.democraticity += 0.5; Q.instability += 0.5; 
+  Q.workers_unrest -= 5; Q.peasants_unrest -= 5; Q.soldiers_unrest -= 5;
+!}
+
+  
+@administration
+title: ADMINISTRATION
+
+- @improve_admin
+- @hire_staff
+- @corruption
+- @justice_return
+
+@improve_admin
+title: Streamline the commissariat
+subtitle: Cut waste and inefficiencies, increase labor intensity
+choose-if: justice_corruption = 0
+unavailable-subtitle: There's nothing more to cut at the moment. 
+on-arrival: justice_expend -= 0.25; efficacy_justice += 0.1 if efficacy_justice < 1; justice_streamline += 8; 
+
+@hire_staff
+title: Hire administrative personnel
+subtitle: -0.5 resources
+on-arrival: efficacy_justice += 0.2 if efficacy_justice < 1; justice_expend += 0.25; resources -= 0.5;
+
+@corruption
+title: Root-out departmental corruption. 
+subtitle: -0.5 resources
+on-arrival: efficacy_justice += 0.1 if efficacy_justice < 1; resources -= 0.5;
+
+
+@legal
+title: LEGAL REFORMS
+
+- #legal_options
+- @justice_return
+
+@codify_property_laws
+title: Codify and implement new socialist property laws. 
+subtitle: -0.5 resources
+choose-if: resources >= 0.5 and efficacy_justice >= 0.5
+unavailable-subtitle: -0.5 resources – [?if resources < 0.5: We lack the resources. ?][?if efficacy_justice < 0.5 : We lack the administrative capacity. ?]
+tags: legal_options
+max-visits: 1
+on-arrival: {!
+  Q.resources -= 0.5; 
+  Q.peasants_unrest -= 5; Q.kulaks_unrest -= 5; Q.workers_unrest -= 5; 
+  Q.instability -= 1; Q.democraticity += 2; 
+!}
+
+@codify_property_laws
+title: Release prisoners currently held on counterrevolutionary suspicions. 
+tags: legal_options
+on-arrival: {!
+  Q.justice_expend -= 0.1; 
+  Q.elites_unrest -= 5; Q.middle_unrest -= 3; Q.intelligentsia_unrest -= 5; Q.workers_unrest -= 3;
+  Q.democraticity += 1; 
+  Q.b_strength -= 1; 
+!}
+
+
+@procurator
+title: PROCURATOR
+
+- #procurator_options
+- @justice_return
+
+@investigate_commissariats
+title: Investigate commissariats for corruption and administrative misconduct. 
+subtitle: -1 resources
+choose-if: resources >= 1 and efficacy_justice >= 0.8
+unavailable-subtitle: -1 resources – [?if resources < 1: We lack the resources. ?][?if efficacy_justice < 0.8 : We lack the administrative capacity. ?]
+tags: procurator_options
+on-arrival: {!
+  Q.resources -= 0.5; 
+  Q.democraticity += 1; 
+  Q.workers_unrest += 5; Q.intelligentsia_unrest += 2; 
+
+  Q.efficacy_finance += Math.round(Math.random() * 10) / 100;
+  Q.efficacy_foreign += Math.round(Math.random() * 10) / 100;
+  Q.efficacy_military += Math.round(Math.random() * 10) / 100;
+  Q.efficacy_enlightenment += Math.round(Math.random() * 10) / 100;
+  Q.efficacy_internal += Math.round(Math.random() * 10) / 100;
+  Q.efficacy_railways += Math.round(Math.random() * 10) / 100;
+  Q.efficacy_trade += Math.round(Math.random() * 10) / 100;
+  Q.efficacy_labor += Math.round(Math.random() * 10) / 100;
+  Q.efficacy_justice += Math.round(Math.random() * 10) / 100;
+  Q.efficacy_agriculture += Math.round(Math.random() * 10) / 100;
+  Q.efficacy_foodsupply += Math.round(Math.random() * 10) / 100;
+  Q.efficacy_posts += Math.round(Math.random() * 10) / 100;
+  Q.efficacy_nationalities += Math.round(Math.random() * 10) / 100;
+  Q.efficacy_welfare += Math.round(Math.random() * 10) / 100;
+
+!}
