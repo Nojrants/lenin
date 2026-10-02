@@ -21,6 +21,11 @@ title: Germany
 tags: diplomacy
 go-to: germany_menu
 
+@diplomacy_null
+title: -------------------------------------------------------------------------------------------------
+tags: diplomacy
+go-to: foreign_affairs.diplomacy
+
 @diplomacy_cancel
 title: Cancel action.
 go-to: foreign_affairs.diplomacy
