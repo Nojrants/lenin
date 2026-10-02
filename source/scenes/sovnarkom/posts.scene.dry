@@ -1,0 +1,192 @@
+title: Posts & Telegraphs
+new-page: true
+is-card: true
+on-arrival: posts_policy_timer += 2; week_actions += 1
+view-if: posts_policy_timer == 0 and posts_minister_party = "Bolshevik"
+tags: sovnarkom, government
+card-image: img/posts.PNG
+
+The <b>People's Commissariat for Posts & Telegraphs</b> (Narkompochtel) is charged with administration of communications and the postal service. 
+  
+= Posts & Telegrams
+
+- @administration
+- @postal
+- @telecommunications
+- @newspapers
+- @posts_null
+- @root: Do not change communications policy
+- @easy_discard
+- @cancel_advisor_action
+
+@posts_null
+title: -------------------------------------------------------------------------------------------------
+go-to: posts
+
+@posts_return
+title: Cancel action.
+go-to: posts
+
+  
+@administration
+title: ADMINISTRATION
+
+- @improve_admin
+- @hire_staff
+- @corruption
+- @posts_return
+
+@improve_admin
+title: Streamline the commissariat
+subtitle: Cut waste and inefficiencies, increase labor intensity
+choose-if: posts_corruption = 0
+unavailable-subtitle: There's nothing more to cut at the moment. 
+on-arrival: posts_expend -= 0.25; efficacy_posts += 0.1 if efficacy_posts < 1; posts_streamline += 8; 
+
+@hire_staff
+title: Hire administrative personnel
+subtitle: -0.5 resources
+on-arrival: efficacy_posts += 0.2 if efficacy_posts < 1; posts_expend += 0.25; resources -= 0.5;
+
+@corruption
+title: Root-out departmental corruption. 
+subtitle: -0.5 resources
+on-arrival: efficacy_posts += 0.1 if efficacy_posts < 1; resources -= 0.5;
+
+
+@postal
+title: POSTAL SERVICE
+
+- #postal_options
+- @posts_return
+
+@build_postal_service
+title: Build up postal infrastructure in remote districts. 
+subtitle: -1 resources – Offices will be built and overhauled. 
+choose-if: resources >= 1
+unavailable-subtitle: -1 resources – [?if resources < 1: We lack the resources. ?]
+tags: postal_options
+on-arrival: {!
+  Q.resources -= 1; Q.posts_expend += 0.25;
+  Q.peasants_unrest -= 5; Q.kulaks_unrest -= 5;
+  Q.peasants_b += 1*(1-Q.b_dissent); Q.kulaks_b += 1*(1-Q.b_dissent);
+  Q.instability -= 0.25; 
+!}
+
+@stamps
+title: Issue new line of stamps. 
+subtitle: -0.5 resources – This should raise revenue over time. 
+choose-if: resources >= 0.5
+unavailable-subtitle: -0.5 resources – [?if resources < 0.5: We lack the resources. ?]
+tags: postal_options
+max-visits: 1
+on-arrival: {!
+  Q.resources -= 0.5; 
+  Q.monopolies += 0.025; 
+  Q.peasants_unrest -= 3; Q.workers_unrest -= 1; 
+!}
+
+@monitor_correspondence
+title: Establish monitoring for counterrevolutionary correspondence. 
+subtitle: -1 resources – Letter and telegram traffic will be monitored by dedicated agents. 
+choose-if: resources >= 1 and efficacy_posts >= 0.8
+unavailable-subtitle: -1 resources – [?if resources < 1: We lack the resources. ?][?if efficacy_posts < 0.8 : We lack the administrative capacity. ?]
+tags: postal_options
+max-visits: 1
+on-arrival: {!
+  Q.resources -= 1; Q.posts_expend -= 0.5; 
+  Q.instability -= 1; Q.democraticity -= 1; Q.disillusionment += 2;
+  Q.b_strength += 1; 
+!}
+
+
+
+
+@telecommunications
+title: TELECOMMUNICATIONS
+
+- #telecommunications_options
+- @posts_return
+
+@build_telegrams
+title: Build up and repair telegraph infrastructure. 
+subtitle: -1 resources
+choose-if: resources >= 1
+unavailable-subtitle: -1 resources – [?if resources < 1: We lack the resources. ?]
+tags: telecommunications_options
+on-arrival: {!
+  Q.resources -= 1; Q.posts_expend += 0.25;
+  Q.efficacy_posts += 0.05; 
+  Q.instability -= 0.5; Q.b_strength += 0.5;
+  Q.peasants_unrest -= 2; Q.kulaks_unrest -= 2; Q.workers_unrest -= 2; 
+  Q.morale += 0.05; 
+!}
+
+@found_radio
+title: Establish a radio communications network. 
+subtitle: -2 resources — This has the potential to transform the way we reach the mases. 
+choose-if: resources >= 2 and efficacy_posts >= 0.8
+unavailable-subtitle: -2 resources – [?if resources < 2: We lack the resources. ?][?if efficacy_posts < 0.8 : We lack the administrative capacity. ?]
+tags: telecommunications_options
+max-visits: 1
+on-arrival: {!
+  Q.radio = 1
+  Q.resources -= 2; Q.posts_expend += 0.5;
+  Q.instability += -2; Q.b_strength += 2;
+  Q.peasants_b += 8*(1-Q.b_dissent); Q.kulaks_b += 5*(1-Q.b_dissent); Q.workers_b += 5*(1-Q.b_dissent); 
+  Q.peasants_unrest -= 5; Q.kulaks_unrest -= 3; Q.workers_unrest -= 3; 
+!}
+
+@expand_radio
+title: Build up the radio network and invest in radio production. 
+subtitle: -1 resources
+view-if: radio >= 1
+choose-if: resources >= 2 and efficacy_posts >= 0.8
+unavailable-subtitle: -1 resources – [?if resources < 1: We lack the resources. ?][?if efficacy_posts < 0.8 : We lack the administrative capacity. ?]
+tags: telecommunications_options
+on-arrival: {!
+  Q.radio += 1; 
+  Q.resources -= 1; Q.posts_expend += 0.25;
+  Q.instability += -1; Q.b_strength += 1;
+  Q.peasants_b += 6*(1-Q.b_dissent); Q.kulaks_b += 4*(1-Q.b_dissent); Q.workers_b += 4*(1-Q.b_dissent); 
+  Q.peasants_unrest -= 5; Q.kulaks_unrest -= 3; Q.workers_unrest -= 3; 
+!}
+
+
+
+
+  
+@newspapers
+title: NEWSPAPERS
+
+- #newspaper_options
+- @posts_return
+
+
+@build_telegrams
+title: Crack down on hostile newspapers and hinder their distribution. 
+subtitle: -0.5 resources
+choose-if: resources >= 0.5
+unavailable-subtitle: [?if resources < 0.5: -0.5 resources – We lack the funds. ?]
+tags: newspaper_options
+on-arrival: {!
+  Q.resources -= 0.5; 
+  Q.instability -= 1; Q.democraticity -= 1; Q.b_strength += 0.5;
+!}
+
+@reading_rooms
+title: Invest in rural reading rooms to boost literacy and outreach. 
+subtitle: -1 resources
+tags: newspaper_options
+choose-if: resources > 1 and efficacy_posts >= 0.7
+unavailable-subtitle: -1 resources – [?if resouces < 1 : We lack the resources. ?] [?if efficacy_posts < 0.7 : We lack the administrative capacity. ?]
+on-arrival: {!
+  Q.resources -= 1; Q.posts_expend += 0.25; 
+  Q.peasants_b += 5*(1-Q.b_dissent); Q.kulaks_b += 3*(1-Q.b_dissent); 
+  Q.peasants_unrest -= 5; Q.kulaks_unrest -= 5;
+  Q.b_strength += 0.5; 
+!}
+
+
+
+
