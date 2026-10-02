@@ -86,7 +86,7 @@ on-arrival: {!
   Q.instability -= 1; Q.democraticity += 2; 
 !}
 
-@codify_property_laws
+@release_prisoners
 title: Release prisoners currently held on counterrevolutionary suspicions. 
 tags: legal_options
 on-arrival: {!
