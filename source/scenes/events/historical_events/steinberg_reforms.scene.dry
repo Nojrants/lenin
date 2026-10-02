@@ -5,7 +5,7 @@ view-if: coalition_government >= 1 and coalition_actions_timer = 0 and justice_m
 max-visits: 1
 tags: event
 on-arrival: {!
-  Q.coalition_actions_timer = 2;
+  Q.coalition_actions_timer = 2; Q.coalition_actions = 1;
   Q.pro_vote = 0; Q.opposition_vote = 0;
   if (Q.prime_minister_party == "Bolshevik") Q.pro_vote += 1;
   if (Q.foreign_minister_party == "Bolshevik") Q.pro_vote += 1;
