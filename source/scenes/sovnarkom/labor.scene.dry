@@ -192,7 +192,7 @@ title: PROGRAMS
 
 
 @worker_provisions
-title: Institute a system deducting union dues system from wages automatically, in order to fund worker provisions and welfare programs. 
+title: Institute a system deducting union dues from wages automatically, in order to fund worker provisions and welfare programs. 
 tags: labor_programs
 choose-if: efficacy_labor >= 0.5
 unavailable-subtitle: We lack the administrative capacity for this. 
