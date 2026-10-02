@@ -67,7 +67,7 @@ choose-if: resources >= 1
 unavailable-subtitle: -1 resources – [?if resources < 1: We lack the resources. ?]
 tags: postal_options
 on-arrival: {!
-  Q.resources -= 1; Q.posts_expend += 0.25;
+  Q.resources -= 1; Q.posts_expend += 0.25; Q.monopolies += 0.02; 
   Q.peasants_unrest -= 5; Q.kulaks_unrest -= 5;
   Q.peasants_b += 1*(1-Q.b_dissent); Q.kulaks_b += 1*(1-Q.b_dissent);
   Q.instability -= 0.25; 
@@ -82,7 +82,7 @@ tags: postal_options
 max-visits: 1
 on-arrival: {!
   Q.resources -= 0.5; 
-  Q.monopolies += 0.025; 
+  Q.monopolies += 0.015; 
   Q.peasants_unrest -= 3; Q.workers_unrest -= 1; 
 !}
 
