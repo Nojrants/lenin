@@ -113,7 +113,7 @@ go-to: foreign_affairs
 
 
 @call_for_peace
-title: Issue a statement to all belligerents in the Great War, calling for general peace negotiations. 
+title: Issue a statement to all belligerents, calling for general peace negotiations. 
 tags: foreign_special
 new-page: true
 max-visits: 1
