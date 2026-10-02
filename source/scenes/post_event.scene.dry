@@ -502,7 +502,7 @@ if (Q.agricultural_industry_production >= 5) {
 	}
 } else {
 	if (Q.food_sold > 0.07 + (Q.agricultural_industry_production - 1)/100) {
-		Q.food_sold -= 0.001;
+		Q.food_sold -= 0.0005;
 	}
 }
 if (Q.rural_hunger > 0) {
@@ -614,8 +614,15 @@ Q.ag_capacity = (Q.ag_land/100)**0.40 * (Q.ag_labor/100)**0.25 * (Q.ag_capital/1
 Q.ag_output = Q.ag_capacity * (0.50 + 0.20*Q.ag_weather/100 + 0.20*Q.ag_transport/100 + 0.10*Q.ag_stability/100);
 Q.ag_gdp = Q.ag_output * 100;
 
-Q.food_sold += ((35 - Q.peasants_unrest)/40000) + ((35 - Q.kulaks_unrest)/30000);
+Q.food_sold += ((35 - Q.peasants_unrest)/50000) + ((35 - Q.kulaks_unrest)/40000);
 
+if (Q.land_reform_progress < 10) {
+	Q.land_reform_progress += 0.5;
+	Q.ag_land -= 1; 
+	Q.ag_productivity -= 0.5; 
+	Q.instability += 0.25;
+	Q.food_sold *= 0.99;
+}
 
 // Trade
 Q.trade_marketization = Math.max(0, 100 - Q.industries_nationalized - Q.industries_syndicalized);
@@ -666,7 +673,7 @@ if (Q.monthly_inflation >= 20) {
 	Q.unemployed += (Q.monthly_inflation - 10) * 0.005;
 	Q.workers_unrest += Q.monthly_inflation / 10; 
 	Q.underclass_unrest += Q.monthly_inflation / 10; 
-	Q.food_sold *= (1 - (Q.monthly_inflation / 1000));
+	Q.food_sold *= (1 - (Q.monthly_inflation / 2000));
 }
 Q.unemployed += ((Math.random() * 2 - 1) + (Q.instability / 50)) / 4;
 
