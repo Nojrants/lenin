@@ -584,8 +584,8 @@ Q.ag_capacity = (Q.ag_land/100)**0.40 * (Q.ag_labor/100)**0.25 * (Q.ag_capital/1
 Q.ag_output = Q.ag_capacity * (0.50 + 0.20*Q.ag_weather/100 + 0.20*Q.ag_transport/100 + 0.10*Q.ag_stability/100);
 Q.ag_gdp = Q.ag_output * 100;
 
-Q.land_reform = 0;
-Q.land_reform_progress = 0;
+Q.land_reform = 1;
+Q.land_reform_progress = 1;
 
 
 // Trade
