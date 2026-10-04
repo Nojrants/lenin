@@ -199,6 +199,7 @@ Q.maternity_founded = 0;
 Q.widows_founded = 0;
 Q.nurseries_founded = 0; 
 Q.safety_standards = 1; 
+Q.migration_modifier = 0; 
 
 Q.elites = 2;
 Q.elites_unrest = 65;
