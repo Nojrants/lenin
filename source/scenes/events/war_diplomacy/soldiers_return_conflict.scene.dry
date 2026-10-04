@@ -1,0 +1,52 @@
+title: Conflict with the Demobilized Soldiers
+new-page: true
+view-if: month = 12 and week = 3
+max-visits: 1
+tags: event
+on-arrival: {!
+    Q.instability += 2; 
+    Q.industry_stability_modifier -= 10;
+    Q.industry *= 0.9;
+    Q.discipline -= 0.1; 
+    Q.unemployment *= 1.2; 
+    Q.migration_modifier += 0.5; 
+    Q.soldiers -= 1; Q.peasants += 1; 
+!}
+
+
+= Demobilized Soldiers
+
+Following the demobilization of the army, soldiers have finally begun to trickle back into the cities and villages, but this has created a whole host of new issues. Soldiers are returning to their former places of work expecting to have their jobs restored, only to discover new employees filling their positions, and that the factories had apparently been "seized by the workers". In some cases, soldiers return expecting "back pay" or other bonuses. With our own slogans in their hearts, these soldiers have set to "seizing the factories", but this puts them directly at odds with other constituency—the workers of the home front. Both sides turn to us to intervene on their behalf, as the disputes and clashes (sometimes violent) slow production all the more.
+
+All the while, incumbent workers are jealously guarding the prerogatives of "their" factories, coming into conflict with other factories and collectives around them, and with the state commissars attempting to regulate them all. 
+
+The question is, how can we possibly juggle all their demands at once? 
+
+- @workers
+- @compromise
+- @soldiers
+
+@workers
+title: The workers have a right to defend their factories, restrict the returning soldiers!
+on-arrival: {!
+  Q.soldiers_unrest += 20; Q.workers_unrest += 10; Q.peasants_unrest += 10; 
+  Q.soldiers_b -= 6; Q.workers_b -= 3; 
+!}
+
+@compromise
+title: Try to strike a balance and negotiate a compromise between the two sides.
+subtitle: This may involve giving partial pay raises and compensation. 
+on-arrival: {!
+  Q.soldiers_unrest += 20; Q.workers_unrest += 20; Q.peasants_unrest += 5; 
+  Q.soldiers_b -= 5; Q.workers_b -= 5; 
+  Q.efficacy_labor -= 0.2; Q.labor_expend += 0.25; 
+!}
+
+@soldiers
+title: Those soldiers have earned a say, force the workers to accomodate them! 
+on-arrival: {!
+  Q.soldiers_unrest += 10; Q.workers_unrest += 20; Q.peasants_unrest += 10; 
+  Q.soldiers_b -= 3; Q.workers_b -= 6; 
+!}
+
+
