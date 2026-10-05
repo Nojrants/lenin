@@ -874,7 +874,7 @@ Q.migration = ((Q.workers_unrest - 50) * 0.0005
 Q.workers -= Q.migration;
 Q.peasants += Q.migration;
 Q.unemployed -= Q.migration; 
-Q.migration_modifier * 0.5; 
+Q.migration_modifier *= 0.5; 
 
 
 for (var c of Q.classes) {
