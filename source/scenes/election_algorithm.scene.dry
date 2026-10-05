@@ -170,7 +170,7 @@ for (var party of Q.parties) {
     for (var c of soviet_classes) {
         party_support += Q[c]*Q[c+'_'+party+'_normalized'];
     }
-    Q[party + '_support'] = Math.max(0, Q[party + '_support']);
+    Q[party + '_support'] = Math.max(0, party_support);
     total_support += Q[party + '_support'];
 }
 
