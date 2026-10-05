@@ -27,7 +27,7 @@ on-arrival: democraticity -= 2; instability += 1; count_stopped = 1;
 max-visits: 1
 go-to: ca_reaction
 
-In a panic, the Electoral Commission in the capital is arrested, though they are eventually released without a charge materializing. A surveillance commission is established to monitor the counting, though it soon becomes clear the negative results were legitimate...
+In a panic, the Electoral Commission in the capital is arrested, though they are eventually released without a charge materializing. A surveillance commission is established to monitor the counting, though it soon becomes clear the negative results are legitimate...
 
 
   
@@ -295,7 +295,7 @@ on-arrival:{!
 	Q.soviet_congress_timer = Q.constituent_assembly_timer;
 !}
 
-We have called for a soviet congress to be held a few days after the Constituent Assembly's scheculed opening. If worse comes to worse, we can use the Congress of Soviets to legitimize any actions we take against the Assembly. 
+We have called for a soviet congress to be held a few days after the Constituent Assembly's scheduled opening. If worse comes to worse, we can use the Congress of Soviets to legitimize any actions we take against the Assembly. 
 
 @delegitimize_the_ca
 title: Launch a campaign to delegitimize the election results and the Assembly. 
