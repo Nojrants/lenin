@@ -94,6 +94,9 @@ on-arrival: {!
   Q.elites_unrest -= 5; Q.middle_unrest -= 3; Q.intelligentsia_unrest -= 5; Q.workers_unrest -= 3;
   Q.democraticity += 1; 
   Q.b_strength -= 1; 
+  Q.sdi_relation += 4; Q.left_m_relation += 5; Q.centre_m_relation += 3; Q.lsr_relation += 5; Q.centre_sr_relation += 3;
+  Q.right_m_relation += 2; Q.right_sr_relation += 2; Q.ns_relation += 2; 
+  if (Q.coalition_government > 0) Q.coalition_tension -= 1; 
 !}
 
 
