@@ -3,12 +3,13 @@ subtitle: We have secured the city of Moscow!
 new-page: true
 view-if: year = 1917 and month = 11 and week = 2 
 max-visits: 1
-face-image: img/womens_day.jpg
 tags: event
-on-arrival: oppokov_available = 1; tomsky_available = 1; instability -= 5; 
+on-arrival: oppokov_available = 1; tomsky_available = 1; instability += 1; 
 
 = Fall of the Kremlin
 
-While the arrest of the Provisional Government in Petrograd went off relatively easily, the same could not be said for Moscow. There counterrevolutionary forces managed to hold their positions, leading to protracted fighting in the streets, especially in the vicinity of the Kremlin. But after a week of fighting, the remaining defenders have surrendered, giving us control over the historic capital of Russia!
+<div style="text-align:center;">
+    <img src="img/down_with_eagle.png" style="display:block; margin:0 auto; max-width:100%; height:auto; border:3px solid #8b0000; box-shadow:0 0 0 2px #d4af37 inset;">
+</div>
 
-The capture of the city has also freed-up several prominent Bolsheviks for new assignments. 
+While the arrest of the Provisional Government in Petrograd went off relatively easily, the same could not be said for Moscow. There counterrevolutionary forces managed to hold their positions, leading to protracted fighting in the streets, especially in the vicinity of the Kremlin. But after a week of fighting, the remaining defenders have surrendered, giving us control over the historic capital of Russia! The capture of the city has also freed-up several prominent Bolsheviks for new assignments. 
