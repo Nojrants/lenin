@@ -1,0 +1,28 @@
+title: Nationalities Candidates
+new-page: true
+
+
+@nationalities_stalin
+title: Iosif Stalin
+subtitle: {!
+<span style="color: var(--bolshevik-color);">Bolshevik</span> — Party administrator and nationalities specialist.<ul>
+Overall skill: ★★★★★<br>
+Suitability: ★★★</ul>
+!}
+unavailable-subtitle: {!
+<span style="color: var(--bolshevik-color);">Bolshevik</span> — Party administrator and nationalities specialist.<ul>
+Overall skill: ★★★★★<br>
+Suitability: ★★★</ul>
+!}
+tags: nationalities_candidates
+choose-if: nationalities_minister != "Stalin"  
+on-arrival: nationalities_minister = "Stalin"; nationalities_minister_party = "Bolshevik";
+go-to: sovnarkom_composition
+  
+  
+
+@nationalities_vacant
+title: Let's leave the position vacant for now. 
+tags: nationalities_candidates
+on-arrival: nationalities_minister = "Vacant"; nationalities_minister_party = "";
+go-to: sovnarkom_composition
