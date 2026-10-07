@@ -14,7 +14,8 @@ Overall skill: ★★★<br>
 Suitability: ★★★</ul>
 !}
 tags: trade_candidates
-on-arrival: transport_minister = "Nogin"; transport_minister_party = "Bolshevik"; 
+choose-if: trade_minister != "Nogin"
+on-arrival: trade_minister = "Nogin"; trade_minister_party = "Bolshevik"; 
 go-to: sovnarkom_composition
 
 @trade_proshian
