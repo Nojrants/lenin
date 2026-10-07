@@ -1066,7 +1066,7 @@ lsr_coalition: {
 harbringers_progress: {
     name: "Harbringers of Progress",
     description: "Assemble a government composition that is at least 50% women, 50% non-Russian minorities, and has LGBT representation.",
-    image: "img/equality.png
+    image: "img/equality.png"
 },
 
 elders_zion: {
