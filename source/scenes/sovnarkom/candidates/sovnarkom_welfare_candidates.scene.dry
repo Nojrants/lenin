@@ -1,0 +1,63 @@
+title: Welfare Candidates
+new-page: true
+
+
+@welfare_milyutin
+title: Alexandra Kollontai
+subtitle: {!
+<span style="color: var(--bolshevik-color);">Leftist</span> — Strong social reformer, feminist, and radical.<ul>
+Overall skill: ★★★<br>
+Suitability: ★★★★★</ul>
+!}
+unavailable-subtitle: {!
+<span style="color: var(--bolshevik-color);">Leftist</span> — Strong social reformer, feminist, and radical.<ul>
+Overall skill: ★★★<br>
+Suitability: ★★★★★</ul>
+!}
+tags: welfare_candidates
+choose-if: welfare_minister != "Kollontai"  
+on-arrival: welfare_minister = "Kollontai"; welfare_minister_party = "Bolshevik";
+go-to: sovnarkom_composition
+  
+
+@welfare_vinokurov
+title: Alexander Vinokurov
+subtitle: {!
+<span style="color: var(--bolshevik-color);">Leninist</span> — Early social-democratic organizer with experience in economic and legal matters.<ul>
+Overall skill: ★★☆<br>
+Suitability: ★★☆</ul>
+!}
+unavailable-subtitle: {!
+<span style="color: var(--bolshevik-color);">Leninist</span> — Early social-democratic organizer with experience in economic and legal matters.<ul>
+Overall skill: ★★☆<br>
+Suitability: ★★☆</ul>
+!}
+tags: welfare_candidates
+choose-if: welfare_minister != "Vinokurov"  
+on-arrival: welfare_minister = "Vinokurov"; welfare_minister_party = "Left-SR";
+go-to: sovnarkom_composition
+  
+
+@welfare_milyutin
+title: Nikolai Milyutin
+subtitle: {!
+<span style="color: var(--bolshevik-color);">Leninist</span> — Architectual student; briefly managed Russia's largest disability insurance fund.<br><ul>
+Overall skill: ★★<br>
+Suitability: ★★★</ul>
+!}
+unavailable-subtitle: {!
+<span style="color: var(--bolshevik-color);">Leninist</span> — Architectual student; briefly managed Russia's largest disability insurance fund.<br><ul>
+Overall skill: ★★<br>
+Suitability: ★★★</ul>
+!}
+tags: welfare_candidates
+choose-if: welfare_minister != "N_Milyutin"
+on-arrival: welfare_minister = "N_Milyutin"; welfare_minister_party = "Left-SR";
+go-to: sovnarkom_composition
+  
+
+@welfare_vacant
+title: Let's leave the position vacant for now. 
+tags: welfare_candidates
+on-arrival: welfare_minister = "Vacant"; welfare_minister_party = "";
+go-to: sovnarkom_composition
