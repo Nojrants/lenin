@@ -1,0 +1,46 @@
+title: Transport Candidates
+new-page: true
+
+@transport_elizarov
+title: Mark Elizarov
+view-if: elizarov_available != 0
+subtitle: {!
+<span style="color: var(--bolshevikr-color);">Leninist</span> — Mathmetician with management experience in insurance and shipping; brother-in-law of Lenin.<ul>
+Overall skill: ★★★☆<br>
+Suitability: ★☆</ul>
+!}
+unavailable-subtitle: {!
+<span style="color: var(--bolshevikr-color);">Leninist</span> — Mathmetician with management experience in insurance and shipping; brother-in-law of Lenin.<ul>
+Overall skill: ★★★☆<br>
+Suitability: ★☆</ul>
+!}
+tags: transport_candidates
+on-arrival: transport_minister = "Elizarov"; transport_minister_party = "Bolshevik"; 
+go-to: sovnarkom_composition
+
+@transport_malkin
+title: Boris Malkin
+subtitle: {!
+<span style="color: var(--lsr-color);">Left-SR</span> — Journalist and party activist.<ul> 
+Overall skill: ★★☆<br>
+Suitability: ★☆</ul>
+!}
+unavailable-subtitle: {!
+<span style="color: var(--lsr-color);">Left-SR</span> — Journalist and party activist.<ul> 
+Overall skill: ★★☆<br>
+Suitability: ★☆</ul>
+!}
+tags: transport_candidates
+choose-if: transport_minister != "Malkin"
+on-arrival: transport_minister = "Malkin"; transport_minister_party = "Left-SR"; 
+go-to: sovnarkom_composition
+
+
+@transport_vacant
+title: Let's leave the position vacant for now. 
+tags: transport_candidates
+on-arrival: transport_minister = "Vacant"; transport_minister_party = "";
+go-to: sovnarkom_composition
+
+
+  
