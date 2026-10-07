@@ -38,6 +38,7 @@ on-arrival: {!
   Q.right_m_relation += 2; Q.right_sr_relation += 2; Q.ns_relation += 2; 
   Q.moderate_strength += 5; Q.leninist_strength -= 5; 
   Q.moderate_dissent -= 5; Q.leninist_dissent += 5;
+  if (Q.coalition_government > 0) Q.coalition_tension -= 1; 
 !}
 
 We launch a propaganda campaign aimed at supporting a united front of all socialist parties against the counterrevolution. 
@@ -56,6 +57,7 @@ on-arrival: {!
   Q.right_m_relation -= 5; Q.right_sr_relation -= 5; Q.ns_relation -= 5; 
   Q.moderate_strength -= 5; Q.leninist_strength += 5; 
   Q.moderate_dissent += 5; Q.leninist_dissent -= 5;
+  if (Q.coalition_government > 0) Q.coalition_tension += 1; 
 !}
 
 We attack the false promises and hypocrisies of the Mensheviks, SRs, and other moderate socialists. 
@@ -79,6 +81,7 @@ on-arrival: {!
   Q.moderate_dissent -= 5; Q.leninist_dissent += 5;
   Q.workers_b += 1*(1-Q.b_dissent); Q.peasants_b += 1*(1-Q.b_dissent); Q.soldiers_b += 1*(1-Q.b_dissent);
   Q.democraticity += 2; Q.instability -= 1; 
+  if (Q.coalition_government > 0) Q.coalition_tension -= 1; 
 !}
 
 We rally our base to turn-out for the Constituent Assembly.
@@ -101,6 +104,7 @@ on-arrival: {!
   Q.moderate_strength -= 5; Q.leninist_strength += 5; 
   Q.moderate_dissent += 5; Q.leninist_dissent -= 5;
   Q.democraticity -= 2; Q.instability += 1; 
+  if (Q.coalition_government > 0) Q.coalition_tension += 0.5; 
 !}
 
 We publicize the problems with the upcoming Constituent Assembly, and build support for its replacement. 
@@ -190,6 +194,7 @@ on-arrival: {!
   Q.moderate_dissent -= 2; Q.leftcom_dissent += 6;
   Q.anarchist_strength -= 1; Q.maximalist_strength -= 1;
   Q.anarchist_relation -= 5; Q.maximalist_relation -= 5;
+  if (Q.coalition_government > 0) Q.coalition_tension -= 0.5; 
 !}
 
 We promote stricter compliance and consolidation, seeking to put an end to the chaos. 
