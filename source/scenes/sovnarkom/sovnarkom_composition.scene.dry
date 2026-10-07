@@ -107,31 +107,57 @@ function countFaction(position, party) {
 </td>
 </tr>
 <tr>
-<td style="text-align:left; padding:5px; padding-left:15px;">Leninists</td>
-<td style="text-align:center; padding:5px;">[+ leninist_dissent : dissent +]</td>
-<td style="text-align:center; padding:5px;">[+ leninist_positions +]</td>
-</tr>
-<tr>
-<td style="text-align:left; padding:5px; padding-left:15px;">Leftists</td>
-<td style="text-align:center; padding:5px;">[+ leftcom_dissent : dissent +]</td>
-<td style="text-align:center; padding:5px;">[+ leftcom_positions +]</td>
-</tr>
-<tr>
-<td style="text-align:left; padding:5px; padding-left:15px;">Moderates</td>
-<td style="text-align:center; padding:5px;">[+ moderate_dissent : dissent +]</td>
-<td style="text-align:center; padding:5px;">[+ moderate_positions +]</td>
-</tr>
-<tr>
-<td style="text-align:left; padding:5px; padding-left:15px;">Vperedists</td>
-<td style="text-align:center; padding:5px;">[+ vperedist_dissent : dissent +]</td>
-<td style="text-align:center; padding:5px;">[+ vperedist_positions +]</td>
-</tr>
-<tr>
-<td style="text-align:left; padding:5px; padding-left:15px; border-top:1px solid rgba(128,128,128,0.4);">
-Non-Factional
+<td style="text-align:left; padding:5px 5px 5px 15px; border-bottom:1px solid rgba(128,128,128,0.25);">
+<span style="color: var(--bolshevik-color); font-weight:bold;">Leninists</span>
 </td>
-<td style="text-align:center; padding:5px; border-top:1px solid rgba(128,128,128,0.4);">—</td>
-<td style="text-align:center; padding:5px; border-top:1px solid rgba(128,128,128,0.4);">
+<td style="text-align:center; padding:5px; border-bottom:1px solid rgba(128,128,128,0.25);">
+[+ leninist_dissent : dissent +]
+</td>
+<td style="text-align:center; padding:5px; border-bottom:1px solid rgba(128,128,128,0.25);">
+[+ leninist_positions +]
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding:5px 5px 5px 15px; border-bottom:1px solid rgba(128,128,128,0.25);">
+<span style="color: var(--bolshevik-color); font-weight:bold;">Leftists</span>
+</td>
+<td style="text-align:center; padding:5px; border-bottom:1px solid rgba(128,128,128,0.25);">
+[+ leftcom_dissent : dissent +]
+</td>
+<td style="text-align:center; padding:5px; border-bottom:1px solid rgba(128,128,128,0.25);">
+[+ leftcom_positions +]
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding:5px 5px 5px 15px; border-bottom:1px solid rgba(128,128,128,0.25);">
+<span style="color: var(--bolshevik-color); font-weight:bold;">Moderates</span>
+</td>
+<td style="text-align:center; padding:5px; border-bottom:1px solid rgba(128,128,128,0.25);">
+[+ moderate_dissent : dissent +]
+</td>
+<td style="text-align:center; padding:5px; border-bottom:1px solid rgba(128,128,128,0.25);">
+[+ moderate_positions +]
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding:5px 5px 5px 15px; border-bottom:1px solid rgba(128,128,128,0.25);">
+<span style="color: var(--bolshevik-color); font-weight:bold;">Vperedists</span>
+</td>
+<td style="text-align:center; padding:5px; border-bottom:1px solid rgba(128,128,128,0.25);">
+[+ vperedist_dissent : dissent +]
+</td>
+<td style="text-align:center; padding:5px; border-bottom:1px solid rgba(128,128,128,0.25);">
+[+ vperedist_positions +]
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding:5px 5px 5px 15px;">
+<span style="color: var(--bolshevik-color); font-weight:bold;">Non-Factional</span>
+</td>
+<td style="text-align:center; padding:5px;">
+—
+</td>
+<td style="text-align:center; padding:5px;">
 [+ nonfactional_positions +]
 </td>
 </tr>
@@ -154,52 +180,52 @@ Non-Factional
 </td>
 </tr>
 <tr>
-<td style="text-align:left; padding:5px; padding-left:15px;">
-<span style="color: var(--sdi-color); font-weight: bold;">SD-International</span>
+<td style="text-align:left; padding:5px 5px 5px 15px; border-bottom:1px solid rgba(128,128,128,0.25);">
+<span style="color: var(--sdi-color); font-weight:bold;">SD-International</span>
 </td>
-<td style="text-align:center; padding:5px;">
+<td style="text-align:center; padding:5px; border-bottom:1px solid rgba(128,128,128,0.25);">
 [+ sdi_relation : relationships +]
 </td>
-<td style="text-align:center; padding:5px;">
+<td style="text-align:center; padding:5px; border-bottom:1px solid rgba(128,128,128,0.25);">
 [+ sdi_positions +]
 </td>
 </tr>
 <tr>
-<td style="text-align:left; padding:5px; padding-left:15px;">
-<span style="color: var(--m-color); font-weight: bold;">Mensheviks</span>
+<td style="text-align:left; padding:5px 5px 5px 15px; border-bottom:1px solid rgba(128,128,128,0.25);">
+<span style="color: var(--m-color); font-weight:bold;">Mensheviks</span>
 </td>
-<td style="text-align:center; padding:5px;">
+<td style="text-align:center; padding:5px; border-bottom:1px solid rgba(128,128,128,0.25);">
 [+ ((left_m_relation + centre_m_relation + right_m_relation)/3) : relationships +]
 </td>
-<td style="text-align:center; padding:5px;">
+<td style="text-align:center; padding:5px; border-bottom:1px solid rgba(128,128,128,0.25);">
 [+ menshevik_positions +]
 </td>
 </tr>
 <tr>
-<td style="text-align:left; padding:5px; padding-left:15px;">
-<span style="color: var(--lsr-color); font-weight: bold;">Left-SRs</span>
+<td style="text-align:left; padding:5px 5px 5px 15px; border-bottom:1px solid rgba(128,128,128,0.25);">
+<span style="color: var(--lsr-color); font-weight:bold;">Left-SRs</span>
 </td>
-<td style="text-align:center; padding:5px;">
+<td style="text-align:center; padding:5px; border-bottom:1px solid rgba(128,128,128,0.25);">
 [+ lsr_relation : relationships +]
 </td>
-<td style="text-align:center; padding:5px;">
+<td style="text-align:center; padding:5px; border-bottom:1px solid rgba(128,128,128,0.25);">
 [+ lsr_positions +]
 </td>
 </tr>
 <tr>
-<td style="text-align:left; padding:5px; padding-left:15px;">
-<span style="color: var(--sr-color); font-weight: bold;">Socialist-Revolutionaries</span>
+<td style="text-align:left; padding:5px 5px 5px 15px; border-bottom:1px solid rgba(128,128,128,0.25);">
+<span style="color: var(--sr-color); font-weight:bold;">Socialist-Revolutionaries</span>
 </td>
-<td style="text-align:center; padding:5px;">
+<td style="text-align:center; padding:5px; border-bottom:1px solid rgba(128,128,128,0.25);">
 [+ ((centre_sr_relation + right_sr_relation)/2) : relationships +]
 </td>
-<td style="text-align:center; padding:5px;">
+<td style="text-align:center; padding:5px; border-bottom:1px solid rgba(128,128,128,0.25);">
 [+ sr_positions +]
 </td>
 </tr>
 <tr>
-<td style="text-align:left; padding:5px; padding-left:15px;">
-<span style="color: var(--ns-color); font-weight: bold;">Popular Socialists</span>
+<td style="text-align:left; padding:5px 5px 5px 15px;">
+<span style="color: var(--ns-color); font-weight:bold;">Popular Socialists</span>
 </td>
 <td style="text-align:center; padding:5px;">
 [+ ns_relation : relationships +]
@@ -210,7 +236,6 @@ Non-Factional
 </tr>
 ?]
 </table>
-
 
 
 - #sovnarkom_appointments
