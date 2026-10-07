@@ -1,0 +1,41 @@
+title: Properties Candidates
+new-page: true
+
+
+@property_karelin
+title: Vladimir Karelin
+subtitle: {!
+<span style="color: var(--lsr-color);">Left-SR</span> — Leading SR organizer and former law student.<ul>
+Overall skill: ★★★☆<br>
+Suitability: ★★</ul>
+!}
+unavailable-subtitle: {!
+<span style="color: var(--lsr-color);">Left-SR</span> — Leading SR organizer and former law student.<ul>
+Overall skill: ★★★☆<br>
+Suitability: ★★</ul>
+!}
+tags: properties_candidates
+choose-if: properties_minister != "Karelin"  
+on-arrival: properties_minister = "Karelin"; properties_minister_party = "Bolshevik";
+go-to: sovnarkom_composition
+  
+
+@property_izmailovich
+title: Aleksandra Izmailovich
+subtitle: {!
+<span style="color: var(--lsr-color);">Left-SR</span> — Party organizer with managerial experience.<ul> 
+Overall skill: ★★<br>
+Suitability: ★★★</ul>
+!}
+unavailable-subtitle: <span style="color: var(--lsr-color);">Left-SR</span> — Party organizer with managerial experience.<ul>Overall skill: ★★<br>Suitability: ★★</ul>[?if local_minister == "Izmailovich" : <br>Izmailovich already has a post. ?]
+tags: properties_candidates
+choose-if: local_minister != "Izmailovich" and property_minister != "Izmailovich"
+on-arrival: properties_minister = "Izmailovich"; properties_minister_party = "Left-SR";
+go-to: sovnarkom_composition
+  
+
+@properties_vacant
+title: Let's leave the position vacant for now. 
+tags: properties_candidates
+on-arrival: properties_minister = "Vacant"; properties_minister_party = "";
+go-to: sovnarkom_composition
