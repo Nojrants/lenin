@@ -5,12 +5,12 @@ new-page: true
 title: Mark Elizarov
 view-if: elizarov_available != 0
 subtitle: {!
-<span style="color: var(--bolshevikr-color);">Leninist</span> — Mathmetician with management experience in insurance and shipping; brother-in-law of Lenin.<ul>
+<span style="color: var(--bolshevik-color);">Leninist</span> — Mathmetician with management experience in insurance and shipping; brother-in-law of Lenin.<ul>
 Overall skill: ★★★☆<br>
 Suitability: ★☆</ul>
 !}
 unavailable-subtitle: {!
-<span style="color: var(--bolshevikr-color);">Leninist</span> — Mathmetician with management experience in insurance and shipping; brother-in-law of Lenin.<ul>
+<span style="color: var(--bolshevik-color);">Leninist</span> — Mathmetician with management experience in insurance and shipping; brother-in-law of Lenin.<ul>
 Overall skill: ★★★☆<br>
 Suitability: ★☆</ul>
 !}
