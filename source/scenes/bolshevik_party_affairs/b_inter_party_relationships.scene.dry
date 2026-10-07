@@ -191,66 +191,67 @@ subtitle: -1 resources
 choose-if: resources >= 1 and parties_legal = 1
 unavailable-subtitle: [?if resources < 1: -1 resources — We lack the resources for this. ?][?if parties_legal != 1: We have banned all other parties. ?]
 on-arrival: {!
-Q.resources -= 1;
-Q.moderate_dissent -= 5;
-Q.moderate_strength += 5;
-Q.leninist_dissent += 8;
-Q.leninist_strength -= 4;
-Q.leftcom_dissent += 2;
-Q.anarchist_relation += 3 * (1 - Q.b_dissent);
-Q.maximalist_relation += 3 * (1 - Q.b_dissent);
-Q.sdi_relation += 3 + Math.max(
-    0,
-    (6 * (1 - Q.b_dissent))
-    - Math.max(0, (Q.leninist_strength / Q.moderate_strength))
-    + Math.max(0, (Q.moderate_strength / Q.leninist_strength))
-);
-Q.left_m_relation += 3 + Math.max(
-    0,
-    (6 * (1 - Q.b_dissent))
-    - Math.max(0, (Q.leninist_strength / Q.moderate_strength))
-    + Math.max(0, (Q.moderate_strength / Q.leninist_strength))
-);
-Q.left_m_strength += 3;
-Q.centre_m_relation += 3 + Math.max(
-    0,
-    (6 * (1 - Q.b_dissent))
-    - Math.max(0, (Q.leninist_strength / Q.moderate_strength))
-    + Math.max(0, (Q.moderate_strength / Q.leninist_strength))
-);
-Q.right_m_relation += 3 + Math.max(
-    0,
-    (6 * (1 - Q.b_dissent))
-    - Math.max(0, (Q.leninist_strength / Q.moderate_strength))
-    + Math.max(0, (Q.moderate_strength / Q.leninist_strength))
-);
-Q.right_m_strength -= 3;
-Q.lsr_relation += 3 + Math.max(
-    0,
-    (6 * (1 - Q.b_dissent))
-    - Math.max(0, (Q.leninist_strength / Q.moderate_strength))
-    + Math.max(0, (Q.moderate_strength / Q.leninist_strength))
-);
-Q.centre_sr_relation += 3 + Math.max(
-    0,
-    (6 * (1 - Q.b_dissent))
-    - Math.max(0, (Q.leninist_strength / Q.moderate_strength))
-    + Math.max(0, (Q.moderate_strength / Q.leninist_strength))
-);
-Q.right_sr_relation += 3 + Math.max(
-    0,
-    (6 * (1 - Q.b_dissent))
-    - Math.max(0, (Q.leninist_strength / Q.moderate_strength))
-    + Math.max(0, (Q.moderate_strength / Q.leninist_strength))
-);
-Q.right_sr_strength -= 3;
-Q.ns_relation += 3 + Math.max(
-    0,
-    (6 * (1 - Q.b_dissent))
-    - Math.max(0, (Q.leninist_strength / Q.moderate_strength))
-    + Math.max(0, (Q.moderate_strength / Q.leninist_strength))
-);
-Q.right_sr_strength -= 3;
+    Q.resources -= 1;
+    Q.moderate_dissent -= 5;
+    Q.moderate_strength += 5;
+    Q.leninist_dissent += 8;
+    Q.leninist_strength -= 4;
+    Q.leftcom_dissent += 2;
+    Q.anarchist_relation += 3 * (1 - Q.b_dissent);
+    Q.maximalist_relation += 3 * (1 - Q.b_dissent);
+    Q.sdi_relation += 3 + Math.max(
+        0,
+        (6 * (1 - Q.b_dissent))
+        - Math.max(0, (Q.leninist_strength / Q.moderate_strength))
+        + Math.max(0, (Q.moderate_strength / Q.leninist_strength))
+    );
+    Q.left_m_relation += 3 + Math.max(
+        0,
+        (6 * (1 - Q.b_dissent))
+        - Math.max(0, (Q.leninist_strength / Q.moderate_strength))
+        + Math.max(0, (Q.moderate_strength / Q.leninist_strength))
+    );
+    Q.left_m_strength += 3;
+    Q.centre_m_relation += 3 + Math.max(
+        0,
+        (6 * (1 - Q.b_dissent))
+        - Math.max(0, (Q.leninist_strength / Q.moderate_strength))
+        + Math.max(0, (Q.moderate_strength / Q.leninist_strength))
+    );
+    Q.right_m_relation += 3 + Math.max(
+        0,
+        (6 * (1 - Q.b_dissent))
+        - Math.max(0, (Q.leninist_strength / Q.moderate_strength))
+        + Math.max(0, (Q.moderate_strength / Q.leninist_strength))
+    );
+    Q.right_m_strength -= 3;
+    Q.lsr_relation += 3 + Math.max(
+        0,
+        (6 * (1 - Q.b_dissent))
+        - Math.max(0, (Q.leninist_strength / Q.moderate_strength))
+        + Math.max(0, (Q.moderate_strength / Q.leninist_strength))
+    );
+    Q.centre_sr_relation += 3 + Math.max(
+        0,
+        (6 * (1 - Q.b_dissent))
+        - Math.max(0, (Q.leninist_strength / Q.moderate_strength))
+        + Math.max(0, (Q.moderate_strength / Q.leninist_strength))
+    );
+    Q.right_sr_relation += 3 + Math.max(
+        0,
+        (6 * (1 - Q.b_dissent))
+        - Math.max(0, (Q.leninist_strength / Q.moderate_strength))
+        + Math.max(0, (Q.moderate_strength / Q.leninist_strength))
+    );
+    Q.right_sr_strength -= 3;
+    Q.ns_relation += 3 + Math.max(
+        0,
+        (6 * (1 - Q.b_dissent))
+        - Math.max(0, (Q.leninist_strength / Q.moderate_strength))
+        + Math.max(0, (Q.moderate_strength / Q.leninist_strength))
+    );
+    Q.right_sr_strength -= 3;
+    if (Q.coalition_government > 0) Q.coalition_tension -= 1; 
 !}
 
 Our overtures to the other socialists parties are unexpected, by welcome by moderates on either side. [? if leninist_strength >= moderate_strength : The influence of Lenin however makes it difficult for us to make further in-roads. ?]
