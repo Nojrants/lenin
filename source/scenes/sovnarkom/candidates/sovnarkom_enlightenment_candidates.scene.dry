@@ -73,12 +73,12 @@ go-to: sovnarkom_composition
 @enlightenment_krupskaya
 title: Nadezhda Krupskaya
 subtitle: {!
-<span style="color: var(--bolshevik-color);">Bolshevik</span> — Social reformer and pedagogist. Appointing Lenin's wife will appear nepotistic.<ul>  
+<span style="color: var(--bolshevik-color);">Leninist</span> — Social reformer and pedagogist. Appointing Lenin's wife will appear nepotistic.<ul>  
 Overall skill: ★★☆<br>
 Suitability: ★★★★</ul>
 !}
 unavailable-subtitle: {!
-<span style="color: var(--bolshevik-color);">Bolshevik</span> — Social reformer and pedagogist. Appointing Lenin's wife will appear nepotistic.<ul>  
+<span style="color: var(--bolshevik-color);">Leninist</span> — Social reformer and pedagogist. Appointing Lenin's wife will appear nepotistic.<ul>  
 Overall skill: ★★☆<br>
 Suitability: ★★★★</ul>
 !}
