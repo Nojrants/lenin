@@ -1081,20 +1081,19 @@ party_favorite: {
     image: "img/bukharin.jpg"
 },
 
-red_tsar: {
-    name: "The Red Tsar",
-    description: "Power is in the hands of Iosif Stalin.",
-    image: "img/stalin.jpg"
-},
-
 peoples_tribune: {
     name: "The People's Tribune",
     description: "Power is in the hands of Grigory Zinoviev.",
     image: "img/zinoviev.jpg"
 },
 
-    
+red_tsar: {
+    name: "The Red Tsar",
+    description: "Power is in the hands of Iosif Stalin.",
+    image: "img/stalin.jpg"
+},
 
+    
 game_completed: {
     name: "Game Over",
     description: "Complete the game.",
