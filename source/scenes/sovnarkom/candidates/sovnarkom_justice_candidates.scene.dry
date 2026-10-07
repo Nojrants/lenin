@@ -14,7 +14,7 @@ unavailable-subtitle: {!
 Overall skill: ★★<br>
 Suitability: ★☆</ul>
 !}
-tags: justice_candidates3
+tags: justice_candidates
 choose-if: justice_minister != "Oppokov"  
 on-arrival: justice_minister = "Oppokov"; justice_minister_party = "Bolshevik";
 go-to: sovnarkom_composition
