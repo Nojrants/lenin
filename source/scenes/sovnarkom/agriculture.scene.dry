@@ -84,6 +84,7 @@ on-arrival: {!
   Q.agriculture_expend += 0.5; 
   Q.food_production *= 0.85;
   Q.food_sold *= 0.9; 
+  if (Q.coalition_government > 0 && Q.lsr_in_gov) Q.coalition_tension -= 0.5; 
 !}
 
 We have intensified the land reform process, by devoting additional resources to confiscation and redistribution of confiscated estates. Peasants celebrate our action, though agricultural production and stability temporarily suffer.
