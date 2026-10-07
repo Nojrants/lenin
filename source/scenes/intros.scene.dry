@@ -2,7 +2,6 @@ title: Intros
 new-page: true
 go-to: intro_menu
 max-visits: 1
-face-image: img/womens_day.jpg
 audio: shuffle music/WorkersMarseillaise.ogg music/TchaikovskyQuartet.mp3 music/AyUchniem.mp3 music/SwetitMiesiatz.mp3 music/EchTyDolia.mp3 music/LongingforOurCountry.mp3 music/OdessaMama.mp3 music/VolgaBoatmen.ogg music/LomirSichIberbeiten.mp3 music/Internationale.ogg music/WorkersMarseillaise.ogg music/Kalinka.mp3 music/DearFriends.mp3 music/Dubinushka.mp3
 on-arrival: {!
   Q.b_soviet_display = 18.1;
