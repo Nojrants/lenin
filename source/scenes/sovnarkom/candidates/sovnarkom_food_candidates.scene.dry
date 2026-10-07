@@ -1,0 +1,59 @@
+title: Food Supply Candidates
+new-page: true
+
+
+@food_teodorovich
+title: Ivan Teodorovich
+subtitle: {!
+<span style="color: var(--bolshevik-color);">Bolshevik</span> — Agronomist and party historian<ul>
+Overall skill: ★★<br>
+Suitability: ★★</ul>
+!}
+unavailable-subtitle: {!
+<span style="color: var(--bolshevik-color);">Bolshevik</span> — Agronomist and party historian<ul>
+Overall skill: ★★<br>
+Suitability: ★★</ul>
+!}
+tags: food_candidates
+choose-if: food_minister != "Teodorovich"  
+on-arrival: food_minister = "Teodorovich"; food_minister_party = "Bolshevik";
+go-to: sovnarkom_composition
+
+@food_mayorov
+title: Ilya Mayorov
+subtitle: {!
+<span style="color: var(--lsr-color);">Left-SR</span> — Lawyer with agricultural management experience.<ul> 
+Overall skill: ★★<br>
+Suitability: ★★☆</ul>
+!}
+unavailable-subtitle: {!
+<span style="color: var(--lsr-color);">Left-SR</span> — Lawyer with agricultural management experience.<ul> 
+Overall skill: ★★<br>
+Suitability: ★★☆</ul>
+!}
+tags: food_candidates
+choose-if: food_minister != "Mayorov"
+on-arrival: food_minister = "Mayorov"; food_minister_party = "Left-SR";
+go-to: sovnarkom_composition
+  
+
+@food_algasov
+title: Vladimir Algasov
+subtitle: {!
+<span style="color: var(--lsr-color);">Left-SR</span> — Party organizer with and economic expertise.<ul> 
+Overall skill: ★★★<br>
+Suitability: ★★</ul>
+!}
+unavailable-subtitle:<span style="color: var(--lsr-color);">Left-SR</span> — Party organizer with and economic expertise.<ul> Overall skill: ★★★<br>Suitability: ★★</ul>[?if food_minister == "Algasov" or posts_minister == "Algasov" : <br>Algasov already has a post. ?]
+tags: food_candidates
+choose-if: food_minister != "Algasov" and posts_minister != "Algasov" and food_minister != "Algasov"
+on-arrival: food_minister = "Algasov"; food_minister_party = "Left-SR";
+go-to: sovnarkom_composition
+  
+  
+
+@food_vacant
+title: Let's leave the position vacant for now. 
+tags: food_candidates
+on-arrival: food_minister = "Vacant"; food_minister_party = "";
+go-to: sovnarkom_composition
