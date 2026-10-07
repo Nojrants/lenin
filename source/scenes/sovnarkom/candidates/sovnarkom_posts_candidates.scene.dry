@@ -1,0 +1,56 @@
+title: Posts Candidates
+new-page: true
+
+
+@posts_glebov
+title: Nikolai Glebov-Avilov
+subtitle: {!
+<span style="color: var(--bolshevik-color);">Bolshevik</span> — Party activist and journalist.<ul>
+Overall skill: ★★<br>
+Suitability: ★★</ul>
+!}
+unavailable-subtitle: {!
+<span style="color: var(--bolshevik-color);">Bolshevik</span> — Party activist and journalist.<ul>
+Overall skill: ★★<br>
+Suitability: ★★</ul>
+!}
+tags: posts_candidates
+choose-if: posts_minister != "Glebov"  
+on-arrival: posts_minister = "Glebov"; posts_minister_party = "Bolshevik";
+go-to: sovnarkom_composition
+
+  
+@posts_proshian
+title: Prosh Proshian
+subtitle: {!
+<span style="color: var(--lsr-color);">Left-SR</span> — Lawyer and party activist.<ul> 
+Overall skill: ★★★<br>
+Suitability: ★★</ul>
+!}
+unavailable-subtitle: <span style="color: var(--lsr-color);">Left-SR</span> — Lawyer and party activist<ul>Overall skill: ★★★<br>Suitability: ★★</ul>[?if trade_minister == "Proshian" : <br>Proshian already has a post. ?]
+tags: posts_candidates
+choose-if: posts_minister != "Proshian" and trade_minister != "Proshian"
+on-arrival: posts_minister = "Proshian"; posts_minister_party = "Left-SR";
+go-to: sovnarkom_composition
+  
+
+@posts_algasov
+title: Vladimir Algasov
+subtitle: {!
+<span style="color: var(--lsr-color);">Left-SR</span> — Party organizer with and economic expertise.<ul> 
+Overall skill: ★★★<br>
+Suitability: ★★</ul>
+!}
+unavailable-subtitle:<span style="color: var(--lsr-color);">Left-SR</span> — Party organizer with and economic expertise.<ul> Overall skill: ★★★<br>Suitability: ★★</ul>[?if agriculture_minister == "Algasov" or food_minister == "Algasov" : <br>Algasov already has a post. ?]
+tags: posts_candidates
+choose-if: posts_minister != "Algasov" and posts_minister != "Algasov" and posts_minister != "Algasov"
+on-arrival: posts_minister = "Algasov"; posts_minister_party = "Left-SR";
+go-to: sovnarkom_composition
+  
+  
+
+@posts_vacant
+title: Let's leave the position vacant for now. 
+tags: posts_candidates
+on-arrival: posts_minister = "Vacant"; posts_minister_party = "";
+go-to: sovnarkom_composition
