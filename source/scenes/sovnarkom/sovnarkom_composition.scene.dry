@@ -83,10 +83,11 @@ function countFaction(position, party) {
     countFaction(Q.welfare_minister, Q.welfare_minister_party);
     countFaction(Q.property_minister, Q.property_minister_party);
     countFaction(Q.local_minister, Q.local_minister_party);
+
+    Q.coalition_positions_previous = Q.coalition_positions;
+    Q.coalition_positions = Q.menshevik_positions + Q.lsr_positions + Q.sr_positions + Q.ns_positions + Q.sdi_positions;
 !}
 
-Q.coalition_positions_previous = Q.coalition_positions;
-Q.coalition_positions = Q.menshevik_positions + Q.lsr_positions + Q.sr_positions + Q.ns_positions + Q.sdi_positions;
 
 <table style="width:100%; border-collapse:collapse; margin:10px 0;">
 <tr>
@@ -135,7 +136,7 @@ Non-Factional
 </td>
 </tr>
 
-[if coalition_government > 0]
+[?if coalition_government > 0 :
 <tr>
 <td colspan="3" style="text-align:center; padding:7px 5px; border-top:1px solid var(--text-color); border-bottom:1px solid var(--text-color);">
 <b>Coalition Positions</b>
@@ -154,7 +155,7 @@ Non-Factional
 </tr>
 <tr>
 <td style="text-align:left; padding:5px; padding-left:15px;">
-<span class="sdi-color"><b>SD-International</b></span>
+<span style="color: var(--sdi-color); font-weight: bold;">SD-International</span>
 </td>
 <td style="text-align:center; padding:5px;">
 [+ sdi_relation : relationships +]
@@ -165,7 +166,7 @@ Non-Factional
 </tr>
 <tr>
 <td style="text-align:left; padding:5px; padding-left:15px;">
-<span class="m-color"><b>Mensheviks</b></span>
+<span style="color: var(--m-color); font-weight: bold;">Mensheviks</span>
 </td>
 <td style="text-align:center; padding:5px;">
 [+ ((left_m_relation + centre_m_relation + right_m_relation)/3) : relationships +]
@@ -176,7 +177,7 @@ Non-Factional
 </tr>
 <tr>
 <td style="text-align:left; padding:5px; padding-left:15px;">
-<span class="lsr-color"><b>Left-SRs</b></span>
+<span style="color: var(--lsr-color); font-weight: bold;">Left-SRs</span>
 </td>
 <td style="text-align:center; padding:5px;">
 [+ lsr_relation : relationships +]
@@ -187,7 +188,7 @@ Non-Factional
 </tr>
 <tr>
 <td style="text-align:left; padding:5px; padding-left:15px;">
-<span class="sr-color"><b>SRs</b></span>
+<span style="color: var(--sr-color); font-weight: bold;">Socialist-Revolutionaries</span>
 </td>
 <td style="text-align:center; padding:5px;">
 [+ ((centre_sr_relation + right_sr_relation)/2) : relationships +]
@@ -198,7 +199,7 @@ Non-Factional
 </tr>
 <tr>
 <td style="text-align:left; padding:5px; padding-left:15px;">
-<span class="ns-color"><b>Popular Socialists</b></span>
+<span style="color: var(--ns-color); font-weight: bold;">Popular Socialists</span>
 </td>
 <td style="text-align:center; padding:5px;">
 [+ ns_relation : relationships +]
@@ -207,8 +208,9 @@ Non-Factional
 [+ ns_positions +]
 </td>
 </tr>
-[/if]
+?]
 </table>
+
 
 
 - #sovnarkom_appointments
