@@ -1,0 +1,74 @@
+title: Agriculture Candidates
+new-page: true
+
+
+@agriculture_milyutin
+title: Vladimir Milyutin
+subtitle: {!
+<span style="color: var(--bolshevik-color);">Bolshevik</span> — Party activist with some technical and legal expertise.<ul>
+Overall skill: ★★<br>
+Suitability: ★</ul>
+!}
+unavailable-subtitle: {!
+<span style="color: var(--bolshevik-color);">Bolshevik</span> — Party activist with some technical and legal expertise.<ul>
+Overall skill: ★★<br>
+Suitability: ★</ul>
+!}
+tags: agriculture_candidates
+choose-if: agriculture_minister != "Milyutin"  
+on-arrival: agriculture_minister = "Milyutin"; agriculture_minister_party = "Bolshevik";
+go-to: sovnarkom_composition
+
+@agriculture_kolegayev
+title: Andrei Kolegayev
+subtitle: {!
+<span style="color: var(--lsr-color);">Left-SR</span> — Expert in agricultural management.<ul> 
+Overall skill: ★★★<br>
+Suitability: ★★★★</ul>
+!}
+unavailable-subtitle:{!
+<span style="color: var(--lsr-color);">Left-SR</span> — Expert in agricultural management.<ul> 
+Overall skill: ★★★<br>
+Suitability: ★★★★</ul>
+!}
+tags: agriculture_candidates
+choose-if: agriculture_minister != "Kolegayev"  
+on-arrival: agriculture_minister = "Kolegayev"; agriculture_minister_party = "Left-SR";
+go-to: sovnarkom_composition
+  
+
+@agriculture_algasov
+title: Vladimir Algasov
+subtitle: {!
+<span style="color: var(--lsr-color);">Left-SR</span> — Party organizer with and economic expertise.<ul> 
+Overall skill: ★★★<br>
+Suitability: ★★★</ul>
+!}
+unavailable-subtitle:<span style="color: var(--lsr-color);">Left-SR</span> — Party organizer with and economic expertise.<ul> Overall skill: ★★★<br>Suitability: ★★★</ul>[?if food_minister == "Algasov" or posts_minister == "Algasov" : <br>Algasov already has a post. ?]
+choose-if: agriculture_minister != "Algasov" and posts_minister != "Algasov" and food_minister != "Algasov"
+tags: agriculture_candidates
+choose-if: agriculture_minister != "Algasov"  
+on-arrival: agriculture_minister = "Algasov"; agriculture_minister_party = "Left-SR";
+go-to: sovnarkom_composition
+  
+
+@agriculture_kamkov
+title: Boris Kamkov
+subtitle: {!
+<span style="color: var(--lsr-color);">Left-SR</span> — Leading party administrator and lawyer.<ul> 
+Overall skill: ★★★☆<br>
+Suitability: ★★☆</ul>
+!}
+unavailable-subtitle: <span style="color: var(--lsr-color);">Left-SR</span> — Leading party administrator and lawyer.<ul>Overall skill: ★★★☆<br>Suitability: ★★☆</ul>[?if foreign_minister = "Kamkov" : <br>Kamkov already has a post. ?] 
+choose-if: foreign_minister != "Kamkov" and agriculture_minister != "Kamkov"
+tags: agriculture_candidates
+choose-if: agriculture_minister != "Kamkov"  
+on-arrival: agriculture_minister = "Kamkov"; agriculture_minister_party = "Left-SR";
+go-to: sovnarkom_composition
+  
+
+@agriculture_vacant
+title: Let's leave the position vacant for now. 
+tags: agriculture_candidates
+on-arrival: agriculture_minister = "Vacant"; agriculture_minister_party = "";
+go-to: sovnarkom_composition
