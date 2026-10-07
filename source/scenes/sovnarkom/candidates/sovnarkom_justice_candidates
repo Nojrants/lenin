@@ -1,0 +1,44 @@
+title: Justice Candidates
+new-page: true
+
+
+@justice_oppokov
+title: Georgy Oppokov
+subtitle: {!
+<span style="color: var(--bolshevik-color);">Bolshevik</span> — Party activist with some economic management experience.<ul>
+Overall skill: ★★<br>
+Suitability: ★☆</ul>
+!}
+unavailable-subtitle: {!
+<span style="color: var(--bolshevik-color);">Bolshevik</span> — Party activist with some economic management experience.<ul>
+Overall skill: ★★<br>
+Suitability: ★☆</ul>
+!}
+tags: justice_candidates3
+choose-if: justice_minister != "Oppokov"  
+on-arrival: justice_minister = "Oppokov"; justice_minister_party = "Bolshevik";
+go-to: sovnarkom_composition
+
+@justice_steinberg
+title: Isaac Steinberg
+subtitle: {!
+<span style="color: var(--lsr-color);">Left-SR</span> — Lawyer with political experience.<ul> 
+Overall skill: ★★★<br>
+Suitability: ★★★★</ul>
+!}
+unavailable-subtitle: {!
+<span style="color: var(--lsr-color);">Left-SR</span> — Lawyer with political experience.<ul> 
+Overall skill: ★★★<br>
+Suitability: ★★★★</ul>
+!}
+tags: justice_candidates
+choose-if: justice_minister != "Steinberg"  
+on-arrival: justice_minister = "Steinberg"; justice_minister_party = "Left-SR";
+go-to: sovnarkom_composition
+
+
+@justice_vacant
+title: Let's leave the position vacant for now. 
+tags: justice_candidates
+on-arrival: justice_minister = "Vacant"; justice_minister_party = "";
+go-to: sovnarkom_composition
