@@ -242,7 +242,7 @@ function countFaction(position, party) {
 - #sovnarkom_appointments
 - @sovnarkom_composition_null
 - @cancel_composition
-- @@terminate
+- @terminate
 
 @sovnarkom_composition_null
 title: -------------------------------------------------------------------------------------------------
