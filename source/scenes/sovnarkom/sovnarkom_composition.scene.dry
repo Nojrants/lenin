@@ -88,6 +88,7 @@ function countFaction(position, party) {
     Q.coalition_positions = Q.menshevik_positions + Q.lsr_positions + Q.sr_positions + Q.ns_positions + Q.sdi_positions;
 !}
 
+= Sovnarkom Composition
 
 <table style="width:100%; border-collapse:collapse; margin:10px 0;">
 <tr>
