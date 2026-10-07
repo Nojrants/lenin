@@ -27,6 +27,7 @@ on-arrival: {!
   if (Q.sdi_in_gov == 1) { Q.sdi_relation += 5; Q.sdi_strength += 5; }
   if (Q.ns_in_gov == 1) { Q.ns_relation += 5; Q.ns_strength += 5;  }
   if (Q.coalition_government == 2) { Q.lsr_relation += 5; Q.lsr_strength += 5; }
+  if (Q.coalition_government > 0) Q.coalition_tension -= 2; 
 !}
 
 [?if coalition_government == 2: Four Left-SRs are appointed to the collegium of the Cheka, while Vyacheslav Aleksandrovich is made the body's deputy chairman. This also opens the door to recruitment of Left-SRs into the Cheka, strengthening the body in general, though at the expense of unilateral control. ?]
