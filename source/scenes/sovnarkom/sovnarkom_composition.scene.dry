@@ -216,7 +216,7 @@ Non-Factional
 
 @cancel_composition
 title: Approve composition. 
-coalition_government = 0 or (coalition_government = 1 and coalition_positions >= coalition_positions_previous and menshevik_positions >= 1 and lsr_positions >= 1 and sr_positions >= 1 and ns_positions >= 1 and sdi_positions >= 1) or (coalition_government = 2 and coalition_positions >= coalition_positions_previous and lsr_positions >= 1)
+choose-if: coalition_government = 0 or (coalition_government = 1 and coalition_positions >= coalition_positions_previous and menshevik_positions >= 1 and lsr_positions >= 1 and sr_positions >= 1 and ns_positions >= 1 and sdi_positions >= 1) or (coalition_government = 2 and coalition_positions >= coalition_positions_previous and lsr_positions >= 1)
 unavailable-subtitle: [?if coalition_government = 1 and coalition_positions < coalition_positions_previous : The other parties will not accept a reduction in positions. ?][?if coalition_government = 1 and lsr_positions < 1 : The Left-SRs expect a position. ?][?if coalition_government = 1 and sr_positions < 1 : The SRs expect a position. ?][?if coalition_government = 1 and ns_positions < 1 : The Popular Socialists expect a position. ?][?if coalition_government = 1 and sdi_positions < 1 : The SD-Internationalists expect a position. ?][?if coalition_government = 2 and coalition_positions < coalition_positions_previous : Coalition positions cannot be reduced. ?][?if coalition_government = 2 and (lsr_positions < 1 or (coalition_positions < coalition_positions_previous)) : The Left-SRs will not accept. ?]
 
 The composition is approved.
