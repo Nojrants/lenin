@@ -177,7 +177,7 @@ if (window && d3) {
 }
 !}
 
-= Soviet Governnment
+= Congress of Soviets
 
 {!<svg id="soviet" style="width: 625px; height: 310px;"> </svg>!}
 
@@ -215,7 +215,7 @@ With the constant comings and goings of delegates, it is hard to say for certain
 
 The Congress first approves the creation of a new **Central Executive Committee** (CEC), as a permanent assembly at the head of the soviets. Though some assumed this Executive would simply absorb the functions of the old Provisional Government, the Bolsheviks have instead arranged for the creation of a temporary auxiliary organ to perform similar duties, alongside the CEC: the **Council of People's Commissars** (Sovnarkom). 
 
-There remains general support among the delegates and parties, including from a sizeable minority of our own party (**<span style="color: var(--bolshevik-moderate-color);">Bolshevik Moderates</span>**), for the creation of the broad socialist coalition government that Martov alluded to. However, the **<span style="color: var(--bolshevik-color);">Leninists</span>** of our party view that as untenable, and have successfully strongarmed their peers into accepting this (at least as a start). 
+There remains general support among the delegates and parties, including from a sizeable minority of our own party (**<span style="color: var(--b-color);">Bolshevik Moderates</span>**), for the creation of the broad socialist coalition government that Martov alluded to. However, the **<span style="color: var(--bolshevik-color);">Leninists</span>** of our party view that as untenable, and have successfully strongarmed their peers into accepting this (at least as a start). 
 
 Hypothetically, we could offer a handful of seats to sympathetic non-Bolshevik leaders, but it's unlikely any would accept. Even the **<span style="color: var(--lsr-color);">Left-SRs</span>**, though sympathetic to our actions in general, have announced they will stand firm on an all-socialist government. Therefore, Lenin is prepared to present a list for Sovnarkom consisting of an exclusively Bolshevik composition. 
 
