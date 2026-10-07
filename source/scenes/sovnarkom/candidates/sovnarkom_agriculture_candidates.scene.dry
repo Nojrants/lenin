@@ -59,9 +59,8 @@ Overall skill: ★★★☆<br>
 Suitability: ★★☆</ul>
 !}
 unavailable-subtitle: <span style="color: var(--lsr-color);">Left-SR</span> — Leading party administrator and lawyer.<ul>Overall skill: ★★★☆<br>Suitability: ★★☆</ul>[?if foreign_minister = "Kamkov" : <br>Kamkov already has a post. ?] 
-choose-if: foreign_minister != "Kamkov" and agriculture_minister != "Kamkov"
 tags: agriculture_candidates
-choose-if: agriculture_minister != "Kamkov"  
+choose-if: foreign_minister != "Kamkov" and agriculture_minister != "Kamkov"
 on-arrival: agriculture_minister = "Kamkov"; agriculture_minister_party = "Left-SR";
 go-to: sovnarkom_composition
   
