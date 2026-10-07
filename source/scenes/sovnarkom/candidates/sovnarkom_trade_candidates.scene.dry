@@ -1,0 +1,41 @@
+title: Trade Candidates
+new-page: true
+
+@trade_nogin
+title: Viktor Nogin
+subtitle: {!
+<span style="color: var(--bolshevik-color);">Bolshevik</span> — Proponent moderate with industrial management experience.<ul> 
+Overall skill: ★★★<br>
+Suitability: ★★★</ul>
+!}
+unavailable-subtitle: {!
+<span style="color: var(--bolshevik-color);">Bolshevik</span> — Proponent moderate with industrial management experience.<ul> 
+Overall skill: ★★★<br>
+Suitability: ★★★</ul>
+!}
+tags: trade_candidates
+on-arrival: transport_minister = "Nogin"; transport_minister_party = "Bolshevik"; 
+go-to: sovnarkom_composition
+
+@trade_proshian
+title: Prosh Proshian
+subtitle: {!
+<span style="color: var(--lsr-color);">Left-SR</span> — Lawyer and party activist.<ul> 
+Overall skill: ★★★<br>
+Suitability: ★★</ul>
+!}
+unavailable-subtitle: <span style="color: var(--lsr-color);">Left-SR</span> — Lawyer and party activist<ul>Overall skill: ★★★<br>Suitability: ★★</ul>[?if posts_minister == "Proshian" : <br>Proshian already has a post. ?]
+tags: trade_candidates
+choose-if: posts_minister != "Proshian" and trade_minister != "Proshian"
+on-arrival: trade_minister = "Proshian"; trade_minister_party = "Left-SR";
+go-to: sovnarkom_composition
+
+
+@trade_vacant
+title: Let's leave the position vacant for now. 
+tags: trade_minister
+on-arrival: transport_minister = "Vacant"; trade_minister_party = "";
+go-to: sovnarkom_composition
+
+
+  
