@@ -1,0 +1,157 @@
+title: Coalition Affairs
+new-page: true
+is-card: true
+on-arrival: week_actions += 1; coalition_affairs_timer += 4
+view-if: coalition_government >= 0
+card-image: img/portraits/TaburinChildrens.jpg
+tags: b_party, government
+
+= Coalition Affairs
+
+Governing alongside other parties has proved a balancing act, as tensions persist within the government coalition.
+
+- @shuffle
+- @cheka
+- @appoint_positions
+- @promise_land_acceleration
+- @release_prisoners
+- @affirm_ca
+- @transfer_funds
+- @cancel_coalition
+- @root: We do not need to take any action. 
+- @easy_discard
+
+@shuffle
+title: Renegotiate the composition of Sovnarkom. 
+go-to: sovnarkom_composition
+
+@cheka
+title: Offer our partners positions within the Cheka leadership. 
+view-if: cheka_founded = 1
+go-to: cheka_parties.accept
+
+@appoint_positions
+title: Appoint oppositionists to various government offices and posts. 
+on-arrival: {!
+  if (Q.lsr_in_gov == 1) { Q.lsr_relation += 5; Q.lsr_strength += 4; }
+  if (Q.m_in_gov == 1) { Q.centre_m_relation += 5; Q.m_strength += 4; }
+  if (Q.sr_in_gov == 1) { Q.centre_sr_relation += 5; Q.sr_strength += 4; }
+  if (Q.sdi_in_gov == 1) { Q.sdi_relation += 5; Q.sdi_strength += 4; }
+  if (Q.ns_in_gov == 1) { Q.ns_relation += 5; Q.ns_strength += 4;  }
+  Q.moderate_strength += 5; Q.leninist_strength -= 5; Q.leftcom_strength -= 2;
+  Q.moderate_dissent -= 3; Q.leninist_dissent += 5; Q.leftcom_dissent += 3; 
+  Q.cheka_loyalty -= 0.05;     
+!}
+
+A number of non-Bolsheviks are declared deputy people's commissars, placed onto commissariat collegia, or given leadership over government commissions. 
+
+@promise_land_acceleration
+title: Promise the <span style="color: var(--lsr-color); font-weight: bold;">Left-SRs</span> an acceleration of land reform.
+view-if: land_reform < 10 and lsr_in_gov = 1
+on-arrival: {!
+  Q.lsr_relation += 10; Q.lsr_strength += 5;
+!}
+go-to: agriculture.accelerate_land
+
+@release_prisoners
+title: Rein in political repression and allow the release of select prisoners. 
+on-arrival: {!
+  if (Q.lsr_in_gov == 1) { Q.lsr_relation += 2; Q.lsr_strength += 2; }
+  if (Q.m_in_gov == 1) { Q.centre_m_relation += 2; Q.m_strength += 2; }
+  if (Q.sr_in_gov == 1) { Q.centre_sr_relation += 2; Q.sr_strength += 2; }
+  if (Q.sdi_in_gov == 1) { Q.sdi_relation += 2; Q.sdi_strength += 2; }
+  if (Q.ns_in_gov == 1) { Q.ns_relation += 2; Q.ns_strength += 2;  }
+!}
+go-to: justice.release_prisoners
+
+@affirm_ca
+title: Affirm our commitments to uphold the Constituent Assembly. 
+view-if: ca_held = 0
+on-arrival: {!
+  Q.ca_support += 1; 
+  Q.sdi_strength += 2; Q.left_m_strength += 2; Q.m_strength += 1; Q.lsr_strength += 2; Q.sr_strength += 2; 
+  Q.right_m_strength -= 3; Q.right_sr_strength -= 3; popular_socialist_strength -= 2;
+  Q.sdi_relation += 2; Q.left_m_relation += 2; Q.centre_m_relation += 1; Q.lsr_relation += 2; Q.centre_sr_relation += 1;
+  Q.right_m_relation += 1; Q.right_sr_relation += 1; Q.ns_relation += 1; 
+  Q.moderate_strength += 5; Q.leninist_strength -= 5; 
+  Q.moderate_dissent -= 5; Q.leninist_dissent += 5;
+  Q.democraticity += 1; Q.instability -= 0.5; 
+  if (Q.coalition_government > 0) Q.coalition_tension -= 1; 
+!}
+
+We reiterate our commitments to uphold and protect the Constituent Assembly.
+
+@transfer_funds
+title: Tranfer funds to various projects backed by the other parties. 
+subtitle: -1 resources
+choose-if: resources >= 1
+unavailable-subtitle: -1 resources – We lack the resources. 
+view-if: ca_held = 0
+on-arrival: {!
+  Q.resources -= 1; 
+  if (Q.lsr_in_gov == 1) { Q.lsr_relation += 4; Q.lsr_strength += 2; }
+  if (Q.m_in_gov == 1) { Q.centre_m_relation += 4; Q.m_strength += 2; }
+  if (Q.sr_in_gov == 1) { Q.centre_sr_relation += 4; Q.sr_strength += 2; }
+  if (Q.sdi_in_gov == 1) { Q.sdi_relation += 4; Q.sdi_strength += 2; }
+  if (Q.ns_in_gov == 1) { Q.ns_relation += 4; Q.ns_strength += 2;  }
+  if (Q.coalition_government > 0) Q.coalition_tension -= 1; 
+!}
+
+We allocate additional funding to certain pet projects of the opposition. 
+
+
+@cancel_coalition
+title: No more of this, we're ending the coalition agreement! 
+on-arrival:  {!
+  Q.democraticity -= 1; Q.instability += 5; Q.coalition_government = 0;
+  Q.moderate_unrest += 10; Q.leninist_unrest -= 5; Q.leftcom_unrest -= 10;
+  
+  if (Q.lsr_in_gov == 1) { Q.lsr_in_gov = 0; Q.lsr_relation -= 10; Q.lsr_strength -= 3; }
+  if (Q.m_in_gov == 1) { Q.m_in_gov = 0; Q.left_m_relation -= 10; Q.centre_m_relation -= 10; Q.m_strength -= 3; }
+  if (Q.sr_in_gov == 1) { Q.sr_in_gov = 0; Q.centre_sr_relation -= 10; Q.sr_strength -= 3; }
+  if (Q.sdi_in_gov == 1) { Q.sdi_in_gov = 0; Q.sdi_relation -= 10; Q.sdi_strength -= 3; }
+  if (Q.ns_in_gov == 1) { Q.ns_in_gov = 0; Q.ns_relation -= 10; Q.ns_strength -= 3;  }
+              
+  if (Q.foreign_minister_party != "Bolshevik") { Q.foreign_minister = "Vacant"; Q.foreign_minister_party = ""; }
+  if (Q.war_minister_party != "Bolshevik") { Q.war_minister = "Vacant"; Q.war_minister_party = ""; }
+  if (Q.education_minister_party != "Bolshevik") { Q.education_minister = "Vacant"; Q.education_minister_party = ""; }
+  if (Q.interior_minister_party != "Bolshevik") { Q.interior_minister = "Vacant"; Q.interior_minister_party = ""; }
+  if (Q.transport_minister_party != "Bolshevik") { Q.transport_minister = "Vacant"; Q.transport_minister_party = ""; }
+  if (Q.trade_minister_party != "Bolshevik") { Q.trade_minister = "Vacant"; Q.trade_minister_party = ""; }
+  if (Q.finance_minister_party != "Bolshevik") { Q.finance_minister = "Vacant"; Q.finance_minister_party = ""; }
+  if (Q.justice_minister_party != "Bolshevik") { Q.justice_minister = "Vacant"; Q.justice_minister_party = ""; }
+  if (Q.labor_minister_party != "Bolshevik") { Q.labor_minister = "Vacant"; Q.labor_minister_party = ""; }
+  if (Q.agriculture_minister_party != "Bolshevik") { Q.agriculture_minister = "Vacant"; Q.agriculture_minister_party = ""; }
+  if (Q.food_minister_party != "Bolshevik") { Q.food_minister = "Vacant"; Q.food_minister_party = ""; }
+  if (Q.posts_minister_party != "Bolshevik") { Q.posts_minister = "Vacant"; Q.posts_minister_party = ""; }
+  if (Q.nationalities_minister_party != "Bolshevik") { Q.nationalities_minister = "Vacant"; Q.nationalities_minister_party = ""; }
+  if (Q.welfare_minister_party != "Bolshevik") { Q.welfare_minister = "Vacant"; Q.welfare_minister_party = ""; }
+  if (Q.property_minister_party != "Bolshevik") { Q.property_minister = "Vacant"; Q.property_minister_party = ""; }
+  if (Q.local_minister_party != "Bolshevik") { Q.local_minister = "Vacant"; Q.local_minister_party = ""; }
+
+  Q.vikzhel_unrest += 20; 
+  if (Q.vikzhel_unrest >= 50 && Q.vikzhel_strength >= 25) {
+    Q.vikzhel_strike = 1;
+    Q.workers_unrest += 10;
+
+  	Q.previous_military_trains = Q.military_trains;
+  	Q.previous_civilian_transport = Q.civilian_transport; 
+  	Q.previous_transportation_industry = Q.transportation_industry;
+  	Q.previous_industry = Q.industry; 
+  
+  	Q.military_trains *= 0.1;
+  	Q.civilian_transport *= 0.5;
+  	Q.transportation_industry = 0.5; 
+  	Q.industry = Q.previous_industry * 0.5; 
+  	Q.ag_transport * 0.9; 
+  }
+  !}
+
+[?if vikzhel_strike == 1 : Worse, Vikzhel has declared they are launching their promised railroad strike, bringing industry to a standstill. ?]  
+
+
+
+
+  
+
+  
