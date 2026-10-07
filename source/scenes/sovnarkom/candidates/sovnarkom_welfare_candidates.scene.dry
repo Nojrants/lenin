@@ -17,7 +17,7 @@ Suitability: ★★★★★</ul>
 tags: welfare_candidates
 choose-if: welfare_minister != "Kollontai"  
 on-arrival: welfare_minister = "Kollontai"; welfare_minister_party = "Bolshevik";
-go-to: welfare if welfare_founded = 0; sovnarkom_composition
+go-to: welfare if welfare_founded != 1; sovnarkom_composition
   
 
 @welfare_vinokurov
@@ -35,7 +35,7 @@ Suitability: ★★☆</ul>
 tags: welfare_candidates
 choose-if: welfare_minister != "Vinokurov"  
 on-arrival: welfare_minister = "Vinokurov"; welfare_minister_party = "Left-SR";
-go-to: welfare if welfare_founded = 0; sovnarkom_composition
+go-to: welfare if welfare_founded != 1; sovnarkom_composition
   
 
 @welfare_milyutin
@@ -53,7 +53,7 @@ Suitability: ★★★</ul>
 tags: welfare_candidates
 choose-if: welfare_minister != "N_Milyutin"
 on-arrival: welfare_minister = "N_Milyutin"; welfare_minister_party = "Left-SR";
-go-to: welfare if welfare_founded = 0; sovnarkom_composition
+go-to: welfare if welfare_founded != 1; sovnarkom_composition
   
 
 @welfare_vacant
