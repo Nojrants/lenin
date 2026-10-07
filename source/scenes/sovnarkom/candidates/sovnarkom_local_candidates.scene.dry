@@ -1,0 +1,37 @@
+title: Local Candidates
+new-page: true
+
+
+@local_trutovsky
+title: Vladimir Trutovsky
+subtitle: {!
+<span style="color: var(--lsr-color);">Left-SR</span> — Former law student, journalist, and expert in local affairs.<ul> 
+Overall skill: ★★☆<br>
+Suitability: ★★★★</ul>
+!}
+unavailable-subtitle: <span style="color: var(--lsr-color);">Left-SR</span> — Former law student, journalist, and expert in local affairs.<ul>Overall skill: ★★☆<br>Suitability: ★★★★</ul>[?if labor_minister == "Trutovsky" : <br>Trutovsky already has a post. ?]
+tags: local_candidates
+choose-if: local_minister != "Trutovsky"  
+on-arrival: local_minister = "Trutovsky"; local_minister_party = "Bolshevik";
+go-to: sovnarkom_composition
+  
+
+@local_izmailovich
+title: Aleksandra Izmailovich
+subtitle: {!
+<span style="color: var(--lsr-color);">Left-SR</span> — Party organizer with managerial experience.<ul> 
+Overall skill: ★★<br>
+Suitability: ★★</ul>
+!}
+unavailable-subtitle: <span style="color: var(--lsr-color);">Left-SR</span> — Party organizer with managerial experience.<ul>Overall skill: ★★<br>Suitability: ★★</ul>[?if property_minister == "Izmailovich" : <br>Izmailovich already has a post. ?]
+tags: local_candidates
+choose-if: local_minister != "Izmailovich" and property_minister != "Izmailovich"
+on-arrival: local_minister = "Izmailovich"; local_minister_party = "Left-SR";
+go-to: sovnarkom_composition
+  
+
+@local_vacant
+title: Let's leave the position vacant for now. 
+tags: local_candidates
+on-arrival: local_minister = "Vacant"; local_minister_party = "";
+go-to: sovnarkom_composition
