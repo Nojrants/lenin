@@ -38,6 +38,8 @@ title: Let us begin the elections...
 new-page: true
 go-to: election_strategy
 
+= Constituent Assembly Elections
+
 With the elections officially beginning, now is the time to launch any remaining electoral initiatives. 
 
 @election_strategy
@@ -53,10 +55,15 @@ With the elections officially beginning, now is the time to launch any remaining
 - @print_runs
 - @send_to_the_countryside
 - @station_guards
+- @ca_null
 - @parties
 
+@ca_null
+title: ------------------------------------------------------------------------------------------
+go-to: election_strategy
+
 @rhetoric
-title: RHETORIC -----------------------------------------------------------------------------
+title: RHETORIC ---------------------------------------------------------------------------------
 go-to: election_strategy
 
 
@@ -96,7 +103,7 @@ These words cause a public furor, probably hurting more than helping. The bourge
 
 
 @actions
-title: ACTIONS ------------------------------------------------------------------------------
+title: ACTIONS ----------------------------------------------------------------------------------
 go-to: election_strategy
 
 
