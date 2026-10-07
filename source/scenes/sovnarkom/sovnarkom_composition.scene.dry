@@ -240,7 +240,13 @@ function countFaction(position, party) {
 
 
 - #sovnarkom_appointments
+- @sovnarkom_composition_null
 - @cancel_composition
+- @@terminate
+
+@sovnarkom_composition_null
+title: -------------------------------------------------------------------------------------------------
+go-to: sovnarkom_composition
 
 @cancel_composition
 title: Approve composition. 
@@ -251,6 +257,7 @@ The composition is approved.
 
 @terminate
 title: On second thought, let's terminate the coalition agreement! 
+view-if: coalition_government > 0
 go-to: coalition_affairs.cancel_coalition
 
 
