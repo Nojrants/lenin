@@ -243,14 +243,15 @@ function countFaction(position, party) {
 
 @cancel_composition
 title: Approve composition. 
-choose-if: coalition_government = 0 or (coalition_government = 1 and coalition_positions >= coalition_positions_previous and menshevik_positions >= 1 and lsr_positions >= 1 and sr_positions >= 1 and ns_positions >= 1 and sdi_positions >= 1) or (coalition_government = 2 and coalition_positions >= coalition_positions_previous and lsr_positions >= 1)
-unavailable-subtitle: [?if coalition_government = 1 and coalition_positions < coalition_positions_previous : The other parties will not accept a reduction in positions. ?][?if coalition_government = 1 and lsr_positions < 1 : The Left-SRs expect a position. ?][?if coalition_government = 1 and sr_positions < 1 : The SRs expect a position. ?][?if coalition_government = 1 and ns_positions < 1 : The Popular Socialists expect a position. ?][?if coalition_government = 1 and sdi_positions < 1 : The SD-Internationalists expect a position. ?][?if coalition_government = 2 and coalition_positions < coalition_positions_previous : Coalition positions cannot be reduced. ?][?if coalition_government = 2 and (lsr_positions < 1 or (coalition_positions < coalition_positions_previous)) : The Left-SRs will not accept. ?]
+choose-if: coalition_government = 0 or (coalition_government = 1 and coalition_positions >= coalition_positions_previous and menshevik_positions >= 1 and lsr_positions >= 1 and sr_positions >= 1 and ns_positions >= 1 and sdi_positions >= 1 and (coalition_positions < 9)) or (coalition_government = 2 and coalition_positions >= coalition_positions_previous and lsr_positions >= 1 and (coalition_positions < 9))
+unavailable-subtitle: [?if coalition_government = 1 and coalition_positions < coalition_positions_previous : The other parties will not accept a reduction in positions. ?][?if coalition_government = 1 and lsr_positions < 1 : The Left-SRs expect a position. ?][?if coalition_government = 1 and sr_positions < 1 : The SRs expect a position. ?][?if coalition_government = 1 and ns_positions < 1 : The Popular Socialists expect a position. ?][?if coalition_government = 1 and sdi_positions < 1 : The SD-Internationalists expect a position. ?][?if coalition_government = 2 and coalition_positions < coalition_positions_previous : Coalition positions cannot be reduced. ?][?if coalition_government = 2 and (lsr_positions < 1 or (coalition_positions < coalition_positions_previous)) : The Left-SRs will not accept. ?][?if coalition_positions >= 9 : The Central Committee believes we have ceded too much. ?]
 
 The composition is approved.
 
 @terminate
 title: On second thought, let's terminate the coalition agreement! 
 go-to: coalition_affairs.cancel_coalition
+
 
 
 
@@ -268,13 +269,13 @@ unavailable-subtitle: We have a coalition agreement keeping this position fixed.
 - @keep_foreign
 
 @keep_foreign
-title: Cancel action. 
+title: Cancel action.
 subtitle: [?if foreign_minister != "Vacant": Keep [+ foreign_minister +] in place. ?]
 go-to: sovnarkom_composition
 
 
 @military
-title: Military — [+ war_minister +] [?if war_minister_party =="Bolshevik" and war_minister != "None" and war_minister != "Vacant" : (<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>)?][?if war_minister_party=="Menshevik": (<span class="tooltip-text" title="Menshevik" style="color: var(--m-color);">RSDLP</span>)?][?if war_minister_party=="Left-SR": (<span class="tooltip-text" title="Left-SR" style="color: var(--lsr-color);">Left-SR</span>)?][?if war_minister_party=="SR": (<span class="tooltip-text" title="Socialist Revolutionary" style="color: var(--sr-color);">SR</span>)?][?if war_minister_party=="SD-Int": (<span class="tooltip-text" title="Social-Democratic Internationalist" style="color: var(--sdi-color);">SD-Int</span>)?][?if war_minister_party=="NS": (<span class="tooltip-text" title="Popular Socialist" style="color: var(--ns-color);">NS</span>)?]
+title: Military — [+ war_minister +] [?if war_minister_party=="Bolshevik" and war_minister != "None" and war_minister != "Vacant" : (<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>)?][?if war_minister_party=="Menshevik": (<span class="tooltip-text" title="Menshevik" style="color: var(--m-color);">RSDLP</span>)?][?if war_minister_party=="Left-SR": (<span class="tooltip-text" title="Left-SR" style="color: var(--lsr-color);">Left-SR</span>)?][?if war_minister_party=="SR": (<span class="tooltip-text" title="Socialist Revolutionary" style="color: var(--sr-color);">SR</span>)?][?if war_minister_party=="SD-Int": (<span class="tooltip-text" title="Social-Democratic Internationalist" style="color: var(--sdi-color);">SD-Int</span>)?][?if war_minister_party=="NS": (<span class="tooltip-text" title="Popular Socialist" style="color: var(--ns-color);">NS</span>)?]
 tags: sovnarkom_appointments
 choose-if: war_minister_party == "Bolshevik" or war_minister_party == ""
 unavailable-subtitle: We have a coalition agreement keeping this position fixed.
@@ -285,30 +286,81 @@ unavailable-subtitle: We have a coalition agreement keeping this position fixed.
 - @keep_war
 
 @keep_war
-title: Cancel action. 
+title: Cancel action.
 subtitle: [?if war_minister != "Vacant": Keep [+ war_minister +] in place. ?]
 go-to: sovnarkom_composition
 
 
 @enlightenment
-title: Enlightenment — [+ education_minister +] [?if education_minister_party=="Bolshevik" and education_minister != "None" and education_minister != "Vacant" : (<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>)?][?if education_minister_party=="Menshevik": (<span class="tooltip-text" title="Menshevik" style="color: var(--m-color);">RSDLP(u)</span>)?][?if education_minister_party=="Left-SR": (<span class="tooltip-text" title="Left-SR" style="color: var(--lsr-color);">Left-SR</span>)?][?if education_minister_party=="SR": (<span class="tooltip-text" title="Socialist Revolutionary" style="color: var(--sr-color);">SR</span>)?][?if education_minister_party=="SD-Int": (<span class="tooltip-text" title="Social-Democratic Internationalist" style="color: var(--sdi-color);">SD-Int</span>)?][?if education_minister_party=="NS": (<span class="tooltip-text" title="Popular Socialist" style="color: var(--ns-color);">NS</span>)?]
+title: Enlightenment — [+ education_minister +] [?if education_minister_party=="Bolshevik" and education_minister != "None" and education_minister != "Vacant" : (<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>)?][?if education_minister_party=="Menshevik": (<span class="tooltip-text" title="Menshevik" style="color: var(--m-color);">RSDLP</span>)?][?if education_minister_party=="Left-SR": (<span class="tooltip-text" title="Left-SR" style="color: var(--lsr-color);">Left-SR</span>)?][?if education_minister_party=="SR": (<span class="tooltip-text" title="Socialist Revolutionary" style="color: var(--sr-color);">SR</span>)?][?if education_minister_party=="SD-Int": (<span class="tooltip-text" title="Social-Democratic Internationalist" style="color: var(--sdi-color);">SD-Int</span>)?][?if education_minister_party=="NS": (<span class="tooltip-text" title="Popular Socialist" style="color: var(--ns-color);">NS</span>)?]
 tags: sovnarkom_appointments
 choose-if: education_minister_party == "Bolshevik" or education_minister_party == ""
 unavailable-subtitle: We have a coalition agreement keeping this position fixed.
 
-[?if war_minister != "Vacant" : Who should we replace [+ education_minister +] with? ?][?if education_minister == "Vacant" : Who should we appoint to the position? ?]
+[?if education_minister != "Vacant" : Who should we replace [+ education_minister +] with? ?][?if education_minister == "Vacant" : Who should we appoint to the position? ?]
 
 - #enlightenment_candidates
 - @keep_enlightenment
 
 @keep_enlightenment
-title: Cancel action. 
+title: Cancel action.
 subtitle: [?if education_minister != "Vacant": Keep [+ education_minister +] in place. ?]
 go-to: sovnarkom_composition
 
 
+@interior
+title: Interior — [+ interior_minister +] [?if interior_minister_party=="Bolshevik" and interior_minister != "None" and interior_minister != "Vacant" : (<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>)?][?if interior_minister_party=="Menshevik": (<span class="tooltip-text" title="Menshevik" style="color: var(--m-color);">RSDLP</span>)?][?if interior_minister_party=="Left-SR": (<span class="tooltip-text" title="Left-SR" style="color: var(--lsr-color);">Left-SR</span>)?][?if interior_minister_party=="SR": (<span class="tooltip-text" title="Socialist Revolutionary" style="color: var(--sr-color);">SR</span>)?][?if interior_minister_party=="SD-Int": (<span class="tooltip-text" title="Social-Democratic Internationalist" style="color: var(--sdi-color);">SD-Int</span>)?][?if interior_minister_party=="NS": (<span class="tooltip-text" title="Popular Socialist" style="color: var(--ns-color);">NS</span>)?]
+tags: sovnarkom_appointments
+choose-if: interior_minister_party == "Bolshevik" or interior_minister_party == ""
+unavailable-subtitle: We have a coalition agreement keeping this position fixed.
+
+[?if interior_minister != "Vacant" : Who should we replace [+ interior_minister +] with? ?][?if interior_minister == "Vacant" : Who should we appoint to the position? ?]
+
+- #interior_candidates
+- @keep_interior
+
+@keep_interior
+title: Cancel action.
+subtitle: [?if interior_minister != "Vacant": Keep [+ interior_minister +] in place. ?]
+go-to: sovnarkom_composition
+
+
+@transport
+title: Transport — [+ transport_minister +] [?if transport_minister_party=="Bolshevik" and transport_minister != "None" and transport_minister != "Vacant" : (<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>)?][?if transport_minister_party=="Menshevik": (<span class="tooltip-text" title="Menshevik" style="color: var(--m-color);">RSDLP</span>)?][?if transport_minister_party=="Left-SR": (<span class="tooltip-text" title="Left-SR" style="color: var(--lsr-color);">Left-SR</span>)?][?if transport_minister_party=="SR": (<span class="tooltip-text" title="Socialist Revolutionary" style="color: var(--sr-color);">SR</span>)?][?if transport_minister_party=="SD-Int": (<span class="tooltip-text" title="Social-Democratic Internationalist" style="color: var(--sdi-color);">SD-Int</span>)?][?if transport_minister_party=="NS": (<span class="tooltip-text" title="Popular Socialist" style="color: var(--ns-color);">NS</span>)?]
+tags: sovnarkom_appointments
+choose-if: transport_minister_party == "Bolshevik" or transport_minister_party == ""
+unavailable-subtitle: We have a coalition agreement keeping this position fixed.
+
+[?if transport_minister != "Vacant" : Who should we replace [+ transport_minister +] with? ?][?if transport_minister == "Vacant" : Who should we appoint to the position? ?]
+
+- #transport_candidates
+- @keep_transport
+
+@keep_transport
+title: Cancel action.
+subtitle: [?if transport_minister != "Vacant": Keep [+ transport_minister +] in place. ?]
+go-to: sovnarkom_composition
+
+
+@trade
+title: Trade — [+ trade_minister +] [?if trade_minister_party=="Bolshevik" and trade_minister != "None" and trade_minister != "Vacant" : (<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>)?][?if trade_minister_party=="Menshevik": (<span class="tooltip-text" title="Menshevik" style="color: var(--m-color);">RSDLP</span>)?][?if trade_minister_party=="Left-SR": (<span class="tooltip-text" title="Left-SR" style="color: var(--lsr-color);">Left-SR</span>)?][?if trade_minister_party=="SR": (<span class="tooltip-text" title="Socialist Revolutionary" style="color: var(--sr-color);">SR</span>)?][?if trade_minister_party=="SD-Int": (<span class="tooltip-text" title="Social-Democratic Internationalist" style="color: var(--sdi-color);">SD-Int</span>)?][?if trade_minister_party=="NS": (<span class="tooltip-text" title="Popular Socialist" style="color: var(--ns-color);">NS</span>)?]
+tags: sovnarkom_appointments
+choose-if: trade_minister_party == "Bolshevik" or trade_minister_party == ""
+unavailable-subtitle: We have a coalition agreement keeping this position fixed.
+
+[?if trade_minister != "Vacant" : Who should we replace [+ trade_minister +] with? ?][?if trade_minister == "Vacant" : Who should we appoint to the position? ?]
+
+- #trade_candidates
+- @keep_trade
+
+@keep_trade
+title: Cancel action.
+subtitle: [?if trade_minister != "Vacant": Keep [+ trade_minister +] in place. ?]
+go-to: sovnarkom_composition
+
+
 @finance
-title: Finance — [+ finance_minister +] [?if finance_minister_party=="Bolshevik" and finance_minister != "None" and finance_minister != "Vacant" : (<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>)?][?if finance_minister_party=="Menshevik": (<span class="tooltip-text" title="Menshevik" style="color: var(--m-color);">RSDLP(u)</span>)?][?if finance_minister_party=="Left-SR": (<span class="tooltip-text" title="Left-SR" style="color: var(--lsr-color);">Left-SR</span>)?][?if finance_minister_party=="SR": (<span class="tooltip-text" title="Socialist Revolutionary" style="color: var(--sr-color);">SR</span>)?][?if finance_minister_party=="SD-Int": (<span class="tooltip-text" title="Social-Democratic Internationalist" style="color: var(--sdi-color);">SD-Int</span>)?][?if finance_minister_party=="NS": (<span class="tooltip-text" title="Popular Socialist" style="color: var(--ns-color);">NS</span>)?]
+title: Finance — [+ finance_minister +] [?if finance_minister_party=="Bolshevik" and finance_minister != "None" and finance_minister != "Vacant" : (<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>)?][?if finance_minister_party=="Menshevik": (<span class="tooltip-text" title="Menshevik" style="color: var(--m-color);">RSDLP</span>)?][?if finance_minister_party=="Left-SR": (<span class="tooltip-text" title="Left-SR" style="color: var(--lsr-color);">Left-SR</span>)?][?if finance_minister_party=="SR": (<span class="tooltip-text" title="Socialist Revolutionary" style="color: var(--sr-color);">SR</span>)?][?if finance_minister_party=="SD-Int": (<span class="tooltip-text" title="Social-Democratic Internationalist" style="color: var(--sdi-color);">SD-Int</span>)?][?if finance_minister_party=="NS": (<span class="tooltip-text" title="Popular Socialist" style="color: var(--ns-color);">NS</span>)?]
 tags: sovnarkom_appointments
 choose-if: finance_minister_party == "Bolshevik" or finance_minister_party == ""
 unavailable-subtitle: We have a coalition agreement keeping this position fixed.
@@ -324,8 +376,25 @@ subtitle: [?if finance_minister != "Vacant": Keep [+ finance_minister +] in plac
 go-to: sovnarkom_composition
 
 
+@justice
+title: Justice — [+ justice_minister +] [?if justice_minister_party=="Bolshevik" and justice_minister != "None" and justice_minister != "Vacant" : (<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>)?][?if justice_minister_party=="Menshevik": (<span class="tooltip-text" title="Menshevik" style="color: var(--m-color);">RSDLP</span>)?][?if justice_minister_party=="Left-SR": (<span class="tooltip-text" title="Left-SR" style="color: var(--lsr-color);">Left-SR</span>)?][?if justice_minister_party=="SR": (<span class="tooltip-text" title="Socialist Revolutionary" style="color: var(--sr-color);">SR</span>)?][?if justice_minister_party=="SD-Int": (<span class="tooltip-text" title="Social-Democratic Internationalist" style="color: var(--sdi-color);">SD-Int</span>)?][?if justice_minister_party=="NS": (<span class="tooltip-text" title="Popular Socialist" style="color: var(--ns-color);">NS</span>)?]
+tags: sovnarkom_appointments
+choose-if: justice_minister_party == "Bolshevik" or justice_minister_party == ""
+unavailable-subtitle: We have a coalition agreement keeping this position fixed.
+
+[?if justice_minister != "Vacant" : Who should we replace [+ justice_minister +] with? ?][?if justice_minister == "Vacant" : Who should we appoint to the position? ?]
+
+- #justice_candidates
+- @keep_justice
+
+@keep_justice
+title: Cancel action.
+subtitle: [?if justice_minister != "Vacant": Keep [+ justice_minister +] in place. ?]
+go-to: sovnarkom_composition
+
+
 @labor
-title: Labor — [+ labor_minister +] [?if labor_minister_party=="Bolshevik" and labor_minister != "None" and labor_minister != "Vacant" : (<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>)?][?if labor_minister_party=="Menshevik": (<span class="tooltip-text" title="Menshevik" style="color: var(--m-color);">RSDLP(u)</span>)?][?if labor_minister_party=="Left-SR": (<span class="tooltip-text" title="Left-SR" style="color: var(--lsr-color);">Left-SR</span>)?][?if labor_minister_party=="SR": (<span class="tooltip-text" title="Socialist Revolutionary" style="color: var(--sr-color);">SR</span>)?][?if labor_minister_party=="SD-Int": (<span class="tooltip-text" title="Social-Democratic Internationalist" style="color: var(--sdi-color);">SD-Int</span>)?][?if labor_minister_party=="NS": (<span class="tooltip-text" title="Popular Socialist" style="color: var(--ns-color);">NS</span>)?]
+title: Labor — [+ labor_minister +] [?if labor_minister_party=="Bolshevik" and labor_minister != "None" and labor_minister != "Vacant" : (<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>)?][?if labor_minister_party=="Menshevik": (<span class="tooltip-text" title="Menshevik" style="color: var(--m-color);">RSDLP</span>)?][?if labor_minister_party=="Left-SR": (<span class="tooltip-text" title="Left-SR" style="color: var(--lsr-color);">Left-SR</span>)?][?if labor_minister_party=="SR": (<span class="tooltip-text" title="Socialist Revolutionary" style="color: var(--sr-color);">SR</span>)?][?if labor_minister_party=="SD-Int": (<span class="tooltip-text" title="Social-Democratic Internationalist" style="color: var(--sdi-color);">SD-Int</span>)?][?if labor_minister_party=="NS": (<span class="tooltip-text" title="Popular Socialist" style="color: var(--ns-color);">NS</span>)?]
 tags: sovnarkom_appointments
 choose-if: labor_minister_party == "Bolshevik" or labor_minister_party == ""
 unavailable-subtitle: We have a coalition agreement keeping this position fixed.
@@ -338,4 +407,123 @@ unavailable-subtitle: We have a coalition agreement keeping this position fixed.
 @keep_labor
 title: Cancel action.
 subtitle: [?if labor_minister != "Vacant": Keep [+ labor_minister +] in place. ?]
+go-to: sovnarkom_composition
+
+
+@agriculture
+title: Agriculture — [+ agriculture_minister +] [?if agriculture_minister_party=="Bolshevik" and agriculture_minister != "None" and agriculture_minister != "Vacant" : (<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>)?][?if agriculture_minister_party=="Menshevik": (<span class="tooltip-text" title="Menshevik" style="color: var(--m-color);">RSDLP</span>)?][?if agriculture_minister_party=="Left-SR": (<span class="tooltip-text" title="Left-SR" style="color: var(--lsr-color);">Left-SR</span>)?][?if agriculture_minister_party=="SR": (<span class="tooltip-text" title="Socialist Revolutionary" style="color: var(--sr-color);">SR</span>)?][?if agriculture_minister_party=="SD-Int": (<span class="tooltip-text" title="Social-Democratic Internationalist" style="color: var(--sdi-color);">SD-Int</span>)?][?if agriculture_minister_party=="NS": (<span class="tooltip-text" title="Popular Socialist" style="color: var(--ns-color);">NS</span>)?]
+tags: sovnarkom_appointments
+choose-if: agriculture_minister_party == "Bolshevik" or agriculture_minister_party == ""
+unavailable-subtitle: We have a coalition agreement keeping this position fixed.
+
+[?if agriculture_minister != "Vacant" : Who should we replace [+ agriculture_minister +] with? ?][?if agriculture_minister == "Vacant" : Who should we appoint to the position? ?]
+
+- #agriculture_candidates
+- @keep_agriculture
+
+@keep_agriculture
+title: Cancel action.
+subtitle: [?if agriculture_minister != "Vacant": Keep [+ agriculture_minister +] in place. ?]
+go-to: sovnarkom_composition
+
+
+@food
+title: Food — [+ food_minister +] [?if food_minister_party=="Bolshevik" and food_minister != "None" and food_minister != "Vacant" : (<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>)?][?if food_minister_party=="Menshevik": (<span class="tooltip-text" title="Menshevik" style="color: var(--m-color);">RSDLP</span>)?][?if food_minister_party=="Left-SR": (<span class="tooltip-text" title="Left-SR" style="color: var(--lsr-color);">Left-SR</span>)?][?if food_minister_party=="SR": (<span class="tooltip-text" title="Socialist Revolutionary" style="color: var(--sr-color);">SR</span>)?][?if food_minister_party=="SD-Int": (<span class="tooltip-text" title="Social-Democratic Internationalist" style="color: var(--sdi-color);">SD-Int</span>)?][?if food_minister_party=="NS": (<span class="tooltip-text" title="Popular Socialist" style="color: var(--ns-color);">NS</span>)?]
+tags: sovnarkom_appointments
+choose-if: food_minister_party == "Bolshevik" or food_minister_party == ""
+unavailable-subtitle: We have a coalition agreement keeping this position fixed.
+
+[?if food_minister != "Vacant" : Who should we replace [+ food_minister +] with? ?][?if food_minister == "Vacant" : Who should we appoint to the position? ?]
+
+- #food_candidates
+- @keep_food
+
+@keep_food
+title: Cancel action.
+subtitle: [?if food_minister != "Vacant": Keep [+ food_minister +] in place. ?]
+go-to: sovnarkom_composition
+
+
+@posts
+title: Posts — [+ posts_minister +] [?if posts_minister_party=="Bolshevik" and posts_minister != "None" and posts_minister != "Vacant" : (<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>)?][?if posts_minister_party=="Menshevik": (<span class="tooltip-text" title="Menshevik" style="color: var(--m-color);">RSDLP</span>)?][?if posts_minister_party=="Left-SR": (<span class="tooltip-text" title="Left-SR" style="color: var(--lsr-color);">Left-SR</span>)?][?if posts_minister_party=="SR": (<span class="tooltip-text" title="Socialist Revolutionary" style="color: var(--sr-color);">SR</span>)?][?if posts_minister_party=="SD-Int": (<span class="tooltip-text" title="Social-Democratic Internationalist" style="color: var(--sdi-color);">SD-Int</span>)?][?if posts_minister_party=="NS": (<span class="tooltip-text" title="Popular Socialist" style="color: var(--ns-color);">NS</span>)?]
+tags: sovnarkom_appointments
+choose-if: posts_minister_party == "Bolshevik" or posts_minister_party == ""
+unavailable-subtitle: We have a coalition agreement keeping this position fixed.
+
+[?if posts_minister != "Vacant" : Who should we replace [+ posts_minister +] with? ?][?if posts_minister == "Vacant" : Who should we appoint to the position? ?]
+
+- #posts_candidates
+- @keep_posts
+
+@keep_posts
+title: Cancel action.
+subtitle: [?if posts_minister != "Vacant": Keep [+ posts_minister +] in place. ?]
+go-to: sovnarkom_composition
+
+
+@nationalities
+title: Nationalities — [+ nationalities_minister +] [?if nationalities_minister_party=="Bolshevik" and nationalities_minister != "None" and nationalities_minister != "Vacant" : (<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>)?][?if nationalities_minister_party=="Menshevik": (<span class="tooltip-text" title="Menshevik" style="color: var(--m-color);">RSDLP</span>)?][?if nationalities_minister_party=="Left-SR": (<span class="tooltip-text" title="Left-SR" style="color: var(--lsr-color);">Left-SR</span>)?][?if nationalities_minister_party=="SR": (<span class="tooltip-text" title="Socialist Revolutionary" style="color: var(--sr-color);">SR</span>)?][?if nationalities_minister_party=="SD-Int": (<span class="tooltip-text" title="Social-Democratic Internationalist" style="color: var(--sdi-color);">SD-Int</span>)?][?if nationalities_minister_party=="NS": (<span class="tooltip-text" title="Popular Socialist" style="color: var(--ns-color);">NS</span>)?]
+tags: sovnarkom_appointments
+choose-if: nationalities_minister_party == "Bolshevik" or nationalities_minister_party == ""
+unavailable-subtitle: We have a coalition agreement keeping this position fixed.
+
+[?if nationalities_minister != "Vacant" : Who should we replace [+ nationalities_minister +] with? ?][?if nationalities_minister == "Vacant" : Who should we appoint to the position? ?]
+
+- #nationalities_candidates
+- @keep_nationalities
+
+@keep_nationalities
+title: Cancel action.
+subtitle: [?if nationalities_minister != "Vacant": Keep [+ nationalities_minister +] in place. ?]
+go-to: sovnarkom_composition
+
+
+@welfare
+title: Welfare — [+ welfare_minister +] [?if welfare_minister_party=="Bolshevik" and welfare_minister != "None" and welfare_minister != "Vacant" : (<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>)?][?if welfare_minister_party=="Menshevik": (<span class="tooltip-text" title="Menshevik" style="color: var(--m-color);">RSDLP</span>)?][?if welfare_minister_party=="Left-SR": (<span class="tooltip-text" title="Left-SR" style="color: var(--lsr-color);">Left-SR</span>)?][?if welfare_minister_party=="SR": (<span class="tooltip-text" title="Socialist Revolutionary" style="color: var(--sr-color);">SR</span>)?][?if welfare_minister_party=="SD-Int": (<span class="tooltip-text" title="Social-Democratic Internationalist" style="color: var(--sdi-color);">SD-Int</span>)?][?if welfare_minister_party=="NS": (<span class="tooltip-text" title="Popular Socialist" style="color: var(--ns-color);">NS</span>)?]
+tags: sovnarkom_appointments
+choose-if: welfare_minister_party == "Bolshevik" or welfare_minister_party == ""
+unavailable-subtitle: We have a coalition agreement keeping this position fixed.
+
+[?if welfare_minister != "Vacant" : Who should we replace [+ welfare_minister +] with? ?][?if welfare_minister == "Vacant" : Who should we appoint to the position? ?]
+
+- #welfare_candidates
+- @keep_welfare
+
+@keep_welfare
+title: Cancel action.
+subtitle: [?if welfare_minister != "Vacant": Keep [+ welfare_minister +] in place. ?]
+go-to: sovnarkom_composition
+
+
+@property
+title: Property — [+ property_minister +] [?if property_minister_party=="Bolshevik" and property_minister != "None" and property_minister != "Vacant" : (<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>)?][?if property_minister_party=="Menshevik": (<span class="tooltip-text" title="Menshevik" style="color: var(--m-color);">RSDLP</span>)?][?if property_minister_party=="Left-SR": (<span class="tooltip-text" title="Left-SR" style="color: var(--lsr-color);">Left-SR</span>)?][?if property_minister_party=="SR": (<span class="tooltip-text" title="Socialist Revolutionary" style="color: var(--sr-color);">SR</span>)?][?if property_minister_party=="SD-Int": (<span class="tooltip-text" title="Social-Democratic Internationalist" style="color: var(--sdi-color);">SD-Int</span>)?][?if property_minister_party=="NS": (<span class="tooltip-text" title="Popular Socialist" style="color: var(--ns-color);">NS</span>)?]
+tags: sovnarkom_appointments
+choose-if: property_minister_party == "Bolshevik" or property_minister_party == ""
+unavailable-subtitle: We have a coalition agreement keeping this position fixed.
+
+[?if property_minister != "Vacant" : Who should we replace [+ property_minister +] with? ?][?if property_minister == "Vacant" : Who should we appoint to the position? ?]
+
+- #property_candidates
+- @keep_property
+
+@keep_property
+title: Cancel action.
+subtitle: [?if property_minister != "Vacant": Keep [+ property_minister +] in place. ?]
+go-to: sovnarkom_composition
+
+
+@local
+title: Local Government — [+ local_minister +] [?if local_minister_party=="Bolshevik" and local_minister != "None" and local_minister != "Vacant" : (<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>)?][?if local_minister_party=="Menshevik": (<span class="tooltip-text" title="Menshevik" style="color: var(--m-color);">RSDLP</span>)?][?if local_minister_party=="Left-SR": (<span class="tooltip-text" title="Left-SR" style="color: var(--lsr-color);">Left-SR</span>)?][?if local_minister_party=="SR": (<span class="tooltip-text" title="Socialist Revolutionary" style="color: var(--sr-color);">SR</span>)?][?if local_minister_party=="SD-Int": (<span class="tooltip-text" title="Social-Democratic Internationalist" style="color: var(--sdi-color);">SD-Int</span>)?][?if local_minister_party=="NS": (<span class="tooltip-text" title="Popular Socialist" style="color: var(--ns-color);">NS</span>)?]
+tags: sovnarkom_appointments
+choose-if: local_minister_party == "Bolshevik" or local_minister_party == ""
+unavailable-subtitle: We have a coalition agreement keeping this position fixed.
+
+[?if local_minister != "Vacant" : Who should we replace [+ local_minister +] with? ?][?if local_minister == "Vacant" : Who should we appoint to the position? ?]
+
+- #local_candidates
+- @keep_local
+
+@keep_local
+title: Cancel action.
+subtitle: [?if local_minister != "Vacant": Keep [+ local_minister +] in place. ?]
 go-to: sovnarkom_composition
