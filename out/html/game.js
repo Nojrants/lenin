@@ -1048,7 +1048,7 @@ window.achievements = {
 golden_age_of_the_peoples_commissars: {
     name: "Golden Age of the People's Commissars",
     description: "Assemble an all-star composition in the Council of People's Commissars.",
-    image: "img/portraits/b/sovnarkom1.jpg"
+    image: "img/sovnarkom1.jpg"
 },
 
 vikzhel_averted: {
