@@ -53,7 +53,6 @@ Suitability: ★★</ul>
 tags: internal_candidates
 choose-if: interior_minister != "Blumkin" and coalition_government > 0
 on-arrival: interior_minister = "Blumkin"; interior_minister_party = "Left-SR"; 
-!}
 go-to: sovnarkom_composition
 
 
