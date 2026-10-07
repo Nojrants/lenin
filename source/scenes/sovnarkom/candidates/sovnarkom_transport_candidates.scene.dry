@@ -15,6 +15,7 @@ Overall skill: ★★★☆<br>
 Suitability: ★☆</ul>
 !}
 tags: transport_candidates
+choose-if: transport_minister != "Elizarov"
 on-arrival: transport_minister = "Elizarov"; transport_minister_party = "Bolshevik"; 
 go-to: sovnarkom_composition
 
