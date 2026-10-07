@@ -1527,6 +1527,7 @@ Q.martov_advisor = 0; // Julius Martov - arrive April week 4
 Q.axelrod_advisor = 0; // Pavel Axelrod
 Q.sukhanov_advisor = 1; // Nikolai Sukhanov
 
+Q.elizarov_available = 1;
 Q.sukhanov_available = 1;
 Q.chicherin_available = 0;
 Q.chicherin_negotiation = 0;
@@ -1579,16 +1580,7 @@ Q.kollontai_advisor = 0; // Alexandra Kollontai - April week 1
 Q.stasova_advisor = 0; // Elena Stasova
 Q.shliapnikov_advisor = 0; // Alexander Shliapnikov
 
-Q.lenin_auc = 6;
-Q.lenin_adm = 4;
-Q.lenin_idea = 5;
-Q.lenin_mil = 2;
-Q.lenin_eco = 4;
-Q.lenin_par = 4;
-Q.lenin_dip = 3;
-Q.lenin_nat = 3;
-Q.lenin_cult = 2;
-Q.lenin_spec = "";
+
 
 
 
