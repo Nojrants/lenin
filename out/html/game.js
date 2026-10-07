@@ -1066,31 +1066,31 @@ lsr_coalition: {
 black_devil: {
     name: "The Black Devil",
     description: "Power is in the hands of Yakov Sverdlov.",
-    image: "img/sverdlov.jpg"
+    image: "img/portraits/b/sverdlov.jpg"
 },
 
 prophet_armed: {
     name: "The Prophet Armed",
     description: "Power is in the hands of Leon Trotsky.",
-    image: "img/trotsky.jpg"
+    image: "img/portraits/b/trotsky.jpg"
 },
 
 party_favorite: {
     name: "The Party Favorite",
     description: "Power is in the hands of Nikolai Bukharin.",
-    image: "img/bukharin.jpg"
+    image: "img/portraits/b/bukharin.jpg"
 },
 
 peoples_tribune: {
     name: "The People's Tribune",
     description: "Power is in the hands of Grigory Zinoviev.",
-    image: "img/zinoviev.jpg"
+    image: "img/portraits/b/zinoviev.jpg"
 },
 
 red_tsar: {
     name: "The Red Tsar",
     description: "Power is in the hands of Iosif Stalin.",
-    image: "img/stalin.jpg"
+    image: "img/portraits/b/stalin.jpg"
 },
 
     
