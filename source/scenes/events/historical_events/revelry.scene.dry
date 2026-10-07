@@ -3,10 +3,13 @@ subtitle: The Revolution has arrived!
 new-page: true
 view-if: year = 1917
 max-visits: 1
-face-image: img/womens_day.jpg
 tags: event
 
 = Revolutionary Revelry
+
+<div style="text-align:center;">
+    <img src="img/looting_wine.png" style="display:block; margin:0 auto; max-width:100%; height:auto; border:3px solid #8b0000; box-shadow:0 0 0 2px #d4af37 inset;">
+</div>
 
 The Revolution is upon us! We have seized control over the Winter Palace and arrested the Provisional Government, leading to a wave of enthusiasm in the streets. In the chaos, many have taken to looting valuables from the Winter Palace—in particular there is great interest in the former imperial wine cellar.  
   
