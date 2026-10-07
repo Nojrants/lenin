@@ -105,6 +105,35 @@ on-arrival: education_minister = "Bogdanov"; education_minister_party = "Bolshev
 go-to: sovnarkom_composition
 
 
+@enlightenment_natanson
+title: Mark Natanson
+subtitle: {!
+<span style="color: var(--lsr-color);">Left-SR</span> — Party leader and elder statesman; some experience in education.<ul>
+Overall skill: ★★★☆<br>
+Suitability: ★☆</ul>
+!}
+unavailable-subtitle: <span style="color: var(--lsr-color);">Left-SR</span> — Party leader and elder statesman; some experience in education.<ul>Overall skill: ★★★☆<br>Suitability: ★☆</ul>[?if coalition_government = 0 : We haven't assented to Left-SR participation in government. ?][?if lsr_relation < 40 : Natanson won't accept this offer.<br> ?]
+tags: enlightenment_candidates
+choose-if: lsr_relation >= 40 and education_minister != "Natanson" and coalition_government > 0
+on-arrival: education_minister = "Natanson"; education_minister_party = "Left-SR";
+go-to: sovnarkom_composition
+
+
+@enlightenment_sukhanov
+title: Nikolai Sukhanov
+subtitle: {!
+<span style="color: var(--sdi-color);">SD-Int.</span> — Party leader, writer, and public intellectual.<ul>
+Overall skill: ★★★★<br>
+Suitability: ★★</ul>
+!}
+unavailable-subtitle: <span style="color: var(--sdi-color);">SD-Int.</span> — Party leader, writer, and public intellectual.<ul>Overall skill: ★★★★<br>Suitability: ★★</ul>[?if coalition_government != 1 : We haven't assented to SD-Internationalist participation in government. ?][?if property_minister == "Sukhanov": <br>Sukhanov already has a post. ?][?if sdi_relation < 40 : <br>Sukhanov won't accept this offer. ?]
+tags: enlightenment_candidates
+choose-if: sdi_relation >= 40 and property_minister != "Sukhanov" and education_minister != "Sukhanov" and coalition_government = 1
+on-arrival: education_minister = "Sukhanov"; education_minister_party = "SD-Int";
+go-to: sovnarkom_composition
+
+
+
 @enlightenment_vacant
 title: Let's leave the position vacant for now. 
 tags: enlightenment_candidates
