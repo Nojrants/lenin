@@ -1048,7 +1048,7 @@ window.achievements = {
 golden_age_of_the_peoples_commissars: {
     name: "Golden Age of the People's Commissars",
     description: "Assemble an all-star composition in the Council of People's Commissars.",
-    image: "img/portraits/b/lenin.jpg"
+    image: "img/portraits/b/sovnarkom1.jpg"
 },
 
 vikzhel_averted: {
@@ -1061,6 +1061,18 @@ lsr_coalition: {
     name: "Children of October",
     description: "Form a coalition government between the Bolsheviks and Left-SRs.",
     image: "img/train.jpg"
+},
+
+harbringers_progress: {
+    name: "Harbringers of Progress",
+    description: "Assemble a government composition that is at least 50% women, 50% non-Russian minorities, and has LGBT representation.",
+    image: "img/equality.png
+},
+
+elders_zion: {
+    name: "Elders of Zion",
+    description: "Eliminate Lenin; install a government that is composed entirely of Jews.",
+    image: "img/elders_of_zion.jpg"
 },
 
 black_devil: {
