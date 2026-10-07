@@ -75,8 +75,15 @@ title: Found a new People's Commissariat for Welfare.
 subtitle: We need a dedicated commissariat focusing on the people's general welfare. 
 tags: sovnarkom_special
 view-if: welfare_founded = 0
-on-arrival: welfare_founded = 1; efficacy_welfare += 0.5 if efficacy_welfare < 1; welfare_expend += 0.5; labor_unrest -= 5; peasant_unrest -= 2; intelligentsia_unrest -= 2; 
+on-arrival: efficacy_welfare += 0.5 if efficacy_welfare < 1; welfare_expend += 0.5; labor_unrest -= 5; peasant_unrest -= 2; intelligentsia_unrest -= 2; 
 go-to: welfare_commissar_menu
+
+@welfare_commissar_menu
+
+We need to select a people's commsisar to head the commissariat. 
+
+- #welfare_candidates
+
 
 @terminate_coalition
 title: Terminate the coalition agreement! 
@@ -129,45 +136,6 @@ on-arrival: {!
 
 
 
-
-
-@welfare_commissar_menu
-
-We need to select a people's commsisar to head the commissariat. 
-
-- @select_kollontai
-- @select_vinokurov
-- @select_milyutin
-
-@select_kollontai
-title: Alexandra Kollontai
-subtitle: {!
-Left — Strong social reformer, feminist, and radical.<br>
-Overall skill: ★★★<br>
-Suitability: ★★★★★
-!}
-on-arrival: welfare_minister = "Kollontai"; welfare_minister_party = "Bolshevik"; leftcom_dissent -= 5; 
-go-to: welfare
-
-@select_vinokurov
-title: Alexander Vinokurov
-subtitle: {!
-Early social-democratic organizer with experience in economic and legal matters.<br>
-Overall skill: ★★☆<br>
-Suitability: ★★☆
-!}
-on-arrival: welfare_minister = "Vinokurov"; welfare_minister_party = "Bolshevik"; 
-go-to: welfare
-
-@select_milyutin
-title: Nikolai Milyutin
-subtitle: {!
-Architectual student; briefly managed Russia's largest disability insurance fund.<br>
-Overall skill: ★★<br>
-Suitability: ★★★
-!}
-on-arrival: welfare_minister = "N_Milyutin"; welfare_minister_party = "Bolshevik"; 
-go-to: welfare
 
 
 @change_sovnarkom_composition
