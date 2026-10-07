@@ -316,7 +316,7 @@ unavailable-subtitle: We have a coalition agreement keeping this position fixed.
 
 [?if interior_minister != "Vacant" : Who should we replace [+ interior_minister +] with? ?][?if interior_minister == "Vacant" : Who should we appoint to the position? ?]
 
-- #interior_candidates
+- #internal_candidates
 - @keep_interior
 
 @keep_interior
