@@ -2,20 +2,48 @@ title: Sovnarkom Composition
 new-page: true
 on-arrival: {!
 
-Q.leninist_positions_previous = Q.leninist_positions;
-Q.leftcom_positions_previous = Q.leftcom_positions;
-Q.moderate_positions_previous = Q.moderate_positions;
-Q.vperedist_positions_previous = Q.vperedist_positions;
-Q.nonfactional_positions_previous = Q.nonfactional_positions;
+    Q.leninist_positions_previous = Q.leninist_positions;
+    Q.leftcom_positions_previous = Q.leftcom_positions;
+    Q.moderate_positions_previous = Q.moderate_positions;
+    Q.vperedist_positions_previous = Q.vperedist_positions;
+    Q.nonfactional_positions_previous = Q.nonfactional_positions;
+    
+    Q.leninist_positions = 0;
+    Q.leftcom_positions = 0;
+    Q.moderate_positions = 0;
+    Q.vperedist_positions = 0;
+    Q.nonfactional_positions = 0;
 
-Q.leninist_positions = 0;
-Q.leftcom_positions = 0;
-Q.moderate_positions = 0;
-Q.vperedist_positions = 0;
-Q.nonfactional_positions = 0;
+    Q.menshevik_positions = 0;
+    Q.lsr_positions = 0; 
+    Q.sr_positions = 0;
+    Q.ns_positions = 0;
+    Q.sdi_positions =0;
 
-function countFaction(position) {
+function countFaction(position, party) {
     if (!position || position == "Vacant" || position == "None") return;
+
+    if (party == "Menshevik") {
+        Q.menshevik_positions += 1;
+        return;
+    }
+    if (party == "Left-SR") {
+        Q.lsr_positions += 1;
+        return;
+    }
+    if (party == "SR") {
+        Q.sr_positions += 1;
+        return;
+    }
+    if (party == "NS") {
+        Q.ns_positions += 1;
+        return;
+    }
+    if (party == "SD-Int") {
+        Q.sdi_positions += 1;
+        return;
+    }
+
 
     var leader = Q.leaders[position];
     if (!leader || !leader.faction) return;
@@ -37,26 +65,28 @@ function countFaction(position) {
     }
 }
 
-countFaction(Q.prime_minister);
-countFaction(Q.deputy_pm);
-countFaction(Q.foreign_minister);
-countFaction(Q.war_minister);
-countFaction(Q.education_minister);
-countFaction(Q.interior_minister);
-countFaction(Q.transport_minister);
-countFaction(Q.trade_minister);
-countFaction(Q.finance_minister);
-countFaction(Q.justice_minister);
-countFaction(Q.labor_minister);
-countFaction(Q.agriculture_minister);
-countFaction(Q.food_minister);
-countFaction(Q.posts_minister);
-countFaction(Q.nationalities_minister);
-countFaction(Q.welfare_minister);
-countFaction(Q.property_minister);
-countFaction(Q.local_minister);
-
+    countFaction(Q.prime_minister, Q.prime_minister_party);
+    countFaction(Q.deputy_pm, Q.deputy_pm_party);
+    countFaction(Q.foreign_minister, Q.foreign_minister_party);
+    countFaction(Q.war_minister, Q.war_minister_party);
+    countFaction(Q.education_minister, Q.education_minister_party);
+    countFaction(Q.interior_minister, Q.interior_minister_party);
+    countFaction(Q.transport_minister, Q.transport_minister_party);
+    countFaction(Q.trade_minister, Q.trade_minister_party);
+    countFaction(Q.finance_minister, Q.finance_minister_party);
+    countFaction(Q.justice_minister, Q.justice_minister_party);
+    countFaction(Q.labor_minister, Q.labor_minister_party);
+    countFaction(Q.agriculture_minister, Q.agriculture_minister_party);
+    countFaction(Q.food_minister, Q.food_minister_party);
+    countFaction(Q.posts_minister, Q.posts_minister_party);
+    countFaction(Q.nationalities_minister, Q.nationalities_minister_party);
+    countFaction(Q.welfare_minister, Q.welfare_minister_party);
+    countFaction(Q.property_minister, Q.property_minister_party);
+    countFaction(Q.local_minister, Q.local_minister_party);
 !}
+
+Q.coalition_positions_previous = Q.coalition_positions;
+Q.coalition_positions = Q.menshevik_positions + Q.lsr_positions + Q.sr_positions + Q.ns_positions + Q.sdi_positions;
 
 <table style="width:100%; border-collapse:collapse; margin:10px 0;">
 <tr>
@@ -104,19 +134,100 @@ Non-Factional
 [+ nonfactional_positions +]
 </td>
 </tr>
+
+[if coalition_government > 0]
+<tr>
+<td colspan="3" style="text-align:center; padding:7px 5px; border-top:1px solid var(--text-color); border-bottom:1px solid var(--text-color);">
+<b>Coalition Positions</b>
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding:5px; border-bottom:1px solid rgba(128,128,128,0.4);">
+<b>Party</b>
+</td>
+<td style="text-align:center; padding:5px; border-bottom:1px solid rgba(128,128,128,0.4);">
+<b>Relations</b>
+</td>
+<td style="text-align:center; padding:5px; border-bottom:1px solid rgba(128,128,128,0.4);">
+<b>Positions</b>
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding:5px; padding-left:15px;">
+<span class="sdi-color"><b>SD-International</b></span>
+</td>
+<td style="text-align:center; padding:5px;">
+[+ sdi_relation : relationships +]
+</td>
+<td style="text-align:center; padding:5px;">
+[+ sdi_positions +]
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding:5px; padding-left:15px;">
+<span class="m-color"><b>Mensheviks</b></span>
+</td>
+<td style="text-align:center; padding:5px;">
+[+ ((left_m_relation + centre_m_relation + right_m_relation)/3) : relationships +]
+</td>
+<td style="text-align:center; padding:5px;">
+[+ menshevik_positions +]
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding:5px; padding-left:15px;">
+<span class="lsr-color"><b>Left-SRs</b></span>
+</td>
+<td style="text-align:center; padding:5px;">
+[+ lsr_relation : relationships +]
+</td>
+<td style="text-align:center; padding:5px;">
+[+ lsr_positions +]
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding:5px; padding-left:15px;">
+<span class="sr-color"><b>SRs</b></span>
+</td>
+<td style="text-align:center; padding:5px;">
+[+ ((centre_sr_relation + right_sr_relation)/2) : relationships +]
+</td>
+<td style="text-align:center; padding:5px;">
+[+ sr_positions +]
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding:5px; padding-left:15px;">
+<span class="ns-color"><b>Popular Socialists</b></span>
+</td>
+<td style="text-align:center; padding:5px;">
+[+ ns_relation : relationships +]
+</td>
+<td style="text-align:center; padding:5px;">
+[+ ns_positions +]
+</td>
+</tr>
+[/if]
 </table>
-
-
 
 
 - #sovnarkom_appointments
 - @cancel_composition
 
 @cancel_composition
-title: Stop changing composition. 
-go-to: sovnarkom_chair
+title: Approve composition. 
+choose-if: coalition_government = 0 or (coalition_government = 1 and (coalition_positions >= coalition_positions_previous) and (Q.menshevik_positions >= 1) and (Q.lsr_positions >= 1) and (Q.sr_positions >= 1) and (Q.ns_positions >= 1) and (Q.sdi_positions >= 1)) or (coalition_government = 2 and (coalition_positions >= coalition_positions_previous) and (Q.lsr_positions >= 1))
+unavailable-subtitle: [?if coalition_government = 1 and coalition_positions < coalition_positions_previous : The other parties will not accept a reduction in positions. ?][?if coalition_government = 1 and lsr_positions < 1 : The Left-SRs expect a position. ?][?if coalition_government = 1 and sr_positions < 1 : The SRs expect a position. ?][?if coalition_government = 1 and ns_positions < 1 : The Popular Socialists expect a position. ?][?if coalition_government = 1 and sdi_positions < 1 : The SD-Internationalists expect a position. ?][?if coalition_government = 2 and coalition_positions < coalition_positions_previous : Coalition positions cannot be reduced. ?][?if coalition_government = 2 and (lsr_positions < 1 or (coalition_positions < coalition_positions_previous)) : The Left-SRs will not accept. ?]
 
-  
+The composition is approved.
+
+@terminate
+title: On second thought, let's terminate the coalition agreement! 
+go-to: coalition_affairs.cancel_coalition
+
+
+
+
 
 @foreign
 title: Foreign Affairs — [+ foreign_minister +] [?if foreign_minister_party=="Bolshevik" and foreign_minister != "None" and foreign_minister != "Vacant" : (<span class="tooltip-text" title="Russian Communist Party (Bolsheviks)" style="color: var(--bolshevik-color);">RCP(b)</span>)?][?if foreign_minister_party=="Menshevik": (<span class="tooltip-text" title="Menshevik" style="color: var(--m-color);">RSDLP</span>)?][?if foreign_minister_party=="Left-SR": (<span class="tooltip-text" title="Left-SR" style="color: var(--lsr-color);">Left-SR</span>)?][?if foreign_minister_party=="SR": (<span class="tooltip-text" title="Socialist Revolutionary" style="color: var(--sr-color);">SR</span>)?][?if foreign_minister_party=="SD-Int": (<span class="tooltip-text" title="Social-Democratic Internationalist" style="color: var(--sdi-color);">SD-Int</span>)?][?if foreign_minister_party=="NS": (<span class="tooltip-text" title="Popular Socialist" style="color: var(--ns-color);">NS</span>)?]
