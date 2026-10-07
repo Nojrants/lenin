@@ -1,8 +1,8 @@
 title: Coalition Affairs
 new-page: true
 is-card: true
-on-arrival: week_actions += 1; coalition_affairs_timer += 4 and coalition_government > 0
-view-if: coalition_government >= 0
+on-arrival: week_actions += 1; coalition_affairs_timer += 4
+view-if: coalition_government > 0 
 card-image: img/portraits/TaburinChildrens.jpg
 tags: b_party, government
 
