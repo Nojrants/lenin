@@ -27,7 +27,9 @@ Russia is an agrarian country, so rural policy is a crucial part of the governme
 - @preserve_estates
 - @establish_communes
 - @promote_cooperatives
-
+- @root: Do not change policy
+- @easy_discard
+- @cancel_advisor_action
 
 
 @administration
@@ -56,7 +58,7 @@ subtitle: -0.5 resources
 on-arrival: efficacy_agriculture += 0.1 if efficacy_agriculture < 1; resources -= 0.5;
 
 @agriculture_null
-title: ------------------------------------------------------------------------
+title: -------------------------------------------------------------------------------------------------
 go-to: agriculture
 
 @agriculture_return
