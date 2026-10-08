@@ -35,7 +35,6 @@ tags: agriculture_candidates
 choose-if: agriculture_minister != "Kolegayev"  
 on-arrival: agriculture_minister = "Kolegayev"; agriculture_minister_party = "Left-SR";
 go-to: sovnarkom_composition
-  
 
 @agriculture_algasov
 title: Vladimir Algasov
@@ -50,7 +49,6 @@ choose-if: agriculture_minister != "Algasov" and posts_minister != "Algasov" and
 on-arrival: agriculture_minister = "Algasov"; agriculture_minister_party = "Left-SR";
 go-to: sovnarkom_composition
   
-
 @agriculture_kamkov
 title: Boris Kamkov
 subtitle: {!
@@ -58,10 +56,23 @@ subtitle: {!
 Overall skill: ★★★☆<br>
 Suitability: ★★☆</ul>
 !}
-unavailable-subtitle: <span style="color: var(--lsr-color);">Left-SR</span> — Leading party administrator and lawyer.<ul>Overall skill: ★★★☆<br>Suitability: ★★☆</ul>[?if foreign_minister = "Kamkov" : <br>Kamkov already has a post. ?] 
+unavailable-subtitle: <span style="color: var(--lsr-color);">Left-SR</span> — Leading party administrator and lawyer.<ul>Overall skill: ★★★☆<br>Suitability: ★★☆</ul>[?if coalition_government = 0 : We haven't assented to Left-SR participation in government. ?][?if foreign_minister = "Kamkov" : Kamkov already has a post. ?] 
 tags: agriculture_candidates
-choose-if: foreign_minister != "Kamkov" and agriculture_minister != "Kamkov"
+choose-if: foreign_minister != "Kamkov" and agriculture_minister != "Kamkov" and coalition_government > 0
 on-arrival: agriculture_minister = "Kamkov"; agriculture_minister_party = "Left-SR";
+go-to: sovnarkom_composition
+
+@agriculture_peshekhonov
+title: Alexey Peshekhonov
+subtitle: {!
+<span style="color: var(--ns-color);">NS</span> — Economist, statistician, and expert on rural administration; member of the Provisional Government.<ul> 
+Overall skill: ★★★<br>
+Suitability: ★★★★</ul>
+!}
+unavailable-subtitle: <span style="color: var(--ns-color);">NS</span> — Economist, statistician, and expert on rural administration; member of the Provisional Government.<ul>Overall skill: ★★★<br>Suitability: ★★★★</ul>[?if coalition_government = 0 : We haven't assented to Left-SR participation in government. ?][?if food_minister == "Peshekhonov" : Peshekhonov already has a post. ?]
+tags: agriculture_candidates
+choose-if: agriculture_minister != "Peshekhonov" and food_minister != "Peshekhonov" and coalition_government = 1
+on-arrival: agriculture_minister = "Peshekhonov"; agriculture_minister_party = "NS";
 go-to: sovnarkom_composition
   
 
