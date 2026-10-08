@@ -11,8 +11,8 @@ Suitability: ★★</ul>
 !}
 unavailable-subtitle: <span style="color: var(--lsr-color);">Left-SR</span> — Leading SR organizer and former law student.<ul>Overall skill: ★★★☆<br>Suitability: ★★</ul>[?if coalition_government = 0 : We haven't assented to Left-SR participation in government. ?]
 tags: property_candidates
-choose-if: properties_minister != "Karelin" and coalition_government > 0
-on-arrival: properties_minister = "Karelin"; properties_minister_party = "Bolshevik";
+choose-if: property_minister != "Karelin" and coalition_government > 0
+on-arrival: property_minister = "Karelin"; property_minister_party = "Left-SR";
 go-to: sovnarkom_composition
 
 @property_izmailovich
@@ -25,7 +25,7 @@ Suitability: ★★★</ul>
 unavailable-subtitle: <span style="color: var(--lsr-color);">Left-SR</span> — Party organizer with managerial experience.<ul>Overall skill: ★★<br>Suitability: ★★</ul>[?if coalition_government = 0 : We haven't assented to Left-SR participation in government. ?][?if local_minister == "Izmailovich" : Izmailovich already has a post. ?]
 tags: property_candidates
 choose-if: local_minister != "Izmailovich" and property_minister != "Izmailovich" and coalition_government > 0
-on-arrival: properties_minister = "Izmailovich"; properties_minister_party = "Left-SR";
+on-arrival: property_minister = "Izmailovich"; property_minister_party = "Left-SR";
 go-to: sovnarkom_composition
 
 @property_sukhanov
@@ -38,11 +38,11 @@ Suitability: ★☆</ul>
 unavailable-subtitle: <span style="color: var(--sdi-color);">SD-Int.</span> — Party leader, writer, and public intellectual.<ul>Overall skill: ★★★★<br>Suitability: ★☆</ul>[?if coalition_government != 1 : We haven't assented to SD-Internationalist participation in government. ?][?if education_minister = "Sukhanov": Sukhanov already has a post. ?][?if sdi_relation < 40 : <br> Sukhanov won't accept this offer. ?]
 tags: property_candidates
 choose-if: sdi_relation >= 40 and education_minister != "Sukhanov" and property_minister != "Sukhanov" and coalition_government = 1
-on-arrival: properties_minister = "Sukhanov"; properties_minister_party = "SD-Int";
+on-arrival: property_minister = "Sukhanov"; property_minister_party = "SD-Int";
 go-to: sovnarkom_composition
 
 @properties_vacant
 title: Let's leave the position vacant for now. 
 tags: property_candidates
-on-arrival: properties_minister = "Vacant"; properties_minister_party = "";
+on-arrival: property_minister = "Vacant"; property_minister_party = "";
 go-to: sovnarkom_composition
