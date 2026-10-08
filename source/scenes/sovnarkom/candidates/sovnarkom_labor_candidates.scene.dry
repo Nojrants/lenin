@@ -18,6 +18,32 @@ choose-if: labor_minister != "Shliapnikov"
 on-arrival: labor_minister = "Shliapnikov"; labor_minister_party = "Bolshevik";
 go-to: sovnarkom_composition
 
+@labor_tomsky
+title: Mikhail Tomsky
+subtitle: {!
+<span style="color: var(--bolshevik-color);">Moderate</span> — Proletarian organizer and skilled negotiator.<ul>
+Overall skill: ★★★★<br>
+Suitability: ★★★★</ul>
+!}
+unavailable-subtitle: <span style="color: var(--bolshevik-color);">Moderate</span> — Proletarian organizer and skilled negotiator.<ul>Overall skill: ★★★★<br>Suitability: ★★★★</ul>[?if tomsky_unavailable != 1 : Tomsky is indisposed in Moscow. ?]
+tags: labor_candidates
+choose-if: labor_minister != "Tomsky" and tomsky_available = 1
+on-arrival: labor_minister = "Tomsky"; labor_minister_party = "Bolshevik";
+go-to: sovnarkom_composition
+
+@labor_abramovich
+title: Raphael Abramovich
+subtitle: {!
+<span style="color: var(--m-color);">Menshevik</span> — Leading party organizer, trade unionist, and architect of Bolshevik cooperation.<ul> 
+Overall skill: ★★★☆<br>
+Suitability: ★★★★</ul>
+!}
+unavailable-subtitle: <span style="color: var(--m-color);">Menshevik</span> — Leading party organizer, trade unionist, and architect of Bolshevik cooperation.<ul>Overall skill: ★★★☆<br>Suitability: ★★★★</ul>[?if coalition_government != 1 : We haven't assented to Menshevik participation in government. ?][?if transport_minister == "Abramovich" : Abramovich already has a post. ?]
+tags: labor_candidates
+choose-if: labor_minister != "Abramovich" and transport_minister != "Abramovich" and coalition_government = 1
+on-arrival: labor_minister = "Abramovich"; labor_minister_party = "Menshevik";
+go-to: sovnarkom_composition
+
 
 @labor_vacant
 title: Let's leave the position vacant for now. 
