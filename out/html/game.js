@@ -21,36 +21,43 @@ var TITLE = "Heroic Age of Revolution" + '_' + "(Noj Rants)";
 /*
 MAP
 
-To add a province: give it an entry in window.mapProvinces whose key is the
-id of that element in the SVG. Anything in the SVG without an entry is ignored
-(no hover, no click). Add extra fields to window.mapProvinceFields to show
-them in the right-hand sidebar.
+Provinces:  add an entry to window.mapProvinces whose key is the id of that
+            element in the SVG. Anything without an entry is ignored.
+            `adjacent` lists neighbouring provinces (it only needs to be
+            listed on one side; adjacency is treated as two-way).
+Divisions:  window.mapDivisions is the list of all divisions. Each has an id,
+            a name, an owner (a key of mapPartyColors) and a province.
+Moving:     see window.mapCanMove (rules hook) and
+            window.onMapDivisionsMoved (called after a move).
 */
+
+/* Only divisions owned by this faction can be selected and moved. */
+window.mapPlayerFaction = 'bolsheviks';
 
 window.mapProvinces = {
     petrograd: {
         name: 'Petrograd',
         controller: 'bolsheviks',
-        divisions: 5,
-        control: 100
+        control: 100,
+        adjacent: ['novgorod']
     },
     novgorod: {
         name: 'Novgorod',
         controller: 'sr',
-        divisions: 2,
-        control: 70
+        control: 70,
+        adjacent: ['petrograd', 'tver']
     },
     tver: {
         name: 'Tver',
         controller: 'mensheviks',
-        divisions: 1,
-        control: 40
+        control: 40,
+        adjacent: ['novgorod', 'moscow']
     },
     moscow: {
         name: 'Moscow',
         controller: 'bolsheviks',
-        divisions: 4,
-        control: 85
+        control: 85,
+        adjacent: ['tver']
     }
 };
 
@@ -78,7 +85,8 @@ window.mapPartyNames = {
     ns: 'Popular Socialists'
 };
 
-/* Rows shown in the sidebar for the selected province. */
+/* Rows shown in the sidebar for the selected province
+   (the division list is added underneath automatically). */
 window.mapProvinceFields = [
     {
         label: 'Controller',
@@ -88,15 +96,109 @@ window.mapProvinceFields = [
                 (window.mapPartyNames[d.controller] || d.controller);
         }
     },
-    { label: 'Control', value: function(d) { return d.control + '%'; } },
-    { label: 'Divisions', value: function(d) { return d.divisions; } }
+    { label: 'Control', value: function(d) { return d.control + '%'; } }
 ];
 
+/* ---------- divisions ---------- */
+
+function makeDivisions(province, owner, count) {
+    var name = window.mapProvinces[province].name;
+    var out = [];
+    for (var i = 1; i <= count; i++) {
+        out.push({
+            id: province + '_' + owner + '_' + i,
+            name: name + ' Division ' + i,
+            owner: owner,
+            province: province,
+            start: province      // where it begins a new game
+        });
+    }
+    return out;
+}
+
+window.mapDivisions = [].concat(
+    makeDivisions('petrograd', 'bolsheviks', 5),
+    makeDivisions('novgorod', 'sr', 2),
+    makeDivisions('tver', 'mensheviks', 1),
+    makeDivisions('moscow', 'bolsheviks', 4)
+);
+
+/* Rules hook: return true to allow the move, or false / a message string
+   to refuse it. Add supply, turn limits, etc. here later. */
+window.mapCanMove = function(divisionIds, fromId, toId) {
+    return true;
+};
+
+/* Called after a successful move. */
+window.onMapDivisionsMoved = function(divisionIds, fromId, toId) {
+};
+
 window.selectedMapProvince = null;
+window.selectedMapDivisions = [];   // ids; always inside the selected province
 
 var MAP_SHAPES = 'path, polygon, polyline, rect, circle, ellipse';
 var hoveredMapProvince = null;
 var mapSvgText = null;   // cached so the SVG is only fetched once
+var mapMessage = '';
+
+function divisionsIn(provinceId) {
+    return window.mapDivisions.filter(function(d) {
+        return d.province === provinceId;
+    });
+}
+
+function playerDivisionsIn(provinceId) {
+    return divisionsIn(provinceId).filter(function(d) {
+        return d.owner === window.mapPlayerFaction;
+    });
+}
+
+window.areProvincesAdjacent = function(a, b) {
+    var A = window.mapProvinces[a];
+    var B = window.mapProvinces[b];
+    if (!A || !B) {
+        return false;
+    }
+    return (A.adjacent || []).indexOf(b) !== -1 ||
+           (B.adjacent || []).indexOf(a) !== -1;
+};
+
+function getAdjacentProvinces(id) {
+    return Object.keys(window.mapProvinces).filter(function(other) {
+        return other !== id && window.areProvincesAdjacent(id, other);
+    });
+}
+
+/* Division positions are kept in a quality so they survive save/load. */
+function saveMapDivisions() {
+    try {
+        var positions = {};
+        window.mapDivisions.forEach(function(d) {
+            positions[d.id] = d.province;
+        });
+        window.dendryUI.dendryEngine.state.qualities.map_divisions =
+            JSON.stringify(positions);
+    } catch (e) {
+        console.warn('Could not store division positions:', e);
+    }
+}
+
+function loadMapDivisions() {
+    var positions = {};
+    try {
+        var raw = window.dendryUI.dendryEngine.state.qualities.map_divisions;
+        if (raw) {
+            positions = JSON.parse(raw);
+        }
+    } catch (e) {
+        console.warn('Could not read division positions:', e);
+    }
+    window.mapDivisions.forEach(function(d) {
+        d.province = positions[d.id] || d.start;
+    });
+}
+
+/* ---------- colours ---------- */
 
 window.getMapPartyColor = function(controller) {
     var variable = window.mapPartyColors[controller];
@@ -114,6 +216,8 @@ window.getMapProvinceColor = function(controller, control) {
     return 'color-mix(in srgb, ' + color + ' ' + control + '%, white)';
 };
 
+/* ---------- svg helpers ---------- */
+
 function getMapSvg() {
     return document.querySelector('#map-container .map-frame svg');
 }
@@ -121,6 +225,11 @@ function getMapSvg() {
 function getMapElement(id) {
     var svg = getMapSvg();
     return svg ? svg.querySelector('[id="' + id + '"]') : null;
+}
+
+function mapIsOpen() {
+    var container = document.getElementById('map-container');
+    return !!(container && container.classList.contains('active'));
 }
 
 /* A province may be a single shape or a <g> of shapes. */
@@ -148,8 +257,45 @@ function findProvinceElement(target) {
 }
 
 /*
-Right-hand sidebar (created on demand, shown only while the map is open).
+What is under the mouse? elementsFromPoint lists everything stacked at that
+spot, so this still works if another SVG element sits on top of a province.
+Returns { province: <element or null>, counter: <province id or null> }.
 */
+function findMapHit(event) {
+    var hit = { province: null, counter: null };
+    var svg = getMapSvg();
+    if (!svg) {
+        return hit;
+    }
+    var rect = svg.getBoundingClientRect();
+    if (event.clientX < rect.left || event.clientX > rect.right ||
+        event.clientY < rect.top || event.clientY > rect.bottom) {
+        return hit;
+    }
+    var stack = document.elementsFromPoint(event.clientX, event.clientY);
+    for (var i = 0; i < stack.length; i++) {
+        var el = stack[i];
+        if (!svg.contains(el)) {
+            continue;
+        }
+        if (!hit.counter && el.closest) {
+            var counter = el.closest('.map-division-counter');
+            if (counter) {
+                hit.counter = counter.getAttribute('data-province');
+            }
+        }
+        if (!hit.province) {
+            hit.province = findProvinceElement(el);
+        }
+    }
+    if (!hit.province && hit.counter) {
+        hit.province = getMapElement(hit.counter);
+    }
+    return hit;
+}
+
+/* ---------- sidebar ---------- */
+
 window.ensureMapSidebar = function() {
     var sidebar = document.getElementById('map-sidebar');
     if (!sidebar) {
@@ -158,6 +304,35 @@ window.ensureMapSidebar = function() {
         sidebar.className = 'tools right';
         var content = document.getElementById('content');
         content.parentNode.insertBefore(sidebar, content);
+
+        /* Delegated, so they survive the sidebar being re-rendered. */
+        sidebar.addEventListener('change', function(event) {
+            var box = event.target;
+            if (box.matches && box.matches('input[data-division]')) {
+                window.setMapDivisionSelected(
+                    box.getAttribute('data-division'),
+                    box.checked
+                );
+            }
+        });
+        sidebar.addEventListener('click', function(event) {
+            var button = event.target.closest ?
+                event.target.closest('button') : null;
+            if (!button) {
+                return;
+            }
+            if (button.hasAttribute('data-move-to')) {
+                window.tryMoveSelectedDivisions(
+                    button.getAttribute('data-move-to')
+                );
+            } else if (button.hasAttribute('data-select-all')) {
+                window.selectAllMapDivisions();
+            } else if (button.hasAttribute('data-select-none')) {
+                window.selectedMapDivisions = [];
+                mapMessage = '';
+                window.refreshMapUI();
+            }
+        });
     }
     return sidebar;
 };
@@ -169,7 +344,10 @@ window.renderMapSidebar = function(provinceId) {
     if (!data) {
         sidebar.innerHTML =
             '<h2>Province</h2>' +
-            '<div class="map-hint">Click a province to see its details.</div>';
+            '<div class="map-hint">Click a province to see its details. ' +
+            'Click a division icon to select the divisions there, then ' +
+            'right-click an adjacent province to move them.</div>' +
+            (mapMessage ? '<div class="map-message">' + mapMessage + '</div>' : '');
         return;
     }
 
@@ -185,8 +363,199 @@ window.renderMapSidebar = function(provinceId) {
                 '<div class="province-stat-value">' + value + '</div>' +
             '</div>';
     });
+
+    /* Divisions stationed here */
+    html += '<h3>Divisions</h3>';
+    var here = divisionsIn(provinceId);
+    var mine = playerDivisionsIn(provinceId);
+    var selected = window.selectedMapDivisions;
+
+    if (!here.length) {
+        html += '<div class="map-hint">No divisions stationed here.</div>';
+    } else {
+        html += '<div class="division-list">';
+        here.forEach(function(d) {
+            if (d.owner === window.mapPlayerFaction) {
+                html +=
+                    '<label class="division-row">' +
+                    '<input type="checkbox" data-division="' + d.id + '"' +
+                    (selected.indexOf(d.id) !== -1 ? ' checked' : '') + '> ' +
+                    d.name + '</label>';
+            } else {
+                html +=
+                    '<div class="division-row foreign">' + d.name +
+                    ' <span class="division-owner">(' +
+                    (window.mapPartyNames[d.owner] || d.owner) +
+                    ')</span></div>';
+            }
+        });
+        html += '</div>';
+    }
+
+    if (mine.length) {
+        html +=
+            '<div class="division-actions">' +
+            '<button class="map-button" data-select-all>Select all</button> ' +
+            '<button class="map-button" data-select-none>Clear</button>' +
+            '</div>';
+    }
+
+    if (selected.length) {
+        html += '<div class="division-move"><div class="province-stat-label">' +
+            'Move ' + selected.length + ' division' +
+            (selected.length === 1 ? '' : 's') + ' to:</div>';
+        getAdjacentProvinces(provinceId).forEach(function(otherId) {
+            html += '<button class="map-button" data-move-to="' + otherId +
+                '">' + window.mapProvinces[otherId].name + '</button> ';
+        });
+        html += '<div class="map-hint">Or right-click an adjacent ' +
+            'province on the map.</div></div>';
+    }
+
+    if (mapMessage) {
+        html += '<div class="map-message">' + mapMessage + '</div>';
+    }
     sidebar.innerHTML = html;
 };
+
+/* ---------- selection ---------- */
+
+window.refreshMapUI = function() {
+    window.renderMapSidebar(window.selectedMapProvince);
+    window.renderMapCounters();
+};
+
+window.showMapProvince = function(provinceId, keepDivisions) {
+    var data = window.mapProvinces[provinceId];
+    if (!data) {
+        return;
+    }
+    if (!keepDivisions && provinceId !== window.selectedMapProvince) {
+        window.selectedMapDivisions = [];
+    }
+    mapMessage = '';
+
+    var svg = getMapSvg();
+    if (svg) {
+        svg.querySelectorAll('.map-province-selected').forEach(function(p) {
+            p.classList.remove('map-province-selected');
+        });
+    }
+    var el = getMapElement(provinceId);
+    if (el) {
+        el.classList.add('map-province-selected');
+    }
+    window.selectedMapProvince = provinceId;
+    window.refreshMapUI();
+};
+
+window.clearMapProvince = function() {
+    var svg = getMapSvg();
+    if (svg) {
+        svg.querySelectorAll('.map-province-selected').forEach(function(p) {
+            p.classList.remove('map-province-selected');
+        });
+    }
+    window.selectedMapProvince = null;
+    window.selectedMapDivisions = [];
+    mapMessage = '';
+    if (document.getElementById('map-sidebar')) {
+        window.refreshMapUI();
+    }
+};
+
+window.setMapDivisionSelected = function(divisionId, on) {
+    var list = window.selectedMapDivisions;
+    var index = list.indexOf(divisionId);
+    if (on && index === -1) {
+        list.push(divisionId);
+    } else if (!on && index !== -1) {
+        list.splice(index, 1);
+    }
+    mapMessage = '';
+    window.refreshMapUI();
+};
+
+window.selectAllMapDivisions = function() {
+    var provinceId = window.selectedMapProvince;
+    if (!provinceId) {
+        return;
+    }
+    window.selectedMapDivisions = playerDivisionsIn(provinceId).map(function(d) {
+        return d.id;
+    });
+    mapMessage = '';
+    window.refreshMapUI();
+};
+
+/* Clicking a division icon: select the province and all your divisions
+   there. Clicking again with everything already selected clears it. */
+window.onMapCounterClick = function(provinceId) {
+    var mine = playerDivisionsIn(provinceId);
+
+    if (provinceId !== window.selectedMapProvince) {
+        window.showMapProvince(provinceId);
+    }
+    if (!mine.length) {
+        return;
+    }
+    var allSelected = mine.every(function(d) {
+        return window.selectedMapDivisions.indexOf(d.id) !== -1;
+    });
+    if (allSelected) {
+        window.selectedMapDivisions = [];
+    } else {
+        window.selectedMapDivisions = mine.map(function(d) { return d.id; });
+    }
+    mapMessage = '';
+    window.refreshMapUI();
+};
+
+/* ---------- moving ---------- */
+
+function setMapMessage(text) {
+    mapMessage = text;
+    window.renderMapSidebar(window.selectedMapProvince);
+}
+
+window.tryMoveSelectedDivisions = function(toId) {
+    var fromId = window.selectedMapProvince;
+    var ids = window.selectedMapDivisions.slice();
+
+    if (!fromId || !ids.length || !window.mapProvinces[toId]) {
+        return;
+    }
+    if (toId === fromId) {
+        setMapMessage('Those divisions are already in ' +
+            window.mapProvinces[fromId].name + '.');
+        return;
+    }
+    if (!window.areProvincesAdjacent(fromId, toId)) {
+        setMapMessage(window.mapProvinces[toId].name +
+            ' is not adjacent to ' + window.mapProvinces[fromId].name + '.');
+        return;
+    }
+    var verdict = window.mapCanMove(ids, fromId, toId);
+    if (verdict !== true) {
+        setMapMessage(typeof verdict === 'string' ?
+            verdict : 'Those divisions cannot move there.');
+        return;
+    }
+
+    window.mapDivisions.forEach(function(d) {
+        if (ids.indexOf(d.id) !== -1) {
+            d.province = toId;
+        }
+    });
+    saveMapDivisions();
+
+    /* The selection follows the divisions to their new province. */
+    window.selectedMapDivisions = ids;
+    window.showMapProvince(toId, true);
+    window.onMapDivisionsMoved(ids, fromId, toId);
+};
+
+/* ---------- drawing ---------- */
 
 window.createMapLayout = function() {
     var container = document.getElementById('map-container');
@@ -196,6 +565,8 @@ window.createMapLayout = function() {
     container.innerHTML = '';
     hoveredMapProvince = null;
     window.selectedMapProvince = null;
+    window.selectedMapDivisions = [];
+    mapMessage = '';
 
     var layout = document.createElement('div');
     layout.className = 'map-layout';
@@ -208,50 +579,88 @@ window.createMapLayout = function() {
     return frame;
 };
 
-window.showMapProvince = function(provinceId) {
-    var data = window.mapProvinces[provinceId];
-    if (!data) {
-        return;
-    }
+/* One icon per province that has divisions stationed in it. */
+window.renderMapCounters = function() {
     var svg = getMapSvg();
-    if (svg) {
-        svg.querySelectorAll('.map-province-selected').forEach(function(p) {
-            p.classList.remove('map-province-selected');
-        });
-    }
-    var el = getMapElement(provinceId);
-    if (el) {
-        el.classList.add('map-province-selected');
-    }
-    window.selectedMapProvince = provinceId;
-    window.renderMapSidebar(provinceId);
-};
-
-window.clearMapProvince = function() {
-    var svg = getMapSvg();
-    if (svg) {
-        svg.querySelectorAll('.map-province-selected').forEach(function(p) {
-            p.classList.remove('map-province-selected');
-        });
-    }
-    window.selectedMapProvince = null;
-    if (document.getElementById('map-sidebar')) {
-        window.renderMapSidebar(null);
-    }
-};
-
-/*
-Colour the provinces and add division counters.
-*/
-window.renderGameMap = function() {
-    var svg = getMapSvg();
-    if (!svg) {
+    if (!svg || !mapIsOpen()) {
         return;
     }
 
     svg.querySelectorAll('.map-division-counter').forEach(function(c) {
         c.remove();
     });
+
+    Object.keys(window.mapProvinces).forEach(function(provinceId) {
+        var data = window.mapProvinces[provinceId];
+        var province = getMapElement(provinceId);
+        var here = divisionsIn(provinceId);
+
+        if (!province || !here.length) {
+            return;
+        }
+
+        var x, y;
+        if (data.label) {
+            x = data.label[0];
+            y = data.label[1];
+        } else {
+            try {
+                /* Province centre, in the root SVG's coordinates. */
+                var bbox = province.getBBox();
+                var localCenter = new DOMPoint(
+                    bbox.x + bbox.width / 2,
+                    bbox.y + bbox.height / 2
+                );
+                var provinceMatrix = province.getScreenCTM();
+                var svgMatrix = svg.getScreenCTM();
+                if (!provinceMatrix || !svgMatrix) {
+                    return;
+                }
+                var svgCenter = localCenter
+                    .matrixTransform(provinceMatrix)
+                    .matrixTransform(svgMatrix.inverse());
+                x = svgCenter.x;
+                y = svgCenter.y;
+            } catch (e) {
+                return;
+            }
+        }
+
+        var ns = 'http://www.w3.org/2000/svg';
+        var group = document.createElementNS(ns, 'g');
+        var hasSelected = here.some(function(d) {
+            return window.selectedMapDivisions.indexOf(d.id) !== -1;
+        });
+        group.setAttribute('class', 'map-division-counter' +
+            (hasSelected ? ' map-counter-selected' : ''));
+        group.setAttribute('data-province', provinceId);
+
+        var circle = document.createElementNS(ns, 'circle');
+        circle.setAttribute('cx', x);
+        circle.setAttribute('cy', y);
+        circle.setAttribute('r', 36);
+        circle.style.stroke = window.getMapPartyColor(here[0].owner);
+        group.appendChild(circle);
+
+        var text = document.createElementNS(ns, 'text');
+        text.setAttribute('x', x);
+        text.setAttribute('y', y);
+        text.setAttribute('text-anchor', 'middle');
+        text.setAttribute('dominant-baseline', 'central');
+        text.style.fontSize = '30px';
+        text.textContent = here.length;
+        group.appendChild(text);
+
+        svg.appendChild(group);
+    });
+};
+
+/* Colour the provinces, then draw the division icons. */
+window.renderGameMap = function() {
+    var svg = getMapSvg();
+    if (!svg) {
+        return;
+    }
 
     Object.keys(window.mapProvinces).forEach(function(provinceId) {
         var data = window.mapProvinces[provinceId];
@@ -267,50 +676,9 @@ window.renderGameMap = function() {
             shape.classList.add('map-province-shape');
             shape.style.fill = fill;
         });
-
-        if (data.divisions === undefined) {
-            return;
-        }
-
-        /* Province centre, converted into the root SVG's coordinates. */
-        var bbox = province.getBBox();
-        var localCenter = new DOMPoint(
-            bbox.x + bbox.width / 2,
-            bbox.y + bbox.height / 2
-        );
-        var provinceMatrix = province.getScreenCTM();
-        var svgMatrix = svg.getScreenCTM();
-        if (!provinceMatrix || !svgMatrix) {
-            return;
-        }
-        var svgCenter = localCenter
-            .matrixTransform(provinceMatrix)
-            .matrixTransform(svgMatrix.inverse());
-
-        var x = data.label ? data.label[0] : svgCenter.x;
-        var y = data.label ? data.label[1] : svgCenter.y;
-
-        var ns = 'http://www.w3.org/2000/svg';
-        var group = document.createElementNS(ns, 'g');
-        group.setAttribute('class', 'map-division-counter');
-
-        var circle = document.createElementNS(ns, 'circle');
-        circle.setAttribute('cx', x);
-        circle.setAttribute('cy', y);
-        circle.setAttribute('r', 36);
-        group.appendChild(circle);
-
-        var text = document.createElementNS(ns, 'text');
-        text.setAttribute('x', x);
-        text.setAttribute('y', y);
-        text.setAttribute('text-anchor', 'middle');
-        text.setAttribute('dominant-baseline', 'central');
-        text.style.fontSize = '30px';
-        text.textContent = data.divisions;
-        group.appendChild(text);
-
-        svg.appendChild(group);
     });
+
+    window.renderMapCounters();
 };
 
 window.loadGameMap = function() {
@@ -318,6 +686,7 @@ window.loadGameMap = function() {
     if (!frame) {
         return;
     }
+    loadMapDivisions();
 
     var draw = function(svgText) {
         frame.innerHTML = svgText;
@@ -345,10 +714,8 @@ window.loadGameMap = function() {
         });
 };
 
-/*
-Hover and click. Delegated on document, so they work after the SVG is
-reloaded. Works whether a province is a <path> or a <g> of paths.
-*/
+/* ---------- mouse ---------- */
+
 function setMapHover(el) {
     if (el === hoveredMapProvince) {
         return;
@@ -362,53 +729,47 @@ function setMapHover(el) {
     hoveredMapProvince = el;
 }
 
-/*
-Find the province under the mouse. elementsFromPoint lists everything
-stacked at that spot, so this still works if some other SVG element (a
-border layer, label layer, sea rectangle...) sits on top of the province
-and swallows the mouse event.
-*/
-function findProvinceAtEvent(event) {
+document.addEventListener('mousemove', function(event) {
     var svg = getMapSvg();
     if (!svg) {
-        return null;
-    }
-    var rect = svg.getBoundingClientRect();
-    if (event.clientX < rect.left || event.clientX > rect.right ||
-        event.clientY < rect.top || event.clientY > rect.bottom) {
-        return null;
-    }
-    var stack = document.elementsFromPoint(event.clientX, event.clientY);
-    for (var i = 0; i < stack.length; i++) {
-        if (svg.contains(stack[i])) {
-            var province = findProvinceElement(stack[i]);
-            if (province) {
-                return province;
-            }
-        }
-    }
-    return null;
-}
-
-document.addEventListener('mousemove', function(event) {
-    if (!getMapSvg()) {
         return;
     }
-    var province = findProvinceAtEvent(event);
-    setMapHover(province);
-    var svg = getMapSvg();
-    svg.style.cursor = province ? 'pointer' : '';
+    var hit = findMapHit(event);
+    setMapHover(hit.province);
+    svg.style.cursor = hit.province ? 'pointer' : '';
 });
 
+/* Left click: a division icon selects its divisions; a province selects
+   (or, if already selected, deselects) the province. */
 document.addEventListener('click', function(event) {
-    var province = findProvinceAtEvent(event);
-    if (!province) {
+    var hit = findMapHit(event);
+
+    if (hit.counter) {
+        window.onMapCounterClick(hit.counter);
         return;
     }
-    if (window.selectedMapProvince === province.id) {
+    if (!hit.province) {
+        return;
+    }
+    if (window.selectedMapProvince === hit.province.id) {
         window.clearMapProvince();
     } else {
-        window.showMapProvince(province.id);
+        window.showMapProvince(hit.province.id);
+    }
+});
+
+/* Right click: move the selected divisions into that province. */
+document.addEventListener('contextmenu', function(event) {
+    if (!mapIsOpen()) {
+        return;
+    }
+    var hit = findMapHit(event);
+    if (!hit.province) {
+        return;
+    }
+    event.preventDefault();
+    if (window.selectedMapDivisions.length) {
+        window.tryMoveSelectedDivisions(hit.province.id);
     }
 });
 
@@ -448,10 +809,8 @@ window.closeMapView = function() {
 /* If the player leaves the map scene some other way (e.g. Library),
    make sure the map view is closed. */
 window.syncMapView = function() {
-    var container = document.getElementById('map-container');
     var scene = window.dendryUI.dendryEngine.state.sceneId;
-    if (container && container.classList.contains('active') &&
-        !scene.startsWith('map')) {
+    if (mapIsOpen() && !scene.startsWith('map')) {
         window.closeMapView();
     }
 };
