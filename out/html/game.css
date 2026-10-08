@@ -756,6 +756,7 @@ body.dark-mode .soviet-table tr:nth-child(even) {
     width: 100% !important;
     height: auto !important;
     display: block;
+    overflow: visible;
 }
 
 
