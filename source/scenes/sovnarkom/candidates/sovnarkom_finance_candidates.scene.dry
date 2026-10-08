@@ -36,6 +36,33 @@ choose-if: finance_minister != "Sokolnikov"
 on-arrival: finance_minister = "Sokolnikov"; finance_minister_party = "Bolshevik";
 go-to: sovnarkom_composition
 
+@finance_bazarov
+title: Vladimir Bazarov
+subtitle: {!
+<span style="color: var(--m-color);">Menshevik</span> — Pioneering economist in the area of central planning.<ul> 
+Overall skill: ★★★★<br>
+Suitability: ★★★★</ul>
+!}
+unavailable-subtitle: <span style="color: var(--m-color);">Menshevik</span> — Pioneering economist in the area of central planning.<ul>Overall skill: ★★★★<br>Suitability: ★★★★</ul>[?if coalition_government != 1 : We haven't assented to Menshevik participation in government. ?][?if trade_minister == "Bazarov": Bazarov already has a post. ?]
+tags: finance_candidates
+choose-if: finance_minister != "Bazarov" and trade_minister != "Bazarov" and coalition_government = 0
+on-arrival: finance_minister = "Bazarov"; finance_minister_party = "Menshevik";
+go-to: sovnarkom_composition
+
+@finance_avilov
+title: Boris Avilov
+subtitle: {!
+<span style="color: var(--m-color);">Menshevik</span> — Lawyer, economist, and noted administrator.<ul> 
+Overall skill: ★★☆<br>
+Suitability: ★★★</ul>
+!}
+unavailable-subtitle: <span style="color: var(--m-color);">Menshevik</span> — Lawyer, economist, and noted administrator.<ul>Overall skill: ★★☆<br>Suitability: ★★★</ul>[?if coalition_government != 1 : We haven't assented to Menshevik participation in government. ?][?if justice_minister == "Avilov": Avilov already has a post. ?][?if trade_minister == "Avilov": Avilov already has a post. ?][?if transport_minister == "Avilov": Avilov already has a post. ?]
+tags: finance_candidates
+choose-if: transport_minister != "Avilov" and trade_minister != "Avilov" and finance_minister != "Avilov" and justice_minister != "Avilov" and coalition_government = 0
+on-arrival: finance_minister = "Avilov"; finance_minister_party = "Menshevik";
+go-to: sovnarkom_composition
+
+
 
 @finance_vacant
 title: Let's leave the position vacant for now. 
