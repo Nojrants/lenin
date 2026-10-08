@@ -89,9 +89,10 @@ body.dark-mode #map-container {
 
 /* ----------------------------------------------------------
    LAYOUT
-     --side-w  : sidebar width
-     --gap     : space between sidebar and main panel
+     --side-w  : left sidebar width
+     --gap     : space between sidebars and main panel
      --main-w  : main panel width
+     --rside-w : right (map info) sidebar width
    Below 1200px the sidebar stacks above the main panel.
    ---------------------------------------------------------- */
 #page {
@@ -99,6 +100,11 @@ body.dark-mode #map-container {
   --gap: 1.5rem;
   --main-w: 750px;
   --edge: 1rem;
+  --rside-w: 18rem;
+  --ml: max(
+    calc(var(--side-w) + var(--gap) + var(--edge)),
+    calc((100% - var(--main-w)) / 2)
+  );
   position: relative;
   box-sizing: border-box;
   margin: 0 auto;
@@ -107,11 +113,15 @@ body.dark-mode #map-container {
 #mid_panel {
   box-sizing: border-box;
   max-width: var(--main-w);
-  margin-left: max(
-    calc(var(--side-w) + var(--gap) + var(--edge)),
-    calc((100% - var(--main-w)) / 2)
-  );
+  margin-left: var(--ml);
   margin-right: var(--edge);
+}
+/* On the map screen the main panel makes room for the right sidebar. */
+body.map-active #mid_panel {
+  max-width: min(
+    var(--main-w),
+    calc(100% - var(--ml) - var(--rside-w) - var(--gap) - var(--edge))
+  );
 }
 #tools_wrapper {
   position: absolute;    
@@ -124,6 +134,20 @@ body.dark-mode #map-container {
   max-width: none;
   margin: 0;
 }
+#map-sidebar {
+  display: none;
+  position: absolute;        /* top = same spot as the left sidebar */
+  left: calc(
+    var(--ml)
+    + min(var(--main-w),
+          calc(100% - var(--ml) - var(--rside-w) - var(--gap) - var(--edge)))
+    + var(--gap)
+  );
+  width: var(--rside-w);
+  max-width: none;
+  margin: 0;
+}
+body.map-active #map-sidebar { display: block; }
 .tools {
   box-sizing: border-box;
   padding: 0.6em;
@@ -540,11 +564,37 @@ img {
 #bottomRightSprite { float: right; right: 0.4em; top: 50%; }
 
 
+/* Stacking order, used whenever #mid_panel becomes a flex column
+   (map screen without room for a right sidebar, and narrow windows). */
+#mid_panel > header         { order: 0; }
+#mid_panel > #tools_wrapper { order: 1; }
+#mid_panel > #content       { order: 2; }
+#mid_panel > #map-container { order: 3; }
+#mid_panel > #map-sidebar   { order: 4; }
+#mid_panel > footer         { order: 5; }
+
+/* Map screen with no room beside the map: sidebar goes under it. */
+@media screen and (max-width: 1350px) {
+  body.map-active #mid_panel {
+    display: flex;
+    flex-direction: column;
+    max-width: var(--main-w);
+  }
+  body.map-active #map-sidebar {
+    position: static;
+    width: auto;
+    margin-top: 1rem;
+  }
+}
+
 @media screen and (max-width: 1200px) {
   #page {
     padding: 0.5rem 0 1rem 0;
   }
-  #mid_panel {
+  #mid_panel,
+  body.map-active #mid_panel {
+    display: flex;
+    flex-direction: column;
     margin: 0 0.5rem;
     max-width: none;
   }
@@ -552,6 +602,11 @@ img {
     position: static;
     width: auto;
     margin: 0 0.5rem 1rem 0.5rem;
+  }
+  #map-sidebar {
+    position: static;
+    width: auto;
+    margin: 1rem 0 0 0;
   }
   .tools,
   .tools.left,
@@ -903,14 +958,8 @@ body.dark-mode .negative { color: #ff6b6b; }
 }
 #map-container.active { display: block; }
 
-.map-layout {
-  display: flex;
-  gap: 15px;
-  align-items: stretch;
-}
+.map-layout { display: block; }
 .map-frame {
-  flex: 1;
-  min-width: 0;
   border: 2px solid var(--red);
   overflow: hidden;
 }
@@ -920,41 +969,31 @@ body.dark-mode .negative { color: #ff6b6b; }
   height: auto;
   max-height: 700px;
 }
-.map-province-panel {
-  width: 250px;
-  flex-shrink: 0;
-  display: none;
-  border: 2px solid var(--red);
-  box-shadow: inset 0 0 0 2px var(--gold);
-  padding: 15px;
-  box-sizing: border-box;
-  overflow-y: auto;
-}
-.map-province-panel.active { display: block; }
-.map-province-panel h2 {
-  margin-top: 0;
-  color: var(--red);
-  border-bottom: 2px solid var(--gold);
-  padding-bottom: 0.25em;
-}
-body.dark-mode .map-province-panel h2 { color: var(--gold-soft); }
-.province-stat { margin-bottom: 0.6em; }
-.province-stat-label {
-  font-size: 0.85em;
-  font-style: italic;
-  opacity: 0.8;
-}
-.province-stat-value { font-weight: bold; }
 
-.map-province-hover {
-  filter: brightness(1.2);
-  stroke: #fff !important;
-  stroke-width: 3 !important;
+/* Province shapes. non-scaling-stroke keeps outlines a constant number
+   of screen pixels no matter how large the SVG's coordinate space is. */
+.map-province-shape {
+  stroke: #000;
+  stroke-width: 1px;
+  vector-effect: non-scaling-stroke;
+  transition: filter 0.12s;
 }
+.map-province-hover { cursor: pointer; }
+.map-province-hover,
 .map-province-selected {
-  stroke: var(--gold) !important;
-  stroke-width: 4 !important;
+  filter: brightness(1.25) saturate(1.1);
 }
+.map-province-hover.map-province-shape,
+.map-province-hover .map-province-shape {
+  stroke: #fff !important;
+  stroke-width: 3px !important;
+}
+.map-province-selected.map-province-shape,
+.map-province-selected .map-province-shape {
+  stroke: var(--gold) !important;
+  stroke-width: 4px !important;
+}
+
 .map-division-counter { pointer-events: none; }
 .map-division-counter circle {
   fill: var(--content-bg-color);
@@ -965,12 +1004,25 @@ body.dark-mode .map-province-panel h2 { color: var(--gold-soft); }
   font-weight: bold;
 }
 
-#content.map-hidden { display: none; }
-
-@media screen and (max-width: 900px) {
-  .map-layout { flex-direction: column; }
-  .map-province-panel { width: 100%; }
+/* Right-hand province sidebar (positioning is in the LAYOUT section) */
+#map-sidebar h2 {
+  margin: 0.2em 0 0.6em 0;
+  font-size: 1.2em;
+  text-align: center;
+  color: var(--red);
+  border-bottom: 1px solid var(--gold);
+  padding-bottom: 0.25em;
 }
+body.dark-mode #map-sidebar h2 { color: var(--gold-soft); }
+#map-sidebar .map-hint {
+  font-style: italic;
+  opacity: 0.8;
+  text-align: center;
+  padding: 0.5em 0.3em;
+}
+.province-stat { margin: 0 0.4em 0.7em 0.4em; }
+.province-stat-label { font-size: 0.85em; font-style: italic; opacity: 0.8; }
+.province-stat-value { font-weight: bold; }
 
 @media (prefers-reduced-motion: reduce) {
   #achievement-notification { transition: none; }
