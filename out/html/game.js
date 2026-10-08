@@ -362,25 +362,46 @@ function setMapHover(el) {
     hoveredMapProvince = el;
 }
 
-document.addEventListener('mouseover', function(event) {
+/*
+Find the province under the mouse. elementsFromPoint lists everything
+stacked at that spot, so this still works if some other SVG element (a
+border layer, label layer, sea rectangle...) sits on top of the province
+and swallows the mouse event.
+*/
+function findProvinceAtEvent(event) {
+    var svg = getMapSvg();
+    if (!svg) {
+        return null;
+    }
+    var rect = svg.getBoundingClientRect();
+    if (event.clientX < rect.left || event.clientX > rect.right ||
+        event.clientY < rect.top || event.clientY > rect.bottom) {
+        return null;
+    }
+    var stack = document.elementsFromPoint(event.clientX, event.clientY);
+    for (var i = 0; i < stack.length; i++) {
+        if (svg.contains(stack[i])) {
+            var province = findProvinceElement(stack[i]);
+            if (province) {
+                return province;
+            }
+        }
+    }
+    return null;
+}
+
+document.addEventListener('mousemove', function(event) {
     if (!getMapSvg()) {
         return;
     }
-    setMapHover(findProvinceElement(event.target));
-});
-
-document.addEventListener('mouseout', function(event) {
+    var province = findProvinceAtEvent(event);
+    setMapHover(province);
     var svg = getMapSvg();
-    if (!svg || !svg.contains(event.target)) {
-        return;
-    }
-    if (!event.relatedTarget || !svg.contains(event.relatedTarget)) {
-        setMapHover(null);
-    }
+    svg.style.cursor = province ? 'pointer' : '';
 });
 
 document.addEventListener('click', function(event) {
-    var province = findProvinceElement(event.target);
+    var province = findProvinceAtEvent(event);
     if (!province) {
         return;
     }
