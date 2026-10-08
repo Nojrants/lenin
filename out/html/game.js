@@ -16,7 +16,7 @@ var main = function(dendryUI) {
     game = ui.game;
 };
 
-var TITLE = "Social Democracy: Petrograd 1917" + '_' + "Autumn Chen";
+var TITLE = "Heroic Age of Revolution" + '_' + "(Noj Rants)";
 
 /*
 
