@@ -1,5 +1,4 @@
 body {
-  /* --- original political colour scale (unchanged) --- */
   --level1-color: #008000;
   --level2-color: #258b52;
   --level3-color: #659e61;
@@ -19,16 +18,16 @@ body {
   --right-sr-color: #67a365;
   --ns-color: #949d48;
 
-  /* --- Soviet theme tokens --- */
-  --red: #c8102e;          /* flag red */
-  --red-deep: #7a0c0c;     /* page background */
+  /* --- Soviet theme --- */
+  --red: #c8102e;         
+  --red-deep: #7a0c0c;    
   --red-dark: #4e0707;
-  --gold: #e8b923;         /* hammer-and-sickle yellow */
+  --gold: #e8b923;        
   --gold-soft: #f4d06f;
 
-  --bg-color: #5e1b1b;   /* muted, subtle red */
+  --bg-color: #D3B29B;  
   --border-color: #3a0a0a;
-  --content-bg-color: #efe4cf;
+  --content-bg-color: #F2ECE1;
   --text-color: #2b1710;
   --link-color: #a30f1f;
   --link-hover-color: rgba(200, 16, 46, 0.10);
@@ -38,8 +37,8 @@ body {
   --tab-color: #8f1218;
   --tab-text-color: #f4d06f;
   --tab-hover-color: #b3162a;
-  --card-border-color: #ccc;   /* original */
-  --card-bg-color: #ddd;       /* original */
+  --card-border-color: #F3F3F3;  
+  --card-bg-color: #ddd;     
   --box-bg: rgba(122, 12, 12, 0.07);
   --panel-line: #b99a4a;
 
@@ -62,16 +61,13 @@ body.dark-mode {
   --tab-bg-color: #3a0808;
   --tab-color: #6e1015;
   --tab-hover-color: #922030;
-  --card-border-color: #4c4c4c; /* original */
-  --card-bg-color: #3f3f3f;     /* original */
+  --card-border-color: #4c4c4c;  
+  --card-bg-color: #3f3f3f;     
   --box-bg: rgba(255, 255, 255, 0.05);
   --panel-line: #8a6f2a;
 }
 
-/* ----------------------------------------------------------
-   PANELS: red outer border + thin gold inner line.
-   Shared by main content, sidebar, map, header bar.
-   ---------------------------------------------------------- */
+/* --Panels-- */
 #content,
 .tools,
 #map-container {
@@ -93,14 +89,10 @@ body.dark-mode #map-container {
 
 /* ----------------------------------------------------------
    LAYOUT
-   Tweak these three numbers to resize things:
      --side-w  : sidebar width
      --gap     : space between sidebar and main panel
      --main-w  : main panel width
-   The main panel is centred in the window. If the window is too
-   narrow to centre it AND fit the sidebar, it shifts right just
-   enough to keep the sidebar and gap intact. Below 1200px the
-   sidebar stacks above the main panel.
+   Below 1200px the sidebar stacks above the main panel.
    ---------------------------------------------------------- */
 #page {
   --side-w: 24rem;
@@ -155,15 +147,13 @@ header, #content, footer {
   overflow: auto;
 }
 
-/* ----------------------------------------------------------
-   HEADER: slim, muted bar, a bit narrower than the main panel
-   ---------------------------------------------------------- */
+/* --Top Panel-- */
 header {
   box-sizing: border-box;
   width: calc(100% - 3rem);
   margin: 0 auto 0.9rem auto;
   text-align: right;
-  background: #4a1414;
+  background: #E0C9AF;
   color: var(--gold-soft);
   border: 1px solid #7d5a1c;
   border-bottom: 2px solid #a8801f;
@@ -216,9 +206,7 @@ footer a {
   color: var(--gold-soft);
 }
 
-/* ----------------------------------------------------------
-   MAIN CONTENT
-   ---------------------------------------------------------- */
+/* ---Main Content--- */
 #content {
   position: relative;
   background-color: var(--content-bg-color);
@@ -270,7 +258,7 @@ p.game-over {
   color: var(--red);
 }
 
-/* choices */
+
 ul.choices {
   border: 2px solid var(--red);
   padding: 0;
@@ -321,9 +309,7 @@ blockquote + blockquote.attribution {
   margin-top: -0.6em;
 }
 
-/* ----------------------------------------------------------
-   SIDEBAR / TABS
-   ---------------------------------------------------------- */
+/* ---Sidebar--- */
 #qualities {
   text-indent: 0;
   line-height: 1.3em;
@@ -386,9 +372,7 @@ body.dark-mode #qualities h1 {
   outline-offset: -3px;
 }
 
-/* ----------------------------------------------------------
-   OVERLAYS (options / save)
-   ---------------------------------------------------------- */
+/* ----OVERLAYS (options / save)--- */
 .overlay {
   background: rgba(30, 0, 0, 0.78);
   display: none;
@@ -436,7 +420,7 @@ body.dark-mode #qualities h1 {
   right: 0;
   bottom: 0;
   left: 0;
-  background-color: transparent;  /* lets the red body show through */
+  background-color: transparent;  
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
@@ -448,9 +432,7 @@ body.dark-mode #qualities h1 {
 .save_button {}
 .delete_button {}
 
-/* ----------------------------------------------------------
-   CARDS
-   ---------------------------------------------------------- */
+/* ------CARDS------- */
 ul.decks, ul.hand, ul.pinned-cards {
   list-style: none;
   padding-left: 0;
@@ -557,11 +539,7 @@ img {
 #bottomLeftSprite { float: left; left: 0.4em; top: 50%; }
 #bottomRightSprite { float: right; right: 0.4em; top: 50%; }
 
-/* ----------------------------------------------------------
-   RESPONSIVE
-   Below 1200px there isn't room for side-by-side: the sidebar
-   moves above the main column (same as the original mobile mode).
-   ---------------------------------------------------------- */
+
 @media screen and (max-width: 1200px) {
   #page {
     padding: 0.5rem 0 1rem 0;
@@ -624,9 +602,8 @@ img {
   header { padding: 0.4em 0.6em; }
 }
 
-/* ----------------------------------------------------------
-   GAME-SPECIFIC STUFF
-   ---------------------------------------------------------- */
+
+
 .box {
   display: inline-block;
   height: 1em;
@@ -797,7 +774,7 @@ hr {
   border-top: 2px solid var(--gold);
 }
 
-/* Achievement toast */
+/* Achievements */
 #achievement-notification {
   position: fixed;
   bottom: 60px;
@@ -902,6 +879,7 @@ body.dark-mode .economy-box h3 {
 .negative { color: #c62828; }
 body.dark-mode .positive { color: #6fcf73; }
 body.dark-mode .negative { color: #ff6b6b; }
+
 
 /* ----------------------------------------------------------
    MAP
