@@ -41,7 +41,7 @@ choose-if: local_minister != "Maslov" and property_minister != "Izmailovich" and
 on-arrival: local_minister = "Maslov"; local_minister_party = "SR";
 go-to: sovnarkom_composition
 
-@@local_dzyubinsky
+@local_dzyubinsky
 title: Vladimir Dzyubinsky
 subtitle: {!
 <span style="color: var(--ns-color);">NS</span> — Organizer, publicist, and grassroots activist; former chairman of the Trudoviks.<ul> 
