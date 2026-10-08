@@ -35,29 +35,449 @@ Moving:     see window.mapCanMove (rules hook) and
 window.mapPlayerFaction = 'bolsheviks';
 
 window.mapProvinces = {
+    finland: {
+        name: 'Finland',
+        controller: 'none',
+        control: 100,
+        adjacent: ['petrograd', 'arkhangelsk', 'karelia', 'murmansk']
+    },
+    volhynia: {
+        name: 'Volhynia',
+        controller: 'none',
+        control: 100,
+        adjacent: ['podolia', 'kyiv', 'minsk', 'poland', 'grodno']
+    },
+    bessarabia: {
+        name: 'Bessarabia',
+        controller: 'none',
+        control: 100,
+        adjacent: ['podolia', 'kherson']
+    },
+    podolia: {
+        name: 'Podolia',
+        controller: 'none',
+        control: 100,
+        adjacent: ['volhynia', 'bessarabia', 'kyiv', 'kherson']
+    },
     petrograd: {
         name: 'Petrograd',
         controller: 'bolsheviks',
         control: 100,
-        adjacent: ['novgorod']
+        adjacent: ['finland', 'novgorod', 'pskov', 'olonets', 'estonia']
     },
     novgorod: {
         name: 'Novgorod',
         controller: 'sr',
         control: 70,
-        adjacent: ['petrograd', 'tver']
+        adjacent: ['petrograd', 'tver', 'pskov', 'yaroslavl', 'vologda', 'olonets']
+    },
+    chernigov: {
+        name: 'Chernigov',
+        controller: 'none',
+        control: 100,
+        adjacent: ['smolensk', 'kyiv', 'mogilev', 'orel', 'kursk', 'poltava', 'minsk']
+    },
+    smolensk: {
+        name: 'Smolensk',
+        controller: 'none',
+        control: 100,
+        adjacent: ['chernigov', 'tver', 'kaluga', 'moscow', 'mogilev', 'vitebsk', 'orel', 'pskov']
     },
     tver: {
         name: 'Tver',
         controller: 'mensheviks',
         control: 40,
-        adjacent: ['novgorod', 'moscow']
+        adjacent: ['novgorod', 'smolensk', 'moscow', 'pskov', 'yaroslavl', 'vladimir']
+    },
+    yekaterinoslav: {
+        name: 'Yekaterinoslav',
+        controller: 'none',
+        control: 100,
+        adjacent: ['kharkov', 'kherson', 'poltava', 'don', 'taurida']
+    },
+    kaluga: {
+        name: 'Kaluga',
+        controller: 'none',
+        control: 100,
+        adjacent: ['smolensk', 'moscow', 'tula', 'orel']
+    },
+    kharkov: {
+        name: 'Kharkov',
+        controller: 'none',
+        control: 100,
+        adjacent: ['yekaterinoslav', 'kursk', 'poltava', 'voronezh', 'don']
     },
     moscow: {
         name: 'Moscow',
         controller: 'bolsheviks',
         control: 85,
-        adjacent: ['tver']
+        adjacent: ['smolensk', 'tver', 'kaluga', 'tula', 'vladimir', 'ryazan']
+    },
+    kyiv: {
+        name: 'Kyiv',
+        controller: 'none',
+        control: 100,
+        adjacent: ['volhynia', 'podolia', 'chernigov', 'kherson', 'poltava', 'minsk']
+    },
+    mogilev: {
+        name: 'Mogilev',
+        controller: 'none',
+        control: 100,
+        adjacent: ['chernigov', 'smolensk', 'vitebsk', 'minsk']
+    },
+    tula: {
+        name: 'Tula',
+        controller: 'none',
+        control: 100,
+        adjacent: ['kaluga', 'moscow', 'orel', 'tambov', 'ryazan']
+    },
+    vitebsk: {
+        name: 'Vitebsk',
+        controller: 'none',
+        control: 100,
+        adjacent: ['smolensk', 'mogilev', 'pskov', 'latvia', 'minsk']
+    },
+    orel: {
+        name: 'Orel',
+        controller: 'none',
+        control: 100,
+        adjacent: ['chernigov', 'smolensk', 'kaluga', 'tula', 'kursk', 'voronezh', 'tambov']
+    },
+    kursk: {
+        name: 'Kursk',
+        controller: 'none',
+        control: 100,
+        adjacent: ['chernigov', 'kharkov', 'orel', 'poltava', 'voronezh']
+    },
+    kherson: {
+        name: 'Kherson',
+        controller: 'none',
+        control: 100,
+        adjacent: ['bessarabia', 'podolia', 'yekaterinoslav', 'kyiv', 'poltava', 'taurida']
+    },
+    pskov: {
+        name: 'Pskov',
+        controller: 'none',
+        control: 100,
+        adjacent: ['petrograd', 'novgorod', 'smolensk', 'tver', 'vitebsk', 'estonia', 'latvia']
+    },
+    poltava: {
+        name: 'Poltava',
+        controller: 'none',
+        control: 100,
+        adjacent: ['chernigov', 'yekaterinoslav', 'kharkov', 'kyiv', 'kursk', 'kherson']
+    },
+    arkhangelsk: {
+        name: 'Arkhangelsk',
+        controller: 'none',
+        control: 100,
+        adjacent: ['finland', 'vologda', 'olonets', 'karelia']
+    },
+    crimea: {
+        name: 'Crimea',
+        controller: 'none',
+        control: 100,
+        adjacent: ['taurida']
+    },
+    kuban: {
+        name: 'Kuban',
+        controller: 'none',
+        control: 100,
+        adjacent: ['don', 'georgia', 'stavropol', 'terek']
+    },
+    yaroslavl: {
+        name: 'Yaroslavl',
+        controller: 'none',
+        control: 100,
+        adjacent: ['novgorod', 'tver', 'vladimir', 'vologda', 'kostroma']
+    },
+    voronezh: {
+        name: 'Voronezh',
+        controller: 'none',
+        control: 100,
+        adjacent: ['kharkov', 'orel', 'kursk', 'don', 'tambov', 'saratov']
+    },
+    vladimir: {
+        name: 'Vladimir',
+        controller: 'none',
+        control: 100,
+        adjacent: ['tver', 'moscow', 'yaroslavl', 'tambov', 'ryazan', 'kostroma', 'nizhny']
+    },
+    don: {
+        name: 'Don Host',
+        controller: 'none',
+        control: 100,
+        adjacent: ['yekaterinoslav', 'kharkov', 'kuban', 'voronezh', 'stavropol', 'saratov', 'astrakhan']
+    },
+    vologda: {
+        name: 'Vologda',
+        controller: 'none',
+        control: 100,
+        adjacent: ['novgorod', 'arkhangelsk', 'yaroslavl', 'kostroma', 'vyatka', 'olonets', 'perm']
+    },
+    tambov: {
+        name: 'Tambov',
+        controller: 'none',
+        control: 100,
+        adjacent: ['tula', 'orel', 'voronezh', 'vladimir', 'ryazan', 'nizhny', 'saratov', 'penza']
+    },
+    ryazan: {
+        name: 'Ryazan',
+        controller: 'none',
+        control: 100,
+        adjacent: ['moscow', 'tula', 'vladimir', 'tambov']
+    },
+    kostroma: {
+        name: 'Kostroma',
+        controller: 'none',
+        control: 100,
+        adjacent: ['yaroslavl', 'vladimir', 'vologda', 'nizhny', 'vyatka']
+    },
+    georgia: {
+        name: 'Georgia',
+        controller: 'none',
+        control: 100,
+        adjacent: ['kuban', 'kars', 'terek', 'armenia', 'azerbaijan', 'dagestan']
+    },
+    stavropol: {
+        name: 'Stavropol',
+        controller: 'none',
+        control: 100,
+        adjacent: ['kuban', 'don', 'terek', 'astrakhan']
+    },
+    kars: {
+        name: 'Kars',
+        controller: 'none',
+        control: 100,
+        adjacent: ['georgia', 'armenia']
+    },
+    nizhny: {
+        name: 'Nizhny Novgorod',
+        controller: 'none',
+        control: 100,
+        adjacent: ['vladimir', 'tambov', 'kostroma', 'penza', 'simbirsk', 'vyatka', 'kazan']
+    },
+    terek: {
+        name: 'Terek',
+        controller: 'none',
+        control: 100,
+        adjacent: ['kuban', 'georgia', 'stavropol', 'astrakhan', 'dagestan']
+    },
+    saratov: {
+        name: 'Saratov',
+        controller: 'none',
+        control: 100,
+        adjacent: ['voronezh', 'don', 'tambov', 'penza', 'astrakhan', 'simbirsk', 'samara']
+    },
+    penza: {
+        name: 'Penza',
+        controller: 'none',
+        control: 100,
+        adjacent: ['tambov', 'nizhny', 'saratov', 'simbirsk']
+    },
+    armenia: {
+        name: 'Armenia',
+        controller: 'none',
+        control: 100,
+        adjacent: ['georgia', 'kars', 'azerbaijan']
+    },
+    astrakhan: {
+        name: 'Astrakhan',
+        controller: 'none',
+        control: 100,
+        adjacent: ['don', 'stavropol', 'terek', 'saratov', 'samara', 'uralsk']
+    },
+    azerbaijan: {
+        name: 'Azerbaijan',
+        controller: 'none',
+        control: 100,
+        adjacent: ['georgia', 'armenia', 'dagestan']
+    },
+    simbirsk: {
+        name: 'Simbirsk',
+        controller: 'none',
+        control: 100,
+        adjacent: ['nizhny', 'saratov', 'penza', 'samara', 'kazan']
+    },
+    dagestan: {
+        name: 'Dagestan',
+        controller: 'none',
+        control: 100,
+        adjacent: ['georgia', 'terek', 'azerbaijan']
+    },
+    samara: {
+        name: 'Samara',
+        controller: 'none',
+        control: 100,
+        adjacent: ['saratov', 'astrakhan', 'simbirsk', 'kazan', 'uralsk', 'ufa', 'orenburg']
+    },
+    vyatka: {
+        name: 'Vyatka',
+        controller: 'none',
+        control: 100,
+        adjacent: ['vologda', 'kostroma', 'nizhny', 'kazan', 'ufa', 'perm']
+    },
+    kazan: {
+        name: 'Kazan',
+        controller: 'none',
+        control: 100,
+        adjacent: ['nizhny', 'simbirsk', 'samara', 'vyatka', 'ufa']
+    },
+    uralsk: {
+        name: 'Uralsk',
+        controller: 'none',
+        control: 100,
+        adjacent: ['astrakhan', 'samara', 'transcaspian', 'orenburg', 'turgai', 'syr_darya']
+    },
+    transcaspian: {
+        name: 'Transcaspia',
+        controller: 'none',
+        control: 100,
+        adjacent: ['uralsk', 'khiva', 'syr_darya']
+    },
+    ufa: {
+        name: 'Ufa',
+        controller: 'none',
+        control: 100,
+        adjacent: ['samara', 'vyatka', 'kazan', 'yekaterinburg', 'orenburg', 'perm']
+    },
+    olonets: {
+        name: 'Olonets',
+        controller: 'none',
+        control: 100,
+        adjacent: ['petrograd', 'novgorod', 'arkhangelsk', 'vologda', 'karelia']
+    },
+    yekaterinburg: {
+        name: 'Yekaterinburg',
+        controller: 'none',
+        control: 100,
+        adjacent: ['ufa', 'orenburg', 'perm']
+    },
+    orenburg: {
+        name: 'Orenburg',
+        controller: 'none',
+        control: 100,
+        adjacent: ['samara', 'uralsk', 'ufa', 'yekaterinburg', 'turgai', 'akmolinsk']
+    },
+    turgai: {
+        name: 'Turgai',
+        controller: 'none',
+        control: 100,
+        adjacent: ['uralsk', 'orenburg', 'syr_darya', 'akmolinsk']
+    },
+    khiva: {
+        name: 'Khiva',
+        controller: 'none',
+        control: 100,
+        adjacent: ['transcaspian', 'syr_darya']
+    },
+    syr_darya: {
+        name: 'Syr-Darya',
+        controller: 'none',
+        control: 100,
+        adjacent: ['uralsk', 'transcaspian', 'turgai', 'khiva', 'akmolinsk', 'samarkhand', 'ferghana', 'semipalatinsk', 'semirechye']
+    },
+    akmolinsk: {
+        name: 'Akmolinsk',
+        controller: 'none',
+        control: 100,
+        adjacent: ['orenburg', 'turgai', 'syr_darya', 'semipalatinsk']
+    },
+    samarkhand: {
+        name: 'Samarkand',
+        controller: 'none',
+        control: 100,
+        adjacent: ['syr_darya', 'ferghana']
+    },
+    ferghana: {
+        name: 'Fergana',
+        controller: 'none',
+        control: 100,
+        adjacent: ['syr_darya', 'samarkhand', 'semirechye']
+    },
+    semipalatinsk: {
+        name: 'Semipalatinsk',
+        controller: 'none',
+        control: 100,
+        adjacent: ['syr_darya', 'akmolinsk', 'semirechye', 'tomsk']
+    },
+    siberia: {
+        name: 'Siberia',
+        controller: 'none',
+        control: 100,
+        adjacent: ['tomsk']
+    },
+    semirechye: {
+        name: 'Semirechye',
+        controller: 'none',
+        control: 100,
+        adjacent: ['syr_darya', 'ferghana', 'semipalatinsk']
+    },
+    tomsk: {
+        name: 'Tomsk',
+        controller: 'none',
+        control: 100,
+        adjacent: ['semipalatinsk', 'siberia']
+    },
+    estonia: {
+        name: 'Estonia',
+        controller: 'none',
+        control: 100,
+        adjacent: ['petrograd', 'pskov', 'latvia']
+    },
+    latvia: {
+        name: 'Latvia',
+        controller: 'none',
+        control: 100,
+        adjacent: ['vitebsk', 'pskov', 'estonia', 'lithuania']
+    },
+    lithuania: {
+        name: 'Lithuania',
+        controller: 'none',
+        control: 100,
+        adjacent: ['latvia', 'poland']
+    },
+    minsk: {
+        name: 'Minsk',
+        controller: 'none',
+        control: 100,
+        adjacent: ['volhynia', 'chernigov', 'kyiv', 'mogilev', 'vitebsk', 'grodno']
+    },
+    poland: {
+        name: 'Poland',
+        controller: 'none',
+        control: 100,
+        adjacent: ['volhynia', 'lithuania', 'grodno']
+    },
+    grodno: {
+        name: 'Grodno',
+        controller: 'none',
+        control: 100,
+        adjacent: ['volhynia', 'minsk', 'poland']
+    },
+    taurida: {
+        name: 'Taurida',
+        controller: 'none',
+        control: 100,
+        adjacent: ['yekaterinoslav', 'kherson', 'crimea']
+    },
+    karelia: {
+        name: 'Karelia',
+        controller: 'none',
+        control: 100,
+        adjacent: ['finland', 'arkhangelsk', 'olonets', 'murmansk']
+    },
+    murmansk: {
+        name: 'Murmansk',
+        controller: 'none',
+        control: 100,
+        adjacent: ['finland', 'karelia']
+    },
+    perm: {
+        name: 'Perm',
+        controller: 'none',
+        control: 100,
+        adjacent: ['vologda', 'vyatka', 'ufa', 'yekaterinburg']
     }
 };
 
@@ -70,7 +490,8 @@ window.mapPartyColors = {
     lsr: '--lsr-color',
     sr: '--sr-color',
     right_sr: '--right-sr-color',
-    ns: '--ns-color'
+    ns: '--ns-color',
+    none: '--none'
 };
 
 window.mapPartyNames = {
@@ -82,7 +503,8 @@ window.mapPartyNames = {
     lsr: 'Left SRs',
     sr: 'Socialist-Revolutionaries',
     right_sr: 'Right SRs',
-    ns: 'Popular Socialists'
+    ns: 'Popular Socialists',
+    none: 'Uncontrolled'
 };
 
 /* Rows shown in the sidebar for the selected province
@@ -96,7 +518,12 @@ window.mapProvinceFields = [
                 (window.mapPartyNames[d.controller] || d.controller);
         }
     },
-    { label: 'Control', value: function(d) { return d.control + '%'; } }
+    {
+        label: 'Control',
+        value: function(d) {
+            return d.controller === 'none' ? null : d.control + '%';
+        }
+    }
 ];
 
 /* ---------- divisions ---------- */
@@ -223,8 +650,10 @@ function getMapSvg() {
 }
 
 function getMapElement(id) {
+    /* getElementById is much faster than querySelector on a big SVG. */
     var svg = getMapSvg();
-    return svg ? svg.querySelector('[id="' + id + '"]') : null;
+    var el = document.getElementById(id);
+    return (svg && el && svg.contains(el)) ? el : null;
 }
 
 function mapIsOpen() {
@@ -761,14 +1190,28 @@ function setMapHover(el) {
     hoveredMapProvince = el;
 }
 
+var mapMoveQueued = false;
+var mapLastMouse = null;
 document.addEventListener('mousemove', function(event) {
-    var svg = getMapSvg();
-    if (!svg) {
+    if (!getMapSvg()) {
         return;
     }
-    var hit = findMapHit(event);
-    setMapHover(hit.province);
-    svg.style.cursor = hit.province ? 'pointer' : '';
+    mapLastMouse = { clientX: event.clientX, clientY: event.clientY };
+    if (mapMoveQueued) {
+        return;
+    }
+    mapMoveQueued = true;
+    /* At most one hit-test per frame; the map has thousands of shapes. */
+    requestAnimationFrame(function() {
+        mapMoveQueued = false;
+        var svg = getMapSvg();
+        if (!svg || !mapLastMouse) {
+            return;
+        }
+        var hit = findMapHit(mapLastMouse);
+        setMapHover(hit.province);
+        svg.style.cursor = hit.province ? 'pointer' : '';
+    });
 });
 
 /* Left click: a division icon selects its divisions; a province selects
