@@ -26,17 +26,12 @@ subtitle: {!
 Overall skill: ★★<br>
 Suitability: ★★☆</ul>
 !}
-unavailable-subtitle: {!
-<span style="color: var(--lsr-color);">Left-SR</span> — Lawyer with agricultural management experience.<ul> 
-Overall skill: ★★<br>
-Suitability: ★★☆</ul>
-!}
+unavailable-subtitle: <span style="color: var(--lsr-color);">Left-SR</span> — Lawyer with agricultural management experience.<ul> Overall skill: ★★<br>Suitability: ★★☆</ul>[?if coalition_government = 0 : We haven't assented to Left-SR participation in government. ?]
 tags: food_candidates
-choose-if: food_minister != "Mayorov"
+choose-if: food_minister != "Mayorov" and coalition_government > 0
 on-arrival: food_minister = "Mayorov"; food_minister_party = "Left-SR";
 go-to: sovnarkom_composition
   
-
 @food_algasov
 title: Vladimir Algasov
 subtitle: {!
@@ -44,13 +39,37 @@ subtitle: {!
 Overall skill: ★★★<br>
 Suitability: ★★</ul>
 !}
-unavailable-subtitle:<span style="color: var(--lsr-color);">Left-SR</span> — Party organizer with and economic expertise.<ul> Overall skill: ★★★<br>Suitability: ★★</ul>[?if food_minister == "Algasov" or posts_minister == "Algasov" : <br>Algasov already has a post. ?]
+unavailable-subtitle:<span style="color: var(--lsr-color);">Left-SR</span> — Party organizer with and economic expertise.<ul> Overall skill: ★★★<br>Suitability: ★★</ul>[?if coalition_government = 0 : We haven't assented to Left-SR participation in government. ?][?if food_minister == "Algasov" or posts_minister == "Algasov" : Algasov already has a post. ?]
 tags: food_candidates
-choose-if: food_minister != "Algasov" and posts_minister != "Algasov" and food_minister != "Algasov"
+choose-if: food_minister != "Algasov" and posts_minister != "Algasov" and food_minister != "Algasov" and coalition_government > 0
 on-arrival: food_minister = "Algasov"; food_minister_party = "Left-SR";
 go-to: sovnarkom_composition
+
+@food_peshekhonov
+title: Alexey Peshekhonov
+subtitle: {!
+<span style="color: var(--ns-color);">NS</span> — Economist, statistician, and expert on rural administration; member of the Provisional Government.<ul> 
+Overall skill: ★★★<br>
+Suitability: ★★★★</ul>
+!}
+unavailable-subtitle: <span style="color: var(--ns-color);">NS</span> — Economist, statistician, and expert on rural administration; member of the Provisional Government.<ul>Overall skill: ★★★<br>Suitability: ★★★★</ul>[?if coalition_government = 0 : We haven't assented to NS participation in government. ?][?if agriculture_minister == "Peshekhonov" : Peshekhonov already has a post. ?]
+tags: food_candidates
+choose-if: food_minister != "Peshekhonov" and agriculture_minister != "Peshekhonov" and coalition_government = 1
+on-arrival: food_minister = "Peshekhonov"; food_minister_party = "NS";
+go-to: sovnarkom_composition
   
-  
+@food_dzyubinsky
+title: Vladimir Dzyubinsky
+subtitle: {!
+<span style="color: var(--ns-color);">NS</span> — Organizer, publicist, and grassroots activist; former chairman of the Trudoviks.<ul> 
+Overall skill: ★★★<br>
+Suitability: ★★</ul>
+!}
+unavailable-subtitle: <span style="color: var(--ns-color);">NS</span> — Organizer, publicist, and grassroots activist; former chairman of the Trudoviks.<br>Overall skill: ★★★<br>Suitability: ★★</ul>[?if coalition_government = 0 : We haven't assented to NS participation in government. ?][?if local_minister == "Dzyubinsky" : Dzyubinsky already has a post. ?]
+tags: food_candidates
+choose-if: food_minister != "Dzyubinsky" and local_minister != "Dzyubinsky"and coalition_government = 1
+on-arrival: food_minister = "Dzyubinsky"; food_minister_party = "NS";
+go-to: sovnarkom_composition
 
 @food_vacant
 title: Let's leave the position vacant for now. 
