@@ -308,11 +308,8 @@ window.ensureMapSidebar = function() {
         /* Delegated, so they survive the sidebar being re-rendered. */
         sidebar.addEventListener('change', function(event) {
             var box = event.target;
-            if (box.matches && box.matches('input[data-division]')) {
-                window.setMapDivisionSelected(
-                    box.getAttribute('data-division'),
-                    box.checked
-                );
+            if (box.matches && box.matches('input[data-division-count]')) {
+                window.setMapSelectionCount(parseInt(box.value, 10) || 0);
             }
         });
         sidebar.addEventListener('click', function(event) {
@@ -321,7 +318,11 @@ window.ensureMapSidebar = function() {
             if (!button) {
                 return;
             }
-            if (button.hasAttribute('data-move-to')) {
+            if (button.hasAttribute('data-count-step')) {
+                window.stepMapSelection(
+                    parseInt(button.getAttribute('data-count-step'), 10)
+                );
+            } else if (button.hasAttribute('data-move-to')) {
                 window.tryMoveSelectedDivisions(
                     button.getAttribute('data-move-to')
                 );
@@ -376,11 +377,9 @@ window.renderMapSidebar = function(provinceId) {
         html += '<div class="division-list">';
         here.forEach(function(d) {
             if (d.owner === window.mapPlayerFaction) {
-                html +=
-                    '<label class="division-row">' +
-                    '<input type="checkbox" data-division="' + d.id + '"' +
-                    (selected.indexOf(d.id) !== -1 ? ' checked' : '') + '> ' +
-                    d.name + '</label>';
+                html += '<div class="division-row' +
+                    (selected.indexOf(d.id) !== -1 ? ' selected' : '') +
+                    '">' + d.name + '</div>';
             } else {
                 html +=
                     '<div class="division-row foreign">' + d.name +
@@ -394,9 +393,22 @@ window.renderMapSidebar = function(provinceId) {
 
     if (mine.length) {
         html +=
+            '<div class="division-selector-label">Divisions to move</div>' +
+            '<div class="division-selector">' +
+            '<button class="map-button" data-count-step="-1"' +
+                (selected.length <= 0 ? ' disabled' : '') +
+                ' title="Select one fewer">&#9664;</button>' +
+            '<input type="number" class="division-count" ' +
+                'data-division-count min="0" max="' + mine.length + '" ' +
+                'value="' + selected.length + '">' +
+            '<button class="map-button" data-count-step="1"' +
+                (selected.length >= mine.length ? ' disabled' : '') +
+                ' title="Select one more">&#9654;</button>' +
+            '<span class="division-of">of ' + mine.length + '</span>' +
+            '</div>' +
             '<div class="division-actions">' +
-            '<button class="map-button" data-select-all>Select all</button> ' +
-            '<button class="map-button" data-select-none>Clear</button>' +
+            '<button class="map-button" data-select-all>All</button> ' +
+            '<button class="map-button" data-select-none>None</button>' +
             '</div>';
     }
 
@@ -464,16 +476,36 @@ window.clearMapProvince = function() {
     }
 };
 
-window.setMapDivisionSelected = function(divisionId, on) {
-    var list = window.selectedMapDivisions;
-    var index = list.indexOf(divisionId);
-    if (on && index === -1) {
-        list.push(divisionId);
-    } else if (!on && index !== -1) {
-        list.splice(index, 1);
+/* Set how many of your divisions in the selected province are selected.
+   Selected divisions stay selected; extra ones are added in list order, and
+   reducing the number drops the most recently added first. */
+window.setMapSelectionCount = function(count) {
+    var provinceId = window.selectedMapProvince;
+    if (!provinceId) {
+        return;
     }
+    var mine = playerDivisionsIn(provinceId);
+    count = Math.max(0, Math.min(mine.length, count));
+
+    var current = window.selectedMapDivisions.filter(function(id) {
+        return mine.some(function(d) { return d.id === id; });
+    });
+    if (count < current.length) {
+        current = current.slice(0, count);
+    } else {
+        mine.forEach(function(d) {
+            if (current.length < count && current.indexOf(d.id) === -1) {
+                current.push(d.id);
+            }
+        });
+    }
+    window.selectedMapDivisions = current;
     mapMessage = '';
     window.refreshMapUI();
+};
+
+window.stepMapSelection = function(delta) {
+    window.setMapSelectionCount(window.selectedMapDivisions.length + delta);
 };
 
 window.selectAllMapDivisions = function() {
