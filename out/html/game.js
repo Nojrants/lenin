@@ -1072,7 +1072,7 @@ harbringers_progress: {
 elders_zion: {
     name: "Elders of Zion",
     description: "Eliminate Lenin; install a government that is composed entirely of Jews.",
-    image: "img/elders_of_zion.jpg"
+    image: "img/elders_of_zion.png"
 },
 
 black_devil: {
