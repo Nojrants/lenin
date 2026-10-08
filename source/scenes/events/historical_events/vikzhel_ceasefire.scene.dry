@@ -807,7 +807,7 @@ go-to: menu2
 title: Cancel our offer to give up the Finance Commissariat.
 view-if: drop_finance = 1
 tags: vikzhel_cancel2
-on-arrival: drop_finance = 0; influence -= 3; commissariats_held += 1;
+on-arrival: drop_finance = 0; influence -= 2; commissariats_held += 1;
 go-to: menu2
 
 @labor2
