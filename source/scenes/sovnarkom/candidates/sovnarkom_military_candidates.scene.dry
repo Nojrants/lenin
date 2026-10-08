@@ -69,6 +69,21 @@ choose-if: war_minister != "Podvoisky"
 on-arrival: war_minister = "Podvoisky"; war_minister_party = "Bolshevik";
 go-to: sovnarkom_composition
 
+@military_lazimir
+title: Pavel Lazimir
+subtitle: {!
+<span style="color: var(--lsr-color);">Left-SR</span> — Chair of the Petrograd Military Revolutionary Committee; prominent soldier-activist during October Revolution.<ul>
+Overall skill: ★★<br>
+Suitability: ★★★★</ul>
+!}
+unavailable-subtitle: <span style="color: var(--lsr-color);">Left-SR</span> — Chair of the Petrograd Military Revolutionary Committee; prominent soldier-activist during October Revolution.<ul>Overall skill: ★★<br>Suitability: ★★★★</ul>[?if coalition_government = 0 : We haven't assented to Left-SR participation in government. ?]
+tags: military_candidates 
+choose-if: war_minister != "Lazimir" 
+on-arrival: war_minister = "Lazimir"; war_minister_party = "Left-SR";
+go-to: sovnarkom_composition
+
+
+
 @military_vacant
 title: Let's leave the position vacant for now. 
 tags: military_candidates
