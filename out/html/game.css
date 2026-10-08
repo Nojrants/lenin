@@ -970,38 +970,37 @@ body.dark-mode .negative { color: #ff6b6b; }
   max-height: 700px;
 }
 
-/* Province shapes. non-scaling-stroke keeps outlines a constant number
-   of screen pixels no matter how large the SVG's coordinate space is. */
+/* Provinces get no outline of their own (the SVG's borders show
+   through); only the selected province is outlined. */
 .map-province-shape {
-  stroke: #000;
-  stroke-width: 1px;
-  vector-effect: non-scaling-stroke;
   transition: filter 0.12s;
 }
-.map-province-hover { cursor: pointer; }
 .map-province-hover,
 .map-province-selected {
   filter: brightness(1.25) saturate(1.1);
-}
-.map-province-hover.map-province-shape,
-.map-province-hover .map-province-shape {
-  stroke: #fff !important;
-  stroke-width: 3px !important;
 }
 .map-province-selected.map-province-shape,
 .map-province-selected .map-province-shape {
   stroke: var(--gold) !important;
   stroke-width: 4px !important;
+  vector-effect: non-scaling-stroke;
 }
 
-.map-division-counter { pointer-events: none; }
+/* Division icons are clickable. */
+.map-division-counter { cursor: pointer; }
 .map-division-counter circle {
   fill: var(--content-bg-color);
   stroke: var(--red);
+  stroke-width: 3;
 }
 .map-division-counter text {
   fill: var(--text-color);
   font-weight: bold;
+  pointer-events: none;
+}
+.map-division-counter.map-counter-selected circle {
+  stroke: var(--gold) !important;
+  stroke-width: 8;
 }
 
 /* Right-hand province sidebar (positioning is in the LAYOUT section) */
@@ -1023,6 +1022,37 @@ body.dark-mode #map-sidebar h2 { color: var(--gold-soft); }
 .province-stat { margin: 0 0.4em 0.7em 0.4em; }
 .province-stat-label { font-size: 0.85em; font-style: italic; opacity: 0.8; }
 .province-stat-value { font-weight: bold; }
+
+/* Division list and move buttons in the map sidebar */
+#map-sidebar h3 {
+  margin: 0.8em 0 0.4em 0;
+  font-size: 1em;
+  font-weight: bold;
+  border-bottom: 1px solid var(--panel-line);
+  padding-bottom: 0.2em;
+}
+.division-list { margin: 0 0.4em; }
+.division-row { display: block; padding: 0.1em 0; cursor: pointer; }
+.division-row.foreign { cursor: default; opacity: 0.8; }
+.division-owner { font-size: 0.85em; font-style: italic; }
+.division-actions, .division-move { margin: 0.6em 0.4em 0 0.4em; }
+.map-button {
+  font-family: inherit;
+  font-size: 0.9em;
+  background: var(--red);
+  color: var(--gold-soft);
+  border: 1px solid var(--red-dark);
+  padding: 0.2em 0.6em;
+  margin: 0 0.2em 0.3em 0;
+  cursor: pointer;
+}
+.map-button:hover { background: var(--tab-hover-color); color: #fff; }
+.map-message {
+  margin: 0.7em 0.4em 0 0.4em;
+  padding: 0.4em 0.6em;
+  border-left: 4px solid var(--red);
+  background: var(--link-hover-color);
+}
 
 @media (prefers-reduced-motion: reduce) {
   #achievement-notification { transition: none; }
