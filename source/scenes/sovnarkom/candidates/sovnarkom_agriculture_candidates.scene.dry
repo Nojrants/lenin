@@ -26,13 +26,9 @@ subtitle: {!
 Overall skill: ★★★<br>
 Suitability: ★★★★</ul>
 !}
-unavailable-subtitle:{!
-<span style="color: var(--lsr-color);">Left-SR</span> — Expert in agricultural management.<ul> 
-Overall skill: ★★★<br>
-Suitability: ★★★★</ul>
-!}
+unavailable-subtitle: <span style="color: var(--lsr-color);">Left-SR</span> — Expert in agricultural management.<ul>Overall skill: ★★★<br>Suitability: ★★★★</ul>[?if coalition_government = 0 : We haven't assented to Left-SR participation in government. ?]
 tags: agriculture_candidates
-choose-if: agriculture_minister != "Kolegayev"  
+choose-if: agriculture_minister != "Kolegayev" and coalition_government > 0
 on-arrival: agriculture_minister = "Kolegayev"; agriculture_minister_party = "Left-SR";
 go-to: sovnarkom_composition
 
@@ -43,9 +39,9 @@ subtitle: {!
 Overall skill: ★★★<br>
 Suitability: ★★★</ul>
 !}
-unavailable-subtitle:<span style="color: var(--lsr-color);">Left-SR</span> — Party organizer with and economic expertise.<ul> Overall skill: ★★★<br>Suitability: ★★★</ul>[?if food_minister == "Algasov" or posts_minister == "Algasov" : <br>Algasov already has a post. ?]
+unavailable-subtitle:<span style="color: var(--lsr-color);">Left-SR</span> — Party organizer with and economic expertise.<ul> Overall skill: ★★★<br>Suitability: ★★★</ul>[?if coalition_government = 0 : We haven't assented to Left-SR participation in government. ?][?if food_minister == "Algasov" or posts_minister == "Algasov" : Algasov already has a post. ?]
 tags: agriculture_candidates
-choose-if: agriculture_minister != "Algasov" and posts_minister != "Algasov" and food_minister != "Algasov"
+choose-if: agriculture_minister != "Algasov" and posts_minister != "Algasov" and food_minister != "Algasov" and coalition_government > 0
 on-arrival: agriculture_minister = "Algasov"; agriculture_minister_party = "Left-SR";
 go-to: sovnarkom_composition
   
@@ -69,7 +65,7 @@ subtitle: {!
 Overall skill: ★★★<br>
 Suitability: ★★★★</ul>
 !}
-unavailable-subtitle: <span style="color: var(--ns-color);">NS</span> — Economist, statistician, and expert on rural administration; member of the Provisional Government.<ul>Overall skill: ★★★<br>Suitability: ★★★★</ul>[?if coalition_government = 0 : We haven't assented to Left-SR participation in government. ?][?if food_minister == "Peshekhonov" : Peshekhonov already has a post. ?]
+unavailable-subtitle: <span style="color: var(--ns-color);">NS</span> — Economist, statistician, and expert on rural administration; member of the Provisional Government.<ul>Overall skill: ★★★<br>Suitability: ★★★★</ul>[?if coalition_government = 0 : We haven't assented to NS participation in government. ?][?if food_minister == "Peshekhonov" : Peshekhonov already has a post. ?]
 tags: agriculture_candidates
 choose-if: agriculture_minister != "Peshekhonov" and food_minister != "Peshekhonov" and coalition_government = 1
 on-arrival: agriculture_minister = "Peshekhonov"; agriculture_minister_party = "NS";
