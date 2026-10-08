@@ -28,6 +28,19 @@ choose-if: local_minister != "Izmailovich" and property_minister != "Izmailovich
 on-arrival: properties_minister = "Izmailovich"; properties_minister_party = "Left-SR";
 go-to: sovnarkom_composition
 
+@property_sukhanov
+title: Nikolai Sukhanov
+subtitle: {!
+<span style="color: var(--sdi-color);">SD-Int.</span> — Party leader, writer, and public intellectual.<ul>
+Overall skill: ★★★★<br>
+Suitability: ★☆</ul>
+!}
+unavailable-subtitle: <span style="color: var(--sdi-color);">SD-Int.</span> — Party leader, writer, and public intellectual.<ul>Overall skill: ★★★★<br>Suitability: ★☆</ul>[?if coalition_government != 1 : We haven't assented to SD-Internationalist participation in government. ?][?if education_minister = "Sukhanov": Sukhanov already has a post. ?][?if sdi_relation < 40 : <br> Sukhanov won't accept this offer. ?]
+tags: property_candidates
+choose-if: sdi_relation >= 40 and education_minister != "Sukhanov" and property_minister != "Sukhanov" and coalition_government = 1
+on-arrival: properties_minister = "Sukhanov"; properties_minister_party = "SD-Int";
+go-to: sovnarkom_composition
+
 @properties_vacant
 title: Let's leave the position vacant for now. 
 tags: property_candidates
