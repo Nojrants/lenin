@@ -19,16 +19,53 @@ var main = function(dendryUI) {
 var TITLE = "Heroic Age of Revolution" + '_' + "(Noj Rants)";
 
 /*
-
 MAP
+
+To add a province: give it an entry in window.mapProvinces whose key is the
+id of that element in the SVG. Anything in the SVG without an entry is ignored
+(no hover, no click). Add extra fields to window.mapProvinceFields to show
+them in the right-hand sidebar.
 */
 
+window.mapProvinces = {
+    petrograd: {
+        name: 'Petrograd',
+        controller: 'bolsheviks',
+        divisions: 5,
+        control: 100
+    },
+    novgorod: {
+        name: 'Novgorod',
+        controller: 'sr',
+        divisions: 2,
+        control: 70
+    },
+    tver: {
+        name: 'Tver',
+        controller: 'mensheviks',
+        divisions: 1,
+        control: 40
+    },
+    moscow: {
+        name: 'Moscow',
+        controller: 'bolsheviks',
+        divisions: 4,
+        control: 85
+    }
+};
+
+window.mapPartyColors = {
+    bolsheviks: '--bolshevik-color',
+    sdi: '--sdi-color',
+    left_m: '--left-m-color',
+    mensheviks: '--m-color',
+    right_m: '--right_m-color',
     lsr: '--lsr-color',
     sr: '--sr-color',
     right_sr: '--right-sr-color',
     ns: '--ns-color'
 };
- 
+
 window.mapPartyNames = {
     bolsheviks: 'Bolsheviks',
     sdi: 'Social Democrats',
@@ -40,7 +77,7 @@ window.mapPartyNames = {
     right_sr: 'Right SRs',
     ns: 'Popular Socialists'
 };
- 
+
 /* Rows shown in the sidebar for the selected province. */
 window.mapProvinceFields = [
     {
@@ -54,13 +91,13 @@ window.mapProvinceFields = [
     { label: 'Control', value: function(d) { return d.control + '%'; } },
     { label: 'Divisions', value: function(d) { return d.divisions; } }
 ];
- 
+
 window.selectedMapProvince = null;
- 
+
 var MAP_SHAPES = 'path, polygon, polyline, rect, circle, ellipse';
 var hoveredMapProvince = null;
 var mapSvgText = null;   // cached so the SVG is only fetched once
- 
+
 window.getMapPartyColor = function(controller) {
     var variable = window.mapPartyColors[controller];
     if (!variable) {
@@ -70,22 +107,22 @@ window.getMapPartyColor = function(controller) {
         .getPropertyValue(variable).trim();
     return color || '#999';
 };
- 
+
 window.getMapProvinceColor = function(controller, control) {
     var color = window.getMapPartyColor(controller);
     control = Math.max(0, Math.min(100, control));
     return 'color-mix(in srgb, ' + color + ' ' + control + '%, white)';
 };
- 
+
 function getMapSvg() {
     return document.querySelector('#map-container .map-frame svg');
 }
- 
+
 function getMapElement(id) {
     var svg = getMapSvg();
     return svg ? svg.querySelector('[id="' + id + '"]') : null;
 }
- 
+
 /* A province may be a single shape or a <g> of shapes. */
 function getMapShapes(el) {
     if (el.matches(MAP_SHAPES)) {
@@ -93,7 +130,7 @@ function getMapShapes(el) {
     }
     return Array.prototype.slice.call(el.querySelectorAll(MAP_SHAPES));
 }
- 
+
 /* Walk up from whatever was hovered/clicked to the province element. */
 function findProvinceElement(target) {
     var svg = getMapSvg();
@@ -109,7 +146,7 @@ function findProvinceElement(target) {
     }
     return null;
 }
- 
+
 /*
 Right-hand sidebar (created on demand, shown only while the map is open).
 */
@@ -124,18 +161,18 @@ window.ensureMapSidebar = function() {
     }
     return sidebar;
 };
- 
+
 window.renderMapSidebar = function(provinceId) {
     var sidebar = window.ensureMapSidebar();
     var data = provinceId ? window.mapProvinces[provinceId] : null;
- 
+
     if (!data) {
         sidebar.innerHTML =
             '<h2>Province</h2>' +
             '<div class="map-hint">Click a province to see its details.</div>';
         return;
     }
- 
+
     var html = '<h2>' + (data.name || provinceId) + '</h2>';
     window.mapProvinceFields.forEach(function(field) {
         var value = field.value(data);
@@ -150,7 +187,7 @@ window.renderMapSidebar = function(provinceId) {
     });
     sidebar.innerHTML = html;
 };
- 
+
 window.createMapLayout = function() {
     var container = document.getElementById('map-container');
     if (!container) {
@@ -159,18 +196,18 @@ window.createMapLayout = function() {
     container.innerHTML = '';
     hoveredMapProvince = null;
     window.selectedMapProvince = null;
- 
+
     var layout = document.createElement('div');
     layout.className = 'map-layout';
     var frame = document.createElement('div');
     frame.className = 'map-frame';
     layout.appendChild(frame);
     container.appendChild(layout);
- 
+
     window.renderMapSidebar(null);
     return frame;
 };
- 
+
 window.showMapProvince = function(provinceId) {
     var data = window.mapProvinces[provinceId];
     if (!data) {
@@ -189,7 +226,7 @@ window.showMapProvince = function(provinceId) {
     window.selectedMapProvince = provinceId;
     window.renderMapSidebar(provinceId);
 };
- 
+
 window.clearMapProvince = function() {
     var svg = getMapSvg();
     if (svg) {
@@ -202,7 +239,7 @@ window.clearMapProvince = function() {
         window.renderMapSidebar(null);
     }
 };
- 
+
 /*
 Colour the provinces and add division counters.
 */
@@ -211,30 +248,30 @@ window.renderGameMap = function() {
     if (!svg) {
         return;
     }
- 
+
     svg.querySelectorAll('.map-division-counter').forEach(function(c) {
         c.remove();
     });
- 
+
     Object.keys(window.mapProvinces).forEach(function(provinceId) {
         var data = window.mapProvinces[provinceId];
         var province = getMapElement(provinceId);
- 
+
         if (!province) {
             console.warn('Province not found in SVG:', provinceId);
             return;
         }
- 
+
         var fill = window.getMapProvinceColor(data.controller, data.control);
         getMapShapes(province).forEach(function(shape) {
             shape.classList.add('map-province-shape');
             shape.style.fill = fill;
         });
- 
+
         if (data.divisions === undefined) {
             return;
         }
- 
+
         /* Province centre, converted into the root SVG's coordinates. */
         var bbox = province.getBBox();
         var localCenter = new DOMPoint(
@@ -249,20 +286,20 @@ window.renderGameMap = function() {
         var svgCenter = localCenter
             .matrixTransform(provinceMatrix)
             .matrixTransform(svgMatrix.inverse());
- 
+
         var x = data.label ? data.label[0] : svgCenter.x;
         var y = data.label ? data.label[1] : svgCenter.y;
- 
+
         var ns = 'http://www.w3.org/2000/svg';
         var group = document.createElementNS(ns, 'g');
         group.setAttribute('class', 'map-division-counter');
- 
+
         var circle = document.createElementNS(ns, 'circle');
         circle.setAttribute('cx', x);
         circle.setAttribute('cy', y);
         circle.setAttribute('r', 36);
         group.appendChild(circle);
- 
+
         var text = document.createElementNS(ns, 'text');
         text.setAttribute('x', x);
         text.setAttribute('y', y);
@@ -271,27 +308,27 @@ window.renderGameMap = function() {
         text.style.fontSize = '30px';
         text.textContent = data.divisions;
         group.appendChild(text);
- 
+
         svg.appendChild(group);
     });
 };
- 
+
 window.loadGameMap = function() {
     var frame = window.createMapLayout();
     if (!frame) {
         return;
     }
- 
+
     var draw = function(svgText) {
         frame.innerHTML = svgText;
         window.renderGameMap();
     };
- 
+
     if (mapSvgText) {
         draw(mapSvgText);
         return;
     }
- 
+
     fetch('img/European Russia Map.svg')
         .then(function(response) {
             if (!response.ok) {
@@ -307,7 +344,7 @@ window.loadGameMap = function() {
             console.error('Failed to load game map:', error);
         });
 };
- 
+
 /*
 Hover and click. Delegated on document, so they work after the SVG is
 reloaded. Works whether a province is a <path> or a <g> of paths.
@@ -324,14 +361,14 @@ function setMapHover(el) {
     }
     hoveredMapProvince = el;
 }
- 
+
 document.addEventListener('mouseover', function(event) {
     if (!getMapSvg()) {
         return;
     }
     setMapHover(findProvinceElement(event.target));
 });
- 
+
 document.addEventListener('mouseout', function(event) {
     var svg = getMapSvg();
     if (!svg || !svg.contains(event.target)) {
@@ -341,7 +378,7 @@ document.addEventListener('mouseout', function(event) {
         setMapHover(null);
     }
 });
- 
+
 document.addEventListener('click', function(event) {
     var province = findProvinceElement(event.target);
     if (!province) {
@@ -353,14 +390,14 @@ document.addEventListener('click', function(event) {
         window.showMapProvince(province.id);
     }
 });
- 
+
 /*
 Map navigation.
 */
 window.openMapView = function() {
     var container = document.getElementById('map-container');
     var content = document.getElementById('content');
- 
+
     window.ensureMapSidebar();
     document.body.classList.add('map-active');
     if (content) {
@@ -371,11 +408,11 @@ window.openMapView = function() {
     }
     window.loadGameMap();
 };
- 
+
 window.closeMapView = function() {
     var container = document.getElementById('map-container');
     var content = document.getElementById('content');
- 
+
     document.body.classList.remove('map-active');
     if (container) {
         container.classList.remove('active');
@@ -386,7 +423,7 @@ window.closeMapView = function() {
     window.clearMapProvince();
     setMapHover(null);
 };
- 
+
 /* If the player leaves the map scene some other way (e.g. Library),
    make sure the map view is closed. */
 window.syncMapView = function() {
@@ -397,25 +434,23 @@ window.syncMapView = function() {
         window.closeMapView();
     }
 };
- 
+
 window.showMap = function() {
     var engine = window.dendryUI.dendryEngine;
- 
+
     if (engine.state.sceneId.startsWith('map')) {
         window.closeMapView();
         engine.goToScene('backSpecialScene');
         return;
     }
- 
+
     engine.goToScene('map');
     setTimeout(window.openMapView, 0);
 };
 
-
-
-
-
-/*   LIBRARY   */
+/*
+LIBRARY
+*/
 
 window.showStats = function() {
 
@@ -1017,6 +1052,7 @@ window.updateSidebar = function() {
 
 window.onDisplayContent = function() {
     window.updateSidebar();
+    window.syncMapView();
 };
 
     
@@ -1251,10 +1287,3 @@ function metric_color(value, positive_is_good = true) {
         ? "var(--level7-color)"
         : "var(--level1-color)";
 }
-
-
-
-
-
-
-
