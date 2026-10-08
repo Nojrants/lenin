@@ -4,11 +4,11 @@ new-page: true
 @internal_rykov
 title: Alexei Rykov
 subtitle: {!
-<span style="color: var(--lsr-color);">Moderate</span> — Skilled administrator and statesman.<ul>
+<span style="color: var(--bolshevik-color);">Moderate</span> — Skilled administrator and statesman.<ul>
 Overall skill: ★★★★<br>
 Suitability: ★★</ul>
 !}
-unavailable-subtitle: <span style="color: var(--lsr-color);">Moderate</span> — Skilled administrator and statesman.<ul>Overall skill: ★★★★<br>Suitability: ★★</ul>[?if moderates_resigned = 1 : The Moderates have resigned from government. ?]
+unavailable-subtitle: <span style="color: var(--bolshevik-color);">Moderate</span> — Skilled administrator and statesman.<ul>Overall skill: ★★★★<br>Suitability: ★★</ul>[?if moderates_resigned = 1 : The Moderates have resigned from government. ?]
 tags: internal_candidates
 choose-if: interior_minister != "Rykov" and moderates_resigned != 1
 on-arrival: interior_minister = "Rykov"; interior_minister_party = "Bolshevik"; 
@@ -17,12 +17,12 @@ go-to: sovnarkom_composition
 @internal_dzerzhinsky
 title: Felix Dzerzhinsky
 subtitle: {!
-<span style="color: var(--lsr-color);">Leftist</span> — Underground organizer with extensive security experience.<ul>
+<span style="color: var(--bolshevik-color);">Leftist</span> — Underground organizer with extensive security experience.<ul>
 Overall skill: ★★★★<br>
 Suitability: ★★★★★</ul>
 !}
 unavailable-subtitle: {!
-<span style="color: var(--lsr-color);">Leftist</span> — Underground organizer with extensive security experience.<ul>
+<span style="color: var(--bolshevik-color);">Leftist</span> — Underground organizer with extensive security experience.<ul>
 Overall skill: ★★★★<br>
 Suitability: ★★★★★</ul>
 !}
