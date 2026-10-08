@@ -9,13 +9,12 @@ subtitle: {!
 Overall skill: ★★☆<br>
 Suitability: ★★★★</ul>
 !}
-unavailable-subtitle: <span style="color: var(--lsr-color);">Left-SR</span> — Former law student, journalist, and expert in local affairs.<ul>Overall skill: ★★☆<br>Suitability: ★★★★</ul>[?if labor_minister == "Trutovsky" : <br>Trutovsky already has a post. ?]
+unavailable-subtitle: <span style="color: var(--lsr-color);">Left-SR</span> — Former law student, journalist, and expert in local affairs.<ul>Overall skill: ★★☆<br>Suitability: ★★★★</ul>[?if coalition_government = 0 : We haven't assented to Left-SR participation in government. ?][?if labor_minister == "Trutovsky" : Trutovsky already has a post. ?]
 tags: local_candidates
-choose-if: local_minister != "Trutovsky"  
+choose-if: local_minister != "Trutovsky"  and coalition_government > 0
 on-arrival: local_minister = "Trutovsky"; local_minister_party = "Bolshevik";
 go-to: sovnarkom_composition
   
-
 @local_izmailovich
 title: Aleksandra Izmailovich
 subtitle: {!
@@ -23,12 +22,37 @@ subtitle: {!
 Overall skill: ★★<br>
 Suitability: ★★</ul>
 !}
-unavailable-subtitle: <span style="color: var(--lsr-color);">Left-SR</span> — Party organizer with managerial experience.<ul>Overall skill: ★★<br>Suitability: ★★</ul>[?if property_minister == "Izmailovich" : <br>Izmailovich already has a post. ?]
+unavailable-subtitle: <span style="color: var(--lsr-color);">Left-SR</span> — Party organizer with managerial experience.<ul>Overall skill: ★★<br>Suitability: ★★</ul>[?if coalition_government = 0 : We haven't assented to Left-SR participation in government. ?][?if property_minister == "Izmailovich" : Izmailovich already has a post. ?]
 tags: local_candidates
-choose-if: local_minister != "Izmailovich" and property_minister != "Izmailovich"
+choose-if: local_minister != "Izmailovich" and property_minister != "Izmailovich" and coalition_government > 0
 on-arrival: local_minister = "Izmailovich"; local_minister_party = "Left-SR";
 go-to: sovnarkom_composition
   
+@local_maslov
+title: Semyon Maslov
+subtitle: {!
+<span style="color: var(--sr-color);">SR</span> — Laywer, statistician, and agronomist with experience in land policy and zemstvo politics.<ul>
+Overall skill: ★★☆<br>
+Suitability: ★★★</ul>
+!}
+unavailable-subtitle: <span style="color: var(--sr-color);">SR</span> — Laywer, statistician, and agronomist with experience in land policy and zemstvo politics.<ul>Overall skill: ★★☆<br>Suitability: ★★★</ul>[?if coalition_government != 1 : We haven't assented to SR participation in government. ?]
+tags: local_candidates
+choose-if: local_minister != "Maslov" and property_minister != "Izmailovich" and coalition_government = 1
+on-arrival: local_minister = "Maslov"; local_minister_party = "SR";
+go-to: sovnarkom_composition
+
+@@local_dzyubinsky
+title: Vladimir Dzyubinsky
+subtitle: {!
+<span style="color: var(--ns-color);">NS</span> — Organizer, publicist, and grassroots activist; former chairman of the Trudoviks.<ul> 
+Overall skill: ★★★<br>
+Suitability: ★★★★</ul>
+!}
+unavailable-subtitle: <span style="color: var(--ns-color);">NS</span> — Organizer, publicist, and grassroots activist; former chairman of the Trudoviks.<ul>Overall skill: ★★★<br>Suitability: ★★★★</ul>[?if coalition_government != 1 : We haven't assented to NS participation in government. ?][?if food_minister == "Dzyubinsky" : <br> Dzyubinsky already has a post. ?] 
+tags: local_candidates
+choose-if: food_minister != "Dzyubinsky" and local_minister != "Dzyubinsky" and coalition_government = 1
+on-arrival: local_minister = "Dzyubinsky"; local_minister_party = "NS";
+go-to: sovnarkom_composition
 
 @local_vacant
 title: Let's leave the position vacant for now. 
