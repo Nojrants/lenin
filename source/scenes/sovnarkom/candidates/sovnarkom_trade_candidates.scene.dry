@@ -18,6 +18,31 @@ choose-if: trade_minister != "Nogin"
 on-arrival: trade_minister = "Nogin"; trade_minister_party = "Bolshevik"; 
 go-to: sovnarkom_composition
 
+title: Vladimir Bazarov
+subtitle: {!
+<span style="color: var(--m-color);">Menshevik</span> — Pioneering economist in the area of central planning.<ul> 
+Overall skill: ★★★★<br>
+Suitability: ★★★★</ul> 
+!}
+unavailable-subtitle: <span style="color: var(--m-color);">Menshevik</span> — Pioneering economist in the area of central planning.<ul> Overall skill: ★★★★<br>Suitability: ★★★★</ul>[?if coalition_government != 1 : We haven't assented to Menshevik participation in government. ?][?if finance_minister == "Bazarov": Bazarov already has a post. ?]
+tags: trade_candidates
+choose-if: finance_minister != "Bazarov" and trade_minister != "Bazarov" and coalition_government > 0
+on-arrival: trade_minister = "Bazarov"; trade_minister_party = "Menshevik";
+go-to: sovnarkom_composition
+
+@trade_avilov
+title: Boris Avilov
+subtitle: {!
+<span style="color: var(--m-color);">Menshevik</span> — Lawyer, economist, and noted administrator.<ul> 
+Overall skill: ★★☆<br>
+Suitability: ★★★</ul>
+!}
+unavailable-subtitle: <span style="color: var(--m-color);">Menshevik</span> — Lawyer, economist, and noted administrator.<ul>Overall skill: ★★☆<br>Suitability: ★★★</ul>[?if coalition_government != 1 : We haven't assented to Menshevik participation in government. ?][?if justice_minister == "Avilov": Avilov already has a post. ?][?if finance_minister == "Avilov": Avilov already has a post. ?][?if transport_minister == "Avilov": ilov already has a post. ?]
+tags: trade_candidates
+choose-if: transport_minister != "Avilov" and trade_minister != "Avilov" and finance_minister != "Avilov" and justice_minister != "Avilov" and coalition_government > 0
+on-arrival: trade_minister = "Avilov"; trade_minister_party = "Menshevik";
+go-to: sovnarkom_composition
+
 @trade_proshian
 title: Prosh Proshian
 subtitle: {!
@@ -25,9 +50,9 @@ subtitle: {!
 Overall skill: ★★★<br>
 Suitability: ★★</ul>
 !}
-unavailable-subtitle: <span style="color: var(--lsr-color);">Left-SR</span> — Lawyer and party activist<ul>Overall skill: ★★★<br>Suitability: ★★</ul>[?if posts_minister == "Proshian" : <br>Proshian already has a post. ?]
+unavailable-subtitle: <span style="color: var(--lsr-color);">Left-SR</span> — Lawyer and party activist<ul>Overall skill: ★★★<br>Suitability: ★★</ul>[?if coalition_government = 0 : We haven't assented to Left-SR participation in government. ?][?if posts_minister == "Proshian" : Proshian already has a post. ?]
 tags: trade_candidates
-choose-if: posts_minister != "Proshian" and trade_minister != "Proshian"
+choose-if: posts_minister != "Proshian" and trade_minister != "Proshian" and coalition_government > 0
 on-arrival: trade_minister = "Proshian"; trade_minister_party = "Left-SR";
 go-to: sovnarkom_composition
 
