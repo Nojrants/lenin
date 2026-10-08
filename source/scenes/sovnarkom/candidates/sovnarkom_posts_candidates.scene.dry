@@ -27,9 +27,9 @@ subtitle: {!
 Overall skill: ★★★<br>
 Suitability: ★★</ul>
 !}
-unavailable-subtitle: <span style="color: var(--lsr-color);">Left-SR</span> — Lawyer and party activist<ul>Overall skill: ★★★<br>Suitability: ★★</ul>[?if trade_minister == "Proshian" : <br>Proshian already has a post. ?]
+unavailable-subtitle: <span style="color: var(--lsr-color);">Left-SR</span> — Lawyer and party activist<ul>Overall skill: ★★★<br>Suitability: ★★</ul>[?if coalition_government = 0 : We haven't assented to Left-SR participation in government. ?][?if trade_minister == "Proshian" : Proshian already has a post. ?]
 tags: posts_candidates
-choose-if: posts_minister != "Proshian" and trade_minister != "Proshian"
+choose-if: posts_minister != "Proshian" and trade_minister != "Proshian" and coalition_government > 0
 on-arrival: posts_minister = "Proshian"; posts_minister_party = "Left-SR";
 go-to: sovnarkom_composition
   
@@ -41,9 +41,9 @@ subtitle: {!
 Overall skill: ★★★<br>
 Suitability: ★★</ul>
 !}
-unavailable-subtitle:<span style="color: var(--lsr-color);">Left-SR</span> — Party organizer with and economic expertise.<ul> Overall skill: ★★★<br>Suitability: ★★</ul>[?if agriculture_minister == "Algasov" or food_minister == "Algasov" : <br>Algasov already has a post. ?]
+unavailable-subtitle:<span style="color: var(--lsr-color);">Left-SR</span> — Party organizer with and economic expertise.<ul> Overall skill: ★★★<br>Suitability: ★★</ul>[?if coalition_government = 0 : We haven't assented to Left-SR participation in government. ?][?if agriculture_minister == "Algasov" or food_minister == "Algasov" : Algasov already has a post. ?]
 tags: posts_candidates
-choose-if: posts_minister != "Algasov" and posts_minister != "Algasov" and posts_minister != "Algasov"
+choose-if: posts_minister != "Algasov" and posts_minister != "Algasov" and posts_minister != "Algasov" and coalition_government > 0 
 on-arrival: posts_minister = "Algasov"; posts_minister_party = "Left-SR";
 go-to: sovnarkom_composition
   
