@@ -214,7 +214,7 @@ data.forEach(d => {
 
 = Constituent Assembly Results
 
-{!<svg id="constituent_assembly" style="width: 625px; height: 310px;"> </svg>!}
+{!<svg id="constituent_assembly" viewBox="0 0 625 310"> </svg>!}
 
 {!<table class="soviet-table">!}
 {!<tr><th>Party</th><th>Vote Share</th></tr>!}
