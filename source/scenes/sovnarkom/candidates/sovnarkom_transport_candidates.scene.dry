@@ -26,7 +26,7 @@ subtitle: {!
 Overall skill: ★★★<br>
 Suitability: ★★★★★</ul>
 !}
-unavailable-subtitle: <span style="color: var(--sr-color);">SR</span> — Vikzhel Chairman; helped crush the Kornilov Coup.Overall skill: ★★★<br>Suitability: ★★★★★</ul>[?if coalition_government != 1 : We haven't assented to SR participation in government. ?]
+unavailable-subtitle: <span style="color: var(--sr-color);">SR</span> — Vikzhel Chairman; helped crush the Kornilov Coup.<ul>Overall skill: ★★★<br>Suitability: ★★★★★</ul>[?if coalition_government != 1 : We haven't assented to SR participation in government. ?]
 tags: transport_candidates
 choose-if: transport_minister != "Malitsky" and coalition_goverment = 1
 on-arrival: transport_minister = "Malitsky"; transport_minister_party = "SR"; 
@@ -39,7 +39,7 @@ subtitle: {!
 Overall skill: ★★★☆<br>
 Suitability: ★★</ul>
 !}
-unavailable-subtitle: unavailable-subtitle: <span style="color: var(--m-color);">Menshevik</span> — Leading party organizer, trade unionist, and architect of Bolshevik cooperation.<ul> Overall skill: ★★★☆<br>Suitability: ★★</ul>[?if coalition_government != 1 : We haven't assented to Menshevik participation in government. ?][?if labor_minister == "Abramovich" : Abramovich already has a post. ?]
+unavailable-subtitle: <span style="color: var(--m-color);">Menshevik</span> — Leading party organizer, trade unionist, and architect of Bolshevik cooperation.<ul> Overall skill: ★★★☆<br>Suitability: ★★</ul>[?if coalition_government != 1 : We haven't assented to Menshevik participation in government. ?][?if labor_minister == "Abramovich" : Abramovich already has a post. ?]
 tags: transport_candidates
 choose-if: labor_minister != "Abramovich" and transport_minister != "Abramovich" and coalition_goverment = 1
 on-arrival: transport_minister = "Abramovich"; transport_minister_party = "Menshevik"; 
@@ -52,7 +52,7 @@ subtitle: {!
 Overall skill: ★★☆<br>
 Suitability: ★★★</ul>
 !}
-unavailable-subtitle: <span style="color: var(--m-color);">Menshevik</span> — Lawyer, economist, and noted administrator.<br>Overall skill: ★★☆<br>Suitability: ★★★</ul>[?if coalition_government != 1 : We haven't assented to Menshevik participation in government. ?][?if justice_minister == "Avilov": Avilov already has a post. ?][?if trade_minister == "Avilov": Avilov already has a post. ?][?if finance_minister == "Avilov": Avilov already has a post. ?]
+unavailable-subtitle: <span style="color: var(--m-color);">Menshevik</span> — Lawyer, economist, and noted administrator.<ul>Overall skill: ★★☆<br>Suitability: ★★★</ul>[?if coalition_government != 1 : We haven't assented to Menshevik participation in government. ?][?if justice_minister == "Avilov": Avilov already has a post. ?][?if trade_minister == "Avilov": Avilov already has a post. ?][?if finance_minister == "Avilov": Avilov already has a post. ?]
 tags: transport_candidates
 choose-if: transport_minister != "Avilov" and coalition_goverment = 1
 on-arrival: transport_minister = "Avilov"; transport_minister_party = "Menshevik"; 
