@@ -716,7 +716,8 @@ table {
 .soviet-table {
   border-collapse: collapse;
   width: 100%;
-  max-width: 650px;
+  max-width: none;
+  box-sizing: border-box;
   margin-top: 20px;
   font-size: 16px;
   border: 2px solid var(--red);
@@ -751,6 +752,12 @@ body.dark-mode .soviet-table tr:nth-child(even) {
   text-align: center;
   white-space: nowrap;
 }
+#content svg, #qualities svg {
+    width: 100% !important;
+    height: auto !important;
+    display: block;
+}
+
 
 .party-box {
   display: inline-block;
