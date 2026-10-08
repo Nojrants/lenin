@@ -17,83 +17,152 @@ body {
   --sr-color: #40853d;
   --right-sr-color: #67a365;
   --ns-color: #949d48;
-  --bg-color: #f3f3e3;
-  --border-color: #000;
-  --content-bg-color: #f3f3f3;
-  --text-color: #431;
-  --link-color: #900;
-  --link-hover-color: rgba(0, 0, 0, 0.05);
-  --unavailable-bg-color: rgba(0, 0, 0, 0.1);
-  --unavailable-color: #999;
-  --tab-bg-color: #dedede;
-  --tab-color: #ddd;
-  --tab-hover-color: #ececec;
-  --card-border-color: #ccc; 
-  --card-bg-color: #ddd; 
+
+  /* --- Soviet theme tokens --- */
+  --red: #c8102e;          /* flag red */
+  --red-deep: #7a0c0c;     /* page background */
+  --red-dark: #4e0707;
+  --gold: #e8b923;         /* hammer-and-sickle yellow */
+  --gold-soft: #f4d06f;
+
+  --bg-color: #7a0c0c;
+  --border-color: #3a0a0a;
+  --content-bg-color: #efe4cf;
+  --text-color: #2b1710;
+  --link-color: #a30f1f;
+  --link-hover-color: rgba(200, 16, 46, 0.10);
+  --unavailable-bg-color: rgba(0, 0, 0, 0.08);
+  --unavailable-color: #8c7f70;
+  --tab-bg-color: #5c0a0a;
+  --tab-color: #8f1218;
+  --tab-text-color: #f4d06f;
+  --tab-hover-color: #b3162a;
+  --card-border-color: #b99a4a;
+  --card-bg-color: #d9cdb4;
+  --box-bg: rgba(122, 12, 12, 0.07);
+  --panel-line: #b99a4a;
+
   font-family: "Minion Pro", Georgia, serif;
   background-color: var(--bg-color);
+  /* subtle star-field / ray texture over the red */
+  background-image:
+    radial-gradient(ellipse at 50% -10%, rgba(232, 185, 35, 0.16), transparent 55%),
+    repeating-linear-gradient(135deg,
+      rgba(0, 0, 0, 0.00) 0 22px,
+      rgba(0, 0, 0, 0.07) 22px 44px);
+  background-attachment: fixed;
   padding: 0;
   line-height: 155%;
   overflow-y: scroll;
 }
+
 body.dark-mode {
-  --bg-color: #000;
-  --border-color: #fff;
-  --content-bg-color: #242424;
-  --text-color: #efefef;
-  --link-color: #ff8080;
-  --link-hover-color: rgba(100, 100, 100, 0.1);
-  --tab-bg-color: #555555;
-  --tab-color: #505050;
-  --tab-hover-color: #242424;
-  --card-border-color: #4c4c4c;
-  --card-bg-color: #3f3f3f;
+  --bg-color: #1a0505;
+  --border-color: #000;
+  --content-bg-color: #2a1616;
+  --text-color: #f0e6d2;
+  --link-color: #ff9a8a;
+  --link-hover-color: rgba(232, 185, 35, 0.12);
+  --unavailable-bg-color: rgba(255, 255, 255, 0.06);
+  --unavailable-color: #8f8070;
+  --tab-bg-color: #3a0808;
+  --tab-color: #6e1015;
+  --tab-hover-color: #922030;
+  --card-border-color: #8a6f2a;
+  --card-bg-color: #3f2a2a;
+  --box-bg: rgba(255, 255, 255, 0.05);
+  --panel-line: #8a6f2a;
+  background-image:
+    radial-gradient(ellipse at 50% -10%, rgba(200, 16, 46, 0.25), transparent 55%),
+    repeating-linear-gradient(135deg,
+      rgba(0, 0, 0, 0.00) 0 22px,
+      rgba(0, 0, 0, 0.25) 22px 44px);
 }
-body.dark-mode #content {
-  border-style: double;
-  border-width: 4px;
-  border-color: #888;
+
+/* ----------------------------------------------------------
+   PANELS: red outer border + thin gold inner line.
+   Shared by main content, sidebar, map, header bar.
+   ---------------------------------------------------------- */
+#content,
+.tools,
+#map-container {
+  border: 4px solid var(--red);
+  box-shadow:
+    inset 0 0 0 2px var(--gold),
+    inset 0 0 0 3px var(--red-dark),
+    0 6px 22px rgba(0, 0, 0, 0.55);
 }
-body.dark-mode .tools {
-  border-style: double;
-  border-width: 4px;
-  border-color: #888;
+body.dark-mode #content,
+body.dark-mode .tools,
+body.dark-mode #map-container {
+  border: 4px solid #a30f1f;
+  box-shadow:
+    inset 0 0 0 2px #b8921f,
+    inset 0 0 0 3px #000,
+    0 6px 22px rgba(0, 0, 0, 0.8);
 }
+
+/* ----------------------------------------------------------
+   LAYOUT
+   Sidebar sits on the left (22rem wide), a 1.5rem gap, then the
+   main column fills ALL remaining width up to the page max.
+   Widen the game by raising #page max-width.
+   ---------------------------------------------------------- */
+#page {
+  position: relative;
+  box-sizing: border-box;
+  max-width: 88rem;          /* <-- overall width; raise for a wider main panel */
+  margin: 0 auto;
+  padding: 1rem 1rem 2rem 1rem;
+}
+#mid_panel {
+  margin-left: 23.5rem;      /* 22rem sidebar + 1.5rem gap */
+  margin-right: 0;
+}
+#tools_wrapper {
+  position: absolute;        /* top stays at its natural spot under the header */
+  left: 1rem;                /* matches #page padding */
+  right: auto;
+  width: 22rem;
+  max-width: none;
+  margin: 0;
+}
+.tools {
+  box-sizing: border-box;
+  padding: 0.6em;
+  width: 22rem;
+  color: var(--text-color);
+  background-color: var(--content-bg-color);
+}
+.tools.left {
+  float: none;
+  left: 0;
+}
+.tools.right {
+  float: none;
+  right: 0;
+}
+
 header, #content, footer {
   color: var(--text-color);
-  max-width: 680px;
-  margin: 0 auto;
+  max-width: none;           /* fill the main column */
+  margin: 0;
   overflow: auto;
 }
-#content {
-  position: relative;
-  background-color: var(--content-bg-color);
-  font-size: 1.1em;
-  padding: 1em 1.5em 1.5em 1.5em;
-  box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.2);
-}
-footer {
-  margin-top: 1em;
-  font-size: 0.8em;
-  position: relative;
-}
-footer a {
-  padding-right: 1em;
-}
+
+/* ----------------------------------------------------------
+   HEADER: red banner with gold lettering
+   ---------------------------------------------------------- */
 header {
-  text-align: right
-}
-#header-links {
-  text-align: left;
-  float: left;
-  display: inline-block;
-  margin-bottom: 0.5em;
-  padding-left: 1em;
-  box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.2);
-  background-color: var(--bg-color);
-}
-#header-links a {
-  padding-right: 1em;
+  text-align: right;
+  background: linear-gradient(180deg, #d01530, #a30f1f);
+  color: var(--gold-soft);
+  border: 4px solid var(--red-dark);
+  border-bottom: 4px solid var(--gold);
+  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.5);
+  padding: 0.5em 1em 0.6em 1em;
+  margin-bottom: 1rem;
+  text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.45);
 }
 header h1, header h2 {
   display: inline-block;
@@ -103,13 +172,54 @@ header h1, header h2 {
 }
 header h1 {
   font-weight: bold;
+  font-size: 1.15em;
+  letter-spacing: 0.04em;
 }
 header h2:before {
   content: "by";
   font-style: italic;
-  padding: 0 0.3em 0 0;
+  padding: 0 0.3em 0 0.6em;
+  opacity: 0.85;
+}
+#header-links {
+  text-align: left;
+  float: left;
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  background: none;
+  box-shadow: none;
+}
+#header-links a {
+  color: var(--gold-soft);
+  padding-right: 1em;
+  font-weight: bold;
+}
+#header-links a:hover {
+  color: #fff;
+  text-decoration: underline;
 }
 
+footer {
+  margin-top: 1em;
+  font-size: 0.8em;
+  position: relative;
+  color: var(--gold-soft);
+}
+footer a {
+  padding-right: 1em;
+  color: var(--gold-soft);
+}
+
+/* ----------------------------------------------------------
+   MAIN CONTENT
+   ---------------------------------------------------------- */
+#content {
+  position: relative;
+  background-color: var(--content-bg-color);
+  font-size: 1.1em;
+  padding: 1em 1.8em 1.5em 1.8em;
+}
 #content #read-marker {
   border: none;
   border-top: 1px solid var(--border-color);
@@ -122,17 +232,25 @@ header h2:before {
 }
 #content h1 {
   margin: 2em 0 1em 0;
+  padding-bottom: 0.4em;
   font-size: 1.35em;
   font-weight: normal;
   text-align: center;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  text-shadow: rgba(255, 255, 255, 0.75) 2px 2px 2px,
-               rgba(0, 0, 0, 0.1) -1px -1px 2px;
+  color: var(--red);
+  border-bottom: 2px solid var(--gold);
+  text-shadow: none;
+}
+body.dark-mode #content h1 {
+  color: var(--gold-soft);
 }
 a {
   color: var(--link-color);
   text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
 }
 p {
   margin: 0;
@@ -140,23 +258,30 @@ p {
   text-indent: 1em;
 }
 p.game-over {
-  border: 2px solid #bbb;
+  border: 2px solid var(--red);
   padding: 0.5em;
   margin: 0.5em 0 0 0;
-  border-radius: 4px;
-  color: #999;
+  border-radius: 0;
+  color: var(--red);
 }
+
+/* choices */
 ul.choices {
-  border: 2px solid #876;
+  border: 2px solid var(--red);
   padding: 0;
   margin: 0.25em 0 0 0;
   list-style-type: none;
-  border-radius: 4px;
+  border-radius: 0;
   clear: left;
+  background-color: rgba(255, 255, 255, 0.25);
+}
+body.dark-mode ul.choices {
+  background-color: rgba(0, 0, 0, 0.2);
 }
 ul.choices li {
-  border-bottom: 1px solid #876;
-  padding: 0.5em;
+  border-bottom: 1px solid var(--panel-line);
+  padding: 0.5em 0.7em;
+  border-left: 5px solid transparent;
 }
 ul.choices li div.subtitle {
   margin-left: 2em;
@@ -169,7 +294,11 @@ ul.choices li.unavailable {
 }
 ul.choices li:hover {
   background-color: var(--link-hover-color);
+  border-left-color: var(--gold);
   cursor: pointer;
+}
+ul.choices li.unavailable:hover {
+  border-left-color: transparent;
 }
 ul.choices li:last-child {
   border-bottom: none;
@@ -179,47 +308,25 @@ ul.choices a {
 }
 blockquote {
   margin: 1em 1em;
+  padding-left: 0.8em;
+  border-left: 3px solid var(--gold);
 }
 blockquote.attribution {
   margin-left: 2em;
+  border-left: none;
+  padding-left: 0;
 }
 blockquote + blockquote.attribution {
   margin-top: -0.6em;
 }
-/* This is mostly copied from undum. */
-#mid_panel {
-  margin-left: 24rem;
-  margin-right: 18rem;}
-#page {
-  margin: 0 auto;
-  position: relative;
-}
-#tools_wrapper {
-  position: absolute;
-  width: 100%;
-  max-width: 85em;
-  left: 0;
-  right: 5em;
-  margin: 0 auto;
-}
-.tools {
-  padding: 0.6em;
-  width: 22rem;
-  color: var(--text-color);
-  background-color: var(--content-bg-color);
-  box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.2);
-}
-.tools.left {
-  float: left;
-  left: 0.4em;
-}
-.tools.right {
-  float: right;
-  right: 0.4em;
-}
+
+/* ----------------------------------------------------------
+   SIDEBAR / TABS
+   ---------------------------------------------------------- */
 #qualities {
   text-indent: 0;
   line-height: 1.3em;
+  padding: 0.3em 0.3em 0.2em 0.3em;
 }
 #qualities p {
   text-indent: 0;
@@ -230,129 +337,138 @@ blockquote + blockquote.attribution {
   text-align: center;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  text-shadow: rgba(255, 255, 255, 0.75) 2px 2px 2px,
-               rgba(0, 0, 0, 0.1) -1px -1px 2px;
+  color: var(--red);
+  border-bottom: 1px solid var(--gold);
+  padding-bottom: 0.25em;
+  text-shadow: none;
+}
+body.dark-mode #qualities h1 {
+  color: var(--gold-soft);
 }
 #qualities h1 + p:first-line {
   font-weight: normal;
 }
 
-
-/* tabs */
 .tab_container {
-    background-color: var(--tab-bg-color);
-    margin-top: -0.6em;
-    margin-left: -0.6em;
-    margin-right: -0.6em;
+  background-color: var(--tab-bg-color);
+  margin-top: -0.6em;
+  margin-left: -0.6em;
+  margin-right: -0.6em;
+  margin-bottom: 0.4em;
+  border-bottom: 3px solid var(--gold);
 }
 .tab_button {
-    font-family: "Minion Pro", Georgia, serif;
-    background-color: var(--tab-color);
-    color: var(--text-color);
-    /*float: left;*/
-    border: none;
-    outline: none;
-    padding: 10px;
+  font-family: "Minion Pro", Georgia, serif;
+  background-color: var(--tab-color);
+  color: var(--tab-text-color);
+  border: none;
+  border-right: 1px solid rgba(0, 0, 0, 0.35);
+  outline: none;
+  padding: 10px;
+  cursor: pointer;
 }
 .tab_button.active {
-    background-color: var(--content-bg-color);
+  background-color: var(--gold);
+  color: var(--red-dark);
+  font-weight: bold;
 }
 .tab_button:hover {
-    background-color: var(--tab-hover-color);
+  background-color: var(--tab-hover-color);
+  color: #fff;
+}
+.tab_button.active:hover {
+  background-color: var(--gold-soft);
+  color: var(--red-dark);
+}
+.tab_button:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: -3px;
 }
 
-
+/* ----------------------------------------------------------
+   OVERLAYS (options / save)
+   ---------------------------------------------------------- */
 .overlay {
-    background: rgba(0,0,0,0.7);
-    display: none;
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 2;
-    overflow: scroll;
+  background: rgba(30, 0, 0, 0.78);
+  display: none;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 2;
+  overflow: scroll;
 }
 .options {
-    text-align: right;
+  text-align: right;
 }
 .overlay_top {
-    position: relative;
-    max-width: 540px;
-    margin: 100px auto;
-    background: rgba(50,50,50,0.7);
-    border: 2px solid;
-    color: white;
+  position: relative;
+  max-width: 540px;
+  margin: 100px auto;
+  background: rgba(70, 8, 8, 0.96);
+  border: 4px solid var(--red);
+  box-shadow: inset 0 0 0 2px var(--gold);
+  color: var(--gold-soft);
+  padding: 0.5em;
+}
+.overlay_top button {
+  background: var(--gold);
+  color: var(--red-dark);
+  border: 1px solid var(--red-dark);
+  font-family: inherit;
+  cursor: pointer;
+}
+.overlay_top button:hover {
+  background: var(--gold-soft);
 }
 .save_info {
-    min-width: 10em;
+  min-width: 10em;
 }
 .background {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background-color: var(--bg-color);
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-size: cover;
-    overflow: hidden;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: transparent;  /* lets the red body show through */
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  overflow: hidden;
 }
-/*
- * This is used for overlaying transparencies
- * only transition on fade-in
- * */
-#bg2 {
-    z-index: -100;
-}
-#bg1 {
-    z-index: -99;
-}
-.b {
-}
-.save_button {
-}
-.delete_button {
-}
+#bg2 { z-index: -100; }
+#bg1 { z-index: -99; }
+.b {}
+.save_button {}
+.delete_button {}
 
-/*
- * Card stuff for dendrynexus
- * 
- */
-
+/* ----------------------------------------------------------
+   CARDS
+   ---------------------------------------------------------- */
 ul.decks, ul.hand, ul.pinned-cards {
   list-style: none;
   padding-left: 0;
 }
-
-.hand {
-
-}
-
-.pinned-cards {
-
-}
-
-.deck {
-
-}
+.hand {}
+.pinned-cards {}
+.deck {}
 
 a.card {
   display: inline-block;
   width: 120px;
   height: 150px;
-  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
   border: 10px solid var(--card-border-color);
   margin-bottom: 0.5em;
   position: relative;
 }
 a.card:hover {
-  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.3);
   left: -5px;
   top: -5px;
 }
@@ -364,7 +480,6 @@ div.blank-card {
   border: 10px solid var(--card-border-color);
   margin-bottom: 0.5em;
 }
-
 .card-in-hand, .pinned-card, .deck {
   display: inline-block;
   position: relative;
@@ -372,20 +487,16 @@ div.blank-card {
   margin-right: 1em;
   vertical-align: top;
 }
-
-/* TODO: unavailable card */
 .unavailable-card {
   color: var(--unavailable-color);
   background-color: var(--unavailable-bg-color) !important;
   cursor: default !important;
 }
-
 .card-caption {
   text-align: center;
   display: block;
   font-size: 1em;
 }
-
 .card-tooltip {
   position: absolute;
   visibility: hidden;
@@ -394,46 +505,37 @@ div.blank-card {
   font-size: 0.9em;
   z-index: 2;
   padding: 0.2em;
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--red);
   background-color: var(--content-bg-color);
   left: 105%;
 }
-
 .card-img {
   height: 150px;
   width: 120px;
   object-fit: cover;
 }
-
 a.card:focus .card-tooltip, a.card:hover .card-tooltip {
   visibility: visible;
   position: absolute;
 }
-
-/* Unlike cards, face images can have different sizes. */
 .face-figure {
-  /*vertical-align: top;*/
   display: inline-block;
   border: 5px solid var(--card-border-color);
   float: left;
   max-width: 35%;
-  /*max-height: 180px;*/
   margin-right: 1em;
   margin-bottom: 0.5em;
   overflow: hidden;
 }
 .face-img {
-  /*max-width: 150px;*/
   vertical-align: bottom;
   object-fit: cover;
 }
 
-/*
- * sprite stuff- feel free to comment out/remove if not using
- */
+/* sprites */
 img {
-    max-width: 100%;
-    max-height: 100%;
+  max-width: 100%;
+  max-height: 100%;
 }
 #contentSpriteContainer {
   position: fixed;
@@ -446,76 +548,53 @@ img {
   z-index: -97;
 }
 .sprite {
-    position: absolute;
-    width: 180px;
+  position: absolute;
+  width: 180px;
 }
-#topLeftSprite {
-    float: left;
-    top: -1em;
-    left: 0.4em;
-}
-#topRightSprite {
-    float: right;
-    top: -1em;
-    right: 0.4em;
-}
-#bottomLeftSprite {
-    float: left;
-    left: 0.4em;
-    top: 50%;
-}
-#bottomRightSprite {
-    float: right;
-    right: 0.4em;
-    top: 50%;
-}
+#topLeftSprite { float: left; top: -1em; left: 0.4em; }
+#topRightSprite { float: right; top: -1em; right: 0.4em; }
+#bottomLeftSprite { float: left; left: 0.4em; top: 50%; }
+#bottomRightSprite { float: right; right: 0.4em; top: 50%; }
 
-/* smaller screens: hide left margin */
-@media screen and (max-width: 1200px) {
-  .tools {
-      margin-right: 0.4em;
-      margin-left: 0.4em;
+/* ----------------------------------------------------------
+   RESPONSIVE
+   Below 1000px there isn't room for side-by-side: the sidebar
+   moves above the main column (same as the original mobile mode).
+   ---------------------------------------------------------- */
+@media screen and (max-width: 1000px) {
+  #page {
+    padding: 0.5rem;
   }
   #mid_panel {
-      margin-right: 0.4em;
-  }
-}
-/* mobile: move the stat box to the top if the screen is too small,
- * and reduce font size slightly. */
-@media screen and (max-width: 560px) {
-  #page {
-      position: static;
-  }
-  #content {
-      position: static;
-      font-size: 1em;
-      line-height: 160%;
-      padding: 1em 1em 1.5em 1em;
-  }
-  #qualities {
-      font-size: 1em;
+    margin: 0 auto;
   }
   #tools_wrapper {
     position: static;
+    width: auto;
+    margin: 0 0 1rem 0;
   }
-  .tools {
-      width: 90%;
-      margin: 2em 0 1em 0;
-      margin: 0.4em;
-  }
-  .tools.left {
-      float: none;
-      left: 0;
-  }
+  .tools,
+  .tools.left,
   .tools.right {
-      float: none;
-      right: 0;
+    width: auto;
+    float: none;
+    margin: 0;
   }
-  #mid_panel {
-      margin: 0 auto;
+}
+@media screen and (max-width: 560px) {
+  #page {
+    position: static;
+    padding: 0.4rem;
   }
-
-  /* cards are smaller on mobile */
+  #content {
+    position: static;
+    font-size: 1em;
+    line-height: 160%;
+    padding: 1em 1em 1.5em 1em;
+  }
+  #qualities {
+    font-size: 1em;
+  }
   .card-img {
     height: 125px;
     width: 100px;
@@ -538,25 +617,21 @@ img {
     margin-right: 1em;
     vertical-align: top;
   }
+  header { padding: 0.4em 0.6em; }
 }
 
-
-/* New stuff just for this game */
-
-/* colored box div */
+/* ----------------------------------------------------------
+   GAME-SPECIFIC STUFF
+   ---------------------------------------------------------- */
 .box {
   display: inline-block;
   height: 1em;
   width: 1em;
 }
-
 table {
-    border-spacing: 0.5em;
+  border-spacing: 0.5em;
 }
 
-
-/* Styles for parties - TODO: have the player party be highlighted. */
-/* Use CSS variables for the colors... */
 :root {
   --anarchist: #090505;
   --maximalist: #572c2c;
@@ -565,7 +640,6 @@ table {
   --left_m: #c34816;
   --m: #b44314;
   --right_m: #9a3a11;
-  --m: #b44314;
   --left_m2: #810c3f;
   --right_m2: #9a7811;
   --d: #fc7a82;
@@ -584,539 +658,330 @@ table {
   --rightist: #0030ff;
   --cossack: #758fff;
   --none: #cccccc;
-
   --leftcom: #460a0a;
   --leninist: #D83934;
   --moderate: #c78a1c;
 }
 
+.seat.leftcom { fill: var(--leftcom); }
+.seat.leninist { fill: var(--leninist); }
+.seat.moderate { fill: var(--moderate); }
+.seat.anarchist { fill: var(--anarchist); }
+.seat.maximalist { fill: var(--maximalist); }
+.seat.b { fill: var(--b); }
+.seat.sdi { fill: var(--sdi); }
+.seat.left_m { fill: var(--left_m); }
+.seat.m { fill: var(--m); }
+.seat.right_m { fill: var(--right_m); }
+.seat.left_m2 { fill: var(--left_m2); }
+.seat.right_m2 { fill: var(--right_m2); }
+.seat.defensist { fill: var(--d); }
+.seat.internationalist { fill: var(--i); }
+.seat.k { fill: var(--k); }
+.seat.lsr { fill: var(--lsr); }
+.seat.sr { fill: var(--sr); }
+.seat.right_sr { fill: var(--right_sr); }
+.seat.ukrainian_sr { fill: var(--usr); }
+.seat.popular_socialist { fill: var(--ps); }
+.seat.muslim_national { fill: var(--m_n); }
+.seat.muslim_socialist { fill: var(--m_s); }
+.seat.jewish_national { fill: var(--j_n); }
+.seat.other { fill: var(--other); }
+.seat.dashnak { fill: var(--dashnak); }
+.seat.rightist { fill: var(--rightist); }
+.seat.cossack { fill: var(--cossack); }
+.seat.none { fill: var(--none); }
 
-.seat.leftcom {
-    fill: var(--leftcom);
-}
-.seat.leninist {
-    fill: var(--leninist);
-}
-.seat.moderate {
-    fill: var(--moderate);
-}
+.box.leftcom { background-color: var(--leftcom); }
+.box.leninist { background-color: var(--leninist); }
+.box.moderate { background-color: var(--moderate); }
+.box.a { background-color: var(--anarchist); }
+.box.maximalist { background-color: var(--maximalist); }
+.box.b { background-color: var(--b); }
+.box.sdi { background-color: var(--sdi); }
+.box.left_m { background-color: var(--left_m); }
+.box.m { background-color: var(--m); }
+.box.right_m { background-color: var(--right_m); }
+.box.left_m2 { background-color: var(--left_m2); }
+.box.right_m2 { background-color: var(--right_m2); }
+.box.defensist { background-color: var(--d); }
+.box.internationalist { background-color: var(--i); }
+.box.k { background-color: var(--k); }
+.box.sr { background-color: var(--sr); }
+.box.lsr { background-color: var(--lsr); }
+.box.right_sr { background-color: var(--right_sr); }
+.box.ukrainian_sr { background-color: var(--usr); }
+.box.popular_socialist { background-color: var(--ps); }
+.box.muslim_national { background-color: var(--m_n); }
+.box.muslim_socialist { background-color: var(--m_s); }
+.box.jewish_national { background-color: var(--j_n); }
+.box.other { background-color: var(--other); }
+.box.dashnak { background-color: var(--dashnak); }
+.box.rightist { background-color: var(--rightist); }
+.box.cossack { background-color: var(--cossack); }
+.box.none { background-color: var(--none); }
 
-.seat.anarchist {
-    fill: var(--anarchist);
-}
-.seat.maximalist {
-    fill: var(--maximalist);
-}
-.seat.b {
-    fill: var(--b);
-}
-.seat.sdi {
-   fill: var(--sdi);
-}
-.seat.left_m {
-    fill: var(--left_m);
-}
-.seat.m {
-    fill: var(--m);
-}
-.seat.right_m {
-    fill: var(--right_m);
-}
-
-.seat.left_m2 {
-    fill: var(--left_m2);
-}
-.seat.right_m2 {
-    fill: var(--right_m2);
-}
-.seat.defensist {
-    fill: var(--d);
-}
-.seat.internationalist {
-    fill: var(--i);
-}
-.seat.k {
-    fill: var(--k);
-}
-.seat.lsr {
-    fill: var(--lsr);
-}
-.seat.sr {
-    fill: var(--sr);
-}
-.seat.right_sr {
-    fill: var(--right_sr);
-}
-.seat.ukrainian_sr {
-    fill: var(--usr);
-}
-.seat.popular_socialist {
-    fill: var(--ps);
-}
-.seat.muslim_national {
-    fill: var(--m_n);
-}
-.seat.muslim_socialist {
-    fill: var(--m_s);
-}
-.seat.jewish_national {
-    fill: var(--j_n);
-}
-.seat.other {
-    fill: var(--other);
-}
-.seat.dashnak {
-    fill: var(--dashnak);
-}
-.seat.rightist {
-    fill: var(--rightist);
-}
-.seat.cossack {
-    fill: var(--cossack);
-}
-.seat.none {
-    fill: var(--none);
-}
-
-
-/* boxes... */
-.box.leftcom {
-    background-color: var(--leftcom);
-}
-.box.leninist {
-    background-color: var(--leninist);
-}
-.box.moderate {
-    background-color: var(--moderate);
-}
-
-.box.a {
-    background-color: var(--anarchist);
-}
-.box.maximalist {
-    background-color: var(--maximalist);
-}
-.box.b {
-    background-color: var(--b);
-}
-.box.sdi {
-    background-color: var(--sdi);
-}
-.box.left_m {
-    background-color: var(--left_m);
-}
-.box.m {
-    background-color: var(--m);
-}
-.box.right_m {
-    background-color: var(--right_m);
-}
-
-.box.left_m2 {
-    background-color: var(--left_m2);
-}
-.box.right_m2 {
-    background-color: var(--right_m2);
-}
-.box.defensist {
-    background-color: var(--d);
-}
-.box.internationalist {
-    background-color: var(--i);
-}
-.box.k {
-    background-color: var(--k);
-}
-.box.sr {
-    background-color: var(--sr);
-}
-.box.lsr {
-    background-color: var(--lsr);
-}
-.box.right_sr {
-    background-color: var(--right_sr);
-}
-.box.ukrainian_sr {
-    background-color: var(--usr);
-}
-.box.popular_socialist {
-    background-color: var(--ps);
-}
-.box.muslim_national {
-    background-color: var(--m_n);
-}
-.box.muslim_socialist {
-    background-color: var(--m_s);
-}
-.box.jewish_national {
-    background-color: var(--j_n);
-}
-.box.other {
-    background-color: var(--other);
-}
-.box.dashnak {
-    background-color: var(--dashnak);
-}
-.box.rightist {
-    background-color: var(--rightist);
-}
-.box.cossack {
-    background-color: var(--cossack);
-}
-.box.none {
-    background-color: var(--none);
-}
-
-
-.bar.sr {
-    fill: var(--sr-color);
-}
-
-.bar.lsr {
-    fill: var(--lsr-color);
-}
-
-.bar.b {
-    fill: var(--bolshevik-color);
-}
-
-.bar.other {
-    fill: var(--bolshevik-other);
-}
-
+.bar.sr { fill: var(--sr-color); }
+.bar.lsr { fill: var(--lsr-color); }
+.bar.b { fill: var(--bolshevik-color); }
+.bar.other { fill: var(--bolshevik-other); }
 
 .tooltip-text {
-    text-decoration: underline;
-    text-decoration-style: dotted;
+  text-decoration: underline;
+  text-decoration-style: dotted;
 }
 
-
+/* Soviet / coalition tables */
 .soviet-table {
-    border-collapse: collapse;
-    width: 650px;
-    margin-top: 20px;
-    font-size: 16px;
+  border-collapse: collapse;
+  width: 100%;
+  max-width: 650px;
+  margin-top: 20px;
+  font-size: 16px;
+  border: 2px solid var(--red);
 }
-
 .soviet-table th {
-    background-color: #333;
-    color: white;
-    padding: 4px 8px;
-    text-align: left;
+  background-color: var(--red);
+  color: var(--gold-soft);
+  padding: 4px 8px;
+  text-align: left;
+  border-bottom: 3px solid var(--gold);
 }
-
 .soviet-table td {
-    padding: 4px 10px;
-    line-height: 1.1;
-    border-bottom: 1px solid #aaa;
+  padding: 4px 10px;
+  line-height: 1.1;
+  border-bottom: 1px solid var(--panel-line);
 }
-
 .soviet-table tr:nth-child(even) {
-    background-color: #f2f2f2;
+  background-color: rgba(122, 12, 12, 0.07);
 }
-
 .soviet-table tr:hover {
-    background-color: #ddd;
+  background-color: rgba(232, 185, 35, 0.25);
 }
-
-.soviet-table td:first-child {
-    width: 85%;
+body.dark-mode .soviet-table tr:nth-child(even) {
+  background-color: rgba(255, 255, 255, 0.05);
 }
-
-.soviet-table th:first-child {
-    text-align: left;
-}
-
+.soviet-table td:first-child { width: 85%; }
+.soviet-table th:first-child { text-align: left; }
 .soviet-table th:nth-child(2),
 .soviet-table th:nth-child(3),
 .soviet-table td:nth-child(2),
 .soviet-table td:nth-child(3) {
-    text-align: center;
-    white-space: nowrap;
+  text-align: center;
+  white-space: nowrap;
 }
-
-
-
 
 .party-box {
-    display: inline-block;
-    width: 14px;
-    height: 14px;
-    margin-right: 8px;
-    border: 1px solid black;
-    vertical-align: middle;
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  margin-right: 8px;
+  border: 1px solid black;
+  vertical-align: middle;
 }
+.coalition-bar { fill: #555; }
+#coalitions text { font-size: 14px; }
 
-
-.coalition-bar {
-    fill: #555;
-}
-
-#coalitions text {
-    font-size: 14px;
-}
-
-
-.sovnarkom-chair {
-    margin-left: 1em;
-    margin-bottom: 5px;
-}
-
-.sovnarkom-item {
-    margin-left: 2em;
-    margin-bottom: 5px;
-}
+.sovnarkom-chair { margin-left: 1em; margin-bottom: 5px; }
+.sovnarkom-item { margin-left: 2em; margin-bottom: 5px; }
 
 hr {
-    width: 275px;
-    margin: 15px auto;
-    border: 0;
-    border-top: 1px solid #aaa;
+  width: 275px;
+  max-width: 100%;
+  margin: 15px auto;
+  border: 0;
+  border-top: 2px solid var(--gold);
 }
 
-
-
+/* Achievement toast */
 #achievement-notification {
-    position: fixed;
-    bottom: 60px;
-    left: 70%;
-    width: 500px;
-    height: 130px;
-    display: flex;
-    align-items: stretch;
-    z-index: 9999;
-    opacity: 0;
-    transform: translate(-50%, 120%);
-    pointer-events: none;
-    transition: opacity 0.3s, transform 0.3s;
-
-    border: 5px solid #c00000;
-    box-sizing: border-box;
-    overflow: hidden;
+  position: fixed;
+  bottom: 60px;
+  left: 70%;
+  width: 500px;
+  max-width: 94vw;
+  height: 130px;
+  display: flex;
+  align-items: stretch;
+  z-index: 9999;
+  opacity: 0;
+  transform: translate(-50%, 120%);
+  pointer-events: none;
+  transition: opacity 0.3s, transform 0.3s;
+  border: 5px solid var(--red);
+  box-shadow: inset 0 0 0 2px var(--gold), 0 6px 22px rgba(0, 0, 0, 0.6);
+  box-sizing: border-box;
+  overflow: hidden;
 }
-
 #achievement-notification.show {
-    opacity: 1;
-    transform: translate(-50%, 0);
+  opacity: 1;
+  transform: translate(-50%, 0);
 }
-
 .achievement-image {
-    width: 130px;
-    height: 130px;
-    flex: 0 0 130px;
-    background-color: #c00000;
-    box-sizing: border-box;
+  width: 130px;
+  height: 130px;
+  flex: 0 0 130px;
+  background-color: var(--red);
+  box-sizing: border-box;
 }
-
 .achievement-image img {
-    width: 130px;
-    height: 130px;
-    object-fit: cover;
-    display: block;
+  width: 130px;
+  height: 130px;
+  object-fit: cover;
+  display: block;
 }
-
 .achievement-info {
-    flex: 1;
-    height: 130px;
-    box-sizing: border-box;
-    background-color: #e6f0ee;
-    text-align: center;
-    padding: 0;
+  flex: 1;
+  height: 130px;
+  box-sizing: border-box;
+  background-color: #f1e6d0;
+  color: #2b1710;
+  text-align: center;
+  padding: 0;
 }
-
 .achievement-header {
-    font-weight: bold;
-    font-size: 90%;
-    padding: 1px 10px;
-    background-color: #edf4f2;
-    border-bottom: 1px solid #c7d8d4;
+  font-weight: bold;
+  font-size: 90%;
+  padding: 1px 10px;
+  background-color: var(--red);
+  color: var(--gold-soft);
+  border-bottom: 2px solid var(--gold);
 }
-
 .achievement-title {
-    font-weight: bold;
-    font-size: 100%;
-    padding: 6px 18px 0;
+  font-weight: bold;
+  font-size: 100%;
+  padding: 6px 18px 0;
 }
-
 .achievement-description {
-    margin-top: 6px;
-    padding: 0 18px;
-    font-size: 85%;
-    line-height: 1.25;
-    color: #444;
+  margin-top: 6px;
+  padding: 0 18px;
+  font-size: 85%;
+  line-height: 1.25;
+  color: #4a3a30;
 }
 
-
-
+/* Economy tab */
 .economy-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 15px;
-    width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  width: 100%;
 }
-
 .economy-column {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
-
 .economy-box {
-    border: 2px solid #555;
-    padding: 12px;
-    background: #111;
+  border: 2px solid var(--red);
+  padding: 12px;
+  background: var(--box-bg);
 }
-
 .economy-box h3 {
-    text-align: center;
-    margin: 0 0 10px 0;
-    padding-bottom: 6px;
-    border-bottom: 1px solid #555;
+  text-align: center;
+  margin: 0 0 10px 0;
+  padding-bottom: 6px;
+  border-bottom: 2px solid var(--gold);
+  color: var(--red);
 }
-
+body.dark-mode .economy-box h3 {
+  color: var(--gold-soft);
+}
 .economy-row {
-    display: flex;
-    justify-content: space-between;
-    padding: 5px 2px;
-    border-bottom: 1px solid #333;
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 2px;
+  border-bottom: 1px solid var(--panel-line);
 }
+.economy-row:last-child { border-bottom: none; }
+.positive { color: #2e7d32; }
+.negative { color: #c62828; }
+body.dark-mode .positive { color: #6fcf73; }
+body.dark-mode .negative { color: #ff6b6b; }
 
-.economy-row:last-child {
-    border-bottom: none;
-}
-
-.positive {
-    color: #4CAF50;
-}
-
-.negative {
-    color: #E53935;
-}
-
-
-
-
-
-
-
-
-
-/*
- * MAP
- */
-
+/* ----------------------------------------------------------
+   MAP
+   ---------------------------------------------------------- */
 #map-container {
-    display: none;
-
-    position: relative;
-
-    background-color: var(--content-bg-color);
-
-    max-width: 680px;
-    margin: 0 auto;
-
-    padding: 1em;
-
-    box-shadow: 2px 2px 12px rgba(0,0,0,0.2);
-
-    overflow: hidden;
+  display: none;
+  position: relative;
+  background-color: var(--content-bg-color);
+  max-width: none;
+  margin: 0;
+  padding: 1em;
+  overflow: hidden;
 }
-
-#map-container.active {
-    display: block;
-}
+#map-container.active { display: block; }
 
 .map-layout {
-    display: flex;
-    gap: 15px;
-    align-items: stretch;
+  display: flex;
+  gap: 15px;
+  align-items: stretch;
 }
-
 .map-frame {
-    flex: 1;
-    min-width: 0;
-
-    border: 2px solid var(--border-color);
-
-    overflow: hidden;
+  flex: 1;
+  min-width: 0;
+  border: 2px solid var(--red);
+  overflow: hidden;
 }
-
 .map-frame svg {
-    display: block;
-
-    width: 100%;
-    height: auto;
-
-    max-height: 700px;
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 700px;
 }
-
 .map-province-panel {
-    width: 250px;
-    flex-shrink: 0;
-
-    display: none;
-
-    border: 2px solid var(--border-color);
-
-    padding: 15px;
-
-    box-sizing: border-box;
-
-    overflow-y: auto;
+  width: 250px;
+  flex-shrink: 0;
+  display: none;
+  border: 2px solid var(--red);
+  box-shadow: inset 0 0 0 2px var(--gold);
+  padding: 15px;
+  box-sizing: border-box;
+  overflow-y: auto;
 }
-
-.map-province-panel.active {
-    display: block;
-}
-
+.map-province-panel.active { display: block; }
 .map-province-panel h2 {
-    margin-top: 0;
+  margin-top: 0;
+  color: var(--red);
+  border-bottom: 2px solid var(--gold);
+  padding-bottom: 0.25em;
 }
+body.dark-mode .map-province-panel h2 { color: var(--gold-soft); }
+.province-stat { margin-bottom: 0.6em; }
+.province-stat-label {
+  font-size: 0.85em;
+  font-style: italic;
+  opacity: 0.8;
+}
+.province-stat-value { font-weight: bold; }
 
 .map-province-hover {
-    filter: brightness(1.2);
-    stroke: #fff !important;
-    stroke-width: 3 !important;
+  filter: brightness(1.2);
+  stroke: #fff !important;
+  stroke-width: 3 !important;
 }
-
 .map-province-selected {
-    stroke: #000 !important;
-    stroke-width: 3 !important;
+  stroke: var(--gold) !important;
+  stroke-width: 4 !important;
 }
-
-.map-division-counter {
-    pointer-events: none;
-}
-
+.map-division-counter { pointer-events: none; }
 .map-division-counter circle {
-    fill: var(--content-bg-color);
-    stroke: var(--border-color);
+  fill: var(--content-bg-color);
+  stroke: var(--red);
 }
-
 .map-division-counter text {
-    fill: var(--text-color);
-    font-weight: bold;
+  fill: var(--text-color);
+  font-weight: bold;
 }
 
-/*
- * Hide normal content when map open
- */
-
-#content.map-hidden {
-    display: none;
-}
-
-/*
- * Mobile
- */
+#content.map-hidden { display: none; }
 
 @media screen and (max-width: 900px) {
+  .map-layout { flex-direction: column; }
+  .map-province-panel { width: 100%; }
+}
 
-    .map-layout {
-        flex-direction: column;
-    }
-
-    .map-province-panel {
-        width: 100%;
-    }
+@media (prefers-reduced-motion: reduce) {
+  #achievement-notification { transition: none; }
 }
