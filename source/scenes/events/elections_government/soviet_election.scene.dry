@@ -108,7 +108,7 @@ if (window && d3) {
 
 = Congress of Soviets
 
-{!<svg id="soviet" style="width: 625px; height: 310px;"> </svg>!}
+{!<svg id="soviet" viewBox="0 0 625 310"> </svg>!}
 
 {!<table class="soviet-table">!}
 
