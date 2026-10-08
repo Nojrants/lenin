@@ -97,7 +97,7 @@ body.dark-mode #map-container {
 #page {
   --side-w: 24rem;
   --gap: 1.5rem;
-  --main-w: 780px;
+  --main-w: 720px;
   --edge: 1rem;
   position: relative;
   box-sizing: border-box;
