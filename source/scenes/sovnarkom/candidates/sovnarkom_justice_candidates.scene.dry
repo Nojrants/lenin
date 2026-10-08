@@ -26,14 +26,23 @@ subtitle: {!
 Overall skill: ★★★<br>
 Suitability: ★★★★</ul>
 !}
-unavailable-subtitle: {!
-<span style="color: var(--lsr-color);">Left-SR</span> — Lawyer with political experience.<ul> 
-Overall skill: ★★★<br>
-Suitability: ★★★★</ul>
-!}
+unavailable-subtitle: <span style="color: var(--lsr-color);">Left-SR</span> — Lawyer with political experience.<ul> Overall skill: ★★★<br>Suitability: ★★★★</ul>[?if coalition_government != 1 : We haven't assented to Menshevik participation in government. ?]
 tags: justice_candidates
-choose-if: justice_minister != "Steinberg"  
+choose-if: justice_minister != "Steinberg" and coalition_government > 0
 on-arrival: justice_minister = "Steinberg"; justice_minister_party = "Left-SR";
+go-to: sovnarkom_composition
+
+@justice_avilov
+title: Boris Avilov
+subtitle: {!
+<span style="color: var(--m-color);">Menshevik</span> — Lawyer, economist, and noted administrator.<ul> 
+Overall skill: ★★☆<br>
+Suitability: ★★★</ul>
+!}
+unavailable-subtitle: <span style="color: var(--m-color);">Menshevik</span> — Lawyer, economist, and noted administrator.<ul>Overall skill: ★★☆<br>Suitability: ★★★</ul>[?if coalition_government != 1 : We haven't assented to Menshevik participation in government. ?][?if trade_minister == "Avilov": Avilov already has a post. ?][?if finance_minister == "Avilov": Avilov already has a post. ?][?if transport_minister == "Avilov": Avilov already has a post. ?]
+tags: justice_candidates
+choose-if: transport_minister != "Avilov" and trade_minister != "Avilov" and finance_minister != "Avilov" and justice_minister != "Avilov" and coalition_government > 0
+on-arrival: justice_minister = "Avilov"; justice_minister_party = "Menshevik";
 go-to: sovnarkom_composition
 
 
