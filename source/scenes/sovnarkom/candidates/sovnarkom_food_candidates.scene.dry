@@ -65,7 +65,7 @@ subtitle: {!
 Overall skill: ★★★<br>
 Suitability: ★★</ul>
 !}
-unavailable-subtitle: <span style="color: var(--ns-color);">NS</span> — Organizer, publicist, and grassroots activist; former chairman of the Trudoviks.<br>Overall skill: ★★★<br>Suitability: ★★</ul>[?if coalition_government = 0 : We haven't assented to NS participation in government. ?][?if local_minister == "Dzyubinsky" : Dzyubinsky already has a post. ?]
+unavailable-subtitle: <span style="color: var(--ns-color);">NS</span> — Organizer, publicist, and grassroots activist; former chairman of the Trudoviks.<ul>Overall skill: ★★★<br>Suitability: ★★</ul>[?if coalition_government = 0 : We haven't assented to NS participation in government. ?][?if local_minister == "Dzyubinsky" : Dzyubinsky already has a post. ?]
 tags: food_candidates
 choose-if: food_minister != "Dzyubinsky" and local_minister != "Dzyubinsky"and coalition_government = 1
 on-arrival: food_minister = "Dzyubinsky"; food_minister_party = "NS";
