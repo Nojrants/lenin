@@ -3,18 +3,29 @@ new-page: true
 
 @internal_rykov
 title: Alexei Rykov
-subtitle: 
-unavailable-subtitle: 
+subtitle: {!
+<span style="color: var(--lsr-color);">Moderate</span> — Skilled administrator and statesman.<ul>
+Overall skill: ★★★★<br>
+Suitability: ★★</ul>
+!}
+unavailable-subtitle: <span style="color: var(--lsr-color);">Moderate</span> — Skilled administrator and statesman.<ul>Overall skill: ★★★★<br>Suitability: ★★</ul>[?if moderates_resigned = 1 : The Moderates have resigned from government. ?]
 tags: internal_candidates
-view-if: moderates_resigned != 1
 choose-if: interior_minister != "Rykov" and moderates_resigned != 1
 on-arrival: interior_minister = "Rykov"; interior_minister_party = "Bolshevik"; 
 go-to: sovnarkom_composition
 
 @internal_dzerzhinsky
 title: Felix Dzerzhinsky
-subtitle: 
-unavailable-subtitle: 
+subtitle: {!
+<span style="color: var(--lsr-color);">Leftist</span> — Underground organizer with extensive security experience.<ul>
+Overall skill: ★★★★<br>
+Suitability: ★★★★★</ul>
+!}
+unavailable-subtitle: {!
+<span style="color: var(--lsr-color);">Leftist</span> — Underground organizer with extensive security experience.<ul>
+Overall skill: ★★★★<br>
+Suitability: ★★★★★</ul>
+!}
 tags: internal_candidates
 view-if: moderates_resigned != 1
 choose-if: interior_minister != "Dzerzhinsky"
@@ -28,11 +39,7 @@ subtitle: {!
 Overall skill: ★★<br>
 Suitability: ★★</ul>
 !}
-unavailable-subtitle: {!
-<span style="color: var(--lsr-color);">Left-SR</span> — Experienced revolutionary militant.<ul>
-Overall skill: ★★<br>
-Suitability: ★★</ul>
-!}
+unavailable-subtitle: <span style="color: var(--lsr-color);">Left-SR</span> — Experienced revolutionary militant.<ul>Overall skill: ★★<br>Suitability: ★★</ul>[?if coalition_government = 0 : We haven't assented to Left-SR participation in government. ?]
 tags: internal_candidates
 choose-if: interior_minister != "Alexandrov" and coalition_government > 0
 on-arrival: interior_minister = "Alexandrov"; interior_minister_party = "Left-SR"; 
@@ -45,11 +52,7 @@ subtitle: {!
 Overall skill: ★☆<br>
 Suitability: ★★</ul>
 !}
-unavailable-subtitle: {!
-<span style="color: var(--lsr-color);">Left-SR</span> — Soldier-agitator with some experience in espionage.<ul>
-Overall skill: ★☆<br>
-Suitability: ★★</ul>
-!}
+unavailable-subtitle: <span style="color: var(--lsr-color);">Left-SR</span> — Soldier-agitator with some experience in espionage.<ul>Overall skill: ★☆<br>Suitability: ★★</ul>[?if coalition_government = 0 : We haven't assented to Left-SR participation in government. ?]
 tags: internal_candidates
 choose-if: interior_minister != "Blumkin" and coalition_government > 0
 on-arrival: interior_minister = "Blumkin"; interior_minister_party = "Left-SR"; 
