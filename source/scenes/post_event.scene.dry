@@ -120,7 +120,7 @@ Q.military_minister_stats =
         (Q.leaders[Q.war_minister].auctoritas / 10)
         + (Q.leaders[Q.war_minister].administration / 10)
         + (Q.leaders[Q.war_minister].idealogism / 20)
-        + (Q.leaders[Q.war_minister].military / 1)
+        + (Q.leaders[Q.war_minister].military / 2)
         + (Q.leaders[Q.war_minister].economic / 15)
         + (Q.leaders[Q.war_minister].partyorg / 15)
         + (Q.leaders[Q.war_minister].diplomacy / 20)
@@ -138,7 +138,7 @@ Q.enlightenment_minister_stats =
         + (Q.leaders[Q.education_minister].economic / 20)
         + (Q.leaders[Q.education_minister].partyorg / 15)
         + (Q.leaders[Q.education_minister].diplomacy / 15)
-        + (Q.leaders[Q.education_minister].culture / 1)
+        + (Q.leaders[Q.education_minister].culture / 4)
         + (Q.leaders[Q.education_minister].legalism / 15)
         + (Q.leaders[Q.education_minister].nationalities / 5)
     ));
@@ -146,11 +146,11 @@ Q.enlightenment_minister_stats =
 Q.internal_minister_stats =
     (0.25 * (
         (Q.leaders[Q.interior_minister].auctoritas / 10)
-        + (Q.leaders[Q.interior_minister].administration / 10)
-        + (Q.leaders[Q.interior_minister].idealogism / 10)
+        + (Q.leaders[Q.interior_minister].administration / 5)
+        + (Q.leaders[Q.interior_minister].idealogism / 5)
         + (Q.leaders[Q.interior_minister].military / 5)
         + (Q.leaders[Q.interior_minister].economic / 15)
-        + (Q.leaders[Q.interior_minister].partyorg / 10)
+        + (Q.leaders[Q.interior_minister].partyorg / 5)
         + (Q.leaders[Q.interior_minister].diplomacy / 20)
         + (Q.leaders[Q.interior_minister].culture / 20)
         + (Q.leaders[Q.interior_minister].legalism / 10)
@@ -209,7 +209,7 @@ Q.justice_minister_stats =
         + (Q.leaders[Q.justice_minister].partyorg / 20)
         + (Q.leaders[Q.justice_minister].diplomacy / 5)
         + (Q.leaders[Q.justice_minister].culture / 10)
-        + (Q.leaders[Q.justice_minister].legalism / 1)
+        + (Q.leaders[Q.justice_minister].legalism / 5)
         + (Q.leaders[Q.justice_minister].nationalities / 15)
     ));
 
@@ -280,7 +280,7 @@ Q.nationalities_minister_stats =
         + (Q.leaders[Q.nationalities_minister].diplomacy / 15)
         + (Q.leaders[Q.nationalities_minister].culture / 5)
         + (Q.leaders[Q.nationalities_minister].legalism / 20)
-        + (Q.leaders[Q.nationalities_minister].nationalities / 1)
+        + (Q.leaders[Q.nationalities_minister].nationalities / 3)
     ));
 
 Q.welfare_minister_stats =
@@ -334,7 +334,7 @@ console.log("Nationalities:", Q.nationalities_minister_stats);
 console.log("Welfare:", Q.welfare_minister_stats);
 console.log("Dreamteam Score:", Q.dreamteam_score);
 
-if (Q.dreamteam_score >= 14) {
+if (Q.dreamteam_score >= 14 && !window.unlockedAchievements?.includes('golden_age_of_the_peoples_commissars')) {
     this.achieve('golden_age_of_the_peoples_commissars');
     window.unlockAchievement('golden_age_of_the_peoples_commissars');
 }
