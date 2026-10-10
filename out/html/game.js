@@ -98,8 +98,8 @@ window.mapProvinces = {
     },
     novgorod: {
         name: 'Novgorod',
-        controller: 'sr',
-        control: 70,
+        controller: 'bolsheviks',
+        control: 80,
         adjacent: ['petrograd', 'tver', 'pskov', 'yaroslavl', 'vologda', 'olonets']
     },
     chernigov: {
@@ -110,14 +110,14 @@ window.mapProvinces = {
     },
     smolensk: {
         name: 'Smolensk',
-        controller: 'none',
-        control: 100,
+        controller: 'bolsheviks',
+        control: 80,
         adjacent: ['chernigov', 'tver', 'kaluga', 'moscow', 'mogilev', 'vitebsk', 'orel', 'pskov']
     },
     tver: {
         name: 'Tver',
-        controller: 'mensheviks',
-        control: 40,
+        controller: 'bolsheviks',
+        control: 80,
         adjacent: ['novgorod', 'smolensk', 'moscow', 'pskov', 'yaroslavl', 'vladimir']
     },
     yekaterinoslav: {
@@ -128,8 +128,8 @@ window.mapProvinces = {
     },
     kaluga: {
         name: 'Kaluga',
-        controller: 'none',
-        control: 100,
+        controller: 'bolsheviks',
+        control: 80,
         adjacent: ['smolensk', 'moscow', 'tula', 'orel']
     },
     kharkov: {
@@ -141,7 +141,7 @@ window.mapProvinces = {
     moscow: {
         name: 'Moscow',
         controller: 'bolsheviks',
-        control: 85,
+        control: 50,
         adjacent: ['smolensk', 'tver', 'kaluga', 'tula', 'vladimir', 'ryazan']
     },
     kyiv: {
@@ -164,8 +164,8 @@ window.mapProvinces = {
     },
     vitebsk: {
         name: 'Vitebsk',
-        controller: 'none',
-        control: 100,
+        controller: 'bolsheviks',
+        control: 80,
         adjacent: ['smolensk', 'mogilev', 'pskov', 'latvia', 'vilna', 'minsk']
     },
     orel: {
@@ -188,8 +188,8 @@ window.mapProvinces = {
     },
     pskov: {
         name: 'Pskov',
-        controller: 'none',
-        control: 100,
+        controller: 'bolsheviks',
+        control: 80,
         adjacent: ['petrograd', 'novgorod', 'smolensk', 'tver', 'vitebsk', 'estonia', 'latvia']
     },
     poltava: {
@@ -380,8 +380,8 @@ window.mapProvinces = {
     },
     yekaterinburg: {
         name: 'Yekaterinburg',
-        controller: 'none',
-        control: 100,
+        controller: 'bolsheviks',
+        control: 80,
         adjacent: ['ufa', 'orenburg', 'tobolsk', 'perm']
     },
     orenburg: {
@@ -488,8 +488,8 @@ window.mapProvinces = {
     },
     minsk: {
         name: 'Minsk',
-        controller: 'none',
-        control: 100,
+        controller: 'bolsheviks',
+        control: 80,
         adjacent: ['volhynia', 'chernigov', 'kyiv', 'mogilev', 'vitebsk', 'vilna', 'grodno']
     },
     poland: {
@@ -958,11 +958,22 @@ function findMapHit(event) {
 window.ensureMapSidebar = function() {
     var sidebar = document.getElementById('map-sidebar');
     if (!sidebar) {
+        /* The right-hand column: a "moves left" panel above the sidebar. */
+        var column = document.createElement('div');
+        column.id = 'map-right';
+
+        var bar = document.createElement('div');
+        bar.id = 'map-turnbar';
+        bar.className = 'tools map-turnbar';
+        column.appendChild(bar);
+
         sidebar = document.createElement('div');
         sidebar.id = 'map-sidebar';
         sidebar.className = 'tools right';
+        column.appendChild(sidebar);
+
         var content = document.getElementById('content');
-        content.parentNode.insertBefore(sidebar, content);
+        content.parentNode.insertBefore(column, content);
 
         /* Delegated, so they survive the sidebar being re-rendered. */
         sidebar.addEventListener('change', function(event) {
@@ -1064,50 +1075,19 @@ window.renderMapSidebar = function(provinceId) {
             '</div>';
     });
 
-    /* Divisions stationed here */
-    html += '<h3>Divisions</h3>';
+    /* Divisions stationed here: a count, then the selection controls */
     var here = divisionsIn(provinceId);
     var mine = availablePlayerDivisionsIn(provinceId);
     var selected = window.selectedMapDivisions;
 
-    if (!here.length) {
-        html += '<div class="map-hint">No divisions stationed here.</div>';
-    } else {
-        html += '<div class="division-list">';
-        var foreign = {};
-        var foreignOrder = [];
-        here.forEach(function(d) {
-            if (d.owner === window.mapPlayerFaction) {
-                var battle = committedBattleFor(d.id);
-                if (battle) {
-                    html += '<div class="division-row committed">' + d.name +
-                        ' <span class="division-owner">(attacking ' +
-                        provinceName(battle.to) + ')</span></div>';
-                } else {
-                    html += '<div class="division-row' +
-                        (selected.indexOf(d.id) !== -1 ? ' selected' : '') +
-                        '">' + d.name + '</div>';
-                }
-            } else {
-                if (!foreign[d.owner]) {
-                    foreign[d.owner] = 0;
-                    foreignOrder.push(d.owner);
-                }
-                foreign[d.owner]++;
-            }
-        });
-        foreignOrder.forEach(function(owner) {
-            html += '<div class="division-row foreign">' + partyName(owner) +
-                ': ' + foreign[owner] + ' division' +
-                (foreign[owner] === 1 ? '' : 's') + '</div>';
-        });
-        html += '</div>';
-    }
+    html += '<h3>Divisions \u2013 ' + here.length + '</h3>';
 
     if (mine.length) {
         html +=
-            '<div class="division-selector-label">Divisions to move</div>' +
             '<div class="division-selector">' +
+            '<button class="map-button" data-select-none' +
+                (selected.length <= 0 ? ' disabled' : '') +
+                '>None</button>' +
             '<button class="map-button" data-count-step="-1"' +
                 (selected.length <= 0 ? ' disabled' : '') +
                 ' title="Select one fewer">&#9664;</button>' +
@@ -1117,11 +1097,9 @@ window.renderMapSidebar = function(provinceId) {
             '<button class="map-button" data-count-step="1"' +
                 (selected.length >= mine.length ? ' disabled' : '') +
                 ' title="Select one more">&#9654;</button>' +
-            '<span class="division-of">of ' + mine.length + '</span>' +
-            '</div>' +
-            '<div class="division-actions">' +
-            '<button class="map-button" data-select-all>All</button> ' +
-            '<button class="map-button" data-select-none>None</button>' +
+            '<button class="map-button" data-select-all' +
+                (selected.length >= mine.length ? ' disabled' : '') +
+                '>All</button>' +
             '</div>';
     }
 
@@ -1165,7 +1143,7 @@ window.renderMapSidebar = function(provinceId) {
     sidebar.innerHTML = html;
 };
 
-/* "Moves left" banner above the map. */
+/* "Moves left" panel above the right-hand sidebar. */
 window.renderMapTurnbar = function() {
     var bar = document.getElementById('map-turnbar');
     if (!bar) {
@@ -1189,7 +1167,7 @@ window.renderMapTurnbar = function() {
             ' attack' + (window.mapBattles.length === 1 ? '' : 's') +
             ' queued</span>';
     }
-    bar.className = 'map-turnbar' + (left === 0 ? ' out' : '');
+    bar.className = 'tools map-turnbar' + (left === 0 ? ' out' : '');
     bar.innerHTML = html;
 };
 
@@ -1540,11 +1518,6 @@ window.createMapLayout = function() {
     window.selectedMapProvince = null;
     window.selectedMapDivisions = [];
     mapMessage = '';
-
-    var bar = document.createElement('div');
-    bar.id = 'map-turnbar';
-    bar.className = 'map-turnbar';
-    container.appendChild(bar);
 
     var layout = document.createElement('div');
     layout.className = 'map-layout';
