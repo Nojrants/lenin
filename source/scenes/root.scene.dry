@@ -553,7 +553,7 @@ Q.specialist_capacity = Q.specialist_availability * Q.specialist_quality * 100;
 // Transportation
 Q.military_trains = 30;
 Q.civilian_trains = 70;
-Q.train_capacity = 160000;
+Q.train_capacity = 320000;
 Q.civilian_rail_throughput = Q.train_capacity * Q.civilian_trains / 100;
 Q.effective_rail_throughput = Q.civilian_rail_throughput * (1 + (Q.finalefficacy_railways - 0.5)) * (Q.specialist_capacity/100);
 Q.civilian_transport = Math.min(100, Q.effective_rail_throughput / 1000);  
