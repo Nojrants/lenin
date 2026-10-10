@@ -1,6 +1,7 @@
 title: Vote in the CEC
 new-page: true
 max-visits: 1
+view-if: german_negotiations = 8
 tags: event
 on-arrival: {!
   Q.yes_votes = 0; Q.no_votes = 0; Q.abstentions = 0; 
@@ -152,7 +153,7 @@ view-if: yes_votes > no_votes
 on-arrival: {!
   Q.leninist_dissent -= 10; Q.leftcom_dissent += 10;
   Q.lsr_relation -= 20; 
-  Q.german_negotiations = 8; 
+  Q.german_negotiations = 9; 
   Q.german_waiting_timer = 1; 
 !}
 
