@@ -4,7 +4,11 @@ new-page: true
 view-if: year = 1917 and month = 11 and week = 2 
 max-visits: 1
 tags: event
-on-arrival: oppokov_available = 1; tomsky_available = 1; instability += 1; 
+on-arrival: {!
+    Q.oppokov_available = 1; Q.tomsky_available = 1; 
+    Q.instability -= 1; 
+    window.mapSetController('moscow', 'bolsheviks', 100);
+!}
 
 = Fall of the Kremlin
 
