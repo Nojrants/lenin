@@ -1,0 +1,269 @@
+title: News from Brest-Litovsk
+new-page: true
+view-if: german_negotiations = 6
+max-visits: 1
+tags: event
+go-to: dispatch_menu
+on-arrival: {!
+  Q.morale *= 0.8; Q.discipline *= 0.6; Q.war_weariness += 10; 
+  Q.instability += 3; Q.train_capacity *= 0.95;
+  Q.soldiers_unrest += 10; Q.peasants_unrest += 5; 
+  Q.german_negotiations = 7; 
+!}
+
+= News from Brest-Litovsk
+
+The Germans have finally replied to us with their peace terms:<br><ul>
+    <li>Cession of Finland, the Baltic states, Belarus, Ukraine, Poland and Kars and Batum, and cessation of war between Russia and any territories therein.</li>
+    <li>Immediate demobilization of the Russian Army (both the old army and the new) and the Red Guards, and internment or dismantling of the Russian navy.</li>
+    <li>Favorable trade with Germany and protection of German business and capitalists in Russia, along with payment of a significant indemnity.</li>
+    <li>Cessation of revolutionary propaganda within the Central Powers.</li>
+</ul>
+  
+The Germans have informed us that we must accept the terms as is within 48 hours (much of which has already elapsed). 
+
+Lenin is absolutely adament on the need for peace, and is even threatening to resign from the Central Committee and Sovnarkom if the terms are not accepted. 
+
+- @accept
+- @reject
+
+
+@reject
+title: If Lenin resigns, so be it! 
+choose-if: leftcom_strength >= ((leninist_strength + moderate_strength) * 3)
+unavailable-subtitle: The <span style="color: var(--leftcom); font-weight: bold;">Leftcoms</span> aren't to risk this. 
+
+@accept
+title: The terms must be accepted. 
+on-arrival: {!
+  Q.leftcom_strength -= 5;
+  Q.leninist_dissent -= 5; Q.leftcom_dissent += 10;
+  Q.b_dissent += 0.15;
+!}
+
+The terms are narrowly approved by a vote of 7 in favor, 4 against, and 4 abstentions. 
+
+The four no-votes (Bukharin, Lomov, Uritsky, and Bubnov), along with several other prominent Bolshevik leaders, have decided to tender resignations of their own, so that they may be free to campaign against the treaty both within and outside the party. Although, we may be able to delay their resignations by signalling that agitation against the peace will be allowed.  
+
+- @disallow
+- @allow
+
+@disallow
+title: Enforce party unity, even if it means a split! 
+on-arrival: {!
+  Q.leftcoms_resign = 1;
+  Q.instability += 2; 
+  Q.b_dissent += 0.35; Q.b_strength *= 0.8; 
+  Q.leftcom_dissent += 20; 
+
+    if (
+        Q.soviet_chair == "Bukharin" ||
+        Q.soviet_chair == "Lomov" ||
+        Q.soviet_chair == "Uritsky" ||
+        Q.soviet_chair == "Bubnov" ||
+        Q.soviet_chair == "Pyatakov" ||
+        Q.soviet_chair == "V. Smirnov" ||
+    ) {
+        Q.soviet_chair = "Vacant";
+        Q.soviet_chair_party = "";
+    }
+    if (
+        Q.deputy_pm == "Bukharin" ||
+        Q.deputy_pm == "Lomov" ||
+        Q.deputy_pm == "Uritsky" ||
+        Q.deputy_pm == "Bubnov" ||
+        Q.deputy_pm == "Pyatakov" ||
+        Q.deputy_pm == "V. Smirnov" ||
+    ) {
+        Q.deputy_pm = "Vacant";
+        Q.deputy_pm_party = "";
+        Q.efficacy_sovnarkom -= 0.1;
+    }
+
+    if (
+        Q.foreign_minister == "Bukharin" ||
+        Q.foreign_minister == "Lomov" ||
+        Q.foreign_minister == "Uritsky" ||
+        Q.foreign_minister == "Bubnov" ||
+        Q.foreign_minister == "Pyatakov" ||
+        Q.foreign_minister == "V. Smirnov" ||
+    ) {
+        Q.foreign_minister = "Vacant";
+        Q.foreign_minister_party = "";
+        Q.efficacy_foreign -= 0.1;
+    }
+
+    if (
+        Q.war_minister == "Bukharin" ||
+        Q.war_minister == "Lomov" ||
+        Q.war_minister == "Uritsky" ||
+        Q.war_minister == "Bubnov" ||
+        Q.war_minister == "Pyatakov" ||
+        Q.war_minister == "V. Smirnov" ||
+    ) {
+        Q.war_minister = "Vacant";
+        Q.war_minister_party = "";
+        Q.efficacy_military -= 0.1;
+    }
+
+    if (
+        Q.education_minister == "Bukharin" ||
+        Q.education_minister == "Lomov" ||
+        Q.education_minister == "Uritsky" ||
+        Q.education_minister == "Bubnov" ||
+        Q.education_minister == "Pyatakov" ||
+        Q.education_minister == "V. Smirnov" ||
+    ) {
+        Q.education_minister = "Vacant";
+        Q.education_minister_party = "";
+        Q.efficacy_enlightenment -= 0.1;
+    }
+
+    if (
+        Q.interior_minister == "Bukharin" ||
+        Q.interior_minister == "Lomov" ||
+        Q.interior_minister == "Uritsky" ||
+        Q.interior_minister == "Bubnov" ||
+        Q.interior_minister == "Pyatakov" ||
+        Q.interior_minister == "V. Smirnov" ||
+    ) {
+        Q.interior_minister = "Vacant";
+        Q.interior_minister_party = "";
+        Q.efficacy_internal -= 0.1;
+    }
+
+    if (
+        Q.transport_minister == "Bukharin" ||
+        Q.transport_minister == "Lomov" ||
+        Q.transport_minister == "Uritsky" ||
+        Q.transport_minister == "Bubnov" ||
+        Q.transport_minister == "Pyatakov" ||
+        Q.transport_minister == "V. Smirnov" ||
+    ) {
+        Q.transport_minister = "Vacant";
+        Q.transport_minister_party = "";
+        Q.efficacy_railways -= 0.1;
+    }
+
+    if (
+        Q.trade_minister == "Bukharin" ||
+        Q.trade_minister == "Lomov" ||
+        Q.trade_minister == "Uritsky" ||
+        Q.trade_minister == "Bubnov" ||
+        Q.trade_minister == "Pyatakov" ||
+        Q.trade_minister == "V. Smirnov" ||
+    ) {
+        Q.trade_minister = "Vacant";
+        Q.trade_party = "";
+        Q.efficacy_trade -= 0.1;
+    }
+
+    if (
+        Q.finance_minister == "Bukharin" ||
+        Q.finance_minister == "Lomov" ||
+        Q.finance_minister == "Uritsky" ||
+        Q.finance_minister == "Bubnov" ||
+        Q.finance_minister == "Pyatakov" ||
+        Q.finance_minister == "V. Smirnov" ||
+    ) {
+        Q.finance_minister = "Vacant";
+        Q.finance_minister_party = "";
+        Q.efficacy_finance -= 0.1;
+    }
+
+    if (
+        Q.labor_minister == "Bukharin" ||
+        Q.labor_minister == "Lomov" ||
+        Q.labor_minister == "Uritsky" ||
+        Q.labor_minister == "Bubnov" ||
+        Q.labor_minister == "Pyatakov" ||
+        Q.labor_minister == "V. Smirnov" ||
+    ) {
+        Q.labor_minister = "Vacant";
+        Q.labor_minister_party = "";
+        Q.efficacy_labor -= 0.1;
+    }
+
+    if (
+        Q.justice_minister == "Bukharin" ||
+        Q.justice_minister == "Lomov" ||
+        Q.justice_minister == "Uritsky" ||
+        Q.justice_minister == "Bubnov" ||
+        Q.justice_minister == "Pyatakov" ||
+        Q.justice_minister == "V. Smirnov" ||
+    ) {
+        Q.justice_minister = "Vacant";
+        Q.justice_minister_party = "";
+        Q.efficacy_justice -= 0.1;
+    }
+
+    if (
+        Q.agriculture_minister == "Bukharin" ||
+        Q.agriculture_minister == "Lomov" ||
+        Q.agriculture_minister == "Uritsky" ||
+        Q.agriculture_minister == "Bubnov" ||
+        Q.agriculture_minister == "Pyatakov" ||
+        Q.agriculture_minister == "V. Smirnov" ||
+    ) {
+        Q.agriculture_minister = "Vacant";
+        Q.agriculture_minister_party = "";
+        Q.efficacy_agriculture -= 0.1;
+    }
+
+    if (
+        Q.food_minister == "Bukharin" ||
+        Q.food_minister == "Lomov" ||
+        Q.food_minister == "Uritsky" ||
+        Q.food_minister == "Bubnov" ||
+        Q.food_minister == "Pyatakov" ||
+        Q.food_minister == "V. Smirnov" ||
+    ) {
+        Q.food_minister = "Vacant";
+        Q.food_minister_party = "";
+        Q.efficacy_foodsupply -= 0.1;
+    }
+
+    if (
+        Q.nationalities_minister == "Bukharin" ||
+        Q.nationalities_minister == "Lomov" ||
+        Q.nationalities_minister == "Uritsky" ||
+        Q.nationalities_minister == "Bubnov" ||
+        Q.nationalities_minister == "Pyatakov" ||
+        Q.nationalities_minister == "V. Smirnov" ||
+    ) {
+        Q.nationalities_minister = "Vacant";
+        Q.nationalities_minister_party = "";
+        Q.efficacy_nationalities -= 0.1;
+    }
+
+    if (
+        Q.welfare_minister == "Bukharin" ||
+        Q.welfare_minister == "Lomov" ||
+        Q.welfare_minister == "Uritsky" ||
+        Q.welfare_minister == "Bubnov" ||
+        Q.welfare_minister == "Pyatakov" ||
+        Q.welfare_minister == "V. Smirnov" ||
+    ) {
+        Q.welfare_minister = "Vacant";
+        Q.welfare_minister_party = "";
+        Q.efficacy_welfare -= 0.1;
+    }
+!}           
+
+A number of prominent <span style="color: var(--leftcom); font-weight: bold;">Leftcoms</span> have resigned their posts, while a fierce agitation campaign is launched against the peace treaty. 
+
+  - @goto_brest_cec_vote
+  
+@allow
+title: Placate the dissenters in the name of keeping the Party together. 
+on-arrival: {!
+  Q.leftcom_dissent -= 5; 
+!}
+
+By making assurances to the other CC members, Lenin is able to stave off resignations for now, though few fully satisfied. 
+
+- @goto_brest_cec_vote
+
+@goto_brest_cec_vote
+title: And now we must get the CEC signed on...
+go-to: brest_cec_vote
