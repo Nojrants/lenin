@@ -12,6 +12,7 @@ on-arrival: {!
   if (Q.leftcoms_resign == 1) {
     Q.abstentions -= (Q.b_cec * Q.leftcom_vote * 0.5);
     Q.no_votes += (Q.b_cec * Q.leftcom_vote * 0.5);
+  }
 !}
 
 = Vote in the CEC
