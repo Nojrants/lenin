@@ -42,7 +42,7 @@ on-arrival: {!
 
 The terms are narrowly approved by a vote of 7 in favor, 4 against, and 4 abstentions. 
 
-The four no-votes (Bukharin, Lomov, Uritsky, and Bubnov), along with several other prominent Bolshevik leaders, have decided to tender resignations of their own, so that they may be free to campaign against the treaty both within and outside the party. Although, we may be able to delay their resignations by signalling that agitation against the peace will be allowed.  
+The four no-votes (Bukharin, Oppokov, Uritsky, and Bubnov), along with several other prominent Bolshevik leaders, have decided to tender resignations of their own, so that they may be free to campaign against the treaty both within and outside the party. Although, we may be able to delay their resignations by signalling that agitation against the peace will be allowed.  
 
 - @disallow
 - @allow
@@ -58,7 +58,7 @@ on-arrival: {!
 
     if (
         Q.soviet_chair == "Bukharin" ||
-        Q.soviet_chair == "Lomov" ||
+        Q.soviet_chair == "Oppokov" ||
         Q.soviet_chair == "Uritsky" ||
         Q.soviet_chair == "Bubnov" ||
         Q.soviet_chair == "Pyatakov" ||
@@ -69,7 +69,7 @@ on-arrival: {!
     }
     if (
         Q.deputy_pm == "Bukharin" ||
-        Q.deputy_pm == "Lomov" ||
+        Q.deputy_pm == "Oppokov" ||
         Q.deputy_pm == "Uritsky" ||
         Q.deputy_pm == "Bubnov" ||
         Q.deputy_pm == "Pyatakov" ||
@@ -82,7 +82,7 @@ on-arrival: {!
 
     if (
         Q.foreign_minister == "Bukharin" ||
-        Q.foreign_minister == "Lomov" ||
+        Q.foreign_minister == "Oppokov" ||
         Q.foreign_minister == "Uritsky" ||
         Q.foreign_minister == "Bubnov" ||
         Q.foreign_minister == "Pyatakov" ||
@@ -95,7 +95,7 @@ on-arrival: {!
 
     if (
         Q.war_minister == "Bukharin" ||
-        Q.war_minister == "Lomov" ||
+        Q.war_minister == "Oppokov" ||
         Q.war_minister == "Uritsky" ||
         Q.war_minister == "Bubnov" ||
         Q.war_minister == "Pyatakov" ||
@@ -108,7 +108,7 @@ on-arrival: {!
 
     if (
         Q.education_minister == "Bukharin" ||
-        Q.education_minister == "Lomov" ||
+        Q.education_minister == "Oppokov" ||
         Q.education_minister == "Uritsky" ||
         Q.education_minister == "Bubnov" ||
         Q.education_minister == "Pyatakov" ||
@@ -121,7 +121,7 @@ on-arrival: {!
 
     if (
         Q.interior_minister == "Bukharin" ||
-        Q.interior_minister == "Lomov" ||
+        Q.interior_minister == "Oppokov" ||
         Q.interior_minister == "Uritsky" ||
         Q.interior_minister == "Bubnov" ||
         Q.interior_minister == "Pyatakov" ||
@@ -134,7 +134,7 @@ on-arrival: {!
 
     if (
         Q.transport_minister == "Bukharin" ||
-        Q.transport_minister == "Lomov" ||
+        Q.transport_minister == "Oppokov" ||
         Q.transport_minister == "Uritsky" ||
         Q.transport_minister == "Bubnov" ||
         Q.transport_minister == "Pyatakov" ||
@@ -147,7 +147,7 @@ on-arrival: {!
 
     if (
         Q.trade_minister == "Bukharin" ||
-        Q.trade_minister == "Lomov" ||
+        Q.trade_minister == "Oppokov" ||
         Q.trade_minister == "Uritsky" ||
         Q.trade_minister == "Bubnov" ||
         Q.trade_minister == "Pyatakov" ||
@@ -160,7 +160,7 @@ on-arrival: {!
 
     if (
         Q.finance_minister == "Bukharin" ||
-        Q.finance_minister == "Lomov" ||
+        Q.finance_minister == "Oppokov" ||
         Q.finance_minister == "Uritsky" ||
         Q.finance_minister == "Bubnov" ||
         Q.finance_minister == "Pyatakov" ||
@@ -173,7 +173,7 @@ on-arrival: {!
 
     if (
         Q.labor_minister == "Bukharin" ||
-        Q.labor_minister == "Lomov" ||
+        Q.labor_minister == "Oppokov" ||
         Q.labor_minister == "Uritsky" ||
         Q.labor_minister == "Bubnov" ||
         Q.labor_minister == "Pyatakov" ||
@@ -186,7 +186,7 @@ on-arrival: {!
 
     if (
         Q.justice_minister == "Bukharin" ||
-        Q.justice_minister == "Lomov" ||
+        Q.justice_minister == "Oppokov" ||
         Q.justice_minister == "Uritsky" ||
         Q.justice_minister == "Bubnov" ||
         Q.justice_minister == "Pyatakov" ||
@@ -199,7 +199,7 @@ on-arrival: {!
 
     if (
         Q.agriculture_minister == "Bukharin" ||
-        Q.agriculture_minister == "Lomov" ||
+        Q.agriculture_minister == "Oppokov" ||
         Q.agriculture_minister == "Uritsky" ||
         Q.agriculture_minister == "Bubnov" ||
         Q.agriculture_minister == "Pyatakov" ||
@@ -212,7 +212,7 @@ on-arrival: {!
 
     if (
         Q.food_minister == "Bukharin" ||
-        Q.food_minister == "Lomov" ||
+        Q.food_minister == "Oppokov" ||
         Q.food_minister == "Uritsky" ||
         Q.food_minister == "Bubnov" ||
         Q.food_minister == "Pyatakov" ||
@@ -225,7 +225,7 @@ on-arrival: {!
 
     if (
         Q.nationalities_minister == "Bukharin" ||
-        Q.nationalities_minister == "Lomov" ||
+        Q.nationalities_minister == "Oppokov" ||
         Q.nationalities_minister == "Uritsky" ||
         Q.nationalities_minister == "Bubnov" ||
         Q.nationalities_minister == "Pyatakov" ||
@@ -238,7 +238,7 @@ on-arrival: {!
 
     if (
         Q.welfare_minister == "Bukharin" ||
-        Q.welfare_minister == "Lomov" ||
+        Q.welfare_minister == "Oppokov" ||
         Q.welfare_minister == "Uritsky" ||
         Q.welfare_minister == "Bubnov" ||
         Q.welfare_minister == "Pyatakov" ||
