@@ -1,6 +1,7 @@
 title: Post Event
 new-page: true
 on-arrival: {!
+window.mapPostTurn();
 Q.last_advisor_action = 0;
 Q.last_cabinet_action = 0;
 // make sure no stat is below 0.
