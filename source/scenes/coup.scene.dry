@@ -2,7 +2,7 @@ title: A Coup!
 go-to: jumpScene
 on-arrival: {!
 // 1. re-normalize the militias...
-Q.workers_militia_parties = ['m', 'b', 'sr'];
+Q.workers_militia_parties = ['m', 'b', 'sr', 'lsr'];
 var total_workers_militia_loyalty = Q.workers_militia_independent;
 for (var p of Q.workers_militia_parties) {
     total_workers_militia_loyalty += Q['workers_militia_' + p + '_loyalty'];
@@ -12,7 +12,7 @@ for (var p of Q.workers_militia_parties) {
 }
 Q.workers_militia_independent = 100*Q.workers_militia_independent/total_workers_militia_loyalty;
 // normalize city militia loyalty
-Q.city_militia_parties = ['m', 'sr', 'k'];
+Q.city_militia_parties = ['b', 'm', 'sr', 'k', 'lsr'];
 var total_city_militia_loyalty = Q.city_militia_independent;
 for (var p of Q.city_militia_parties) {
     total_city_militia_loyalty += Q['city_militia_' + p + '_loyalty'];
@@ -23,7 +23,7 @@ for (var p of Q.city_militia_parties) {
 Q.city_militia_independent = 100*Q.city_militia_independent/total_city_militia_loyalty;
 
 // Garrison loyalty is the same as that for the soldiers demographic as a whole.
-Q.garrison_parties = ['m', 'sr',  'k', 'b'];
+Q.garrison_parties = ['m', 'sr',  'k', 'b', 'lsr'];
 var total_garrison_loyalty = 0;
 for (var p of Q.parties) {
     total_garrison_loyalty += Q['soldiers_' + p];
