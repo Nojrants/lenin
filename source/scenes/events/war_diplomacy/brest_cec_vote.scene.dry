@@ -6,8 +6,8 @@ tags: event
 on-arrival: {!
   Q.yes_votes = 0; Q.no_votes = 0; Q.abstentions = 0; 
   Q.leftcom_vote = (Q.leftcom_strength / (Q.leftcom_strength + Q.leninist_strength)); 
-  Q.yes_votes = ((Q.b_cec * (Q.leninist_strength / (Q.leftcom_strength + Q.leninist_strength))) + (Q.other_cec * 0.05)) * 0.8; 
-  Q.no_votes = (Q.anarchist_cec + Q.maximalist_cec + Q.sdi_cec + Q.left_m_cec + Q.right_m_cec + (Q.lsr_cec * 0.8) + Q.sr_cec + Q.popular_socialist_cec + (Q.other_cec * 0.55) + (Q.b_cec * Q.leftcom_vote * 0.2)) * 0.7;
+  Q.yes_votes = ((Q.b_cec * (Q.leninist_strength / (Q.leftcom_strength + Q.leninist_strength))) + (Q.other_cec * 0.05)) * 0.6; 
+  Q.no_votes = (Q.anarchist_cec + Q.maximalist_cec + Q.sdi_cec + Q.left_m_cec + Q.right_m_cec + (Q.lsr_cec * 0.8) + Q.sr_cec + Q.popular_socialist_cec + (Q.other_cec * 0.55) + (Q.b_cec * Q.leftcom_vote * 0.2)) * 0.5;
   Q.abstentions = (Q.lsr_cec * 0.2) + (Q.other_cec * 0.3) + (Q.b_cec * Q.leftcom_vote * 0.8);
   if (Q.leftcoms_resign == 1) {
     Q.abstentions -= (Q.b_cec * Q.leftcom_vote * 0.5);
