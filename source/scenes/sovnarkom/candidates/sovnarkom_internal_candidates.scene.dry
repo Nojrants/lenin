@@ -27,7 +27,6 @@ Overall skill: ★★★★<br>
 Suitability: ★★★★★</ul>
 !}
 tags: internal_candidates
-view-if: moderates_resigned != 1
 choose-if: interior_minister != "Dzerzhinsky"
 on-arrival: interior_minister = "Dzerzhinsky"; interior_minister_party = "Bolshevik"; 
 go-to: sovnarkom_composition
