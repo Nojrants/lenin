@@ -27,12 +27,43 @@ Provinces:  add an entry to window.mapProvinces whose key is the id of that
             listed on one side; adjacency is treated as two-way).
 Divisions:  window.mapDivisions is the list of all divisions. Each has an id,
             a name, an owner (a key of mapPartyColors) and a province.
-Moving:     see window.mapCanMove (rules hook) and
-            window.onMapDivisionsMoved (called after a move).
+Moves:      every order that moves a group of divisions one province (or
+            queues an attack) costs a move. The limit is
+            window.mapMovesPerTurn. See "SETTINGS" just below.
+Battles:    moving into a province held by a hostile army queues a battle
+            (red arrow on the map). Nothing is fought until the post_turn
+            scene calls window.mapPostTurn(), which resolves every queued
+            battle and then resets the move counter.
+
+In your post_turn scene, add:
+    on-arrival: {! window.mapPostTurn(); !}
 */
+
+/* ---------- SETTINGS ---------- */
 
 /* Only divisions owned by this faction can be selected and moved. */
 window.mapPlayerFaction = 'bolsheviks';
+
+/* Moves available each turn. */
+window.mapMovesPerTurn = 10;
+
+/* 'order'    : one move per order (any number of divisions moved together
+                from one province to a neighbouring one, or one queued attack)
+   'division' : one move per division */
+window.mapMoveCostMode = 'order';
+
+/* Control (0-100) of a province that has just been conquered. */
+window.mapConquestControl = 50;
+
+/* Battle calculation: each round every attacking division destroys one
+   enemy division with probability attackKill, every defending division with
+   probability defendKill. Rounds repeat until one side is wiped out or
+   maxRounds is reached (then the defender holds). */
+window.mapBattleSettings = {
+    attackKill: 0.35,
+    defendKill: 0.40,
+    maxRounds: 12
+};
 
 window.mapProvinces = {
     finland: {
@@ -135,7 +166,7 @@ window.mapProvinces = {
         name: 'Vitebsk',
         controller: 'none',
         control: 100,
-        adjacent: ['smolensk', 'mogilev', 'pskov', 'latvia', 'minsk']
+        adjacent: ['smolensk', 'mogilev', 'pskov', 'latvia', 'vilna', 'minsk']
     },
     orel: {
         name: 'Orel',
@@ -171,7 +202,7 @@ window.mapProvinces = {
         name: 'Arkhangelsk',
         controller: 'none',
         control: 100,
-        adjacent: ['finland', 'vologda', 'olonets', 'karelia']
+        adjacent: ['finland', 'vologda', 'olonets', 'tobolsk', 'karelia']
     },
     crimea: {
         name: 'Crimea',
@@ -213,7 +244,7 @@ window.mapProvinces = {
         name: 'Vologda',
         controller: 'none',
         control: 100,
-        adjacent: ['novgorod', 'arkhangelsk', 'yaroslavl', 'kostroma', 'vyatka', 'olonets', 'perm']
+        adjacent: ['novgorod', 'arkhangelsk', 'yaroslavl', 'kostroma', 'vyatka', 'olonets', 'tobolsk', 'perm']
     },
     tambov: {
         name: 'Tambov',
@@ -333,7 +364,7 @@ window.mapProvinces = {
         name: 'Transcaspia',
         controller: 'none',
         control: 100,
-        adjacent: ['uralsk', 'khiva', 'syr_darya']
+        adjacent: ['uralsk', 'khiva', 'syr_darya', 'bukhara']
     },
     ufa: {
         name: 'Ufa',
@@ -351,13 +382,13 @@ window.mapProvinces = {
         name: 'Yekaterinburg',
         controller: 'none',
         control: 100,
-        adjacent: ['ufa', 'orenburg', 'perm']
+        adjacent: ['ufa', 'orenburg', 'tobolsk', 'perm']
     },
     orenburg: {
         name: 'Orenburg',
         controller: 'none',
         control: 100,
-        adjacent: ['samara', 'uralsk', 'ufa', 'yekaterinburg', 'turgai', 'akmolinsk']
+        adjacent: ['samara', 'uralsk', 'ufa', 'yekaterinburg', 'turgai', 'tobolsk', 'akmolinsk']
     },
     turgai: {
         name: 'Turgai',
@@ -369,31 +400,43 @@ window.mapProvinces = {
         name: 'Khiva',
         controller: 'none',
         control: 100,
-        adjacent: ['transcaspian', 'syr_darya']
+        adjacent: ['transcaspian', 'syr_darya', 'bukhara']
     },
     syr_darya: {
         name: 'Syr-Darya',
         controller: 'none',
         control: 100,
-        adjacent: ['uralsk', 'transcaspian', 'turgai', 'khiva', 'akmolinsk', 'samarkhand', 'ferghana', 'semipalatinsk', 'semirechye']
+        adjacent: ['uralsk', 'transcaspian', 'turgai', 'khiva', 'bukhara', 'akmolinsk', 'samarkhand', 'ferghana', 'semipalatinsk', 'semirechye']
+    },
+    tobolsk: {
+        name: 'Tobolsk',
+        controller: 'none',
+        control: 100,
+        adjacent: ['arkhangelsk', 'vologda', 'yekaterinburg', 'orenburg', 'akmolinsk', 'siberia', 'tomsk', 'perm']
+    },
+    bukhara: {
+        name: 'Bukhara',
+        controller: 'none',
+        control: 100,
+        adjacent: ['transcaspian', 'khiva', 'syr_darya', 'samarkhand', 'ferghana']
     },
     akmolinsk: {
         name: 'Akmolinsk',
         controller: 'none',
         control: 100,
-        adjacent: ['orenburg', 'turgai', 'syr_darya', 'semipalatinsk']
+        adjacent: ['orenburg', 'turgai', 'syr_darya', 'tobolsk', 'semipalatinsk']
     },
     samarkhand: {
         name: 'Samarkand',
         controller: 'none',
         control: 100,
-        adjacent: ['syr_darya', 'ferghana']
+        adjacent: ['syr_darya', 'bukhara', 'ferghana']
     },
     ferghana: {
         name: 'Fergana',
         controller: 'none',
         control: 100,
-        adjacent: ['syr_darya', 'samarkhand', 'semirechye']
+        adjacent: ['syr_darya', 'bukhara', 'samarkhand', 'semirechye']
     },
     semipalatinsk: {
         name: 'Semipalatinsk',
@@ -405,7 +448,7 @@ window.mapProvinces = {
         name: 'Siberia',
         controller: 'none',
         control: 100,
-        adjacent: ['tomsk']
+        adjacent: ['tobolsk', 'tomsk']
     },
     semirechye: {
         name: 'Semirechye',
@@ -417,7 +460,7 @@ window.mapProvinces = {
         name: 'Tomsk',
         controller: 'none',
         control: 100,
-        adjacent: ['semipalatinsk', 'siberia']
+        adjacent: ['tobolsk', 'semipalatinsk', 'siberia']
     },
     estonia: {
         name: 'Estonia',
@@ -429,31 +472,37 @@ window.mapProvinces = {
         name: 'Latvia',
         controller: 'none',
         control: 100,
-        adjacent: ['vitebsk', 'pskov', 'estonia', 'lithuania']
+        adjacent: ['vitebsk', 'pskov', 'estonia', 'lithuania', 'vilna']
     },
     lithuania: {
         name: 'Lithuania',
+        controller: 'germany',
+        control: 100,
+        adjacent: ['latvia', 'vilna', 'poland']
+    },
+    vilna: {
+        name: 'Vilna',
         controller: 'none',
         control: 100,
-        adjacent: ['latvia', 'poland']
+        adjacent: ['vitebsk', 'latvia', 'lithuania', 'minsk', 'poland', 'grodno']
     },
     minsk: {
         name: 'Minsk',
         controller: 'none',
         control: 100,
-        adjacent: ['volhynia', 'chernigov', 'kyiv', 'mogilev', 'vitebsk', 'grodno']
+        adjacent: ['volhynia', 'chernigov', 'kyiv', 'mogilev', 'vitebsk', 'vilna', 'grodno']
     },
     poland: {
         name: 'Poland',
-        controller: 'none',
+        controller: 'germany',
         control: 100,
-        adjacent: ['volhynia', 'lithuania', 'grodno']
+        adjacent: ['volhynia', 'lithuania', 'vilna', 'grodno']
     },
     grodno: {
         name: 'Grodno',
         controller: 'none',
         control: 100,
-        adjacent: ['volhynia', 'minsk', 'poland']
+        adjacent: ['volhynia', 'vilna', 'minsk', 'poland']
     },
     taurida: {
         name: 'Taurida',
@@ -477,7 +526,7 @@ window.mapProvinces = {
         name: 'Perm',
         controller: 'none',
         control: 100,
-        adjacent: ['vologda', 'vyatka', 'ufa', 'yekaterinburg']
+        adjacent: ['vologda', 'vyatka', 'ufa', 'yekaterinburg', 'tobolsk']
     }
 };
 
@@ -491,6 +540,7 @@ window.mapPartyColors = {
     sr: '--sr-color',
     right_sr: '--right-sr-color',
     ns: '--ns-color',
+    germany: '--germany-color',
     none: '--none'
 };
 
@@ -504,6 +554,7 @@ window.mapPartyNames = {
     sr: 'Socialist-Revolutionaries',
     right_sr: 'Right SRs',
     ns: 'Popular Socialists',
+    germany: 'German Empire',
     none: 'Uncontrolled'
 };
 
@@ -526,18 +577,27 @@ window.mapProvinceFields = [
     }
 ];
 
+/* Remember each province's starting owner so a new game resets cleanly. */
+Object.keys(window.mapProvinces).forEach(function(id) {
+    var p = window.mapProvinces[id];
+    p.startController = p.controller;
+    p.startControl = p.control;
+});
+
 /* ---------- divisions ---------- */
 
-function makeDivisions(province, owner, count) {
-    var name = window.mapProvinces[province].name;
+function makeDivisions(province, owner, count, label, firstNumber) {
     var out = [];
-    for (var i = 1; i <= count; i++) {
+    var base = label || (window.mapProvinces[province].name + ' Division');
+    var n0 = firstNumber || 1;
+    for (var i = 0; i < count; i++) {
         out.push({
-            id: province + '_' + owner + '_' + i,
-            name: name + ' Division ' + i,
+            id: province + '_' + owner + '_' + (i + 1),
+            name: base + ' ' + (n0 + i),
             owner: owner,
             province: province,
-            start: province      // where it begins a new game
+            start: province,     // where it begins a new game
+            dead: false
         });
     }
     return out;
@@ -547,36 +607,216 @@ window.mapDivisions = [].concat(
     makeDivisions('petrograd', 'bolsheviks', 5),
     makeDivisions('novgorod', 'sr', 2),
     makeDivisions('tver', 'mensheviks', 1),
-    makeDivisions('moscow', 'bolsheviks', 4)
+    makeDivisions('moscow', 'bolsheviks', 4),
+    makeDivisions('poland', 'germany', 28, 'German Division', 1),
+    makeDivisions('lithuania', 'germany', 23, 'German Division', 29)
 );
 
-/* Rules hook: return true to allow the move, or false / a message string
-   to refuse it. Add supply, turn limits, etc. here later. */
+var mapDivisionIndex = {};
+window.mapDivisions.forEach(function(d) {
+    mapDivisionIndex[d.id] = d;
+});
+
+/* ---------- rules hooks ---------- */
+
+/* Return true to allow the move, or false / a message string to refuse it.
+   Add supply, terrain, etc. here later. */
 window.mapCanMove = function(divisionIds, fromId, toId) {
     return true;
 };
 
-/* Called after a successful move. */
+/* Is `defender` an enemy of `attacker`? Moving into a province that holds
+   only non-hostile foreign divisions is a peaceful move, not an attack.
+   Right now every other faction is hostile. */
+window.mapIsHostile = function(attacker, defender) {
+    return attacker !== defender;
+};
+
+/* The battle calculation. Receives
+     { to, from: [province ids], attackers: [divisions], defenders: [divisions] }
+   and returns
+     { attackersLost, defendersLost, winner: 'attacker' | 'defender' | 'none',
+       rounds }
+   Replace this to change how battles are decided. */
+window.mapResolveBattle = function(battle) {
+    var s = window.mapBattleSettings;
+    var a = battle.attackers.length;
+    var d = battle.defenders.length;
+    var startA = a;
+    var startD = d;
+    var rounds = 0;
+
+    function hits(n, p) {
+        var h = 0;
+        for (var i = 0; i < n; i++) {
+            if (Math.random() < p) {
+                h++;
+            }
+        }
+        return h;
+    }
+
+    while (a > 0 && d > 0 && rounds < s.maxRounds) {
+        var attackHits = hits(a, s.attackKill);
+        var defendHits = hits(d, s.defendKill);
+        a = Math.max(0, a - defendHits);
+        d = Math.max(0, d - attackHits);
+        rounds++;
+    }
+
+    var winner = 'defender';
+    if (a > 0 && d === 0) {
+        winner = 'attacker';
+    } else if (a === 0 && d === 0) {
+        winner = 'none';
+    }
+    return {
+        attackersLost: startA - a,
+        defendersLost: startD - d,
+        winner: winner,
+        rounds: rounds
+    };
+};
+
+/* Called after a successful (peaceful) move. */
 window.onMapDivisionsMoved = function(divisionIds, fromId, toId) {
 };
 
+/* ---------- state ---------- */
+
 window.selectedMapProvince = null;
 window.selectedMapDivisions = [];   // ids; always inside the selected province
+window.mapMovesUsed = 0;
+window.mapBattles = [];             // queued: { from, to, ids: [...], cost }
+window.mapReport = [];              // plain-text results of the last post_turn
 
 var MAP_SHAPES = 'path, polygon, polyline, rect, circle, ellipse';
 var hoveredMapProvince = null;
 var mapSvgText = null;   // cached so the SVG is only fetched once
 var mapMessage = '';
+var mapCenterCache = {};
+var COUNTER_RADIUS = 36;
+
+function engineQualities() {
+    try {
+        return window.dendryUI.dendryEngine.state.qualities;
+    } catch (e) {
+        return null;
+    }
+}
+
+function readJson(raw, fallback) {
+    if (!raw) {
+        return fallback;
+    }
+    try {
+        return JSON.parse(raw);
+    } catch (e) {
+        return fallback;
+    }
+}
+
+/* Everything lives in Dendry qualities so it is saved and loaded with the
+   game:  map_divisions, map_control, map_battles, map_report (JSON strings)
+   and map_moves_used (a number, readable from scenes). */
+window.saveMapState = function() {
+    var q = engineQualities();
+    if (!q) {
+        return;
+    }
+    var positions = {};
+    window.mapDivisions.forEach(function(d) {
+        positions[d.id] = d.dead ? null : d.province;
+    });
+    var control = {};
+    Object.keys(window.mapProvinces).forEach(function(id) {
+        var p = window.mapProvinces[id];
+        if (p.controller !== p.startController ||
+            p.control !== p.startControl) {
+            control[id] = [p.controller, p.control];
+        }
+    });
+    q.map_divisions = JSON.stringify(positions);
+    q.map_control = JSON.stringify(control);
+    q.map_battles = JSON.stringify(window.mapBattles);
+    q.map_report = JSON.stringify(window.mapReport);
+    q.map_moves_used = window.mapMovesUsed;
+};
+
+window.loadMapState = function() {
+    var q = engineQualities() || {};
+
+    var positions = readJson(q.map_divisions, {});
+    window.mapDivisions.forEach(function(d) {
+        if (positions[d.id] === null) {
+            d.dead = true;
+            d.province = d.start;
+        } else {
+            d.dead = false;
+            d.province = positions[d.id] || d.start;
+        }
+    });
+
+    var control = readJson(q.map_control, {});
+    Object.keys(window.mapProvinces).forEach(function(id) {
+        var p = window.mapProvinces[id];
+        var saved = control[id];
+        p.controller = saved ? saved[0] : p.startController;
+        p.control = saved ? saved[1] : p.startControl;
+    });
+
+    var battles = readJson(q.map_battles, []);
+    window.mapBattles = Array.isArray(battles) ? battles.filter(function(b) {
+        return b && window.mapProvinces[b.from] && window.mapProvinces[b.to] &&
+            Array.isArray(b.ids);
+    }) : [];
+
+    var report = readJson(q.map_report, []);
+    window.mapReport = Array.isArray(report) ? report : [];
+
+    window.mapMovesUsed = Number(q.map_moves_used) || 0;
+};
+
+/* ---------- queries ---------- */
 
 function divisionsIn(provinceId) {
     return window.mapDivisions.filter(function(d) {
-        return d.province === provinceId;
+        return !d.dead && d.province === provinceId;
     });
+}
+
+function isCommitted(divisionId) {
+    return window.mapBattles.some(function(b) {
+        return b.ids.indexOf(divisionId) !== -1;
+    });
+}
+
+function committedBattleFor(divisionId) {
+    for (var i = 0; i < window.mapBattles.length; i++) {
+        if (window.mapBattles[i].ids.indexOf(divisionId) !== -1) {
+            return window.mapBattles[i];
+        }
+    }
+    return null;
 }
 
 function playerDivisionsIn(provinceId) {
     return divisionsIn(provinceId).filter(function(d) {
         return d.owner === window.mapPlayerFaction;
+    });
+}
+
+/* Player divisions that are free to receive an order (not committed to a
+   queued attack). */
+function availablePlayerDivisionsIn(provinceId) {
+    return playerDivisionsIn(provinceId).filter(function(d) {
+        return !isCommitted(d.id);
+    });
+}
+
+function hostileDivisionsIn(provinceId, owner) {
+    return divisionsIn(provinceId).filter(function(d) {
+        return window.mapIsHostile(owner, d.owner);
     });
 }
 
@@ -596,34 +836,24 @@ function getAdjacentProvinces(id) {
     });
 }
 
-/* Division positions are kept in a quality so they survive save/load. */
-function saveMapDivisions() {
-    try {
-        var positions = {};
-        window.mapDivisions.forEach(function(d) {
-            positions[d.id] = d.province;
-        });
-        window.dendryUI.dendryEngine.state.qualities.map_divisions =
-            JSON.stringify(positions);
-    } catch (e) {
-        console.warn('Could not store division positions:', e);
-    }
+function provinceName(id) {
+    var p = window.mapProvinces[id];
+    return p ? (p.name || id) : id;
 }
 
-function loadMapDivisions() {
-    var positions = {};
-    try {
-        var raw = window.dendryUI.dendryEngine.state.qualities.map_divisions;
-        if (raw) {
-            positions = JSON.parse(raw);
-        }
-    } catch (e) {
-        console.warn('Could not read division positions:', e);
-    }
-    window.mapDivisions.forEach(function(d) {
-        d.province = positions[d.id] || d.start;
-    });
+function partyName(key) {
+    return window.mapPartyNames[key] || key;
 }
+
+/* ---------- moves ---------- */
+
+window.mapMovesLeft = function() {
+    return Math.max(0, window.mapMovesPerTurn - window.mapMovesUsed);
+};
+
+window.mapMoveCost = function(divisionIds) {
+    return window.mapMoveCostMode === 'division' ? divisionIds.length : 1;
+};
 
 /* ---------- colours ---------- */
 
@@ -755,6 +985,10 @@ window.ensureMapSidebar = function() {
                 window.tryMoveSelectedDivisions(
                     button.getAttribute('data-move-to')
                 );
+            } else if (button.hasAttribute('data-cancel-battle')) {
+                window.cancelMapBattle(
+                    parseInt(button.getAttribute('data-cancel-battle'), 10)
+                );
             } else if (button.hasAttribute('data-select-all')) {
                 window.selectAllMapDivisions();
             } else if (button.hasAttribute('data-select-none')) {
@@ -767,17 +1001,53 @@ window.ensureMapSidebar = function() {
     return sidebar;
 };
 
+/* Queued attacks (all of them, or only those touching one province),
+   each with a Cancel button that refunds its moves. */
+function battlesHtml(provinceId) {
+    var html = '';
+    window.mapBattles.forEach(function(b, index) {
+        if (provinceId && b.from !== provinceId && b.to !== provinceId) {
+            return;
+        }
+        html +=
+            '<div class="battle-row">' +
+            '<div>' + b.ids.length + ' division' +
+            (b.ids.length === 1 ? '' : 's') + ' from ' +
+            provinceName(b.from) + ' will attack ' + provinceName(b.to) +
+            '.</div>' +
+            '<button class="map-button" data-cancel-battle="' + index +
+            '">Cancel attack</button>' +
+            '</div>';
+    });
+    return html ? '<h3>Queued attacks</h3>' + html : '';
+}
+
+function reportHtml() {
+    if (!window.mapReport.length) {
+        return '';
+    }
+    var html = '<h3>Last turn\'s battles</h3>';
+    window.mapReport.forEach(function(line) {
+        html += '<div class="battle-report">' + line + '</div>';
+    });
+    return html;
+}
+
 window.renderMapSidebar = function(provinceId) {
     var sidebar = window.ensureMapSidebar();
     var data = provinceId ? window.mapProvinces[provinceId] : null;
+    var movesLeft = window.mapMovesLeft();
 
     if (!data) {
         sidebar.innerHTML =
             '<h2>Province</h2>' +
             '<div class="map-hint">Click a province to see its details. ' +
             'Click a division icon to select the divisions there, then ' +
-            'right-click an adjacent province to move them.</div>' +
-            (mapMessage ? '<div class="map-message">' + mapMessage + '</div>' : '');
+            'right-click an adjacent province to move them. Moving into a ' +
+            'province held by an enemy army queues an attack.</div>' +
+            battlesHtml(null) +
+            (mapMessage ? '<div class="map-message">' + mapMessage + '</div>' : '') +
+            reportHtml();
         return;
     }
 
@@ -797,25 +1067,39 @@ window.renderMapSidebar = function(provinceId) {
     /* Divisions stationed here */
     html += '<h3>Divisions</h3>';
     var here = divisionsIn(provinceId);
-    var mine = playerDivisionsIn(provinceId);
+    var mine = availablePlayerDivisionsIn(provinceId);
     var selected = window.selectedMapDivisions;
 
     if (!here.length) {
         html += '<div class="map-hint">No divisions stationed here.</div>';
     } else {
         html += '<div class="division-list">';
+        var foreign = {};
+        var foreignOrder = [];
         here.forEach(function(d) {
             if (d.owner === window.mapPlayerFaction) {
-                html += '<div class="division-row' +
-                    (selected.indexOf(d.id) !== -1 ? ' selected' : '') +
-                    '">' + d.name + '</div>';
+                var battle = committedBattleFor(d.id);
+                if (battle) {
+                    html += '<div class="division-row committed">' + d.name +
+                        ' <span class="division-owner">(attacking ' +
+                        provinceName(battle.to) + ')</span></div>';
+                } else {
+                    html += '<div class="division-row' +
+                        (selected.indexOf(d.id) !== -1 ? ' selected' : '') +
+                        '">' + d.name + '</div>';
+                }
             } else {
-                html +=
-                    '<div class="division-row foreign">' + d.name +
-                    ' <span class="division-owner">(' +
-                    (window.mapPartyNames[d.owner] || d.owner) +
-                    ')</span></div>';
+                if (!foreign[d.owner]) {
+                    foreign[d.owner] = 0;
+                    foreignOrder.push(d.owner);
+                }
+                foreign[d.owner]++;
             }
+        });
+        foreignOrder.forEach(function(owner) {
+            html += '<div class="division-row foreign">' + partyName(owner) +
+                ': ' + foreign[owner] + ' division' +
+                (foreign[owner] === 1 ? '' : 's') + '</div>';
         });
         html += '</div>';
     }
@@ -842,28 +1126,79 @@ window.renderMapSidebar = function(provinceId) {
     }
 
     if (selected.length) {
+        var cost = window.mapMoveCost(selected);
+        var canAfford = movesLeft >= cost;
         html += '<div class="division-move"><div class="province-stat-label">' +
             'Move ' + selected.length + ' division' +
             (selected.length === 1 ? '' : 's') + ' to:</div>';
         getAdjacentProvinces(provinceId).forEach(function(otherId) {
-            html += '<button class="map-button" data-move-to="' + otherId +
-                '">' + window.mapProvinces[otherId].name + '</button> ';
+            var hostile = hostileDivisionsIn(otherId, window.mapPlayerFaction).length > 0;
+            html += '<button class="map-button' + (hostile ? ' attack' : '') +
+                '" data-move-to="' + otherId + '"' +
+                (canAfford ? '' : ' disabled title="Not enough moves left"') +
+                '>' + (hostile ? 'Attack ' : '') + provinceName(otherId) +
+                '</button> ';
         });
-        html += '<div class="map-hint">Or right-click an adjacent ' +
-            'province on the map.</div></div>';
+        if (!canAfford) {
+            /* When a move was just refused, the same text is shown as the
+               message at the bottom, so don't repeat it here. */
+            if (!mapMessage) {
+                html += '<div class="map-warning">' + (movesLeft <= 0 ?
+                    'No moves left this turn.' :
+                    'Not enough moves left (' + cost + ' needed, ' +
+                    movesLeft + ' left).') + '</div>';
+            }
+        } else {
+            html += '<div class="map-hint">Or right-click an adjacent ' +
+                'province on the map. If an enemy army is there, an attack ' +
+                'is queued and fought at the end of the turn.</div>';
+        }
+        html += '</div>';
     }
+
+    html += battlesHtml(provinceId);
 
     if (mapMessage) {
         html += '<div class="map-message">' + mapMessage + '</div>';
     }
+    html += reportHtml();
     sidebar.innerHTML = html;
+};
+
+/* "Moves left" banner above the map. */
+window.renderMapTurnbar = function() {
+    var bar = document.getElementById('map-turnbar');
+    if (!bar) {
+        return;
+    }
+    var per = window.mapMovesPerTurn;
+    var left = window.mapMovesLeft();
+    var pips = '';
+    for (var i = 0; i < per; i++) {
+        pips += '<span class="move-pip' + (i < left ? ' on' : '') + '"></span>';
+    }
+    var html =
+        '<span class="turnbar-label">Moves left: <strong>' + left +
+        '</strong> of ' + per + '</span>' +
+        '<span class="move-pips">' + pips + '</span>';
+    if (left === 0) {
+        html += '<span class="turnbar-out">Out of moves. End the turn to continue.</span>';
+    }
+    if (window.mapBattles.length) {
+        html += '<span class="turnbar-attacks">' + window.mapBattles.length +
+            ' attack' + (window.mapBattles.length === 1 ? '' : 's') +
+            ' queued</span>';
+    }
+    bar.className = 'map-turnbar' + (left === 0 ? ' out' : '');
+    bar.innerHTML = html;
 };
 
 /* ---------- selection ---------- */
 
 window.refreshMapUI = function() {
     window.renderMapSidebar(window.selectedMapProvince);
-    window.renderMapCounters();
+    window.renderMapTurnbar();
+    window.renderMapOverlay();
 };
 
 window.showMapProvince = function(provinceId, keepDivisions) {
@@ -905,15 +1240,15 @@ window.clearMapProvince = function() {
     }
 };
 
-/* Set how many of your divisions in the selected province are selected.
-   Selected divisions stay selected; extra ones are added in list order, and
-   reducing the number drops the most recently added first. */
+/* Set how many of your free divisions in the selected province are
+   selected. Selected divisions stay selected; extra ones are added in list
+   order, and reducing the number drops the most recently added first. */
 window.setMapSelectionCount = function(count) {
     var provinceId = window.selectedMapProvince;
     if (!provinceId) {
         return;
     }
-    var mine = playerDivisionsIn(provinceId);
+    var mine = availablePlayerDivisionsIn(provinceId);
     count = Math.max(0, Math.min(mine.length, count));
 
     var current = window.selectedMapDivisions.filter(function(id) {
@@ -942,22 +1277,24 @@ window.selectAllMapDivisions = function() {
     if (!provinceId) {
         return;
     }
-    window.selectedMapDivisions = playerDivisionsIn(provinceId).map(function(d) {
-        return d.id;
-    });
+    window.selectedMapDivisions = availablePlayerDivisionsIn(provinceId)
+        .map(function(d) { return d.id; });
     mapMessage = '';
     window.refreshMapUI();
 };
 
-/* Clicking a division icon: select the province and all your divisions
+/* Clicking a division icon: select the province and all your free divisions
    there. Clicking again with everything already selected clears it. */
 window.onMapCounterClick = function(provinceId) {
-    var mine = playerDivisionsIn(provinceId);
+    var mine = availablePlayerDivisionsIn(provinceId);
 
     if (provinceId !== window.selectedMapProvince) {
         window.showMapProvince(provinceId);
     }
     if (!mine.length) {
+        if (playerDivisionsIn(provinceId).length) {
+            setMapMessage('Your divisions here are committed to an attack.');
+        }
         return;
     }
     var allSelected = mine.every(function(d) {
@@ -972,34 +1309,99 @@ window.onMapCounterClick = function(provinceId) {
     window.refreshMapUI();
 };
 
-/* ---------- moving ---------- */
+/* ---------- moving and attacking ---------- */
 
 function setMapMessage(text) {
     mapMessage = text;
     window.renderMapSidebar(window.selectedMapProvince);
 }
 
+/* Queue an attack. Several orders from the same province against the same
+   target are merged into one battle (and one arrow). */
+window.queueMapAttack = function(ids, fromId, toId, cost) {
+    var existing = null;
+    window.mapBattles.forEach(function(b) {
+        if (b.from === fromId && b.to === toId) {
+            existing = b;
+        }
+    });
+    if (existing) {
+        ids.forEach(function(id) {
+            if (existing.ids.indexOf(id) === -1) {
+                existing.ids.push(id);
+            }
+        });
+        existing.cost += cost;
+    } else {
+        window.mapBattles.push({
+            from: fromId,
+            to: toId,
+            ids: ids.slice(),
+            cost: cost
+        });
+    }
+};
+
+window.cancelMapBattle = function(index) {
+    var battle = window.mapBattles[index];
+    if (!battle) {
+        return;
+    }
+    window.mapMovesUsed = Math.max(0, window.mapMovesUsed - battle.cost);
+    window.mapBattles.splice(index, 1);
+    window.saveMapState();
+    mapMessage = 'Attack on ' + provinceName(battle.to) + ' cancelled. ' +
+        battle.cost + ' move' + (battle.cost === 1 ? '' : 's') + ' refunded.';
+    window.refreshMapUI();
+};
+
 window.tryMoveSelectedDivisions = function(toId) {
     var fromId = window.selectedMapProvince;
-    var ids = window.selectedMapDivisions.slice();
+    var ids = window.selectedMapDivisions.filter(function(id) {
+        return !isCommitted(id);
+    });
 
     if (!fromId || !ids.length || !window.mapProvinces[toId]) {
         return;
     }
     if (toId === fromId) {
         setMapMessage('Those divisions are already in ' +
-            window.mapProvinces[fromId].name + '.');
+            provinceName(fromId) + '.');
         return;
     }
     if (!window.areProvincesAdjacent(fromId, toId)) {
-        setMapMessage(window.mapProvinces[toId].name +
-            ' is not adjacent to ' + window.mapProvinces[fromId].name + '.');
+        setMapMessage(provinceName(toId) + ' is not adjacent to ' +
+            provinceName(fromId) + '.');
         return;
     }
+
+    var cost = window.mapMoveCost(ids);
+    var left = window.mapMovesLeft();
+    if (left < cost) {
+        setMapMessage(left <= 0 ?
+            'No moves left this turn.' :
+            'Not enough moves left (' + cost + ' needed, ' + left + ' left).');
+        return;
+    }
+
     var verdict = window.mapCanMove(ids, fromId, toId);
     if (verdict !== true) {
         setMapMessage(typeof verdict === 'string' ?
             verdict : 'Those divisions cannot move there.');
+        return;
+    }
+
+    /* A hostile army holds the province: queue a battle instead. */
+    var defenders = hostileDivisionsIn(toId, window.mapPlayerFaction);
+    if (defenders.length) {
+        window.queueMapAttack(ids, fromId, toId, cost);
+        window.mapMovesUsed += cost;
+        window.selectedMapDivisions = [];
+        window.saveMapState();
+        mapMessage = 'Attack on ' + provinceName(toId) + ' queued with ' +
+            ids.length + ' division' + (ids.length === 1 ? '' : 's') +
+            '. It will be fought at the end of the turn.';
+        window.refreshMapUI();
         return;
     }
 
@@ -1008,12 +1410,122 @@ window.tryMoveSelectedDivisions = function(toId) {
             d.province = toId;
         }
     });
-    saveMapDivisions();
+    window.mapMovesUsed += cost;
+    window.saveMapState();
 
     /* The selection follows the divisions to their new province. */
     window.selectedMapDivisions = ids;
     window.showMapProvince(toId, true);
     window.onMapDivisionsMoved(ids, fromId, toId);
+};
+
+/* ---------- end of turn ---------- */
+
+function killDivisions(list, count) {
+    for (var i = 0; i < count && i < list.length; i++) {
+        list[list.length - 1 - i].dead = true;
+    }
+}
+
+/* Fight every queued battle. Attacks from several provinces on the same
+   target are combined into a single battle. Returns the report lines. */
+window.resolveMapBattles = function() {
+    var report = [];
+    var targets = [];
+    window.mapBattles.forEach(function(b) {
+        if (targets.indexOf(b.to) === -1) {
+            targets.push(b.to);
+        }
+    });
+
+    targets.forEach(function(toId) {
+        var group = window.mapBattles.filter(function(b) {
+            return b.to === toId;
+        });
+        var attackers = [];
+        var fromIds = [];
+        group.forEach(function(b) {
+            if (fromIds.indexOf(b.from) === -1) {
+                fromIds.push(b.from);
+            }
+            b.ids.forEach(function(id) {
+                var d = mapDivisionIndex[id];
+                if (d && !d.dead && attackers.indexOf(d) === -1) {
+                    attackers.push(d);
+                }
+            });
+        });
+        if (!attackers.length) {
+            return;
+        }
+
+        var owner = attackers[0].owner;
+        var defenders = hostileDivisionsIn(toId, owner);
+        var province = window.mapProvinces[toId];
+        var name = provinceName(toId);
+        var result;
+
+        if (!defenders.length) {
+            result = { attackersLost: 0, defendersLost: 0,
+                       winner: 'attacker', rounds: 0 };
+        } else {
+            result = window.mapResolveBattle({
+                to: toId,
+                from: fromIds,
+                attackers: attackers.slice(),
+                defenders: defenders.slice()
+            });
+        }
+
+        var startA = attackers.length;
+        var startD = defenders.length;
+        killDivisions(attackers, result.attackersLost);
+        killDivisions(defenders, result.defendersLost);
+
+        var line = 'Battle for ' + name + ' (from ' +
+            fromIds.map(provinceName).join(', ') + '): ' + startA +
+            ' attacking, ' + startD + ' defending. ';
+
+        if (result.winner === 'attacker') {
+            attackers.forEach(function(d) {
+                if (!d.dead) {
+                    d.province = toId;
+                }
+            });
+            if (province.controller !== owner) {
+                province.controller = owner;
+                province.control = window.mapConquestControl;
+            }
+            line += 'Victory: ' + partyName(owner) + ' took ' + name + '. ' +
+                'Lost ' + result.attackersLost + ', destroyed ' +
+                result.defendersLost + '.';
+        } else if (result.winner === 'none') {
+            line += 'Both sides were wiped out. ' + name + ' is empty.';
+        } else {
+            line += 'The attack failed. Lost ' + result.attackersLost +
+                ', destroyed ' + result.defendersLost + '. The survivors ' +
+                'fell back.';
+        }
+        report.push(line);
+    });
+
+    window.mapBattles = [];
+    window.mapReport = report;
+    return report;
+};
+
+/* Call this from the post_turn scene. Resolves all queued battles, then
+   resets the move counter for the new turn. */
+window.mapPostTurn = function() {
+    window.loadMapState();
+    var report = window.resolveMapBattles();
+    window.mapMovesUsed = 0;
+    window.saveMapState();
+    if (mapIsOpen()) {
+        window.renderGameMap();
+        window.refreshMapUI();
+    }
+    return report;
 };
 
 /* ---------- drawing ---------- */
@@ -1029,6 +1541,11 @@ window.createMapLayout = function() {
     window.selectedMapDivisions = [];
     mapMessage = '';
 
+    var bar = document.createElement('div');
+    bar.id = 'map-turnbar';
+    bar.className = 'map-turnbar';
+    container.appendChild(bar);
+
     var layout = document.createElement('div');
     layout.className = 'map-layout';
     var frame = document.createElement('div');
@@ -1037,86 +1554,186 @@ window.createMapLayout = function() {
     container.appendChild(layout);
 
     window.renderMapSidebar(null);
+    window.renderMapTurnbar();
     return frame;
 };
 
-/* One icon per province that has divisions stationed in it. */
-window.renderMapCounters = function() {
+/* Centre of a province in the root SVG's coordinates (or its `label`
+   override). Cached, because measuring big paths is slow. */
+function getProvinceCenter(provinceId) {
+    if (mapCenterCache[provinceId]) {
+        return mapCenterCache[provinceId];
+    }
+    var data = window.mapProvinces[provinceId];
+    var svg = getMapSvg();
+    var province = getMapElement(provinceId);
+    if (!data || !svg || !province) {
+        return null;
+    }
+    var center = null;
+    if (data.label) {
+        center = [data.label[0], data.label[1]];
+    } else {
+        try {
+            var bbox = province.getBBox();
+            var localCenter = new DOMPoint(
+                bbox.x + bbox.width / 2,
+                bbox.y + bbox.height / 2
+            );
+            var provinceMatrix = province.getScreenCTM();
+            var svgMatrix = svg.getScreenCTM();
+            if (provinceMatrix && svgMatrix) {
+                var p = localCenter
+                    .matrixTransform(provinceMatrix)
+                    .matrixTransform(svgMatrix.inverse());
+                center = [p.x, p.y];
+            }
+        } catch (e) {
+            center = null;
+        }
+    }
+    if (center) {
+        mapCenterCache[provinceId] = center;
+    }
+    return center;
+}
+
+var SVG_NS = 'http://www.w3.org/2000/svg';
+
+function svgEl(name, attrs, cls) {
+    var el = document.createElementNS(SVG_NS, name);
+    if (cls) {
+        el.setAttribute('class', cls);
+    }
+    Object.keys(attrs || {}).forEach(function(k) {
+        el.setAttribute(k, attrs[k]);
+    });
+    return el;
+}
+
+/* Red arrows from the attacking province to the province being attacked. */
+function drawBattleArrows(parent) {
+    if (!window.mapBattles.length) {
+        return;
+    }
+    var layer = svgEl('g', {}, 'map-battle-arrows');
+
+    window.mapBattles.forEach(function(b) {
+        var A = getProvinceCenter(b.from);
+        var B = getProvinceCenter(b.to);
+        if (!A || !B) {
+            return;
+        }
+        var dx = B[0] - A[0];
+        var dy = B[1] - A[1];
+        var len = Math.sqrt(dx * dx + dy * dy);
+        if (len < 1) {
+            return;
+        }
+        var ux = dx / len;
+        var uy = dy / len;
+        var gap = COUNTER_RADIUS + 8;
+
+        var avail = Math.max(20, len - 2 * gap);
+        var headLen = Math.min(70, avail * 0.6);
+        var headW = 56;
+
+        var sx = A[0] + ux * gap;
+        var sy = A[1] + uy * gap;
+        var tipX = sx + ux * avail;
+        var tipY = sy + uy * avail;
+        var baseX = tipX - ux * headLen;
+        var baseY = tipY - uy * headLen;
+        var px = -uy * headW / 2;
+        var py = ux * headW / 2;
+
+        layer.appendChild(svgEl('line', {
+            x1: sx, y1: sy, x2: baseX, y2: baseY
+        }, 'map-arrow-halo'));
+        layer.appendChild(svgEl('line', {
+            x1: sx, y1: sy, x2: baseX, y2: baseY
+        }, 'map-arrow-line'));
+        layer.appendChild(svgEl('polygon', {
+            points: tipX + ',' + tipY + ' ' +
+                (baseX + px) + ',' + (baseY + py) + ' ' +
+                (baseX - px) + ',' + (baseY - py)
+        }, 'map-arrow-head'));
+
+        /* Number of attacking divisions, on the shaft. */
+        var shaft = avail - headLen;
+        if (shaft > 80) {
+            var mx = sx + ux * shaft * 0.5;
+            var my = sy + uy * shaft * 0.5;
+            var badge = svgEl('g', {}, 'map-arrow-badge');
+            badge.appendChild(svgEl('circle', { cx: mx, cy: my, r: 28 }));
+            var label = svgEl('text', {
+                x: mx, y: my,
+                'text-anchor': 'middle',
+                'dominant-baseline': 'central'
+            });
+            label.style.fontSize = '32px';
+            label.textContent = b.ids.length;
+            badge.appendChild(label);
+            layer.appendChild(badge);
+        }
+    });
+    parent.appendChild(layer);
+}
+
+/* Everything drawn on top of the provinces: attack arrows, then one icon
+   per province that has divisions stationed in it. */
+window.renderMapOverlay = function() {
     var svg = getMapSvg();
     if (!svg || !mapIsOpen()) {
         return;
     }
 
-    svg.querySelectorAll('.map-division-counter').forEach(function(c) {
-        c.remove();
-    });
+    var old = document.getElementById('map-overlay');
+    if (old) {
+        old.remove();
+    }
+    var overlay = svgEl('g', { id: 'map-overlay' });
+
+    drawBattleArrows(overlay);
 
     Object.keys(window.mapProvinces).forEach(function(provinceId) {
-        var data = window.mapProvinces[provinceId];
-        var province = getMapElement(provinceId);
         var here = divisionsIn(provinceId);
-
-        if (!province || !here.length) {
+        if (!here.length) {
             return;
         }
-
-        var x, y;
-        if (data.label) {
-            x = data.label[0];
-            y = data.label[1];
-        } else {
-            try {
-                /* Province centre, in the root SVG's coordinates. */
-                var bbox = province.getBBox();
-                var localCenter = new DOMPoint(
-                    bbox.x + bbox.width / 2,
-                    bbox.y + bbox.height / 2
-                );
-                var provinceMatrix = province.getScreenCTM();
-                var svgMatrix = svg.getScreenCTM();
-                if (!provinceMatrix || !svgMatrix) {
-                    return;
-                }
-                var svgCenter = localCenter
-                    .matrixTransform(provinceMatrix)
-                    .matrixTransform(svgMatrix.inverse());
-                x = svgCenter.x;
-                y = svgCenter.y;
-            } catch (e) {
-                return;
-            }
+        var center = getProvinceCenter(provinceId);
+        if (!center) {
+            return;
         }
+        var x = center[0];
+        var y = center[1];
 
-        var ns = 'http://www.w3.org/2000/svg';
-        var group = document.createElementNS(ns, 'g');
         var hasSelected = here.some(function(d) {
             return window.selectedMapDivisions.indexOf(d.id) !== -1;
         });
-        group.setAttribute('class', 'map-division-counter' +
-            (hasSelected ? ' map-counter-selected' : ''));
-        group.setAttribute('data-province', provinceId);
+        var group = svgEl('g', { 'data-province': provinceId },
+            'map-division-counter' + (hasSelected ? ' map-counter-selected' : ''));
 
-        var circle = document.createElementNS(ns, 'circle');
-        circle.setAttribute('cx', x);
-        circle.setAttribute('cy', y);
-        circle.setAttribute('r', 36);
+        var circle = svgEl('circle', { cx: x, cy: y, r: COUNTER_RADIUS });
         circle.style.stroke = window.getMapPartyColor(here[0].owner);
         group.appendChild(circle);
 
-        var text = document.createElementNS(ns, 'text');
-        text.setAttribute('x', x);
-        text.setAttribute('y', y);
-        text.setAttribute('text-anchor', 'middle');
-        text.setAttribute('dominant-baseline', 'central');
+        var text = svgEl('text', {
+            x: x, y: y,
+            'text-anchor': 'middle',
+            'dominant-baseline': 'central'
+        });
         text.style.fontSize = '30px';
         text.textContent = here.length;
         group.appendChild(text);
 
-        svg.appendChild(group);
+        overlay.appendChild(group);
     });
+
+    svg.appendChild(overlay);
 };
 
-/* Colour the provinces, then draw the division icons. */
+/* Colour the provinces, then draw the overlay. */
 window.renderGameMap = function() {
     var svg = getMapSvg();
     if (!svg) {
@@ -1139,18 +1756,19 @@ window.renderGameMap = function() {
         });
     });
 
-    window.renderMapCounters();
+    window.renderMapOverlay();
 };
 
 window.loadGameMap = function() {
+    window.loadMapState();
     var frame = window.createMapLayout();
     if (!frame) {
         return;
     }
-    loadMapDivisions();
 
     var draw = function(svgText) {
         frame.innerHTML = svgText;
+        mapCenterCache = {};
         window.renderGameMap();
     };
 
