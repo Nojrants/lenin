@@ -1,0 +1,38 @@
+title: Counterrevolutionary Plot Uncovered! 
+new-page: true
+view-if: cheka_founded = 1 and german_negotiations >= 4 and month >= 2 and brest_signed != 1
+max-visits: 1
+tags: event
+
+= Counterrevolutionary Plot
+
+In the wake of renewed aggression by the German imperialists, the Cheka is reporting that the Russian bourgeoisie has begun organizing counterrevolutionary bands to aid the Germans and "stab soviet power in the back". Allegedly, these conspirators are infiltrating organizations ostensibly for humanitarian and charitable efforts (e.g. groups giving aid to wounded soldiers), instead using them as fronts to prepare counterrevolutionary actions. We've also found at least one concrete case of counterrevolutionary agitation: at the Mikhailovsky Artillery Academy, a number of officers upset by the peace negotiations with the Germans have been discovered agitating among the soldiers to resist our efforts. 
+
+The Cheka has arrested the officers and others caught with anti-Bolshevik materials. Detachments are being formed to raid the facilities of all such "humanitarian organizations", as well as the homes of their supporters and patrons, in order to root out any counterevolutionary behavior. Arrests are being carried out, and the worst offenders are being threatened with execution on the spot. 
+
+- @accept
+- @reject
+
+
+@accept
+title: Give the Cheka free rein to persecute this conspiracy, and grant them the resources they need to do so. 
+on-arrival: {!
+    Q.instability += 1; Q.democraticity -= 1; 
+    Q.cheka += 2; Q.cheka_strength += 4; Q.cheka_militancy += 0.2; Q.cheka_loyality += 0.05;
+    Q.internal_expend += 0.25; 
+    Q.crime -= 5; 
+    Q.right_sr_strength -= 2; Q.k_strength -= 2; Q.rightist_strength -= 2;
+    Q.intelligentsia_unrest += 4; Q.elite_unrest += 6; Q.middle_unrest += 4; Q.workers_unrest += 4; Q.soldiers_unrest += 5;
+!}
+
+The Cheka carries out the operation, arresting several hundred people, and greatly disrupting the work of all non-governmental organizations. While evidence is uncovered of counterrevolutionary activity, a great number of legitimate charities are impacted. It also appears that some of those arrested are taken on rather flimsy charges. We receive complaints that innocent people were caught in the crossfire, including from some of the city's soviets. Nonetheless, perhaps such measures are necessitated by the emergency situation. 
+  
+@reject
+title: That is all too much, quietly restrain the Cheka and minimize arbitrary arrests and executions. 
+on-arrival: {!
+    Q.instability -= 1; 
+    Q.cheka_militancy -= 0.2; Q.cheka_loyality -= 0.05;
+    Q.intelligentsia_unrest += 2; Q.elite_unrest += 2; Q.middle_unrest += 2; Q.workers_unrest += 2; Q.soldiers_unrest += 2;
+!}
+
+Though the Cheka conducts several searches and arrests, they are restrained from escalating the operation. Several charities have their work disrupted, and we receive complaints that some innocent people were targeted, though the reevaulation and release of some of the prisoners after the fact assuages dissenters. 
