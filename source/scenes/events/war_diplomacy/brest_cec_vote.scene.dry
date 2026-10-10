@@ -2,3 +2,171 @@ title: Vote in the CEC
 new-page: true
 max-visits: 1
 tags: event
+on-arrival: {!
+  Q.yes_votes = 0; Q.no_votes = 0; Q.abstentions = 0; 
+  Q.leftcom_vote = (Q.leftcom_strength / (Q.leftcom_strength + Q.leninist_strength)); 
+  Q.yes_votes = (Q.b_cec * (Q.leninist_strength / (Q.leftcom_strength + Q.leninist_strength))) + (Q.other_cec * 0.05); 
+  Q.no_votes = Q.anarchist_cec + Q.maximalist_cec + Q.sdi_cec + Q.left_m_cec + Q.right_m_cec + (Q.lsr_cec * 0.8) + Q.sr_cec + Q.popular_socialist_cec + (Q.other_cec * 0.55) + (Q.b_cec * Q.leftcom_vote * 0.3);
+  Q.abstentions = (Q.lsr_cec * 0.2) + (Q.other_cec * 0.3) + (Q.b_cec * Q.leftcom_vote * 0.7);
+  if (Q.leftcoms_resign == 1) {
+    Q.abstentions -= (Q.b_cec * Q.leftcom_vote * 0.5);
+    Q.no_votes += (Q.b_cec * Q.leftcom_vote * 0.5);
+!}
+
+= Vote in the CEC
+
+With only hours to spare before the German ultimatum expires, an emergency meeting of the CEC is called to approve the peace treaty. With broad opposition to the treaty among the other parties, it will likely taken careful manuveuring to secure a majority. 
+
+[?if leftcoms_resign == 1 : There are a large number of absences in the hall given the short notice, although the <span style="color: var(--leftcom); font-weight: bold;">Leftcoms</span> have arrived determined to vote against the peace proposal. ?] 
+[?if leftcoms_resign != 1 : There are a large number of absences in the hall, in part because many <span style="color: var(--leftcom); font-weight: bold;">Leftcoms</span> have taken advantage of Lenin's allowances and have decided not to show up in protest. ?]
+
+- @restrict
+- @allow
+
+@restrict
+title: Before opening the debate, impose limits on the number of speakers, in order to control the proceedings and subtly favor the pro-peace position. 
+unavailable-subtitle: We don't control the CEC chair. 
+choose-if: soviet_chair_party = "Bolshevik"
+on-arrival: {!
+  Q.leftcom_strength -= 5; 
+  Q.democraticity -= 0.5; 
+  Q.yes_votes += Q.no_votes * 0.1; 
+  Q.no_votes *= 0.9; 
+!}
+
+With [+ soviet_chair +] in control of the proceedings, we are able to steer the conversation in favor of accepting peace, although the debate is nonetheless highly charged. 
+
+- @goto_cec_votes
+
+@allow
+title: Speeches and debates will proceed unrestricted. 
+go-to: goto_cec_votes
+
+Without control over the CEC chair, we have difficulty fully controlling the proceedings, though the treaty proponents make an impassioned case. 
+
+- @goto_cec_votes
+
+
+@goto_cec_votes
+title: And now for the vote...
+on-arrival: {!
+  if (Q.yes_votes = Q.no_votes) {
+    Q.yes_votes += 1; Q.no_votes -= 1;
+  }
+!}
+on-display: {!
+// Create bar graph data
+var data = [
+    {
+        "id": "b",
+        "legend": "Yes",
+        "name": "Yes",
+        "votes": Q.yes_votes
+    }
+];
+data.push({
+    "id": "lsr",
+    "legend": "No",
+    "name": "No",
+    "votes": Q.no_votes
+});
+data.push({
+    "id": "other",
+    "legend": "Abstain",
+    "name": "Abstain",
+    "votes": Q.abstentions
+});
+
+
+var width = 625;
+var height = 400;
+
+var svg = d3.select("#vote_chart");
+
+svg.attr("width", width)
+   .attr("height", height);
+
+var margin = {
+    top: 30,
+    right: 30,
+    bottom: 60,
+    left: 60
+};
+
+var chartWidth = width - margin.left - margin.right;
+var chartHeight = height - margin.top - margin.bottom;
+
+var x = d3.scaleBand()
+    .domain(data.map(function(d) { return d.name; }))
+    .range([0, chartWidth])
+    .padding(0.3);
+
+var y = d3.scaleLinear()
+    .domain([0, Math.max(1, d3.max(data, function(d) { return d.votes; }))])
+    .nice()
+    .range([chartHeight, 0]);
+
+var g = svg.append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+g.append("g")
+    .attr("transform", "translate(0," + chartHeight + ")")
+    .call(d3.axisBottom(x))
+    .selectAll("text")
+    .style("font-size", "16px");
+
+g.append("g")
+    .call(d3.axisLeft(y));
+
+g.selectAll(".bar")
+    .data(data)
+    .enter()
+    .append("rect")
+    .attr("class", function(d) { return "bar " + d.id; })
+    .attr("x", function(d) { return x(d.name); })
+    .attr("y", function(d) { return y(d.votes); })
+    .attr("width", x.bandwidth())
+    .attr("height", function(d) { return chartHeight - y(d.votes); });
+
+g.selectAll(".label")
+    .data(data)
+    .enter()
+    .append("text")
+    .attr("class", "label")
+    .attr("x", function(d) { return x(d.name) + x.bandwidth() / 2; })
+    .attr("y", function(d) { return y(d.votes) - 10; })
+    .attr("text-anchor", "middle")
+    .text(function(d) { return d.votes; });
+!}
+
+= Vote Result
+
+{!<svg id="vote_chart" style="width: 625px; height: 400px;"></svg>!}
+
+- @approved
+- @rejected
+
+@approved
+title: The treaty is approved! 
+view-if: yes_votes > no_votes
+on-arrival: {!
+  Q.leninist_dissent -= 10; Q.leftcom_dissent += 10;
+  Q.lsr_relation -= 20; 
+  Q.german_negotiations = 8; 
+  Q.german_waiting_timer = 1; 
+!}
+
+Although a defiant few <span style="color: var(--leftcom); font-weight: bold;">Leftcoms</span> still vote no in the final roll-call vote, many others abstain or even begrudgingly vote yes. Though the <span style="color: var(--lsr-color); font-weight: bold;">Left-SRs</span> vote against overall, it appears we managed to persuade a small minority of them to abstain, likely making the difference. 
+
+With that, we immediately radio the Germans at Brest-Litovsk, informing them that we are ready to sign... 
+
+@rejected
+title: The treaty is rejected! 
+view-if: yes_votes < no_votes
+on-arrival: {!
+  Q.leninist_dissent += 20; Q.leftcom_dissent -= 10;
+  Q.leninist_strength -= 5; Q.leftcom_strength += 10; 
+  Q.lsr_relation += 5; 
+!}
+
+Astonishingly, the opposition has managed to rally enough votes to shoot down ratification of the treaty! The German ultimatum soon lapses, and war resumes...
