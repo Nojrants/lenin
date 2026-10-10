@@ -3,7 +3,6 @@ new-page: true
 view-if: german_negotiations = 6
 max-visits: 1
 tags: event
-go-to: dispatch_menu
 on-arrival: {!
   Q.morale *= 0.8; Q.discipline *= 0.6; Q.war_weariness += 10; 
   Q.instability += 3; Q.train_capacity *= 0.95;
