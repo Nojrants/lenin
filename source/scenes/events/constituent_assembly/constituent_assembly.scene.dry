@@ -504,6 +504,14 @@ Angered by the rejection of the Declaration, Lenin calls for the Bolsheviks to i
 title: Let's wait and see where this goes.
 choose-if: (moderate_strength >= leninist_strength) or coalition_government = 1
 unavailable-subtitle: The Moderates don't have enough strength for this.
+on-arrival: {!
+  Q.moderate_strength += 5; Q.leninist_strength -= 5;
+  Q.left_m_relation += 5; Q.centre_m_relation += 5; Q.right_m_relation += 5; Q.centre_sr_relation += 5; Q.right_sr_relation += 5; 
+  Q.ca_progress = 1; 
+!}
+
+The other parties are pleasantly surprised, though still apprehensive about our intentions. Though a number of general resolutions are passed on the first night of the Assembly, plans are made to continue the work on subsequent days. 
+
 
 @walkout
 title: We walk out and declare this assembly disbanded! 
