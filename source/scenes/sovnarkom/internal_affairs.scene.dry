@@ -34,7 +34,15 @@ title: Dismantle the imperial police system.
 subtitle: Reform the militia system to remove vestiges of the imperial era, and purge known reactionary officers from service. 
 tags: internal_general
 view-if: imperial_police = 0
-on-arrival: imperial_police = 1; city_militia_strength -= 5; city_militia_militancy += 0.05; worker_unrest -= 5; elite_strength -= 2; internal_expend -= 0.25;
+on-arrival: {!
+    Q.imperial_police = 1;
+    Q.city_militia_strength -= 5;
+    Q.city_militia_militancy += 0.05;
+    Q.workers_unrest -= 5; 
+    Q.elites_strength -= 2;
+    Q.internal_expend -= 0.25;
+    Q.city_militia_k_loyalty *= 0.25; Q.city_militia_sr_loyalty *= 0.75; Q.city_militia_m_loyalty *= 0.75; Q.city_militia_b_loyalty *= 3; 
+!}
 
 We implement a series of reforms replacing the imperial police system fully and purging reactionary officers. 
 
@@ -108,6 +116,7 @@ on-arrival: {!
     Q.cheka_militancy += 0.02 * Q.efficacy_internal;
     Q.resources -= 1; Q.internal_expend += 0.1;
     Q.cheka_loyalty -= 0.2;
+    Q.city_militia_b_loyalty *= 1.2; Q.city_militia_lsr_loyalty *= 1.5;
 !}
 
 @recruit_chekists
