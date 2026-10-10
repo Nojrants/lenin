@@ -17,6 +17,7 @@ body {
   --sr-color: #40853d;
   --right-sr-color: #67a365;
   --ns-color: #949d48;
+  --germany-color: #5a6169;
 
   /* --- Soviet theme --- */
   --red: #c8102e;         
@@ -1039,6 +1040,11 @@ body.dark-mode #map-sidebar h2 { color: var(--gold-soft); }
   background: var(--link-hover-color);
 }
 .division-row.foreign { opacity: 0.8; }
+.division-row.committed {
+  font-style: italic;
+  opacity: 0.75;
+  border-left-color: var(--red);
+}
 .division-owner { font-size: 0.85em; font-style: italic; }
 .division-selector-label {
   margin: 0.8em 0.4em 0.2em 0.4em;
@@ -1093,6 +1099,97 @@ body.dark-mode #map-sidebar h2 { color: var(--gold-soft); }
   border-left: 4px solid var(--red);
   background: var(--link-hover-color);
 }
+
+/* Moves-left banner above the map */
+.map-turnbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.3em 1em;
+  margin: 0 0 0.8em 0;
+  padding: 0.35em 0.8em;
+  border: 2px solid var(--red);
+  background: var(--box-bg);
+  color: var(--text-color);
+}
+.turnbar-label strong { font-size: 1.15em; }
+.move-pips { display: inline-flex; gap: 3px; }
+.move-pip {
+  width: 0.7em;
+  height: 0.7em;
+  border: 1px solid var(--red-dark);
+  background: transparent;
+}
+.move-pip.on { background: var(--gold); }
+.turnbar-out { font-weight: bold; }
+.turnbar-attacks {
+  margin-left: auto;
+  font-weight: bold;
+  color: var(--red);
+}
+body.dark-mode .turnbar-attacks { color: #ff8a8a; }
+.map-turnbar.out {
+  background: var(--red);
+  border-color: var(--red-dark);
+  color: var(--gold-soft);
+}
+.map-turnbar.out .move-pip { border-color: var(--gold-soft); }
+.map-turnbar.out .move-pip.on { background: var(--gold-soft); }
+.map-turnbar.out .turnbar-attacks { color: #fff; }
+
+/* Attack arrows (drawn in SVG units; the map is ~3000 units wide) */
+.map-battle-arrows { pointer-events: none; }
+.map-arrow-halo {
+  stroke: #fff;
+  stroke-width: 32;
+  stroke-linecap: round;
+  fill: none;
+  opacity: 0.9;
+}
+.map-arrow-line {
+  stroke: #d0101f;
+  stroke-width: 20;
+  stroke-linecap: round;
+  fill: none;
+}
+.map-arrow-head {
+  fill: #d0101f;
+  stroke: #fff;
+  stroke-width: 8;
+  stroke-linejoin: round;
+}
+.map-arrow-badge circle {
+  fill: #d0101f;
+  stroke: #fff;
+  stroke-width: 4;
+}
+.map-arrow-badge text {
+  fill: #fff;
+  font-weight: bold;
+}
+
+/* Attack buttons, queued attacks and battle reports in the sidebar */
+.map-button.attack {
+  background: var(--red-dark);
+  border-color: #000;
+  color: #fff;
+}
+.map-button.attack:hover { background: #8a0d1c; }
+.map-warning {
+  margin-top: 0.4em;
+  font-weight: bold;
+  color: var(--red);
+}
+body.dark-mode .map-warning { color: #ff8a8a; }
+.battle-row, .battle-report {
+  margin: 0.4em 0.4em;
+  padding: 0.3em 0.6em;
+  border-left: 4px solid var(--red);
+  background: var(--link-hover-color);
+  font-size: 0.92em;
+  line-height: 1.35;
+}
+.battle-row .map-button { margin-top: 0.3em; }
 
 @media (prefers-reduced-motion: reduce) {
   #achievement-notification { transition: none; }
