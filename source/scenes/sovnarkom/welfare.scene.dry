@@ -6,7 +6,7 @@ tags: sovnarkom, government
 card-image: img/women_poster.PNG
 on-arrival: {!
   Q.social_policy_timer += 2; Q.week_actions += 1
-  if (Q.welfare_founded = 0) Q.welfare_founded = 1;
+  Q.welfare_founded = 1;
 !}
 
 
