@@ -198,6 +198,27 @@ bagmen  :   [+ bagmen +]<br>
 bagmen_unrest  :   [+ bagmen_unrest +]<br>
 bagmen_strength  :   [+ bagmen_strength +]<br>
 
+workers_unrest  :   [+ workers_unrest +]<br>
+workers_strength  :   [+ workers_strength +]<br>
+workers_b  :   [+ workers_b +]<br>
+workers_m  :   [+ workers_m +]<br>
+workers_sr  :   [+ workers_sr +]<br>
+workers_lsr  :   [+ workers_lsr +]<br>
+
+peasants_unrest  :   [+ peasants_unrest +]<br>
+peasants_strength  :   [+ peasants_strength +]<br>
+peasants_b  :   [+ peasants_b +]<br>
+peasants_m  :   [+ peasants_m +]<br>
+peasants_sr  :   [+ peasants_sr +]<br>
+peasants_lsr  :   [+ peasants_lsr +]<br>
+
+soldiers_unrest  :   [+ soldiers_unrest +]<br>
+soldiers_strength  :   [+ soldiers_strength +]<br>
+soldiers_b  :   [+ soldiers_b +]<br>
+soldiers_m  :   [+ soldiers_m +]<br>
+soldiers_sr  :   [+ soldiers_sr +]<br>
+soldiers_lsr  :   [+ soldiers_lsr +]<br>
+
 
 = Inter-party Relationships
 
