@@ -55,6 +55,9 @@ on-arrival: {!
   if (Q.yes_votes = Q.no_votes) {
     Q.yes_votes += 1; Q.no_votes -= 1;
   }
+Q.yes_votes = Math.round(Q.yes_votes);
+Q.no_votes = Math.round(Q.no_votes);
+Q.abstentions = Math.round(Q.abstentions);
 !}
 on-display: {!
 // Create bar graph data
