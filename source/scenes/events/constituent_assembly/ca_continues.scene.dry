@@ -1,0 +1,17 @@
+title: The Constituent Assembly Continues...
+new-page: true
+view-if: ca_progress = 1
+max-visits: 1
+tags: event
+on-arrival: {!
+  Q.instability -= 0.5;
+  Q.democraticity += 1;
+  Q.ca_support_timer += 1; 
+!} 
+
+= Constituent Assembly
+
+The delegates reconvene for the second day of the Constituent Assembly. Though Lenin is still of the opinion that the entire endeavor should be shut down in due time, moderates have been able to persuade the party leadership to give the Assembly a chance, hoping to subtly guide it in the direction of Bolshevik positions. 
+
+
+
