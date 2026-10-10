@@ -1,0 +1,23 @@
+title: Peasant Rebellions! 
+new-page: true
+view-if: peasants_unrest >= 70 and peasants_strength >= 25 and ca_held = 1
+max-visits: 1
+tags: event
+on-arrival: {!
+  mapAddControl('saratov', -40)
+  mapAddControl('penza', -40)
+  mapAddControl('tambov', -40)
+  mapAddControl('voronezh', -40)
+  mapAddControl('kursk', -40)
+  
+  mapAddDivisions('kursk', 'sr', 2)
+  mapAddDivisions('penza', 'sr', 1)
+  mapAddDivisions('saratov', 'sr', 1)
+  
+  Q.peasants_strength += 5; Q.peasants_unrest += 10;
+  Q.peasants_b -= 5; Q.peasants_sr += 2; Q.peasants_right_sr += 2; 
+!}
+
+= Peasant Rebellions
+
+  
