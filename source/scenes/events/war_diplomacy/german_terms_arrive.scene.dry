@@ -13,15 +13,15 @@ on-arrival: {!
 = News from Brest-Litovsk
 
 The Germans have finally replied to us with their peace terms:<br><ul>
-    <li>Cession of Finland, the Baltic states, Belarus, Ukraine, Poland and Kars and Batum, and cessation of war between Russia and any territories therein.</li>
-    <li>Immediate demobilization of the Russian Army (both the old army and the new) and the Red Guards, and internment or dismantling of the Russian navy.</li>
+    <li>Cession of Finland, the Baltic states, Belarus, Ukraine, Poland, and Kars and Batum; cessation of war between Russia and any of the above countries.</li>
+    <li>Immediate demobilization of the Russian Army (both the old army and the red guards), and internment or dismantling of the Russian navy.</li>
     <li>Favorable trade with Germany and protection of German business and capitalists in Russia, along with payment of a significant indemnity.</li>
     <li>Cessation of revolutionary propaganda within the Central Powers.</li>
 </ul>
   
 The Germans have informed us that we must accept the terms as is within 48 hours (much of which has already elapsed). 
 
-Lenin is absolutely adamant on the need for peace, and is even threatening to resign from the Central Committee and Sovnarkom if the terms are not accepted. 
+Despite the harsh terms, Lenin is absolutely adamant on the need for peace, and is even threatening to resign from the Central Committee and Sovnarkom if the terms are not accepted. 
 
 - @accept
 - @reject
@@ -30,7 +30,7 @@ Lenin is absolutely adamant on the need for peace, and is even threatening to re
 @reject
 title: If Lenin resigns, so be it! 
 choose-if: leftcom_strength >= ((leninist_strength + moderate_strength) * 3)
-unavailable-subtitle: The <span style="color: var(--leftcom); font-weight: bold;">Leftcoms</span> aren't to risk this. 
+unavailable-subtitle: The <span style="color: var(--leftcom); font-weight: bold;">Leftcoms</span> aren't willing to risk this. 
 
 @accept
 title: The terms must be accepted. 
@@ -251,7 +251,7 @@ on-arrival: {!
 
 A number of prominent <span style="color: var(--leftcom); font-weight: bold;">Leftcoms</span> have resigned their posts, while a fierce agitation campaign is launched against the peace treaty. 
 
-  - @goto_brest_cec_vote
+- @goto_brest_cec_vote
   
 @allow
 title: Placate the dissenters in the name of keeping the Party together. 
