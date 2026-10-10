@@ -32,7 +32,7 @@ on-arrival: {!
 The soldiers are refusing to board the trains and be sent off to the front! Though pledging to defend the capital, it seems only the most ardent of our supporters among the garrison can stomach actual mobilization. 
 
 @mobilize_workers
-title: Mobilize workers to form militias in the capital. 
+title: Recruit workers into the army and worker militias. 
 subtitle: -0.5 resources
 unavailable-subtitle: -0.5 resources – We lack the resources.
 choose-if: resources >= 0.5
@@ -42,6 +42,7 @@ on-arrival: {!
   Q.resources -= 0.5;
   Q.workers_militia_strength += 5; 
   Q.workers_b -= 2; Q.workers_unrest += 5; 
+  mapAddDivisions('petrograd', 'bolsheviks', 1)
 !}
 
 Although we manage to recruit a number of Bolshevik suppoters into the worker militias, it appears that recruitment is hampered by rising inflation, unemployment, and general disillusionment. Though many support the Revolution, enthusiasm for prolonged military service in support of it is low. 
@@ -53,6 +54,7 @@ go-to: defense_menu
 on-arrival: {!
   Q.unionists_strength += 2; 
   Q.workers_militia_strength += Math.max(0, (Q.unionists / 1500) * (Q.unionists_strength / 50) * (Q.unionists_unrest / 100)); 
+  mapAddDivisions('petrograd', 'bolsheviks', 1)
 !}
 
 The trade unions help spur the workers to action in defense of the Revolution. 
