@@ -736,6 +736,11 @@ window.saveMapState = function() {
             control[id] = [p.controller, p.control];
         }
     });
+    q.map_extra = JSON.stringify(window.mapDivisions.filter(function(d) {
+        return d.extra;
+    }).map(function(d) {
+        return { id: d.id, name: d.name, owner: d.owner, start: d.start };
+    }));
     q.map_divisions = JSON.stringify(positions);
     q.map_control = JSON.stringify(control);
     q.map_battles = JSON.stringify(window.mapBattles);
@@ -745,6 +750,25 @@ window.saveMapState = function() {
 
 window.loadMapState = function() {
     var q = engineQualities() || {};
+
+    /* Divisions created by events (window.mapAddDivisions) are rebuilt
+       from the saved game before positions are applied. */
+    window.mapDivisions = window.mapDivisions.filter(function(d) {
+        if (d.extra) {
+            delete mapDivisionIndex[d.id];
+            return false;
+        }
+        return true;
+    });
+    var extras = readJson(q.map_extra, []);
+    (Array.isArray(extras) ? extras : []).forEach(function(e) {
+        var d = {
+            id: e.id, name: e.name, owner: e.owner,
+            province: e.start, start: e.start, dead: false, extra: true
+        };
+        window.mapDivisions.push(d);
+        mapDivisionIndex[d.id] = d;
+    });
 
     var positions = readJson(q.map_divisions, {});
     window.mapDivisions.forEach(function(d) {
@@ -1504,6 +1528,192 @@ window.mapPostTurn = function() {
         window.refreshMapUI();
     }
     return report;
+};
+
+/* ---------- changing the map from events ----------
+   Call these from a scene, e.g.
+       on-arrival: {! window.mapSetController('tver', 'bolsheviks', 80); !}
+   They load the saved map state, make the change, save it again, and
+   redraw the map if it happens to be open. Each returns true/false (or the
+   number of divisions affected). Province ids are the SVG ids (lowercase),
+   factions are keys of window.mapPartyColors. */
+
+function editMapState(change) {
+    window.loadMapState();
+    var result = change();
+    window.saveMapState();
+    if (mapIsOpen()) {
+        window.renderGameMap();
+        window.refreshMapUI();
+    }
+    return result;
+}
+
+function knownProvince(id, caller) {
+    if (!window.mapProvinces[id]) {
+        console.warn(caller + ': unknown province "' + id + '"');
+        return false;
+    }
+    return true;
+}
+
+function clampControl(n) {
+    return Math.max(0, Math.min(100, Number(n) || 0));
+}
+
+/* Who holds a province. `control` is optional: if left out the current
+   control stays, unless the owner changes, in which case it becomes
+   window.mapConquestControl. */
+window.mapSetController = function(id, faction, control) {
+    if (!knownProvince(id, 'mapSetController')) {
+        return false;
+    }
+    if (!window.mapPartyColors[faction]) {
+        console.warn('mapSetController: unknown faction "' + faction +
+            '" (add it to window.mapPartyColors / mapPartyNames)');
+    }
+    return editMapState(function() {
+        var p = window.mapProvinces[id];
+        var changed = p.controller !== faction;
+        p.controller = faction;
+        if (control !== undefined && control !== null) {
+            p.control = clampControl(control);
+        } else if (changed) {
+            p.control = window.mapConquestControl;
+        }
+        return true;
+    });
+};
+
+/* Set how firmly the current owner holds a province (0-100). */
+window.mapSetControl = function(id, control) {
+    if (!knownProvince(id, 'mapSetControl')) {
+        return false;
+    }
+    return editMapState(function() {
+        window.mapProvinces[id].control = clampControl(control);
+        return true;
+    });
+};
+
+/* Raise or lower control by an amount, e.g. mapAddControl('tver', -15). */
+window.mapAddControl = function(id, delta) {
+    if (!knownProvince(id, 'mapAddControl')) {
+        return false;
+    }
+    return editMapState(function() {
+        var p = window.mapProvinces[id];
+        p.control = clampControl(p.control + Number(delta || 0));
+        return true;
+    });
+};
+
+/* Create new divisions for `owner` in a province. Returns how many. */
+window.mapAddDivisions = function(id, owner, count) {
+    if (!knownProvince(id, 'mapAddDivisions')) {
+        return 0;
+    }
+    count = Math.floor(Number(count) || 0);
+    if (count <= 0) {
+        return 0;
+    }
+    return editMapState(function() {
+        var next = 1;
+        window.mapDivisions.forEach(function(d) {
+            var m = /^extra_(\d+)$/.exec(d.id);
+            if (m) {
+                next = Math.max(next, Number(m[1]) + 1);
+            }
+        });
+        for (var i = 0; i < count; i++) {
+            var n = next + i;
+            var d = {
+                id: 'extra_' + n,
+                name: partyName(owner) + ' Division (new ' + n + ')',
+                owner: owner,
+                province: id,
+                start: id,
+                dead: false,
+                extra: true
+            };
+            window.mapDivisions.push(d);
+            mapDivisionIndex[d.id] = d;
+        }
+        return count;
+    });
+};
+
+/* Destroy up to `count` of `owner`'s divisions in a province (free ones
+   first). Returns how many were removed. */
+window.mapRemoveDivisions = function(id, owner, count) {
+    if (!knownProvince(id, 'mapRemoveDivisions')) {
+        return 0;
+    }
+    count = Math.floor(Number(count) || 0);
+    if (count <= 0) {
+        return 0;
+    }
+    return editMapState(function() {
+        var mine = divisionsIn(id).filter(function(d) {
+            return d.owner === owner;
+        });
+        /* divisions committed to a queued attack go last */
+        mine.sort(function(a, b) {
+            return (isCommitted(a.id) ? 1 : 0) - (isCommitted(b.id) ? 1 : 0);
+        });
+        var doomed = mine.slice(0, count);
+        doomed.forEach(function(d) {
+            d.dead = true;
+        });
+        /* drop them from queued attacks; an attack with nobody left is
+           cancelled and its moves refunded */
+        window.mapBattles = window.mapBattles.filter(function(b) {
+            b.ids = b.ids.filter(function(did) {
+                return mapDivisionIndex[did] && !mapDivisionIndex[did].dead;
+            });
+            if (!b.ids.length) {
+                window.mapMovesUsed = Math.max(0, window.mapMovesUsed - b.cost);
+                return false;
+            }
+            return true;
+        });
+        return doomed.length;
+    });
+};
+
+/* Make `owner` have exactly `count` divisions in a province. */
+window.mapSetDivisions = function(id, owner, count) {
+    if (!knownProvince(id, 'mapSetDivisions')) {
+        return 0;
+    }
+    window.loadMapState();
+    var have = divisionsIn(id).filter(function(d) {
+        return d.owner === owner;
+    }).length;
+    count = Math.max(0, Math.floor(Number(count) || 0));
+    if (count > have) {
+        return window.mapAddDivisions(id, owner, count - have);
+    }
+    if (count < have) {
+        return window.mapRemoveDivisions(id, owner, have - count);
+    }
+    return 0;
+};
+
+/* Read helpers, for scripts that need to branch on the map. */
+window.mapDivisionCount = function(id, owner) {
+    window.loadMapState();
+    return divisionsIn(id).filter(function(d) {
+        return !owner || d.owner === owner;
+    }).length;
+};
+window.mapController = function(id) {
+    window.loadMapState();
+    return window.mapProvinces[id] ? window.mapProvinces[id].controller : null;
+};
+window.mapControl = function(id) {
+    window.loadMapState();
+    return window.mapProvinces[id] ? window.mapProvinces[id].control : null;
 };
 
 /* ---------- drawing ---------- */
