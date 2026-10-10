@@ -1,0 +1,70 @@
+title: Dispatch to the Germans
+new-page: true
+view-if: german_negotiations = 5
+max-visits: 1
+tags: event
+go-to: dispatch_menu
+on-arrival: {!
+  Q.morale *= 0.8; Q.discipline *= 0.6; Q.war_weariness += 10; 
+  Q.instability += 3; Q.train_capacity *= 0.95;
+  Q.soldiers_unrest += 10; Q.peasants_unrest += 5; 
+  Q.german_negotiations = 6; 
+!}
+
+= Dispatch to the Germans
+
+The Bolshevik leadership has tenatively approved peace with the Germans, and a radio dispatch has been sent declaring as much. But at the same time, it's not entirely clear if the Germans will listen now or not. The imperialists continue to advance deep into Russian territory, and it appears they even continue on to Petrograd. Chaos grips the capital, as fears of a potential siege sets in. 
+
+Meanwhile, news of the radio dispatch spreads among the public. Naturally, most oppositionists reject the decision, but more worryingly, the <span style="color: var(--lsr-color); font-weight: bold;">Left-SRs</span> are among them. According to them, we surrendered without even putting up a fight, and abandoned the working-class in the occupied territories to the Germans. Moreover, our decision to hastily approve a peace – without the formal consent of the CEC – they reject as a gross injustice. On top of that, the <span style="color: var(--leftcom); font-weight: bold;">Leftcoms</span> of our own party have issued a public declaration, formally condemning the peace as a "vicious blow to the cause of the international proletariat", and vowing to agitate within the Party to have the treaty overturned by a party congress. A series of other anti-treaty resolutions are passed by from prominent Bolshevik party organizations. 
+
+@dispatch_menu
+  
+- @agitators
+- @defenses
+- @speakers
+- @nothing
+
+
+@agitators
+title: Dispatch agitators to the front and try to stabilize the army. 
+subtitle: -0.5 resources – We need to halt the retreat, or at the very least get ahead of it. 
+unavailable-subtitle: -0.5 resources – We lack the resources. 
+choose-if: resources >= 0.5
+max-visits: 1
+go-to: dispatch_menu
+on-arrival: {!
+  Q.resources -= 0.5; 
+  Q.train_capacity *= 1.02;
+  Q.discipline *= 1.1; 
+  Q.leftcom_strength += 2; 
+!}
+
+@defenses
+title: Prepare the defenses, fortify the capital! 
+subtitle: -0.5 resources
+unavailable-subtitle: -0.5 resources – We lack the resources. 
+choose-if: resources >= 0.5
+max-visits: 1
+go-to: dispatch_menu
+on-arrival: {!
+  Q.resources -= 0.5; 
+  Q.war_weariness -= 3;
+  Q.discipline *= 1.1; 
+  Q.leftcom_strength += 2; 
+!}
+
+@speakers
+title: Send speakers into the major soviets of the capital, ensuring they'll back a peace. 
+max-visits: 1
+go-to: dispatch_menu
+on-arrival: {!
+  Q.war_weariness += 5;
+  Q.leninist_strength += 5; Q.leftcom_strength -= 5;
+  Q.leftcom_dissent += 10; 
+!}
+
+After a long debate in the Petrograd Soviet, tentative approval is given for the peace position, weakening the leverage of the <span style="color: var(--leftcom); font-weight: bold;">Leftcoms</span>. 
+
+@nothing
+title: We've done all we can.
+go-to: root
