@@ -54,6 +54,7 @@ on-arrival: {!
   Q.instability += 2; 
   Q.b_dissent += 0.35; Q.b_strength *= 0.8; 
   Q.leftcom_dissent += 20; 
+  Q.german_negotiations = 8;
 
     if (
         Q.soviet_chair == "Bukharin" ||
@@ -257,6 +258,7 @@ A number of prominent <span style="color: var(--leftcom); font-weight: bold;">Le
 title: Placate the dissenters in the name of keeping the Party together. 
 on-arrival: {!
   Q.leftcom_dissent -= 5; 
+  Q.german_negotiations = 8;
 !}
 
 By making assurances to the other CC members, Lenin is able to stave off resignations for now, though few fully satisfied. 
