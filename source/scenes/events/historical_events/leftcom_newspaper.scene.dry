@@ -1,0 +1,30 @@
+title: Leftcom Newspaper Founded
+new-page: true
+view-if: german_negotiations >= 8 or (german_negotiations >= 4 and month = 2 and week >= 3) or (german_negotiations >= 4 and party_congress_timer <= 1); 
+max-visits: 1
+tags: event
+on-arrival: {!
+  Q.b_dissent += 0.1; 
+  Q.leftcom_strength += 10; 
+  Q.leninist_unrest += 5; 
+!}
+
+= Founding of Kommunist
+
+The <span style="color: var(--leftcom); font-weight: bold;">Leftcoms</span> have announced the creation of their own newspaper, <i>Kommunist</i>, with articles promoting "revolutionary war" and decrying capitulation to the Germans. Though a relatively small organ so far, it appears the faction seeks to use it to win over delegates to the upcoming party congress.   
+
+- @condemn
+- @nothing
+
+@condemn
+title: Condemn the paper and seek to censure its editors in the Petrograd Soviet fraction. 
+on-arrival: {!
+  if ((Q.leninist_strength + Q.moderate_strength) > Q.leftcom_strength) { Q.leftcom_strength -= 5; Q.leftcom_dissent += 10; }
+!}
+
+[?if ((leninist_strength + moderate_strength) > leftcom_strength) : A resolution is passed in the party fraction of the Petrograd Soviet censuring the editors for impropriety. The <span style="color: var(--leftcom); font-weight: bold;">Leftcoms</span> complain that we they are being unfairly restricted. ?]
+[?if ((leninist_strength + moderate_strength) <= leftcom_strength) : Though the newspaper is criticized by the <span style="color: var(--bolshevik-color); font-weight: bold;">Leninists</span>, it appears the <span style="color: var(--leftcom); font-weight: bold;">Leftcoms</span> have sufficient strength to block any kind of formal sanction, allowing the newspaper to continue unimpeded. ?]
+
+@nothing
+title: There's nothing we can do.
+go-to: root 
