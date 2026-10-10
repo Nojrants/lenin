@@ -1,6 +1,6 @@
 title: Treaty of Brest-Litovsk
 new-page: true
-view-if: german_negotiations = 7
+view-if: german_negotiations = 8
 max-visits: 1
 tags: event
 on-arrival: {!
@@ -12,7 +12,7 @@ on-arrival: {!
 = Peace Treaty Signed
 
 <div style="text-align:center;">
-    <img src="img/brest_litovsk2.jpg" style="display:block; margin:0 auto; max-width:100%; height:auto; border:3px solid #8b0000; box-shadow:0 0 0 2px #d4af37 inset;">
+    <img src="img/brest-litovsk2.jpg" style="display:block; margin:0 auto; max-width:100%; height:auto; border:3px solid #8b0000; box-shadow:0 0 0 2px #d4af37 inset;">
 </div>
 
 Though we tried to delay and stall to the last moment, the treaty of peace between ourselves and the German Empire has finally been signed. It is a devasting agreement for the fledgeling country, as Russia is forced to cede large swaths of territory and resources to the imperialists, and the Revolution left on precarious footing. But nonetheless, after many long years at least we can say we are once more at peace. 
