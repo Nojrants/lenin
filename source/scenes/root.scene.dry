@@ -862,35 +862,39 @@ Q.election_officials = 1;
 Q.election_power = 35;
 
 // 100k
-Q.workers_militia_parties = ['m', 'b', 'sr'];
+Q.workers_militia_parties = ['m', 'b', 'sr', 'lsr'];
 Q.workers_militia_strength = 20;
 Q.workers_militia_militancy = 0.5;
 // soviet loyalty, prov gov loyalty, menshevik loyalty, bolshevik loyalty, sr loyalty, left-sr loyalty
 Q.workers_militia_m_loyalty = 25;
-Q.workers_militia_b_loyalty = 25;
+Q.workers_militia_b_loyalty = 50;
 Q.workers_militia_sr_loyalty = 25;
+Q.workers_militia_lsr_loyalty = 35;
 Q.workers_militia_soviet_loyalty = 50;
 Q.workers_militia_prov_gov_loyalty = 20;
 Q.workers_militia_independent = 25;
 
 // petrograd garrison
-Q.garrison_parties = ['m', 'b', 'k', 'sr'];
+Q.garrison_parties = ['m', 'b', 'k', 'sr', 'lsr'];
 Q.garrison_strength = 100;
 Q.garrison_militancy = 2;
 Q.garrison_m_loyalty = 20;
-Q.garrison_b_loyalty = 20;
+Q.garrison_b_loyalty = 50;
 Q.garrison_k_loyalty = 0;
 Q.garrison_sr_loyalty = 20;
+Q.garrison_lsr_loyalty = 35;
 Q.garrison_soviet_loyalty = 20;
 Q.garrison_prov_gov_loyalty = 20;
 Q.garrison_independent = 30;
 
-Q.city_militia_parties = ['m', 'k', 'sr'];
+Q.city_militia_parties = ['b', 'm', 'k', 'sr', 'lsr'];
 Q.city_militia_strength = 20;
 Q.city_militia_militancy = 0.5;
+Q.city_militia_b_loyalty = 10;
 Q.city_militia_m_loyalty = 20;
 Q.city_militia_k_loyalty = 30;
 Q.city_militia_sr_loyalty = 20;
+Q.city_militia_lsr_loyalty = 20;
 Q.city_militia_soviet_loyalty = 0;
 Q.city_militia_prov_gov_loyalty = 50;
 Q.city_militia_independent = 20;
