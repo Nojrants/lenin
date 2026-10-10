@@ -1535,7 +1535,7 @@ go-to: cabinet_negotiations2
 title: Cancel reassignment.
 subtitle: [?if local_minister != "None": Keep [+ local_minister +] in place. ?]
 view-if: local_minister != "None"
-tags: local_candidates
+tags: local_candidates3
 go-to: cabinet_negotiations2
 
 
