@@ -1,6 +1,6 @@
 title: Leftcom Newspaper Founded
 new-page: true
-view-if: german_negotiations >= 8 or (german_negotiations >= 4 and month = 2 and week >= 3) or (german_negotiations >= 4 and party_congress_timer <= 1); 
+view-if: german_negotiations >= 8 or (german_negotiations >= 4 and month = 2 and week >= 3) or (german_negotiations >= 4 and party_congress_timer <= 1)
 max-visits: 1
 tags: event
 on-arrival: {!
