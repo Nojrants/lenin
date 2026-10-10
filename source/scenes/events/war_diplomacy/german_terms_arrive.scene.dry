@@ -22,7 +22,7 @@ The Germans have finally replied to us with their peace terms:<br><ul>
   
 The Germans have informed us that we must accept the terms as is within 48 hours (much of which has already elapsed). 
 
-Lenin is absolutely adament on the need for peace, and is even threatening to resign from the Central Committee and Sovnarkom if the terms are not accepted. 
+Lenin is absolutely adamant on the need for peace, and is even threatening to resign from the Central Committee and Sovnarkom if the terms are not accepted. 
 
 - @accept
 - @reject
@@ -62,7 +62,7 @@ on-arrival: {!
         Q.soviet_chair == "Uritsky" ||
         Q.soviet_chair == "Bubnov" ||
         Q.soviet_chair == "Pyatakov" ||
-        Q.soviet_chair == "V. Smirnov" ||
+        Q.soviet_chair == "V. Smirnov"
     ) {
         Q.soviet_chair = "Vacant";
         Q.soviet_chair_party = "";
@@ -73,7 +73,7 @@ on-arrival: {!
         Q.deputy_pm == "Uritsky" ||
         Q.deputy_pm == "Bubnov" ||
         Q.deputy_pm == "Pyatakov" ||
-        Q.deputy_pm == "V. Smirnov" ||
+        Q.deputy_pm == "V. Smirnov"
     ) {
         Q.deputy_pm = "Vacant";
         Q.deputy_pm_party = "";
@@ -86,7 +86,7 @@ on-arrival: {!
         Q.foreign_minister == "Uritsky" ||
         Q.foreign_minister == "Bubnov" ||
         Q.foreign_minister == "Pyatakov" ||
-        Q.foreign_minister == "V. Smirnov" ||
+        Q.foreign_minister == "V. Smirnov"
     ) {
         Q.foreign_minister = "Vacant";
         Q.foreign_minister_party = "";
@@ -99,7 +99,7 @@ on-arrival: {!
         Q.war_minister == "Uritsky" ||
         Q.war_minister == "Bubnov" ||
         Q.war_minister == "Pyatakov" ||
-        Q.war_minister == "V. Smirnov" ||
+        Q.war_minister == "V. Smirnov"
     ) {
         Q.war_minister = "Vacant";
         Q.war_minister_party = "";
@@ -112,7 +112,7 @@ on-arrival: {!
         Q.education_minister == "Uritsky" ||
         Q.education_minister == "Bubnov" ||
         Q.education_minister == "Pyatakov" ||
-        Q.education_minister == "V. Smirnov" ||
+        Q.education_minister == "V. Smirnov"
     ) {
         Q.education_minister = "Vacant";
         Q.education_minister_party = "";
@@ -125,7 +125,7 @@ on-arrival: {!
         Q.interior_minister == "Uritsky" ||
         Q.interior_minister == "Bubnov" ||
         Q.interior_minister == "Pyatakov" ||
-        Q.interior_minister == "V. Smirnov" ||
+        Q.interior_minister == "V. Smirnov"
     ) {
         Q.interior_minister = "Vacant";
         Q.interior_minister_party = "";
@@ -138,7 +138,7 @@ on-arrival: {!
         Q.transport_minister == "Uritsky" ||
         Q.transport_minister == "Bubnov" ||
         Q.transport_minister == "Pyatakov" ||
-        Q.transport_minister == "V. Smirnov" ||
+        Q.transport_minister == "V. Smirnov"
     ) {
         Q.transport_minister = "Vacant";
         Q.transport_minister_party = "";
@@ -151,10 +151,10 @@ on-arrival: {!
         Q.trade_minister == "Uritsky" ||
         Q.trade_minister == "Bubnov" ||
         Q.trade_minister == "Pyatakov" ||
-        Q.trade_minister == "V. Smirnov" ||
+        Q.trade_minister == "V. Smirnov"
     ) {
         Q.trade_minister = "Vacant";
-        Q.trade_party = "";
+        Q.trade_minister_party = "";
         Q.efficacy_trade -= 0.1;
     }
 
@@ -164,7 +164,7 @@ on-arrival: {!
         Q.finance_minister == "Uritsky" ||
         Q.finance_minister == "Bubnov" ||
         Q.finance_minister == "Pyatakov" ||
-        Q.finance_minister == "V. Smirnov" ||
+        Q.finance_minister == "V. Smirnov"
     ) {
         Q.finance_minister = "Vacant";
         Q.finance_minister_party = "";
@@ -177,7 +177,7 @@ on-arrival: {!
         Q.labor_minister == "Uritsky" ||
         Q.labor_minister == "Bubnov" ||
         Q.labor_minister == "Pyatakov" ||
-        Q.labor_minister == "V. Smirnov" ||
+        Q.labor_minister == "V. Smirnov"
     ) {
         Q.labor_minister = "Vacant";
         Q.labor_minister_party = "";
@@ -190,7 +190,7 @@ on-arrival: {!
         Q.justice_minister == "Uritsky" ||
         Q.justice_minister == "Bubnov" ||
         Q.justice_minister == "Pyatakov" ||
-        Q.justice_minister == "V. Smirnov" ||
+        Q.justice_minister == "V. Smirnov"
     ) {
         Q.justice_minister = "Vacant";
         Q.justice_minister_party = "";
@@ -203,7 +203,7 @@ on-arrival: {!
         Q.agriculture_minister == "Uritsky" ||
         Q.agriculture_minister == "Bubnov" ||
         Q.agriculture_minister == "Pyatakov" ||
-        Q.agriculture_minister == "V. Smirnov" ||
+        Q.agriculture_minister == "V. Smirnov"
     ) {
         Q.agriculture_minister = "Vacant";
         Q.agriculture_minister_party = "";
@@ -216,7 +216,7 @@ on-arrival: {!
         Q.food_minister == "Uritsky" ||
         Q.food_minister == "Bubnov" ||
         Q.food_minister == "Pyatakov" ||
-        Q.food_minister == "V. Smirnov" ||
+        Q.food_minister == "V. Smirnov"
     ) {
         Q.food_minister = "Vacant";
         Q.food_minister_party = "";
@@ -229,7 +229,7 @@ on-arrival: {!
         Q.nationalities_minister == "Uritsky" ||
         Q.nationalities_minister == "Bubnov" ||
         Q.nationalities_minister == "Pyatakov" ||
-        Q.nationalities_minister == "V. Smirnov" ||
+        Q.nationalities_minister == "V. Smirnov"
     ) {
         Q.nationalities_minister = "Vacant";
         Q.nationalities_minister_party = "";
@@ -242,7 +242,7 @@ on-arrival: {!
         Q.welfare_minister == "Uritsky" ||
         Q.welfare_minister == "Bubnov" ||
         Q.welfare_minister == "Pyatakov" ||
-        Q.welfare_minister == "V. Smirnov" ||
+        Q.welfare_minister == "V. Smirnov"
     ) {
         Q.welfare_minister = "Vacant";
         Q.welfare_minister_party = "";
