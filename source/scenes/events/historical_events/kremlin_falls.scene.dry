@@ -8,6 +8,7 @@ on-arrival: {!
     Q.oppokov_available = 1; Q.tomsky_available = 1; 
     Q.instability -= 1; 
     window.mapSetController('moscow', 'bolsheviks', 100);
+    mapAddDivisions('moscow', 'bolsheviks', 2)
 !}
 
 = Fall of the Kremlin
