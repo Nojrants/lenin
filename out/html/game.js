@@ -746,6 +746,44 @@ window.saveMapState = function() {
     q.map_battles = JSON.stringify(window.mapBattles);
     q.map_report = JSON.stringify(window.mapReport);
     q.map_moves_used = window.mapMovesUsed;
+    syncMapQualities(q);
+};
+
+/* Plain numeric qualities mirroring the map, so Dendry's own conditions can
+   use them (view-if, choose-if, go-to ... if, [? if ... : ... ?]).
+   "Held" and "my" mean window.mapPlayerFaction (the Bolsheviks).
+     map_held_<province>     1 if the player's faction controls it, else 0
+     map_control_<province>  control 0-100 (0 if nobody controls it)
+     map_div_<province>      divisions stationed there (all factions)
+     map_mydiv_<province>    the player's divisions stationed there
+     map_held_total          number of provinces the player controls
+     map_mydiv_total         number of divisions the player has        */
+function syncMapQualities(q) {
+    var heldTotal = 0;
+    var myTotal = 0;
+    Object.keys(window.mapProvinces).forEach(function(id) {
+        var p = window.mapProvinces[id];
+        var here = divisionsIn(id);
+        var mine = here.filter(function(d) {
+            return d.owner === window.mapPlayerFaction;
+        }).length;
+        var held = p.controller === window.mapPlayerFaction ? 1 : 0;
+        q['map_held_' + id] = held;
+        q['map_control_' + id] = p.controller === 'none' ? 0 : p.control;
+        q['map_div_' + id] = here.length;
+        q['map_mydiv_' + id] = mine;
+        heldTotal += held;
+        myTotal += mine;
+    });
+    q.map_held_total = heldTotal;
+    q.map_mydiv_total = myTotal;
+}
+
+/* Make sure the map qualities exist and are current (new game, loaded
+   save). Runs on every new page; scenes can also call it. */
+window.mapInit = function() {
+    window.loadMapState();
+    window.saveMapState();
 };
 
 window.loadMapState = function() {
@@ -2662,6 +2700,12 @@ scene_id
 
 
 window.onNewPage = function() {
+
+    try {
+        window.mapInit();
+    } catch (e) {
+        console.warn('mapInit failed:', e);
+    }
 
     var scene =
         window.dendryUI.dendryEngine
