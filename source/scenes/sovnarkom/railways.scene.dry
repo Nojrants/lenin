@@ -3,7 +3,7 @@ new-page: true
 is-card: true
 on-arrival: transport_policy_timer += 2; week_actions += 1
 view-if: transport_policy_timer == 0
-card-image: img/railways2.jpg
+card-image: img/railways1.PNG
 tags: sovnarkom, government
 
 = Transport Policy
