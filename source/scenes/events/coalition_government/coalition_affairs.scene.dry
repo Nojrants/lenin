@@ -130,24 +130,8 @@ on-arrival:  {!
   if (Q.local_minister_party != "Bolshevik") { Q.local_minister = "Vacant"; Q.local_minister_party = ""; }
 
   Q.vikzhel_unrest += 20; 
-  if (Q.vikzhel_unrest >= 50 && Q.vikzhel_strength >= 25) {
-    Q.vikzhel_strike = 1;
-    Q.workers_unrest += 10;
+!}
 
-  	Q.previous_military_trains = Q.military_trains;
-  	Q.previous_civilian_transport = Q.civilian_transport; 
-  	Q.previous_transportation_industry = Q.transportation_industry;
-  	Q.previous_industry = Q.industry; 
-  
-  	Q.military_trains *= 0.1;
-  	Q.civilian_transport *= 0.5;
-  	Q.transportation_industry = 0.5; 
-  	Q.industry = Q.previous_industry * 0.5; 
-  	Q.ag_transport * 0.9; 
-  }
-  !}
-
-[?if vikzhel_strike == 1 : Worse, Vikzhel has declared they are launching their promised railroad strike, bringing industry to a standstill. ?]  
 
 
 
