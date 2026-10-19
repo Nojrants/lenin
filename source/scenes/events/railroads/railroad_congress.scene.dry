@@ -10,20 +10,10 @@ tags: event
 go-to: post_election_menu
 on-arrival: {!
   Q.railway_congress_timer = 24;
-console.log("Railway chart variables:", {
-    anarchist: Q.anarchist_rail_votes_dec,
-    maximalist: Q.maximalist_rail_votes_dec,
-    b: Q.b_rail_votes_dec,
-    sdi: Q.sdi_rail_votes_dec,
-    left_m: Q.left_m_rail_votes_dec,
-    m: Q.m_rail_votes_dec,
-    right_m: Q.right_m_rail_votes_dec,
-    lsr: Q.lsr_rail_votes_dec,
-    sr: Q.sr_rail_votes_dec,
-    right_sr: Q.right_sr_rail_votes_dec,
-    popular_socialist: Q.popular_socialist_rail_votes_dec,
-    other: Q.other_rail_votes_dec
-});
+
+  Q.coalition1 = Q.anarchist_rail_votes_dec + Q.maximalist_rail_votes_dec + Q.b_rail_votes_dec + (Q.other_rail_votes_dec * Math.max(0, (90 - Q.workers_unrest))/100); 
+  Q.coalition2 = Q.left_m_rail_votes_dec + Q.m_rail_votes_dec + Q.right_m_rail_votes_dec + Q.sr_rail_votes_dec + Q.right_sr_rail_votes_dec + Q.popular_socialist_rail_votes_dec + (Q.other_rail_votes_dec * 0.5); 
+
 !}
 on-display: {!
 // do the graphs
@@ -94,7 +84,7 @@ if (window && d3) {
 }
 !}
 
-= Congress of Soviets
+= Railways Congress
 
 {!<svg id="soviet" viewBox="0 0 625 310"> </svg>!}
 
@@ -129,5 +119,63 @@ if (window && d3) {
 {!</table>!}
 
 @post_election_menu
-title: Begin the congress...
- 
+
+- @october_majority
+- @gridlock
+- @vikzhel_majority
+
+@october_majority
+title: Our forces are in firm command of the congress.
+subtitle: [+ coalition1 +]% – A coalition of <span style="color: var(--b-color); font-weight: bold;">Bolsheviks</span>, <span style="color: var(--lsr-color); font-weight: bold;">Left-SRs</span>, and other maximalists. 
+unavailable-subtitle: [+ coalition1 +]% – We lack the numbers for this. 
+choose-if: coalition1 > 50
+on-arrival: {!
+  Q.b_strength += 5; Q.workers_b += 5; 
+  Q.democraticity += 1; 
+  Q.moderate_strength -= 5; Q.leninist_strength += 5;
+  Q.m_strength -= 2; Q.right_m_strength -= 4; 
+  Q.sr_strength -= 4; Q.right_sr_strength -= 4; 
+  Q.vikzhel_strength -= 25; 
+  Q.campaign_against_vikzhel = 4; 
+!}
+
+
+With a majority in hand, we're able to pass a number of resolutions severely weakening the position of the moderate socialists. A new Vikzhel presidium is elected that's firmly under Bolshevik control, and reforms are put in place to keep the union subordinate to the interests of the government going forward. The other parties protest severely, and vow to continue their opposition on the subnational level.
+
+
+@gridlock
+title: Can we obstruct the congress proceedings to create a stalemate?
+choose-if: coalition2 < 66
+on-arrival: {!
+  Q.b_strength -= 2; Q.workers_b -= 2; 
+  Q.instability += 1; Q.democraticity -= 1; 
+  Q.moderate_unrest += 5; Q.leninist_unrest -= 5;
+  Q.m_strength += 2; Q.right_m_strength += 2; 
+  Q.sr_strength += 2; Q.right_sr_strength += 2; 
+  Q.vikzhel_unrest += 10; 
+  Q.campaign_against_vikzhel = 5; 
+!}
+
+Though we lack a majority, we are able to disrupt the proceedings of the congress and cause gridlock. The congress grinds to a halt, as proceedings stretch out over several days. This buys us more time as the campaign to weaken Vikzhel continues. 
+
+
+@vikzhel_majority
+title: The Vikzhelite opposition is in firm command of the congress.
+subtitle: [+ coalition2 +]% – A coalition of <span style="color: var(--m-color); font-weight: bold;">Mensheviks</span>, <span style="color: var(--sr-color); font-weight: bold;">SRs</span>, and other moderates. 
+unavailable-subtitle: [+ coalition2 +]% – They lack the numbers for this. 
+choose-if: coalition2 > 50
+on-arrival: {!
+  Q.b_strength -= 5; Q.workers_b -= 5; 
+  Q.instability -= 2; Q.democraticity += 1; 
+  Q.moderate_strength += 5; Q.leninist_strength -= 5;
+  Q.m_strength += 5; Q.right_m_strength += 6; 
+  Q.sr_strength += 6; Q.right_sr_strength += 5; 
+  Q.vikzhel_unrest += 10; Q.vikzhel_strength += 10; 
+  Q.transportation_industry *= 1.05;
+  Q.industry *= 1.05; 
+  Q.campaign_against_vikzhel = 6; 
+!}
+
+It appears our efforts may have backfired, as the elections have returned a strong majority for the Vikzhel old guard. The incumbent leadership is affirmed, and they pass a series of resolutions meant to re-establish order on the railways, severely weakening our position on the local level. 
+
+
