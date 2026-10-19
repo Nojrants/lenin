@@ -1484,6 +1484,7 @@ Q.timers = [//m_party
             'ca_support',
             'coalition_actions',
             'peace_question',
+            'railway_congress',
             ];
 Q.advisor_action_timer = 0;
 Q.labor_unrest_timer = 5;
