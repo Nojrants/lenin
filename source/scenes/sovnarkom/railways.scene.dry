@@ -106,5 +106,18 @@ title: On second thought, let's not make a decision yet.
 go-to: railways
 
 
+@call_extraordinary congress
+title: Call for an extraordinary railway congress! 
+subtitle: With Vikzhel still not budging, we need a congress to elect new leadership. 
+new-page: true
+tags: railways_special
+view-if: campaign_against_vikzhel = 1 
+on-arrival: campaign_against_vikzhel = 2; railway_congress_timer = 3; 
 
-  
+= Extraordinary Congress
+
+In the wake of our campaign to undermine Vikzhel, the incumbent leadership has only entrenched itself, all while refusing to cooperate with the People's Commissariat. If they won't budge, then we need to call for an extraordinary congress of railway workers, in order to elect new leadership more amenable to our government. The call has gone out across the country that railway councils are to begin selecting delegates for a congress in the capital. 
+
+
+
+
