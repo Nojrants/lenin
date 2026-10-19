@@ -74,6 +74,7 @@ The All-Russian Union of Railway Workers (**Vikzhel**) is the largest and most i
 title: Let us open negotiations with Vikzhel and the other socialist parties. 
 subtitle: We can placate Vikzhel by negotiating an all-socialist coalition government. 
 go-to: vikzhel_ceasefire
+max-visits: 2
 view-if: year = 1917 and campaign_against_vikzhel != 1
 
 @isolate
