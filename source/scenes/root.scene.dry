@@ -202,6 +202,7 @@ Q.safety_standards = 1;
 Q.migration_modifier = 0; 
 Q.coalition_tension = 0;
 Q.campaign_against_vikzhel = 0; 
+Q.railway_congress_timer = 12; 
 
 
 Q.elites = 2;
