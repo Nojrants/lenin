@@ -10,6 +10,20 @@ tags: event
 go-to: post_election_menu
 on-arrival: {!
   Q.railway_congress_timer = 24;
+console.log("Railway chart variables:", {
+    anarchist: Q.anarchist_rail_votes_dec,,
+    maximalist: Q.maximalist_rail_votes_dec,,
+    b: Q.b_rail_votes_dec,,
+    sdi: Q.sdi_rail_votes_dec,
+    left_m: Q.left_m_rail_votes_dec,
+    m: Q.m_rail_votes_dec,
+    right_m: Q.right_m_rail_votes_dec,
+    lsr: Q.lsr_rail_votes_dec,
+    sr: Q.sr_rail_votes_dec,
+    right_sr: Q.right_sr_rail_votes_dec,
+    popular_socialist: Q.popular_socialist_rail_votes_dec,
+    other: Q.other_rail_votes_dec
+});
 !}
 on-display: {!
 // do the graphs
