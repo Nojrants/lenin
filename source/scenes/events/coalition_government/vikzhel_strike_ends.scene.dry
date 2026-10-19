@@ -1,6 +1,7 @@
 title: End of the Railway Strike
 new-page: true
 view-if: vikzhel_strike == 1 and (coalition_government >= 1 or vikzhel_unrest < 10)
+tags: event
 on-arrival: {!
     Q.vikzhel_strike_ended = 1;
     Q.vikzhel_strike = 0;
