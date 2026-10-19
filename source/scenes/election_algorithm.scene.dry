@@ -343,16 +343,16 @@ var rail_classes = ["workers"];
 
 // Campaign bonuses to workers' party support
 var campaign_bonus = {
-    anarchist: [0, 5, 8],
-    maximalist: [2, 10, 15],
-    sdi: [5, 10, 5],
+    anarchist: [0, 2, 4],
+    maximalist: [5, 10, 15],
+    sdi: [0, 1, 2],
     left_m: [20, 20, 15],
     m: [40, 35, 30],
     right_m: [60, 50, 40],
     sr: [60, 50, 40],
     right_sr: [50, 40, 30],
-    popular_socialist: [5, 5, 2],
-    other: [10, 10, 15]
+    popular_socialist: [3, 2, 0],
+    other: [10, 15, 20]
 };
 
 var campaign_level = Q.campaign_against_vikzhel;
