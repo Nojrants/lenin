@@ -1,0 +1,106 @@
+title: Railways
+new-page: true
+is-card: true
+on-arrival: transport_policy_timer += 2; week_actions += 1
+view-if: transport_policy_timer == 0
+card-image: img/railways2.jpg
+tags: sovnarkom, government
+
+= Transport Policy
+
+Due to the war, the government has acquired a great deal of power over the railroads. What should our transportation policy be?
+
+
+- @administration
+- @railways_null
+- #railways_special
+- @root: Do not change policy
+- @easy_discard
+- @cancel_advisor_action
+
+
+@administration
+title: ADMINISTRATION
+
+- @improve_admin
+- @hire_staff
+- @corruption
+- @railways_return
+
+@improve_admin
+title: Streamline the commissariat
+subtitle: Cut waste and inefficiencies, increase labor intensity
+choose-if: railways_corruption = 0
+unavailable-subtitle: There's nothing more to cut at the moment. 
+on-arrival: railways_expend -= 0.25; efficacy_railways += 0.1 if efficacy_railways < 1; railways_streamline += 8; 
+
+@hire_staff
+title: Hire administrative personnel
+subtitle: -0.5 resources
+on-arrival: efficacy_railways += 0.2 if efficacy_railways < 1; railways_expend += 0.25; resources -= 0.5;
+
+@corruption
+title: Root-out departmental corruption. 
+subtitle: -0.5 resources
+on-arrival: efficacy_railways += 0.1 if efficacy_railways < 1; resources -= 0.5;
+
+@railways_return
+title: Cancel action
+go-to: railways
+
+@railways_null
+title: -------------------------------------------------------------------------------------------------
+go-to: railways
+
+
+  
+
+@dealing_with_vikzhel
+title: The Vikzhel Crisis...
+subtitle: We must decide on a policy toward the Railwaymen's Union. 
+new-page: true
+view-if: campaign_against_vikzhel != 1 
+
+The All-Russian Union of Railway Workers (**Vikzhel**) is the largest and most influential union in the country, possessing the power to cripple our government through a railroad strike. Although officially "neutral" in the emerging political conflict, Vikzhel's leadership is dominated by moderate socialists, making the organization uncooperative to Bolshevik governance. In particular, the union strongly favors the creation of an "all-socialist coalition government", viewing broad cooperation as the only way to ensure the survival of the Revolution.  
+
+- @negotiate
+- @isolate
+- @cancel_isolation
+
+@negotiate
+title: Let us open negotiations with Vikzhel and the other socialist parties. 
+subtitle: We can placate Vikzhel by negotiating an all-socialist coalition government. 
+go-to: vikzhel_ceasefire
+view-if: year = 1917 and campaign_against_vikzhel != 1
+
+@isolate
+title: We must break the power of Vikzhel.
+subtitle: No union can be allowed to lord over the decisions of the government. 
+  
+= Isolating Vikzhel 
+
+By declaring the "political admissibibility" of treating with Vikzhel, we will forever destroy our relations with the organization, but it may also undermine Vikzhel's own legitimacy in the eyes of the workers. Vikzhel is a "big tent" union representing a variety of rail-related professions, with an extensive vertical hierarchy. Perhaps we could divide the union along class lines, by stirring up the rank-and-file workers to seize power from the senior technical staff. If we build grass-roots support among everyday railroad workers, there will be immense pressure to replace the incumbent leadership at the top, though this may also harm the functioning of the railways in the meantime. 
+
+- @initiate
+- @cancel_isolation
+
+@initiate
+title: Initiate a grassroots campaign against Vikzhel! 
+on-arrival: {!
+  Q.vikzhel_unrest += 10; Q.vikzhel_strength -= 5; 
+  Q.instability += 2; 
+  Q.industry *= 0.9; 
+	Q.ag_transport *= 0.9; 
+  Q.campaign_against_vikzhel = 1; 
+  Q.sdi_relation -= 5; Q.left_m_relation -= 5; Q.centre_m_relation -= 5; Q.right_m_relation -= 5; Q.centre_sr_relation -= 5; Q.right_sr_relation -= 5; Q.ns_relation -= 5;
+!}
+
+We initiate a grassroots campaign against Vikzhel, encouraging rank-and-file railwaymen to seize control over the lines and form local councils. The incumbent Vikzhel leadership is highly aggrieved by this. 
+
+@cancel_isolation
+title: On second thought, let's not make a decision yet. 
+go-to: railways
+
+
+
+  
