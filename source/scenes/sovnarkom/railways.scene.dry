@@ -59,6 +59,7 @@ go-to: railways
 title: The Vikzhel Crisis...
 subtitle: We must decide on a policy toward the Railwaymen's Union. 
 new-page: true
+tags: railways_special
 view-if: campaign_against_vikzhel != 1 
 
 The All-Russian Union of Railway Workers (**Vikzhel**) is the largest and most influential union in the country, possessing the power to cripple our government through a railroad strike. Although officially "neutral" in the emerging political conflict, Vikzhel's leadership is dominated by moderate socialists, making the organization uncooperative to Bolshevik governance. In particular, the union strongly favors the creation of an "all-socialist coalition government", viewing broad cooperation as the only way to ensure the survival of the Revolution.  
