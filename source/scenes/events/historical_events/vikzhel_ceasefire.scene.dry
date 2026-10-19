@@ -50,17 +50,19 @@ Vikzhel immediately unleashes a full-scale strike across the railway network, an
 title: There is no harm in hearing them out...
 subtitle: Send representatives to the conference. 
 new-page: true
-on-arrival: commissariats_held = 14; influence = (10 + (left_m_relation / 3) + (moderate_strength / 10) - (instability / 10)); lenin_anger = 0; 
+on-arrival: {!
+	Q.commissariats_held = 14; Q.lenin_anger = 0; 
+	Q.influence = (10 + (Q.left_m_relation / 3) + (Q.moderate_strength / 10) - (Q.instability / 10)); 
+	if (Q.year == 1917 && Q.month == 11 && Q.week == 1) { Q.influence -= 5; }
+	if ((Q.year == 1917 && Q.month == 11 && Q.week >= 4) || (Q.year == 1917 && Q.month == 12)) { Q.influence -= 5; }
+!}
 go-to: menu
 
 = Vikzhel Negotiations 
 
 Despite the initial talks stalling, several days of arguing (and news of anti-Bolshevik military failures) have worn down the most ardent anti-Bolshevik representatives. Though the promises we make here won't be binding until signed-off on by the Party, we are in a position to potentially reach a compromise. 
 
-
 @menu
-
-[+ influence +]
 
 - #vikzhel_offers
 - @null
