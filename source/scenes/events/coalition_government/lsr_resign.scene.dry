@@ -1,0 +1,41 @@
+title: Parties Resign from Government
+new-page: true
+view-if: brest_signed = 1 and coalition_government >= 1
+max-visits: 1
+tags: event
+on-arrival: {!
+  if (Q.lsr_in_gov == 1) { Q.lsr_in_gov = 0; Q.lsr_relation -= 10; Q.lsr_strength -= 3; }
+  if (Q.m_in_gov == 1) { Q.m_in_gov = 0; Q.left_m_relation -= 10; Q.centre_m_relation -= 10; Q.m_strength -= 3; }
+  if (Q.sr_in_gov == 1) { Q.sr_in_gov = 0; Q.centre_sr_relation -= 10; Q.sr_strength -= 3; }
+  if (Q.sdi_in_gov == 1) { Q.sdi_in_gov = 0; Q.sdi_relation -= 10; Q.sdi_strength -= 3; }
+  if (Q.ns_in_gov == 1) { Q.ns_in_gov = 0; Q.ns_relation -= 10; Q.ns_strength -= 3;  }
+              
+  if (Q.foreign_minister_party != "Bolshevik") { Q.foreign_minister = "Vacant"; Q.foreign_minister_party = ""; }
+  if (Q.war_minister_party != "Bolshevik") { Q.war_minister = "Vacant"; Q.war_minister_party = ""; }
+  if (Q.education_minister_party != "Bolshevik") { Q.education_minister = "Vacant"; Q.education_minister_party = ""; }
+  if (Q.interior_minister_party != "Bolshevik") { Q.interior_minister = "Vacant"; Q.interior_minister_party = ""; }
+  if (Q.transport_minister_party != "Bolshevik") { Q.transport_minister = "Vacant"; Q.transport_minister_party = ""; }
+  if (Q.trade_minister_party != "Bolshevik") { Q.trade_minister = "Vacant"; Q.trade_minister_party = ""; }
+  if (Q.finance_minister_party != "Bolshevik") { Q.finance_minister = "Vacant"; Q.finance_minister_party = ""; }
+  if (Q.justice_minister_party != "Bolshevik") { Q.justice_minister = "Vacant"; Q.justice_minister_party = ""; }
+  if (Q.labor_minister_party != "Bolshevik") { Q.labor_minister = "Vacant"; Q.labor_minister_party = ""; }
+  if (Q.agriculture_minister_party != "Bolshevik") { Q.agriculture_minister = "Vacant"; Q.agriculture_minister_party = ""; }
+  if (Q.food_minister_party != "Bolshevik") { Q.food_minister = "Vacant"; Q.food_minister_party = ""; }
+  if (Q.posts_minister_party != "Bolshevik") { Q.posts_minister = "Vacant"; Q.posts_minister_party = ""; }
+  if (Q.nationalities_minister_party != "Bolshevik") { Q.nationalities_minister = "Vacant"; Q.nationalities_minister_party = ""; }
+  if (Q.welfare_minister_party != "Bolshevik") { Q.welfare_minister = "Vacant"; Q.welfare_minister_party = ""; }
+  if (Q.property_minister_party != "Bolshevik") { Q.property_minister = "Vacant"; Q.property_minister_party = ""; }
+  if (Q.local_minister_party != "Bolshevik") { Q.local_minister = "Vacant"; Q.local_minister_party = ""; }
+
+  Q.coalition_government = 0; 
+!}
+
+= Parties Resign
+
+In response to our signing of the Treaty of Brest-Litovsk, our coalition partners have announced that they are resigning from government in protest. The other parties vigorously protest the treaty, with the <span style="color: var(--lsr-color); font-weight: bold;">Left-SRs</span> in particular emerging at the forefront of the protests. 
+
+- @so_be_it
+
+@so_be_it
+title: So be it...
+go-to: root
