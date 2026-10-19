@@ -332,3 +332,114 @@ for (var faction of Q.b_factions) {
 !}
 go-to: jumpScene
 
+
+
+
+######################################### RAILWAYS
+@railways
+title: Railways
+on-arrival: {!
+var rail_classes = ["workers"];
+
+// Temporarily adjust party strengths
+if (Q.campaign_against_vikzhel == 0) {
+    anarchist_strength += 0; 
+    maximalist_strength += 2;
+    sdi_strength += 5; 
+    left_m_strength += 20;
+    m_strength += 40;
+    right_m_strength += 60;
+    sr_strength += 60;
+    right_sr_strength += 50;
+    popular_socialist_strength += 5;
+    other_strength += 10;
+}
+if (Q.campaign_against_vikzhel == 1) {
+    anarchist_strength += 5; 
+    maximalist_strength += 10;
+    sdi_strength += 10; 
+    left_m_strength += 20;
+    m_strength += 35;
+    right_m_strength += 50;
+    sr_strength += 50;
+    right_sr_strength += 40;
+    popular_socialist_strength += 5;
+    other_strength += 10;
+}
+if (Q.campaign_against_vikzhel == 2) {
+    anarchist_strength += 8; 
+    maximalist_strength += 15;
+    sdi_strength += 5; 
+    left_m_strength += 15;
+    m_strength += 30;
+    right_m_strength += 40;
+    sr_strength += 40;
+    right_sr_strength += 30;
+    popular_socialist_strength += 2;
+    other_strength += 15;
+}
+
+// Normalize each class's party support
+for (var c of rail_classes) {
+    var class_votes = 0;
+
+    for (var party of Q.parties) {
+        if (party == "none") {
+            continue;
+        }
+
+        if (!Q[c + '_' + party] || Q[c + '_' + party] < 0) {
+            Q[c + '_' + party] = 0;
+        }
+
+        class_votes += Q[c + '_' + party];
+    }
+
+    if (class_votes <= 0) {
+        class_votes = 1;
+    }
+
+    for (var party of Q.parties) {
+        Q[c + '_' + party + '_normalized'] =
+            100 * Q[c + '_' + party] / class_votes;
+
+        Q[c + '_' + party + '_display'] =
+            Math.round(100 * Q[c + '_' + party] / class_votes);
+    }
+}
+
+// Calculate support for each party
+var total_support = 0;
+
+for (var party of Q.parties) {
+    if (party == "none") {
+        continue;
+    }
+
+    var party_support = 0;
+
+    for (var c of rail_classes) {
+        party_support += Q[c] * Q[c + '_' + party + '_normalized'];
+    }
+
+    Q[party + '_support'] = Math.max(0, party_support);
+    total_support += Q[party + '_support'];
+}
+
+// Normalize party support and calculate vote shares
+if (total_support <= 0) {
+    total_support = 1;
+}
+
+for (var party of Q.parties) {
+    if (party == "none") {
+        continue;
+    }
+
+    Q[party + '_rail_normalized'] = Q[party + '_support'] / total_support;
+    Q[party + '_rail_votes_dec'] = Math.round(Q[party + '_rail_normalized'] * 1000) / 10;
+    Q[party + '_rail_votes'] = Math.round(Q[party + '_rail_normalized'] * 100);
+    Q[party + '_rail_votes_disp'] = Q[party + '_rail_votes_dec'].toFixed(1);
+}
+!}
+go-to: jumpScene
