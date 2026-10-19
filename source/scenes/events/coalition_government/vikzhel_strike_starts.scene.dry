@@ -1,6 +1,6 @@
 title: Railroads on Strike! 
 new-page: true
-view-if: vikzhel_unrest >= 50 and vikzhel_strength >= 25 and vikzhel_strike < 1
+view-if: vikzhel_unrest >= 50 and vikzhel_strength >= 25 and coalition_government < 1
 on-arrival: {!
     Q.vikzhel_strike = 1;
     Q.workers_unrest += 10;
