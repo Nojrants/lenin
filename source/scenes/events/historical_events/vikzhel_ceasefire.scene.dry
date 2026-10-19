@@ -31,8 +31,6 @@ Our refusal to cooperate entirely shocks the other parties, seemingly proving th
 
 Though on the other hand, Lenin's argument against cooperation carries some sway in the working-class districts of the capital, with workers' councils agreeing that they cannot compromise the values and gains of the October Revolution. 
 
-Vikzhel immediately unleashes a full-scale strike across the railway network, and many other prominent unions and enterprises decide to join them. 
-
 
 
 @accept_vikzhel
@@ -467,8 +465,6 @@ Unable to come to an agreement, we're forced to walk away from the negotiations.
 
 Lenin criticizes the entire endeavor, using the failure of talks to prove his point that compromise is impossible. This will likely serve as a rallying cry for the Leninist position going forward. 
 
-Vikzhel immediately unleashes a full-scale strike across the railway network, and many other prominent unions and enterprises decide to join them. 
-
 
 
 
@@ -508,8 +504,6 @@ on-arrival: sdi_relation -= 10; left_m_relation -= 10; centre_m_relation -= 10; 
 Our sudden renegation on the agreement and breaking-off of negotiations entirely shocks the other parties, seemingly proving the right socialists correct after all—more than likely compromise will be impossible from here on out. Likewise, we receive immense condemnation from various interest groups, and even some members of our own party.
 
 Though on the other hand, Lenin's argument against cooperation carries some sway in the working-class districts of the capital, with workers' councils agreeing that they cannot compromise the values and gains of the October Revolution. 
-
-Vikzhel immediately unleashes a full-scale strike across the railway network, and many other prominent unions and enterprises decide to join them. 
 
 
 
@@ -875,8 +869,6 @@ Our sudden renegation on the agreement entirely shocks the other parties, seemin
 
 Though on the other hand, Lenin's argument against cooperation carries some sway in the working-class districts of the capital, with workers' councils agreeing that they cannot compromise the values and gains of the October Revolution. 
 
-Vikzhel immediately unleashes a full-scale strike across the railway network, and many other prominent unions and enterprises decide to join them. 
-
 
 
 
@@ -971,8 +963,6 @@ on-arrival: {!
 Our sudden renegation on the agreement entirely shocks the other parties, seemingly proving the right socialists correct after all—more than likely compromise will be impossible from here on out. Likewise, we receive immense condemnation from various interest groups, and even some members of our own party.
 
 Though on the other hand, Lenin's argument against cooperation carries some sway in the working-class districts of the capital, with workers' councils agreeing that they cannot compromise the values and gains of the October Revolution. 
-
-Vikzhel immediately unleashes a full-scale strike across the railway network, and many other prominent unions and enterprises decide to join them. 
 
 @finalize_deal
 title: Finalize the agreement. 
