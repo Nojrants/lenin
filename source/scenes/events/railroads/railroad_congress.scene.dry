@@ -11,9 +11,9 @@ go-to: post_election_menu
 on-arrival: {!
   Q.railway_congress_timer = 24;
 console.log("Railway chart variables:", {
-    anarchist: Q.anarchist_rail_votes_dec,,
-    maximalist: Q.maximalist_rail_votes_dec,,
-    b: Q.b_rail_votes_dec,,
+    anarchist: Q.anarchist_rail_votes_dec,
+    maximalist: Q.maximalist_rail_votes_dec,
+    b: Q.b_rail_votes_dec,
     sdi: Q.sdi_rail_votes_dec,
     left_m: Q.left_m_rail_votes_dec,
     m: Q.m_rail_votes_dec,
