@@ -10,20 +10,6 @@ tags: event
 go-to: post_election_menu
 on-arrival: {!
   Q.railway_congress_timer = 24;
-             
-  Q.anarchist_rail = Q.anarchist_rail_votes_dec;
-  Q.maximalist_rail = Q.maximalist_rail_votes_dec;
-  Q.b_rail = Q.b_rail_votes_dec;
-  Q.sdi_rail = Q.sdi_rail_votes_dec;
-  Q.left_m_rail = Q.left_m_rail_votes_dec;
-  Q.m_rail = Q.m_rail_votes_dec;
-  Q.right_m_rail = Q.right_m_rail_votes_dec;
-  Q.lsr_rail = Q.lsr_rail_votes_dec;
-  Q.sr_rail = Q.sr_rail_votes_dec;
-  Q.right_sr_rail = Q.right_sr_rail_votes_dec;
-  Q.popular_socialist_rail = Q.popular_socialist_rail_votes_dec;
-  Q.other_rail = Math.round(10*(Q.other_rail_votes_dec + Q.k_rail_votes_dec + Q.rightist_rail_votes_dec))/10;
-
 !}
 on-display: {!
 // do the graphs
@@ -31,15 +17,15 @@ var data = [
 {"id": "anarchist",
  "legend": "Anarchist",
  "name": "Anarchist",
- "seats": Math.round(Q.anarchist_rail*10)},
+ "seats": Math.round(Q.anarchist_rail_votes_dec*10)},
 {"id": "maximalist",
  "legend": "SR-Maximalist",
  "name": "SR-Maximalist",
- "seats": Math.round(Q.maximalist_rail*10)},
+ "seats": Math.round(Q.maximalist_rail_votes_dec*10)},
 {"id": "b",
  "legend": "Bolshevik",
  "name": "Bolshevik",
- "seats": Math.round(Q.b_rail*10)},
+ "seats": Math.round(Q.b_rail_votes_dec*10)},
 {"id": "sdi",
  "legend": "SD-Internationalist",
  "name": "SD-Internationalist",
@@ -102,29 +88,29 @@ if (window && d3) {
 
 {!<tr><th>Party</th><th>Vote Share</th></tr>!}
 
-{!<tr><td><div class="party-box box a"></div>Anarchists</td><td>!}[+ anarchist_rail +]%{!</td></tr>!}
+{!<tr><td><div class="party-box box a"></div>Anarchists</td><td>!}[+ anarchist_rail_votes_dec +]%{!</td></tr>!}
 
-{!<tr><td><div class="party-box box maximalist"></div>Maximalists</td><td>!}[+ maximalist_rail +]%{!</td></tr>!}
+{!<tr><td><div class="party-box box maximalist"></div>Maximalists</td><td>!}[+ maximalist_rail_votes_dec +]%{!</td></tr>!}
 
-{!<tr><td><div class="party-box box b"></div>Bolsheviks</td><td>!}[+ b_rail +]%{!</td></tr>!}
+{!<tr><td><div class="party-box box b"></div>Bolsheviks</td><td>!}[+ b_rail_votes_dec +]%{!</td></tr>!}
 
-{!<tr><td><div class="party-box box sdi"></div>SD-Internationalists</td><td>!}[+ sdi_rail +]%{!</td></tr>!}
+{!<tr><td><div class="party-box box sdi"></div>SD-Internationalists</td><td>!}[+ sdi_rail_votes_dec +]%{!</td></tr>!}
 
-{!<tr><td><div class="party-box box left_m"></div>Menshevik Internationalists</td><td>!}[+ left_m_rail +]%{!</td></tr>!}
+{!<tr><td><div class="party-box box left_m"></div>Menshevik Internationalists</td><td>!}[+ left_m_rail_votes_dec +]%{!</td></tr>!}
 
-{!<tr><td><div class="party-box box m"></div>Mensheviks (Centre)</td><td>!}[+ m_rail +]%{!</td></tr>!}
+{!<tr><td><div class="party-box box m"></div>Mensheviks (Centre)</td><td>!}[+ m_rail_votes_dec +]%{!</td></tr>!}
 
-{!<tr><td><div class="party-box box right_m"></div>Menshevik Defencists</td><td>!}[+ right_m_rail +]%{!</td></tr>!}
+{!<tr><td><div class="party-box box right_m"></div>Menshevik Defencists</td><td>!}[+ right_m_rail_votes_dec +]%{!</td></tr>!}
 
-{!<tr><td><div class="party-box box lsr"></div>Left-SRs</td><td>!}[+ lsr_rail +]%{!</td></tr>!}
+{!<tr><td><div class="party-box box lsr"></div>Left-SRs</td><td>!}[+ lsr_rail_votes_dec +]%{!</td></tr>!}
 
-{!<tr><td><div class="party-box box sr"></div>SRs</td><td>!}[+ sr_rail +]%{!</td></tr>!}
+{!<tr><td><div class="party-box box sr"></div>SRs</td><td>!}[+ sr_rail_votes_dec +]%{!</td></tr>!}
 
-{!<tr><td><div class="party-box box right_sr"></div>Right SRs</td><td>!}[+ right_sr_rail +]%{!</td></tr>!}
+{!<tr><td><div class="party-box box right_sr"></div>Right SRs</td><td>!}[+ right_sr_rail_votes_dec +]%{!</td></tr>!}
 
-{!<tr><td><div class="party-box box popular_socialist"></div>Popular Socialists</td><td>!}[+ popular_socialist_rail +]%{!</td></tr>!}
+{!<tr><td><div class="party-box box popular_socialist"></div>Popular Socialists</td><td>!}[+ popular_socialist_rail_votes_dec +]%{!</td></tr>!}
 
-{!<tr><td><div class="party-box box other"></div>Others</td><td>!}[+ other_rail +]%{!</td></tr>!}
+{!<tr><td><div class="party-box box other"></div>Others</td><td>!}[+ other_rail_votes_dec +]%{!</td></tr>!}
 
 {!</table>!}
 
