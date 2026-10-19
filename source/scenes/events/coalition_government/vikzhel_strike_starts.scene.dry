@@ -1,10 +1,11 @@
 title: Railroads on Strike! 
 new-page: true
-view-if: vikzhel_unrest >= 50 and vikzhel_strength >= 25 and coalition_government < 1
+view-if: vikzhel_unrest >= 50 and vikzhel_strength >= 25 and coalition_government < 1 and railroad_strike_seen != 1
 tags: event
 on-arrival: {!
     Q.vikzhel_strike = 1;
     Q.workers_unrest += 10;
+    Q.railroad_strike_seen = 1;
              
   	Q.previous_military_trains = Q.military_trains;
   	Q.previous_civilian_transport = Q.civilian_transport; 
@@ -17,5 +18,7 @@ on-arrival: {!
   	Q.industry = Q.previous_industry * 0.5; 
   	Q.ag_transport *= 0.9; 
 !}
+
+= Railroad Strike
 
 The All-Russian Union of Railway Workers (**Vikzhel**) has declared that they are launching their promised railroad strike! Railway workers across the country are refusing to work, bringing our industry to a standstill. 
