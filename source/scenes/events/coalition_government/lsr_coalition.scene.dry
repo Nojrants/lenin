@@ -453,28 +453,11 @@ on-arrival: {!
   Q.moderate_dissent -= 5; Q.moderate_strength += 5;
   Q.coalition_actions_timer = 1;
 
-  if (Q.vikzhel_strike == 1) {
-    Q.vikzhel_strike_ended = 1;
-    Q.vikzhel_strike = 0;
-    Q.workers_unrest -= 10;
-
-	Q.military_trains = Math.max(Q.previous_military_trains + Q.military_trains, Q.previous_military_trains);
-	Q.civilian_transport = Math.max(Q.previous_civilian_transport + Q.civilian_transport, previous_civilian_transport);
-	Q.transportation_industry = Math.max(Q.previous_transportation_industry + Q.transportation_industry, Q.transportation_industry);
-	Q.industry = Math.max(Q.previous_industry + Q.industry, Q.industry);
-  Q.ag_transport * 1.1; 
-
-
-  }
 !}
 
 = Coalition Created
 
 We have formed a coalition agreement! Though not an all-socialist government, the inclusion of another party helps bolster our government's legitimacy somewhat. 
-
-[?if vikzhel_strike_ended = 1 : Satisfied with our efforts, Vikzhel has announced they are lifting their strike. ?]
-
-
 
 
 
