@@ -5,8 +5,10 @@ max-visits: 1
 tags: event
 on-arrival: {!
   Q.brest_signed = 1;
-  Q.war_weariness -= 5; 
-  Q.soldiers_unrest -= 10; 
+  if (Q.war_weariness > 30) { Q.war_weariness -= 30; } else { Q.war_weariness = 0; }
+  Q.soldiers_unrest -= 15; 
+  Q.indemnities = 2; 
+  Q.military_expend -= 4; 
 !}
 
 = Peace Treaty Signed
