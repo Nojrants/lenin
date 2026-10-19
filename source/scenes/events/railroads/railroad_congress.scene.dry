@@ -11,8 +11,8 @@ go-to: post_election_menu
 on-arrival: {!
   Q.railway_congress_timer = 24;
 
-  Q.coalition1 = Q.anarchist_rail_votes_dec + Q.maximalist_rail_votes_dec + Q.b_rail_votes_dec + (Q.other_rail_votes_dec * Math.max(0, (90 - Q.workers_unrest))/100); 
-  Q.coalition2 = Q.left_m_rail_votes_dec + Q.m_rail_votes_dec + Q.right_m_rail_votes_dec + Q.sr_rail_votes_dec + Q.right_sr_rail_votes_dec + Q.popular_socialist_rail_votes_dec + (Q.other_rail_votes_dec * 0.5); 
+  Q.coalition1 = Math.round((Q.anarchist_rail_votes_dec + Q.maximalist_rail_votes_dec + Q.b_rail_votes_dec + (Q.other_rail_votes_dec * Math.max(0, (90 - Q.workers_unrest))/100))*100)/100; 
+  Q.coalition2 = Math.round((Q.left_m_rail_votes_dec + Q.m_rail_votes_dec + Q.right_m_rail_votes_dec + Q.sr_rail_votes_dec + Q.right_sr_rail_votes_dec + Q.popular_socialist_rail_votes_dec + (Q.other_rail_votes_dec * 0.5))*100)/100; 
 
 !}
 on-display: {!
