@@ -24,18 +24,7 @@ on-arrival: {!
   Q.democraticity -= 3; Q.instability += 5;
   Q.right_sr_strength += 2; Q.right_m_strength += 2; 
   Q.moderate_dissent += 10; Q.leninist_dissent -= 5; Q.leftcom_dissent -= 5;
-  Q.vikzhel_strike = 1; Q.vikzhel_unrest += 20; Q.workers_unrest += 10; 
-
-	Q.previous_military_trains = Q.military_trains;
-	Q.previous_civilian_transport = Q.civilian_transport; 
-	Q.previous_transportation_industry = Q.transportation_industry;
-	Q.previous_industry = Q.industry; 
-
-	Q.military_trains *= 0.1;
-	Q.civilian_transport *= 0.5;
-	Q.transportation_industry = 0.5; 
-	Q.industry = Q.previous_industry * 0.5; 
-	Q.ag_transport * 0.9; 
+  Q.vikzhel_unrest += 20; Q.workers_unrest += 5; 
 !}
 
 Our refusal to cooperate entirely shocks the other parties, seemingly proving the right socialists correct after all—more than likely compromise will be impossible from here on out. Likewise, we receive immense condemnation from various interest groups, and even some members of our own party.
@@ -469,18 +458,7 @@ on-arrival: {!
   Q.democraticity -= 3; Q.instability += 5;
   Q.right_sr_strength += 2; Q.right_m_strength += 2; 
   Q.moderate_dissent += 10; Q.leninist_dissent -= 5; Q.leftcom_dissent -= 5;
-  Q.vikzhel_strike = 1; Q.vikzhel_unrest += 20; Q.workers_unrest += 10; 
-
-	Q.previous_military_trains = Q.military_trains;
-	Q.previous_civilian_transport = Q.civilian_transport; 
-	Q.previous_transportation_industry = Q.transportation_industry;
-	Q.previous_industry = Q.industry; 
-
-	Q.military_trains *= 0.1;
-	Q.civilian_transport *= 0.5;
-	Q.transportation_industry = 0.5; 
-	Q.industry = Q.previous_industry * 0.5; 
-	Q.ag_transport * 0.9; 
+  Q.vikzhel_unrest += 20; Q.workers_unrest += 5; 
 !}
 
 = Negotiations Collapse
@@ -932,20 +910,9 @@ new-page: true
 on-arrival: {!
   Q.sdi_relation -= 10; Q.left_m_relation -= 10; Q.centre_m_relation -= 10; Q.right_m_relation -= 15; Q.lsr_relation -= 10; Q.centre_sr_relation -= 15; Q.right_sr_relation -= 15; Q.ns_relation -= 15;
   Q.right_sr_strength += 8; Q.right_m_strength += 8;   
-  Q.democraticity -= 2; Q.instability += 6; Q.vikzhel_unrest += 20;
+  Q.democraticity -= 2; Q.instability += 6; 
   Q.moderate_dissent += 10; Q.leninist_dissent -= 5; Q.leftcom_dissent -= 5;
-  Q.vikzhel_strike = 1; Q.vikzhel_unrest += 20; Q.workers_unrest += 10; 
-
-	Q.previous_military_trains = Q.military_trains;
-	Q.previous_civilian_transport = Q.civilian_transport; 
-	Q.previous_transportation_industry = Q.transportation_industry;
-	Q.previous_industry = Q.industry; 
-
-	Q.military_trains *= 0.1;
-	Q.civilian_transport *= 0.5;
-	Q.transportation_industry = 0.5; 
-	Q.industry = Q.previous_industry * 0.5; 
-	Q.ag_transport * 0.9; 
+  Q.vikzhel_unrest += 20; Q.workers_unrest += 5; 
 
   if (Q.education_minister_party != "Bolshevik") {
     Q.education_minister = "Vacant";
