@@ -2,7 +2,7 @@ title: Railways
 new-page: true
 is-card: true
 on-arrival: transport_policy_timer += 2; week_actions += 1
-view-if: transport_policy_timer == 0
+view-if: transport_policy_timer == 0 and transport_minister_party = "Bolshevik"
 card-image: img/railways1.PNG
 tags: sovnarkom, government
 
@@ -60,7 +60,7 @@ title: The Vikzhel Crisis...
 subtitle: We must decide on a policy toward the Railwaymen's Union. 
 new-page: true
 tags: railways_special
-view-if: campaign_against_vikzhel != 1 
+view-if: campaign_against_vikzhel = 0
 
 = Dealing with Vikzhel
 
@@ -94,7 +94,7 @@ on-arrival: {!
   Q.vikzhel_unrest += 10; Q.vikzhel_strength -= 5; 
   Q.instability += 2; 
   Q.industry *= 0.9; 
-	Q.ag_transport *= 0.9; 
+  Q.ag_transport *= 0.9; 
   Q.campaign_against_vikzhel = 1; 
   Q.sdi_relation -= 5; Q.left_m_relation -= 5; Q.centre_m_relation -= 5; Q.right_m_relation -= 5; Q.centre_sr_relation -= 5; Q.right_sr_relation -= 5; Q.ns_relation -= 5;
 !}
