@@ -31,11 +31,11 @@ Moves:      every order that moves a group of divisions one province (or
             queues an attack) costs a move. The limit is
             window.mapMovesPerTurn. See "SETTINGS" just below.
 Battles:    moving into a province held by a hostile army queues a battle
-            (red arrow on the map). Nothing is fought until the post_turn
+            (red arrow on the map). Nothing is fought until the post_event
             scene calls window.mapPostTurn(), which resolves every queued
             battle and then resets the move counter.
 
-In your post_turn scene, add:
+In your post_event scene, add:
     on-arrival: {! window.mapPostTurn(); !}
 */
 
@@ -839,12 +839,12 @@ window.mapNpcTurn = function(faction) {
             getAdjacentProvinces(from).forEach(function(to) {
                 var defenders = hostileDivisionsIn(to, faction);
                 var p = window.mapProvinces[to];
-                if (!defenders.length && (!p || p.controller === faction ||
-                                          p.controller === 'none')) {
+                if (!defenders.length && (!p || p.controller === faction)) {
                     return;
                 }
                 var r = window.mapStrengthRatio(mine, defenders, to);
-                if (r >= window.mapAIAttackRatio && (!best || r > best.r)) {
+                if (r >= window.mapAIAttackRatio &&
+                    (!best || r > best.r || (r === best.r && Math.random() < 0.5))) {
                     best = { to: to, r: r };
                 }
             });
@@ -869,7 +869,7 @@ window.selectedMapProvince = null;
 window.selectedMapDivisions = [];   // ids; always inside the selected province
 window.mapMovesUsed = 0;
 window.mapBattles = [];             // queued: { from, to, ids: [...], cost }
-window.mapReport = [];              // plain-text results of the last post_turn
+window.mapReport = [];              // plain-text results of the last post_event
 
 var MAP_SHAPES = 'path, polygon, polyline, rect, circle, ellipse';
 var hoveredMapProvince = null;
@@ -1738,7 +1738,7 @@ window.resolveMapBattles = function() {
     return report;
 };
 
-/* Call this from the post_turn scene. Resolves all queued battles, then
+/* Call this from the post_event scene. Resolves all queued battles, then
    resets the move counter for the new turn. */
 window.mapPostTurn = function() {
     window.loadMapState();
