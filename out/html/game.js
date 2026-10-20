@@ -1545,6 +1545,17 @@ window.ensureMapSidebar = function() {
 
 /* Queued attacks (all of them, or only those touching one province),
    each with a Cancel button that refunds its moves. */
+/* Faction that ordered a queued attack. */
+function battleOwner(b) {
+    for (var i = 0; i < b.ids.length; i++) {
+        var d = mapDivisionIndex[b.ids[i]];
+        if (d) {
+            return d.owner;
+        }
+    }
+    return null;
+}
+
 function battlesHtml(provinceId) {
     var html = '';
     window.mapBattles.forEach(function(b, index) {
@@ -1553,12 +1564,14 @@ function battlesHtml(provinceId) {
         }
         html +=
             '<div class="battle-row">' +
-            '<div>' + b.ids.length + ' division' +
+            '<div>' + (battleOwner(b) === window.mapPlayerFaction ? '' :
+                partyName(battleOwner(b)) + ': ') + b.ids.length + ' division' +
             (b.ids.length === 1 ? '' : 's') + ' from ' +
             provinceName(b.from) + ' will attack ' + provinceName(b.to) +
             '.</div>' +
-            '<button class="map-button" data-cancel-battle="' + index +
-            '">Cancel attack</button>' +
+            (battleOwner(b) === window.mapPlayerFaction ?
+                '<button class="map-button" data-cancel-battle="' + index +
+                '">Cancel attack</button>' : '') +
             '</div>';
     });
     return html ? '<h3>Queued attacks</h3>' + html : '';
@@ -1856,7 +1869,7 @@ window.queueMapAttack = function(ids, fromId, toId, cost) {
 
 window.cancelMapBattle = function(index) {
     var battle = window.mapBattles[index];
-    if (!battle) {
+    if (!battle || battleOwner(battle) !== window.mapPlayerFaction) {
         return;
     }
     window.mapMovesUsed = Math.max(0, window.mapMovesUsed - battle.cost);
