@@ -632,14 +632,147 @@ window.mapIsHostile = function(attacker, defender) {
     return attacker !== defender;
 };
 
+/* ---------- Dendry combat integration ----------
+   Battles are fought province by province. Battles involving the player's
+   faction use the Battle scene's maths and write the same result qualities
+   (casualties, outcome, war_weariness, counts), so events driven by them
+   keep working. */
+
+/* Soldiers represented by one division. */
+window.mapSoldiersPerDivision = 15000;
+
+/* The Battle-scene formulas work in thousands of soldiers, so they are fed
+   soldiers / mapSoldierUnit. Casualty qualities are in the same unit. */
+window.mapSoldierUnit = 1000;
+
+/* Stats of non-player factions. Any province can override them, e.g.
+     window.mapProvinces.minsk.defense_bonus = 0.5;
+   (fields: morale, discipline, supply_quality, defense_bonus). */
+window.mapFactionStats = {
+    germany: { morale: 1, discipline: 1.2, supply_quality: 1, defense_bonus: 0 },
+    _default: { morale: 1, discipline: 1, supply_quality: 1, defense_bonus: 0 }
+};
+
+/* Optional: a province may have  front: 'northern'  . If it does, a battle
+   there also moves Q[front + '_progress'] by +/-1. */
+
+function mapQ() {
+    try {
+        return window.dendryUI.dendryEngine.state.qualities;
+    } catch (e) {
+        return null;
+    }
+}
+
+function mapGauss() {
+    var u = 1 - Math.random();
+    var v = Math.random();
+    return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v);
+}
+
+/* Stats of `owner`'s army fighting in province `provinceId`. */
+window.mapStatsFor = function(owner, provinceId) {
+    var Q = mapQ();
+    var base;
+    if (owner === window.mapPlayerFaction && Q) {
+        base = { morale: Q.morale || 1, discipline: Q.discipline || 1,
+                 supply_quality: Q.supply_quality || 1,
+                 defense_bonus: Q.defense_bonus || 0 };
+    } else {
+        var f = window.mapFactionStats[owner] || window.mapFactionStats._default;
+        base = { morale: f.morale, discipline: f.discipline,
+                 supply_quality: f.supply_quality,
+                 defense_bonus: f.defense_bonus };
+    }
+    var p = window.mapProvinces[provinceId] || {};
+    ['morale', 'discipline', 'supply_quality', 'defense_bonus'].forEach(function(k) {
+        if (typeof p[k] === 'number') {
+            base[k] = p[k];
+        }
+    });
+    return base;
+};
+
+function mapAttackPower(soldiers, st) {
+    return soldiers * st.morale * st.discipline * Math.pow(st.supply_quality, 1.5);
+}
+function mapDefensePower(soldiers, st) {
+    return soldiers * st.morale * st.morale * Math.pow(st.supply_quality, 1.5) *
+        (1 + st.defense_bonus / 2);
+}
+
+/* Expected attacker/defender strength ratio, used by the AI. */
+window.mapStrengthRatio = function(attackers, defenders, toId) {
+    var N = window.mapSoldiersPerDivision / window.mapSoldierUnit;
+    if (!defenders.length) {
+        return 99;
+    }
+    var aSt = window.mapStatsFor(attackers[0].owner, toId);
+    var dSt = window.mapStatsFor(defenders[0].owner, toId);
+    return mapAttackPower(attackers.length * N, aSt) /
+        Math.max(1, mapDefensePower(defenders.length * N, dSt));
+};
+
 /* The battle calculation. Receives
      { to, from: [province ids], attackers: [divisions], defenders: [divisions] }
-   and returns
-     { attackersLost, defendersLost, winner: 'attacker' | 'defender' | 'none',
-       rounds }
-   Replace this to change how battles are decided. */
+   and returns { attackersLost, defendersLost, winner, rounds }. */
 window.mapResolveBattle = function(battle) {
     var s = window.mapBattleSettings;
+    var Q = mapQ();
+    var player = window.mapPlayerFaction;
+    var atkOwner = battle.attackers[0] && battle.attackers[0].owner;
+    var defOwner = battle.defenders[0] && battle.defenders[0].owner;
+    var playerAttacks = atkOwner === player;
+    var playerDefends = defOwner === player;
+
+    if (Q && (playerAttacks || playerDefends)) {
+        var N = window.mapSoldiersPerDivision / window.mapSoldierUnit;
+        var aSold = battle.attackers.length * N;
+        var dSold = battle.defenders.length * N;
+        var aPow = mapAttackPower(aSold, window.mapStatsFor(atkOwner, battle.to));
+        var dPow = mapDefensePower(dSold, window.mapStatsFor(defOwner, battle.to));
+        var x1 = 2 * mapGauss() + 3, x2 = 2 * mapGauss() + 3;
+        var aCas = Math.max(2, Math.round(Math.min(dPow / 2 + x1, aSold / 2)));
+        var dCas = Math.max(2, Math.round(Math.min(aPow / 2 + x2, dSold / 2)));
+        var ratio = aPow / Math.max(1, dPow);
+
+        /* ratio seen from the player's side, as in the Battle scene */
+        var pr = playerAttacks ? ratio : 1 / Math.max(ratio, 1e-6);
+        var t = playerAttacks ? [1.25, 1, 0.5] : [1.5, 1, 0.75];
+        /* 3 decisive win, 2 win, 1 loss, 0 rout (adjust to your scene) */
+        var outcome = pr >= t[0] ? 3 : pr >= t[1] ? 2 : pr >= t[2] ? 1 : 0;
+        var playerWon = outcome >= 2;
+        var friendly = playerAttacks ? aCas : dCas;
+        var hostile = playerAttacks ? dCas : aCas;
+        var attackerWins = playerAttacks ? playerWon : !playerWon;
+
+        var aLost = Math.min(battle.attackers.length, Math.ceil(aCas / N));
+        var dLost = Math.min(battle.defenders.length, Math.ceil(dCas / N));
+        if (attackerWins) { dLost = battle.defenders.length; }
+        else { aLost = battle.attackers.length; }
+
+        var prov = window.mapProvinces[battle.to] || {};
+        Q.attacking = playerAttacks ? 1 : 0;
+        Q.in_defensive_battle = playerAttacks ? 0 : 1;
+        Q.friendly_casualties = friendly;
+        Q.hostile_casualties = hostile;
+        Q.battle_outcome = outcome;
+        Q.battle_count = (Q.battle_count || 0) + 1;
+        Q.war_weariness = (Q.war_weariness || 0) + friendly / 1000;  /* guess: adjust to your scene */
+        if (playerWon) {
+            Q.victory_count = (Q.victory_count || 0) + 1;
+        } else {
+            Q.defeat_count = (Q.defeat_count || 0) + 1;
+        }
+        if (prov.front) {
+            Q[prov.front + '_progress'] =
+                (Q[prov.front + '_progress'] || 0) + (playerWon ? 1 : -1);
+        }
+        return { attackersLost: aLost, defendersLost: dLost,
+                 winner: attackerWins ? 'attacker' : 'defender', rounds: 1 };
+    }
+
+    /* battles between two non-player factions: simple dice model */
     var a = battle.attackers.length;
     var d = battle.defenders.length;
     var startA = a;
@@ -676,6 +809,54 @@ window.mapResolveBattle = function(battle) {
         winner: winner,
         rounds: rounds
     };
+};
+
+/* ---------- NPC AI ----------
+   For every province holding the faction's divisions, look at neighbouring
+   provinces held by someone else. If the best target is clearly weaker
+   (strength ratio >= window.mapAIAttackRatio) queue an attack with the whole
+   stack. On victory only half advance (see resolveMapBattles). Call it from
+   a scene:  window.mapNpcTurn('germany');  Returns a list of descriptions. */
+window.mapAIAttackRatio = 1.5;
+
+window.mapNpcTurn = function(faction) {
+    return editMapState(function() {
+        var done = [];
+        var seen = {};
+        window.mapDivisions.forEach(function(d0) {
+            if (d0.dead || d0.owner !== faction || seen[d0.province]) {
+                return;
+            }
+            var from = d0.province;
+            seen[from] = true;
+            var mine = divisionsIn(from).filter(function(d) {
+                return d.owner === faction && !isCommitted(d.id);
+            });
+            if (!mine.length) {
+                return;
+            }
+            var best = null;
+            getAdjacentProvinces(from).forEach(function(to) {
+                var defenders = hostileDivisionsIn(to, faction);
+                var p = window.mapProvinces[to];
+                if (!defenders.length && (!p || p.controller === faction ||
+                                          p.controller === 'none')) {
+                    return;
+                }
+                var r = window.mapStrengthRatio(mine, defenders, to);
+                if (r >= window.mapAIAttackRatio && (!best || r > best.r)) {
+                    best = { to: to, r: r };
+                }
+            });
+            if (best) {
+                window.queueMapAttack(mine.map(function(d) { return d.id; }),
+                                      from, best.to, 0);
+                done.push(partyName(faction) + ': ' + provinceName(from) +
+                    ' -> ' + provinceName(best.to));
+            }
+        });
+        return done;
+    });
 };
 
 /* Called after a successful (peaceful) move. */
@@ -1527,10 +1708,13 @@ window.resolveMapBattles = function() {
             ' attacking, ' + startD + ' defending. ';
 
         if (result.winner === 'attacker') {
-            attackers.forEach(function(d) {
-                if (!d.dead) {
-                    d.province = toId;
-                }
+            /* the player's army moves in whole; an NPC army splits, only
+               half advancing while the rest stay behind */
+            var alive = attackers.filter(function(d) { return !d.dead; });
+            var advance = owner === window.mapPlayerFaction
+                ? alive.length : Math.max(1, Math.ceil(alive.length / 2));
+            alive.slice(0, advance).forEach(function(d) {
+                d.province = toId;
             });
             if (province.controller !== owner) {
                 province.controller = owner;
