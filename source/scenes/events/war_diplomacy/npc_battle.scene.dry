@@ -1,7 +1,8 @@
 title: Test: German Advance
 subtitle: Test scene for the NPC attack AI
 new-page: true
-tags: test
+tags: event
+view-if: (year = 1917 and month >= 11)
 on-arrival: {! window.mapNpcTurn('germany'); !}
 
 @_
