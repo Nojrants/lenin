@@ -68,7 +68,7 @@ window.mapBattleSettings = {
 window.mapProvinces = {
     finland: {
         name: 'Finland',
-        controller: 'none',
+        controller: 'finland',
         control: 100,
         adjacent: ['petrograd', 'arkhangelsk', 'karelia', 'murmansk']
     },
@@ -152,14 +152,14 @@ window.mapProvinces = {
     },
     mogilev: {
         name: 'Mogilev',
-        controller: 'none',
-        control: 100,
+        controller: 'bolsheviks',
+        control: 70,
         adjacent: ['chernigov', 'smolensk', 'vitebsk', 'minsk']
     },
     tula: {
         name: 'Tula',
-        controller: 'none',
-        control: 100,
+        controller: 'bolsheviks',
+        control: 70,
         adjacent: ['kaluga', 'moscow', 'orel', 'tambov', 'ryazan']
     },
     vitebsk: {
@@ -170,14 +170,14 @@ window.mapProvinces = {
     },
     orel: {
         name: 'Orel',
-        controller: 'none',
-        control: 100,
+        controller: 'bolsheviks',
+        control: 70,
         adjacent: ['chernigov', 'smolensk', 'kaluga', 'tula', 'kursk', 'voronezh', 'tambov']
     },
     kursk: {
         name: 'Kursk',
-        controller: 'none',
-        control: 100,
+        controller: 'bolsheviks',
+        control: 70,
         adjacent: ['chernigov', 'kharkov', 'orel', 'poltava', 'voronezh']
     },
     kherson: {
@@ -218,8 +218,8 @@ window.mapProvinces = {
     },
     yaroslavl: {
         name: 'Yaroslavl',
-        controller: 'none',
-        control: 100,
+        controller: 'bolsheviks',
+        control: 70,
         adjacent: ['novgorod', 'tver', 'vladimir', 'vologda', 'kostroma']
     },
     voronezh: {
@@ -230,14 +230,14 @@ window.mapProvinces = {
     },
     vladimir: {
         name: 'Vladimir',
-        controller: 'none',
-        control: 100,
+        controller: 'bolsheviks',
+        control: 70,
         adjacent: ['tver', 'moscow', 'yaroslavl', 'tambov', 'ryazan', 'kostroma', 'nizhny']
     },
     don: {
         name: 'Don Host',
-        controller: 'none',
-        control: 100,
+        controller: 'don',
+        control: 70,
         adjacent: ['yekaterinoslav', 'kharkov', 'kuban', 'voronezh', 'stavropol', 'saratov', 'astrakhan']
     },
     vologda: {
@@ -254,8 +254,8 @@ window.mapProvinces = {
     },
     ryazan: {
         name: 'Ryazan',
-        controller: 'none',
-        control: 100,
+        controller: 'bolsheviks',
+        control: 70,
         adjacent: ['moscow', 'tula', 'vladimir', 'tambov']
     },
     kostroma: {
@@ -284,8 +284,8 @@ window.mapProvinces = {
     },
     nizhny: {
         name: 'Nizhny Novgorod',
-        controller: 'none',
-        control: 100,
+        controller: 'bolsheviks',
+        control: 70,
         adjacent: ['vladimir', 'tambov', 'kostroma', 'penza', 'simbirsk', 'vyatka', 'kazan']
     },
     terek: {
@@ -350,8 +350,8 @@ window.mapProvinces = {
     },
     kazan: {
         name: 'Kazan',
-        controller: 'none',
-        control: 100,
+        controller: 'bolsheviks',
+        control: 50,
         adjacent: ['nizhny', 'simbirsk', 'samara', 'vyatka', 'ufa']
     },
     uralsk: {
@@ -368,14 +368,14 @@ window.mapProvinces = {
     },
     ufa: {
         name: 'Ufa',
-        controller: 'none',
-        control: 100,
+        controller: 'bolsheviks',
+        control: 50,
         adjacent: ['samara', 'vyatka', 'kazan', 'yekaterinburg', 'orenburg', 'perm']
     },
     olonets: {
         name: 'Olonets',
-        controller: 'none',
-        control: 100,
+        controller: 'bolsheviks',
+        control: 80,
         adjacent: ['petrograd', 'novgorod', 'arkhangelsk', 'vologda', 'karelia']
     },
     yekaterinburg: {
@@ -465,13 +465,13 @@ window.mapProvinces = {
     estonia: {
         name: 'Estonia',
         controller: 'bolsheviks',
-        control: 80,
+        control: 70,
         adjacent: ['petrograd', 'pskov', 'latvia']
     },
     latvia: {
         name: 'Latvia',
-        controller: 'bolsheviks',
-        control: 80,
+        controller: 'germany',
+        control: 70,
         adjacent: ['vitebsk', 'pskov', 'estonia', 'lithuania', 'vilna']
     },
     lithuania: {
@@ -512,20 +512,20 @@ window.mapProvinces = {
     },
     karelia: {
         name: 'Karelia',
-        controller: 'none',
-        control: 100,
+        controller: 'bolsheviks',
+        control: 70,
         adjacent: ['finland', 'arkhangelsk', 'olonets', 'murmansk']
     },
     murmansk: {
         name: 'Murmansk',
-        controller: 'none',
-        control: 100,
+        controller: 'bolsheviks',
+        control: 70,
         adjacent: ['finland', 'karelia']
     },
     perm: {
         name: 'Perm',
-        controller: 'none',
-        control: 100,
+        controller: 'bolsheviks',
+        control: 70,
         adjacent: ['vologda', 'vyatka', 'ufa', 'yekaterinburg', 'tobolsk']
     }
 };
@@ -542,6 +542,9 @@ window.mapPartyColors = {
     ns: '--ns-color',
     germany: '--germany-color',
     upr: '--usr',
+    finland: '#4f8fc0',
+    don: '--cossack',
+    greens: '#1f9d6b',
     none: '--none'
 };
 
@@ -557,6 +560,9 @@ window.mapPartyNames = {
     ns: 'Popular Socialists',
     germany: 'German Empire',
     upr: 'Ukrainian People\'s Republic',
+    finland: 'Finland',
+    don: 'Don Cossacks',
+    greens: 'Greens',
     none: 'Uncontrolled'
 };
 
@@ -605,10 +611,11 @@ Object.keys(window.mapProvinces).forEach(function(id) {
 ['podolia', 'bessarabia', 'kyiv', 'kherson', 'poltava', 'chernigov',
  'kharkov', 'yekaterinoslav', 'taurida', 'crimea'].forEach(function(id) {
     var p = window.mapProvinces[id];
+    var v = { kyiv: 100, kharkov: 70, taurida: 70, yekaterinoslav: 60 }[id] || 80;
     p.controller = 'upr';
-    p.control = 80;
+    p.control = v;
     p.startController = 'upr';
-    p.startControl = 80;
+    p.startControl = v;
 });
 
 /* ---------- supply limits and devastation ----------
@@ -617,8 +624,8 @@ Object.keys(window.mapProvinces).forEach(function(id) {
    provinces get window.mapUrbanSupply, the rest window.mapRuralSupply. A
    province can override it with  supply: N  . Devastation (0-100) lowers the
    limit, down to half of it at 100. */
-window.mapUrbanSupply = 30;
-window.mapRuralSupply = 10;
+window.mapUrbanSupply = 150;
+window.mapRuralSupply = 50;
 window.mapUrbanProvinces = ['petrograd', 'moscow', 'kyiv', 'kharkov',
     'yekaterinoslav', 'poland', 'latvia', 'tver', 'vladimir', 'yaroslavl',
     'nizhny', 'tula', 'kherson', 'saratov'];
@@ -649,6 +656,7 @@ function makeDivisions(province, owner, count, label, firstNumber) {
             id: province + '_' + owner + '_' + (i + 1),
             name: base + ' ' + (n0 + i),
             owner: owner,
+            startOwner: owner,
             province: province,
             start: province,     // where it begins a new game
             dead: false
@@ -658,20 +666,34 @@ function makeDivisions(province, owner, count, label, firstNumber) {
 }
 
 window.mapDivisions = [].concat(
-    makeDivisions('latvia', 'bolsheviks', 15),
-    makeDivisions('estonia', 'bolsheviks', 10),
+    makeDivisions('pskov', 'bolsheviks', 50),
+    makeDivisions('vitebsk', 'bolsheviks', 75),
+    makeDivisions('estonia', 'bolsheviks', 50),
 
-    makeDivisions('vilna', 'bolsheviks', 18),
-    makeDivisions('grodno', 'bolsheviks', 16),
+    makeDivisions('vilna', 'bolsheviks', 90),
+    makeDivisions('grodno', 'bolsheviks', 80),
 
-    makeDivisions('volhynia', 'bolsheviks', 20),
-    makeDivisions('podolia', 'upr', 15),
-    makeDivisions('bessarabia', 'upr', 15),
+    makeDivisions('volhynia', 'bolsheviks', 100),
 
-    makeDivisions('petrograd', 'bolsheviks', 5),
+    makeDivisions('podolia', 'upr', 75),
+    makeDivisions('bessarabia', 'upr', 75),
+    makeDivisions('kyiv', 'upr', 25),
 
-    makeDivisions('poland', 'germany', 28, 'German Division', 1),
-    makeDivisions('lithuania', 'germany', 23, 'German Division', 29)
+    /* garrisons */
+    makeDivisions('petrograd', 'bolsheviks', 30),
+    makeDivisions('yekaterinburg', 'bolsheviks', 15),
+    makeDivisions('nizhny', 'bolsheviks', 10),
+    makeDivisions('kazan', 'bolsheviks', 10),
+    makeDivisions('saratov', 'bolsheviks', 10),
+    makeDivisions('mogilev', 'bolsheviks', 20),
+    makeDivisions('minsk', 'bolsheviks', 20),
+    makeDivisions('kursk', 'bolsheviks', 10),
+
+    makeDivisions('poland', 'germany', 125, 'German Division', 1),
+    makeDivisions('lithuania', 'germany', 100, 'German Division', 126),
+    makeDivisions('latvia', 'germany', 90, 'German Division', 226),
+
+    makeDivisions('don', 'don', 8)
 );
 
 var mapDivisionIndex = {};
@@ -701,7 +723,7 @@ window.mapIsHostile = function(attacker, defender) {
    keep working. */
 
 /* Soldiers represented by one division. */
-window.mapSoldiersPerDivision = 15000;
+window.mapSoldiersPerDivision = 3000;
 
 /* The Battle-scene formulas work in thousands of soldiers, so they are fed
    soldiers / mapSoldierUnit. Casualty qualities are in the same unit. */
@@ -998,6 +1020,13 @@ window.saveMapState = function() {
     }).map(function(d) {
         return { id: d.id, name: d.name, owner: d.owner, start: d.start };
     }));
+    var owners = {};
+    window.mapDivisions.forEach(function(d) {
+        if (!d.dead && d.owner !== (d.startOwner || d.owner)) {
+            owners[d.id] = d.owner;
+        }
+    });
+    q.map_owners = JSON.stringify(owners);
     q.map_divisions = JSON.stringify(positions);
     q.map_control = JSON.stringify(control);
     q.map_battles = JSON.stringify(window.mapBattles);
@@ -1063,10 +1092,19 @@ window.loadMapState = function() {
     (Array.isArray(extras) ? extras : []).forEach(function(e) {
         var d = {
             id: e.id, name: e.name, owner: e.owner,
-            province: e.start, start: e.start, dead: false, extra: true
+            province: e.start, start: e.start, dead: false, extra: true,
+            startOwner: e.owner
         };
         window.mapDivisions.push(d);
         mapDivisionIndex[d.id] = d;
+    });
+
+    var owners = readJson(q.map_owners, {});
+    window.mapDivisions.forEach(function(d) {
+        if (d.startOwner === undefined) {
+            d.startOwner = d.owner;
+        }
+        d.owner = owners[d.id] || d.startOwner;
     });
 
     var positions = readJson(q.map_divisions, {});
@@ -1196,6 +1234,9 @@ window.getMapPartyColor = function(controller) {
     var variable = window.mapPartyColors[controller];
     if (!variable) {
         return '#999';
+    }
+    if (variable.charAt(0) !== '-') {
+        return variable;      /* a literal colour such as '#4f8fc0' */
     }
     var color = getComputedStyle(document.body)
         .getPropertyValue(variable).trim();
@@ -1405,8 +1446,9 @@ window.renderMapSidebar = function(provinceId) {
         }
         html +=
             '<div class="province-stat">' +
-                '<div class="province-stat-label">' + field.label + '</div>' +
-                '<div class="province-stat-value">' + value + '</div>' +
+                '<span class="province-stat-label">' + field.label + '</span>' +
+                '<span class="province-stat-dash">  \u2014  </span>' +
+                '<span class="province-stat-value">' + value + '</span>' +
             '</div>';
     });
 
@@ -1872,7 +1914,8 @@ window.mapDecayDevastation = function() {
 };
 
 /* An army over a province's supply limit wastes away: one division per
-   10 over the limit (at least one) per turn. */
+   window.mapAttritionStep over the limit (at least one) per turn. */
+window.mapAttritionStep = 50;
 window.mapApplyAttrition = function(report) {
     Object.keys(window.mapProvinces).forEach(function(id) {
         var limit = window.mapSupplyLimit(id);
@@ -1884,7 +1927,7 @@ window.mapApplyAttrition = function(report) {
             var list = owners[owner];
             var over = list.length - limit;
             if (over > 0) {
-                var loss = Math.min(list.length, Math.max(1, Math.round(over / 10)));
+                var loss = Math.min(list.length, Math.max(1, Math.round(over / window.mapAttritionStep)));
                 killDivisions(list, loss);
                 report.push(partyName(owner) + ' lost ' + loss + ' division' +
                     (loss === 1 ? '' : 's') + ' to attrition in ' +
@@ -2006,6 +2049,65 @@ window.mapSetControl = function(id, control) {
     return editMapState(function() {
         window.mapProvinces[id].control = clampControl(control);
         return true;
+    });
+};
+
+/* Remove a fraction of the divisions in a province, e.g.
+   mapScaleDivisions('bessarabia', 0.5) halves every army there; add an
+   owner to affect only that faction's army. Returns how many were removed. */
+window.mapScaleDivisions = function(id, factor, owner) {
+    if (!knownProvince(id, 'mapScaleDivisions')) {
+        return 0;
+    }
+    return editMapState(function() {
+        var list = divisionsIn(id).filter(function(d) {
+            return !owner || d.owner === owner;
+        });
+        var keep = Math.round(list.length * Math.max(0, Number(factor) || 0));
+        var doomed = list.slice(keep);
+        doomed.forEach(function(d) { d.dead = true; });
+        window.mapBattles = window.mapBattles.filter(function(b) {
+            b.ids = b.ids.filter(function(did) {
+                return mapDivisionIndex[did] && !mapDivisionIndex[did].dead;
+            });
+            if (!b.ids.length) {
+                window.mapMovesUsed = Math.max(0, window.mapMovesUsed - b.cost);
+                return false;
+            }
+            return true;
+        });
+        return doomed.length;
+    });
+};
+
+/* Hand divisions of one faction in a province to another faction, e.g.
+   mapChangeOwner('kursk', 'bolsheviks', 'greens') (all of them) or
+   mapChangeOwner('kursk', 'bolsheviks', 'greens', 5). Returns the number
+   changed. */
+window.mapChangeOwner = function(id, fromOwner, toOwner, count) {
+    if (!knownProvince(id, 'mapChangeOwner')) {
+        return 0;
+    }
+    return editMapState(function() {
+        var list = divisionsIn(id).filter(function(d) {
+            return d.owner === fromOwner;
+        });
+        if (count !== undefined && count !== null) {
+            list = list.slice(0, Math.max(0, Math.floor(Number(count) || 0)));
+        }
+        list.forEach(function(d) { d.owner = toOwner; });
+        /* a changed division can no longer be part of a queued attack */
+        window.mapBattles = window.mapBattles.filter(function(b) {
+            b.ids = b.ids.filter(function(did) {
+                return !list.some(function(d) { return d.id === did; });
+            });
+            if (!b.ids.length) {
+                window.mapMovesUsed = Math.max(0, window.mapMovesUsed - b.cost);
+                return false;
+            }
+            return true;
+        });
+        return list.length;
     });
 };
 
