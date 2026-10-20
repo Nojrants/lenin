@@ -604,19 +604,10 @@ function makeDivisions(province, owner, count, label, firstNumber) {
 }
 
 window.mapDivisions = [].concat(
-    makeDivisions('latvia', 'bolsheviks', 15),
-    makeDivisions('estonia', 'bolsheviks', 10),
-
-    makeDivisions('vilna', 'bolsheviks', 18),
-    makeDivisions('grodno', 'bolsheviks', 16),
-    
-    makeDivisions('volhynia', 'bolsheviks', 20),
-    makeDivisions('podolia', 'bolsheviks', 15),
-    makeDivisions('bessarabia', 'bolsheviks', 15),
-
-    
     makeDivisions('petrograd', 'bolsheviks', 5),
-    
+    makeDivisions('novgorod', 'sr', 2),
+    makeDivisions('tver', 'mensheviks', 1),
+    makeDivisions('moscow', 'bolsheviks', 4),
     makeDivisions('poland', 'germany', 28, 'German Division', 1),
     makeDivisions('lithuania', 'germany', 23, 'German Division', 29)
 );
@@ -653,6 +644,9 @@ window.mapSoldiersPerDivision = 15000;
 /* The Battle-scene formulas work in thousands of soldiers, so they are fed
    soldiers / mapSoldierUnit. Casualty qualities are in the same unit. */
 window.mapSoldierUnit = 1000;
+
+/* Base share of an army lost in a battle against an equal enemy. */
+window.mapCasualtyRate = 0.12;
 
 /* Stats of non-player factions. Any province can override them, e.g.
      window.mapProvinces.minsk.defense_bonus = 0.5;
@@ -740,9 +734,22 @@ window.mapResolveBattle = function(battle) {
         var dSold = battle.defenders.length * N;
         var aPow = mapAttackPower(aSold, window.mapStatsFor(atkOwner, battle.to));
         var dPow = mapDefensePower(dSold, window.mapStatsFor(defOwner, battle.to));
-        var x1 = 2 * mapGauss() + 3, x2 = 2 * mapGauss() + 3;
-        var aCas = Math.max(2, Math.round(Math.min(dPow / 2 + x1, aSold / 2)));
-        var dCas = Math.max(2, Math.round(Math.min(aPow / 2 + x2, dSold / 2)));
+        /* Each side loses a fraction of its soldiers, bigger the stronger
+           the enemy is relative to it. Most of a defeated army survives
+           and retreats. */
+        function lossFrac(ownPow, enemyPow) {
+            var f = window.mapCasualtyRate *
+                Math.sqrt(enemyPow / Math.max(1, ownPow)) + 0.02 * mapGauss();
+            return Math.min(0.4, Math.max(0.02, f));
+        }
+        function lossCount(n, frac) {
+            var x = n * frac;
+            return Math.min(n, Math.floor(x) + (Math.random() < x - Math.floor(x) ? 1 : 0));
+        }
+        var aFrac = lossFrac(aPow, dPow);
+        var dFrac = lossFrac(dPow, aPow);
+        var aCas = Math.round(aFrac * aSold);
+        var dCas = Math.round(dFrac * dSold);
         var ratio = aPow / Math.max(1, dPow);
 
         /* ratio seen from the player's side, as in the Battle scene */
@@ -755,10 +762,8 @@ window.mapResolveBattle = function(battle) {
         var hostile = playerAttacks ? dCas : aCas;
         var attackerWins = playerAttacks ? playerWon : !playerWon;
 
-        var aLost = Math.min(battle.attackers.length, Math.ceil(aCas / N));
-        var dLost = Math.min(battle.defenders.length, Math.ceil(dCas / N));
-        if (attackerWins) { dLost = battle.defenders.length; }
-        else { aLost = battle.attackers.length; }
+        var aLost = lossCount(battle.attackers.length, aFrac);
+        var dLost = lossCount(battle.defenders.length, dFrac);
 
         var prov = window.mapProvinces[battle.to] || {};
         Q.attacking = playerAttacks ? 1 : 0;
@@ -1066,6 +1071,17 @@ function availablePlayerDivisionsIn(provinceId) {
     });
 }
 
+/* True if moving `owner`'s army into the province means fighting: enemy
+   divisions are there, or another faction controls it (even if empty). */
+function isAttackTarget(provinceId, owner) {
+    if (hostileDivisionsIn(provinceId, owner).length) {
+        return true;
+    }
+    var p = window.mapProvinces[provinceId];
+    return !!p && p.controller !== 'none' && p.controller !== owner &&
+        window.mapIsHostile(owner, p.controller);
+}
+
 function hostileDivisionsIn(provinceId, owner) {
     return divisionsIn(provinceId).filter(function(d) {
         return window.mapIsHostile(owner, d.owner);
@@ -1362,7 +1378,7 @@ window.renderMapSidebar = function(provinceId) {
             'Move ' + selected.length + ' division' +
             (selected.length === 1 ? '' : 's') + ' to:</div>';
         getAdjacentProvinces(provinceId).forEach(function(otherId) {
-            var hostile = hostileDivisionsIn(otherId, window.mapPlayerFaction).length > 0;
+            var hostile = isAttackTarget(otherId, window.mapPlayerFaction);
             html += '<button class="map-button' + (hostile ? ' attack' : '') +
                 '" data-move-to="' + otherId + '"' +
                 (canAfford ? '' : ' disabled title="Not enough moves left"') +
@@ -1622,8 +1638,7 @@ window.tryMoveSelectedDivisions = function(toId) {
     }
 
     /* A hostile army holds the province: queue a battle instead. */
-    var defenders = hostileDivisionsIn(toId, window.mapPlayerFaction);
-    if (defenders.length) {
+    if (isAttackTarget(toId, window.mapPlayerFaction)) {
         window.queueMapAttack(ids, fromId, toId, cost);
         window.mapMovesUsed += cost;
         window.selectedMapDivisions = [];
@@ -1712,6 +1727,33 @@ window.resolveMapBattles = function() {
         killDivisions(attackers, result.attackersLost);
         killDivisions(defenders, result.defendersLost);
 
+        /* A beaten defender retreats to a neighbouring province with no
+           enemy soldiers in it (preferring one it controls); with nowhere
+           to go the survivors are lost. Beaten attackers simply stay in
+           the province they attacked from. */
+        var retreatNote = '';
+        if (result.winner === 'attacker' && defenders.length) {
+            var survivors = defenders.filter(function(d) { return !d.dead; });
+            if (survivors.length) {
+                var dOwner = survivors[0].owner;
+                var options = getAdjacentProvinces(toId).filter(function(id) {
+                    return !hostileDivisionsIn(id, dOwner).length;
+                });
+                var home = options.filter(function(id) {
+                    return window.mapProvinces[id].controller === dOwner;
+                });
+                var dest = (home.length ? home : options)[0];
+                if (dest) {
+                    survivors.forEach(function(d) { d.province = dest; });
+                    retreatNote = ' ' + survivors.length + ' retreated to ' +
+                        provinceName(dest) + '.';
+                } else {
+                    killDivisions(survivors, survivors.length);
+                    retreatNote = ' The survivors were cut off and lost.';
+                }
+            }
+        }
+
         var line = 'Battle for ' + name + ' (from ' +
             fromIds.map(provinceName).join(', ') + '): ' + startA +
             ' attacking, ' + startD + ' defending. ';
@@ -1731,7 +1773,7 @@ window.resolveMapBattles = function() {
             }
             line += 'Victory: ' + partyName(owner) + ' took ' + name + '. ' +
                 'Lost ' + result.attackersLost + ', destroyed ' +
-                result.defendersLost + '.';
+                result.defendersLost + '.' + retreatNote;
         } else if (result.winner === 'none') {
             line += 'Both sides were wiped out. ' + name + ' is empty.';
         } else {
