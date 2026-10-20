@@ -788,6 +788,10 @@ function mapGauss() {
     return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v);
 }
 
+/* Stats set by events (saved with the game): faction -> { stat: value }. */
+var MAP_STATS = ['morale', 'discipline', 'supply_quality', 'defense_bonus'];
+window.mapStatOverrides = {};
+
 /* Stats of `owner`'s army fighting in province `provinceId`. */
 window.mapStatsFor = function(owner, provinceId) {
     var Q = mapQ();
@@ -798,9 +802,11 @@ window.mapStatsFor = function(owner, provinceId) {
                  defense_bonus: Q.defense_bonus || 0 };
     } else {
         var f = window.mapFactionStats[owner] || window.mapFactionStats._default;
-        base = { morale: f.morale, discipline: f.discipline,
-                 supply_quality: f.supply_quality,
-                 defense_bonus: f.defense_bonus };
+        var ov = window.mapStatOverrides[owner] || {};
+        base = {};
+        MAP_STATS.forEach(function(k) {
+            base[k] = typeof ov[k] === 'number' ? ov[k] : f[k];
+        });
     }
     var p = window.mapProvinces[provinceId] || {};
     ['morale', 'discipline', 'supply_quality', 'defense_bonus'].forEach(function(k) {
@@ -1162,6 +1168,7 @@ window.saveMapState = function() {
     });
     q.map_owners = JSON.stringify(owners);
     q.map_wars = JSON.stringify(window.mapWarOverrides);
+    q.map_stats = JSON.stringify(window.mapStatOverrides);
     q.map_divisions = JSON.stringify(positions);
     q.map_control = JSON.stringify(control);
     q.map_battles = JSON.stringify(window.mapBattles);
@@ -1180,6 +1187,8 @@ window.saveMapState = function() {
      map_div_<province>      divisions stationed there (all factions)
      map_mydiv_<province>    the player's divisions stationed there
      map_war_<faction>       1 if the player's faction is at war with it
+     map_<stat>_<faction>    morale / discipline / supply_quality /
+                             defense_bonus of a non-player faction
      map_held_total          number of provinces the player controls
      map_mydiv_total         number of divisions the player has        */
 function syncMapQualities(q) {
@@ -1204,6 +1213,13 @@ function syncMapQualities(q) {
     Object.keys(window.mapPartyNames).forEach(function(f) {
         if (f !== 'none' && f !== window.mapPlayerFaction) {
             q['map_war_' + f] = window.mapAtWar(window.mapPlayerFaction, f) ? 1 : 0;
+        }
+    });
+    Object.keys(window.mapPartyNames).forEach(function(f) {
+        if (f !== 'none' && f !== window.mapPlayerFaction) {
+            MAP_STATS.forEach(function(k) {
+                q['map_' + k + '_' + f] = window.mapStatsFor(f, null)[k];
+            });
         }
     });
     q.map_held_total = heldTotal;
@@ -1247,6 +1263,9 @@ window.loadMapState = function() {
         }
         d.owner = owners[d.id] || d.startOwner;
     });
+
+    var stats = readJson(q.map_stats, {});
+    window.mapStatOverrides = stats && typeof stats === 'object' ? stats : {};
 
     var wars = readJson(q.map_wars, {});
     window.mapWarOverrides = wars && typeof wars === 'object' ? wars : {};
@@ -2302,6 +2321,35 @@ window.mapChangeOwner = function(id, fromOwner, toOwner, count) {
         });
         return list.length;
     });
+};
+
+/* Combat stats of a non-player faction: morale, discipline, supply_quality,
+   defense_bonus. e.g. mapSetStat('germany', 'morale', 0.8),
+   mapAddStat('germany', 'morale', -0.1), mapGetStat('germany', 'morale').
+   (The player's own stats are the Dendry qualities Q.morale etc.) */
+window.mapSetStat = function(faction, stat, value) {
+    if (MAP_STATS.indexOf(stat) === -1) {
+        console.warn('mapSetStat: unknown stat "' + stat + '" (use ' +
+            MAP_STATS.join(', ') + ')');
+        return false;
+    }
+    return editMapState(function() {
+        window.mapStatOverrides[faction] = window.mapStatOverrides[faction] || {};
+        window.mapStatOverrides[faction][stat] = Number(value);
+        return true;
+    });
+};
+window.mapAddStat = function(faction, stat, delta) {
+    window.loadMapState();
+    var current = window.mapStatsFor(faction, null)[stat];
+    if (typeof current !== 'number') {
+        return false;
+    }
+    return window.mapSetStat(faction, stat, current + Number(delta || 0));
+};
+window.mapGetStat = function(faction, stat) {
+    window.loadMapState();
+    return window.mapStatsFor(faction, null)[stat];
 };
 
 /* War and peace between two factions. */
