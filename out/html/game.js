@@ -74,20 +74,20 @@ window.mapProvinces = {
     },
     volhynia: {
         name: 'Volhynia',
-        controller: 'none',
-        control: 100,
+        controller: 'bolsheviks',
+        control: 80,
         adjacent: ['podolia', 'kyiv', 'minsk', 'poland', 'grodno']
     },
     bessarabia: {
         name: 'Bessarabia',
-        controller: 'none',
-        control: 100,
+        controller: 'bolsheviks',
+        control: 80,
         adjacent: ['podolia', 'kherson']
     },
     podolia: {
         name: 'Podolia',
-        controller: 'none',
-        control: 100,
+        controller: 'bolsheviks',
+        control: 80,
         adjacent: ['volhynia', 'bessarabia', 'kyiv', 'kherson']
     },
     petrograd: {
@@ -464,14 +464,14 @@ window.mapProvinces = {
     },
     estonia: {
         name: 'Estonia',
-        controller: 'none',
-        control: 100,
+        controller: 'bolsheviks',
+        control: 80,
         adjacent: ['petrograd', 'pskov', 'latvia']
     },
     latvia: {
         name: 'Latvia',
-        controller: 'none',
-        control: 100,
+        controller: 'bolsheviks',
+        control: 80,
         adjacent: ['vitebsk', 'pskov', 'estonia', 'lithuania', 'vilna']
     },
     lithuania: {
@@ -482,8 +482,8 @@ window.mapProvinces = {
     },
     vilna: {
         name: 'Vilna',
-        controller: 'none',
-        control: 100,
+        controller: 'bolsheviks',
+        control: 80,
         adjacent: ['vitebsk', 'latvia', 'lithuania', 'minsk', 'poland', 'grodno']
     },
     minsk: {
@@ -500,8 +500,8 @@ window.mapProvinces = {
     },
     grodno: {
         name: 'Grodno',
-        controller: 'none',
-        control: 100,
+        controller: 'bolsheviks',
+        control: 80,
         adjacent: ['volhynia', 'vilna', 'minsk', 'poland']
     },
     taurida: {
@@ -541,6 +541,7 @@ window.mapPartyColors = {
     right_sr: '--right-sr-color',
     ns: '--ns-color',
     germany: '--germany-color',
+    upr: '--usr',
     none: '--none'
 };
 
@@ -555,6 +556,7 @@ window.mapPartyNames = {
     right_sr: 'Right SRs',
     ns: 'Popular Socialists',
     germany: 'German Empire',
+    upr: 'Ukrainian People\'s Republic',
     none: 'Uncontrolled'
 };
 
@@ -574,15 +576,67 @@ window.mapProvinceFields = [
         value: function(d) {
             return d.controller === 'none' ? null : d.control + '%';
         }
+    },
+    {
+        label: 'Devastation',
+        value: function(d) {
+            return d.devastation + '%';
+        }
+    },
+    {
+        label: 'Supply limit',
+        value: function(d) {
+            var n = window.mapSupplyLimit(d.id);
+            return (Math.round(n * 10) / 10) + ' divisions';
+        }
     }
 ];
 
 /* Remember each province's starting owner so a new game resets cleanly. */
 Object.keys(window.mapProvinces).forEach(function(id) {
     var p = window.mapProvinces[id];
+    p.id = id;
     p.startController = p.controller;
     p.startControl = p.control;
+    p.devastation = 0;
 });
+
+/* ---------- starting factions: Ukrainian People's Republic ---------- */
+['podolia', 'bessarabia', 'kyiv', 'kherson', 'poltava', 'chernigov',
+ 'kharkov', 'yekaterinoslav', 'taurida', 'crimea'].forEach(function(id) {
+    var p = window.mapProvinces[id];
+    p.controller = 'upr';
+    p.control = 80;
+    p.startController = 'upr';
+    p.startControl = 80;
+});
+
+/* ---------- supply limits and devastation ----------
+   Each province has a base supply limit: how many divisions of one army can
+   be stationed there without suffering attrition. Urbanised / industrial
+   provinces get window.mapUrbanSupply, the rest window.mapRuralSupply. A
+   province can override it with  supply: N  . Devastation (0-100) lowers the
+   limit, down to half of it at 100. */
+window.mapUrbanSupply = 30;
+window.mapRuralSupply = 10;
+window.mapUrbanProvinces = ['petrograd', 'moscow', 'kyiv', 'kharkov',
+    'yekaterinoslav', 'poland', 'latvia', 'tver', 'vladimir', 'yaroslavl',
+    'nizhny', 'tula', 'kherson', 'saratov'];
+
+/* Devastation added to a province by a battle, and removed each turn. */
+window.mapBattleDevastation = 5;
+window.mapDevastationDecay = 1;
+
+window.mapSupplyLimit = function(id) {
+    var p = window.mapProvinces[id];
+    if (!p) {
+        return 0;
+    }
+    var base = typeof p.supply === 'number' ? p.supply :
+        (window.mapUrbanProvinces.indexOf(id) !== -1 ?
+            window.mapUrbanSupply : window.mapRuralSupply);
+    return base * (1 - 0.5 * (p.devastation || 0) / 100);
+};
 
 /* ---------- divisions ---------- */
 
@@ -609,14 +663,13 @@ window.mapDivisions = [].concat(
 
     makeDivisions('vilna', 'bolsheviks', 18),
     makeDivisions('grodno', 'bolsheviks', 16),
-    
-    makeDivisions('volhynia', 'bolsheviks', 20),
-    makeDivisions('podolia', 'bolsheviks', 15),
-    makeDivisions('bessarabia', 'bolsheviks', 15),
 
-    
+    makeDivisions('volhynia', 'bolsheviks', 20),
+    makeDivisions('podolia', 'upr', 15),
+    makeDivisions('bessarabia', 'upr', 15),
+
     makeDivisions('petrograd', 'bolsheviks', 5),
-    
+
     makeDivisions('poland', 'germany', 28, 'German Division', 1),
     makeDivisions('lithuania', 'germany', 23, 'German Division', 29)
 );
@@ -936,8 +989,8 @@ window.saveMapState = function() {
     Object.keys(window.mapProvinces).forEach(function(id) {
         var p = window.mapProvinces[id];
         if (p.controller !== p.startController ||
-            p.control !== p.startControl) {
-            control[id] = [p.controller, p.control];
+            p.control !== p.startControl || p.devastation) {
+            control[id] = [p.controller, p.control, p.devastation || 0];
         }
     });
     q.map_extra = JSON.stringify(window.mapDivisions.filter(function(d) {
@@ -958,6 +1011,8 @@ window.saveMapState = function() {
    "Held" and "my" mean window.mapPlayerFaction (the Bolsheviks).
      map_held_<province>     1 if the player's faction controls it, else 0
      map_control_<province>  control 0-100 (0 if nobody controls it)
+     map_devast_<province>   devastation 0-100
+     map_supply_<province>   current supply limit (divisions)
      map_div_<province>      divisions stationed there (all factions)
      map_mydiv_<province>    the player's divisions stationed there
      map_held_total          number of provinces the player controls
@@ -974,6 +1029,8 @@ function syncMapQualities(q) {
         var held = p.controller === window.mapPlayerFaction ? 1 : 0;
         q['map_held_' + id] = held;
         q['map_control_' + id] = p.controller === 'none' ? 0 : p.control;
+        q['map_devast_' + id] = p.devastation || 0;
+        q['map_supply_' + id] = Math.round(window.mapSupplyLimit(id) * 10) / 10;
         q['map_div_' + id] = here.length;
         q['map_mydiv_' + id] = mine;
         heldTotal += held;
@@ -1029,6 +1086,7 @@ window.loadMapState = function() {
         var saved = control[id];
         p.controller = saved ? saved[0] : p.startController;
         p.control = saved ? saved[1] : p.startControl;
+        p.devastation = saved && saved[2] ? saved[2] : 0;
     });
 
     var battles = readJson(q.map_battles, []);
@@ -1731,6 +1789,11 @@ window.resolveMapBattles = function() {
             });
         }
 
+        if (defenders.length) {
+            province.devastation = clampControl(
+                (province.devastation || 0) + window.mapBattleDevastation);
+        }
+
         var startA = attackers.length;
         var startD = defenders.length;
         killDivisions(attackers, result.attackersLost);
@@ -1800,9 +1863,77 @@ window.resolveMapBattles = function() {
 
 /* Call this from the post_event scene. Resolves all queued battles, then
    resets the move counter for the new turn. */
+/* Everything that changes between turns apart from battles. */
+window.mapDecayDevastation = function() {
+    Object.keys(window.mapProvinces).forEach(function(id) {
+        var p = window.mapProvinces[id];
+        p.devastation = clampControl((p.devastation || 0) - window.mapDevastationDecay);
+    });
+};
+
+/* An army over a province's supply limit wastes away: one division per
+   10 over the limit (at least one) per turn. */
+window.mapApplyAttrition = function(report) {
+    Object.keys(window.mapProvinces).forEach(function(id) {
+        var limit = window.mapSupplyLimit(id);
+        var owners = {};
+        divisionsIn(id).forEach(function(d) {
+            (owners[d.owner] = owners[d.owner] || []).push(d);
+        });
+        Object.keys(owners).forEach(function(owner) {
+            var list = owners[owner];
+            var over = list.length - limit;
+            if (over > 0) {
+                var loss = Math.min(list.length, Math.max(1, Math.round(over / 10)));
+                killDivisions(list, loss);
+                report.push(partyName(owner) + ' lost ' + loss + ' division' +
+                    (loss === 1 ? '' : 's') + ' to attrition in ' +
+                    provinceName(id) + ' (over the supply limit).');
+            }
+        });
+    });
+};
+
+/* Control drifts each turn: -5 with an enemy army present, otherwise +10
+   with a garrison, +5 with at least 50 control, 0 otherwise; devastation
+   subtracts up to 5 more. Uncontrolled provinces garrisoned by a single
+   faction at turn's end go over to it. */
+window.mapUpdateControl = function() {
+    Object.keys(window.mapProvinces).forEach(function(id) {
+        var p = window.mapProvinces[id];
+        var here = divisionsIn(id);
+        if (p.controller === 'none') {
+            var owners = [];
+            here.forEach(function(d) {
+                if (owners.indexOf(d.owner) === -1) {
+                    owners.push(d.owner);
+                }
+            });
+            if (owners.length === 1) {
+                p.controller = owners[0];
+                p.control = window.mapConquestControl;
+            }
+            return;
+        }
+        var enemy = here.some(function(d) {
+            return window.mapIsHostile(p.controller, d.owner);
+        });
+        var garrison = here.some(function(d) {
+            return d.owner === p.controller;
+        });
+        var delta = enemy ? -5 : garrison ? 10 : p.control >= 50 ? 5 : 0;
+        delta -= 5 * (p.devastation || 0) / 100;
+        p.control = clampControl(Math.round(p.control + delta));
+    });
+};
+
 window.mapPostTurn = function() {
     window.loadMapState();
+    window.mapDecayDevastation();
     var report = window.resolveMapBattles();
+    window.mapApplyAttrition(report);
+    window.mapUpdateControl();
+    window.mapReport = report;
     window.mapMovesUsed = 0;
     window.saveMapState();
     if (mapIsOpen()) {
@@ -1876,6 +2007,31 @@ window.mapSetControl = function(id, control) {
         window.mapProvinces[id].control = clampControl(control);
         return true;
     });
+};
+
+/* Devastation (0-100) of a province. */
+window.mapSetDevastation = function(id, value) {
+    if (!knownProvince(id, 'mapSetDevastation')) {
+        return false;
+    }
+    return editMapState(function() {
+        window.mapProvinces[id].devastation = clampControl(value);
+        return true;
+    });
+};
+window.mapAddDevastation = function(id, delta) {
+    if (!knownProvince(id, 'mapAddDevastation')) {
+        return false;
+    }
+    return editMapState(function() {
+        var p = window.mapProvinces[id];
+        p.devastation = clampControl((p.devastation || 0) + Number(delta || 0));
+        return true;
+    });
+};
+window.mapDevastation = function(id) {
+    var p = window.mapProvinces[id];
+    return p ? (p.devastation || 0) : 0;
 };
 
 /* Raise or lower control by an amount, e.g. mapAddControl('tver', -15). */
