@@ -607,12 +607,12 @@ window.mapDivisions = [].concat(
     makeDivisions('latvia', 'bolsheviks', 15),
     makeDivisions('estonia', 'bolsheviks', 10),
 
-    makeDivisions('vilna', 'bolsheviks', 20),
-    makeDivisions('grodno', 'bolsheviks', 20),
+    makeDivisions('vilna', 'bolsheviks', 18),
+    makeDivisions('grodno', 'bolsheviks', 16),
     
     makeDivisions('volhynia', 'bolsheviks', 20),
-    makeDivisions('podolia', 'bolsheviks', 20),
-    makeDivisions('bessarabia', 'bolsheviks', 20),
+    makeDivisions('podolia', 'bolsheviks', 15),
+    makeDivisions('bessarabia', 'bolsheviks', 15),
 
     
     makeDivisions('petrograd', 'bolsheviks', 5),
