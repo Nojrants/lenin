@@ -604,10 +604,19 @@ function makeDivisions(province, owner, count, label, firstNumber) {
 }
 
 window.mapDivisions = [].concat(
+    makeDivisions('latvia', 'bolsheviks', 15),
+    makeDivisions('estonia', 'bolsheviks', 10),
+
+    makeDivisions('vilna', 'bolsheviks', 20),
+    makeDivisions('grodno', 'bolsheviks', 20),
+    
+    makeDivisions('volhynia', 'bolsheviks', 20),
+    makeDivisions('podolia', 'bolsheviks', 20),
+    makeDivisions('bessarabia', 'bolsheviks', 20),
+
+    
     makeDivisions('petrograd', 'bolsheviks', 5),
-    makeDivisions('novgorod', 'sr', 2),
-    makeDivisions('tver', 'mensheviks', 1),
-    makeDivisions('moscow', 'bolsheviks', 4),
+    
     makeDivisions('poland', 'germany', 28, 'German Division', 1),
     makeDivisions('lithuania', 'germany', 23, 'German Division', 29)
 );
