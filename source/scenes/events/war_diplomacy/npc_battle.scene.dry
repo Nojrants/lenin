@@ -12,4 +12,4 @@ The German Empire reviews its lines. Wherever a neighbouring province looks clea
 
 Any attacks have been queued on the map (red arrows). They are fought when the turn ends.
 
-- @post_turn: Continue
+- @root: Continue
