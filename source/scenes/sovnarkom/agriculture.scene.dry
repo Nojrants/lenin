@@ -2,7 +2,7 @@ title: Agriculture
 new-page: true
 is-card: true
 on-arrival: agricultural_policy_timer += 2; week_actions += 1
-view-if: agricultural_policy_timer == 0
+view-if: agricultural_policy_timer == 0 and agriculture_minister_party = "Bolshevik"
 card-image: img/agriculture.PNG
 tags: sovnarkom, government
 
