@@ -2,6 +2,7 @@ title: Test: German Advance
 subtitle: Test scene for the NPC attack AI
 tags: event
 view-if: german_offensive_timer = 0
+max-visits: 1
 on-arrival: {! Q.german_offensive_timer += 1; try { window.mapNpcTurn('germany'); } catch (e) { console.error('mapNpcTurn failed:', e); } !}
 
 The German Empire reviews its lines. Wherever a neighbouring province looks clearly weaker than the army facing it, the order is given to advance.
