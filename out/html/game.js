@@ -260,8 +260,8 @@ window.mapProvinces = {
     },
     kostroma: {
         name: 'Kostroma',
-        controller: 'none',
-        control: 100,
+        controller: 'bolsheviks',
+        control: 60,
         adjacent: ['yaroslavl', 'vladimir', 'vologda', 'nizhny', 'vyatka']
     },
     georgia: {
@@ -344,8 +344,8 @@ window.mapProvinces = {
     },
     vyatka: {
         name: 'Vyatka',
-        controller: 'none',
-        control: 100,
+        controller: 'bolsheviks',
+        control: 60,
         adjacent: ['vologda', 'kostroma', 'nizhny', 'kazan', 'ufa', 'perm']
     },
     kazan: {
@@ -545,6 +545,7 @@ window.mapPartyColors = {
     finland: '#4f8fc0',
     don: '--cossack',
     greens: '#1f9d6b',
+    whites: '#d9d3bf',
     none: '--none'
 };
 
@@ -563,6 +564,7 @@ window.mapPartyNames = {
     finland: 'Finland',
     don: 'Don Cossacks',
     greens: 'Greens',
+    whites: 'White Army',
     none: 'Uncontrolled'
 };
 
@@ -668,6 +670,7 @@ function makeDivisions(province, owner, count, label, firstNumber) {
 window.mapDivisions = [].concat(
     makeDivisions('pskov', 'bolsheviks', 50),
     makeDivisions('vitebsk', 'bolsheviks', 75),
+
     makeDivisions('estonia', 'bolsheviks', 50),
 
     makeDivisions('vilna', 'bolsheviks', 90),
@@ -693,7 +696,7 @@ window.mapDivisions = [].concat(
     makeDivisions('lithuania', 'germany', 100, 'German Division', 126),
     makeDivisions('latvia', 'germany', 90, 'German Division', 226),
 
-    makeDivisions('don', 'don', 8)
+    makeDivisions('don', 'don', 10)
 );
 
 var mapDivisionIndex = {};
@@ -713,7 +716,35 @@ window.mapCanMove = function(divisionIds, fromId, toId) {
    only non-hostile foreign divisions is a peaceful move, not an attack.
    Right now every other faction is hostile. */
 window.mapIsHostile = function(attacker, defender) {
-    return attacker !== defender;
+    return window.mapAtWar(attacker, defender);
+};
+
+/* ---------- war and peace ----------
+   Two factions can only fight (and enter each other's territory) while at
+   war. Everyone is at war with everyone except the pairs listed here; events
+   change that with window.mapSetWar(a, b) / window.mapSetPeace(a, b). */
+window.mapDefaultPeace = [
+    ['bolsheviks', 'finland'],
+    ['bolsheviks', 'upr'],
+    ['germany', 'finland']
+];
+window.mapWarOverrides = {};     // 'a|b' (sorted) -> true = war, false = peace
+
+function warKey(a, b) {
+    return a < b ? a + '|' + b : b + '|' + a;
+}
+
+window.mapAtWar = function(a, b) {
+    if (a === b || a === 'none' || b === 'none') {
+        return false;
+    }
+    var key = warKey(a, b);
+    if (Object.prototype.hasOwnProperty.call(window.mapWarOverrides, key)) {
+        return window.mapWarOverrides[key];
+    }
+    return !window.mapDefaultPeace.some(function(pair) {
+        return warKey(pair[0], pair[1]) === key;
+    });
 };
 
 /* ---------- Dendry combat integration ----------
@@ -910,16 +941,59 @@ window.mapResolveBattle = function(battle) {
 };
 
 /* ---------- NPC AI ----------
-   For every province holding the faction's divisions, look at neighbouring
-   provinces held by someone else. If the best target is clearly weaker
-   (strength ratio >= window.mapAIAttackRatio) queue an attack with the whole
-   stack. On victory only half advance (see resolveMapBattles). Call it from
-   a scene:  window.mapNpcTurn('germany');  Returns a list of descriptions. */
+   window.mapNpcTurn('germany') plans one turn for a faction (call it from a
+   scene). Two kinds of order:
+   1. Attack: a province whose stack is at least window.mapAIAttackRatio
+      times stronger than a neighbouring target at war with it (or empty and
+      not its own) queues an attack with the whole stack. On victory half
+      advance, unless the origin then has no enemy neighbours, in which case
+      everyone advances (see resolveMapBattles).
+   2. Reinforce: other stacks move toward the enemy. A province moves troops
+      into a neighbouring province of its own that is closer to enemy armies,
+      only as many as fit under that province's supply limit, and front-line
+      provinces keep half their troops as a garrison.
+   Returns a list of descriptions. */
 window.mapAIAttackRatio = 1.5;
+
+/* Is the province hostile ground for `faction`: held by a faction at war
+   with it, or containing such an army? */
+function isEnemyGround(id, faction) {
+    var p = window.mapProvinces[id];
+    if (p && p.controller !== 'none' && window.mapIsHostile(faction, p.controller)) {
+        return true;
+    }
+    return hostileDivisionsIn(id, faction).length > 0;
+}
+
+/* Distance (in provinces) from every province to the nearest enemy army. */
+function enemyDistances(faction) {
+    var dist = {};
+    var queue = [];
+    window.mapDivisions.forEach(function(d) {
+        if (!d.dead && window.mapIsHostile(faction, d.owner) &&
+            dist[d.province] === undefined) {
+            dist[d.province] = 0;
+            queue.push(d.province);
+        }
+    });
+    while (queue.length) {
+        var cur = queue.shift();
+        getAdjacentProvinces(cur).forEach(function(n) {
+            if (dist[n] === undefined) {
+                dist[n] = dist[cur] + 1;
+                queue.push(n);
+            }
+        });
+    }
+    return dist;
+}
 
 window.mapNpcTurn = function(faction) {
     return editMapState(function() {
         var done = [];
+        var attacking = {};
+
+        /* 1. attacks */
         var seen = {};
         window.mapDivisions.forEach(function(d0) {
             if (d0.dead || d0.owner !== faction || seen[d0.province]) {
@@ -935,10 +1009,16 @@ window.mapNpcTurn = function(faction) {
             }
             var best = null;
             getAdjacentProvinces(from).forEach(function(to) {
-                var defenders = hostileDivisionsIn(to, faction);
                 var p = window.mapProvinces[to];
-                if (!defenders.length && (!p || p.controller === faction)) {
-                    return;
+                var defenders = hostileDivisionsIn(to, faction);
+                if (!defenders.length) {
+                    if (!p || p.controller === faction) {
+                        return;
+                    }
+                    if (p.controller !== 'none' &&
+                        !window.mapIsHostile(faction, p.controller)) {
+                        return;     /* at peace with its owner */
+                    }
                 }
                 var r = window.mapStrengthRatio(mine, defenders, to);
                 if (r >= window.mapAIAttackRatio &&
@@ -949,8 +1029,62 @@ window.mapNpcTurn = function(faction) {
             if (best) {
                 window.queueMapAttack(mine.map(function(d) { return d.id; }),
                                       from, best.to, 0);
+                attacking[from] = true;
                 done.push(partyName(faction) + ': ' + provinceName(from) +
-                    ' -> ' + provinceName(best.to));
+                    ' attacks ' + provinceName(best.to));
+            }
+        });
+
+        /* 2. reinforcements */
+        var dist = enemyDistances(faction);
+        var moved = {};
+        var incoming = {};
+        var sources = Object.keys(window.mapProvinces).filter(function(id) {
+            return window.mapProvinces[id].controller === faction &&
+                dist[id] !== undefined;
+        }).sort(function(x, y) {
+            return dist[y] - dist[x];      /* furthest from the enemy first */
+        });
+        sources.forEach(function(from) {
+            var mine = divisionsIn(from).filter(function(d) {
+                return d.owner === faction && !isCommitted(d.id) && !moved[d.id];
+            });
+            if (!mine.length) {
+                return;
+            }
+            var keep = dist[from] <= 1 ? Math.ceil(mine.length / 2) : 1;
+            var movable = mine.length - keep;
+            if (movable <= 0) {
+                return;
+            }
+            var best = null;
+            getAdjacentProvinces(from).forEach(function(to) {
+                var q = window.mapProvinces[to];
+                if (!q || q.controller !== faction || dist[to] === undefined ||
+                    dist[to] >= dist[from]) {
+                    return;
+                }
+                var there = divisionsIn(to).filter(function(d) {
+                    return d.owner === faction;
+                }).length + (incoming[to] || 0);
+                var room = Math.floor(window.mapSupplyLimit(to) - there);
+                if (room <= 0) {
+                    return;
+                }
+                if (!best || dist[to] < best.dist ||
+                    (dist[to] === best.dist && room > best.room)) {
+                    best = { to: to, dist: dist[to], room: room };
+                }
+            });
+            if (best) {
+                var n = Math.min(movable, best.room);
+                mine.slice(0, n).forEach(function(d) {
+                    d.province = best.to;
+                    moved[d.id] = true;
+                });
+                incoming[best.to] = (incoming[best.to] || 0) + n;
+                done.push(partyName(faction) + ': ' + n + ' reinforce ' +
+                    provinceName(best.to) + ' from ' + provinceName(from));
             }
         });
         return done;
@@ -1027,6 +1161,7 @@ window.saveMapState = function() {
         }
     });
     q.map_owners = JSON.stringify(owners);
+    q.map_wars = JSON.stringify(window.mapWarOverrides);
     q.map_divisions = JSON.stringify(positions);
     q.map_control = JSON.stringify(control);
     q.map_battles = JSON.stringify(window.mapBattles);
@@ -1044,6 +1179,7 @@ window.saveMapState = function() {
      map_supply_<province>   current supply limit (divisions)
      map_div_<province>      divisions stationed there (all factions)
      map_mydiv_<province>    the player's divisions stationed there
+     map_war_<faction>       1 if the player's faction is at war with it
      map_held_total          number of provinces the player controls
      map_mydiv_total         number of divisions the player has        */
 function syncMapQualities(q) {
@@ -1064,6 +1200,11 @@ function syncMapQualities(q) {
         q['map_mydiv_' + id] = mine;
         heldTotal += held;
         myTotal += mine;
+    });
+    Object.keys(window.mapPartyNames).forEach(function(f) {
+        if (f !== 'none' && f !== window.mapPlayerFaction) {
+            q['map_war_' + f] = window.mapAtWar(window.mapPlayerFaction, f) ? 1 : 0;
+        }
     });
     q.map_held_total = heldTotal;
     q.map_mydiv_total = myTotal;
@@ -1106,6 +1247,9 @@ window.loadMapState = function() {
         }
         d.owner = owners[d.id] || d.startOwner;
     });
+
+    var wars = readJson(q.map_wars, {});
+    window.mapWarOverrides = wars && typeof wars === 'object' ? wars : {};
 
     var positions = readJson(q.map_divisions, {});
     window.mapDivisions.forEach(function(d) {
@@ -1178,6 +1322,17 @@ function availablePlayerDivisionsIn(provinceId) {
 
 /* True if moving `owner`'s army into the province means fighting: enemy
    divisions are there, or another faction controls it (even if empty). */
+/* If `owner` may not enter the province because it belongs to a faction it
+   is at peace with, returns that faction; otherwise false. */
+function mapBorderClosed(owner, provinceId) {
+    var p = window.mapProvinces[provinceId];
+    if (p && p.controller !== 'none' && p.controller !== owner &&
+        !window.mapAtWar(owner, p.controller)) {
+        return p.controller;
+    }
+    return false;
+}
+
 function isAttackTarget(provinceId, owner) {
     if (hostileDivisionsIn(provinceId, owner).length) {
         return true;
@@ -1488,9 +1643,11 @@ window.renderMapSidebar = function(provinceId) {
             (selected.length === 1 ? '' : 's') + ' to:</div>';
         getAdjacentProvinces(provinceId).forEach(function(otherId) {
             var hostile = isAttackTarget(otherId, window.mapPlayerFaction);
+            var shut = mapBorderClosed(window.mapPlayerFaction, otherId);
             html += '<button class="map-button' + (hostile ? ' attack' : '') +
                 '" data-move-to="' + otherId + '"' +
-                (canAfford ? '' : ' disabled title="Not enough moves left"') +
+                (shut ? ' disabled title="At peace with ' + partyName(shut) + '"' :
+                 canAfford ? '' : ' disabled title="Not enough moves left"') +
                 '>' + (hostile ? 'Attack ' : '') + provinceName(otherId) +
                 '</button> ';
         });
@@ -1746,6 +1903,13 @@ window.tryMoveSelectedDivisions = function(toId) {
         return;
     }
 
+    var closed = mapBorderClosed(window.mapPlayerFaction, toId);
+    if (closed) {
+        setMapMessage('You are at peace with ' + partyName(closed) +
+            ', so you cannot enter ' + provinceName(toId) + '.');
+        return;
+    }
+
     /* A hostile army holds the province: queue a battle instead. */
     if (isAttackTarget(toId, window.mapPlayerFaction)) {
         window.queueMapAttack(ids, fromId, toId, cost);
@@ -1876,11 +2040,27 @@ window.resolveMapBattles = function() {
             /* the player's army moves in whole; an NPC army splits, only
                half advancing while the rest stay behind */
             var alive = attackers.filter(function(d) { return !d.dead; });
-            var advance = owner === window.mapPlayerFaction
-                ? alive.length : Math.max(1, Math.ceil(alive.length / 2));
-            alive.slice(0, advance).forEach(function(d) {
-                d.province = toId;
-            });
+            if (owner === window.mapPlayerFaction) {
+                alive.forEach(function(d) { d.province = toId; });
+            } else {
+                /* per origin province: everyone advances if that province
+                   no longer borders enemy ground, otherwise half do */
+                var byOrigin = {};
+                alive.forEach(function(d) {
+                    (byOrigin[d.province] = byOrigin[d.province] || []).push(d);
+                });
+                Object.keys(byOrigin).forEach(function(originId) {
+                    var group = byOrigin[originId];
+                    var exposed = getAdjacentProvinces(originId).some(function(n) {
+                        return n !== toId && isEnemyGround(n, owner);
+                    });
+                    var advance = exposed ?
+                        Math.max(1, Math.ceil(group.length / 2)) : group.length;
+                    group.slice(0, advance).forEach(function(d) {
+                        d.province = toId;
+                    });
+                });
+            }
             if (province.controller !== owner) {
                 province.controller = owner;
                 province.control = window.mapConquestControl;
@@ -2109,6 +2289,34 @@ window.mapChangeOwner = function(id, fromOwner, toOwner, count) {
         });
         return list.length;
     });
+};
+
+/* War and peace between two factions. */
+window.mapSetWar = function(a, b) {
+    return editMapState(function() {
+        window.mapWarOverrides[warKey(a, b)] = true;
+        return true;
+    });
+};
+window.mapSetPeace = function(a, b) {
+    return editMapState(function() {
+        window.mapWarOverrides[warKey(a, b)] = false;
+        /* queued attacks against a faction we just made peace with fall away */
+        window.mapBattles = window.mapBattles.filter(function(bt) {
+            var p = window.mapProvinces[bt.to];
+            var cancel = p && !isAttackTarget(bt.to, mapDivisionIndex[bt.ids[0]] ?
+                mapDivisionIndex[bt.ids[0]].owner : a);
+            if (cancel) {
+                window.mapMovesUsed = Math.max(0, window.mapMovesUsed - bt.cost);
+            }
+            return !cancel;
+        });
+        return true;
+    });
+};
+window.mapIsAtWar = function(a, b) {
+    window.loadMapState();
+    return window.mapAtWar(a, b);
 };
 
 /* Devastation (0-100) of a province. */
