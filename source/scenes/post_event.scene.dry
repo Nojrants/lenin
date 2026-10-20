@@ -1,7 +1,6 @@
 title: Post Event
 new-page: true
 on-arrival: {!
-window.mapPostTurn();
 Q.last_advisor_action = 0;
 Q.last_cabinet_action = 0;
 // make sure no stat is below 0.
@@ -1446,6 +1445,7 @@ Q.red_specialists += (Q.students / 4) * Q.finalefficacy_enlightenment * Q.school
 
 // 1. update dates
 if (Q.week_actions >= 1 && Q.current_player >= Q.n_players) {
+	window.mapPostTurn();
     Q.week_actions = 0;
     Q.time += 1;
     Q.week += 1;
