@@ -971,8 +971,7 @@ body.dark-mode .negative { color: #ff6b6b; }
   max-height: 700px;
 }
 
-/* Provinces get no outline of their own (the SVG's borders show
-   through); only the selected province is outlined. */
+/* Provinces */
 .map-province-shape {
   transition: filter 0.12s;
 }
@@ -987,7 +986,7 @@ body.dark-mode .negative { color: #ff6b6b; }
   vector-effect: non-scaling-stroke;
 }
 
-/* Division icons are clickable. */
+/* Division icons */
 .map-division-counter { cursor: pointer; }
 .map-division-counter circle {
   fill: var(--content-bg-color);
@@ -1004,7 +1003,7 @@ body.dark-mode .negative { color: #ff6b6b; }
   stroke-width: 8;
 }
 
-/* Right-hand province sidebar (positioning is in the LAYOUT section) */
+/* Right sidebar */
 #map-sidebar h2 {
   margin: 0.2em 0 0.6em 0;
   font-size: 1.2em;
@@ -1024,7 +1023,7 @@ body.dark-mode #map-sidebar h2 { color: var(--gold-soft); }
 .province-stat-label { font-size: 0.85em; font-style: italic; opacity: 0.8; }
 .province-stat-value { font-weight: bold; }
 
-/* Division list and move buttons in the map sidebar */
+/* Division controls */
 #map-sidebar h3 {
   margin: 0.8em 0 0.4em 0;
   font-size: 1em;
@@ -1080,7 +1079,7 @@ body.dark-mode #map-sidebar h2 { color: var(--gold-soft); }
   background: var(--link-hover-color);
 }
 
-/* Moves-left panel above the right-hand sidebar */
+/* Moves counter */
 #map-turnbar { margin: 0 0 1rem 0; }
 .map-turnbar {
   display: flex;
@@ -1112,7 +1111,7 @@ body.dark-mode .turnbar-attacks { color: #ff8a8a; }
 .map-turnbar.out .move-pip.on { background: var(--gold-soft); }
 .map-turnbar.out .turnbar-attacks { color: #fff; }
 
-/* Attack arrows (drawn in SVG units; the map is ~3000 units wide) */
+/* Attack arrows */
 .map-battle-arrows { pointer-events: none; }
 .map-arrow-halo {
   stroke: #fff;
@@ -1143,7 +1142,7 @@ body.dark-mode .turnbar-attacks { color: #ff8a8a; }
   font-weight: bold;
 }
 
-/* Attack buttons, queued attacks and battle reports in the sidebar */
+/* Battles and reports */
 .map-button.attack {
   background: var(--red-dark);
   border-color: #000;
