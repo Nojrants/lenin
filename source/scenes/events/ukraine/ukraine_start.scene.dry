@@ -1,0 +1,32 @@
+title: Situation in Ukraine
+new-page: true
+view-if: year = 1917 and month = 11 and week = 2 
+max-visits: 1
+tags: event
+
+= Situation in Ukraine
+
+Receiving news of our actions in Petrograd, the Central Rada of Ukraine has issued a statement condemning the Bolshevik seizure of power, and has announced they will resist any and all attempts to undermine the provisional government within Ukraine, though officially they aim to pursue a position of "neutrality" toward our government in Russia. In response to Ukrainian Bolsheviks forming a "revolutionary committee" – in order to coordinate an uprising along the same lines as in Petrograd – military forces loyal to the Central Rada responded with a crackdown against Bolshevik militants.
+
+We are receiving word that a majority of Bolshevik leaders in Kyiv have now been arrested. After sporadic fighting across the city over the past week, the Bolshevik militias have surrendered, leaving the city firmly under the control of the Central Rada. 
+
+- @rebound
+- @leave
+
+@rebound
+title: Do what we can to rebuild our forces in Ukraine, we must try again. 
+on-arrival: {!
+  Q.ukraine_preparations += 1;
+  Q.upr_relation -= 15; 
+!}
+
+The Kyiv Revolutionary Committee is re-formed, though it will take time to rebuild loyal militias within the capital. 
+
+@leave
+title: What happens in Kyiv is none of our concern. 
+on-arrival: {!
+  Q.ukraine_preparations = 0;
+  Q.upr_relation -= 10; 
+!}
+
+Our forces in Kyiv are disarmed by the Central Rada, though some Bolshevik notables manage to flee from the city. Our standing among the Ukrainian workers is severely weakened. 
