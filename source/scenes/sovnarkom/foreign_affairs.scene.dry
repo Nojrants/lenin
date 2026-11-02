@@ -125,7 +125,7 @@ new-page: true
 max-visits: 1
 view-if: call_for_peace != 1 and german_negotiations < 1
 on-arrival: {!
-  Q.call_for_peace = 1; Q.german_revolution += 1;
+  Q.call_for_peace = 1; Q.german_revolution_timer -= 1; 
   Q.uk_relation -= 4; Q.france_relation -= 4; Q.us_relation -= 2; 
 !}
 
