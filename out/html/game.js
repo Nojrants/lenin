@@ -18,53 +18,22 @@ var main = function(dendryUI) {
 
 var TITLE = "Heroic Age of Revolution" + '_' + "(Noj Rants)";
 
-/*
-MAP
-
-Provinces:  add an entry to window.mapProvinces whose key is the id of that
-            element in the SVG. Anything without an entry is ignored.
-            `adjacent` lists neighbouring provinces (it only needs to be
-            listed on one side; adjacency is treated as two-way).
-Divisions:  window.mapDivisions is the list of all divisions. Each has an id,
-            a name, an owner (a key of mapPartyColors) and a province.
-Moves:      every order that moves a group of divisions one province (or
-            queues an attack) costs a move. The limit is
-            window.mapMovesPerTurn. See "SETTINGS" just below.
-Battles:    moving into a province held by a hostile army queues a battle
-            (red arrow on the map). Nothing is fought until the post_event
-            scene calls window.mapPostTurn(), which resolves every queued
-            battle and then resets the move counter.
-
-In your post_event scene, add:
-    on-arrival: {! window.mapPostTurn(); !}
-*/
-
-/* ---------- SETTINGS ---------- */
-
-/* Only divisions owned by this faction can be selected and moved. */
+// settings
 window.mapPlayerFaction = 'bolsheviks';
 
-/* Moves available each turn. */
 window.mapMovesPerTurn = 10;
 
-/* 'order'    : one move per order (any number of divisions moved together
-                from one province to a neighbouring one, or one queued attack)
-   'division' : one move per division */
 window.mapMoveCostMode = 'order';
 
-/* Control (0-100) of a province that has just been conquered. */
 window.mapConquestControl = 50;
 
-/* Battle calculation: each round every attacking division destroys one
-   enemy division with probability attackKill, every defending division with
-   probability defendKill. Rounds repeat until one side is wiped out or
-   maxRounds is reached (then the defender holds). */
 window.mapBattleSettings = {
     attackKill: 0.35,
     defendKill: 0.40,
     maxRounds: 12
 };
 
+// provinces
 window.mapProvinces = {
     finland: {
         name: 'Finland',
@@ -530,6 +499,7 @@ window.mapProvinces = {
     }
 };
 
+// factions
 window.mapPartyColors = {
     bolsheviks: '--bolshevik-color',
     sdi: '--sdi-color',
@@ -568,8 +538,7 @@ window.mapPartyNames = {
     none: 'Uncontrolled'
 };
 
-/* Rows shown in the sidebar for the selected province
-   (the division list is added underneath automatically). */
+// sidebar fields
 window.mapProvinceFields = [
     {
         label: 'Controller',
@@ -600,7 +569,6 @@ window.mapProvinceFields = [
     }
 ];
 
-/* Remember each province's starting owner so a new game resets cleanly. */
 Object.keys(window.mapProvinces).forEach(function(id) {
     var p = window.mapProvinces[id];
     p.id = id;
@@ -609,7 +577,6 @@ Object.keys(window.mapProvinces).forEach(function(id) {
     p.devastation = 0;
 });
 
-/* ---------- starting factions: Ukrainian People's Republic ---------- */
 ['podolia', 'bessarabia', 'kyiv', 'kherson', 'poltava', 'chernigov',
  'kharkov', 'yekaterinoslav', 'taurida', 'crimea'].forEach(function(id) {
     var p = window.mapProvinces[id];
@@ -620,19 +587,12 @@ Object.keys(window.mapProvinces).forEach(function(id) {
     p.startControl = v;
 });
 
-/* ---------- supply limits and devastation ----------
-   Each province has a base supply limit: how many divisions of one army can
-   be stationed there without suffering attrition. Urbanised / industrial
-   provinces get window.mapUrbanSupply, the rest window.mapRuralSupply. A
-   province can override it with  supply: N  . Devastation (0-100) lowers the
-   limit, down to half of it at 100. */
 window.mapUrbanSupply = 150;
 window.mapRuralSupply = 50;
 window.mapUrbanProvinces = ['petrograd', 'moscow', 'kyiv', 'kharkov',
     'yekaterinoslav', 'poland', 'latvia', 'tver', 'vladimir', 'yaroslavl',
     'nizhny', 'tula', 'kherson', 'saratov'];
 
-/* Devastation added to a province by a battle, and removed each turn. */
 window.mapBattleDevastation = 5;
 window.mapDevastationDecay = 1;
 
@@ -647,8 +607,7 @@ window.mapSupplyLimit = function(id) {
     return base * (1 - 0.5 * (p.devastation || 0) / 100);
 };
 
-/* ---------- divisions ---------- */
-
+// divisions
 function makeDivisions(province, owner, count, label, firstNumber) {
     var out = [];
     var base = label || (window.mapProvinces[province].name + ' Division');
@@ -660,7 +619,7 @@ function makeDivisions(province, owner, count, label, firstNumber) {
             owner: owner,
             startOwner: owner,
             province: province,
-            start: province,     // where it begins a new game
+            start: province,
             dead: false
         });
     }
@@ -682,7 +641,6 @@ window.mapDivisions = [].concat(
     makeDivisions('bessarabia', 'upr', 75),
     makeDivisions('kyiv', 'upr', 25),
 
-    /* garrisons */
     makeDivisions('petrograd', 'bolsheviks', 30),
     makeDivisions('yekaterinburg', 'bolsheviks', 15),
     makeDivisions('nizhny', 'bolsheviks', 10),
@@ -704,31 +662,21 @@ window.mapDivisions.forEach(function(d) {
     mapDivisionIndex[d.id] = d;
 });
 
-/* ---------- rules hooks ---------- */
-
-/* Return true to allow the move, or false / a message string to refuse it.
-   Add supply, terrain, etc. here later. */
 window.mapCanMove = function(divisionIds, fromId, toId) {
     return true;
 };
 
-/* Is `defender` an enemy of `attacker`? Moving into a province that holds
-   only non-hostile foreign divisions is a peaceful move, not an attack.
-   Right now every other faction is hostile. */
 window.mapIsHostile = function(attacker, defender) {
     return window.mapAtWar(attacker, defender);
 };
 
-/* ---------- war and peace ----------
-   Two factions can only fight (and enter each other's territory) while at
-   war. Everyone is at war with everyone except the pairs listed here; events
-   change that with window.mapSetWar(a, b) / window.mapSetPeace(a, b). */
+// war and peace
 window.mapDefaultPeace = [
     ['bolsheviks', 'finland'],
     ['bolsheviks', 'upr'],
     ['germany', 'finland']
 ];
-window.mapWarOverrides = {};     // 'a|b' (sorted) -> true = war, false = peace
+window.mapWarOverrides = {};
 
 function warKey(a, b) {
     return a < b ? a + '|' + b : b + '|' + a;
@@ -747,32 +695,17 @@ window.mapAtWar = function(a, b) {
     });
 };
 
-/* ---------- Dendry combat integration ----------
-   Battles are fought province by province. Battles involving the player's
-   faction use the Battle scene's maths and write the same result qualities
-   (casualties, outcome, war_weariness, counts), so events driven by them
-   keep working. */
-
-/* Soldiers represented by one division. */
+// combat
 window.mapSoldiersPerDivision = 3000;
 
-/* The Battle-scene formulas work in thousands of soldiers, so they are fed
-   soldiers / mapSoldierUnit. Casualty qualities are in the same unit. */
 window.mapSoldierUnit = 1000;
 
-/* Base share of an army lost in a battle against an equal enemy. */
 window.mapCasualtyRate = 0.12;
 
-/* Stats of non-player factions. Any province can override them, e.g.
-     window.mapProvinces.minsk.defense_bonus = 0.5;
-   (fields: morale, discipline, supply_quality, defense_bonus). */
 window.mapFactionStats = {
     germany: { morale: 1, discipline: 1.2, supply_quality: 1, defense_bonus: 0 },
     _default: { morale: 1, discipline: 1, supply_quality: 1, defense_bonus: 0 }
 };
-
-/* Optional: a province may have  front: 'northern'  . If it does, a battle
-   there also moves Q[front + '_progress'] by +/-1. */
 
 function mapQ() {
     try {
@@ -788,11 +721,9 @@ function mapGauss() {
     return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v);
 }
 
-/* Stats set by events (saved with the game): faction -> { stat: value }. */
 var MAP_STATS = ['morale', 'discipline', 'supply_quality', 'defense_bonus'];
 window.mapStatOverrides = {};
 
-/* Stats of `owner`'s army fighting in province `provinceId`. */
 window.mapStatsFor = function(owner, provinceId) {
     var Q = mapQ();
     var base;
@@ -825,7 +756,6 @@ function mapDefensePower(soldiers, st) {
         (1 + st.defense_bonus / 2);
 }
 
-/* Expected attacker/defender strength ratio, used by the AI. */
 window.mapStrengthRatio = function(attackers, defenders, toId) {
     var N = window.mapSoldiersPerDivision / window.mapSoldierUnit;
     if (!defenders.length) {
@@ -837,9 +767,6 @@ window.mapStrengthRatio = function(attackers, defenders, toId) {
         Math.max(1, mapDefensePower(defenders.length * N, dSt));
 };
 
-/* The battle calculation. Receives
-     { to, from: [province ids], attackers: [divisions], defenders: [divisions] }
-   and returns { attackersLost, defendersLost, winner, rounds }. */
 window.mapResolveBattle = function(battle) {
     var s = window.mapBattleSettings;
     var Q = mapQ();
@@ -855,9 +782,7 @@ window.mapResolveBattle = function(battle) {
         var dSold = battle.defenders.length * N;
         var aPow = mapAttackPower(aSold, window.mapStatsFor(atkOwner, battle.to));
         var dPow = mapDefensePower(dSold, window.mapStatsFor(defOwner, battle.to));
-        /* Each side loses a fraction of its soldiers, bigger the stronger
-           the enemy is relative to it. Most of a defeated army survives
-           and retreats. */
+
         function lossFrac(ownPow, enemyPow) {
             var f = window.mapCasualtyRate *
                 Math.sqrt(enemyPow / Math.max(1, ownPow)) + 0.02 * mapGauss();
@@ -873,10 +798,9 @@ window.mapResolveBattle = function(battle) {
         var dCas = Math.round(dFrac * dSold);
         var ratio = aPow / Math.max(1, dPow);
 
-        /* ratio seen from the player's side, as in the Battle scene */
         var pr = playerAttacks ? ratio : 1 / Math.max(ratio, 1e-6);
         var t = playerAttacks ? [1.25, 1, 0.5] : [1.5, 1, 0.75];
-        /* 3 decisive win, 2 win, 1 loss, 0 rout (adjust to your scene) */
+
         var outcome = pr >= t[0] ? 3 : pr >= t[1] ? 2 : pr >= t[2] ? 1 : 0;
         var playerWon = outcome >= 2;
         var friendly = playerAttacks ? aCas : dCas;
@@ -893,7 +817,7 @@ window.mapResolveBattle = function(battle) {
         Q.hostile_casualties = hostile;
         Q.battle_outcome = outcome;
         Q.battle_count = (Q.battle_count || 0) + 1;
-        Q.war_weariness = (Q.war_weariness || 0) + friendly / 1000;  /* guess: adjust to your scene */
+        Q.war_weariness = (Q.war_weariness || 0) + friendly / 1000;
         if (playerWon) {
             Q.victory_count = (Q.victory_count || 0) + 1;
         } else {
@@ -907,7 +831,6 @@ window.mapResolveBattle = function(battle) {
                  winner: attackerWins ? 'attacker' : 'defender', rounds: 1 };
     }
 
-    /* battles between two non-player factions: simple dice model */
     var a = battle.attackers.length;
     var d = battle.defenders.length;
     var startA = a;
@@ -946,23 +869,9 @@ window.mapResolveBattle = function(battle) {
     };
 };
 
-/* ---------- NPC AI ----------
-   window.mapNpcTurn('germany') plans one turn for a faction (call it from a
-   scene). Two kinds of order:
-   1. Attack: a province whose stack is at least window.mapAIAttackRatio
-      times stronger than a neighbouring target at war with it (or empty and
-      not its own) queues an attack with the whole stack. On victory half
-      advance, unless the origin then has no enemy neighbours, in which case
-      everyone advances (see resolveMapBattles).
-   2. Reinforce: other stacks move toward the enemy. A province moves troops
-      into a neighbouring province of its own that is closer to enemy armies,
-      only as many as fit under that province's supply limit, and front-line
-      provinces keep half their troops as a garrison.
-   Returns a list of descriptions. */
+// NPC orders
 window.mapAIAttackRatio = 1.5;
 
-/* Is the province hostile ground for `faction`: held by a faction at war
-   with it, or containing such an army? */
 function isEnemyGround(id, faction) {
     var p = window.mapProvinces[id];
     if (p && p.controller !== 'none' && window.mapIsHostile(faction, p.controller)) {
@@ -971,7 +880,6 @@ function isEnemyGround(id, faction) {
     return hostileDivisionsIn(id, faction).length > 0;
 }
 
-/* Distance (in provinces) from every province to the nearest enemy army. */
 function enemyDistances(faction) {
     var dist = {};
     var queue = [];
@@ -999,7 +907,6 @@ window.mapNpcTurn = function(faction) {
         var done = [];
         var attacking = {};
 
-        /* 1. attacks */
         var seen = {};
         window.mapDivisions.forEach(function(d0) {
             if (d0.dead || d0.owner !== faction || seen[d0.province]) {
@@ -1023,7 +930,7 @@ window.mapNpcTurn = function(faction) {
                     }
                     if (p.controller !== 'none' &&
                         !window.mapIsHostile(faction, p.controller)) {
-                        return;     /* at peace with its owner */
+                        return;
                     }
                 }
                 var r = window.mapStrengthRatio(mine, defenders, to);
@@ -1041,7 +948,6 @@ window.mapNpcTurn = function(faction) {
             }
         });
 
-        /* 2. reinforcements */
         var dist = enemyDistances(faction);
         var moved = {};
         var incoming = {};
@@ -1049,7 +955,7 @@ window.mapNpcTurn = function(faction) {
             return window.mapProvinces[id].controller === faction &&
                 dist[id] !== undefined;
         }).sort(function(x, y) {
-            return dist[y] - dist[x];      /* furthest from the enemy first */
+            return dist[y] - dist[x];
         });
         sources.forEach(function(from) {
             var mine = divisionsIn(from).filter(function(d) {
@@ -1097,21 +1003,18 @@ window.mapNpcTurn = function(faction) {
     });
 };
 
-/* Called after a successful (peaceful) move. */
 window.onMapDivisionsMoved = function(divisionIds, fromId, toId) {
 };
 
-/* ---------- state ---------- */
-
 window.selectedMapProvince = null;
-window.selectedMapDivisions = [];   // ids; always inside the selected province
+window.selectedMapDivisions = [];
 window.mapMovesUsed = 0;
-window.mapBattles = [];             // queued: { from, to, ids: [...], cost }
-window.mapReport = [];              // plain-text results of the last post_event
+window.mapBattles = [];
+window.mapReport = [];
 
 var MAP_SHAPES = 'path, polygon, polyline, rect, circle, ellipse';
 var hoveredMapProvince = null;
-var mapSvgText = null;   // cached so the SVG is only fetched once
+var mapSvgText = null;
 var mapMessage = '';
 var mapCenterCache = {};
 var COUNTER_RADIUS = 36;
@@ -1135,9 +1038,7 @@ function readJson(raw, fallback) {
     }
 }
 
-/* Everything lives in Dendry qualities so it is saved and loaded with the
-   game:  map_divisions, map_control, map_battles, map_report (JSON strings)
-   and map_moves_used (a number, readable from scenes). */
+// persistence
 window.saveMapState = function() {
     var q = engineQualities();
     if (!q) {
@@ -1177,20 +1078,6 @@ window.saveMapState = function() {
     syncMapQualities(q);
 };
 
-/* Plain numeric qualities mirroring the map, so Dendry's own conditions can
-   use them (view-if, choose-if, go-to ... if, [? if ... : ... ?]).
-   "Held" and "my" mean window.mapPlayerFaction (the Bolsheviks).
-     map_held_<province>     1 if the player's faction controls it, else 0
-     map_control_<province>  control 0-100 (0 if nobody controls it)
-     map_devast_<province>   devastation 0-100
-     map_supply_<province>   current supply limit (divisions)
-     map_div_<province>      divisions stationed there (all factions)
-     map_mydiv_<province>    the player's divisions stationed there
-     map_war_<faction>       1 if the player's faction is at war with it
-     map_<stat>_<faction>    morale / discipline / supply_quality /
-                             defense_bonus of a non-player faction
-     map_held_total          number of provinces the player controls
-     map_mydiv_total         number of divisions the player has        */
 function syncMapQualities(q) {
     var heldTotal = 0;
     var myTotal = 0;
@@ -1226,8 +1113,6 @@ function syncMapQualities(q) {
     q.map_mydiv_total = myTotal;
 }
 
-/* Make sure the map qualities exist and are current (new game, loaded
-   save). Runs on every new page; scenes can also call it. */
 window.mapInit = function() {
     window.loadMapState();
     window.saveMapState();
@@ -1236,8 +1121,6 @@ window.mapInit = function() {
 window.loadMapState = function() {
     var q = engineQualities() || {};
 
-    /* Divisions created by events (window.mapAddDivisions) are rebuilt
-       from the saved game before positions are applied. */
     window.mapDivisions = window.mapDivisions.filter(function(d) {
         if (d.extra) {
             delete mapDivisionIndex[d.id];
@@ -1302,8 +1185,7 @@ window.loadMapState = function() {
     window.mapMovesUsed = Number(q.map_moves_used) || 0;
 };
 
-/* ---------- queries ---------- */
-
+// queries
 function divisionsIn(provinceId) {
     return window.mapDivisions.filter(function(d) {
         return !d.dead && d.province === provinceId;
@@ -1331,18 +1213,12 @@ function playerDivisionsIn(provinceId) {
     });
 }
 
-/* Player divisions that are free to receive an order (not committed to a
-   queued attack). */
 function availablePlayerDivisionsIn(provinceId) {
     return playerDivisionsIn(provinceId).filter(function(d) {
         return !isCommitted(d.id);
     });
 }
 
-/* True if moving `owner`'s army into the province means fighting: enemy
-   divisions are there, or another faction controls it (even if empty). */
-/* If `owner` may not enter the province because it belongs to a faction it
-   is at peace with, returns that faction; otherwise false. */
 function mapBorderClosed(owner, provinceId) {
     var p = window.mapProvinces[provinceId];
     if (p && p.controller !== 'none' && p.controller !== owner &&
@@ -1392,8 +1268,7 @@ function partyName(key) {
     return window.mapPartyNames[key] || key;
 }
 
-/* ---------- moves ---------- */
-
+// moves
 window.mapMovesLeft = function() {
     return Math.max(0, window.mapMovesPerTurn - window.mapMovesUsed);
 };
@@ -1402,15 +1277,13 @@ window.mapMoveCost = function(divisionIds) {
     return window.mapMoveCostMode === 'division' ? divisionIds.length : 1;
 };
 
-/* ---------- colours ---------- */
-
 window.getMapPartyColor = function(controller) {
     var variable = window.mapPartyColors[controller];
     if (!variable) {
         return '#999';
     }
     if (variable.charAt(0) !== '-') {
-        return variable;      /* a literal colour such as '#4f8fc0' */
+        return variable;
     }
     var color = getComputedStyle(document.body)
         .getPropertyValue(variable).trim();
@@ -1423,14 +1296,12 @@ window.getMapProvinceColor = function(controller, control) {
     return 'color-mix(in srgb, ' + color + ' ' + control + '%, white)';
 };
 
-/* ---------- svg helpers ---------- */
-
 function getMapSvg() {
     return document.querySelector('#map-container .map-frame svg');
 }
 
 function getMapElement(id) {
-    /* getElementById is much faster than querySelector on a big SVG. */
+
     var svg = getMapSvg();
     var el = document.getElementById(id);
     return (svg && el && svg.contains(el)) ? el : null;
@@ -1441,7 +1312,6 @@ function mapIsOpen() {
     return !!(container && container.classList.contains('active'));
 }
 
-/* A province may be a single shape or a <g> of shapes. */
 function getMapShapes(el) {
     if (el.matches(MAP_SHAPES)) {
         return [el];
@@ -1449,7 +1319,6 @@ function getMapShapes(el) {
     return Array.prototype.slice.call(el.querySelectorAll(MAP_SHAPES));
 }
 
-/* Walk up from whatever was hovered/clicked to the province element. */
 function findProvinceElement(target) {
     var svg = getMapSvg();
     if (!svg || !target || !svg.contains(target)) {
@@ -1465,11 +1334,6 @@ function findProvinceElement(target) {
     return null;
 }
 
-/*
-What is under the mouse? elementsFromPoint lists everything stacked at that
-spot, so this still works if another SVG element sits on top of a province.
-Returns { province: <element or null>, counter: <province id or null> }.
-*/
 function findMapHit(event) {
     var hit = { province: null, counter: null };
     var svg = getMapSvg();
@@ -1503,12 +1367,10 @@ function findMapHit(event) {
     return hit;
 }
 
-/* ---------- sidebar ---------- */
-
 window.ensureMapSidebar = function() {
     var sidebar = document.getElementById('map-sidebar');
     if (!sidebar) {
-        /* The right-hand column: a "moves left" panel above the sidebar. */
+
         var column = document.createElement('div');
         column.id = 'map-right';
 
@@ -1525,7 +1387,6 @@ window.ensureMapSidebar = function() {
         var content = document.getElementById('content');
         content.parentNode.insertBefore(column, content);
 
-        /* Delegated, so they survive the sidebar being re-rendered. */
         sidebar.addEventListener('change', function(event) {
             var box = event.target;
             if (box.matches && box.matches('input[data-division-count]')) {
@@ -1562,9 +1423,6 @@ window.ensureMapSidebar = function() {
     return sidebar;
 };
 
-/* Queued attacks (all of them, or only those touching one province),
-   each with a Cancel button that refunds its moves. */
-/* Faction that ordered a queued attack. */
 function battleOwner(b) {
     for (var i = 0; i < b.ids.length; i++) {
         var d = mapDivisionIndex[b.ids[i]];
@@ -1639,7 +1497,6 @@ window.renderMapSidebar = function(provinceId) {
             '</div>';
     });
 
-    /* Divisions stationed here: a count, then the selection controls */
     var here = divisionsIn(provinceId);
     var mine = availablePlayerDivisionsIn(provinceId);
     var selected = window.selectedMapDivisions;
@@ -1684,8 +1541,7 @@ window.renderMapSidebar = function(provinceId) {
                 '</button> ';
         });
         if (!canAfford) {
-            /* When a move was just refused, the same text is shown as the
-               message at the bottom, so don't repeat it here. */
+
             if (!mapMessage) {
                 html += '<div class="map-warning">' + (movesLeft <= 0 ?
                     'No moves left this turn.' :
@@ -1709,7 +1565,6 @@ window.renderMapSidebar = function(provinceId) {
     sidebar.innerHTML = html;
 };
 
-/* "Moves left" panel above the right-hand sidebar. */
 window.renderMapTurnbar = function() {
     var bar = document.getElementById('map-turnbar');
     if (!bar) {
@@ -1736,8 +1591,6 @@ window.renderMapTurnbar = function() {
     bar.className = 'tools map-turnbar' + (left === 0 ? ' out' : '');
     bar.innerHTML = html;
 };
-
-/* ---------- selection ---------- */
 
 window.refreshMapUI = function() {
     window.renderMapSidebar(window.selectedMapProvince);
@@ -1784,9 +1637,6 @@ window.clearMapProvince = function() {
     }
 };
 
-/* Set how many of your free divisions in the selected province are
-   selected. Selected divisions stay selected; extra ones are added in list
-   order, and reducing the number drops the most recently added first. */
 window.setMapSelectionCount = function(count) {
     var provinceId = window.selectedMapProvince;
     if (!provinceId) {
@@ -1827,8 +1677,6 @@ window.selectAllMapDivisions = function() {
     window.refreshMapUI();
 };
 
-/* Clicking a division icon: select the province and all your free divisions
-   there. Clicking again with everything already selected clears it. */
 window.onMapCounterClick = function(provinceId) {
     var mine = availablePlayerDivisionsIn(provinceId);
 
@@ -1853,15 +1701,11 @@ window.onMapCounterClick = function(provinceId) {
     window.refreshMapUI();
 };
 
-/* ---------- moving and attacking ---------- */
-
 function setMapMessage(text) {
     mapMessage = text;
     window.renderMapSidebar(window.selectedMapProvince);
 }
 
-/* Queue an attack. Several orders from the same province against the same
-   target are merged into one battle (and one arrow). */
 window.queueMapAttack = function(ids, fromId, toId, cost) {
     var existing = null;
     window.mapBattles.forEach(function(b) {
@@ -1942,7 +1786,6 @@ window.tryMoveSelectedDivisions = function(toId) {
         return;
     }
 
-    /* A hostile army holds the province: queue a battle instead. */
     if (isAttackTarget(toId, window.mapPlayerFaction)) {
         window.queueMapAttack(ids, fromId, toId, cost);
         window.mapMovesUsed += cost;
@@ -1963,13 +1806,10 @@ window.tryMoveSelectedDivisions = function(toId) {
     window.mapMovesUsed += cost;
     window.saveMapState();
 
-    /* The selection follows the divisions to their new province. */
     window.selectedMapDivisions = ids;
     window.showMapProvince(toId, true);
     window.onMapDivisionsMoved(ids, fromId, toId);
 };
-
-/* ---------- end of turn ---------- */
 
 function killDivisions(list, count) {
     for (var i = 0; i < count && i < list.length; i++) {
@@ -1977,8 +1817,7 @@ function killDivisions(list, count) {
     }
 }
 
-/* Fight every queued battle. Attacks from several provinces on the same
-   target are combined into a single battle. Returns the report lines. */
+// end of turn
 window.resolveMapBattles = function() {
     var report = [];
     var targets = [];
@@ -2037,10 +1876,6 @@ window.resolveMapBattles = function() {
         killDivisions(attackers, result.attackersLost);
         killDivisions(defenders, result.defendersLost);
 
-        /* A beaten defender retreats to a neighbouring province with no
-           enemy soldiers in it (preferring one it controls); with nowhere
-           to go the survivors are lost. Beaten attackers simply stay in
-           the province they attacked from. */
         var retreatNote = '';
         if (result.winner === 'attacker' && defenders.length) {
             var survivors = defenders.filter(function(d) { return !d.dead; });
@@ -2069,14 +1904,12 @@ window.resolveMapBattles = function() {
             ' attacking, ' + startD + ' defending. ';
 
         if (result.winner === 'attacker') {
-            /* the player's army moves in whole; an NPC army splits, only
-               half advancing while the rest stay behind */
+
             var alive = attackers.filter(function(d) { return !d.dead; });
             if (owner === window.mapPlayerFaction) {
                 alive.forEach(function(d) { d.province = toId; });
             } else {
-                /* per origin province: everyone advances if that province
-                   no longer borders enemy ground, otherwise half do */
+
                 var byOrigin = {};
                 alive.forEach(function(d) {
                     (byOrigin[d.province] = byOrigin[d.province] || []).push(d);
@@ -2115,9 +1948,6 @@ window.resolveMapBattles = function() {
     return report;
 };
 
-/* Call this from the post_event scene. Resolves all queued battles, then
-   resets the move counter for the new turn. */
-/* Everything that changes between turns apart from battles. */
 window.mapDecayDevastation = function() {
     Object.keys(window.mapProvinces).forEach(function(id) {
         var p = window.mapProvinces[id];
@@ -2125,8 +1955,6 @@ window.mapDecayDevastation = function() {
     });
 };
 
-/* An army over a province's supply limit wastes away: one division per
-   window.mapAttritionStep over the limit (at least one) per turn. */
 window.mapAttritionStep = 50;
 window.mapApplyAttrition = function(report) {
     Object.keys(window.mapProvinces).forEach(function(id) {
@@ -2149,10 +1977,6 @@ window.mapApplyAttrition = function(report) {
     });
 };
 
-/* Control drifts each turn: -5 with an enemy army present, otherwise +10
-   with a garrison, +5 with at least 50 control, 0 otherwise; devastation
-   subtracts up to 5 more. Uncontrolled provinces garrisoned by a single
-   faction at turn's end go over to it. */
 window.mapUpdateControl = function() {
     Object.keys(window.mapProvinces).forEach(function(id) {
         var p = window.mapProvinces[id];
@@ -2198,14 +2022,7 @@ window.mapPostTurn = function() {
     return report;
 };
 
-/* ---------- changing the map from events ----------
-   Call these from a scene, e.g.
-       on-arrival: {! window.mapSetController('tver', 'bolsheviks', 80); !}
-   They load the saved map state, make the change, save it again, and
-   redraw the map if it happens to be open. Each returns true/false (or the
-   number of divisions affected). Province ids are the SVG ids (lowercase),
-   factions are keys of window.mapPartyColors. */
-
+// event helpers
 function editMapState(change) {
     window.loadMapState();
     var result = change();
@@ -2229,9 +2046,6 @@ function clampControl(n) {
     return Math.max(0, Math.min(100, Number(n) || 0));
 }
 
-/* Who holds a province. `control` is optional: if left out the current
-   control stays, unless the owner changes, in which case it becomes
-   window.mapConquestControl. */
 window.mapSetController = function(id, faction, control) {
     if (!knownProvince(id, 'mapSetController')) {
         return false;
@@ -2253,7 +2067,6 @@ window.mapSetController = function(id, faction, control) {
     });
 };
 
-/* Set how firmly the current owner holds a province (0-100). */
 window.mapSetControl = function(id, control) {
     if (!knownProvince(id, 'mapSetControl')) {
         return false;
@@ -2264,9 +2077,38 @@ window.mapSetControl = function(id, control) {
     });
 };
 
-/* Remove a fraction of the divisions in a province, e.g.
-   mapScaleDivisions('bessarabia', 0.5) halves every army there; add an
-   owner to affect only that faction's army. Returns how many were removed. */
+// order an attack: mapOrderAttack(faction, from, to, [count])
+window.mapOrderAttack = function(faction, fromId, toId, count) {
+    if (!knownProvince(fromId, 'mapOrderAttack') ||
+        !knownProvince(toId, 'mapOrderAttack')) {
+        return 0;
+    }
+    return editMapState(function() {
+        if (!areProvincesAdjacent(fromId, toId)) {
+            console.warn('mapOrderAttack: ' + fromId + ' and ' + toId +
+                ' are not adjacent');
+            return 0;
+        }
+        if (!isAttackTarget(toId, faction)) {
+            console.warn('mapOrderAttack: ' + toId + ' is not an attack ' +
+                'target for ' + faction + ' (peace, or already its own)');
+            return 0;
+        }
+        var free = divisionsIn(fromId).filter(function(d) {
+            return d.owner === faction && !isCommitted(d.id);
+        });
+        if (count !== undefined && count !== null) {
+            free = free.slice(0, Math.max(0, Math.floor(Number(count) || 0)));
+        }
+        if (!free.length) {
+            return 0;
+        }
+        window.queueMapAttack(free.map(function(d) { return d.id; }),
+                              fromId, toId, 0);
+        return free.length;
+    });
+};
+
 window.mapScaleDivisions = function(id, factor, owner) {
     if (!knownProvince(id, 'mapScaleDivisions')) {
         return 0;
@@ -2292,10 +2134,6 @@ window.mapScaleDivisions = function(id, factor, owner) {
     });
 };
 
-/* Hand divisions of one faction in a province to another faction, e.g.
-   mapChangeOwner('kursk', 'bolsheviks', 'greens') (all of them) or
-   mapChangeOwner('kursk', 'bolsheviks', 'greens', 5). Returns the number
-   changed. */
 window.mapChangeOwner = function(id, fromOwner, toOwner, count) {
     if (!knownProvince(id, 'mapChangeOwner')) {
         return 0;
@@ -2308,7 +2146,7 @@ window.mapChangeOwner = function(id, fromOwner, toOwner, count) {
             list = list.slice(0, Math.max(0, Math.floor(Number(count) || 0)));
         }
         list.forEach(function(d) { d.owner = toOwner; });
-        /* a changed division can no longer be part of a queued attack */
+
         window.mapBattles = window.mapBattles.filter(function(b) {
             b.ids = b.ids.filter(function(did) {
                 return !list.some(function(d) { return d.id === did; });
@@ -2323,10 +2161,6 @@ window.mapChangeOwner = function(id, fromOwner, toOwner, count) {
     });
 };
 
-/* Combat stats of a non-player faction: morale, discipline, supply_quality,
-   defense_bonus. e.g. mapSetStat('germany', 'morale', 0.8),
-   mapAddStat('germany', 'morale', -0.1), mapGetStat('germany', 'morale').
-   (The player's own stats are the Dendry qualities Q.morale etc.) */
 window.mapSetStat = function(faction, stat, value) {
     if (MAP_STATS.indexOf(stat) === -1) {
         console.warn('mapSetStat: unknown stat "' + stat + '" (use ' +
@@ -2352,7 +2186,6 @@ window.mapGetStat = function(faction, stat) {
     return window.mapStatsFor(faction, null)[stat];
 };
 
-/* War and peace between two factions. */
 window.mapSetWar = function(a, b) {
     return editMapState(function() {
         window.mapWarOverrides[warKey(a, b)] = true;
@@ -2362,7 +2195,7 @@ window.mapSetWar = function(a, b) {
 window.mapSetPeace = function(a, b) {
     return editMapState(function() {
         window.mapWarOverrides[warKey(a, b)] = false;
-        /* queued attacks against a faction we just made peace with fall away */
+
         window.mapBattles = window.mapBattles.filter(function(bt) {
             var p = window.mapProvinces[bt.to];
             var cancel = p && !isAttackTarget(bt.to, mapDivisionIndex[bt.ids[0]] ?
@@ -2380,7 +2213,6 @@ window.mapIsAtWar = function(a, b) {
     return window.mapAtWar(a, b);
 };
 
-/* Devastation (0-100) of a province. */
 window.mapSetDevastation = function(id, value) {
     if (!knownProvince(id, 'mapSetDevastation')) {
         return false;
@@ -2405,7 +2237,6 @@ window.mapDevastation = function(id) {
     return p ? (p.devastation || 0) : 0;
 };
 
-/* Raise or lower control by an amount, e.g. mapAddControl('tver', -15). */
 window.mapAddControl = function(id, delta) {
     if (!knownProvince(id, 'mapAddControl')) {
         return false;
@@ -2417,7 +2248,6 @@ window.mapAddControl = function(id, delta) {
     });
 };
 
-/* Create new divisions for `owner` in a province. Returns how many. */
 window.mapAddDivisions = function(id, owner, count) {
     if (!knownProvince(id, 'mapAddDivisions')) {
         return 0;
@@ -2452,8 +2282,6 @@ window.mapAddDivisions = function(id, owner, count) {
     });
 };
 
-/* Destroy up to `count` of `owner`'s divisions in a province (free ones
-   first). Returns how many were removed. */
 window.mapRemoveDivisions = function(id, owner, count) {
     if (!knownProvince(id, 'mapRemoveDivisions')) {
         return 0;
@@ -2466,7 +2294,7 @@ window.mapRemoveDivisions = function(id, owner, count) {
         var mine = divisionsIn(id).filter(function(d) {
             return d.owner === owner;
         });
-        /* divisions committed to a queued attack go last */
+
         mine.sort(function(a, b) {
             return (isCommitted(a.id) ? 1 : 0) - (isCommitted(b.id) ? 1 : 0);
         });
@@ -2474,8 +2302,7 @@ window.mapRemoveDivisions = function(id, owner, count) {
         doomed.forEach(function(d) {
             d.dead = true;
         });
-        /* drop them from queued attacks; an attack with nobody left is
-           cancelled and its moves refunded */
+
         window.mapBattles = window.mapBattles.filter(function(b) {
             b.ids = b.ids.filter(function(did) {
                 return mapDivisionIndex[did] && !mapDivisionIndex[did].dead;
@@ -2490,7 +2317,6 @@ window.mapRemoveDivisions = function(id, owner, count) {
     });
 };
 
-/* Make `owner` have exactly `count` divisions in a province. */
 window.mapSetDivisions = function(id, owner, count) {
     if (!knownProvince(id, 'mapSetDivisions')) {
         return 0;
@@ -2509,7 +2335,6 @@ window.mapSetDivisions = function(id, owner, count) {
     return 0;
 };
 
-/* Read helpers, for scripts that need to branch on the map. */
 window.mapDivisionCount = function(id, owner) {
     window.loadMapState();
     return divisionsIn(id).filter(function(d) {
@@ -2524,8 +2349,6 @@ window.mapControl = function(id) {
     window.loadMapState();
     return window.mapProvinces[id] ? window.mapProvinces[id].control : null;
 };
-
-/* ---------- drawing ---------- */
 
 window.createMapLayout = function() {
     var container = document.getElementById('map-container');
@@ -2550,8 +2373,6 @@ window.createMapLayout = function() {
     return frame;
 };
 
-/* Centre of a province in the root SVG's coordinates (or its `label`
-   override). Cached, because measuring big paths is slow. */
 function getProvinceCenter(provinceId) {
     if (mapCenterCache[provinceId]) {
         return mapCenterCache[provinceId];
@@ -2603,7 +2424,6 @@ function svgEl(name, attrs, cls) {
     return el;
 }
 
-/* Red arrows from the attacking province to the province being attacked. */
 function drawBattleArrows(parent) {
     if (!window.mapBattles.length) {
         return;
@@ -2651,7 +2471,6 @@ function drawBattleArrows(parent) {
                 (baseX - px) + ',' + (baseY - py)
         }, 'map-arrow-head'));
 
-        /* Number of attacking divisions, on the shaft. */
         var shaft = avail - headLen;
         if (shaft > 80) {
             var mx = sx + ux * shaft * 0.5;
@@ -2672,8 +2491,6 @@ function drawBattleArrows(parent) {
     parent.appendChild(layer);
 }
 
-/* Everything drawn on top of the provinces: attack arrows, then one icon
-   per province that has divisions stationed in it. */
 window.renderMapOverlay = function() {
     var svg = getMapSvg();
     if (!svg || !mapIsOpen()) {
@@ -2725,7 +2542,6 @@ window.renderMapOverlay = function() {
     svg.appendChild(overlay);
 };
 
-/* Colour the provinces, then draw the overlay. */
 window.renderGameMap = function() {
     var svg = getMapSvg();
     if (!svg) {
@@ -2785,8 +2601,6 @@ window.loadGameMap = function() {
         });
 };
 
-/* ---------- mouse ---------- */
-
 function setMapHover(el) {
     if (el === hoveredMapProvince) {
         return;
@@ -2811,7 +2625,7 @@ document.addEventListener('mousemove', function(event) {
         return;
     }
     mapMoveQueued = true;
-    /* At most one hit-test per frame; the map has thousands of shapes. */
+
     requestAnimationFrame(function() {
         mapMoveQueued = false;
         var svg = getMapSvg();
@@ -2824,8 +2638,6 @@ document.addEventListener('mousemove', function(event) {
     });
 });
 
-/* Left click: a division icon selects its divisions; a province selects
-   (or, if already selected, deselects) the province. */
 document.addEventListener('click', function(event) {
     var hit = findMapHit(event);
 
@@ -2843,7 +2655,6 @@ document.addEventListener('click', function(event) {
     }
 });
 
-/* Right click: move the selected divisions into that province. */
 document.addEventListener('contextmenu', function(event) {
     if (!mapIsOpen()) {
         return;
@@ -2858,9 +2669,6 @@ document.addEventListener('contextmenu', function(event) {
     }
 });
 
-/*
-Map navigation.
-*/
 window.openMapView = function() {
     var container = document.getElementById('map-container');
     var content = document.getElementById('content');
@@ -2891,8 +2699,6 @@ window.closeMapView = function() {
     setMapHover(null);
 };
 
-/* If the player leaves the map scene some other way (e.g. Library),
-   make sure the map view is closed. */
 window.syncMapView = function() {
     var scene = window.dendryUI.dendryEngine.state.sceneId;
     if (mapIsOpen() && !scene.startsWith('map')) {
@@ -3142,7 +2948,6 @@ var disable_audio =
 var show_portraits =
     window.dendryUI.show_portraits;
 
-
 if (disable_bg) {
 
     $('#backgrounds_no')[0]
@@ -3154,7 +2959,6 @@ if (disable_bg) {
         .checked = true;
 
 }
-
 
 if (animate) {
 
@@ -3168,7 +2972,6 @@ if (animate) {
 
 }
 
-
 if (disable_audio) {
 
     $('#audio_no')[0]
@@ -3181,7 +2984,6 @@ if (disable_audio) {
 
 }
 
-
 if (show_portraits) {
 
     $('#images_yes')[0]
@@ -3193,7 +2995,6 @@ if (show_portraits) {
         .checked = true;
 
 }
-
 
 if (window.dendryUI.dark_mode) {
 
@@ -3275,7 +3076,6 @@ red_tsar: {
     image: "img/portraits/b/stalin.jpg"
 },
 
-    
 game_completed: {
     name: "Game Over",
     description: "Complete the game.",
@@ -3383,7 +3183,6 @@ var incomplete =
         'achievement-incomplete'
     );
 
-
 if (
     !playthrough ||
     !overall ||
@@ -3394,11 +3193,9 @@ if (
 
 }
 
-
 playthrough.innerHTML = '';
 overall.innerHTML = '';
 incomplete.innerHTML = '';
-
 
 Object.keys(
     window.achievements
@@ -3432,7 +3229,6 @@ Object.keys(
         '</tr>' +
         '</table>';
 
-
     if (
         qualities[
             'game_achievement_' + id
@@ -3442,7 +3238,6 @@ Object.keys(
         playthrough.innerHTML += table;
 
     }
-
 
     if (
         qualities[
@@ -3469,7 +3264,6 @@ scene_id
 ) {
 };
 
-
 window.onNewPage = function() {
 
     try {
@@ -3493,8 +3287,6 @@ window.onNewPage = function() {
         window.justLoaded = false;
     }
 };
-
-
 
 window.updateSidebar = function() {
     $('#qualities').empty();
@@ -3526,7 +3318,6 @@ window.onDisplayContent = function() {
     window.syncMapView();
 };
 
-    
 window.changeTab = function(newTab, tabId) {
     if (
         tabId == 'poll_tab' &&
@@ -3558,7 +3349,6 @@ window.changeTab = function(newTab, tabId) {
     window.updateSidebar();
 };
 
-    
 window.generateBar = function(
 quality,
 qualityName,
@@ -3583,11 +3373,9 @@ var value =
 value.className =
     'barValue';
 
-
 var width =
     (quality - min) /
     (max - min);
-
 
 if (width > 1) {
 
@@ -3599,12 +3387,10 @@ if (width > 1) {
 
 }
 
-
 value.style.width =
     Math.round(
         width * 100
     ) + '%';
-
 
 if (colors) {
 
@@ -3615,12 +3401,10 @@ if (colors) {
 
 }
 
-
 bar.textContent =
     qualityName +
     ': ' +
     quality;
-
 
 if (colors) {
 
@@ -3628,7 +3412,6 @@ if (colors) {
         '/' + max;
 
 }
-
 
 bar.appendChild(value);
 
@@ -3647,7 +3430,6 @@ console.log(
 /*
 
 Do not replace window.onload.
-
 
 Dendry may already have an onload handler.
 Use DOMContentLoaded instead.
@@ -3741,7 +3523,6 @@ if (
 }
 
 }, 500);
-
 
 function metric_color(value, positive_is_good = true) {
     if (value == 0) {
