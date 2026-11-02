@@ -10,4 +10,21 @@ The Central Rada of Ukraine has officially issued the "Third Universal", declari
 
 The Universal also declares the inalienability of civil liberties in the country, the abolition of private ownership of land, and the creation of new local self-government and workers' rights. 
 
-  
+- @respect
+- @ignore
+
+@respect
+title: We will cooperate with the Ukrainian People's Republic, and will participate in the Constituent Assembly elections. 
+on-arrival: {!
+  Q.ca_support_timer += 1;
+  Q.upr_relation += 5; 
+  Q.ukraine_preparations -= 1;
+!}
+
+@ignore
+title: We will organize our own All-Ukrainian Congress of Soviets! 
+on-arrival: {!
+  Q.upr_relation -= 10; 
+  Q.ukraine_preparations += 1;
+  Q.ukrainian_congress_timer = 4;
+!} 
