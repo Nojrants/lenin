@@ -1490,6 +1490,7 @@ Q.timers = [//m_party
             'peace_question',
             'railway_congress',
             'german_revolution',
+            'ukrainian_congress',
             ];
 Q.advisor_action_timer = 0;
 Q.labor_unrest_timer = 5;
