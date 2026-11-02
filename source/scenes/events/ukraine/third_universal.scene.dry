@@ -21,6 +21,8 @@ on-arrival: {!
   Q.ukraine_preparations -= 1;
 !}
 
+We begin making preparations for the Ukrainian elections, while the Central Rada consolidates its control over the country. 
+
 @ignore
 title: We will organize our own All-Ukrainian Congress of Soviets! 
 on-arrival: {!
@@ -28,3 +30,5 @@ on-arrival: {!
   Q.ukraine_preparations += 1;
   Q.ukrainian_congress_timer = 4;
 !} 
+
+We continue the process of building soviet power across the country, with Bolshevik forces managing to take over councils in the cities and factories. Preparations are put in place for the soviet congress in Kyiv, while the Central Rada looks on with unease. 
