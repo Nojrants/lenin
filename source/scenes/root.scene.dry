@@ -1487,6 +1487,7 @@ Q.timers = [//m_party
             'coalition_actions',
             'peace_question',
             'railway_congress',
+            'german_revolution',
             ];
 Q.advisor_action_timer = 0;
 Q.labor_unrest_timer = 5;
@@ -1501,6 +1502,7 @@ Q.crime_wave_timer = 5;
 Q.enemy_reinforcements_timer = 0;
 Q.party_congress_timer = 35;
 Q.soviet_congress = 0;
+Q.german_revolution_timer = 48;
 
 // constituent assembly election
 Q.election_type = "ca";
