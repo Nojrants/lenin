@@ -9,41 +9,26 @@ tags: event
 - @proceed_election : Brace ourselves for the results...
 
 @proceed_election
-go-to: election_algorithm 
+go-to: election_algorithm.ukrainian_assembly
 set-jump: election_results
 
-
 @election_results
-go-to: post_election_menu
 new-page: true
 on-arrival: {!
+var ua_order = ["b", "m", "ukrainian_sd", "lsr", "sr", "ukrainian_sr", "popular_socialist", "agrarian", "polish", "bundist", "zionist", "rightist", "other"];
+var ua_seat_total = 500;
 
-Q.b_ua_r = Math.round(800*Q.b_ua_assembly_votes_dec/100);
-Q.b_ua_r_dec = Q.b_ua_assembly_votes_dec;
-Q.m_ua_r = Math.round(800*Q.m_ua_assembly_votes_dec/100);
-Q.m_ua_r_dec = Q.m_ua_assembly_votes_dec;
-Q.ukrainian_sd_ua_r = Math.round(800*Q.ukrainian_sd_ua_assembly_votes_dec/100);
-Q.ukrainian_sd_ua_r_dec = Q.ukrainian_sd_ua_assembly_votes_dec;
-Q.lsr_ua_r = Math.round(800*Q.lsr_ua_assembly_votes_dec/100);
-Q.lsr_ua_r_dec = Q.lsr_ua_assembly_votes_dec;
-Q.sr_ua_r = Math.round(800*Q.sr_ua_assembly_votes_dec/100);
-Q.sr_ua_r_dec = Q.sr_ua_assembly_votes_dec;
-Q.ukrainian_sr_ua_r = Math.round(800*Q.ukrainian_sr_ua_assembly_votes_dec/100);
-Q.ukrainian_sr_ua_r_dec = Q.ukrainian_sr_ua_assembly_votes_dec;
-Q.popular_socialist_ua_r = Math.round(800*Q.popular_socialist_ua_assembly_votes_dec/100);
-Q.popular_socialist_ua_r_dec = Q.popular_socialist_ua_assembly_votes_dec;
-Q.agrarian_ua_r = Math.round(800*Q.agrarian_ua_assembly_votes_dec/100);
-Q.agrarian_ua_r_dec = Q.agrarian_ua_assembly_votes_dec;
-Q.polish_ua_r = Math.round(800*Q.polish_ua_assembly_votes_dec/100);
-Q.polish_ua_r_dec = Q.polish_ua_assembly_votes_dec;
-Q.bundist_ua_r = Math.round(800*Q.bundist_ua_assembly_votes_dec/100);
-Q.bundist_ua_r_dec = Q.bundist_ua_assembly_votes_dec;
-Q.zionist_ua_r = Math.round(800*Q.zionist_ua_assembly_votes_dec/100);
-Q.zionist_ua_r_dec = Q.zionist_ua_assembly_votes_dec;
-Q.rightist_ua_r = Math.round(800*Q.rightist_ua_assembly_votes_dec/100);
-Q.rightist_ua_r_dec = Q.rightist_ua_assembly_votes_dec;
-Q.other_ua_r = Math.round(800*Q.other_ua_assembly_votes_dec/100);
-Q.other_ua_r_dec = Q.other_ua_assembly_votes_dec;
+var ua_null = [];
+for (var party of ua_order) {
+    var dec = Q[party + '_ua_assembly_votes_dec'];
+    if (!Number.isFinite(dec)) {
+        ua_null.push(party + '_ua_assembly_votes_dec');
+        dec = 0;
+    }
+    Q[party + '_ua_r_dec'] = dec;
+    Q[party + '_ua_r'] = Math.round(ua_seat_total * dec / 100);
+}
+console.log('Ukrainian results: null variables:', ua_null.length ? ua_null : 'none');
 !}
 on-display: {!
 var data = [
@@ -61,6 +46,11 @@ var data = [
 {"id": "rightist", "legend": "Rightist", "name": "Rightist", "seats": Q.rightist_ua_r},
 {"id": "other", "legend": "Others", "name": "Others", "seats": Q.other_ua_r},
 ];
+data.forEach(function(d) {
+    if (!Number.isFinite(d.seats)) {
+        console.error("BAD SEAT VALUE", d.id, d.seats);
+    }
+});
 if (window && d3) {
     var width = 625;
     var height = 500;
@@ -113,5 +103,4 @@ if (window && d3) {
 
 {!</table>!}
 
-@post_election_menu
-
+- @root: Continue
