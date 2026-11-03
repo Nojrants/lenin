@@ -439,3 +439,102 @@ for (var party of Q.parties) {
 }
 !}
 go-to: jumpScene
+
+
+######################################### UKRAINE CA
+@ukrainian_assembly
+title: Ukrainian Constituent Assembly Election
+on-arrival: {!
+Q.ua_parties = ["ukrainian_sr", "b", "zionist", "lsr", "polish", "ukrainian_sd", "sr", "agrarian", "bundist", "rightist", "m", "popular_socialist", "other"];
+Q.ua_classes = ["peasants", "workers", "soldiers", "urban"];
+Q.ua_minorities = ["jews", "poles"];
+
+// starting values
+var ua_defaults = {
+    // size of each group (relative weights)
+    peasants: 60, workers: 8, soldiers: 10, urban: 9, jews: 9, poles: 4,
+
+    // class support for each party (raw weights, normalized below)
+    peasants_ukrainian_sr: 78.3, peasants_b: 11, peasants_lsr: 4.2, peasants_ukrainian_sd: 0.5,
+    peasants_sr: 0.9, peasants_agrarian: 2.6, peasants_rightist: 0.1, peasants_m: 0.2,
+    peasants_bundist: 0.1, peasants_other: 2.2,
+
+    workers_b: 42, workers_ukrainian_sr: 28, workers_m: 2, workers_ukrainian_sd: 10,
+    workers_sr: 4, workers_lsr: 6, workers_bundist: 1, workers_zionist: 0.5, workers_other: 6.5,
+
+    soldiers_b: 34, soldiers_ukrainian_sr: 50, soldiers_sr: 3, soldiers_lsr: 8,
+    soldiers_other: 3, soldiers_rightist: 1, soldiers_agrarian: 1,
+
+    urban_ukrainian_sr: 38, urban_rightist: 7, urban_other: 15, urban_ukrainian_sd: 8,
+    urban_m: 1.5, urban_popular_socialist: 2, urban_zionist: 3.5, urban_b: 8, urban_sr: 3,
+    urban_agrarian: 10.5, urban_bundist: 0, urban_polish: 0,
+
+    // minority support (percent of the group voting for each party)
+    jews_zionist: 40, jews_bundist: 21, jews_b: 8, jews_ukrainian_sd: 2, jews_lsr: 2,
+    jews_m: 1, jews_sr: 1, jews_other: 7, jews_ukrainian_sr: 18,
+
+    poles_polish: 50, poles_b: 5, poles_ukrainian_sr: 15, poles_agrarian: 10,
+    poles_rightist: 5, poles_other: 15
+};
+for (var key in ua_defaults) {
+    if (typeof Q['ua_' + key] != 'number') {
+        Q['ua_' + key] = ua_defaults[key];
+    }
+}
+
+// calculate normalized class voting amounts (0 to 100)
+for (var c of Q.ua_classes) {
+    var class_votes = 0;
+    for (var party of Q.ua_parties) {
+        if (!Q['ua_' + c + '_' + party] || Q['ua_' + c + '_' + party] < 0) {
+            Q['ua_' + c + '_' + party] = 0;
+        }
+        class_votes += Q['ua_' + c + '_' + party];
+    }
+    if (class_votes <= 0) { class_votes = 1; }
+    for (var party of Q.ua_parties) {
+        Q['ua_' + c + '_' + party + '_normalized'] = 100 * Q['ua_' + c + '_' + party] / class_votes;
+        Q['ua_' + c + '_' + party + '_display'] = Math.round(100 * Q['ua_' + c + '_' + party] / class_votes);
+    }
+}
+
+// 1. calculate support for each of the parties
+var total_support = 0;
+for (var party of Q.ua_parties) {
+    var party_support = 0;
+    for (var c of Q.ua_classes) {
+        party_support += Q['ua_' + c] * Q['ua_' + c + '_' + party + '_normalized'];
+    }
+    for (var c of Q.ua_minorities) {
+        if (Q['ua_' + c + '_' + party]) {
+            party_support += Q['ua_' + c] * Q['ua_' + c + '_' + party];
+        }
+    }
+    Q['ua_' + party + '_support'] = Math.max(0, party_support);
+    total_support += Q['ua_' + party + '_support'];
+}
+if (total_support <= 0) { total_support = 1; }
+
+// Bolshevik preparations bonus
+var preparations = Math.max(0, Math.min(2, Q.ukraine_preparations || 0));
+if (preparations > 0) {
+    var b_share = Q.ua_b_support / total_support;
+    var boost = preparations * 0.01;
+    var extra = boost * total_support / (1 - b_share - boost);
+    Q.ua_b_support += extra;
+    total_support += extra;
+}
+
+// 2. normalize support (fraction)
+// 3. round to 1 decimal
+for (var party of Q.ua_parties) {
+    Q[party + '_ua_assembly_normalized'] = Q['ua_' + party + '_support'] / total_support;
+    Q[party + '_ua_assembly_votes_dec'] = Math.round(Q[party + '_ua_assembly_normalized'] * 1000) / 10;
+    Q[party + '_ua_assembly_votes'] = Math.round(Q[party + '_ua_assembly_normalized'] * 100);
+    Q[party + '_ua_assembly_votes_disp'] = Q[party + '_ua_assembly_votes_dec'].toFixed(1);
+}
+!}
+go-to: jumpScene
+
+
+
