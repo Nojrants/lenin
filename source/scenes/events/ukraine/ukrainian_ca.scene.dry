@@ -4,55 +4,50 @@ new-page: true
 max-visits: 1
 tags: event
 on-arrival: {!
-// parties from left to right
-Q.ua_chart_order = ["b", "m", "ukrainian_sd", "lsr", "sr", "ukrainian_sr", "popular_socialist", "agrarian", "polish", "bundist", "zionist", "rightist", "other"];
 
-// seats in the Ukrainian Constituent Assembly
-if (typeof Q.ua_seat_total != 'number' || Q.ua_seat_total <= 0) {
-    Q.ua_seat_total = 301;
-}
-
-// allocate seats by largest remainder so they add up to the total
-var allocated = 0;
-var remainders = [];
-for (var party of Q.ua_chart_order) {
-    var exact = Q.ua_seat_total * (Q[party + '_ua_assembly_normalized'] || 0);
-    Q[party + '_ua_r'] = Math.floor(exact);
-    Q[party + '_ua_r_dec'] = Q[party + '_ua_assembly_votes_dec'] || 0;
-    allocated += Q[party + '_ua_r'];
-    remainders.push({party: party, rem: exact - Math.floor(exact)});
-}
-remainders.sort(function(a, b) { return b.rem - a.rem; });
-for (var i = 0; allocated < Q.ua_seat_total && i < remainders.length; i++) {
-    Q[remainders[i].party + '_ua_r'] += 1;
-    allocated += 1;
-}
+Q.b_ua_r = Math.round(800*Q.b_ua_assembly_votes_dec/100);
+Q.b_ua_r_dec = Q.b_ua_assembly_votes_dec;
+Q.m_ua_r = Math.round(800*Q.m_ua_assembly_votes_dec/100);
+Q.m_ua_r_dec = Q.m_ua_assembly_votes_dec;
+Q.ukrainian_sd_ua_r = Math.round(800*Q.ukrainian_sd_ua_assembly_votes_dec/100);
+Q.ukrainian_sd_ua_r_dec = Q.ukrainian_sd_ua_assembly_votes_dec;
+Q.lsr_ua_r = Math.round(800*Q.lsr_ua_assembly_votes_dec/100);
+Q.lsr_ua_r_dec = Q.lsr_ua_assembly_votes_dec;
+Q.sr_ua_r = Math.round(800*Q.sr_ua_assembly_votes_dec/100);
+Q.sr_ua_r_dec = Q.sr_ua_assembly_votes_dec;
+Q.ukrainian_sr_ua_r = Math.round(800*Q.ukrainian_sr_ua_assembly_votes_dec/100);
+Q.ukrainian_sr_ua_r_dec = Q.ukrainian_sr_ua_assembly_votes_dec;
+Q.popular_socialist_ua_r = Math.round(800*Q.popular_socialist_ua_assembly_votes_dec/100);
+Q.popular_socialist_ua_r_dec = Q.popular_socialist_ua_assembly_votes_dec;
+Q.agrarian_ua_r = Math.round(800*Q.agrarian_ua_assembly_votes_dec/100);
+Q.agrarian_ua_r_dec = Q.agrarian_ua_assembly_votes_dec;
+Q.polish_ua_r = Math.round(800*Q.polish_ua_assembly_votes_dec/100);
+Q.polish_ua_r_dec = Q.polish_ua_assembly_votes_dec;
+Q.bundist_ua_r = Math.round(800*Q.bundist_ua_assembly_votes_dec/100);
+Q.bundist_ua_r_dec = Q.bundist_ua_assembly_votes_dec;
+Q.zionist_ua_r = Math.round(800*Q.zionist_ua_assembly_votes_dec/100);
+Q.zionist_ua_r_dec = Q.zionist_ua_assembly_votes_dec;
+Q.rightist_ua_r = Math.round(800*Q.rightist_ua_assembly_votes_dec/100);
+Q.rightist_ua_r_dec = Q.rightist_ua_assembly_votes_dec;
+Q.other_ua_r = Math.round(800*Q.other_ua_assembly_votes_dec/100);
+Q.other_ua_r_dec = Q.other_ua_assembly_votes_dec;
 !}
 on-display: {!
-var names = {
-    b: "Bolshevik",
-    m: "Menshevik",
-    ukrainian_sd: "Ukrainian SD",
-    lsr: "Left SR",
-    sr: "SR",
-    ukrainian_sr: "Ukrainian SR",
-    popular_socialist: "Popular Socialist",
-    agrarian: "Agrarian",
-    polish: "Polish",
-    bundist: "Bundist",
-    zionist: "Zionist",
-    rightist: "Rightist",
-    other: "Others"
-};
-var data = [];
-for (var party of Q.ua_chart_order) {
-    data.push({
-        "id": party,
-        "legend": names[party],
-        "name": names[party],
-        "seats": Q[party + '_ua_r']
-    });
-}
+var data = [
+{"id": "b", "legend": "Bolshevik", "name": "Bolshevik", "seats": Q.b_ua_r},
+{"id": "m", "legend": "Menshevik", "name": "Menshevik", "seats": Q.m_ua_r},
+{"id": "ukrainian_sd", "legend": "Ukrainian SD", "name": "Ukrainian SD", "seats": Q.ukrainian_sd_ua_r},
+{"id": "lsr", "legend": "Left SR", "name": "Left SR", "seats": Q.lsr_ua_r},
+{"id": "sr", "legend": "SR", "name": "SR", "seats": Q.sr_ua_r},
+{"id": "ukrainian_sr", "legend": "Ukrainian SR", "name": "Ukrainian SR", "seats": Q.ukrainian_sr_ua_r},
+{"id": "popular_socialist", "legend": "Popular Socialist", "name": "Popular Socialist", "seats": Q.popular_socialist_ua_r},
+{"id": "agrarian", "legend": "Agrarian", "name": "Agrarian", "seats": Q.agrarian_ua_r},
+{"id": "polish", "legend": "Polish", "name": "Polish", "seats": Q.polish_ua_r},
+{"id": "bundist", "legend": "Bundist", "name": "Bundist", "seats": Q.bundist_ua_r},
+{"id": "zionist", "legend": "Zionist", "name": "Zionist", "seats": Q.zionist_ua_r},
+{"id": "rightist", "legend": "Rightist", "name": "Rightist", "seats": Q.rightist_ua_r},
+{"id": "other", "legend": "Others", "name": "Others", "seats": Q.other_ua_r},
+];
 if (window && d3) {
     var width = 625;
     var height = 500;
@@ -106,3 +101,4 @@ if (window && d3) {
 {!</table>!}
 
 - @root: Continue
+
