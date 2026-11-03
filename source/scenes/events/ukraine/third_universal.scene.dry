@@ -3,6 +3,9 @@ new-page: true
 view-if: year = 1917 and month = 11 and week = 3 
 max-visits: 1
 tags: event
+on-arrival: {!
+  Q.ukrainian_ca_timer = 6;
+!}
 
 = Third Universal 
 
@@ -14,7 +17,7 @@ The Universal also declares the inalienability of civil liberties in the country
 - @ignore
 
 @respect
-title: We will cooperate with the Ukrainian People's Republic, and will participate in the Constituent Assembly elections. 
+title: We will cooperate with the new government and participate in the scheduled elections. 
 on-arrival: {!
   Q.ca_support_timer += 1;
   Q.upr_relation += 5; 
