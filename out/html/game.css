@@ -685,7 +685,7 @@ table {
   --lsr: #295627;
   --sr: #40853d;
   --right_sr: #67a365;
-  --usr: #FFBB5A;
+  --usr: #bbca5d;
   --ps: #949d48;
   --m_n: #00780A;
   --m_s: #76f981;
@@ -694,6 +694,11 @@ table {
   --dashnak: #fe67ff;
   --rightist: #0030ff;
   --cossack: #758fff;
+  --zionist: #1d65aa;
+  --polish: #b16b9a;
+  --ukrainian_sd: #b4592d;
+  --agrarian: #a87949;
+  --bundist: #27aa8b;
   --none: #cccccc;
   --leftcom: #460a0a;
   --leninist: #D83934;
@@ -727,6 +732,11 @@ table {
 .seat.dashnak { fill: var(--dashnak); }
 .seat.rightist { fill: var(--rightist); }
 .seat.cossack { fill: var(--cossack); }
+.seat.zionist { fill: var(--zionist); }
+.seat.polish { fill: var(--polish); }
+.seat.ukrainian_sd { fill: var(--ukrainian_sd); }
+.seat.agrarian { fill: var(--agrarian); }
+.seat.bundist { fill: var(--bundist); }
 .seat.none { fill: var(--none); }
 
 .box.leftcom { background-color: var(--leftcom); }
@@ -756,6 +766,11 @@ table {
 .box.dashnak { background-color: var(--dashnak); }
 .box.rightist { background-color: var(--rightist); }
 .box.cossack { background-color: var(--cossack); }
+.box.zionist { background-color: var(--zionist); }
+.box.polish { background-color: var(--polish); }
+.box.ukrainian_sd { background-color: var(--ukrainian_sd); }
+.box.agrarian { background-color: var(--agrarian); }
+.box.bundist { background-color: var(--bundist); }
 .box.none { background-color: var(--none); }
 
 .bar.sr { fill: var(--sr-color); }
