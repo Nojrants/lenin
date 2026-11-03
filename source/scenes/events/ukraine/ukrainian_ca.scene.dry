@@ -1,6 +1,8 @@
 @ukrainian_results
 title: Ukrainian Constituent Assembly Election
 new-page: true
+max-visits: 1
+tags: event
 on-arrival: {!
 // parties from left to right
 Q.ua_chart_order = ["b", "m", "ukrainian_sd", "lsr", "sr", "ukrainian_sr", "popular_socialist", "agrarian", "polish", "bundist", "zionist", "rightist", "other"];
