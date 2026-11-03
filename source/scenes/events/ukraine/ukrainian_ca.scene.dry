@@ -1,0 +1,106 @@
+@ukrainian_results
+title: Ukrainian Constituent Assembly Election
+new-page: true
+on-arrival: {!
+// parties from left to right
+Q.ua_chart_order = ["b", "m", "ukrainian_sd", "lsr", "sr", "ukrainian_sr", "popular_socialist", "agrarian", "polish", "bundist", "zionist", "rightist", "other"];
+
+// seats in the Ukrainian Constituent Assembly
+if (typeof Q.ua_seat_total != 'number' || Q.ua_seat_total <= 0) {
+    Q.ua_seat_total = 301;
+}
+
+// allocate seats by largest remainder so they add up to the total
+var allocated = 0;
+var remainders = [];
+for (var party of Q.ua_chart_order) {
+    var exact = Q.ua_seat_total * (Q[party + '_ua_assembly_normalized'] || 0);
+    Q[party + '_ua_r'] = Math.floor(exact);
+    Q[party + '_ua_r_dec'] = Q[party + '_ua_assembly_votes_dec'] || 0;
+    allocated += Q[party + '_ua_r'];
+    remainders.push({party: party, rem: exact - Math.floor(exact)});
+}
+remainders.sort(function(a, b) { return b.rem - a.rem; });
+for (var i = 0; allocated < Q.ua_seat_total && i < remainders.length; i++) {
+    Q[remainders[i].party + '_ua_r'] += 1;
+    allocated += 1;
+}
+!}
+on-display: {!
+var names = {
+    b: "Bolshevik",
+    m: "Menshevik",
+    ukrainian_sd: "Ukrainian SD",
+    lsr: "Left SR",
+    sr: "SR",
+    ukrainian_sr: "Ukrainian SR",
+    popular_socialist: "Popular Socialist",
+    agrarian: "Agrarian",
+    polish: "Polish",
+    bundist: "Bundist",
+    zionist: "Zionist",
+    rightist: "Rightist",
+    other: "Others"
+};
+var data = [];
+for (var party of Q.ua_chart_order) {
+    data.push({
+        "id": party,
+        "legend": names[party],
+        "name": names[party],
+        "seats": Q[party + '_ua_r']
+    });
+}
+if (window && d3) {
+    var width = 625;
+    var height = 500;
+    var screenWidth = document.getElementById('content').offsetWidth;
+    if (screenWidth < width - 50) {
+        width = screenWidth - 50;
+        height = width;
+        document.getElementById("ua_assembly_chart").style.height = screenWidth/2 + "px";
+    }
+    var parliament = d3.parliament();
+    parliament.width(width).height(height).innerRadiusCoef(0.4);
+    parliament.enter.fromCenter(true).smallToBig(true);
+    parliament.exit.toCenter(false).bigToSmall(true);
+    d3.select("#ua_assembly_chart").datum(data).call(parliament);
+}
+!}
+
+= Ukrainian Constituent Assembly Results
+
+{!<svg id="ua_assembly_chart" viewBox="0 0 625 310"> </svg>!}
+
+{!<table class="soviet-table">!}
+{!<tr><th>Party</th><th>Vote Share</th></tr>!}
+
+{!<tr><td><div class="party-box box b"></div>Bolsheviks</td><td>!}[+ b_ua_r_dec +]%{!</td></tr>!}
+
+{!<tr><td><div class="party-box box m"></div>Mensheviks</td><td>!}[+ m_ua_r_dec +]%{!</td></tr>!}
+
+{!<tr><td><div class="party-box box ukrainian_sd"></div>Ukrainian SDs</td><td>!}[+ ukrainian_sd_ua_r_dec +]%{!</td></tr>!}
+
+{!<tr><td><div class="party-box box lsr"></div>Left-SRs</td><td>!}[+ lsr_ua_r_dec +]%{!</td></tr>!}
+
+{!<tr><td><div class="party-box box sr"></div>SRs</td><td>!}[+ sr_ua_r_dec +]%{!</td></tr>!}
+
+{!<tr><td><div class="party-box box ukrainian_sr"></div>Ukrainian SRs</td><td>!}[+ ukrainian_sr_ua_r_dec +]%{!</td></tr>!}
+
+{!<tr><td><div class="party-box box popular_socialist"></div>Popular Socialists</td><td>!}[+ popular_socialist_ua_r_dec +]%{!</td></tr>!}
+
+{!<tr><td><div class="party-box box agrarian"></div>Agrarian Parties</td><td>!}[+ agrarian_ua_r_dec +]%{!</td></tr>!}
+
+{!<tr><td><div class="party-box box polish"></div>Polish Parties</td><td>!}[+ polish_ua_r_dec +]%{!</td></tr>!}
+
+{!<tr><td><div class="party-box box bundist"></div>Bundists</td><td>!}[+ bundist_ua_r_dec +]%{!</td></tr>!}
+
+{!<tr><td><div class="party-box box zionist"></div>Zionists</td><td>!}[+ zionist_ua_r_dec +]%{!</td></tr>!}
+
+{!<tr><td><div class="party-box box rightist"></div>Rightists</td><td>!}[+ rightist_ua_r_dec +]%{!</td></tr>!}
+
+{!<tr><td><div class="party-box box other"></div>Others</td><td>!}[+ other_ua_r_dec +]%{!</td></tr>!}
+
+{!</table>!}
+
+- @root: Continue
