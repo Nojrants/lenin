@@ -2,7 +2,7 @@
 title: Ukrainian Constituent Assembly Elections
 new-page: true
 max-visits: 1
-view-if: ukrainian_ca_timer = 0
+view-if: ukrainian_ca_timer = 0 and month != 11
 tags: event
 
 = Ukrainian Constituent Assembly
