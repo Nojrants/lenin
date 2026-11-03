@@ -6,6 +6,8 @@ tags: event
 
 = Ukrainian Constituent Assembly
 
+Election results are arriving for the Ukrainian Constituent Assembly, although it appears that conflict between loyalist and local Bolshevik forces have disrupted the election in several districts. 
+
 - @proceed_election : Brace ourselves for the results...
 
 @proceed_election
@@ -14,9 +16,10 @@ set-jump: election_results
 
 @election_results
 new-page: true
+go-to: post_election
 on-arrival: {!
 var ua_order = ["b", "m", "ukrainian_sd", "lsr", "sr", "ukrainian_sr", "popular_socialist", "agrarian", "polish", "bundist", "zionist", "rightist", "other"];
-var ua_seat_total = 500;
+var ua_seat_total = 425;
 
 var ua_null = [];
 for (var party of ua_order) {
@@ -103,4 +106,7 @@ if (window && d3) {
 
 {!</table>!}
 
-- @root: Continue
+@post_election
+
+It's an overwhelming victory for the Ukrainian Socialist-Revolutionaries! The Central Rada declares that a Constituent Assembly will be held in Kyiv at the end of the month, and that it will act as a provisional government until the Assembly's convocation. 
+
