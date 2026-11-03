@@ -1473,6 +1473,7 @@ Q.timers = [//m_party
             'bolshevik_soviet',
             'advisor_action',
             'constituent_assembly',
+            'ukrainian_ca',
             'military_disorder',
             'crime_wave',
             'enemy_reinforcements',
