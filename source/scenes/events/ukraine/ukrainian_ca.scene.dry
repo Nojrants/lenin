@@ -1,8 +1,21 @@
 @ukrainian_results
-title: Ukrainian Constituent Assembly Election
+title: Ukrainian Constituent Assembly Elections
 new-page: true
 max-visits: 1
 tags: event
+
+= Ukrainian Constituent Assembly
+
+- @proceed_election : Brace ourselves for the results...
+
+@proceed_election
+go-to: election_algorithm 
+set-jump: election_results
+
+
+@election_results
+go-to: post_election_menu
+new-page: true
 on-arrival: {!
 
 Q.b_ua_r = Math.round(800*Q.b_ua_assembly_votes_dec/100);
@@ -100,5 +113,5 @@ if (window && d3) {
 
 {!</table>!}
 
-- @root: Continue
+@post_election_menu
 
