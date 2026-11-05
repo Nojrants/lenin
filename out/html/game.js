@@ -2343,7 +2343,7 @@ window.sovietRiggingExponent = 1.5;
 
 // left-to-right order of parties in charts and tables
 window.electionChartOrder = ['anarchist', 'maximalist', 'b', 'sdi', 'left_m', 'm',
-    'ukrainian_sd', 'right_m', 'bundist', 'lsr', 'sr', 'right_sr', 'ukrainian_sr',
+    'right_m', 'ukrainian_sd', 'bundist', 'lsr', 'sr', 'right_sr', 'ukrainian_sr',
     'popular_socialist', 'agrarian', 'polish', 'zionist', 'k', 'rightist', 'other'];
 
 // display names: legend (chart) and table (plural)
