@@ -2184,7 +2184,7 @@ demoSetter('mapAddElectionControl', function(p, d) {
     p.election_control = clampControl(p.election_control + Number(d));
 });
 
-// soviet elections
+// elections
 // groups that vote at each level of soviet_class_participation
 window.mapSovietClasses = function(level) {
     var l = Math.max(1, Math.min(4, Math.floor(level) || 1));
@@ -2202,9 +2202,28 @@ window.mapSovietClasses = function(level) {
     return window.mapClassOrder.slice();
 };
 
+// election types. excluded: parties not on the ballot (their support goes to "other")
+window.electionTypes = {
+    soviet: { excluded: ['k', 'rightist'], participation: true, sovietPower: true, rigging: true },
+    general: { excluded: [], participation: false, sovietPower: false, rigging: false }
+};
+
+// a faction is excluded when its legal flag in Root is 0
+window.electionLegalFlags = {
+    mensheviks_legal: ['left_m', 'm', 'right_m', 'sdi'],
+    sr_legal: ['sr', 'right_sr', 'popular_socialist'],
+    lsr_legal: ['lsr'],
+    anarchists_legal: ['anarchist', 'maximalist']
+};
+
 // parties that benefit from election control, and how fast the rest are suppressed
 window.sovietFavoured = ['b'];
 window.sovietRiggingExponent = 1.5;
+
+// left-to-right order of parties in charts and tables
+window.electionChartOrder = ['anarchist', 'maximalist', 'b', 'sdi', 'left_m', 'm',
+    'ukrainian_sd', 'right_m', 'bundist', 'lsr', 'sr', 'ukrainian_sr', 'right_sr',
+    'popular_socialist', 'agrarian', 'polish', 'zionist', 'k', 'rightist', 'other'];
 
 // regions for multi-province elections
 window.mapRegions = {
@@ -2212,15 +2231,68 @@ window.mapRegions = {
         'yekaterinoslav', 'kherson', 'taurida']
 };
 
-// one province: returns { shares: {party: 0-1}, weight, classes }
-window.mapSovietProvince = function(id, options) {
+// local parties by region. steal: party -> { national party: share of its support taken }
+window.mapLocalPolitics = {
+    ukraine: {
+        parties: ['ukrainian_sr', 'zionist', 'polish', 'ukrainian_sd', 'agrarian', 'bundist'],
+        steal: {
+            ukrainian_sr: { sr: 0.8, lsr: 0.6 },
+            agrarian: { sr: 0.1, lsr: 0.1, other: 0.5 },
+            ukrainian_sd: { left_m: 0.4, m: 0.4, right_m: 0.4, sdi: 0.4 }
+        }
+    }
+};
+
+// minorities (percent of a province) and the local parties they vote for
+window.mapMinorityParties = { jews: ['zionist', 'bundist'], poles: ['polish'] };
+window.mapMinorityNationalShare = 0.5;    // share of a minority voting for its own parties
+window.mapProvinceMinorities = {
+    volhynia: { jews: 13, poles: 6 },
+    podolia: { jews: 12, poles: 4 },
+    kyiv: { jews: 10, poles: 3 },
+    chernigov: { jews: 8, poles: 1 },
+    poltava: { jews: 5, poles: 1 },
+    kharkov: { jews: 5, poles: 1 },
+    yekaterinoslav: { jews: 7, poles: 1 },
+    kherson: { jews: 10, poles: 2 },
+    taurida: { jews: 3, poles: 1 }
+};
+Object.keys(window.mapLocalPolitics).forEach(function(region) {
+    (window.mapRegions[region] || []).forEach(function(id) {
+        window.mapProvinces[id].local = region;
+    });
+});
+Object.keys(window.mapProvinceMinorities).forEach(function(id) {
+    window.mapProvinces[id].minorities = window.mapProvinceMinorities[id];
+});
+
+// national parties on the ballot for an election type
+function ballotParties(Q, type) {
+    var excluded = type.excluded.slice();
+    Object.keys(window.electionLegalFlags).forEach(function(flag) {
+        if (Q[flag] === 0) {
+            excluded = excluded.concat(window.electionLegalFlags[flag]);
+        }
+    });
+    var all = Q.parties.filter(function(x) { return x !== 'none'; });
+    return {
+        all: all,
+        excluded: excluded.filter(function(x) { return all.indexOf(x) !== -1 && x !== 'other'; })
+    };
+}
+
+// one province: returns { shares: {party: 0-1}, weight, parties }
+window.mapElectionProvince = function(id, options) {
     var Q = engineQualities();
     var p = window.mapProvinces[id];
     options = options || {};
-    var level = options.participation !== undefined ? options.participation :
-        (Q.soviet_class_participation || 1);
+    var type = window.electionTypes[options.type || 'soviet'];
+    var level = !type.participation ? 4 : options.participation !== undefined ?
+        options.participation : (Q.soviet_class_participation || 1);
     var classes = window.mapSovietClasses(level);
-    var parties = options.parties || Q.parties.filter(function(x) { return x !== 'none'; });
+    var ballot = ballotParties(Q, type);
+    var lp = p.local ? window.mapLocalPolitics[p.local] : null;
+    var localParties = lp ? lp.parties : [];
 
     var totalShare = 0;
     window.mapClassOrder.forEach(function(c) { totalShare += p.classes[c] || 0; });
@@ -2228,88 +2300,168 @@ window.mapSovietProvince = function(id, options) {
         totalShare = 1;
     }
 
+    // 1. national parties: class shares times each class's party support
     var support = {};
-    parties.forEach(function(x) { support[x] = 0; });
+    ballot.all.concat(localParties).forEach(function(x) { support[x] = 0; });
     var allowedShare = 0;
+    var urbanShare = 0;
     classes.forEach(function(c) {
         var share = (p.classes[c] || 0) / totalShare;
         var votes = 0;
-        parties.forEach(function(x) { votes += Math.max(0, Q[c + '_' + x] || 0); });
+        ballot.all.forEach(function(x) { votes += Math.max(0, Q[c + '_' + x] || 0); });
         if (votes <= 0 || share <= 0) {
             return;
         }
         allowedShare += share;
-        parties.forEach(function(x) {
+        ballot.all.forEach(function(x) {
             support[x] += share * 100 * Math.max(0, Q[c + '_' + x] || 0) / votes;
         });
     });
+    var rural = ((p.classes.peasants || 0) + (p.classes.kulaks || 0)) / totalShare;
+    urbanShare = 1 - rural;
 
-    // election control suppresses everyone but the favoured parties
-    var control = Math.max(0, Math.min(1, p.election_control / 100));
-    var suppression = Math.pow(1 - control, window.sovietRiggingExponent);
-    var total = 0;
-    parties.forEach(function(x) {
-        if (window.sovietFavoured.indexOf(x) === -1) {
-            support[x] *= suppression;
-        }
-        total += support[x];
+    // 2. excluded parties: their support goes to other
+    ballot.excluded.forEach(function(x) {
+        support.other += support[x];
+        delete support[x];
     });
+
+    // 3. local parties take a share of national parties' support
+    if (lp) {
+        var original = {};
+        Object.keys(support).forEach(function(x) { original[x] = support[x]; });
+        var taken = {};
+        Object.keys(lp.steal).forEach(function(thief) {
+            Object.keys(lp.steal[thief]).forEach(function(from) {
+                if (original[from] === undefined) {
+                    return;
+                }
+                var amount = original[from] * lp.steal[thief][from];
+                support[thief] += amount;
+                taken[from] = (taken[from] || 0) + amount;
+            });
+        });
+        Object.keys(taken).forEach(function(from) {
+            support[from] = Math.max(0, support[from] - taken[from]);
+        });
+    }
+
+    // 4. minorities: part of each votes for its own parties, drawn from all parties pro rata
+    var total = 0;
+    Object.keys(support).forEach(function(x) { total += support[x]; });
+    if (lp && p.minorities && total > 0) {
+        var votesFor = {};
+        var drawn = 0;
+        Object.keys(p.minorities).forEach(function(m) {
+            var options2 = (window.mapMinorityParties[m] || []).filter(function(x) {
+                return support[x] !== undefined;
+            });
+            if (!options2.length) {
+                return;
+            }
+            var amount = total * (p.minorities[m] / 100) * window.mapMinorityNationalShare;
+            var weights = options2.map(function(x) {
+                // bundists do better in less rural provinces, zionists in more rural ones
+                return x === 'bundist' ? 0.25 + 0.6 * urbanShare :
+                    x === 'zionist' ? 0.75 - 0.6 * urbanShare : 1;
+            });
+            var weightTotal = weights.reduce(function(a, b) { return a + b; }, 0);
+            options2.forEach(function(x, i) {
+                votesFor[x] = (votesFor[x] || 0) + amount * weights[i] / weightTotal;
+            });
+            drawn += amount;
+        });
+        if (drawn > 0) {
+            var keep = Math.max(0, 1 - drawn / total);
+            Object.keys(support).forEach(function(x) { support[x] *= keep; });
+            Object.keys(votesFor).forEach(function(x) { support[x] += votesFor[x]; });
+        }
+    }
+
+    // 5. election control suppresses everyone but the favoured parties
+    if (type.rigging) {
+        var control = Math.max(0, Math.min(1, p.election_control / 100));
+        var suppression = Math.pow(1 - control, window.sovietRiggingExponent);
+        Object.keys(support).forEach(function(x) {
+            if (window.sovietFavoured.indexOf(x) === -1) {
+                support[x] *= suppression;
+            }
+        });
+    }
+    total = 0;
+    Object.keys(support).forEach(function(x) { total += support[x]; });
     var shares = {};
-    parties.forEach(function(x) {
+    Object.keys(support).forEach(function(x) {
         shares[x] = total > 0 ? support[x] / total : 0;
     });
 
-    // how many people take part: population, voting classes, soviet power
-    var weight = total > 0 ? p.pop * allowedShare * p.soviet_power / 100 : 0;
-    return { shares: shares, weight: weight, classes: classes };
+    // how many people take part
+    var weight = total > 0 ? p.pop * allowedShare *
+        (type.sovietPower ? p.soviet_power / 100 : 1) : 0;
+    return { shares: shares, weight: weight, parties: Object.keys(support) };
 };
 
-// one or more provinces: returns { party: percent }; writes <party>_<key>_votes_dec etc.
-window.mapSovietElection = function(provinces, key, options) {
+// one or more provinces: returns { party: percent }
+//   options: type ('soviet' or 'general'), key (variable prefix, default 'election')
+// writes <party>_<key>_votes_dec / _votes / _votes_disp / _normalized, <key>_parties,
+// <key>_participants and <key>_provinces
+window.mapElection = function(provinces, options) {
     var Q = engineQualities();
     window.loadMapState();
+    options = options || {};
+    var key = options.key || 'election';
+    if (provinces === undefined || provinces === null) {
+        provinces = Q.election_provinces;
+    }
     if (typeof provinces === 'string') {
         provinces = window.mapRegions[provinces] || [provinces];
     }
-    options = options || {};
-    var parties = options.parties || Q.parties.filter(function(x) { return x !== 'none'; });
     var totals = {};
-    parties.forEach(function(x) { totals[x] = 0; });
     var weightSum = 0;
     var taking = 0;
     var perProvince = {};
 
     provinces.forEach(function(id) {
         if (!window.mapProvinces[id]) {
-            console.warn('mapSovietElection: unknown province "' + id + '"');
+            console.warn('mapElection: unknown province "' + id + '"');
             return;
         }
-        var r = window.mapSovietProvince(id, options);
+        var r = window.mapElectionProvince(id, options);
         perProvince[id] = r;
         weightSum += r.weight;
         if (r.weight > 0) {
             taking++;
         }
-        parties.forEach(function(x) { totals[x] += r.weight * r.shares[x]; });
+        Object.keys(r.shares).forEach(function(x) {
+            totals[x] = (totals[x] || 0) + r.weight * r.shares[x];
+        });
     });
 
+    var parties = Object.keys(totals).sort(function(a, b) {
+        return window.electionChartOrder.indexOf(a) - window.electionChartOrder.indexOf(b);
+    });
     var result = {};
     parties.forEach(function(x) {
         var fraction = weightSum > 0 ? totals[x] / weightSum : 0;
         result[x] = Math.round(fraction * 1000) / 10;
-        if (key) {
-            Q[x + '_' + key + '_normalized'] = fraction;
-            Q[x + '_' + key + '_votes_dec'] = result[x];
-            Q[x + '_' + key + '_votes'] = Math.round(fraction * 100);
-            Q[x + '_' + key + '_votes_disp'] = result[x].toFixed(1);
-        }
+        Q[x + '_' + key + '_normalized'] = fraction;
+        Q[x + '_' + key + '_votes_dec'] = result[x];
+        Q[x + '_' + key + '_votes'] = Math.round(fraction * 100);
+        Q[x + '_' + key + '_votes_disp'] = result[x].toFixed(1);
     });
-    if (key) {
-        Q[key + '_participants'] = Math.round(weightSum * 100) / 100;
-        Q[key + '_provinces'] = taking;
-    }
-    window.mapSovietLast = { result: result, weight: weightSum, provinces: perProvince };
+    Q[key + '_parties'] = parties;
+    Q[key + '_participants'] = Math.round(weightSum * 100) / 100;
+    Q[key + '_provinces'] = taking;
+    window.mapElectionLast = { result: result, weight: weightSum, provinces: perProvince };
     return result;
+};
+
+// older name, kept for existing events
+window.mapSovietElection = function(provinces, key, options) {
+    options = options || {};
+    options.type = 'soviet';
+    options.key = key;
+    return window.mapElection(provinces, options);
 };
 
 // order an attack: mapOrderAttack(faction, from, to, [count])
