@@ -601,49 +601,170 @@ window.mapDevastationDecay = 1;
 window.mapClassOrder = ['elites', 'middle', 'clergy', 'workers', 'peasants',
     'kulaks', 'soldiers', 'intelligentsia', 'underclass', 'students'];
 
-// class shares (relative weights) and population weight by type of province
-var MAP_ARCHETYPES = {
-    rural: { pop: 1, classes: { elites: 1, middle: 3, clergy: 0.6, workers: 2,
-        peasants: 78, kulaks: 6, soldiers: 5, intelligentsia: 1, underclass: 3, students: 0.2 } },
-    sparse: { pop: 0.4, classes: { elites: 0.5, middle: 2, clergy: 0.4, workers: 1,
-        peasants: 85, kulaks: 5, soldiers: 3, intelligentsia: 0.5, underclass: 2.5, students: 0.1 } },
-    front: { pop: 1, classes: { elites: 1, middle: 3, clergy: 0.5, workers: 2,
-        peasants: 62, kulaks: 4, soldiers: 20, intelligentsia: 1, underclass: 3, students: 0.2 } },
-    urban: { pop: 2, classes: { elites: 3, middle: 12, clergy: 0.6, workers: 25,
-        peasants: 25, kulaks: 2, soldiers: 12, intelligentsia: 5, underclass: 13, students: 1.4 } },
-    capital: { pop: 5, classes: { elites: 4, middle: 15, clergy: 0.5, workers: 30,
-        peasants: 4, kulaks: 0.5, soldiers: 20, intelligentsia: 6, underclass: 17, students: 3 } }
+window.mapDemographics = {
+    finland: { pop: 1, soviet_power: 10,
+        classes: { elites: 1, middle: 3, clergy: 0.6, workers: 2, peasants: 78, kulaks: 6, soldiers: 5, intelligentsia: 1, underclass: 3, students: 0.2 } },
+    volhynia: { pop: 1, soviet_power: 20,
+        classes: { elites: 1, middle: 3, clergy: 0.5, workers: 2, peasants: 62, kulaks: 4, soldiers: 20, intelligentsia: 1, underclass: 3, students: 0.2 } },
+    bessarabia: { pop: 1, soviet_power: 20,
+        classes: { elites: 1, middle: 3, clergy: 0.5, workers: 2, peasants: 62, kulaks: 4, soldiers: 20, intelligentsia: 1, underclass: 3, students: 0.2 } },
+    podolia: { pop: 1, soviet_power: 20,
+        classes: { elites: 1, middle: 3, clergy: 0.5, workers: 2, peasants: 62, kulaks: 4, soldiers: 20, intelligentsia: 1, underclass: 3, students: 0.2 } },
+    petrograd: { pop: 5, soviet_power: 90,
+        classes: { elites: 4, middle: 15, clergy: 0.5, workers: 30, peasants: 4, kulaks: 0.5, soldiers: 20, intelligentsia: 6, underclass: 17, students: 3 } },
+    novgorod: { pop: 1, soviet_power: 10,
+        classes: { elites: 1, middle: 3, clergy: 0.6, workers: 2, peasants: 78, kulaks: 6, soldiers: 5, intelligentsia: 1, underclass: 3, students: 0.2 } },
+    chernigov: { pop: 1, soviet_power: 10,
+        classes: { elites: 1, middle: 3, clergy: 0.6, workers: 2, peasants: 78, kulaks: 6, soldiers: 5, intelligentsia: 1, underclass: 3, students: 0.2 } },
+    smolensk: { pop: 1, soviet_power: 20,
+        classes: { elites: 1, middle: 3, clergy: 0.5, workers: 2, peasants: 62, kulaks: 4, soldiers: 20, intelligentsia: 1, underclass: 3, students: 0.2 } },
+    tver: { pop: 2, soviet_power: 45,
+        classes: { elites: 3, middle: 12, clergy: 0.6, workers: 25, peasants: 25, kulaks: 2, soldiers: 12, intelligentsia: 5, underclass: 13, students: 1.4 } },
+    yekaterinoslav: { pop: 2, soviet_power: 45,
+        classes: { elites: 3, middle: 12, clergy: 0.6, workers: 25, peasants: 25, kulaks: 2, soldiers: 12, intelligentsia: 5, underclass: 13, students: 1.4 } },
+    kaluga: { pop: 1, soviet_power: 10,
+        classes: { elites: 1, middle: 3, clergy: 0.6, workers: 2, peasants: 78, kulaks: 6, soldiers: 5, intelligentsia: 1, underclass: 3, students: 0.2 } },
+    kharkov: { pop: 2, soviet_power: 45,
+        classes: { elites: 3, middle: 12, clergy: 0.6, workers: 25, peasants: 25, kulaks: 2, soldiers: 12, intelligentsia: 5, underclass: 13, students: 1.4 } },
+    moscow: { pop: 5, soviet_power: 85,
+        classes: { elites: 4, middle: 15, clergy: 0.5, workers: 30, peasants: 4, kulaks: 0.5, soldiers: 20, intelligentsia: 6, underclass: 17, students: 3 } },
+    kyiv: { pop: 2, soviet_power: 40,
+        classes: { elites: 3, middle: 12, clergy: 0.6, workers: 25, peasants: 25, kulaks: 2, soldiers: 12, intelligentsia: 5, underclass: 13, students: 1.4 } },
+    mogilev: { pop: 1, soviet_power: 20,
+        classes: { elites: 1, middle: 3, clergy: 0.5, workers: 2, peasants: 62, kulaks: 4, soldiers: 20, intelligentsia: 1, underclass: 3, students: 0.2 } },
+    tula: { pop: 2, soviet_power: 40,
+        classes: { elites: 3, middle: 12, clergy: 0.6, workers: 25, peasants: 25, kulaks: 2, soldiers: 12, intelligentsia: 5, underclass: 13, students: 1.4 } },
+    vitebsk: { pop: 1, soviet_power: 20,
+        classes: { elites: 1, middle: 3, clergy: 0.5, workers: 2, peasants: 62, kulaks: 4, soldiers: 20, intelligentsia: 1, underclass: 3, students: 0.2 } },
+    orel: { pop: 1, soviet_power: 10,
+        classes: { elites: 1, middle: 3, clergy: 0.6, workers: 2, peasants: 78, kulaks: 6, soldiers: 5, intelligentsia: 1, underclass: 3, students: 0.2 } },
+    kursk: { pop: 1, soviet_power: 10,
+        classes: { elites: 1, middle: 3, clergy: 0.6, workers: 2, peasants: 78, kulaks: 6, soldiers: 5, intelligentsia: 1, underclass: 3, students: 0.2 } },
+    kherson: { pop: 2, soviet_power: 35,
+        classes: { elites: 3, middle: 12, clergy: 0.6, workers: 25, peasants: 25, kulaks: 2, soldiers: 12, intelligentsia: 5, underclass: 13, students: 1.4 } },
+    pskov: { pop: 1, soviet_power: 20,
+        classes: { elites: 1, middle: 3, clergy: 0.5, workers: 2, peasants: 62, kulaks: 4, soldiers: 20, intelligentsia: 1, underclass: 3, students: 0.2 } },
+    poltava: { pop: 1, soviet_power: 10,
+        classes: { elites: 1, middle: 3, clergy: 0.6, workers: 2, peasants: 78, kulaks: 6, soldiers: 5, intelligentsia: 1, underclass: 3, students: 0.2 } },
+    arkhangelsk: { pop: 0.4, soviet_power: 3,
+        classes: { elites: 0.5, middle: 2, clergy: 0.4, workers: 1, peasants: 85, kulaks: 5, soldiers: 3, intelligentsia: 0.5, underclass: 2.5, students: 0.1 } },
+    crimea: { pop: 1, soviet_power: 10,
+        classes: { elites: 1, middle: 3, clergy: 0.6, workers: 2, peasants: 78, kulaks: 6, soldiers: 5, intelligentsia: 1, underclass: 3, students: 0.2 } },
+    kuban: { pop: 1, soviet_power: 10,
+        classes: { elites: 1, middle: 3, clergy: 0.6, workers: 2, peasants: 78, kulaks: 6, soldiers: 5, intelligentsia: 1, underclass: 3, students: 0.2 } },
+    yaroslavl: { pop: 2, soviet_power: 40,
+        classes: { elites: 3, middle: 12, clergy: 0.6, workers: 25, peasants: 25, kulaks: 2, soldiers: 12, intelligentsia: 5, underclass: 13, students: 1.4 } },
+    voronezh: { pop: 1, soviet_power: 10,
+        classes: { elites: 1, middle: 3, clergy: 0.6, workers: 2, peasants: 78, kulaks: 6, soldiers: 5, intelligentsia: 1, underclass: 3, students: 0.2 } },
+    vladimir: { pop: 2, soviet_power: 45,
+        classes: { elites: 3, middle: 12, clergy: 0.6, workers: 25, peasants: 25, kulaks: 2, soldiers: 12, intelligentsia: 5, underclass: 13, students: 1.4 } },
+    don: { pop: 1, soviet_power: 10,
+        classes: { elites: 1, middle: 3, clergy: 0.6, workers: 2, peasants: 78, kulaks: 6, soldiers: 5, intelligentsia: 1, underclass: 3, students: 0.2 } },
+    vologda: { pop: 0.4, soviet_power: 3,
+        classes: { elites: 0.5, middle: 2, clergy: 0.4, workers: 1, peasants: 85, kulaks: 5, soldiers: 3, intelligentsia: 0.5, underclass: 2.5, students: 0.1 } },
+    tambov: { pop: 1, soviet_power: 10,
+        classes: { elites: 1, middle: 3, clergy: 0.6, workers: 2, peasants: 78, kulaks: 6, soldiers: 5, intelligentsia: 1, underclass: 3, students: 0.2 } },
+    ryazan: { pop: 1, soviet_power: 10,
+        classes: { elites: 1, middle: 3, clergy: 0.6, workers: 2, peasants: 78, kulaks: 6, soldiers: 5, intelligentsia: 1, underclass: 3, students: 0.2 } },
+    kostroma: { pop: 1, soviet_power: 10,
+        classes: { elites: 1, middle: 3, clergy: 0.6, workers: 2, peasants: 78, kulaks: 6, soldiers: 5, intelligentsia: 1, underclass: 3, students: 0.2 } },
+    georgia: { pop: 1, soviet_power: 10,
+        classes: { elites: 1, middle: 3, clergy: 0.6, workers: 2, peasants: 78, kulaks: 6, soldiers: 5, intelligentsia: 1, underclass: 3, students: 0.2 } },
+    stavropol: { pop: 1, soviet_power: 10,
+        classes: { elites: 1, middle: 3, clergy: 0.6, workers: 2, peasants: 78, kulaks: 6, soldiers: 5, intelligentsia: 1, underclass: 3, students: 0.2 } },
+    kars: { pop: 1, soviet_power: 10,
+        classes: { elites: 1, middle: 3, clergy: 0.6, workers: 2, peasants: 78, kulaks: 6, soldiers: 5, intelligentsia: 1, underclass: 3, students: 0.2 } },
+    nizhny: { pop: 2, soviet_power: 45,
+        classes: { elites: 3, middle: 12, clergy: 0.6, workers: 25, peasants: 25, kulaks: 2, soldiers: 12, intelligentsia: 5, underclass: 13, students: 1.4 } },
+    terek: { pop: 1, soviet_power: 10,
+        classes: { elites: 1, middle: 3, clergy: 0.6, workers: 2, peasants: 78, kulaks: 6, soldiers: 5, intelligentsia: 1, underclass: 3, students: 0.2 } },
+    saratov: { pop: 2, soviet_power: 40,
+        classes: { elites: 3, middle: 12, clergy: 0.6, workers: 25, peasants: 25, kulaks: 2, soldiers: 12, intelligentsia: 5, underclass: 13, students: 1.4 } },
+    penza: { pop: 1, soviet_power: 10,
+        classes: { elites: 1, middle: 3, clergy: 0.6, workers: 2, peasants: 78, kulaks: 6, soldiers: 5, intelligentsia: 1, underclass: 3, students: 0.2 } },
+    armenia: { pop: 1, soviet_power: 10,
+        classes: { elites: 1, middle: 3, clergy: 0.6, workers: 2, peasants: 78, kulaks: 6, soldiers: 5, intelligentsia: 1, underclass: 3, students: 0.2 } },
+    astrakhan: { pop: 1, soviet_power: 10,
+        classes: { elites: 1, middle: 3, clergy: 0.6, workers: 2, peasants: 78, kulaks: 6, soldiers: 5, intelligentsia: 1, underclass: 3, students: 0.2 } },
+    azerbaijan: { pop: 1, soviet_power: 10,
+        classes: { elites: 1, middle: 3, clergy: 0.6, workers: 2, peasants: 78, kulaks: 6, soldiers: 5, intelligentsia: 1, underclass: 3, students: 0.2 } },
+    simbirsk: { pop: 1, soviet_power: 10,
+        classes: { elites: 1, middle: 3, clergy: 0.6, workers: 2, peasants: 78, kulaks: 6, soldiers: 5, intelligentsia: 1, underclass: 3, students: 0.2 } },
+    dagestan: { pop: 1, soviet_power: 10,
+        classes: { elites: 1, middle: 3, clergy: 0.6, workers: 2, peasants: 78, kulaks: 6, soldiers: 5, intelligentsia: 1, underclass: 3, students: 0.2 } },
+    samara: { pop: 2, soviet_power: 35,
+        classes: { elites: 3, middle: 12, clergy: 0.6, workers: 25, peasants: 25, kulaks: 2, soldiers: 12, intelligentsia: 5, underclass: 13, students: 1.4 } },
+    vyatka: { pop: 1, soviet_power: 10,
+        classes: { elites: 1, middle: 3, clergy: 0.6, workers: 2, peasants: 78, kulaks: 6, soldiers: 5, intelligentsia: 1, underclass: 3, students: 0.2 } },
+    kazan: { pop: 2, soviet_power: 35,
+        classes: { elites: 3, middle: 12, clergy: 0.6, workers: 25, peasants: 25, kulaks: 2, soldiers: 12, intelligentsia: 5, underclass: 13, students: 1.4 } },
+    uralsk: { pop: 0.4, soviet_power: 3,
+        classes: { elites: 0.5, middle: 2, clergy: 0.4, workers: 1, peasants: 85, kulaks: 5, soldiers: 3, intelligentsia: 0.5, underclass: 2.5, students: 0.1 } },
+    transcaspian: { pop: 0.4, soviet_power: 3,
+        classes: { elites: 0.5, middle: 2, clergy: 0.4, workers: 1, peasants: 85, kulaks: 5, soldiers: 3, intelligentsia: 0.5, underclass: 2.5, students: 0.1 } },
+    ufa: { pop: 1, soviet_power: 20,
+        classes: { elites: 1, middle: 3, clergy: 0.6, workers: 2, peasants: 78, kulaks: 6, soldiers: 5, intelligentsia: 1, underclass: 3, students: 0.2 } },
+    olonets: { pop: 1, soviet_power: 10,
+        classes: { elites: 1, middle: 3, clergy: 0.6, workers: 2, peasants: 78, kulaks: 6, soldiers: 5, intelligentsia: 1, underclass: 3, students: 0.2 } },
+    yekaterinburg: { pop: 2, soviet_power: 40,
+        classes: { elites: 3, middle: 12, clergy: 0.6, workers: 25, peasants: 25, kulaks: 2, soldiers: 12, intelligentsia: 5, underclass: 13, students: 1.4 } },
+    orenburg: { pop: 1, soviet_power: 10,
+        classes: { elites: 1, middle: 3, clergy: 0.6, workers: 2, peasants: 78, kulaks: 6, soldiers: 5, intelligentsia: 1, underclass: 3, students: 0.2 } },
+    turgai: { pop: 0.4, soviet_power: 3,
+        classes: { elites: 0.5, middle: 2, clergy: 0.4, workers: 1, peasants: 85, kulaks: 5, soldiers: 3, intelligentsia: 0.5, underclass: 2.5, students: 0.1 } },
+    khiva: { pop: 0.4, soviet_power: 3,
+        classes: { elites: 0.5, middle: 2, clergy: 0.4, workers: 1, peasants: 85, kulaks: 5, soldiers: 3, intelligentsia: 0.5, underclass: 2.5, students: 0.1 } },
+    syr_darya: { pop: 0.4, soviet_power: 3,
+        classes: { elites: 0.5, middle: 2, clergy: 0.4, workers: 1, peasants: 85, kulaks: 5, soldiers: 3, intelligentsia: 0.5, underclass: 2.5, students: 0.1 } },
+    tobolsk: { pop: 0.4, soviet_power: 3,
+        classes: { elites: 0.5, middle: 2, clergy: 0.4, workers: 1, peasants: 85, kulaks: 5, soldiers: 3, intelligentsia: 0.5, underclass: 2.5, students: 0.1 } },
+    bukhara: { pop: 0.4, soviet_power: 3,
+        classes: { elites: 0.5, middle: 2, clergy: 0.4, workers: 1, peasants: 85, kulaks: 5, soldiers: 3, intelligentsia: 0.5, underclass: 2.5, students: 0.1 } },
+    akmolinsk: { pop: 0.4, soviet_power: 3,
+        classes: { elites: 0.5, middle: 2, clergy: 0.4, workers: 1, peasants: 85, kulaks: 5, soldiers: 3, intelligentsia: 0.5, underclass: 2.5, students: 0.1 } },
+    samarkhand: { pop: 0.4, soviet_power: 3,
+        classes: { elites: 0.5, middle: 2, clergy: 0.4, workers: 1, peasants: 85, kulaks: 5, soldiers: 3, intelligentsia: 0.5, underclass: 2.5, students: 0.1 } },
+    ferghana: { pop: 0.4, soviet_power: 3,
+        classes: { elites: 0.5, middle: 2, clergy: 0.4, workers: 1, peasants: 85, kulaks: 5, soldiers: 3, intelligentsia: 0.5, underclass: 2.5, students: 0.1 } },
+    semipalatinsk: { pop: 0.4, soviet_power: 3,
+        classes: { elites: 0.5, middle: 2, clergy: 0.4, workers: 1, peasants: 85, kulaks: 5, soldiers: 3, intelligentsia: 0.5, underclass: 2.5, students: 0.1 } },
+    siberia: { pop: 0.4, soviet_power: 3,
+        classes: { elites: 0.5, middle: 2, clergy: 0.4, workers: 1, peasants: 85, kulaks: 5, soldiers: 3, intelligentsia: 0.5, underclass: 2.5, students: 0.1 } },
+    semirechye: { pop: 0.4, soviet_power: 3,
+        classes: { elites: 0.5, middle: 2, clergy: 0.4, workers: 1, peasants: 85, kulaks: 5, soldiers: 3, intelligentsia: 0.5, underclass: 2.5, students: 0.1 } },
+    tomsk: { pop: 0.4, soviet_power: 3,
+        classes: { elites: 0.5, middle: 2, clergy: 0.4, workers: 1, peasants: 85, kulaks: 5, soldiers: 3, intelligentsia: 0.5, underclass: 2.5, students: 0.1 } },
+    estonia: { pop: 2, soviet_power: 10,
+        classes: { elites: 3, middle: 12, clergy: 0.6, workers: 25, peasants: 25, kulaks: 2, soldiers: 12, intelligentsia: 5, underclass: 13, students: 1.4 } },
+    latvia: { pop: 2, soviet_power: 45,
+        classes: { elites: 3, middle: 12, clergy: 0.6, workers: 25, peasants: 25, kulaks: 2, soldiers: 12, intelligentsia: 5, underclass: 13, students: 1.4 } },
+    lithuania: { pop: 1, soviet_power: 20,
+        classes: { elites: 1, middle: 3, clergy: 0.5, workers: 2, peasants: 62, kulaks: 4, soldiers: 20, intelligentsia: 1, underclass: 3, students: 0.2 } },
+    vilna: { pop: 2, soviet_power: 10,
+        classes: { elites: 3, middle: 12, clergy: 0.6, workers: 25, peasants: 25, kulaks: 2, soldiers: 12, intelligentsia: 5, underclass: 13, students: 1.4 } },
+    minsk: { pop: 2, soviet_power: 40,
+        classes: { elites: 3, middle: 12, clergy: 0.6, workers: 25, peasants: 25, kulaks: 2, soldiers: 12, intelligentsia: 5, underclass: 13, students: 1.4 } },
+    poland: { pop: 2, soviet_power: 10,
+        classes: { elites: 3, middle: 12, clergy: 0.6, workers: 25, peasants: 25, kulaks: 2, soldiers: 12, intelligentsia: 5, underclass: 13, students: 1.4 } },
+    grodno: { pop: 1, soviet_power: 20,
+        classes: { elites: 1, middle: 3, clergy: 0.5, workers: 2, peasants: 62, kulaks: 4, soldiers: 20, intelligentsia: 1, underclass: 3, students: 0.2 } },
+    taurida: { pop: 1, soviet_power: 10,
+        classes: { elites: 1, middle: 3, clergy: 0.6, workers: 2, peasants: 78, kulaks: 6, soldiers: 5, intelligentsia: 1, underclass: 3, students: 0.2 } },
+    karelia: { pop: 0.4, soviet_power: 3,
+        classes: { elites: 0.5, middle: 2, clergy: 0.4, workers: 1, peasants: 85, kulaks: 5, soldiers: 3, intelligentsia: 0.5, underclass: 2.5, students: 0.1 } },
+    murmansk: { pop: 0.4, soviet_power: 3,
+        classes: { elites: 0.5, middle: 2, clergy: 0.4, workers: 1, peasants: 85, kulaks: 5, soldiers: 3, intelligentsia: 0.5, underclass: 2.5, students: 0.1 } },
+    perm: { pop: 1, soviet_power: 10,
+        classes: { elites: 1, middle: 3, clergy: 0.6, workers: 2, peasants: 78, kulaks: 6, soldiers: 5, intelligentsia: 1, underclass: 3, students: 0.2 } }
 };
-var MAP_SPARSE = ['arkhangelsk', 'murmansk', 'karelia', 'vologda', 'uralsk',
-    'transcaspian', 'turgai', 'khiva', 'syr_darya', 'tobolsk', 'bukhara',
-    'akmolinsk', 'samarkhand', 'ferghana', 'semipalatinsk', 'siberia',
-    'semirechye', 'tomsk'];
-var MAP_FRONT = ['pskov', 'vitebsk', 'minsk', 'mogilev', 'smolensk', 'volhynia',
-    'podolia', 'bessarabia', 'vilna', 'grodno', 'lithuania', 'estonia'];
-var MAP_URBAN_EXTRA = ['kazan', 'yekaterinburg', 'samara', 'minsk', 'vilna', 'estonia'];
-
-// starting soviet power: only the larger cities, mostly in European Russia
-var MAP_SOVIET_START = { petrograd: 90, moscow: 85, nizhny: 45, tver: 45,
-    tula: 40, yaroslavl: 40, vladimir: 45, saratov: 40, kharkov: 45, kyiv: 40,
-    yekaterinoslav: 45, latvia: 45, kazan: 35, samara: 35, yekaterinburg: 40,
-    minsk: 40, kherson: 35, ufa: 20 };
 
 Object.keys(window.mapProvinces).forEach(function(id) {
     var p = window.mapProvinces[id];
-    var type = id === 'petrograd' || id === 'moscow' ? 'capital' :
-        window.mapUrbanProvinces.indexOf(id) !== -1 ||
-            MAP_URBAN_EXTRA.indexOf(id) !== -1 ? 'urban' :
-        MAP_SPARSE.indexOf(id) !== -1 ? 'sparse' :
-        MAP_FRONT.indexOf(id) !== -1 ? 'front' : 'rural';
-    var a = MAP_ARCHETYPES[type];
-    p.pop = a.pop;
-    p.classes = {};
-    window.mapClassOrder.forEach(function(c) {
-        p.classes[c] = a.classes[c];
-    });
-    p.soviet_power = MAP_SOVIET_START[id] !== undefined ? MAP_SOVIET_START[id] :
-        type === 'sparse' ? 3 : type === 'front' ? 20 : 10;
-    p.election_control = 0;
+    var d = window.mapDemographics[id];
+    p.pop = d.pop;
+    p.classes = JSON.parse(JSON.stringify(d.classes));
+    p.soviet_power = d.soviet_power;
+    p.election_control = d.election_control || 0;
     p.startDemo = demoSnapshot(p);
 });
 
@@ -2222,8 +2343,32 @@ window.sovietRiggingExponent = 1.5;
 
 // left-to-right order of parties in charts and tables
 window.electionChartOrder = ['anarchist', 'maximalist', 'b', 'sdi', 'left_m', 'm',
-    'ukrainian_sd', 'right_m', 'bundist', 'lsr', 'sr', 'ukrainian_sr', 'right_sr',
+    'ukrainian_sd', 'right_m', 'bundist', 'lsr', 'sr', 'right_sr', 'ukrainian_sr',
     'popular_socialist', 'agrarian', 'polish', 'zionist', 'k', 'rightist', 'other'];
+
+// display names: legend (chart) and table (plural)
+window.electionNames = {
+    anarchist: { legend: 'Anarchist', table: 'Anarchists', box: 'a' },
+    maximalist: { legend: 'SR-Maximalist', table: 'Maximalists' },
+    b: { legend: 'Bolshevik', table: 'Bolsheviks' },
+    sdi: { legend: 'SD-Internationalist', table: 'SD-Internationalists' },
+    left_m: { legend: 'Menshevik-Internationalist', table: 'Menshevik Internationalists' },
+    m: { legend: 'Menshevik-Centre', table: 'Mensheviks (Centre)' },
+    right_m: { legend: 'Menshevik-Defencist', table: 'Menshevik Defencists' },
+    lsr: { legend: 'Left-SR', table: 'Left-SRs' },
+    sr: { legend: 'SR', table: 'SRs' },
+    right_sr: { legend: 'Right SR', table: 'Right SRs' },
+    popular_socialist: { legend: 'Popular Socialist', table: 'Popular Socialists' },
+    k: { legend: 'Kadet', table: 'Kadets' },
+    rightist: { legend: 'Rightist', table: 'Rightists' },
+    other: { legend: 'Other', table: 'Others' },
+    ukrainian_sr: { legend: 'Ukrainian SR', table: 'Ukrainian SRs' },
+    ukrainian_sd: { legend: 'Ukrainian SD', table: 'Ukrainian SDs' },
+    zionist: { legend: 'Zionist', table: 'Zionists' },
+    polish: { legend: 'Polish Party', table: 'Polish Parties' },
+    agrarian: { legend: 'Agrarian Party', table: 'Agrarian Parties' },
+    bundist: { legend: 'Bundist', table: 'Bundists' }
+};
 
 // regions for multi-province elections
 window.mapRegions = {
@@ -2231,15 +2376,21 @@ window.mapRegions = {
         'yekaterinoslav', 'kherson', 'taurida']
 };
 
-// local parties by region. steal: party -> { national party: share of its support taken }
+// local parties by region. steals: stages applied in order; each stage is
+// { thief: { party: share of that party's support (at the start of the stage) } }
 window.mapLocalPolitics = {
     ukraine: {
         parties: ['ukrainian_sr', 'zionist', 'polish', 'ukrainian_sd', 'agrarian', 'bundist'],
-        steal: {
-            ukrainian_sr: { sr: 0.8, lsr: 0.6 },
-            agrarian: { sr: 0.1, lsr: 0.1, other: 0.5 },
-            ukrainian_sd: { left_m: 0.4, m: 0.4, right_m: 0.4, sdi: 0.4 }
-        }
+        steals: [
+            {
+                ukrainian_sr: { sr: 0.8, lsr: 0.6 },
+                agrarian: { sr: 0.1, lsr: 0.1, other: 0.5 },
+                ukrainian_sd: { sdi: 0.8, left_m: 0.9, m: 0.9, right_m: 0.9 }
+            },
+            {
+                ukrainian_sr: { ukrainian_sd: 0.7, b: 0.3 }
+            }
+        ]
     }
 };
 
@@ -2320,29 +2471,39 @@ window.mapElectionProvince = function(id, options) {
     var rural = ((p.classes.peasants || 0) + (p.classes.kulaks || 0)) / totalShare;
     urbanShare = 1 - rural;
 
+    // right_sr is part of sr until the two formally split
+    if (Q.right_sr_split !== 1 && support.right_sr !== undefined) {
+        support.sr += support.right_sr;
+        delete support.right_sr;
+    }
+
     // 2. excluded parties: their support goes to other
     ballot.excluded.forEach(function(x) {
-        support.other += support[x];
-        delete support[x];
+        if (support[x] !== undefined) {
+            support.other += support[x];
+            delete support[x];
+        }
     });
 
-    // 3. local parties take a share of national parties' support
+    // 3. local parties take a share of other parties' support, stage by stage
     if (lp) {
-        var original = {};
-        Object.keys(support).forEach(function(x) { original[x] = support[x]; });
-        var taken = {};
-        Object.keys(lp.steal).forEach(function(thief) {
-            Object.keys(lp.steal[thief]).forEach(function(from) {
-                if (original[from] === undefined) {
-                    return;
-                }
-                var amount = original[from] * lp.steal[thief][from];
-                support[thief] += amount;
-                taken[from] = (taken[from] || 0) + amount;
+        lp.steals.forEach(function(stage) {
+            var original = {};
+            Object.keys(support).forEach(function(x) { original[x] = support[x]; });
+            var taken = {};
+            Object.keys(stage).forEach(function(thief) {
+                Object.keys(stage[thief]).forEach(function(from) {
+                    if (original[from] === undefined) {
+                        return;
+                    }
+                    var amount = original[from] * stage[thief][from];
+                    support[thief] += amount;
+                    taken[from] = (taken[from] || 0) + amount;
+                });
             });
-        });
-        Object.keys(taken).forEach(function(from) {
-            support[from] = Math.max(0, support[from] - taken[from]);
+            Object.keys(taken).forEach(function(from) {
+                support[from] = Math.max(0, support[from] - taken[from]);
+            });
         });
     }
 
@@ -2454,6 +2615,24 @@ window.mapElection = function(provinces, options) {
     Q[key + '_provinces'] = taking;
     window.mapElectionLast = { result: result, weight: weightSum, provinces: perProvince };
     return result;
+};
+
+// rescale <party>_<key>_votes_dec to add up to 100 (after manual adjustments)
+window.mapElectionNormalize = function(key) {
+    var Q = engineQualities();
+    key = key || 'election';
+    var parties = Q[key + '_parties'] || [];
+    var total = 0;
+    parties.forEach(function(x) { total += Math.max(0, Q[x + '_' + key + '_votes_dec'] || 0); });
+    if (total <= 0) {
+        return;
+    }
+    parties.forEach(function(x) {
+        var v = Math.round(1000 * Math.max(0, Q[x + '_' + key + '_votes_dec'] || 0) / total) / 10;
+        Q[x + '_' + key + '_votes_dec'] = v;
+        Q[x + '_' + key + '_votes'] = Math.round(v);
+        Q[x + '_' + key + '_votes_disp'] = v.toFixed(1);
+    });
 };
 
 // older name, kept for existing events
