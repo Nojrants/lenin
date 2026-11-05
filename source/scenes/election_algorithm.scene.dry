@@ -538,3 +538,12 @@ go-to: jumpScene
 
 
 
+@soviet
+title: Soviet Election
+on-arrival: {! window.mapElection(Q.election_provinces, {type: 'soviet'}); !}
+go-to: jumpScene
+
+@general
+title: General Election
+on-arrival: {! window.mapElection(Q.election_provinces, {type: 'general'}); !}
+go-to: jumpScene
