@@ -1,6 +1,8 @@
 @ukraine_soviet_results
 title: Ukrainian Soviet Congress Elections
 new-page: true
+view-if: year = 1917 and month = 11
+tags: event
 on-arrival: {!
 // provinces to include: a region name from window.mapRegions, or a list of province ids
 window.mapSovietElection('ukraine', 'ukraine_soviet');
