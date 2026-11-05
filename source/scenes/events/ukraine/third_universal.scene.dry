@@ -17,7 +17,7 @@ The Universal also declares the inalienability of civil liberties in the country
 - @ignore
 
 @respect
-title: We will cooperate with the new government and participate in the scheduled elections. 
+title: We will cooperate with the new government and participate in the elections. 
 on-arrival: {!
   Q.ca_support_timer += 1;
   Q.upr_relation += 5; 
