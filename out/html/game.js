@@ -596,6 +596,62 @@ window.mapUrbanProvinces = ['petrograd', 'moscow', 'kyiv', 'kharkov',
 window.mapBattleDevastation = 5;
 window.mapDevastationDecay = 1;
 
+
+// demographics and soviets
+window.mapClassOrder = ['elites', 'middle', 'clergy', 'workers', 'peasants',
+    'kulaks', 'soldiers', 'intelligentsia', 'underclass', 'students'];
+
+// class shares (relative weights) and population weight by type of province
+var MAP_ARCHETYPES = {
+    rural: { pop: 1, classes: { elites: 1, middle: 3, clergy: 0.6, workers: 2,
+        peasants: 78, kulaks: 6, soldiers: 5, intelligentsia: 1, underclass: 3, students: 0.2 } },
+    sparse: { pop: 0.4, classes: { elites: 0.5, middle: 2, clergy: 0.4, workers: 1,
+        peasants: 85, kulaks: 5, soldiers: 3, intelligentsia: 0.5, underclass: 2.5, students: 0.1 } },
+    front: { pop: 1, classes: { elites: 1, middle: 3, clergy: 0.5, workers: 2,
+        peasants: 62, kulaks: 4, soldiers: 20, intelligentsia: 1, underclass: 3, students: 0.2 } },
+    urban: { pop: 2, classes: { elites: 3, middle: 12, clergy: 0.6, workers: 25,
+        peasants: 25, kulaks: 2, soldiers: 12, intelligentsia: 5, underclass: 13, students: 1.4 } },
+    capital: { pop: 5, classes: { elites: 4, middle: 15, clergy: 0.5, workers: 30,
+        peasants: 4, kulaks: 0.5, soldiers: 20, intelligentsia: 6, underclass: 17, students: 3 } }
+};
+var MAP_SPARSE = ['arkhangelsk', 'murmansk', 'karelia', 'vologda', 'uralsk',
+    'transcaspian', 'turgai', 'khiva', 'syr_darya', 'tobolsk', 'bukhara',
+    'akmolinsk', 'samarkhand', 'ferghana', 'semipalatinsk', 'siberia',
+    'semirechye', 'tomsk'];
+var MAP_FRONT = ['pskov', 'vitebsk', 'minsk', 'mogilev', 'smolensk', 'volhynia',
+    'podolia', 'bessarabia', 'vilna', 'grodno', 'lithuania', 'estonia'];
+var MAP_URBAN_EXTRA = ['kazan', 'yekaterinburg', 'samara', 'minsk', 'vilna', 'estonia'];
+
+// starting soviet power: only the larger cities, mostly in European Russia
+var MAP_SOVIET_START = { petrograd: 90, moscow: 85, nizhny: 45, tver: 45,
+    tula: 40, yaroslavl: 40, vladimir: 45, saratov: 40, kharkov: 45, kyiv: 40,
+    yekaterinoslav: 45, latvia: 45, kazan: 35, samara: 35, yekaterinburg: 40,
+    minsk: 40, kherson: 35, ufa: 20 };
+
+Object.keys(window.mapProvinces).forEach(function(id) {
+    var p = window.mapProvinces[id];
+    var type = id === 'petrograd' || id === 'moscow' ? 'capital' :
+        window.mapUrbanProvinces.indexOf(id) !== -1 ||
+            MAP_URBAN_EXTRA.indexOf(id) !== -1 ? 'urban' :
+        MAP_SPARSE.indexOf(id) !== -1 ? 'sparse' :
+        MAP_FRONT.indexOf(id) !== -1 ? 'front' : 'rural';
+    var a = MAP_ARCHETYPES[type];
+    p.pop = a.pop;
+    p.classes = {};
+    window.mapClassOrder.forEach(function(c) {
+        p.classes[c] = a.classes[c];
+    });
+    p.soviet_power = MAP_SOVIET_START[id] !== undefined ? MAP_SOVIET_START[id] :
+        type === 'sparse' ? 3 : type === 'front' ? 20 : 10;
+    p.election_control = 0;
+    p.startDemo = demoSnapshot(p);
+});
+
+function demoSnapshot(p) {
+    return JSON.stringify({ pop: p.pop, classes: p.classes,
+        soviet_power: p.soviet_power, election_control: p.election_control });
+}
+
 window.mapSupplyLimit = function(id) {
     var p = window.mapProvinces[id];
     if (!p) {
@@ -1071,6 +1127,15 @@ window.saveMapState = function() {
     q.map_wars = JSON.stringify(window.mapWarOverrides);
     q.map_stats = JSON.stringify(window.mapStatOverrides);
     q.map_divisions = JSON.stringify(positions);
+    var demo = {};
+    Object.keys(window.mapProvinces).forEach(function(id) {
+        var p = window.mapProvinces[id];
+        if (demoSnapshot(p) !== p.startDemo) {
+            demo[id] = { pop: p.pop, classes: p.classes,
+                soviet_power: p.soviet_power, election_control: p.election_control };
+        }
+    });
+    q.map_demo = JSON.stringify(demo);
     q.map_control = JSON.stringify(control);
     q.map_battles = JSON.stringify(window.mapBattles);
     q.map_report = JSON.stringify(window.mapReport);
@@ -1092,6 +1157,9 @@ function syncMapQualities(q) {
         q['map_control_' + id] = p.controller === 'none' ? 0 : p.control;
         q['map_devast_' + id] = p.devastation || 0;
         q['map_supply_' + id] = Math.round(window.mapSupplyLimit(id) * 10) / 10;
+        q['map_pop_' + id] = p.pop;
+        q['map_sovpower_' + id] = p.soviet_power;
+        q['map_elecctl_' + id] = p.election_control;
         q['map_div_' + id] = here.length;
         q['map_mydiv_' + id] = mine;
         heldTotal += held;
@@ -1171,6 +1239,16 @@ window.loadMapState = function() {
         p.controller = saved ? saved[0] : p.startController;
         p.control = saved ? saved[1] : p.startControl;
         p.devastation = saved && saved[2] ? saved[2] : 0;
+    });
+
+    var demo = readJson(q.map_demo, {});
+    Object.keys(window.mapProvinces).forEach(function(id) {
+        var p = window.mapProvinces[id];
+        var d = demo[id] || JSON.parse(p.startDemo);
+        p.pop = d.pop;
+        p.classes = d.classes;
+        p.soviet_power = d.soviet_power;
+        p.election_control = d.election_control;
     });
 
     var battles = readJson(q.map_battles, []);
@@ -2075,6 +2153,163 @@ window.mapSetControl = function(id, control) {
         window.mapProvinces[id].control = clampControl(control);
         return true;
     });
+};
+
+// province demographics, soviet power and election control (events)
+function demoSetter(name, apply) {
+    window[name] = function(id) {
+        if (!knownProvince(id, name)) {
+            return false;
+        }
+        var args = Array.prototype.slice.call(arguments, 1);
+        return editMapState(function() {
+            apply.apply(null, [window.mapProvinces[id]].concat(args));
+            return true;
+        });
+    };
+}
+demoSetter('mapSetPop', function(p, v) { p.pop = Math.max(0, Number(v)); });
+demoSetter('mapAddPop', function(p, d) { p.pop = Math.max(0, p.pop + Number(d)); });
+demoSetter('mapScalePop', function(p, f) { p.pop = Math.max(0, p.pop * Number(f)); });
+demoSetter('mapSetClassShare', function(p, c, v) { p.classes[c] = Math.max(0, Number(v)); });
+demoSetter('mapAddClassShare', function(p, c, d) {
+    p.classes[c] = Math.max(0, (p.classes[c] || 0) + Number(d));
+});
+demoSetter('mapSetSovietPower', function(p, v) { p.soviet_power = clampControl(v); });
+demoSetter('mapAddSovietPower', function(p, d) {
+    p.soviet_power = clampControl(p.soviet_power + Number(d));
+});
+demoSetter('mapSetElectionControl', function(p, v) { p.election_control = clampControl(v); });
+demoSetter('mapAddElectionControl', function(p, d) {
+    p.election_control = clampControl(p.election_control + Number(d));
+});
+
+// soviet elections
+// groups that vote at each level of soviet_class_participation
+window.mapSovietClasses = function(level) {
+    var l = Math.max(1, Math.min(4, Math.floor(level) || 1));
+    if (l === 1) {
+        return ['workers', 'soldiers'];
+    }
+    if (l === 2) {
+        return ['workers', 'soldiers', 'peasants', 'kulaks'];
+    }
+    if (l === 3) {
+        return window.mapClassOrder.filter(function(c) {
+            return c !== 'clergy' && c !== 'elites';
+        });
+    }
+    return window.mapClassOrder.slice();
+};
+
+// parties that benefit from election control, and how fast the rest are suppressed
+window.sovietFavoured = ['b'];
+window.sovietRiggingExponent = 1.5;
+
+// regions for multi-province elections
+window.mapRegions = {
+    ukraine: ['volhynia', 'podolia', 'kyiv', 'chernigov', 'poltava', 'kharkov',
+        'yekaterinoslav', 'kherson', 'taurida']
+};
+
+// one province: returns { shares: {party: 0-1}, weight, classes }
+window.mapSovietProvince = function(id, options) {
+    var Q = engineQualities();
+    var p = window.mapProvinces[id];
+    options = options || {};
+    var level = options.participation !== undefined ? options.participation :
+        (Q.soviet_class_participation || 1);
+    var classes = window.mapSovietClasses(level);
+    var parties = options.parties || Q.parties.filter(function(x) { return x !== 'none'; });
+
+    var totalShare = 0;
+    window.mapClassOrder.forEach(function(c) { totalShare += p.classes[c] || 0; });
+    if (totalShare <= 0) {
+        totalShare = 1;
+    }
+
+    var support = {};
+    parties.forEach(function(x) { support[x] = 0; });
+    var allowedShare = 0;
+    classes.forEach(function(c) {
+        var share = (p.classes[c] || 0) / totalShare;
+        var votes = 0;
+        parties.forEach(function(x) { votes += Math.max(0, Q[c + '_' + x] || 0); });
+        if (votes <= 0 || share <= 0) {
+            return;
+        }
+        allowedShare += share;
+        parties.forEach(function(x) {
+            support[x] += share * 100 * Math.max(0, Q[c + '_' + x] || 0) / votes;
+        });
+    });
+
+    // election control suppresses everyone but the favoured parties
+    var control = Math.max(0, Math.min(1, p.election_control / 100));
+    var suppression = Math.pow(1 - control, window.sovietRiggingExponent);
+    var total = 0;
+    parties.forEach(function(x) {
+        if (window.sovietFavoured.indexOf(x) === -1) {
+            support[x] *= suppression;
+        }
+        total += support[x];
+    });
+    var shares = {};
+    parties.forEach(function(x) {
+        shares[x] = total > 0 ? support[x] / total : 0;
+    });
+
+    // how many people take part: population, voting classes, soviet power
+    var weight = total > 0 ? p.pop * allowedShare * p.soviet_power / 100 : 0;
+    return { shares: shares, weight: weight, classes: classes };
+};
+
+// one or more provinces: returns { party: percent }; writes <party>_<key>_votes_dec etc.
+window.mapSovietElection = function(provinces, key, options) {
+    var Q = engineQualities();
+    window.loadMapState();
+    if (typeof provinces === 'string') {
+        provinces = window.mapRegions[provinces] || [provinces];
+    }
+    options = options || {};
+    var parties = options.parties || Q.parties.filter(function(x) { return x !== 'none'; });
+    var totals = {};
+    parties.forEach(function(x) { totals[x] = 0; });
+    var weightSum = 0;
+    var taking = 0;
+    var perProvince = {};
+
+    provinces.forEach(function(id) {
+        if (!window.mapProvinces[id]) {
+            console.warn('mapSovietElection: unknown province "' + id + '"');
+            return;
+        }
+        var r = window.mapSovietProvince(id, options);
+        perProvince[id] = r;
+        weightSum += r.weight;
+        if (r.weight > 0) {
+            taking++;
+        }
+        parties.forEach(function(x) { totals[x] += r.weight * r.shares[x]; });
+    });
+
+    var result = {};
+    parties.forEach(function(x) {
+        var fraction = weightSum > 0 ? totals[x] / weightSum : 0;
+        result[x] = Math.round(fraction * 1000) / 10;
+        if (key) {
+            Q[x + '_' + key + '_normalized'] = fraction;
+            Q[x + '_' + key + '_votes_dec'] = result[x];
+            Q[x + '_' + key + '_votes'] = Math.round(fraction * 100);
+            Q[x + '_' + key + '_votes_disp'] = result[x].toFixed(1);
+        }
+    });
+    if (key) {
+        Q[key + '_participants'] = Math.round(weightSum * 100) / 100;
+        Q[key + '_provinces'] = taking;
+    }
+    window.mapSovietLast = { result: result, weight: weightSum, provinces: perProvince };
+    return result;
 };
 
 // order an attack: mapOrderAttack(faction, from, to, [count])
