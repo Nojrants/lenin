@@ -16,26 +16,25 @@ set-jump: election_results
 @election_results
 new-page: true
 on-arrival: {!
+// manual adjustments can go here, e.g.
+// Q.b_election_votes_dec -= 10; Q.sr_election_votes_dec += 10;
+window.mapElectionNormalize();
+
 if (typeof Q.election_seat_total != 'number' || Q.election_seat_total <= 0) {
-    Q.election_seat_total = 500;
+    Q.election_seat_total = 1000;
 }
 for (var party of Q.election_parties) {
     Q[party + '_election_r'] = Math.round(Q.election_seat_total * (Q[party + '_election_votes_dec'] || 0) / 100);
 }
 !}
 on-display: {!
-var names = {
-    anarchist: "Anarchist", maximalist: "Maximalist", b: "Bolshevik", sdi: "SD-Internationalist",
-    left_m: "Left Menshevik", m: "Menshevik", right_m: "Right Menshevik", lsr: "Left SR",
-    sr: "SR", right_sr: "Right SR", popular_socialist: "Popular Socialist", k: "Kadet",
-    rightist: "Rightist", other: "Others", ukrainian_sr: "Ukrainian SR", zionist: "Zionist",
-    polish: "Polish", ukrainian_sd: "Ukrainian SD", agrarian: "Agrarian", bundist: "Bundist"
-};
 var data = [];
 var rows = '<tr><th>Party</th><th>Vote Share</th></tr>';
 for (var party of Q.election_parties) {
-    data.push({"id": party, "legend": names[party], "name": names[party], "seats": Q[party + '_election_r']});
-    rows += '<tr><td><div class="party-box box ' + party + '"></div>' + names[party] + '</td><td>' + (Q[party + '_election_votes_dec'] || 0) + '%</td></tr>';
+    var label = window.electionNames[party];
+    var box = label.box || party;
+    data.push({"id": party, "legend": label.legend, "name": label.legend, "seats": Q[party + '_election_r']});
+    rows += '<tr><td><div class="party-box box ' + box + '"></div>' + label.table + '</td><td>' + (Q[party + '_election_votes_dec'] || 0) + '%</td></tr>';
 }
 data.forEach(function(d) {
     if (!Number.isFinite(d.seats)) {
@@ -45,12 +44,12 @@ data.forEach(function(d) {
 document.getElementById("election_table").innerHTML = rows;
 if (window && d3) {
     var width = 625;
-    var height = 500;
+    var height = 625;
     var screenWidth = document.getElementById('content').offsetWidth;
     if (screenWidth < width - 50) {
         width = screenWidth - 50;
         height = width;
-        document.getElementById("election_chart").style.height = screenWidth/2 + "px";
+        document.getElementById("election_chart").style.height = width + "px";
     }
     var parliament = d3.parliament();
     parliament.width(width).height(height).innerRadiusCoef(0.4);
@@ -67,4 +66,5 @@ if (window && d3) {
 {!<table id="election_table" class="soviet-table"></table>!}
 
 - @root: Continue
+
 
