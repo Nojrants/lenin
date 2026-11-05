@@ -3,18 +3,24 @@ title: Ukrainian Soviet Congress Elections
 new-page: true
 view-if: year = 1917 and month = 11
 tags: event
-on-arrival: {!
-// provinces to include: a region name from window.mapRegions, or a list of province ids
-window.mapSovietElection('ukraine', 'ukraine_soviet');
 
-if (typeof Q.soviet_seat_total != 'number' || Q.soviet_seat_total <= 0) {
-    Q.soviet_seat_total = 500;
+= Ukrainian Soviet Elections
+
+- @proceed_election : Await the results...
+
+@proceed_election
+on-arrival: {! Q.election_provinces = 'ukraine'; !}
+go-to: election_algorithm.soviet
+set-jump: election_results
+
+@election_results
+new-page: true
+on-arrival: {!
+if (typeof Q.election_seat_total != 'number' || Q.election_seat_total <= 0) {
+    Q.election_seat_total = 500;
 }
-for (var party of Q.parties) {
-    if (party == "none") {
-        continue;
-    }
-    Q[party + '_ukraine_soviet_r'] = Math.round(Q.soviet_seat_total * (Q[party + '_ukraine_soviet_votes_dec'] || 0) / 100);
+for (var party of Q.election_parties) {
+    Q[party + '_election_r'] = Math.round(Q.election_seat_total * (Q[party + '_election_votes_dec'] || 0) / 100);
 }
 !}
 on-display: {!
@@ -22,23 +28,21 @@ var names = {
     anarchist: "Anarchist", maximalist: "Maximalist", b: "Bolshevik", sdi: "SD-Internationalist",
     left_m: "Left Menshevik", m: "Menshevik", right_m: "Right Menshevik", lsr: "Left SR",
     sr: "SR", right_sr: "Right SR", popular_socialist: "Popular Socialist", k: "Kadet",
-    rightist: "Rightist", other: "Others"
+    rightist: "Rightist", other: "Others", ukrainian_sr: "Ukrainian SR", zionist: "Zionist",
+    polish: "Polish", ukrainian_sd: "Ukrainian SD", agrarian: "Agrarian", bundist: "Bundist"
 };
 var data = [];
 var rows = '<tr><th>Party</th><th>Vote Share</th></tr>';
-for (var party of Q.parties) {
-    if (party == "none") {
-        continue;
-    }
-    data.push({"id": party, "legend": names[party], "name": names[party], "seats": Q[party + '_ukraine_soviet_r']});
-    rows += '<tr><td><div class="party-box box ' + party + '"></div>' + names[party] + '</td><td>' + (Q[party + '_ukraine_soviet_votes_dec'] || 0) + '%</td></tr>';
+for (var party of Q.election_parties) {
+    data.push({"id": party, "legend": names[party], "name": names[party], "seats": Q[party + '_election_r']});
+    rows += '<tr><td><div class="party-box box ' + party + '"></div>' + names[party] + '</td><td>' + (Q[party + '_election_votes_dec'] || 0) + '%</td></tr>';
 }
 data.forEach(function(d) {
     if (!Number.isFinite(d.seats)) {
         console.error("BAD SEAT VALUE", d.id, d.seats);
     }
 });
-document.getElementById("ukraine_soviet_table").innerHTML = rows;
+document.getElementById("election_table").innerHTML = rows;
 if (window && d3) {
     var width = 625;
     var height = 500;
@@ -46,20 +50,21 @@ if (window && d3) {
     if (screenWidth < width - 50) {
         width = screenWidth - 50;
         height = width;
-        document.getElementById("ukraine_soviet_chart").style.height = screenWidth/2 + "px";
+        document.getElementById("election_chart").style.height = screenWidth/2 + "px";
     }
     var parliament = d3.parliament();
     parliament.width(width).height(height).innerRadiusCoef(0.4);
     parliament.enter.fromCenter(true).smallToBig(true);
     parliament.exit.toCenter(false).bigToSmall(true);
-    d3.select("#ukraine_soviet_chart").datum(data).call(parliament);
+    d3.select("#election_chart").datum(data).call(parliament);
 }
 !}
 
-= Ukrainian Soviet Congress Results
+= Election Results
 
-{!<svg id="ukraine_soviet_chart" viewBox="0 0 625 310"> </svg>!}
+{!<svg id="election_chart" viewBox="0 0 625 310"> </svg>!}
 
-{!<table id="ukraine_soviet_table" class="soviet-table"></table>!}
+{!<table id="election_table" class="soviet-table"></table>!}
 
 - @root: Continue
+
