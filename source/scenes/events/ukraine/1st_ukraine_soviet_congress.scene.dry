@@ -1,0 +1,136 @@
+@ukraine_soviet_results
+title: All-Ukrainian Congress of Soviets
+new-page: true
+view-if: ukrainian_ca_timer = 0 and ukrainian_congresses = 0 
+tags: event
+
+= Ukrainian Soviet Elections
+
+Delegates are gathering for the All-Ukrainian Congress of Soviets. However, there appears to be a major problem regarding the congress composition. The other parties have participated in force, leading to a less than favorable outcome in the election results to begin with. Then, while the Ukrainian Bolsheviks had pushed for "delegation quotas", in the hopes of creating a manageable majority at the congress, it appears many soviets have openly disregarded this. At the instigation of the other parties, soviets have flooded the congress with additional delegates, and in particular, peasant and soldier organizations have been urged to send as many delegates as possible. 
+
+- @proceed_election : How bad could it be? 
+
+@proceed_election
+on-arrival: {! Q.election_provinces = 'ukraine'; !}
+go-to: election_algorithm.soviet
+set-jump: election_results
+
+@election_results
+new-page: true
+on-arrival: {!
+
+Q.ukrainian_congresses += 1;
+Q.ukrainian_ca_timer = 36; 
+
+Q.anarchist_election_votes_dec += 0.3;
+Q.maximalist_election_votes_dec += 0.5;
+Q.b_election_votes_dec -= 25.4;
+Q.sdi_election_votes_dec -= 1.2;
+Q.right_m_election_votes_dec -= 0.1;
+Q.ukrainian_sd_election_votes_dec -= 3;
+Q.bundist_election_votes_dec -= 1.5;
+Q.lsr_election_votes_dec -= 0.2;
+Q.sr_election_votes_dec -= 0.5; 
+Q.ukrainian_sr_election_votes_dec -= 5;
+Q.popular_socialist_election_votes_dec -= 0.5; 
+Q.agrarian_election_votes_dec += 20.4;
+Q.other_election_votes_dec += 16.2;
+
+Q.coalition1 = Math.round(100*(Q.anarchist_election_votes_dec + Q.maximalist_election_votes_dec + Q.b_election_votes_dec + Q.lsr_election_votes_dec + (Q.other * 0.1)))/100;
+Q.coalition2 = Math.round(100*((Q.maximalist_election_votes_dec * 0.75) + Q.ukrainian_sd_election_votes_dec + Q.bundist_election_votes_dec + (Q.lsr_election_votes_dec * 0.75) + Q.sr_election_votes_dec + Q.ukrainian_sr_election_votes_dec + Q.popular_socialist_election_votes_dec + Q.agrarian_election_votes_dec + Q.other_election_votes_dec))/100;
+
+Q.coalition3 = Math.round(100*((Q.anarchist_election_votes_dec * 0.5) + (Q.maximalist_election_votes_dec*0.3) + Q.b_election_votes_dec + Q.lsr_election_votes_dec + (Q.other * 0.3)))/100;
+
+
+window.mapElectionNormalize();
+
+if (typeof Q.election_seat_total != 'number' || Q.election_seat_total <= 0) {
+    Q.election_seat_total = 2420;
+}
+for (var party of Q.election_parties) {
+    Q[party + '_election_r'] = Math.round(Q.election_seat_total * (Q[party + '_election_votes_dec'] || 0) / 100);
+}
+!}
+on-display: {!
+var data = [];
+var rows = '<tr><th>Party</th><th>Vote Share</th></tr>';
+for (var party of Q.election_parties) {
+    var label = window.electionNames[party];
+    var box = label.box || party;
+    data.push({"id": party, "legend": label.legend, "name": label.legend, "seats": Q[party + '_election_r']});
+    rows += '<tr><td><div class="party-box box ' + box + '"></div>' + label.table + '</td><td>' + (Q[party + '_election_votes_dec'] || 0) + '%</td></tr>';
+}
+data.forEach(function(d) {
+    if (!Number.isFinite(d.seats)) {
+        console.error("BAD SEAT VALUE", d.id, d.seats);
+    }
+});
+document.getElementById("election_table").innerHTML = rows;
+if (window && d3) {
+    var width = 625;
+    var height = 625;
+    var screenWidth = document.getElementById('content').offsetWidth;
+    if (screenWidth < width - 50) {
+        width = screenWidth - 50;
+        height = width;
+        document.getElementById("election_chart").style.height = width + "px";
+    }
+    var parliament = d3.parliament();
+    parliament.width(width).height(height).innerRadiusCoef(0.4);
+    parliament.enter.fromCenter(true).smallToBig(true);
+    parliament.exit.toCenter(false).bigToSmall(true);
+    d3.select("#election_chart").datum(data).call(parliament);
+}
+!}
+
+= Election Results
+
+{!<svg id="election_chart" viewBox="0 0 625 310"> </svg>!}
+
+{!<table id="election_table" class="soviet-table"></table>!}
+
+It turns out, vastly more people than expected have attended the congress, and we're in a significant minority. We'll have to choose our actions very carefully here...
+
+- @bolshevik_coalition
+- @agrarian_coalition
+
+
+@bolshevik_coalition
+title: [+ coalition1 +]% — Can we form a pro-Bolshevik congress presidium? 
+choose-if: coalition1 > 50
+unavailable_subtitle: The proposal is drowned out by the booing of the mob. 
+
+@agrarian_coalition
+title: [+ coalition2 +]% — The Ukrainian nationalist and agrarian parties dominate!
+subtitle: The presidium is controlled by the <span style="color: var(--usr); font-weight: bold;">USRs</span>, <span style="color: var(--sr); font-weight: bold;">SRs</span>, <span style="color: var(--agrarian); font-weight: bold;">Agrarians</span>, and others. 
+choose-if: coalition2 > 50
+go-to: congress_events
+
+
+@congress_events
+new-page: true
+
+With the presidium in the hands of pro-Central Rada forces, our delegates struggle to get a word in. The congress descends into chaotic debate, although it's clear that the assembly generally leans in favor of the Kyiv government and against Bolshevik control.
+
+- @conference
+- @agrarian_agenda
+
+@conference
+title: Due to the delegation irregularities, let's push to have the congress reclassified as a non-binding "conference". We can then hold new elections and hopefully undo the damage of the current assembly. 
+unavailable_subtitle: [+ coalition3 +]% — We lack the strength for this. 
+choose-if: coalition3 > 50
+
+@agrarian_agenda
+title: The majority proceeds with their agenda...
+
+The Congress votes to affirm the previous universals of the Central Rada, placing its full weight behind the actions of the incumbent government, and approving their harsh response to Bolshevik forces. It seems our strategy has backfired, as now the Central Rada can point to an official sanction from the soviets for its actions. 
+
+- @walkout
+
+@walkout
+title: All we can do now is walk-out and refuse to recognize this illegitimate assembly! 
+go-to: root
+
+
+
+
