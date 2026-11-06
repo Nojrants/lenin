@@ -1,46 +1,57 @@
-title: War in Ukraine 
+title: Declaration of War
 new-page: true
 max-visits: 1
 tags: event
+view-if: ukraine_manifesto = 1
+
+= Situation in Ukraine
+
+We have tried to reason with the Ukrainian government, but with our ultimatum having been rejected, and with the Central Rada continuing to crack down against Bolshevik militias in the country, we are left with little choice but to invade. 
+
+Ukrainian Bolsheviks in the major cities are standing by, ready to launch urban uprisings at our signal. In particular, forces are ready to arrest counterrevolutionary officials in Kharkiv and secure the city as a provisional capital of Soviet Ukraine. Red Guards, primarily from the Donbas and neighboring provinces, are in position to launch a full-scale invasion. 
+
+- @launch
+
+@launch
+title: Launch the invasion! 
+go-to: map
 on-arrival: {!
-var prep = Number(Q.ukraine_preparations || 0);
+    upr_relation -= 50; 
+    var prep = Number(Q.ukraine_preparations || 0);
+    window.mapSetWar('bolsheviks', 'upr');
 
-window.mapSetWar('bolsheviks', 'upr');
-
-// Bolshevik offensive
-window.mapAttackNow([
-    {faction: 'bolsheviks', from: 'minsk', to: 'chernigov', fraction: 0.5},
-    {faction: 'bolsheviks', from: 'mogilev', to: 'chernigov', fraction: 0.5},
-    {faction: 'bolsheviks', from: 'kursk', to: 'kharkov'}
-]);
-
-// UPR redeploys
-var quarter = function(province, faction) { return Math.round(window.mapDivisionCount(province, faction) / 4); };
-window.mapMoveDivisions('upr', 'podolia', 'poltava', quarter('podolia', 'upr'));
-window.mapMoveDivisions('upr', 'bessarabia', 'kherson', quarter('bessarabia', 'upr'));
-
-// uprisings weaken the UPR relative to Bolshevik preparations
-window.mapAddControl('kyiv', -5 * (1 + prep));
-window.mapAddControl('kherson', -10 * (1 + prep));
-window.mapAddControl('taurida', -10 * (1 + prep));
-
-// Yekaterinoslav
-if (window.mapControl('yekaterinoslav') > 50) {
-    window.mapSetControl('yekaterinoslav', 50);
-}
-if (prep > 4) {
-    window.mapSetController('yekaterinoslav', 'bolsheviks', 50);
-    window.mapAddDivisions('yekaterinoslav', 'bolsheviks', prep);
-}
-
-// reinforcements from preparations
-if (prep >= 2 && window.mapController('kharkov') == 'bolsheviks') {
-    window.mapAddDivisions('kharkov', 'bolsheviks', prep);
-}
-if (prep > 0) {
-    window.mapAddDivisions('voronezh', 'bolsheviks', Math.round(prep / 2));
+    // Bolshevik offensive
+    window.mapAttackNow([
+        {faction: 'bolsheviks', from: 'minsk', to: 'chernigov', fraction: 0.5},
+        {faction: 'bolsheviks', from: 'mogilev', to: 'chernigov', fraction: 0.5},
+        {faction: 'bolsheviks', from: 'kursk', to: 'kharkov'}
+    ]);
+    
+    // UPR redeploys
+    var quarter = function(province, faction) { return Math.round(window.mapDivisionCount(province, faction) / 4); };
+    window.mapMoveDivisions('upr', 'podolia', 'poltava', quarter('podolia', 'upr'));
+    window.mapMoveDivisions('upr', 'bessarabia', 'kherson', quarter('bessarabia', 'upr'));
+    
+    // uprisings weaken the UPR relative to Bolshevik preparations
+    window.mapAddControl('kyiv', -5 * (1 + prep));
+    window.mapAddControl('kherson', -10 * (1 + prep));
+    window.mapAddControl('taurida', -10 * (1 + prep));
+    
+    // Yekaterinoslav
+    if (window.mapControl('yekaterinoslav') > 50) {
+        window.mapSetControl('yekaterinoslav', 50);
+    }
+    if (prep > 4) {
+        window.mapSetController('yekaterinoslav', 'bolsheviks', 50);
+        window.mapAddDivisions('yekaterinoslav', 'bolsheviks', prep);
+    }
+    
+    // reinforcements from preparations
+    if (prep >= 2 && window.mapController('kharkov') == 'bolsheviks') {
+        window.mapAddDivisions('kharkov', 'bolsheviks', prep);
+    }
+    if (prep > 0) {
+        window.mapAddDivisions('voronezh', 'bolsheviks', Math.round(prep / 2));
 }
 !}
 
-
-- @root: Continue
