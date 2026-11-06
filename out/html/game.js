@@ -516,6 +516,10 @@ window.mapPartyColors = {
     don: '--cossack',
     greens: '#1f9d6b',
     moldavia: '#d4b72c',
+    transcaucasia: '#8a5a9e',
+    georgia: '#c0392b',
+    azerbaijan: '#3f9c5a',
+    armenia: '#e07b39',
     whites: '#d9d3bf',
     none: '--none'
 };
@@ -536,6 +540,10 @@ window.mapPartyNames = {
     don: 'Don Cossacks',
     greens: 'Greens',
     moldavia: 'Moldavian Democratic Republic',
+    transcaucasia: 'Transcaucasian Democratic Federative Republic',
+    georgia: 'Democratic Republic of Georgia',
+    azerbaijan: 'Azerbaijan Democratic Republic',
+    armenia: 'Republic of Armenia',
     whites: 'White Army',
     none: 'Uncontrolled'
 };
@@ -858,6 +866,24 @@ window.mapDefaultPeace = [
     ['bolsheviks', 'moldavia'],
     ['upr', 'moldavia'],
     ['germany', 'moldavia'],
+    ['bolsheviks', 'transcaucasia'],
+    ['bolsheviks', 'georgia'],
+    ['bolsheviks', 'azerbaijan'],
+    ['bolsheviks', 'armenia'],
+    ['germany', 'transcaucasia'],
+    ['germany', 'georgia'],
+    ['germany', 'azerbaijan'],
+    ['germany', 'armenia'],
+    ['upr', 'transcaucasia'],
+    ['upr', 'georgia'],
+    ['upr', 'azerbaijan'],
+    ['upr', 'armenia'],
+    ['transcaucasia', 'georgia'],
+    ['transcaucasia', 'azerbaijan'],
+    ['transcaucasia', 'armenia'],
+    ['georgia', 'azerbaijan'],
+    ['georgia', 'armenia'],
+    ['azerbaijan', 'armenia'],
     ['germany', 'finland']
 ];
 window.mapWarOverrides = {};
