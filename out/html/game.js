@@ -2392,7 +2392,7 @@ window.sovietRiggingExponent = 1.5;
 // left-to-right order of parties in charts and tables
 window.electionChartOrder = ['anarchist', 'maximalist', 'b', 'sdi', 'left_m', 'm',
     'right_m', 'socialist_federalist', 'dashnak', 'ukrainian_sd', 'bundist', 'lsr', 'sr',
-    'right_sr', 'ukrainian_sr', 'muslim_sd', 'musavat', 'muslim_socialist', 'ittihad',
+    'right_sr', 'ukrainian_sr', 'muslim_sd', 'muslim_socialist', 'ittihad', 'musavat',
     'national_democrat', 'armenian_populist', 'popular_socialist', 'agrarian', 'polish',
     'zionist', 'k', 'rightist', 'other'];
 
@@ -2453,24 +2453,28 @@ window.mapLocalPolitics = {
     },
     transcaucasia: {
         parties: ['socialist_federalist', 'dashnak', 'muslim_sd', 'musavat', 'muslim_socialist',
-            'ittihad', 'national_democrat', 'armenian_populist', 'zionist'],
+            'ittihad', 'national_democrat', 'armenian_populist', 'agrarian', 'zionist'],
         // national parties not on the ballot here: their support goes to other
-        excluded: ['sdi', 'lsr', 'anarchist', 'maximalist', 'popular_socialist'],
+        excluded: ['sdi', 'anarchist', 'maximalist', 'popular_socialist'],
+        // national parties folded into another before local parties act
+        merge: { lsr: 'sr' },
         steals: [
             {
-                dashnak: { sr: 0.15, other: 0.1 },
-                armenian_populist: { k: 0.6, rightist: 0.5 }
+                dashnak: { sr: 0.1, other: 0.1 },
+                armenian_populist: { k: 0.6, rightist: 0.5 },
+                agrarian: { sr: 0.05, other: 0.2 }
             }
         ],
-        // stages applied only in one province, after the regional ones
+        // stages applied only in one province, after the regional ones.
+        // 'mensheviks' stands for the three Menshevik wings (see mapWingBase)
         provinceSteals: {
             georgia: [{
-                m: { sr: 0.35, b: 0.35, left_m: 0.6, right_m: 0.6 },
-                socialist_federalist: { sr: 0.4, other: 0.3 },
+                mensheviks: { sr: 0.85 },
+                socialist_federalist: { sr: 0.1, other: 0.3 },
                 national_democrat: { k: 0.6, rightist: 0.5, other: 0.3 }
             }],
             armenia: [{
-                dashnak: { sr: 0.4, b: 0.1, other: 0.2 }
+                dashnak: { sr: 0.3, b: 0.05, other: 0.15 }
             }],
             kars: [{
                 socialist_federalist: { sr: 0.3 },
@@ -2486,18 +2490,24 @@ window.mapLocalPolitics = {
     }
 };
 
+// Menshevik wings: base split (left : centre : right) and the quality holding each strength.
+// Each wing's weight is base * (its strength / average strength of the wings).
+window.mapWingBase = { left_m: 1, m: 2, right_m: 2 };
+window.mapWingStrength = { left_m: 'left_m_strength', m: 'm_strength', right_m: 'right_m_strength' };
+
 // minorities (percent of a province) and the local parties they vote for
 window.mapMinorityParties = {
     jews: ['zionist', 'bundist'],
     poles: ['polish'],
     muslims: ['musavat', 'muslim_socialist', 'ittihad', 'muslim_sd'],
-    armenians: ['dashnak', 'armenian_populist']
+    armenians: ['dashnak', 'armenian_populist'],
+    georgians: ['left_m', 'm', 'right_m']
 };
 window.mapMinorityNationalShare = 0.5;    // share of a minority voting for its own parties
-window.mapMinorityShare = { muslims: 0.85, armenians: 0.85 };    // per-minority override
+window.mapMinorityShare = { muslims: 0.85, armenians: 0.8, georgians: 1 };    // per-minority override
 // relative weight of a party among the parties of one minority (default 1)
 window.mapMinorityPartyWeight = { musavat: 3, muslim_socialist: 1.5, ittihad: 1.2,
-    muslim_sd: 1, dashnak: 4, armenian_populist: 1 };
+    muslim_sd: 1, dashnak: 5, armenian_populist: 1 };
 window.mapProvinceMinorities = {
     volhynia: { jews: 13, poles: 6 },
     podolia: { jews: 12, poles: 4 },
@@ -2508,10 +2518,10 @@ window.mapProvinceMinorities = {
     yekaterinoslav: { jews: 7, poles: 1 },
     kherson: { jews: 10, poles: 2 },
     taurida: { jews: 3, poles: 1 },
-    kars: { jews: 0.5, muslims: 59.5, armenians: 29.8 },
-    georgia: { jews: 0.6, muslims: 14.3, armenians: 9.5 },
-    azerbaijan: { jews: 1.4, muslims: 80, armenians: 5.9 },
-    armenia: { jews: 0.1, muslims: 30, armenians: 56.3 }
+    kars: { jews: 0.5, muslims: 59.5, armenians: 29.8, georgians: 7.9 },
+    georgia: { jews: 0.6, muslims: 14.3, armenians: 9.5, georgians: 71.4 },
+    azerbaijan: { jews: 1.4, muslims: 80, armenians: 5.9, georgians: 5.9 },
+    armenia: { jews: 0.1, muslims: 30, armenians: 56.3, georgians: 6.3 }
 };
 Object.keys(window.mapLocalPolitics).forEach(function(region) {
     (window.mapRegions[region] || []).forEach(function(id) {
@@ -2535,6 +2545,22 @@ function ballotParties(Q, type) {
         all: all,
         excluded: excluded.filter(function(x) { return all.indexOf(x) !== -1 && x !== 'other'; })
     };
+}
+
+// weight of each Menshevik wing in a list, from the base split and current strengths
+function wingWeights(list, Q) {
+    var strength = {};
+    var sum = 0;
+    list.forEach(function(x) {
+        strength[x] = Math.max(0, Number(Q[window.mapWingStrength[x]]) || 0);
+        sum += strength[x];
+    });
+    var mean = sum / list.length;
+    var out = {};
+    list.forEach(function(x) {
+        out[x] = window.mapWingBase[x] * (mean > 0 ? Math.max(0.05, strength[x] / mean) : 1);
+    });
+    return out;
 }
 
 // one province: returns { shares: {party: 0-1}, weight, parties }
@@ -2590,6 +2616,14 @@ window.mapElectionProvince = function(id, options) {
         }
     });
 
+    if (lp && lp.merge) {
+        Object.keys(lp.merge).forEach(function(x) {
+            if (support[x] !== undefined && support[lp.merge[x]] !== undefined) {
+                support[lp.merge[x]] += support[x];
+                delete support[x];
+            }
+        });
+    }
     if (lp && lp.excluded) {
         lp.excluded.forEach(function(x) {
             if (support[x] !== undefined) {
@@ -2606,15 +2640,24 @@ window.mapElectionProvince = function(id, options) {
             Object.keys(support).forEach(function(x) { original[x] = support[x]; });
             var taken = {};
             Object.keys(stage).forEach(function(thief) {
-                if (support[thief] === undefined) {
+                var thieves = thief === 'mensheviks' ?
+                    Object.keys(window.mapWingBase).filter(function(w) {
+                        return support[w] !== undefined;
+                    }) : (support[thief] !== undefined ? [thief] : []);
+                if (!thieves.length) {
                     return;
                 }
+                var split = thief === 'mensheviks' ? wingWeights(thieves, Q) : null;
+                var splitTotal = 0;
+                thieves.forEach(function(w) { splitTotal += split ? split[w] : 1; });
                 Object.keys(stage[thief]).forEach(function(from) {
                     if (original[from] === undefined) {
                         return;
                     }
                     var amount = original[from] * stage[thief][from];
-                    support[thief] += amount;
+                    thieves.forEach(function(w) {
+                        support[w] += amount * (split ? split[w] : 1) / splitTotal;
+                    });
                     taken[from] = (taken[from] || 0) + amount;
                 });
             });
@@ -2640,7 +2683,13 @@ window.mapElectionProvince = function(id, options) {
             var amount = total * (p.minorities[m] / 100) *
                 (window.mapMinorityShare[m] !== undefined ?
                     window.mapMinorityShare[m] : window.mapMinorityNationalShare);
+            var wing = wingWeights(options2.filter(function(x) {
+                return window.mapWingBase[x];
+            }), Q);
             var weights = options2.map(function(x) {
+                if (window.mapWingBase[x]) {
+                    return wing[x];
+                }
                 // bundists do better in less rural provinces, zionists in more rural ones
                 return x === 'bundist' ? 0.25 + 0.6 * urbanShare :
                     x === 'zionist' ? 0.75 - 0.6 * urbanShare :
