@@ -4,6 +4,7 @@ view-if: ukrainian_congresses = 1
 max-visits: 1
 tags: event
 go-to: ukraine_menu
+on-arrival: ukrainian_congress_aftermath = 1
 
 = Situation in Ukraine
 
