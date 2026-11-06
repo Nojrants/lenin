@@ -1,6 +1,6 @@
 title: Redoing the Ukrainian Congress of Soviets 
 new-page: true
-view-if: ukrainian_congresses = 1 and ukrainian_congress_timer = 0 and kharkiv_congress_seen != 1
+view-if: ukrainian_congresses = 1 and ukrainian_congress_timer = 0 and kharkiv_congress_seen != 1 and ukrainian_congress_aftermath = 1
 max-visits: 1
 tags: event
 
