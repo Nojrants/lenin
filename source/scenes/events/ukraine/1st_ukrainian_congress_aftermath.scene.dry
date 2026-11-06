@@ -49,6 +49,7 @@ on-arrival: {!
   Q.war_weariness += 1;
   Q.discipline += 0.1; 
   Q.morale += 0.1; 
+  Q.ukraine_manifesto = 1; 
 !}
 
 The Central Rada has rejected our ultimatum, and has issued demands of their own:<br><ul>
