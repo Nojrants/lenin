@@ -1507,7 +1507,7 @@ Q.enemy_reinforcements_timer = 0;
 Q.party_congress_timer = 35;
 Q.soviet_congress = 0;
 Q.ukrainian_congresses = 0;
-Q.ukrainian_congress_timer = 10; 
+Q.ukrainian_congress_timer = 9; 
 Q.german_revolution_timer = 50;
 
 // constituent assembly election
