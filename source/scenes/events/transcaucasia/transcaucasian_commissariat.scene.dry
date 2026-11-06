@@ -9,6 +9,9 @@ on-arrival: {!
   mapSetController('kars', 'transcaucasia', 55);
   mapSetController('armenia', 'transcaucasia', 65);
   mapSetController('azerbaijan', 'transcaucasia', 60);
+  mapSetController('sukhumi', 'transcaucasia', 65);
+  mapSetController('batumi', 'transcaucasia', 65);
+  mapSetController('western_armenia', 'transcaucasia', 40);
              
   mapAddDivisions('georgia', 'transcaucasia', 3);         
 !}
