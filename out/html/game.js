@@ -515,7 +515,7 @@ window.mapPartyColors = {
     finland: '#4f8fc0',
     don: '--cossack',
     greens: '#1f9d6b',
-    moldova: '#d4b72c',
+    moldavia: '#d4b72c',
     whites: '#d9d3bf',
     none: '--none'
 };
@@ -535,7 +535,7 @@ window.mapPartyNames = {
     finland: 'Finland',
     don: 'Don Cossacks',
     greens: 'Greens',
-    moldova: 'Moldavian Democratic Republic',
+    moldavia: 'Moldavian Democratic Republic',
     whites: 'White Army',
     none: 'Uncontrolled'
 };
@@ -855,9 +855,9 @@ window.mapIsHostile = function(attacker, defender) {
 window.mapDefaultPeace = [
     ['bolsheviks', 'finland'],
     ['bolsheviks', 'upr'],
-    ['bolsheviks', 'moldova'],
-    ['upr', 'moldova'],
-    ['germany', 'moldova'],
+    ['bolsheviks', 'moldavia'],
+    ['upr', 'moldavia'],
+    ['germany', 'moldavia'],
     ['germany', 'finland']
 ];
 window.mapWarOverrides = {};
