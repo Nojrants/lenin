@@ -1,7 +1,7 @@
 @ukraine_soviet_results
 title: All-Ukrainian Congress of Soviets
 new-page: true
-view-if: ukrainian_ca_timer = 0 and ukrainian_congresses = 0 
+view-if: ukrainian_ca_timer = 0 and ukrainian_congresses = 0 and month != 11
 tags: event
 
 = Ukrainian Congress of Soviets
