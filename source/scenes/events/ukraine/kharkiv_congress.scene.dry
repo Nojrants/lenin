@@ -107,13 +107,13 @@ The assembled congress is far more amenable to Bolshevik interests, allowing us 
 
 @bolshevik_coalition
 title: [+ coalition1 +]% — The congress is dominated by proponents of soviet power. 
-subtitle: Coalition of <span style="color: var(--bolshevik); font-weight: bold;">Bolsheviks</span>, <span style="color: var(--lsr); font-weight: bold;">Left-SRs</span>, and some <span style="color: var(--ukrainian_sd); font-weight: bold;">Social Democrats</span>.
+subtitle: Coalition of <span style="color: var(--bolshevik-color); font-weight: bold;">Bolsheviks</span>, <span style="color: var(--lsr); font-weight: bold;">Left-SRs</span>, and some <span style="color: var(--ukrainian_sd); font-weight: bold;">Social Democrats</span>.
 choose-if: coalition1 > 50
 go-to: congress_events
 
 @agrarian_coalition
 title: [+ coalition2 +]% — The oppositionists attempt to retake control.
-unavailable-subtitle: Aoalition of <span style="color: var(--m); font-weight: bold;">Mensheviks</span>, <span style="color: var(--usr); font-weight: bold;">USRs</span>, <span style="color: var(--sr); font-weight: bold;">SRs</span>, <span style="color: var(--agrarian); font-weight: bold;">Agrarians</span>, and others. 
+unavailable-subtitle: Coalition of <span style="color: var(--m); font-weight: bold;">Mensheviks</span>, <span style="color: var(--usr); font-weight: bold;">USRs</span>, <span style="color: var(--sr); font-weight: bold;">SRs</span>, <span style="color: var(--agrarian); font-weight: bold;">Agrarians</span>, and others. 
 choose-if: coalition2 > 50
 go-to: congress_events
 
