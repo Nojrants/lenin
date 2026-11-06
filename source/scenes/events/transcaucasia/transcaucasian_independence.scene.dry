@@ -1,0 +1,17 @@
+title: Formation of the Transcaucasian Seim
+new-page: true
+view-if: ca_disbanded = 1 and (year = 1918 and month = 2 and week >= 2)
+max-visits: 1
+tags: event
+
+
+= Transcaucasian Seim
+
+With the dissolution of the Constituent Assembly evaporating any hope of amicable cooperation with our government, the Transcaucasian Commissariat has begun laying the foundations for an independent federation in Transcaucasia. As a first step, the formation of a "Seim" has been declared as a transregional legislative body. Using the results of the Constituent Assembly election as a basis for the composition of the Seim, the body is guaranteed to be dominated by Georgian Mensheviks. Our own party had a very weak showing in Transcausia, and in either case, Georgian Bolsheviks have declared intentions to boycott the new assembly. 
+
+- @election_proceed : What is the composition of the Seim? 
+
+@election proceed
+
+Though not officially declared as such, Transcaucasia has begun to act as an independent country in all but name. Among its first acts, the Seim declares that it will not recognize the authority of the Council of People's Commissars, and begins its own peace negotiations with the Ottoman Empire. 
+  
