@@ -6,8 +6,10 @@ tags: event
 
 = Ukrainian Congress of Soviets
 
-A number of delegates from Kyiv have made the journey to Kharkiv for the "redo" 1st All-Ukrainian Congress of Soviets, although most opposition parties condemn the alternate congress. Bolshevik militias are mobilized to protect the congress and ensure it goes smoothly. 
-  
+A number of delegates from Kyiv have made the journey to Kharkiv for the "redo" 1st All-Ukrainian Congress of Soviets, although most opposition parties condemn the alternate congress, and are unwilling or unable to attend. Bolshevik militias are mobilized to ensure the congress goes smoothly. 
+
+- @proceed_election : Begin the congress...
+
 @proceed_election
 on-arrival: {! Q.election_provinces = 'ukraine'; !}
 go-to: election_algorithm.soviet
