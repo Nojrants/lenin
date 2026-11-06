@@ -7,7 +7,7 @@ tags: event
 - @proceed_election: Await the results...
 
 @proceed_election
-on-arrival: {! window.mapElection('transcaucasia', {type: 'soviet', participation: 5}); !}
+on-arrival: {! window.mapElection('transcaucasia', {type: 'general', participation: 4}); !}
 go-to: election_results
 
 @election_results
