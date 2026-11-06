@@ -49,6 +49,14 @@ on-arrival: {!
   mapAddDivisions('poltava', 'upr', 1);
   mapAddDivisions('chernigov', 'upr', 1);
 
+  mapScaleDivisions('western_armenia', 0.65);
+  mapScaleDivisions('batumi', 0.65);
+  mapScaleDivisions('kars', 0.65);
+  mapScaleDivisions('georgia', 0.65);
+  mapScaleDivisions('armenia', 0.65);
+  mapScaleDivisions('azerbaijan', 0.65);
+  mapScaleDivisions('sukhumi', 0.65);
+
   mapScaleDivisions('volhynia', 0.65);
   mapScaleDivisions('grodno', 0.65);
   mapScaleDivisions('vilna', 0.65);
@@ -90,6 +98,14 @@ on-arrival: {!
   mapAddDivisions('kherson', 'upr', 1);
   mapAddDivisions('poltava', 'upr', 1);
   mapAddDivisions('chernigov', 'upr', 1);
+
+  mapScaleDivisions('western_armenia', 0.7);
+  mapScaleDivisions('batumi', 0.65);
+  mapScaleDivisions('kars', 0.65);
+  mapScaleDivisions('georgia', 0.7);
+  mapScaleDivisions('armenia', 0.65);
+  mapScaleDivisions('azerbaijan', 0.65);
+  mapScaleDivisions('sukhumi', 0.65);
 
   mapScaleDivisions('volhynia', 0.78);
   mapScaleDivisions('grodno', 0.7);
