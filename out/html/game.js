@@ -587,8 +587,9 @@ Object.keys(window.mapProvinces).forEach(function(id) {
     p.startControl = v;
 });
 
-window.mapUrbanSupply = 150;
-window.mapRuralSupply = 50;
+// supply limits are in soldiers, so changing mapSoldiersPerDivision rescales them
+window.mapUrbanSupply = 450000;
+window.mapRuralSupply = 150000;
 window.mapUrbanProvinces = ['petrograd', 'moscow', 'kyiv', 'kharkov',
     'yekaterinoslav', 'poland', 'latvia', 'tver', 'vladimir', 'yaroslavl',
     'nizhny', 'tula', 'kherson', 'saratov'];
@@ -778,10 +779,11 @@ window.mapSupplyLimit = function(id) {
     if (!p) {
         return 0;
     }
-    var base = typeof p.supply === 'number' ? p.supply :
+    var soldiers = typeof p.supply === 'number' ? p.supply :
         (window.mapUrbanProvinces.indexOf(id) !== -1 ?
             window.mapUrbanSupply : window.mapRuralSupply);
-    return base * (1 - 0.5 * (p.devastation || 0) / 100);
+    return soldiers / window.mapSoldiersPerDivision *
+        (1 - 0.5 * (p.devastation || 0) / 100);
 };
 
 // divisions
@@ -804,34 +806,34 @@ function makeDivisions(province, owner, count, label, firstNumber) {
 }
 
 window.mapDivisions = [].concat(
-    makeDivisions('pskov', 'bolsheviks', 50),
-    makeDivisions('vitebsk', 'bolsheviks', 75),
+    makeDivisions('pskov', 'bolsheviks', 17),
+    makeDivisions('vitebsk', 'bolsheviks', 25),
 
-    makeDivisions('estonia', 'bolsheviks', 50),
+    makeDivisions('estonia', 'bolsheviks', 17),
 
-    makeDivisions('vilna', 'bolsheviks', 90),
-    makeDivisions('grodno', 'bolsheviks', 80),
+    makeDivisions('vilna', 'bolsheviks', 30),
+    makeDivisions('grodno', 'bolsheviks', 27),
 
-    makeDivisions('volhynia', 'bolsheviks', 100),
+    makeDivisions('volhynia', 'bolsheviks', 34),
 
-    makeDivisions('podolia', 'upr', 75),
-    makeDivisions('bessarabia', 'upr', 75),
-    makeDivisions('kyiv', 'upr', 25),
+    makeDivisions('podolia', 'upr', 25),
+    makeDivisions('bessarabia', 'upr', 25),
+    makeDivisions('kyiv', 'upr', 9),
 
-    makeDivisions('petrograd', 'bolsheviks', 30),
-    makeDivisions('yekaterinburg', 'bolsheviks', 15),
-    makeDivisions('nizhny', 'bolsheviks', 10),
-    makeDivisions('kazan', 'bolsheviks', 10),
-    makeDivisions('saratov', 'bolsheviks', 10),
-    makeDivisions('mogilev', 'bolsheviks', 20),
-    makeDivisions('minsk', 'bolsheviks', 20),
-    makeDivisions('kursk', 'bolsheviks', 10),
+    makeDivisions('petrograd', 'bolsheviks', 10),
+    makeDivisions('yekaterinburg', 'bolsheviks', 5),
+    makeDivisions('nizhny', 'bolsheviks', 4),
+    makeDivisions('kazan', 'bolsheviks', 4),
+    makeDivisions('saratov', 'bolsheviks', 4),
+    makeDivisions('mogilev', 'bolsheviks', 7),
+    makeDivisions('minsk', 'bolsheviks', 7),
+    makeDivisions('kursk', 'bolsheviks', 4),
 
-    makeDivisions('poland', 'germany', 125, 'German Division', 1),
-    makeDivisions('lithuania', 'germany', 100, 'German Division', 126),
-    makeDivisions('latvia', 'germany', 90, 'German Division', 226),
+    makeDivisions('poland', 'germany', 42, 'German Division', 1),
+    makeDivisions('lithuania', 'germany', 34, 'German Division', 43),
+    makeDivisions('latvia', 'germany', 30, 'German Division', 77),
 
-    makeDivisions('don', 'don', 10)
+    makeDivisions('don', 'don', 4)
 );
 
 var mapDivisionIndex = {};
@@ -873,7 +875,7 @@ window.mapAtWar = function(a, b) {
 };
 
 // combat
-window.mapSoldiersPerDivision = 3000;
+window.mapSoldiersPerDivision = 10000;
 
 window.mapSoldierUnit = 1000;
 
@@ -925,6 +927,21 @@ window.mapStatsFor = function(owner, provinceId) {
     return base;
 };
 
+/* A defender's stats in a province: own control adds to the defence bonus
+   (+1 at 100%), devastation subtracts from it (-0.5 at 100%). */
+window.mapDefenseStats = function(owner, provinceId) {
+    var st = window.mapStatsFor(owner, provinceId);
+    var p = window.mapProvinces[provinceId];
+    if (p) {
+        if (p.controller === owner) {
+            st.defense_bonus += p.control / 100;
+        }
+        st.defense_bonus -= 0.5 * (p.devastation || 0) / 100;
+    }
+    st.defense_bonus = Math.max(-1, st.defense_bonus);
+    return st;
+};
+
 function mapAttackPower(soldiers, st) {
     return soldiers * st.morale * st.discipline * Math.pow(st.supply_quality, 1.5);
 }
@@ -939,7 +956,7 @@ window.mapStrengthRatio = function(attackers, defenders, toId) {
         return 99;
     }
     var aSt = window.mapStatsFor(attackers[0].owner, toId);
-    var dSt = window.mapStatsFor(defenders[0].owner, toId);
+    var dSt = window.mapDefenseStats(defenders[0].owner, toId);
     return mapAttackPower(attackers.length * N, aSt) /
         Math.max(1, mapDefensePower(defenders.length * N, dSt));
 };
@@ -958,7 +975,7 @@ window.mapResolveBattle = function(battle) {
         var aSold = battle.attackers.length * N;
         var dSold = battle.defenders.length * N;
         var aPow = mapAttackPower(aSold, window.mapStatsFor(atkOwner, battle.to));
-        var dPow = mapDefensePower(dSold, window.mapStatsFor(defOwner, battle.to));
+        var dPow = mapDefensePower(dSold, window.mapDefenseStats(defOwner, battle.to));
 
         function lossFrac(ownPow, enemyPow) {
             var f = window.mapCasualtyRate *
@@ -2154,7 +2171,7 @@ window.mapDecayDevastation = function() {
     });
 };
 
-window.mapAttritionStep = 50;
+window.mapAttritionSoldiers = 150000;     // soldiers over the limit per division lost
 window.mapApplyAttrition = function(report) {
     Object.keys(window.mapProvinces).forEach(function(id) {
         var limit = window.mapSupplyLimit(id);
@@ -2166,7 +2183,7 @@ window.mapApplyAttrition = function(report) {
             var list = owners[owner];
             var over = list.length - limit;
             if (over > 0) {
-                var loss = Math.min(list.length, Math.max(1, Math.round(over / window.mapAttritionStep)));
+                var loss = Math.min(list.length, Math.max(1, Math.round(over * window.mapSoldiersPerDivision / window.mapAttritionSoldiers)));
                 killDivisions(list, loss);
                 report.push(partyName(owner) + ' lost ' + loss + ' division' +
                     (loss === 1 ? '' : 's') + ' to attrition in ' +
@@ -2641,6 +2658,25 @@ window.mapSovietElection = function(provinces, key, options) {
     options.type = 'soviet';
     options.key = key;
     return window.mapElection(provinces, options);
+};
+
+// move free divisions between provinces without a battle (instant, no adjacency needed):
+//   window.mapMoveDivisions('upr', 'podolia', 'poltava', 5)   (count optional = all)
+window.mapMoveDivisions = function(faction, fromId, toId, count) {
+    if (!knownProvince(fromId, 'mapMoveDivisions') ||
+        !knownProvince(toId, 'mapMoveDivisions')) {
+        return 0;
+    }
+    return editMapState(function() {
+        var free = divisionsIn(fromId).filter(function(d) {
+            return d.owner === faction && !isCommitted(d.id);
+        });
+        if (count !== undefined && count !== null) {
+            free = free.slice(0, Math.max(0, Math.floor(Number(count) || 0)));
+        }
+        free.forEach(function(d) { d.province = toId; });
+        return free.length;
+    });
 };
 
 // order an attack: mapOrderAttack(faction, from, to, [count])
