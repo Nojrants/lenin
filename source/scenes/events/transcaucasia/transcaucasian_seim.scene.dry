@@ -75,14 +75,35 @@ if (window && d3) {
 }
 !}
 
-= Election Results
+= Transcaucasian Seim
 
 {!<svg id="election_chart" viewBox="0 0 625 310"> </svg>!}
 
 {!<table id="election_table" class="soviet-table"></table>!}
 
-Though not officially declared as such, Transcaucasia has begun to act as an independent country in all but name. Among its first acts, the Seim declares that it will not recognize the authority of the Council of People's Commissars, and begins its own peace negotiations with the Ottoman Empire. 
+Though not officially declared as such, Transcaucasia has begun to act as an independent country in all but name. Among its first acts, the Seim has declared that it will not recognize the authority of the Council of People's Commissars, and the assembly has initiated its own peace negotiations with the Ottoman Empire. 
 
-- @root: Continue
+- @undermine
+- @ignore
+
+@undermine
+title: We must do what we can to undermine this illegitimate, bourgeois government!
+go-to: root
+on-arrival: {!
+    Q.transcaucasia_relation -= 10;
+    Q.m_relation -= 5; Q.right_m_relation -= 5;
+    Q.right_m_strength += 5; 
+    Q.transcaucasia_undermine += 1; 
+!}
+
+@ignore
+title: What they choose to do in Transcaucasia is not our concern. 
+go-to: root
+
+
+
+
+
+
 
   
