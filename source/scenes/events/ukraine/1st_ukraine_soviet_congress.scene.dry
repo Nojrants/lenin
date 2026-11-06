@@ -24,12 +24,12 @@ Q.ukrainian_ca_timer = 36;
 
 Q.anarchist_election_votes_dec += 0.2;
 Q.maximalist_election_votes_dec += 0.6;
-Q.b_election_votes_dec -= 27.9;
+Q.b_election_votes_dec -= 27.4;
 Q.sdi_election_votes_dec -= 1;
 Q.right_m_election_votes_dec -= 0.1;
 Q.ukrainian_sd_election_votes_dec -= 2.5;
 Q.bundist_election_votes_dec -= 2.2;
-Q.lsr_election_votes_dec -= 0;
+Q.lsr_election_votes_dec -= 0.5;
 Q.sr_election_votes_dec -= 0; 
 Q.ukrainian_sr_election_votes_dec -= 5;
 Q.popular_socialist_election_votes_dec -= 0; 
@@ -46,6 +46,7 @@ if (Q.popular_socialist_election_votes_dec < 0.3) { Q.popular_socialist_election
 
 if (Q.ukraine_preparations > 0) { Q.b_election_votes_dec += (Q.ukraine_preparations / 2 ); Q.other_election_votes_dec -= (Q.ukraine_preparations / 2 ); }
 
+if (Q.b_election_votes_dec <= 4.5) { b_election_votes_dec = 4.5; }
 
 window.mapElectionNormalize();
 
