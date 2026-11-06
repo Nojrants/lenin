@@ -1,0 +1,94 @@
+@ukraine_soviet_results
+title: Addressing the Situation in Ukraine
+new-page: true
+view-if: ukrainian_congresses = 1
+max-visits: 1
+tags: event
+go-to: ukraine_menu
+
+= Situation in Ukraine
+
+The Central Rada has consolidated its control over Ukraine, to the detriment of local Bolshevik forces. If we don't act fast, we may lose the country entirely to a hostile, bourgeois government...
+
+In regards to the lackluster Congress of Soviets, a number of party organizations in Ukraine have proposed invalidating the congress in Kyiv, and instead holding a new congress in Kharkiv. There we will be able to decisively control the course of events and pass a proper set of congress resolutions.
+
+According to Bolsheviks on the ground, we still have the support of sizeable militias in the major cities, which are prepared to rise up against the Central Rada in support of soviet power, assuming we act before they can be disarmed. Additionally, we have concentrated a number of Red Guards in the border provinces, who could march into Ukraine in support of an uprising. 
+
+To this end, Lenin has authored a "Manifesto to the Ukrainian People". While re-affirming the right of self-determination for the Ukrainian people (including the right for Ukraine to secede from Russia if it so chooses), the Manifesto will also declare non-recognition of the Central Rada, and present the Ukrainian government with a series of demands:<br><ul>
+	<li>Cease the recalling of Ukrainian units from the front with the Central Powers, until a formal agreement between the Ukrainian and Russian governments is negotiated.</li> 
+	<li>Cease disarming Bolshevik forces and workers' militias within Ukraine.</li>
+	<li>Cease aiding and abetting counterrevolutionary forces (namely the Don Cossack rebels), and lend support to combatting said counterrevolutionary forces instead.</li></ul>Should we issue this manifesto and not receive a satisfactory response, we will declare the Central Rada to be in a state of open war against soviet power.
+
+@ukraine_menu
+  
+- @schedule_congress
+- @issue_manifesto
+- @prepare_army
+- @prepare_rebels
+- @continue 
+
+@schedule_congress
+title: Begin making arrangements for a proper Congress of Soviets in Kharkiv! 
+max-visits: 1
+go-to: ukraine_menu
+on-arrival: {!
+  Q.instability -= 1; 
+  Q.democraticitiy -= 5; 
+  Q.upr_relation -= 10; 
+!}
+
+Our delegates in Kyiv are ordered to head for Kharkiv, where we've begun hastily preparing for a new congress. 
+
+@issue_manifesto
+title: Issue the Manifesto to the Ukrainian government!
+max-visits: 1
+go-to: ukraine_menu
+on-arrival: {!
+  Q.upr_relation -= 30; 
+  Q.war_weariness += 1;
+  Q.discipline += 0.1; 
+  Q.morale += 0.1; 
+!}
+
+The Central Rada has rejected our ultimatum, and has issued their own demands instead:<br><ul>
+	<li>Recognition of the Ukrainian People's Republic.</li>
+	<li>Non-interference in the internal affairs of Ukraine and the Ukrainian Front.</li>
+	<li>Allowance for Ukrainian military personnel to return back to the territory of Ukraine.</li>
+	<li>Fair division of the finances of the former Empire between the two nations.</li>
+	<li>UPR participation in any peace talks with the Central Powers.</li></ul>Meanwhile, it appears they are preparing their forces for a military confrontation. 
+
+@prepare_army
+title: Mobilize the Red Guards, begin preparations for an offensive!
+max-visits: 1
+go-to: ukraine_menu
+on-arrival: {!
+  Q.upr_relation -= 10; 
+  Q.war_weariness += 3;
+  Q.discipline += 0.2; 
+  mapAddDivisions('minsk', 'bolsheviks', 2)
+  mapAddDivisions('kursk', 'bolsheviks', 2)
+  mapAddDivisions('voronezh', 'bolsheviks', 3)
+  Q.ukrainian_preparations += 1; 
+!}
+
+Forces near Minsk and Kursk have begun moving to the Ukrainian border.
+
+@prepare_army
+title: Tell our forces in Ukraine to begin preparing for an uprising! 
+max-visits: 1
+go-to: ukraine_menu
+on-arrival: {!
+  Q.upr_relation -= 5; 
+  Q.discipline += 0.1; 
+  Q.workers_b += 2; 
+  mapAddDivisions('kursk', 'bolsheviks', 1)
+  mapAddDivisions('voronezh', 'bolsheviks', 1)
+  Q.ukrainian_preparations += 1; 
+!}
+
+Ukrainian Bolsheviks have begun rallying militias to defend against the Central Rada. 
+
+@continue
+title: We've done all we can.
+go-to: root
+  
