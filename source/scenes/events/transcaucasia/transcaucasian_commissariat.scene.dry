@@ -12,8 +12,22 @@ on-arrival: {!
   mapSetController('sukhumi', 'transcaucasia', 65);
   mapSetController('batumi', 'transcaucasia', 65);
   mapSetController('western_armenia', 'transcaucasia', 40);
-             
-  mapAddDivisions('georgia', 'transcaucasia', 3);         
+
+  mapSetDivisions('georgia', 'bolsheviks', 0);
+  mapSetDivisions('kars', 'bolsheviks', 0);
+  mapSetDivisions('armenia', 'bolsheviks', 0);
+  mapSetDivisions('azerbaijan', 'bolsheviks', 0);
+  mapSetDivisions('sukhumi', 'bolsheviks', 0);
+  mapSetDivisions('batumi', 'bolsheviks', 0);
+  mapSetDivisions('western_armenia', 'bolsheviks', 0);
+
+  mapSetDivisions('georgia', 'transcaucasia', 3);
+  mapSetDivisions('kars', 'transcaucasia', 8);
+  mapSetDivisions('armenia', 'transcaucasia', 8);
+  mapSetDivisions('azerbaijan', 'transcaucasia', 3);
+  mapSetDivisions('sukhumi', 'transcaucasia', 1);
+  mapSetDivisions('batumi', 'transcaucasia', 8);
+  mapSetDivisions('western_armenia', 'transcaucasia', 15);
 !}
 
 = Transcaucasian Commissariat
