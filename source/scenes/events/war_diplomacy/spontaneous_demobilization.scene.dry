@@ -9,15 +9,16 @@ on-arrival: {!
   Q.instability += 5; Q.train_capacity *= 0.95;
   Q.soldiers_unrest -= 15; Q.peasants_unrest += 5; 
   Q.soldiers_b += 1; 
-  Q.northern_front_soldiers -= 35;
-  Q.western_front_soldiers -= 45;
-  Q.southwestern_front_soldiers -= 100;
-  Q.romanian_front_soldiers -= 50;
-  Q.caucasus_front_soldiers -= 25;
-  Q.reserve_soldiers -= 10; 
   Q.soldiers -= 4; Q.peasants += 3.5; Q.workers += 0.5;  
   Q.military_expend -= 5;
   Q.bagmen_strength += 5; 
+
+  //  Q.northern_front_soldiers -= 35;
+  //  Q.western_front_soldiers -= 45;
+  //  Q.southwestern_front_soldiers -= 100;
+  //  Q.romanian_front_soldiers -= 50;
+  //  Q.caucasus_front_soldiers -= 25;
+  //  Q.reserve_soldiers -= 10; 
 !}
 
 = Demobilization
@@ -36,6 +37,36 @@ on-arrival: {!
   Q.soldiers_unrest -= 5; Q.peasants_unrest += 5; 
   Q.soldiers_b += 2; 
   Q.bagmen_strength += 5; 
+
+  mapScaleDivisions('podolia', 0.75)
+  mapScaleDivisions('bessarabia', 0.75)
+  mapAddDivisions('kyiv', 'upr', 3);
+  mapAddDivisions('kherson', 'upr', 1);
+  mapAddDivisions('poltava', 'upr', 1);
+  mapAddDivisions('chernigov', 'upr', 1);
+
+  mapScaleDivisions('volhynia', 0.65)
+  mapScaleDivisions('grodno', 0.65)
+  mapScaleDivisions('vilna', 0.65)
+  mapScaleDivisions('vitebsk', 0.65)
+  mapScaleDivisions('pskov', 0.8)
+  mapScaleDivisions('estonia', 0.8)
+  mapScaleDivisions('minsk', 0.7)
+  mapScaleDivisions('mogilev', 0.7)
+  mapScaleDivisions('kursk', 0.75)
+  mapScaleDivisions('yekaterinburg', 0.5)
+  mapScaleDivisions('saratov', 0.75)
+  mapScaleDivisions('nizhny', 0.75)
+  mapScaleDivisions('kazan', 0.75)
+  mapAddDivisions('smolensk', 'bolsheviks', 1);
+  mapAddDivisions('petrograd', 'bolsheviks', 1);
+  mapAddDivisions('orel', 'bolsheviks', 1);
+
+  mapAddControl('bessarabia', -10); 
+  mapAddControl('podolia', -5); 
+  mapAddControl('volhynia', -10); 
+  mapAddControl('grodno', -10); 
+  mapAddControl('vilna', -10); 
 !}
 
 We encourage the process of demobilization.
@@ -47,13 +78,44 @@ on-arrival: {!
   Q.instability -= 2; 
   Q.soldiers_unrest += 10; Q.b_strength -= 5;
   Q.discipline += 0.1; Q.war_weariness += 5; 
-  Q.northern_front_soldiers += 5;
-  Q.western_front_soldiers += 5;
-  Q.southwestern_front_soldiers += 5;
-  Q.romanian_front_soldiers += 5;
-  Q.caucasus_front_soldiers += 5;
-  Q.reserve_soldiers += 15; 
   Q.soldiers += 0.5; Q.peasants -= 0.25; Q.workers -= 0.25;  
+
+  mapScaleDivisions('podolia', 0.75)
+  mapScaleDivisions('bessarabia', 0.75)
+  mapAddDivisions('kyiv', 'upr', 3);
+  mapAddDivisions('kherson', 'upr', 1);
+  mapAddDivisions('poltava', 'upr', 1);
+  mapAddDivisions('chernigov', 'upr', 1);
+
+  mapScaleDivisions('volhynia', 0.78)
+  mapScaleDivisions('grodno', 0.7)
+  mapScaleDivisions('vilna', 0.7)
+  mapScaleDivisions('vitebsk', 0.7)
+  mapScaleDivisions('pskov', 0.85)
+  mapScaleDivisions('estonia', 0.8)
+  mapScaleDivisions('minsk', 0.8)
+  mapScaleDivisions('mogilev', 0.8)
+  mapScaleDivisions('kursk', 0.75)
+  mapScaleDivisions('yekaterinburg', 0.5)
+  mapScaleDivisions('saratov', 0.75)
+  mapScaleDivisions('nizhny', 0.75)
+  mapScaleDivisions('kazan', 0.75)
+  mapAddDivisions('smolensk', 'bolsheviks', 1);
+  mapAddDivisions('petrograd', 'bolsheviks', 1);
+  mapAddDivisions('orel', 'bolsheviks', 1);
+
+  mapAddControl('bessarabia', -10); 
+  mapAddControl('podolia', -5); 
+  mapAddControl('volhynia', -10); 
+  mapAddControl('grodno', -10); 
+  mapAddControl('vilna', -10); 
+
+  //  Q.northern_front_soldiers += 5;
+  //  Q.western_front_soldiers += 5;
+  //  Q.southwestern_front_soldiers += 5;
+  //  Q.romanian_front_soldiers += 5;
+  //  Q.caucasus_front_soldiers += 5;
+  //  Q.reserve_soldiers += 15; 
 !}             
 
 We instruct our party members to halt the demobilization efforts, though it's unclear how much these orders are actually heeded. 
