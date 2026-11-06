@@ -183,7 +183,7 @@ window.mapProvinces = {
         name: 'Kuban',
         controller: 'none',
         control: 100,
-        adjacent: ['don', 'georgia', 'stavropol', 'terek']
+        adjacent: ['don', 'georgia', 'stavropol', 'terek', 'sukhumi']
     },
     yaroslavl: {
         name: 'Yaroslavl',
@@ -237,7 +237,43 @@ window.mapProvinces = {
         name: 'Georgia',
         controller: 'none',
         control: 100,
-        adjacent: ['kuban', 'kars', 'terek', 'armenia', 'azerbaijan', 'dagestan']
+        adjacent: ['kuban', 'kars', 'terek', 'armenia', 'azerbaijan', 'dagestan', 'batumi', 'sukhumi']
+    },
+    batumi: {
+        name: 'Batumi',
+        controller: 'none',
+        control: 100,
+        adjacent: ['georgia', 'kars', 'western_armenia', 'anatolia']
+    },
+    sukhumi: {
+        name: 'Sukhumi',
+        controller: 'none',
+        control: 100,
+        adjacent: ['georgia', 'kuban']
+    },
+    western_armenia: {
+        name: 'Western Armenia',
+        controller: 'none',
+        control: 100,
+        adjacent: ['armenia', 'kars', 'batumi', 'anatolia', 'kurdistan', 'iran']
+    },
+    anatolia: {
+        name: 'Anatolia',
+        controller: 'ottoman',
+        control: 100,
+        adjacent: ['batumi', 'western_armenia', 'kurdistan']
+    },
+    kurdistan: {
+        name: 'Kurdistan',
+        controller: 'ottoman',
+        control: 100,
+        adjacent: ['anatolia', 'western_armenia', 'iran']
+    },
+    iran: {
+        name: 'Iran',
+        controller: 'iran',
+        control: 100,
+        adjacent: ['azerbaijan', 'armenia', 'western_armenia', 'kurdistan']
     },
     stavropol: {
         name: 'Stavropol',
@@ -249,7 +285,7 @@ window.mapProvinces = {
         name: 'Kars',
         controller: 'none',
         control: 100,
-        adjacent: ['georgia', 'armenia']
+        adjacent: ['georgia', 'armenia', 'batumi', 'western_armenia']
     },
     nizhny: {
         name: 'Nizhny Novgorod',
@@ -279,7 +315,7 @@ window.mapProvinces = {
         name: 'Armenia',
         controller: 'none',
         control: 100,
-        adjacent: ['georgia', 'kars', 'azerbaijan']
+        adjacent: ['georgia', 'kars', 'azerbaijan', 'western_armenia', 'iran']
     },
     astrakhan: {
         name: 'Astrakhan',
@@ -291,7 +327,7 @@ window.mapProvinces = {
         name: 'Azerbaijan',
         controller: 'none',
         control: 100,
-        adjacent: ['georgia', 'armenia', 'dagestan']
+        adjacent: ['georgia', 'armenia', 'dagestan', 'iran']
     },
     simbirsk: {
         name: 'Simbirsk',
@@ -516,6 +552,8 @@ window.mapPartyColors = {
     don: '--cossack',
     greens: '#1f9d6b',
     moldavia: '#d4b72c',
+    ottoman: '#8c6d46',
+    iran: '#4aa3a2',
     transcaucasia: '--m-color',
     georgia: '--m-color',
     azerbaijan: '#3f9c5a',
@@ -540,6 +578,8 @@ window.mapPartyNames = {
     don: 'Don Cossacks',
     greens: 'Greens',
     moldavia: 'Moldavian Democratic Republic',
+    ottoman: 'Ottoman Empire',
+    iran: 'Iran',
     transcaucasia: 'Transcaucasian Democratic Federative Republic',
     georgia: 'Democratic Republic of Georgia',
     azerbaijan: 'Azerbaijan Democratic Republic',
@@ -679,7 +719,11 @@ window.mapDemographics = {
         classes: { elites: 1, middle: 3, clergy: 0.6, workers: 2, peasants: 78, kulaks: 6, soldiers: 5, intelligentsia: 1, underclass: 3, students: 0.2 } },
     kostroma: { pop: 1, soviet_power: 10,
         classes: { elites: 1, middle: 3, clergy: 0.6, workers: 2, peasants: 78, kulaks: 6, soldiers: 5, intelligentsia: 1, underclass: 3, students: 0.2 } },
-    georgia: { pop: 2.1, soviet_power: 10,
+    georgia: { pop: 1.84, soviet_power: 10,
+        classes: { elites: 1.124, middle: 6.19, clergy: 0.514, workers: 16.19, peasants: 73.333, kulaks: 0.0, soldiers: 0.952, intelligentsia: 0.714, underclass: 0.886, students: 0.095 } },
+    batumi: { pop: 0.15, soviet_power: 10,
+        classes: { elites: 1.124, middle: 6.19, clergy: 0.514, workers: 16.19, peasants: 73.333, kulaks: 0.0, soldiers: 0.952, intelligentsia: 0.714, underclass: 0.886, students: 0.095 } },
+    sukhumi: { pop: 0.11, soviet_power: 10,
         classes: { elites: 1.124, middle: 6.19, clergy: 0.514, workers: 16.19, peasants: 73.333, kulaks: 0.0, soldiers: 0.952, intelligentsia: 0.714, underclass: 0.886, students: 0.095 } },
     stavropol: { pop: 1, soviet_power: 10,
         classes: { elites: 1, middle: 3, clergy: 0.6, workers: 2, peasants: 78, kulaks: 6, soldiers: 5, intelligentsia: 1, underclass: 3, students: 0.2 } },
@@ -695,6 +739,14 @@ window.mapDemographics = {
         classes: { elites: 1, middle: 3, clergy: 0.6, workers: 2, peasants: 78, kulaks: 6, soldiers: 5, intelligentsia: 1, underclass: 3, students: 0.2 } },
     armenia: { pop: 0.8, soviet_power: 10,
         classes: { elites: 0.8, middle: 0.25, clergy: 0.675, workers: 8.75, peasants: 87.5, kulaks: 0.0, soldiers: 1.0, intelligentsia: 0.375, underclass: 0.6, students: 0.05 } },
+    western_armenia: { pop: 0.8, soviet_power: 10,
+        classes: { elites: 0.8, middle: 0.25, clergy: 0.675, workers: 8.75, peasants: 87.5, kulaks: 0.0, soldiers: 1.0, intelligentsia: 0.375, underclass: 0.6, students: 0.05 } },
+    anatolia: { pop: 1, soviet_power: 10,
+        classes: { elites: 1, middle: 3, clergy: 0.6, workers: 2, peasants: 78, kulaks: 6, soldiers: 5, intelligentsia: 1, underclass: 3, students: 0.2 } },
+    kurdistan: { pop: 1, soviet_power: 10,
+        classes: { elites: 1, middle: 3, clergy: 0.6, workers: 2, peasants: 78, kulaks: 6, soldiers: 5, intelligentsia: 1, underclass: 3, students: 0.2 } },
+    iran: { pop: 1, soviet_power: 10,
+        classes: { elites: 1, middle: 3, clergy: 0.6, workers: 2, peasants: 78, kulaks: 6, soldiers: 5, intelligentsia: 1, underclass: 3, students: 0.2 } },
     astrakhan: { pop: 1, soviet_power: 10,
         classes: { elites: 1, middle: 3, clergy: 0.6, workers: 2, peasants: 78, kulaks: 6, soldiers: 5, intelligentsia: 1, underclass: 3, students: 0.2 } },
     azerbaijan: { pop: 0.85, soviet_power: 10,
@@ -843,6 +895,16 @@ window.mapDivisions = [].concat(
     makeDivisions('lithuania', 'germany', 34, 'German Division', 43),
     makeDivisions('latvia', 'germany', 30, 'German Division', 77),
 
+    makeDivisions('western_armenia', 'bolsheviks', 30),
+    makeDivisions('georgia', 'bolsheviks', 5),
+    makeDivisions('kars', 'bolsheviks', 20),
+    makeDivisions('batumi', 'bolsheviks', 20),
+    makeDivisions('armenia', 'bolsheviks', 10),
+    makeDivisions('azerbaijan', 'bolsheviks', 5),
+
+    makeDivisions('anatolia', 'ottoman', 50),
+    makeDivisions('kurdistan', 'ottoman', 40),
+
     makeDivisions('don', 'don', 4)
 );
 
@@ -886,6 +948,16 @@ window.mapDefaultPeace = [
     ['azerbaijan', 'armenia'],
     ['germany', 'finland']
 ];
+// Iran is neutral; the Ottoman Empire fights only the Bolsheviks and Transcaucasia
+Object.keys(window.mapPartyNames).forEach(function(f) {
+    if (f === 'none' || f === 'iran') {
+        return;
+    }
+    window.mapDefaultPeace.push(['iran', f]);
+    if (f !== 'ottoman' && f !== 'bolsheviks' && f !== 'transcaucasia') {
+        window.mapDefaultPeace.push(['ottoman', f]);
+    }
+});
 window.mapWarOverrides = {};
 
 function warKey(a, b) {
@@ -2432,7 +2504,7 @@ window.electionNames = {
 window.mapRegions = {
     ukraine: ['volhynia', 'podolia', 'kyiv', 'chernigov', 'poltava', 'kharkov',
         'yekaterinoslav', 'kherson', 'taurida'],
-    transcaucasia: ['georgia', 'azerbaijan', 'armenia', 'kars']
+    transcaucasia: ['georgia', 'azerbaijan', 'armenia', 'kars', 'batumi', 'sukhumi', 'western_armenia']
 };
 
 // local parties by region. steals: stages applied in order; each stage is
@@ -2490,6 +2562,13 @@ window.mapLocalPolitics = {
     }
 };
 
+window.mapLocalPolitics.transcaucasia.provinceSteals.batumi =
+    window.mapLocalPolitics.transcaucasia.provinceSteals.georgia;
+window.mapLocalPolitics.transcaucasia.provinceSteals.sukhumi =
+    window.mapLocalPolitics.transcaucasia.provinceSteals.georgia;
+window.mapLocalPolitics.transcaucasia.provinceSteals.western_armenia =
+    window.mapLocalPolitics.transcaucasia.provinceSteals.armenia;
+
 // Menshevik wings: base split (left : centre : right) and the quality holding each strength.
 // Each wing's weight is base * (its strength / average strength of the wings).
 window.mapWingBase = { left_m: 1, m: 2, right_m: 2 };
@@ -2521,7 +2600,10 @@ window.mapProvinceMinorities = {
     kars: { jews: 0.5, muslims: 59.5, armenians: 29.8, georgians: 7.9 },
     georgia: { jews: 0.6, muslims: 14.3, armenians: 9.5, georgians: 71.4 },
     azerbaijan: { jews: 1.4, muslims: 80, armenians: 5.9, georgians: 5.9 },
-    armenia: { jews: 0.1, muslims: 30, armenians: 56.3, georgians: 6.3 }
+    armenia: { jews: 0.1, muslims: 30, armenians: 56.3, georgians: 6.3 },
+    batumi: { jews: 0.6, muslims: 14.3, armenians: 9.5, georgians: 71.4 },
+    sukhumi: { jews: 0.6, muslims: 14.3, armenians: 9.5, georgians: 71.4 },
+    western_armenia: { jews: 0.1, muslims: 60, armenians: 30, georgians: 0 }
 };
 Object.keys(window.mapLocalPolitics).forEach(function(region) {
     (window.mapRegions[region] || []).forEach(function(id) {
