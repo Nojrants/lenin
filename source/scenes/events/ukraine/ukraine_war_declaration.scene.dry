@@ -1,0 +1,46 @@
+title: War in Ukraine 
+new-page: true
+max-visits: 1
+tags: event
+on-arrival: {!
+var prep = Number(Q.ukraine_preparations || 0);
+
+window.mapSetWar('bolsheviks', 'upr');
+
+// Bolshevik offensive
+window.mapAttackNow([
+    {faction: 'bolsheviks', from: 'minsk', to: 'chernigov', fraction: 0.5},
+    {faction: 'bolsheviks', from: 'mogilev', to: 'chernigov', fraction: 0.5},
+    {faction: 'bolsheviks', from: 'kursk', to: 'kharkov'}
+]);
+
+// UPR redeploys
+var quarter = function(province, faction) { return Math.round(window.mapDivisionCount(province, faction) / 4); };
+window.mapMoveDivisions('upr', 'podolia', 'poltava', quarter('podolia', 'upr'));
+window.mapMoveDivisions('upr', 'bessarabia', 'kherson', quarter('bessarabia', 'upr'));
+
+// uprisings weaken the UPR relative to Bolshevik preparations
+window.mapAddControl('kyiv', -5 * (1 + prep));
+window.mapAddControl('kherson', -10 * (1 + prep));
+window.mapAddControl('taurida', -10 * (1 + prep));
+
+// Yekaterinoslav
+if (window.mapControl('yekaterinoslav') > 50) {
+    window.mapSetControl('yekaterinoslav', 50);
+}
+if (prep > 4) {
+    window.mapSetController('yekaterinoslav', 'bolsheviks', 50);
+    window.mapAddDivisions('yekaterinoslav', 'bolsheviks', prep);
+}
+
+// reinforcements from preparations
+if (prep >= 2 && window.mapController('kharkov') == 'bolsheviks') {
+    window.mapAddDivisions('kharkov', 'bolsheviks', prep);
+}
+if (prep > 0) {
+    window.mapAddDivisions('voronezh', 'bolsheviks', Math.round(prep / 2));
+}
+!}
+
+
+- @root: Continue
