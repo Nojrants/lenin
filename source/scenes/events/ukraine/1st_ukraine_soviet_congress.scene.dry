@@ -44,8 +44,7 @@ if (Q.m_election_votes_dec < 0.4) { Q.m_election_votes_dec += 0.2; Q.b_election_
 if (Q.right_m_election_votes_dec < 0.1) { Q.right_m_election_votes_dec += 0.1; Q.b_election_votes_dec -= 0.1; }
 if (Q.popular_socialist_election_votes_dec < 0.3) { Q.popular_socialist_election_votes_dec += 0.3; Q.b_election_votes_dec -= 0.3; }
 
-Q.b_election_votes_dec += (Q.ukraine_preparations / 2 );
-Q.other_election_votes_dec -= (Q.ukraine_preparations / 2 );
+if (Q.ukraine_preparations > 0) { Q.b_election_votes_dec += (Q.ukraine_preparations / 2 ); Q.other_election_votes_dec -= (Q.ukraine_preparations / 2 ); }
 
 
 window.mapElectionNormalize();
