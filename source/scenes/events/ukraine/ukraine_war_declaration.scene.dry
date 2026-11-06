@@ -1,10 +1,10 @@
-title: Declaration of War
+title: War in Ukraine
 new-page: true
 max-visits: 1
 tags: event
 view-if: ukraine_manifesto = 1
 
-= Situation in Ukraine
+= War in Ukraine
 
 We have tried to reason with the Ukrainian government, but with our ultimatum having been rejected, and with the Central Rada continuing to crack down against Bolshevik militias in the country, we are left with little choice but to invade. 
 
@@ -16,7 +16,7 @@ Ukrainian Bolsheviks in the major cities are standing by, ready to launch urban 
 title: Launch the invasion! 
 go-to: map
 on-arrival: {!
-    upr_relation -= 50; 
+    Q.upr_relation -= 50; 
     var prep = Number(Q.ukraine_preparations || 0);
     window.mapSetWar('bolsheviks', 'upr');
 
