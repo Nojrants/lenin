@@ -1,0 +1,180 @@
+@kharkiv_congress
+title: Redoing the Ukrainian Congress of Soviets 
+new-page: true
+view-if: ukrainian_congresses = 1 and ukrainian_congress_timer = 0 and kharkiv_congress != 1
+max-visits: 1
+tags: event
+
+= Ukrainian Congress of Soviets
+
+A number of delegates from Kyiv have made the journey to Kharkiv for the "redo" 1st All-Ukrainian Congress of Soviets, although most opposition parties condemn the alternate congress. Bolshevik militias are mobilized to protect the congress and ensure it goes smoothly. 
+  
+@proceed_election
+on-arrival: {! Q.election_provinces = 'ukraine'; !}
+go-to: election_algorithm.soviet
+set-jump: election_results
+
+@election_results
+new-page: true
+on-arrival: {!
+
+Q.ukrainian_ca_timer = 10; 
+
+Q.anarchist_election_votes_dec += 0.1;
+Q.maximalist_election_votes_dec += 0.3;
+Q.b_election_votes_dec += 40;
+Q.sdi_election_votes_dec = 0.2;
+Q.left_m_election_votes_dec = 0.1;
+Q.m_election_votes_dec = 0.1;
+Q.right_m_election_votes_dec = 0;
+Q.ukrainian_sd_election_votes_dec -= 1;
+Q.bundist_election_votes_dec -= 3;
+Q.lsr_election_votes_dec += 5;
+Q.sr_election_votes_dec -= 3; 
+Q.ukrainian_sr_election_votes_dec -= 40;
+Q.popular_socialist_election_votes_dec -= 1; 
+Q.agrarian_election_votes_dec += 0;
+Q.polish_election_votes_dec -= 1;
+Q.zionist_election_votes_dec -= 1.5;
+Q.other_election_votes_dec += 0;
+
+if (Q.ukraine_preparations > 0) { Q.b_election_votes_dec += (Q.ukraine_preparations / 2 ); Q.other_election_votes_dec -= (Q.ukraine_preparations / 2 ); }
+
+
+window.mapElectionNormalize();
+
+Q.coalition1 = Math.round(100*(Q.anarchist_election_votes_dec + Q.maximalist_election_votes_dec + Q.b_election_votes_dec + Q.lsr_election_votes_dec + (Q.ukrainian_sd_election_votes_dec * 0.7) + (Q.other_election_votes_dec * 0.4)))/100;
+Q.coalition2 = Math.round(100*(Q.sdi_election_votes_dec + Q.left_m_election_votes_dec + Q.m_election_votes_dec + Q.right_m_election_votes_dec + Q.ukrainian_sd_election_votes_dec + Q.bundist_election_votes_dec + Q.sr_election_votes_dec + Q.ukrainian_sr_election_votes_dec + Q.popular_socialist_election_votes_dec + Q.agrarian_election_votes_dec + (Q.other_election_votes_dec*0.6)))/100;
+Q.coalition3 = Math.round(100*(Q.anarchist_election_votes_dec + Q.maximalist_election_votes_dec + Q.b_election_votes_dec + Q.lsr_election_votes_dec + (Q.ukrainian_sd_election_votes_dec * 0.5) + (Q.other_election_votes_dec * 0.4)))/100;
+Q.coalition4 = Math.round(100*(Q.anarchist_election_votes_dec + Q.maximalist_election_votes_dec + Q.b_election_votes_dec + Q.lsr_election_votes_dec + (Q.ukrainian_sd_election_votes_dec * 0.4) + (Q.other_election_votes_dec * 0.3)))/100;
+Q.coalition5 = Math.round(100*(Q.anarchist_election_votes_dec + Q.maximalist_election_votes_dec + Q.b_election_votes_dec + Q.lsr_election_votes_dec + (Q.ukrainian_sd_election_votes_dec * 0.2) + (Q.other_election_votes_dec * 0.1)))/100;
+Q.coalition6 = Math.round(100*(Q.anarchist_election_votes_dec + Q.maximalist_election_votes_dec + Q.b_election_votes_dec + Q.lsr_election_votes_dec + (Q.ukrainian_sd_election_votes_dec * 0.3) + (Q.other_election_votes_dec * 0.3)))/100;
+
+
+
+if (typeof Q.election_seat_total != 'number' || Q.election_seat_total <= 0) {
+    Q.election_seat_total = 204;
+}
+for (var party of Q.election_parties) {
+    Q[party + '_election_r'] = Math.round(Q.election_seat_total * (Q[party + '_election_votes_dec'] || 0) / 100);
+}
+!}
+on-display: {!
+var data = [];
+var rows = '<tr><th>Party</th><th>Vote Share</th></tr>';
+for (var party of Q.election_parties) {
+    var label = window.electionNames[party];
+    var box = label.box || party;
+    data.push({"id": party, "legend": label.legend, "name": label.legend, "seats": Q[party + '_election_r']});
+    rows += '<tr><td><div class="party-box box ' + box + '"></div>' + label.table + '</td><td>' + (Q[party + '_election_votes_dec'] || 0) + '%</td></tr>';
+}
+data.forEach(function(d) {
+    if (!Number.isFinite(d.seats)) {
+        console.error("BAD SEAT VALUE", d.id, d.seats);
+    }
+});
+document.getElementById("election_table").innerHTML = rows;
+if (window && d3) {
+    var width = 625;
+    var height = 625;
+    var screenWidth = document.getElementById('content').offsetWidth;
+    if (screenWidth < width - 50) {
+        width = screenWidth - 50;
+        height = width;
+        document.getElementById("election_chart").style.height = width + "px";
+    }
+    var parliament = d3.parliament();
+    parliament.width(width).height(height).innerRadiusCoef(0.4);
+    parliament.enter.fromCenter(true).smallToBig(true);
+    parliament.exit.toCenter(false).bigToSmall(true);
+    d3.select("#election_chart").datum(data).call(parliament);
+}
+!}
+
+= Ukrainian Congress of Soviets
+
+{!<svg id="election_chart" viewBox="0 0 625 310"> </svg>!}
+
+{!<table id="election_table" class="soviet-table"></table>!}
+
+The assembled congress is far more amenable to Bolshevik interests, allowing us to undo the damage of the earlier congress. 
+  
+- @bolshevik_coalition
+- @agrarian_coalition
+
+
+@bolshevik_coalition
+title: [+ coalition1 +]% — The congress is dominated by proponents of soviet power. 
+subtitle: <span style="color: var(--bolshevik); font-weight: bold;">Bolshevik</span> leadership, with support from the <span style="color: var(--lsr); font-weight: bold;">Left-SRs</span> and some <span style="color: var(--ukrainian_sd); font-weight: bold;">Social Democrats</span>.
+choose-if: coalition1 > 50
+go-to: congress_events
+
+@agrarian_coalition
+title: [+ coalition2 +]% — The oppositionists attempt to retake control.
+unavailable-subtitle: A coalition of <span style="color: var(--m); font-weight: bold;">Mensheviks</span>, <span style="color: var(--usr); font-weight: bold;">USRs</span>, <span style="color: var(--sr); font-weight: bold;">SRs</span>, <span style="color: var(--agrarian); font-weight: bold;">Agrarians</span>, and others. 
+choose-if: coalition2 > 50
+go-to: congress_events
+
+
+@congress_events
+new-page: true
+
+= Ukrainian Congress of Soviets
+
+With the congress firmly in our control, we can proceed with a Bolshevik agenda. 
+
+- @void
+- @denounce_rada
+- @dissolve_upr
+- @military
+- @continue
+
+
+
+@void
+title: [+ coalition3 +]% — Declare all resolutions of the previous congress to be null and void. 
+choose-if: coalition3 > 50
+max-visits: 1
+go-to: congress_events
+on-arrival: {!
+  Q.democraticity += 1;
+!}
+
+@denounce_rada
+title: [+ coalition4 +]% — Declare the Central Rada an illegitimate government and strip all support for it. 
+choose-if: coalition4> 50
+max-visits: 1
+go-to: congress_events
+on-arrival: {!
+  Q.instability += 1;
+  Q.morale += 0.1;
+  Q.upr_relation -= 30; 
+!}
+
+@dissolve_upr
+title: [+ coalition5 +]% — Declare the dissolution of the Ukrainian People's Republic, and its replacement by a new "Ukrainian People's Republic of Soviets", which will be based in Kharkiv.  
+choose-if: coalition5 > 50
+max-visits: 1
+go-to: congress_events
+on-arrival: {!
+  Q.instability += 0.5;
+  Q.morale += 0.1; Q.discipline += 0.05;
+  Q.workers_b += 2; 
+  Q.upr_relation -= 30; 
+!}
+
+@military
+title: [+ coalition6 +]% — Call upon all soviet forces to resist the UPR and support the military uprisings against it. 
+choose-if: coalition6 > 50
+max-visits: 1
+go-to: congress_events
+on-arrival: {!
+  Q.instability += 2;
+  Q.morale += 0.1; Q.discipline += 0.1;
+  Q.workers_b += 1; 
+  Q.upr_relation -= 20; 
+!}
+  
+@continue
+title: Conclude the congress...
+go-to: root
