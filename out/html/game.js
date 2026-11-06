@@ -3336,6 +3336,8 @@ window.syncMapView = function() {
     var scene = window.dendryUI.dendryEngine.state.sceneId;
     if (mapIsOpen() && !scene.startsWith('map')) {
         window.closeMapView();
+    } else if (!mapIsOpen() && scene.startsWith('map')) {
+        window.openMapView();
     }
 };
 
@@ -3349,7 +3351,11 @@ window.showMap = function() {
     }
 
     engine.goToScene('map');
-    setTimeout(window.openMapView, 0);
+    setTimeout(function() {
+        if (!mapIsOpen()) {
+            window.openMapView();
+        }
+    }, 0);
 };
 
 /*
