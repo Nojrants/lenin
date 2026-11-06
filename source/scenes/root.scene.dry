@@ -939,6 +939,7 @@ Q.austria_relation = 5;
 Q.ottoman_relation = 5;
 Q.upr_relation = 60;
 Q.moldavia_relation = 60;
+Q.transcaucasia_relation = 50;
 
 // negotiations for a general peace
 Q.general_negotiations = 0;
