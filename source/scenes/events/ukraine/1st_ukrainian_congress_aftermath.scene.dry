@@ -74,7 +74,7 @@ on-arrival: {!
 
 Forces near Minsk and Kursk have begun moving to the Ukrainian border.
 
-@prepare_army
+@prepare_rebels
 title: Tell our forces in Ukraine to begin preparing for an uprising! 
 max-visits: 1
 go-to: ukraine_menu
