@@ -19,6 +19,15 @@ go-to: election_results
 new-page: true
 on-arrival: {!
 
+Q.election_seat_total = 125; 
+
+Q.b_election_votes_dec = 0;
+Q.muslim_sd_election_votes_dec *= 0.1;
+Q.muslim_socialist_election_votes_dec -= 2;
+Q.musavat_election_votes_dec += 10; 
+Q.other_election_votes_dec += 5; 
+
+
 window.mapElectionNormalize();
 
 if (typeof Q.election_seat_total != 'number' || Q.election_seat_total <= 0) {
