@@ -1,0 +1,33 @@
+title: Declaration of the Transcaucasian Commissariat
+new-page: true
+view-if: year = 1917 and month = 11 and week = 4
+max-visits: 1
+tags: event
+on-arrival: {!
+  Q.instability += 1; 
+  mapSetController('georgia', 'transcaucasia', 80);
+  mapSetController('kars', 'transcaucasia', 55);
+  mapSetController('armenia', 'transcaucasia', 65);
+  mapSetController('azerbaijan', 'transcaucasia', 60);
+             
+  mapAddDivisions('georgia', 'transcaucasia', 3);         
+!}
+
+= Transcaucasian Commissariat
+
+Immediately following the seizure of power in Petrograd, the Tiflis Soviet issued a formal condemnation and declared it would not obey Sovnarkom directives. Dominated by Mensheviks and other moderate socialists, the major bodies of Transcaucasia have now declared the formation of a "Transcaucasian Commissariat", which will act as a provisional govenrment until the convocation of the Russian Constituent Assembly. Though hindered by sectarian conflict, it appears the Commissariat is positioning itself to become the government of an independent Trancaucasian federation, should relations with our government deteriorate further. 
+  
+- @undermine
+- @ignore
+
+@undermine
+title: Condemn the Menshevik usurpers and covertly support pro-Bolshevik militias in the major Transcaucasian cities. 
+go-to: root
+on-arrival: {!
+  Q.transcaucasia_relation -= 10;
+  Q.left_m_relation -= 2; Q.m_relation -= 5; Q.right_m_relation -= 5; 
+!}
+
+@ignore
+title: This does not concern us right now.
+go-to: root
