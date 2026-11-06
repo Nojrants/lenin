@@ -1,7 +1,7 @@
 @kharkiv_congress
 title: Redoing the Ukrainian Congress of Soviets 
 new-page: true
-view-if: ukrainian_congresses = 1 and ukrainian_congress_timer = 0 and kharkiv_congress != 1
+view-if: ukrainian_congresses = 1 and ukrainian_congress_timer = 0 and kharkiv_congress_seen != 1
 max-visits: 1
 tags: event
 
@@ -19,6 +19,7 @@ new-page: true
 on-arrival: {!
 
 Q.ukrainian_ca_timer = 10; 
+Q.kharkiv_congress_seen = 1; 
 
 Q.anarchist_election_votes_dec += 0.1;
 Q.maximalist_election_votes_dec += 0.3;
