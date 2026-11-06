@@ -22,6 +22,7 @@ on-arrival: {!
   //  Q.romanian_front_soldiers -= 50;
   //  Q.caucasus_front_soldiers -= 25;
   //  Q.reserve_soldiers -= 10; 
+
 !}
 
 = Demobilization
