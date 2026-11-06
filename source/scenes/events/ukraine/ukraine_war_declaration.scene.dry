@@ -33,9 +33,12 @@ on-arrival: {!
     window.mapMoveDivisions('upr', 'bessarabia', 'kherson', quarter('bessarabia', 'upr'));
     
     // uprisings weaken the UPR relative to Bolshevik preparations
-    window.mapAddControl('kyiv', -5 * (1 + prep));
+    window.mapAddControl('kyiv', -15 * (1 + prep));
     window.mapAddControl('kherson', -10 * (1 + prep));
     window.mapAddControl('taurida', -10 * (1 + prep));
+
+    mapScaleDivisions('kyiv', (0.9 - (prep / 10)));
+    mapScaleDivisions('podolia', (1 - (prep / 10)));
     
     // Yekaterinoslav
     if (window.mapControl('yekaterinoslav') > 50) {
