@@ -3338,6 +3338,7 @@ window.syncMapView = function() {
     var scene = window.dendryUI.dendryEngine.state.sceneId;
     if (!scene.startsWith('map')) {
         mapClosing = false;
+        mapFromButton = false;
     }
     if (mapIsOpen() && !scene.startsWith('map')) {
         window.closeMapView();
@@ -3346,16 +3347,31 @@ window.syncMapView = function() {
     }
 };
 
+var mapFromButton = false;
+
 window.showMap = function() {
     var engine = window.dendryUI.dendryEngine;
+    var inMapScene = engine.state.sceneId.startsWith('map');
 
-    if (engine.state.sceneId.startsWith('map')) {
-        mapClosing = true;
-        window.closeMapView();
-        engine.goToScene('backSpecialScene');
+    if (inMapScene && !mapIsOpen()) {
+        mapClosing = false;
+        window.openMapView();
         return;
     }
 
+    if (inMapScene) {
+        mapClosing = true;
+        window.closeMapView();
+        if (mapFromButton) {
+            mapFromButton = false;
+            engine.goToScene('backSpecialScene');
+        } else {
+            engine.goToScene('root');
+        }
+        return;
+    }
+
+    mapFromButton = true;
     engine.goToScene('map');
     setTimeout(function() {
         if (!mapIsOpen()) {
