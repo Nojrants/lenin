@@ -24,10 +24,10 @@ Q.ukrainian_ca_timer = 36;
 
 Q.anarchist_election_votes_dec += 0.2;
 Q.maximalist_election_votes_dec += 0.6;
-Q.b_election_votes_dec -= 27.4;
+Q.b_election_votes_dec -= 27.9;
 Q.sdi_election_votes_dec -= 1;
 Q.right_m_election_votes_dec -= 0.1;
-Q.ukrainian_sd_election_votes_dec -= 3;
+Q.ukrainian_sd_election_votes_dec -= 2.5;
 Q.bundist_election_votes_dec -= 2.2;
 Q.lsr_election_votes_dec -= 0;
 Q.sr_election_votes_dec -= 0; 
