@@ -2356,7 +2356,7 @@ window.electionNames = {
     m: { legend: 'Menshevik-Centre', table: 'Mensheviks (Centre)' },
     right_m: { legend: 'Menshevik-Defencist', table: 'Menshevik Defencists' },
     lsr: { legend: 'Left-SR', table: 'Left-SRs' },
-    sr: { legend: 'SR', table: 'SRs' },
+    sr: { legend: 'SR', table: 'Socialist-Revolutionaries' },
     right_sr: { legend: 'Right SR', table: 'Right SRs' },
     popular_socialist: { legend: 'Popular Socialist', table: 'Popular Socialists' },
     k: { legend: 'Kadet', table: 'Kadets' },
