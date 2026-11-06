@@ -2392,8 +2392,8 @@ window.sovietRiggingExponent = 1.5;
 // left-to-right order of parties in charts and tables
 window.electionChartOrder = ['anarchist', 'maximalist', 'b', 'sdi', 'left_m', 'm',
     'right_m', 'socialist_federalist', 'dashnak', 'ukrainian_sd', 'bundist', 'lsr', 'sr',
-    'right_sr', 'ukrainian_sr', 'muslim_sd', 'muslim_socialist', 'ittihad', 'musavat',
-    'national_democrat', 'armenian_populist', 'popular_socialist', 'agrarian', 'polish',
+    'right_sr', 'ukrainian_sr', 'popular_socialist', 'muslim_sd', 'muslim_socialist',
+    'ittihad', 'musavat', 'armenian_populist', 'agrarian', 'national_democrat', 'polish',
     'zionist', 'k', 'rightist', 'other'];
 
 // display names: legend (chart) and table (plural)
@@ -2425,7 +2425,7 @@ window.electionNames = {
     ittihad: { legend: 'Ittihad', table: 'Ittihad' },
     muslim_sd: { legend: 'Muslim SD', table: 'Muslim SDs' },
     national_democrat: { legend: 'National Democrat', table: 'National Democrats' },
-    armenian_populist: { legend: 'Armenian Populist', table: 'Armenian Populist Party' }
+    armenian_populist: { legend: 'Armenian Populist', table: 'Armenian Populists' }
 };
 
 // regions for multi-province elections
@@ -2460,7 +2460,7 @@ window.mapLocalPolitics = {
         merge: { lsr: 'sr' },
         steals: [
             {
-                mensheviks: { sr: 0.85 },
+                mensheviks: { sr: 0.75 },
                 dashnak: { sr: 0.1, other: 0.1 },
                 armenian_populist: { k: 0.08, rightist: 0.06 },
                 agrarian: { sr: 0.05, other: 0.2 }
