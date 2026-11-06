@@ -1,6 +1,7 @@
 title: Transcaucasian Soviet Elections
 new-page: true
 max-visits: 1
+view-if: year = 1919
 tags: event
 
 = Transcaucasian Soviet Elections
