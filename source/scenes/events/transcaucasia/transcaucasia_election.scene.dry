@@ -1,0 +1,64 @@
+title: Transcaucasian Soviet Elections
+new-page: true
+tags: event
+
+= Transcaucasian Soviet Elections
+
+- @proceed_election: Await the results...
+
+@proceed_election
+on-arrival: {! window.mapElection('transcaucasia', {type: 'soviet', participation: 4}); !}
+go-to: election_results
+
+@election_results
+new-page: true
+on-arrival: {!
+
+window.mapElectionNormalize();
+
+if (typeof Q.election_seat_total != 'number' || Q.election_seat_total <= 0) {
+    Q.election_seat_total = 1000;
+}
+for (var party of Q.election_parties) {
+    Q[party + '_election_r'] = Math.round(Q.election_seat_total * (Q[party + '_election_votes_dec'] || 0) / 100);
+}
+!}
+on-display: {!
+var data = [];
+var rows = '<tr><th>Party</th><th>Vote Share</th></tr>';
+for (var party of Q.election_parties) {
+    var label = window.electionNames[party];
+    var box = label.box || party;
+    data.push({"id": party, "legend": label.legend, "name": label.legend, "seats": Q[party + '_election_r']});
+    rows += '<tr><td><div class="party-box box ' + box + '"></div>' + label.table + '</td><td>' + (Q[party + '_election_votes_dec'] || 0) + '%</td></tr>';
+}
+data.forEach(function(d) {
+    if (!Number.isFinite(d.seats)) {
+        console.error("BAD SEAT VALUE", d.id, d.seats);
+    }
+});
+document.getElementById("election_table").innerHTML = rows;
+if (window && d3) {
+    var width = 625;
+    var height = 625;
+    var screenWidth = document.getElementById('content').offsetWidth;
+    if (screenWidth < width - 50) {
+        width = screenWidth - 50;
+        height = width;
+        document.getElementById("election_chart").style.height = width + "px";
+    }
+    var parliament = d3.parliament();
+    parliament.width(width).height(height).innerRadiusCoef(0.4);
+    parliament.enter.fromCenter(true).smallToBig(true);
+    parliament.exit.toCenter(false).bigToSmall(true);
+    d3.select("#election_chart").datum(data).call(parliament);
+}
+!}
+
+= Election Results
+
+{!<svg id="election_chart" viewBox="0 0 625 310"> </svg>!}
+
+{!<table id="election_table" class="soviet-table"></table>!}
+
+- @root: Continue
