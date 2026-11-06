@@ -20,6 +20,8 @@ on-arrival: {!
     var prep = Number(Q.ukraine_preparations || 0);
     window.mapSetWar('bolsheviks', 'upr');
 
+    mapAddStat('upr', 'morale', (-0.1 * prep));
+
     // Bolshevik offensive
     window.mapAttackNow([
         {faction: 'bolsheviks', from: 'minsk', to: 'chernigov', fraction: 0.5},
