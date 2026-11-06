@@ -2460,8 +2460,9 @@ window.mapLocalPolitics = {
         merge: { lsr: 'sr' },
         steals: [
             {
+                mensheviks: { sr: 0.85 },
                 dashnak: { sr: 0.1, other: 0.1 },
-                armenian_populist: { k: 0.6, rightist: 0.5 },
+                armenian_populist: { k: 0.08, rightist: 0.06 },
                 agrarian: { sr: 0.05, other: 0.2 }
             }
         ],
@@ -2469,7 +2470,6 @@ window.mapLocalPolitics = {
         // 'mensheviks' stands for the three Menshevik wings (see mapWingBase)
         provinceSteals: {
             georgia: [{
-                mensheviks: { sr: 0.85 },
                 socialist_federalist: { sr: 0.1, other: 0.3 },
                 national_democrat: { k: 0.6, rightist: 0.5, other: 0.3 }
             }],
@@ -2507,7 +2507,7 @@ window.mapMinorityNationalShare = 0.5;    // share of a minority voting for its 
 window.mapMinorityShare = { muslims: 0.85, armenians: 0.8, georgians: 1 };    // per-minority override
 // relative weight of a party among the parties of one minority (default 1)
 window.mapMinorityPartyWeight = { musavat: 3, muslim_socialist: 1.5, ittihad: 1.2,
-    muslim_sd: 1, dashnak: 5, armenian_populist: 1 };
+    muslim_sd: 1, dashnak: 5, armenian_populist: 0.1 };
 window.mapProvinceMinorities = {
     volhynia: { jews: 13, poles: 6 },
     podolia: { jews: 12, poles: 4 },
