@@ -22,7 +22,7 @@ on-arrival: {!
 Q.election_seat_total = 125; 
 
 Q.b_election_votes_dec = 0;
-Q.left_m_election_votes_dec -= 15;
+Q.left_m_election_votes_dec -= 14;
 Q.m_election_votes_dec -= 8;
 Q.right_m_election_votes_dec -= 4;
 Q.dashnak_election_votes_dec += 2;
@@ -30,7 +30,7 @@ Q.sr_election_votes_dec *= 0.5;
 Q.muslim_sd_election_votes_dec *= 0.6;
 Q.muslim_socialist_election_votes_dec -= 2;
 Q.ittihad_election_votes_dec *= 0.5;
-Q.musavat_election_votes_dec += 10; 
+Q.musavat_election_votes_dec += 6; 
 Q.other_election_votes_dec += 8; 
 
 
