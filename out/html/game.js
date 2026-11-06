@@ -3240,6 +3240,10 @@ window.createMapLayout = function() {
     return frame;
 };
 
+// shift the division counter from the middle of a province, as a fraction of its
+// width and height (x: right is positive, y: up is negative)
+window.mapCounterOffset = { anatolia: [0.25, -0.25] };
+
 function getProvinceCenter(provinceId) {
     if (mapCenterCache[provinceId]) {
         return mapCenterCache[provinceId];
@@ -3256,9 +3260,10 @@ function getProvinceCenter(provinceId) {
     } else {
         try {
             var bbox = province.getBBox();
+            var shift = window.mapCounterOffset[provinceId] || [0, 0];
             var localCenter = new DOMPoint(
-                bbox.x + bbox.width / 2,
-                bbox.y + bbox.height / 2
+                bbox.x + bbox.width * (0.5 + shift[0]),
+                bbox.y + bbox.height * (0.5 + shift[1])
             );
             var provinceMatrix = province.getScreenCTM();
             var svgMatrix = svg.getScreenCTM();
