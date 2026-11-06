@@ -2680,34 +2680,65 @@ window.mapMoveDivisions = function(faction, fromId, toId, count) {
 };
 
 // order an attack: mapOrderAttack(faction, from, to, [count])
+function orderAttackInner(faction, fromId, toId, count, fraction) {
+    if (!areProvincesAdjacent(fromId, toId)) {
+        console.warn('mapOrderAttack: ' + fromId + ' and ' + toId + ' are not adjacent');
+        return 0;
+    }
+    if (!isAttackTarget(toId, faction)) {
+        console.warn('mapOrderAttack: ' + toId + ' is not an attack target for ' +
+            faction + ' (peace, or already its own)');
+        return 0;
+    }
+    var free = divisionsIn(fromId).filter(function(d) {
+        return d.owner === faction && !isCommitted(d.id);
+    });
+    if (fraction !== undefined && fraction !== null) {
+        count = Math.ceil(free.length * Number(fraction));
+    }
+    if (count !== undefined && count !== null) {
+        free = free.slice(0, Math.max(0, Math.floor(Number(count) || 0)));
+    }
+    if (!free.length) {
+        return 0;
+    }
+    window.queueMapAttack(free.map(function(d) { return d.id; }), fromId, toId, 0);
+    return free.length;
+}
+
 window.mapOrderAttack = function(faction, fromId, toId, count) {
     if (!knownProvince(fromId, 'mapOrderAttack') ||
         !knownProvince(toId, 'mapOrderAttack')) {
         return 0;
     }
     return editMapState(function() {
-        if (!areProvincesAdjacent(fromId, toId)) {
-            console.warn('mapOrderAttack: ' + fromId + ' and ' + toId +
-                ' are not adjacent');
-            return 0;
-        }
-        if (!isAttackTarget(toId, faction)) {
-            console.warn('mapOrderAttack: ' + toId + ' is not an attack ' +
-                'target for ' + faction + ' (peace, or already its own)');
-            return 0;
-        }
-        var free = divisionsIn(fromId).filter(function(d) {
-            return d.owner === faction && !isCommitted(d.id);
+        return orderAttackInner(faction, fromId, toId, count);
+    });
+};
+
+// attack and fight the battles straight away. orders: a list of
+//   { faction, from, to, count }  or  { faction, from, to, fraction }  (share of the
+//   free divisions, rounded up). Attacks on the same province are fought together.
+// Returns the battle report (list of lines). Attacks queued earlier are left alone.
+window.mapAttackNow = function(orders) {
+    return editMapState(function() {
+        var pending = window.mapBattles;
+        window.mapBattles = [];
+        orders.forEach(function(o) {
+            if (!window.mapProvinces[o.from] || !window.mapProvinces[o.to]) {
+                console.warn('mapAttackNow: unknown province in order', o);
+                return;
+            }
+            orderAttackInner(o.faction, o.from, o.to, o.count, o.fraction);
         });
-        if (count !== undefined && count !== null) {
-            free = free.slice(0, Math.max(0, Math.floor(Number(count) || 0)));
-        }
-        if (!free.length) {
-            return 0;
-        }
-        window.queueMapAttack(free.map(function(d) { return d.id; }),
-                              fromId, toId, 0);
-        return free.length;
+        var report = window.resolveMapBattles();
+        window.mapBattles = pending.filter(function(b) {
+            b.ids = b.ids.filter(function(id) {
+                return mapDivisionIndex[id] && !mapDivisionIndex[id].dead;
+            });
+            return b.ids.length > 0;
+        });
+        return report;
     });
 };
 
