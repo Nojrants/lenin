@@ -1,0 +1,42 @@
+title: Declaration of the Moldavian Democratic Republic
+new-page: true
+view-if: year = 1917 and month = 12 and week = 2
+max-visits: 1
+tags: event
+on-arrival: {!
+  Q.instability += 1; 
+  mapSetController('bessarabia', 'moldavia', 80);
+  mapSetDivisions('bessarabia', 'upr', 0);
+  mapAddDivisions('bessarabia', 'moldavia', 3);
+  mapAddDivisions('kherson', 'upr', 2);
+  mapAddDivisions('kyiv', 'upr', 1);
+  mapAddDivisions('taurida', 'upr', 1);           
+  mapScaleDivisions('podolia', 0.75);
+  mapScaleDivisions('volhynia', 0.85);             
+!}
+
+= Moldavian Democratic Republic
+
+In the former province of Bessarabia, a "Moldavian Democratic Republic" has been declared as an autonomous polity within the Russian Republic. A provisional government is declared in Chișinău, although various local governments and soviets contest its authority.
+
+The declaration seemingly accelerates the disintegration of the Imperial Army in the southwestern front, with violence breaking out bwtween local Moldavan forces and deserting Russian soldiers. 
+
+- @undermine
+- @ignore
+
+@undermine
+title: We should build in-roads among the Moldavian working-class and encourage the development of soviet power there.
+subtitle: -0.5 resources 
+unavailable-subtitle: -0.5 resources – We lack the resources. 
+choose-if: resources >= 0.5
+go-to: root
+on-arrival: {!
+  Q.resources -= 0.5;
+  Q.moldavia_relation -= 10;
+  mapSetControl('bessarabia', 55);
+  mapAddSovietPower('bessarabia', 15);
+!}
+
+@ignore
+title: This does not concern us right now.
+go-to: root
