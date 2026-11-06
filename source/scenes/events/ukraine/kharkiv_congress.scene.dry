@@ -21,27 +21,27 @@ on-arrival: {!
 
 Q.ukrainian_ca_timer = 10; 
 Q.kharkiv_congress_seen = 1; 
+Q.election_seat_total = 204; 
 
 Q.anarchist_election_votes_dec += 0.1;
-Q.maximalist_election_votes_dec += 0.3;
+Q.maximalist_election_votes_dec += 0.5;
 Q.b_election_votes_dec += 40;
 Q.sdi_election_votes_dec = 0.2;
 Q.left_m_election_votes_dec = 0.1;
 Q.m_election_votes_dec = 0.1;
 Q.right_m_election_votes_dec = 0;
-Q.ukrainian_sd_election_votes_dec -= 1;
-Q.bundist_election_votes_dec -= 3;
+Q.ukrainian_sd_election_votes_dec -= 2;
+Q.bundist_election_votes_dec = 0.2;
 Q.lsr_election_votes_dec += 5;
-Q.sr_election_votes_dec -= 3; 
+Q.sr_election_votes_dec *= 0.4; 
 Q.ukrainian_sr_election_votes_dec -= 40;
 Q.popular_socialist_election_votes_dec -= 1; 
-Q.agrarian_election_votes_dec += 0;
-Q.polish_election_votes_dec -= 1;
-Q.zionist_election_votes_dec -= 1.5;
+Q.agrarian_election_votes_dec *= 0.5;
+Q.polish_election_votes_dec *= 0.25;
+Q.zionist_election_votes_dec *= 0.4;
 Q.other_election_votes_dec += 0;
 
 if (Q.ukraine_preparations > 0) { Q.b_election_votes_dec += (Q.ukraine_preparations / 2 ); Q.other_election_votes_dec -= (Q.ukraine_preparations / 2 ); }
-
 
 window.mapElectionNormalize();
 
@@ -107,19 +107,18 @@ The assembled congress is far more amenable to Bolshevik interests, allowing us 
 
 @bolshevik_coalition
 title: [+ coalition1 +]% — The congress is dominated by proponents of soviet power. 
-subtitle: <span style="color: var(--bolshevik); font-weight: bold;">Bolshevik</span> leadership, with support from the <span style="color: var(--lsr); font-weight: bold;">Left-SRs</span> and some <span style="color: var(--ukrainian_sd); font-weight: bold;">Social Democrats</span>.
+subtitle: Coalition of <span style="color: var(--bolshevik); font-weight: bold;">Bolsheviks</span>, <span style="color: var(--lsr); font-weight: bold;">Left-SRs</span>, and some <span style="color: var(--ukrainian_sd); font-weight: bold;">Social Democrats</span>.
 choose-if: coalition1 > 50
 go-to: congress_events
 
 @agrarian_coalition
 title: [+ coalition2 +]% — The oppositionists attempt to retake control.
-unavailable-subtitle: A coalition of <span style="color: var(--m); font-weight: bold;">Mensheviks</span>, <span style="color: var(--usr); font-weight: bold;">USRs</span>, <span style="color: var(--sr); font-weight: bold;">SRs</span>, <span style="color: var(--agrarian); font-weight: bold;">Agrarians</span>, and others. 
+unavailable-subtitle: Aoalition of <span style="color: var(--m); font-weight: bold;">Mensheviks</span>, <span style="color: var(--usr); font-weight: bold;">USRs</span>, <span style="color: var(--sr); font-weight: bold;">SRs</span>, <span style="color: var(--agrarian); font-weight: bold;">Agrarians</span>, and others. 
 choose-if: coalition2 > 50
 go-to: congress_events
 
 
 @congress_events
-new-page: true
 
 = Ukrainian Congress of Soviets
 
