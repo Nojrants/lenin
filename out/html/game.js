@@ -3332,11 +3332,16 @@ window.closeMapView = function() {
     setMapHover(null);
 };
 
+var mapClosing = false;
+
 window.syncMapView = function() {
     var scene = window.dendryUI.dendryEngine.state.sceneId;
+    if (!scene.startsWith('map')) {
+        mapClosing = false;
+    }
     if (mapIsOpen() && !scene.startsWith('map')) {
         window.closeMapView();
-    } else if (!mapIsOpen() && scene.startsWith('map')) {
+    } else if (!mapIsOpen() && scene.startsWith('map') && !mapClosing) {
         window.openMapView();
     }
 };
@@ -3345,6 +3350,7 @@ window.showMap = function() {
     var engine = window.dendryUI.dendryEngine;
 
     if (engine.state.sceneId.startsWith('map')) {
+        mapClosing = true;
         window.closeMapView();
         engine.goToScene('backSpecialScene');
         return;
