@@ -32,9 +32,10 @@ title: Begin making arrangements for a proper Congress of Soviets in Kharkiv!
 max-visits: 1
 go-to: ukraine_menu
 on-arrival: {!
-  Q.instability -= 1; 
-  Q.democraticitiy -= 5; 
-  Q.upr_relation -= 10; 
+	Q.instability -= 1; 
+	Q.democraticitiy -= 5; 
+	Q.upr_relation -= 10; 
+	Q.ukrainian_congress_timer = 0; 
 !}
 
 Our delegates in Kyiv are ordered to head for Kharkiv, where we've begun hastily preparing for a new congress. 
