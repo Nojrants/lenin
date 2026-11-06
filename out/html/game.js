@@ -516,8 +516,8 @@ window.mapPartyColors = {
     don: '--cossack',
     greens: '#1f9d6b',
     moldavia: '#d4b72c',
-    transcaucasia: '#8a5a9e',
-    georgia: '#c0392b',
+    transcaucasia: '--m-color',
+    georgia: '--m-color',
     azerbaijan: '#3f9c5a',
     armenia: '#e07b39',
     whites: '#d9d3bf',
@@ -679,12 +679,12 @@ window.mapDemographics = {
         classes: { elites: 1, middle: 3, clergy: 0.6, workers: 2, peasants: 78, kulaks: 6, soldiers: 5, intelligentsia: 1, underclass: 3, students: 0.2 } },
     kostroma: { pop: 1, soviet_power: 10,
         classes: { elites: 1, middle: 3, clergy: 0.6, workers: 2, peasants: 78, kulaks: 6, soldiers: 5, intelligentsia: 1, underclass: 3, students: 0.2 } },
-    georgia: { pop: 1, soviet_power: 10,
-        classes: { elites: 1, middle: 3, clergy: 0.6, workers: 2, peasants: 78, kulaks: 6, soldiers: 5, intelligentsia: 1, underclass: 3, students: 0.2 } },
+    georgia: { pop: 2.1, soviet_power: 10,
+        classes: { elites: 1.124, middle: 6.19, clergy: 0.514, workers: 16.19, peasants: 73.333, kulaks: 0.0, soldiers: 0.952, intelligentsia: 0.714, underclass: 0.886, students: 0.095 } },
     stavropol: { pop: 1, soviet_power: 10,
         classes: { elites: 1, middle: 3, clergy: 0.6, workers: 2, peasants: 78, kulaks: 6, soldiers: 5, intelligentsia: 1, underclass: 3, students: 0.2 } },
-    kars: { pop: 1, soviet_power: 10,
-        classes: { elites: 1, middle: 3, clergy: 0.6, workers: 2, peasants: 78, kulaks: 6, soldiers: 5, intelligentsia: 1, underclass: 3, students: 0.2 } },
+    kars: { pop: 0.252, soviet_power: 10,
+        classes: { elites: 0.476, middle: 0.833, clergy: 0.437, workers: 1.984, peasants: 91.27, kulaks: 0.0, soldiers: 3.968, intelligentsia: 0.198, underclass: 0.794, students: 0.04 } },
     nizhny: { pop: 2, soviet_power: 45,
         classes: { elites: 3, middle: 12, clergy: 0.6, workers: 25, peasants: 25, kulaks: 2, soldiers: 12, intelligentsia: 5, underclass: 13, students: 1.4 } },
     terek: { pop: 1, soviet_power: 10,
@@ -693,12 +693,12 @@ window.mapDemographics = {
         classes: { elites: 3, middle: 12, clergy: 0.6, workers: 25, peasants: 25, kulaks: 2, soldiers: 12, intelligentsia: 5, underclass: 13, students: 1.4 } },
     penza: { pop: 1, soviet_power: 10,
         classes: { elites: 1, middle: 3, clergy: 0.6, workers: 2, peasants: 78, kulaks: 6, soldiers: 5, intelligentsia: 1, underclass: 3, students: 0.2 } },
-    armenia: { pop: 1, soviet_power: 10,
-        classes: { elites: 1, middle: 3, clergy: 0.6, workers: 2, peasants: 78, kulaks: 6, soldiers: 5, intelligentsia: 1, underclass: 3, students: 0.2 } },
+    armenia: { pop: 0.8, soviet_power: 10,
+        classes: { elites: 0.8, middle: 0.25, clergy: 0.675, workers: 8.75, peasants: 87.5, kulaks: 0.0, soldiers: 1.0, intelligentsia: 0.375, underclass: 0.6, students: 0.05 } },
     astrakhan: { pop: 1, soviet_power: 10,
         classes: { elites: 1, middle: 3, clergy: 0.6, workers: 2, peasants: 78, kulaks: 6, soldiers: 5, intelligentsia: 1, underclass: 3, students: 0.2 } },
-    azerbaijan: { pop: 1, soviet_power: 10,
-        classes: { elites: 1, middle: 3, clergy: 0.6, workers: 2, peasants: 78, kulaks: 6, soldiers: 5, intelligentsia: 1, underclass: 3, students: 0.2 } },
+    azerbaijan: { pop: 0.85, soviet_power: 10,
+        classes: { elites: 1.576, middle: 1.012, clergy: 0.059, workers: 20.0, peasants: 74.118, kulaks: 0.0, soldiers: 1.176, intelligentsia: 0.706, underclass: 1.176, students: 0.176 } },
     simbirsk: { pop: 1, soviet_power: 10,
         classes: { elites: 1, middle: 3, clergy: 0.6, workers: 2, peasants: 78, kulaks: 6, soldiers: 5, intelligentsia: 1, underclass: 3, students: 0.2 } },
     dagestan: { pop: 1, soviet_power: 10,
@@ -2391,8 +2391,10 @@ window.sovietRiggingExponent = 1.5;
 
 // left-to-right order of parties in charts and tables
 window.electionChartOrder = ['anarchist', 'maximalist', 'b', 'sdi', 'left_m', 'm',
-    'right_m', 'ukrainian_sd', 'bundist', 'lsr', 'sr', 'right_sr', 'ukrainian_sr',
-    'popular_socialist', 'agrarian', 'polish', 'zionist', 'k', 'rightist', 'other'];
+    'right_m', 'socialist_federalist', 'dashnak', 'ukrainian_sd', 'bundist', 'lsr', 'sr',
+    'right_sr', 'ukrainian_sr', 'muslim_sd', 'musavat', 'muslim_socialist', 'ittihad',
+    'national_democrat', 'armenian_populist', 'popular_socialist', 'agrarian', 'polish',
+    'zionist', 'k', 'rightist', 'other'];
 
 // display names: legend (chart) and table (plural)
 window.electionNames = {
@@ -2415,13 +2417,22 @@ window.electionNames = {
     zionist: { legend: 'Zionist', table: 'Zionists' },
     polish: { legend: 'Polish Party', table: 'Polish Parties' },
     agrarian: { legend: 'Agrarian Party', table: 'Agrarian Parties' },
-    bundist: { legend: 'Bundist', table: 'Bundists' }
+    bundist: { legend: 'Bundist', table: 'Bundists' },
+    socialist_federalist: { legend: 'Socialist-Federalist', table: 'Socialist-Federalists' },
+    dashnak: { legend: 'Dashnak', table: 'Dashnaks' },
+    musavat: { legend: 'Musavat', table: 'Musavat' },
+    muslim_socialist: { legend: 'Muslim Socialist', table: 'Muslim Socialists' },
+    ittihad: { legend: 'Ittihad', table: 'Ittihad' },
+    muslim_sd: { legend: 'Muslim SD', table: 'Muslim SDs' },
+    national_democrat: { legend: 'National Democrat', table: 'National Democrats' },
+    armenian_populist: { legend: 'Armenian Populist', table: 'Armenian Populist Party' }
 };
 
 // regions for multi-province elections
 window.mapRegions = {
     ukraine: ['volhynia', 'podolia', 'kyiv', 'chernigov', 'poltava', 'kharkov',
-        'yekaterinoslav', 'kherson', 'taurida']
+        'yekaterinoslav', 'kherson', 'taurida'],
+    transcaucasia: ['georgia', 'azerbaijan', 'armenia', 'kars']
 };
 
 // local parties by region. steals: stages applied in order; each stage is
@@ -2439,12 +2450,54 @@ window.mapLocalPolitics = {
                 ukrainian_sr: { ukrainian_sd: 0.7, b: 0.3 }
             }
         ]
+    },
+    transcaucasia: {
+        parties: ['socialist_federalist', 'dashnak', 'muslim_sd', 'musavat', 'muslim_socialist',
+            'ittihad', 'national_democrat', 'armenian_populist', 'zionist'],
+        // national parties not on the ballot here: their support goes to other
+        excluded: ['sdi', 'lsr', 'anarchist', 'maximalist', 'popular_socialist'],
+        steals: [
+            {
+                dashnak: { sr: 0.15, other: 0.1 },
+                armenian_populist: { k: 0.6, rightist: 0.5 }
+            }
+        ],
+        // stages applied only in one province, after the regional ones
+        provinceSteals: {
+            georgia: [{
+                m: { sr: 0.35, b: 0.35, left_m: 0.6, right_m: 0.6 },
+                socialist_federalist: { sr: 0.4, other: 0.3 },
+                national_democrat: { k: 0.6, rightist: 0.5, other: 0.3 }
+            }],
+            armenia: [{
+                dashnak: { sr: 0.4, b: 0.1, other: 0.2 }
+            }],
+            kars: [{
+                socialist_federalist: { sr: 0.3 },
+                muslim_socialist: { sr: 0.3 },
+                ittihad: { k: 0.4, rightist: 0.5 }
+            }],
+            azerbaijan: [{
+                muslim_sd: { left_m: 0.5, m: 0.3, b: 0.15 },
+                muslim_socialist: { sr: 0.5 },
+                ittihad: { k: 0.6, rightist: 0.6, other: 0.3 }
+            }]
+        }
     }
 };
 
 // minorities (percent of a province) and the local parties they vote for
-window.mapMinorityParties = { jews: ['zionist', 'bundist'], poles: ['polish'] };
+window.mapMinorityParties = {
+    jews: ['zionist', 'bundist'],
+    poles: ['polish'],
+    muslims: ['musavat', 'muslim_socialist', 'ittihad', 'muslim_sd'],
+    armenians: ['dashnak', 'armenian_populist']
+};
 window.mapMinorityNationalShare = 0.5;    // share of a minority voting for its own parties
+window.mapMinorityShare = { muslims: 0.85, armenians: 0.85 };    // per-minority override
+// relative weight of a party among the parties of one minority (default 1)
+window.mapMinorityPartyWeight = { musavat: 3, muslim_socialist: 1.5, ittihad: 1.2,
+    muslim_sd: 1, dashnak: 4, armenian_populist: 1 };
 window.mapProvinceMinorities = {
     volhynia: { jews: 13, poles: 6 },
     podolia: { jews: 12, poles: 4 },
@@ -2454,7 +2507,11 @@ window.mapProvinceMinorities = {
     kharkov: { jews: 5, poles: 1 },
     yekaterinoslav: { jews: 7, poles: 1 },
     kherson: { jews: 10, poles: 2 },
-    taurida: { jews: 3, poles: 1 }
+    taurida: { jews: 3, poles: 1 },
+    kars: { jews: 0.5, muslims: 59.5, armenians: 29.8 },
+    georgia: { jews: 0.6, muslims: 14.3, armenians: 9.5 },
+    azerbaijan: { jews: 1.4, muslims: 80, armenians: 5.9 },
+    armenia: { jews: 0.1, muslims: 30, armenians: 56.3 }
 };
 Object.keys(window.mapLocalPolitics).forEach(function(region) {
     (window.mapRegions[region] || []).forEach(function(id) {
@@ -2533,13 +2590,25 @@ window.mapElectionProvince = function(id, options) {
         }
     });
 
+    if (lp && lp.excluded) {
+        lp.excluded.forEach(function(x) {
+            if (support[x] !== undefined) {
+                support.other += support[x];
+                delete support[x];
+            }
+        });
+    }
+
     // 3. local parties take a share of other parties' support, stage by stage
     if (lp) {
-        lp.steals.forEach(function(stage) {
+        lp.steals.concat((lp.provinceSteals || {})[id] || []).forEach(function(stage) {
             var original = {};
             Object.keys(support).forEach(function(x) { original[x] = support[x]; });
             var taken = {};
             Object.keys(stage).forEach(function(thief) {
+                if (support[thief] === undefined) {
+                    return;
+                }
                 Object.keys(stage[thief]).forEach(function(from) {
                     if (original[from] === undefined) {
                         return;
@@ -2568,11 +2637,14 @@ window.mapElectionProvince = function(id, options) {
             if (!options2.length) {
                 return;
             }
-            var amount = total * (p.minorities[m] / 100) * window.mapMinorityNationalShare;
+            var amount = total * (p.minorities[m] / 100) *
+                (window.mapMinorityShare[m] !== undefined ?
+                    window.mapMinorityShare[m] : window.mapMinorityNationalShare);
             var weights = options2.map(function(x) {
                 // bundists do better in less rural provinces, zionists in more rural ones
                 return x === 'bundist' ? 0.25 + 0.6 * urbanShare :
-                    x === 'zionist' ? 0.75 - 0.6 * urbanShare : 1;
+                    x === 'zionist' ? 0.75 - 0.6 * urbanShare :
+                    (window.mapMinorityPartyWeight[x] || 1);
             });
             var weightTotal = weights.reduce(function(a, b) { return a + b; }, 0);
             options2.forEach(function(x, i) {
