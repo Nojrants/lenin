@@ -483,14 +483,12 @@ After days of tough negotiations, there is a viable offer on the table. Some Bol
 
 [?if lenin_anger != 1: Lenin however is absolutely furious that we have even entertained such a prospect, though the measured agreement is at least some consolation. ?]
 
-The Leninists push for breaking off talks entirely, though it's possible we could cautiously reopen negotiations. If so, it's now clear that anything less than this would be a non-starter: 
-<ul>
-Recognition of the inviolability of the decrees/actions of the 2nd Soviet Congress.
-Recognition of the CEC as the coutnry's sole supreme authority.
-CEC membership only to groups previously represented in the soviets (i.e. no expanded "People's Council").
-Lenin and Trotsky must remain in government.<br>
-The Bolsheviks must retain a preponderance of government posts (~75%).
-</ul>
+The Leninists push for breaking off talks entirely, though it's possible we could cautiously reopen negotiations. If so, it's now clear that anything less than this would be a non-starter:<br><ul>
+    <li>Recognition of the inviolability of the decrees/actions of the 2nd Soviet Congress.</li>
+	<li>Recognition of the CEC as the coutnry's sole supreme authority.</li>
+	<li>CEC membership only to groups previously represented in the soviets (i.e. no expanded "People's Council").</li>
+	<li>Lenin and Trotsky must remain in government.</li>
+	<li>The Bolsheviks must retain a preponderance of government posts (~75%).</li></ul>
 
 - @reopen_negotiations
 - @break_talks
