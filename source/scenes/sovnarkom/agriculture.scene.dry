@@ -9,9 +9,9 @@ on-arrival: {!
   Q.area_cultivated = Math.round(Q.ag_land/100*102,327,000); 
   Q.ag_labor_rounded = Math.round(100*Q.ag_labor)/100; 
   Q.ag_labor_number = Math.round((Q.ag_labor/100) * 46.23); 
-  Q.ag_capital_number = Math.round(Q.ag_capital * 60.5); 
+  Q.ag_capital_number = Math.round((Q.ag_capital/100) * 60.5); 
   Q.ag_capital_rounded = Math.round(100*Q.ag_capital)/100; 
-  Q.ag_inputs_number = Math.round(Q.ag_inputs * 15.2); 
+  Q.ag_inputs_number = Math.round((Q.ag_inputs/100) * 15.2); 
   Q.ag_inputs_rounded = Math.round(100*Q.ag_inputs)/100; 
   Q.ag_productivity_rounded = Math.round(100*Q.ag_productivity)/100; 
   Q.ag_capacity_rounded = Math.round(10000*Q.ag_capacity)/100;
@@ -48,7 +48,7 @@ on-arrival: {!
     </div>
     <div style="padding:3px 8px; line-height:1.2; white-space:nowrap;"><b>Area cultivated</b><span style="float:right;">[+ area_cultivated +] dessiatines ([+ ag_land +]%)</span></div>
     <div style="padding:3px 8px; line-height:1.2; background:rgba(215,205,180,0.12); white-space:nowrap;"><b>Labor</b><span style="float:right;">[+ ag_labor_number +] million people ([+ ag_labor_rounded +]%)</span></div>
-    <div style="padding:3px 8px; line-height:1.2; white-space:nowrap;"><b>Capital</b><span style="float:right;">[+ ag_capital_rounded +] million rubles ([+ ag_capital_rounded +]%)</span></div>
+    <div style="padding:3px 8px; line-height:1.2; white-space:nowrap;"><b>Capital</b><span style="float:right;">[+ ag_capital_number +] million rubles ([+ ag_capital_rounded +]%)</span></div>
     <div style="padding:3px 8px; line-height:1.2; background:rgba(215,205,180,0.12); white-space:nowrap;"><b>Inputs</b><span style="float:right;">[+ ag_inputs_number +] million rubles ([+ ag_inputs_rounded +]%)</span></div>
     <div style="padding:3px 8px; line-height:1.2; white-space:nowrap;"><b>Productivity</b><span style="float:right;">[+ ag_productivity_rounded +]%</span></div>
   <div style="padding:3px 8px; line-height:1.2; white-space:nowrap;"><b>Rural instability</b><span style="float:right;">[+ ag_stability : instability +]</span></div>
