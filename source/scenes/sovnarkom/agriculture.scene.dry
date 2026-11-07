@@ -188,7 +188,7 @@ on-arrival: {!
   Q.instability += 2; 
   Q.peasants_unrest -= 10; Q.kulaks_unrest -= 8; Q.elites_unrest += 5;
   Q.peasants_strength += 10; Q.kulaks_strength += 15; Q.elites_strength -= 2; 
-  Q.peasants_b += 5*(1-b_dissent); 
+  Q.peasants_b += 5*(1-Q.b_dissent); 
   Q.efficacy_agriculture -= 0.2;
   Q.agriculture_expend += 0.5; 
   Q.food_production *= 0.85;
@@ -206,7 +206,7 @@ on-arrival: {!
   Q.instability -= 2; 
   Q.peasants_unrest += 5;
   Q.kulaks_unrest += 2;
-  Q.peasants_b -= 2*(1-b_dissent); 
+  Q.peasants_b -= 2*(1-Q.b_dissent); 
   Q.food_production *= 1.05;
 !}
 
