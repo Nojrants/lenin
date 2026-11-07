@@ -1,20 +1,94 @@
 title: Agriculture
 new-page: true
 is-card: true
-on-arrival: agricultural_policy_timer += 2; week_actions += 1
 view-if: agricultural_policy_timer == 0 and agriculture_minister_party = "Bolshevik"
 card-image: img/agriculture.PNG
 tags: sovnarkom, government
+on-arrival: {!
+  Q.agricultural_policy_timer += 2; Q.week_actions += 1
+  Q.area_cultivated = Math.round(Q.ag_land/100*102,327,000); 
+  Q.ag_labor_rounded = Math.round(100*Q.ag_labor)/100; 
+  Q.ag_labor_number = Math.round(Q.ag_labor * 46.23); 
+  Q.ag_capital_number = Math.round(Q.ag_capital * 60.5); 
+  Q.ag_capital_rounded = Math.round(100*Q.ag_capital)/100; 
+  Q.ag_inputs_number = Math.round(Q.ag_inputs * 15.2); 
+  Q.ag_inputs_rounded = Math.round(100*Q.ag_inputs)/100; 
+  Q.ag_productivity_rounded = Math.round(100*Q.ag_productivity)/100; 
+  Q.ag_capacity_rounded = Math.round(100*Q.ag_capacity)/100;
+  Q.ag_output_rounded = Math.round(100*Q.ag_output)/100;
+  Q.land_reform_progress_percentage = Q.land_reform_progress * 10;
+!}
 
 = Agricultural Policy
 
-Russia is an agrarian country, so rural policy is a crucial part of the government's portfolio. The peasants are hungry for land, and the workers are hungry for bread. There must be a way to satisfy these demands, or the country will collapse.
+<table style="width:100%; table-layout:fixed; border-collapse:collapse;">
+<tr>
+<td style="width:50%; vertical-align:top; padding:0 5px 5px 5px;">
+  <div style="border:3px solid #666; border-radius:6px; padding:0; margin-bottom:10px; font-size:0.85em; overflow:hidden;">
+    <div style="background:#e8e8e8; border-bottom:1px solid #ccc; padding:5px 6px; margin-bottom:6px; font-size:1.2em; line-height:1.2; font-weight:bold; text-align:center; white-space:nowrap;">
+      Food Supply
+    </div>
+    <div style="padding:3px 8px; line-height:1.2; white-space:nowrap;"><b>Urban supply</b><span style="float:right;">[+ food_supply_urban +] million kg/year</span></div>
+    <div style="padding:3px 8px; line-height:1.2; white-space:nowrap;"><b>Urban demand</b><span style="float:right;">[+ food_demand_urban +] million kg/year</span></div>
+    <div style="padding:3px 8px; line-height:1.2; white-space:nowrap;"><b>Food shortage</b><span style="float:right;">[+ hunger +]%</span></div>
+  </div>
+  
+  <div style="border:3px solid #666; border-radius:6px; padding:0; margin-bottom:10px; font-size:0.80em; overflow:hidden;">
+    <div style="background:#e8e8e8; border-bottom:1px solid #ccc; padding:5px 6px; margin:0 0 6px 0; font-size:1.2em; line-height:1.2; font-weight:bold; text-align:center; white-space:nowrap;">
+      Production (relative to 1913 levels)
+    </div>
+    <div style="padding:3px 8px; line-height:1.2; white-space:nowrap;"><b>Area cultivated</b><span style="float:right;">[+ area_cultivated +] dessiatines ([+ ag_land +]%)</span></div>
+    <div style="padding:3px 8px; line-height:1.2; background:rgba(215,205,180,0.12); white-space:nowrap;"><b>Labor participation</b><span style="float:right;">[+ ag_labor_number +] million people ([+ ag_labor_rounded +]%)</span></div>
+    <div style="padding:3px 8px; line-height:1.2; white-space:nowrap;"><b>Available capital</b><span style="float:right;">[+ ag_capital_rounded +] million rubles ([+ ag_capital_rounded +]%)</span></div>
+    <div style="padding:3px 8px; line-height:1.2; background:rgba(215,205,180,0.12); white-space:nowrap;"><b>Inputs</b><span style="float:right;">[+ ag_inputs_number +] million rubles ([+ ag_inputs_rounded +]%)</span></div>
+    <div style="padding:3px 8px; line-height:1.2; white-space:nowrap;"><b>Productivity</b><span style="float:right;">[+ ag_productivity_rounded +]%</span></div>
+  <div style="padding:3px 8px; line-height:1.2; white-space:nowrap;"><b>Rural instability</b><span style="float:right;">[+ ag_stability : instability +]</span></div>
+  
+  <div style="display:flex; gap:8px; margin:0; padding:0; border-top:2px solid #666;">
+        <div style="flex:1; min-width:0; padding:3px 0; line-height:1.2; white-space:nowrap;">
+  <div style="padding:3px 8px; line-height:1.2; white-space:nowrap;"><b>Total capacity</b><span style="float:right;">[+ ag_capacity_rounded +]%</span></div>
+  <div style="padding:3px 8px; line-height:1.2; white-space:nowrap;"><b>Total output</b><span style="float:right;">[+ ag_output_rounded +]%</span></div>
+</div></div></div>
+  
+</td>
+<td style="width:50%; vertical-align:top; padding:0 5px 5px 5px;">
+  
+  <div style="border:3px solid #666; border-radius:6px; padding:0; margin-bottom:10px; font-size:0.80em; overflow:hidden;">
+    <div style="background:#e8e8e8; border-bottom:1px solid #ccc; padding:5px 6px; margin:0 0 6px 0; font-size:1.2em; line-height:1.2; font-weight:bold; text-align:center; white-space:nowrap;">
+      Funding & Investment
+    </div>
+    <div style="padding:3px 8px; line-height:1.2; white-space:nowrap;"><b>Expenditure</b><span style="float:right;"><span style="color: var(--level7-color);">-[+ agriculture_expend +]</span></span></div>
+    
+  <div style="display:flex; gap:8px; margin:0; padding:0; border-top:2px solid #666;">
+        <div style="flex:1; min-width:0; padding:3px 0; line-height:1.2; white-space:nowrap;">
+  <div style="padding:3px 8px; line-height:1.2; background:rgba(215,205,180,0.12); white-space:nowrap;"><b>Land Reform</b><span style="float:right;">[+ land_reform_progress_percentage +]% completed</span></div>
+</div></div>
+</div>
 
->>Urban food demand: [+ food_demand_urban +] million kg/year
+  <div style="border:3px solid #666; border-radius:6px; padding:0; margin-bottom:10px; font-size:0.80em; overflow:hidden;">
+    <div style="background:#e8e8e8; border-bottom:1px solid #ccc; padding:5px 6px; margin:0 0 6px 0; font-size:1.2em; line-height:1.2; font-weight:bold; text-align:center; white-space:nowrap;">
+      Land Ownership
+    </div>
+  
+    <div style="padding:3px 8px; line-height:1.2; white-space:nowrap;"><b>State farms</b><span style="float:right;">[+ state_land +]%</span></div>
+    <div style="padding:3px 8px; line-height:1.2; white-space:nowrap;"><b>Collectives</b><span style="float:right;">[+ collective_land +]%</span></div>
+    
+<div style="display:flex; gap:8px; margin:0; padding:0; border-top:2px solid #666;">
+        <div style="flex:1; min-width:0; padding:3px 0; line-height:1.2; white-space:nowrap;">
+  <div style="padding:3px 8px; line-height:1.2; white-space:nowrap;"><b>Peasant farms</b><span style="float:right;">[+ peasant_land +]%</span></div>
+  <div style="padding:3px 8px; line-height:1.2; white-space:nowrap;"><b>Peasant cooperatives</b><span style="float:right;">[+ cooperative_land +]%</span></div>
+  <div style="padding:3px 8px; line-height:1.2; white-space:nowrap;"><b>Association holdings</b><span style="float:right;">[+ association_land +]%</span></div>
+</div></div>
 
->>Urban food supply: [+ food_supply_urban +] million kg/year
-
->>Food shortage: [+ hunger +]%
+<div style="display:flex; gap:8px; margin:0; padding:0; border-top:2px solid #666;">
+    <div style="flex:1; min-width:0; padding:3px 0; line-height:1.2; white-space:nowrap;">
+  	<div style="padding:3px 8px; line-height:1.2; background:rgba(215,205,180,0.12); white-space:nowrap;"><b>Traditional communes</b><span style="float:right;">[+ commune_land +]%</span></div>
+    <div style="padding:3px 8px; line-height:1.2; background:rgba(215,205,180,0.12); white-space:nowrap;"><b>Cossack holdings</b><span style="float:right;">[+ cossack_land +]%</span></div>
+      	<div style="padding:3px 8px; line-height:1.2; background:rgba(215,205,180,0.12); white-space:nowrap;"><b>Gentry estates</b><span style="float:right;">[+ commune_land +]%</span></div>
+        <div style="padding:3px 8px; line-height:1.2; background:rgba(215,205,180,0.12); white-space:nowrap;"><b>Church lands</b><span style="float:right;">[+ church_land +]%</span></div>
+</div></div></div>
+</tr>
+</table>
 
 # options: start land committees
 # - create a state buyer for grain, with a fixed price
@@ -113,13 +187,13 @@ on-arrival: {!
   Q.resources -= 1;
   Q.instability += 2; 
   Q.peasants_unrest -= 10; Q.kulaks_unrest -= 8; Q.elites_unrest += 5;
-  Q.peasants_strength += 10; Q.kulaks_strength += 15;
-  Q.elites_strength -= 2; 
+  Q.peasants_strength += 10; Q.kulaks_strength += 15; Q.elites_strength -= 2; 
   Q.peasants_b += 5*(1-b_dissent); 
   Q.efficacy_agriculture -= 0.2;
   Q.agriculture_expend += 0.5; 
   Q.food_production *= 0.85;
   Q.food_sold *= 0.9; 
+  Q.land_reform_progress += 1; 
   if (Q.coalition_government > 0 && Q.lsr_in_gov) Q.coalition_tension -= 0.5; 
 !}
 
@@ -139,12 +213,14 @@ on-arrival: {!
 Protections are established for current large estates, preventing the land from being broken-up and redistributed. Peasants grumble that we are compromising the land reform process, though on the other hand this safeguards part of the food supply.
 
 @establish_communes
-title: Establish communal farms, to more effectively pool resources. 
+title: Establish collective farms, to more effectively pool resources. 
 subtitle: -0.5 resources
 max-visits: 1
 on-arrival: {!
   Q.resources -= 0.5; 
   Q.efficacy_agriculture += 0.05; 
+  Q.collective_land += 0.05;
+  Q.state_land -= 0.05; 
 !}
 
 We establish a number of communal farms out of existing estates, to be overseen by peasant committees.
@@ -158,6 +234,7 @@ on-arrival: {!
   Q.efficacy_agriculture += 0.05; 
   Q.peasants_strength += 10;
   Q.kulaks_strength += 10;
+  Q.cooperative_land += (Q.peasant_land * 0.02); Q.peasant_land *= 0.98; 
 !}
 
 We launch a campaign supporting cooperative purchasing, cultivation, and marketing. 
