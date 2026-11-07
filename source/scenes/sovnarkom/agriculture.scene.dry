@@ -58,7 +58,7 @@ new-page: true
 <span style="color: var(--bolshevik-color); font-weight:bold;">Corruption</span>
 </td>
 <td style="text-align:center; padding:5px; border-bottom:1px solid rgba(128,128,128,0.25);">
-[+ agriculture_corruption : efficacy +]
+[+ agriculture_corruption : corruption +]
 </td>
 </table>
 
