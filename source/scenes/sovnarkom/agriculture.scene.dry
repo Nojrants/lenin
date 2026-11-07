@@ -90,7 +90,7 @@ unavailable-subtitle: -0.5 resources – [?if resources < 0.5 : We lack the reso
 on-arrival: {!
   Q.resources -= 0.5; Q.agriculture_corruption_timer = 8;
   Q.efficacy_agriculture = Math.min(1, Q.efficacy_agriculture + 0.1);
-  Q.agriculture_corruption = Math.max(0, Q.agriculture_corruption - (0.2 * Q.efficacy_agriculture); 
+  Q.agriculture_corruption = Math.max(0, Q.agriculture_corruption - (0.2 * Q.efficacy_agriculture)); 
 !}
 
 @agriculture_null
