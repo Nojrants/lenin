@@ -862,6 +862,7 @@ title: We must reject the agreement still.
 new-page: true
 on-arrival: sdi_relation -= 10; left_m_relation -= 10; centre_m_relation -= 10; right_m_relation -= 15; lsr_relation -= 10; centre_sr_relation -= 15; right_sr_relation -= 15; ns_relation -= 15; democraticity -= 2; instability += 6; vikzhel_unrest += 20; moderate_dissent += 10; leninist_dissent -= 5; leftcom_dissent -= 5; right_sr_strength += 8; right_m_strength += 8; 
 
+= Vikzhel Negotiations
 
 Our sudden renegation on the agreement entirely shocks the other parties, seemingly proving the right socialists correct after all—more than likely compromise will be impossible from here on out. Likewise, we receive immense condemnation from various interest groups, and even some members of our own party.
 
