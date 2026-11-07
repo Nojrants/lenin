@@ -612,8 +612,8 @@ Q.ag_gdp = Q.ag_output * 100;
 Q.land_reform = 1;
 Q.land_reform_progress = 1;
 
-Q.state_land = 5.55;
-Q.collective_land = 0.05;
+Q.state_land = 5.6;
+Q.collective_land = 0;
 Q.peasant_land = 44; 
 Q.cooperative_land = 6.8;
 Q.commune_land = 28;
