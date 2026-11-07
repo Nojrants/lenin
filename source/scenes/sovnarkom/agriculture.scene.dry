@@ -84,7 +84,7 @@ on-arrival: {!
     <div style="flex:1; min-width:0; padding:3px 0; line-height:1.2; white-space:nowrap;">
   	<div style="padding:3px 8px; line-height:1.2; background:rgba(215,205,180,0.12); white-space:nowrap;"><b>Traditional communes</b><span style="float:right;">[+ commune_land_rounded +]%</span></div>
     <div style="padding:3px 8px; line-height:1.2; background:rgba(215,205,180,0.12); white-space:nowrap;"><b>Cossack holdings</b><span style="float:right;">[+ cossack_land_rounded +]%</span></div>
-      	<div style="padding:3px 8px; line-height:1.2; background:rgba(215,205,180,0.12); white-space:nowrap;"><b>Gentry estates</b><span style="float:right;">[+ commune_land_rounded +]%</span></div>
+      	<div style="padding:3px 8px; line-height:1.2; background:rgba(215,205,180,0.12); white-space:nowrap;"><b>Gentry estates</b><span style="float:right;">[+ gentry_land_rounded +]%</span></div>
         <div style="padding:3px 8px; line-height:1.2; background:rgba(215,205,180,0.12); white-space:nowrap;"><b>Church lands</b><span style="float:right;">[+ church_land_rounded +]%</span></div>
 </div></div></div>
 </tr>
