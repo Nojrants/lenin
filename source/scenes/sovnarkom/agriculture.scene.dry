@@ -18,14 +18,14 @@ on-arrival: {!
   Q.ag_output_rounded = Math.round(10000*Q.ag_output)/100;
   Q.land_reform_progress_percentage = Q.land_reform_progress * 10;
 
-  Q.state_land_rounded = Math.round(100*Q.state_land)/100;
-  Q.collective_land_rounded = Math.round(100*Q.collective_land)/100;
-  Q.peasant_land_rounded = Math.round(100*Q.peasant_land)/100;
-  Q.cooperative_land_rounded = Math.round(100*Q.cooperative_land)/100;
-  Q.commune_land_rounded = Math.round(100*Q.commune_land)/100;
-  Q.cossack_land_rounded = Math.round(100*Q.cossack_land)/100;
-  Q.gentry_land_rounded = Math.round(100*Q.gentry_land)/100;
-  Q.church_land_rounded = Math.round(100*Q.church_land)/100;
+  Q.state_land_rounded = Math.round(10*Q.state_land)/10;
+  Q.collective_land_rounded = Math.round(10*Q.collective_land)/10;
+  Q.peasant_land_rounded = Math.round(10*Q.peasant_land)/10;
+  Q.cooperative_land_rounded = Math.round(10*Q.cooperative_land)/10;
+  Q.commune_land_rounded = Math.round(10*Q.commune_land)/10;
+  Q.cossack_land_rounded = Math.round(10*Q.cossack_land)/10;
+  Q.gentry_land_rounded = Math.round(10*Q.gentry_land)/10;
+  Q.church_land_rounded = Math.round(10*Q.church_land)/10;
   
 !}
 
