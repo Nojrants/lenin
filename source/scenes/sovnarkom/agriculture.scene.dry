@@ -7,13 +7,13 @@ tags: sovnarkom, government
 on-arrival: {!
   Q.agricultural_policy_timer += 2; Q.week_actions += 1
   Q.area_cultivated = Math.round(Q.ag_land/100*102,327,000); 
-  Q.ag_labor_rounded = Math.round(100*Q.ag_labor)/100; 
+  Q.ag_labor_rounded = Math.round(10*Q.ag_labor)/10; 
   Q.ag_labor_number = Math.round((Q.ag_labor/100) * 46.23); 
   Q.ag_capital_number = Math.round((Q.ag_capital/100) * 60.5); 
-  Q.ag_capital_rounded = Math.round(100*Q.ag_capital)/100; 
+  Q.ag_capital_rounded = Math.round(10*Q.ag_capital)/10; 
   Q.ag_inputs_number = Math.round((Q.ag_inputs/100) * 15.2); 
-  Q.ag_inputs_rounded = Math.round(100*Q.ag_inputs)/100; 
-  Q.ag_productivity_rounded = Math.round(100*Q.ag_productivity)/100; 
+  Q.ag_inputs_rounded = Math.round(10*Q.ag_inputs)/10; 
+  Q.ag_productivity_rounded = Math.round(10*Q.ag_productivity)/10; 
   Q.ag_capacity_rounded = Math.round(10000*Q.ag_capacity)/100;
   Q.ag_output_rounded = Math.round(10000*Q.ag_output)/100;
   Q.land_reform_progress_percentage = Q.land_reform_progress * 10;
