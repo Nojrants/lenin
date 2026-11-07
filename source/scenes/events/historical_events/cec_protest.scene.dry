@@ -6,9 +6,9 @@ tags: event
 
 = Constituent Assembly Protests
 
-Our various attacks against the upcoming Constituent Assembly, and the recent outlawing of the Kadets in particular, have sparked major backlash among the opposition parties. Even among those sympathetic to us, it is claimed we are hurting the legitimacy of soviet power.  
+Our various attacks against the upcoming Constituent Assembly, and the recent outlawing of the <span style="color: var(--k-color); font-weight: bold;">Kadets</span> in particular, have sparked major backlash among the opposition parties. Even among those sympathetic to us, it is claimed we are hurting the legitimacy of soviet power.  
 
-A resolution has appeared in the CEC, initiated by the Left-SRs, which calls for Sovnarkom to be barred from interfering in the convocation of the Constituent Assembly, for Sovnarkom's accountability to the CEC to be reaffirmed, and for the decree outlawing the Kadets to be reversed.
+A resolution has appeared in the CEC, initiated by the <span style="color: var(--lsr-color); font-weight: bold;">Left-SRs</span>, which calls for Sovnarkom to be barred from interfering in the convocation of the Constituent Assembly, for Sovnarkom's accountability to the CEC to be reaffirmed, and for the decree outlawing the <span style="color: var(--k-color); font-weight: bold;">Kadets</span> to be reversed.
 
 We have the votes in the CEC to defeat this initiative easily, and the general Bolshevik opinion is that acquiescing to these demands would come across as serious weakness. On the other hand, we could potentially foster some goodwill among the other parties by letting the resolution pass.
 
@@ -20,7 +20,7 @@ title: Reject the resolution.
 
 We instruct our members to vote against the resolution, and it fails to pass. The final vote is 98 for, 150 against, with 3 abstentions. 
 
-The other parties are unsurprised but disappointed. 
+The other parties are disappointed but unsurprised. 
 
 
 @pass
@@ -32,4 +32,4 @@ on-arrival: {!
   Q.democraticity += 2;
 !}
 
-We instruct our members to abstain from the vote, allowing it to pass. The other parties are pleasantly surprised by our tolerance. The Kadets profit most of all, though they seem not at all grateful. 
+We instruct our members to abstain from the vote, allowing it to pass. The other parties are pleasantly surprised by our tolerance. The <span style="color: var(--k-color); font-weight: bold;">Kadets</span> profit most of all, though they seem not at all grateful. 
