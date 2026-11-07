@@ -332,6 +332,10 @@ Q.posts_corruption = 0.1;
 Q.nationalities_corruption = 0.1;
 Q.welfare_corruption = 0;
 
+Q.agriculture_admin = 0.25;
+Q.state_farm_funding = 0.1;
+Q.agriculture_subsidies = 0.4; 
+
 Q.sovnarkom_expend = 0.25;
 Q.internal_expend = 0.75;
 Q.foreignaffairs_expend = 0.5;
@@ -342,7 +346,7 @@ Q.trade_expend = 0.5;
 Q.finance_expend = 0.5;
 Q.justice_expend = 0.5;
 Q.labor_expend = 0.5;
-Q.agriculture_expend = 0.75;
+Q.agriculture_expend = Q.agriculture_admin + Q.state_farm_funding + Q.agriculture_subsidies; 
 Q.foodsupply_expend = 1;
 Q.posts_expend = 0.5; 
 Q.nationalities_expend = 0.25;
