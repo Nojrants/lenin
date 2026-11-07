@@ -1,52 +1,88 @@
 title: Food Shortages
 subtitle: Hunger reigns in the cities...
 new-page: true
-view-if: hunger >= 25 and food_shortages_timer = 0
-on-arrival: food_shortages_timer += 6; workers_none += 4; workers_m -= 3; workers_sr -= 3; workers_k -= 4; workers_other -= 1; workers_anarchist += 1; workers_b += 3 if not b_is_player; prov_gov_legitimacy -= 4; coup_progress += 1; labor_unrest += 2 if labor_unrest < 70; crime_rate += 3 if crime < 50
-face-image: img/breadline.jpg
+view-if: hunger >= 25 and food_shortages_timer = 0 and year != 1917
 tags: event
+on-arrival: {!
+  Q.food_shortages_timer += 8;
+  Q.workers_none += 2; 
+  Q.workers_b -= 4; Q.middle_b -= 2; Q.intelligentsia_b -= 2
+  Q.workers_unrest += 5; Q.middle_unrest += 2; Q.intelligentsia_unrest += 2;
+  if (Q.crime < 50) { Q.crime_rate += 3; }
+  Q.instability += 0.5; Q.disillusionment += 0.1;
+
+  if (Q.m_in_gov != 1) {
+    Q.workers_left_m += 1; Q.workers_m += 1; Q.workers_right_m += 1; 
+    Q.middle_left_m += 0.5; Q.middle_m += 0.5; Q.middle_right_m += 1; 
+  } else {
+    Q.workers_left_m += 0.5; Q.workers_m += 0.5; Q.workers_right_m += 0.5;
+  }
+  if (Q.lsr_in_gov != 1) {
+    Q.workers_lsr += 1;
+  } else {
+    Q.workers_lsr += 0.5;
+  }
+!}
 
 = Food Shortages
 
-The cities are wracked by hunger. Rationing and bread lines have been a constant feature of the past year of war, and they show no signs of improving.
+The cities are wracked by hunger. Rationing and bread lines become a constant feature of urban life, with little sign of improvement. 
 
 Workers are beginning to wonder: if the revolution does not solve the issue of bread, then what was it even for?
 
-# policies: expand rationing amd reduce rations, target private profiteers and the black market, form a grain monopoly, 
-- @party_funds: The party should use its funds to help the workers!
+- @increase_rations
 - @agitate
-- @grain_monopoly
+- @reserves
 - @increase_price
-- @nothing: Unfortunately, there is nothing we can do.
+- @nothing
 
-@party_funds
-view-if: player_party = "b" or player_party = "m" or player_party = "sr"
-choose-if: (player_party = "b" and b_resources >= 1) or (player_party = "m" and m_resources >= 1) or (player_party = "sr" and sr_resources >= 1)
-subtitle: -1 resource
-on-arrival: b_resources -= 1 if player_party = "b"; m_resources -= 1 if player_party = "m"; sr_resources -= 1 if player_party = "sr"; workers_b += 4*(1-b_dissent) if player_party = "b"; workers_m += 4*(1-m_dissent) if player_party = "m"; workers_sr += 4*(1-sr_dissent) if player_party = "sr"
+@increase_rations
+title: Issue emergency rations in the cities to offset shortages. 
+choose-if: resources >= 1
+subtitle: -1 resources
+unavailable-subtitle: -1 resources – We lack the resources. 
+on-arrival: {!
+  Q.resources -= 1;
+  Q.workers_b += 4*(1-Q.b_dissent); 
+  Q.workers_unrest -= 5; 
+!}
 
-We have used some of our party resources to send "bag-men" to purchase grain directly from peasants, and provide them to the workers. These are at best temporary measures, however.
+We use government resources to purchase grain directly from the peasants, and issue a round of emergency rations. These are at best temporary measures, however.
 
 @agitate
-title: We must agitate against the Provisional Government for failing to address the food supply!
-view-if: player_party = "b" and not b_in_gov
-on-arrival: workers_b += 4*(1-b_dissent); prov_gov_legitimacy -= 2;
+title: We must agitate against the bourgeois speculators who are sabotaging the grain supply! 
+on-arrival: {!
+  Q.workers_b += 2*(1-Q.b_dissent); 
+  Q.instability += 0.5;
+  Q.workers_unrest -= 3; Q.peasants_unrest += 2; Q.kulaks_unrest += 4; Q.middle_unrest += 2;
+!}
 
-We publish articles and make speeches about the Provisional Government's failure to provide bread. The propaganda is effective in turning the workers against the bourgeois government, and it creates an impression that the Bolshevik party is the only party taking the problem seriously.
+We publish articles and make speeches blaming the crisis on various counterrevolutionary forces. Although this redirects some of the anger, there are limits to how far propaganda can shield us. 
 
-@nothing
-on-arrival: workers_m -= 2 if player_party = "m"; workers_sr -= 2 if player_party = "sr"; workers_b -= 2 if player_party = "b"; workers_k -= 2 if player_party = "k";
-go-to: root
+@reserves 
+title: Open our urban reserves to increase the supply in the cities. 
+choose-if: urban_stockpile > 0 
+unavailable-subtitle: The urban stockpiles are drained. 
+on-arrival: {!
+  Q.urban_stockpile_release += 0.2; 
+  Q.workers_b += 2*(1-Q.b_dissent); 
+  Q.workers_unrest -= 3;
+!}
 
-@grain_monopoly
-title: Create a state monopoly for grain purchasing.
-subtitle: -2 budget
-view-if: player_in_gov and grain_monopoly = 0
-go-to: food_policy.state_buyer
+We use our reserves to offset some of the shortages in the cities, although this is at best a temporary concession if the underlying problem is not addressed. 
 
 
 @increase_price
-title: Increase the price of grain paid out to farmers.
-subtitle: -2 budget
-view-if: grain_monopoly = 1 and player_in_gov
+title: Increase the price of grain paid out to peasant producers.
+subtitle: -1 resources 
+choose-if: resources >= 1 
+on-arrival: resouces -= 1 
 go-to: food_policy.increase_price
+
+@nothing
+title: There's nothing we can do. 
+on-arrival: {!
+  Q.workers_unrest += 4;
+  Q.workers_b -= 2; 
+!}
+go-to: root
