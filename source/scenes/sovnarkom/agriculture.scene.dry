@@ -79,7 +79,7 @@ on-arrival: agriculture_expend -= 0.25; efficacy_agriculture += 0.1 if efficacy_
 title: Hire administrative personnel
 subtitle: -0.5 resources
 choose-if: resources >= 0.5
-unavailabile-subtitle: -0.5 resources – We lack the resources. 
+unavailable-subtitle: -0.5 resources – We lack the resources. 
 on-arrival: efficacy_agriculture += 0.2 if efficacy_agriculture < 1; agriculture_expend += 0.25; resources -= 0.5;
 
 @corruption
