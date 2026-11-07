@@ -297,21 +297,21 @@ Q.welfare_minister_stats =
         + (Q.leaders[Q.welfare_minister].nationalities / 15)
     ));
 
-Q.finalefficacy_sovnarkom      = Q.efficacy_sovnarkom      + Q.sovnarkom_minister_stats;
-Q.finalefficacy_foreign        = Q.efficacy_foreign        + Q.foreign_minister_stats;
-Q.finalefficacy_military       = Q.efficacy_military       + Q.military_minister_stats;
-Q.finalefficacy_enlightenment  = Q.efficacy_enlightenment  + Q.enlightenment_minister_stats;
-Q.finalefficacy_internal       = Q.efficacy_internal       + Q.internal_minister_stats;
-Q.finalefficacy_railways       = Q.efficacy_railways       + Q.railways_minister_stats;
-Q.finalefficacy_trade          = Q.efficacy_trade          + Q.trade_minister_stats;
-Q.finalefficacy_finance        = Q.efficacy_finance        + Q.finance_minister_stats;
-Q.finalefficacy_justice        = Q.efficacy_justice        + Q.justice_minister_stats;
-Q.finalefficacy_agriculture    = Q.efficacy_agriculture    + Q.agriculture_minister_stats;
-Q.finalefficacy_foodsupply     = Q.efficacy_foodsupply     + Q.foodsupply_minister_stats;
-Q.finalefficacy_labor          = Q.efficacy_labor          + Q.labor_minister_stats;
-Q.finalefficacy_posts          = Q.efficacy_posts          + Q.posts_minister_stats;
-Q.finalefficacy_nationalities  = Q.efficacy_nationalities  + Q.nationalities_minister_stats;
-Q.finalefficacy_welfare        = Q.efficacy_welfare        + Q.welfare_minister_stats;
+Q.finalefficacy_sovnarkom      = Q.efficacy_sovnarkom      - Q.sovnarkom_corruption       + Q.sovnarkom_minister_stats;
+Q.finalefficacy_foreign        = Q.efficacy_foreign        - Q.foreignaffairs_corruption  + Q.foreign_minister_stats;
+Q.finalefficacy_military       = Q.efficacy_military       - Q.military_corruption        + Q.military_minister_stats;
+Q.finalefficacy_enlightenment  = Q.efficacy_enlightenment  - Q.enlightenment_corruption   + Q.enlightenment_minister_stats;
+Q.finalefficacy_internal       = Q.efficacy_internal       - Q.internal_corruption        + Q.internal_minister_stats;
+Q.finalefficacy_railways       = Q.efficacy_railways       - Q.railways_corruption        + Q.railways_minister_stats;
+Q.finalefficacy_trade          = Q.efficacy_trade          - Q.trade_corruption           + Q.trade_minister_stats;
+Q.finalefficacy_finance        = Q.efficacy_finance        - Q.finance_corruption         + Q.finance_minister_stats;
+Q.finalefficacy_justice        = Q.efficacy_justice        - Q.justice_corruption         + Q.justice_minister_stats;
+Q.finalefficacy_agriculture    = Q.efficacy_agriculture    - Q.agriculture_corruption     + Q.agriculture_minister_stats;
+Q.finalefficacy_foodsupply     = Q.efficacy_foodsupply     - Q.foodsupply_corruption      + Q.foodsupply_minister_stats;
+Q.finalefficacy_labor          = Q.efficacy_labor          - Q.labor_corruption           + Q.labor_minister_stats;
+Q.finalefficacy_posts          = Q.efficacy_posts          - Q.posts_corruption           + Q.posts_minister_stats;
+Q.finalefficacy_nationalities  = Q.efficacy_nationalities  - Q.nationalities_corruption   + Q.nationalities_minister_stats;
+Q.finalefficacy_welfare        = Q.efficacy_welfare        - Q.welfare_corruption         + Q.welfare_minister_stats;
 Q.dreamteam_score = Q.sovnarkom_minister_stats + Q.foreign_minister_stats + Q.military_minister_stats + Q.enlightenment_minister_stats + Q.internal_minister_stats + Q.railways_minister_stats + Q.trade_minister_stats + Q.finance_minister_stats + Q.justice_minister_stats + Q.agriculture_minister_stats + Q.foodsupply_minister_stats + Q.labor_minister_stats + Q.posts_minister_stats + Q.nationalities_minister_stats + Q.welfare_minister_stats;
 
 // ACHIEVEMENTS CHECK
