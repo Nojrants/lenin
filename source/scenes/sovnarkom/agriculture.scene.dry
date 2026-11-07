@@ -34,6 +34,34 @@ Russia is an agrarian country, so rural policy is a crucial part of the governme
 
 @administration
 title: ADMINISTRATION
+new-page: true
+
+= Administration
+
+<table style="width:100%; border-collapse:collapse; margin:10px 0;">
+<tr>
+<td style="text-align:left; padding:5px 5px 5px 15px; border-bottom:1px solid rgba(128,128,128,0.25);">
+<span style="color: var(--bolshevik-color); font-weight:bold;">Spending</span>
+</td>
+<td style="text-align:center; padding:5px; border-bottom:1px solid rgba(128,128,128,0.25);">
+[+ agriculture_expend +]
+</td>
+<tr>
+<td style="text-align:left; padding:5px 5px 5px 15px; border-bottom:1px solid rgba(128,128,128,0.25);">
+<span style="color: var(--bolshevik-color); font-weight:bold;">Efficacy</span>
+</td>
+<td style="text-align:center; padding:5px; border-bottom:1px solid rgba(128,128,128,0.25);">
+[+ efficacy_agriculture : efficacy +]
+</td>
+<tr>
+<td style="text-align:left; padding:5px 5px 5px 15px; border-bottom:1px solid rgba(128,128,128,0.25);">
+<span style="color: var(--bolshevik-color); font-weight:bold;">Corruption</span>
+</td>
+<td style="text-align:center; padding:5px; border-bottom:1px solid rgba(128,128,128,0.25);">
+[+ agriculture_corruption : efficacy +]
+</td>
+</table>
+
 
 - @improve_admin
 - @hire_staff
@@ -43,19 +71,27 @@ title: ADMINISTRATION
 @improve_admin
 title: Streamline the commissariat
 subtitle: Cut waste and inefficiencies, increase labor intensity
-choose-if: agriculture_corruption = 0
+choose-if: agriculture_streamline_timer = 0
 unavailable-subtitle: There's nothing more to cut at the moment. 
-on-arrival: agriculture_expend -= 0.25; efficacy_agriculture += 0.1 if efficacy_agriculture < 1; agriculture_streamline += 8; 
+on-arrival: agriculture_expend -= 0.25; efficacy_agriculture += 0.1 if efficacy_agriculture < 1; agriculture_streamline_timer += 8; 
 
 @hire_staff
 title: Hire administrative personnel
 subtitle: -0.5 resources
+choose-if: resources >= 0.5
+unavailabile-subtitle: -0.5 resources – We lack the resources. 
 on-arrival: efficacy_agriculture += 0.2 if efficacy_agriculture < 1; agriculture_expend += 0.25; resources -= 0.5;
 
 @corruption
 title: Root-out departmental corruption. 
 subtitle: -0.5 resources
-on-arrival: efficacy_agriculture += 0.1 if efficacy_agriculture < 1; resources -= 0.5;
+choose-if: agriculture_corruption_timer = 0 and resources >= 0.5
+unavailable-subtitle: -0.5 resources – [?if resources < 0.5 : We lack the resources. ?][?if agriculture_corruption_timer != 0 : We've already initiated an anti-corruption campaign. ?]
+on-arrival: {!
+  Q.resources -= 0.5; Q.agriculture_corruption_timer = 8;
+  Q.efficacy_agriculture = Math.min(1, Q.efficacy_agriculture + 0.1);
+  Q.agriculture_corruption = Math.max(0, Q.agriculture_corruption - (0.2 * Q.efficacy_agriculture); 
+!}
 
 @agriculture_null
 title: -------------------------------------------------------------------------------------------------
