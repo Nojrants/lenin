@@ -44,14 +44,16 @@ on-arrival: {!
   </div>
   <div style="border:3px solid #666; border-radius:6px; padding:0; margin-bottom:10px; font-size:0.80em; overflow:hidden;">
     <div style="background:#e8e8e8; border-bottom:1px solid #ccc; padding:5px 6px; margin:0 0 6px 0; font-size:1.2em; line-height:1.2; font-weight:bold; text-align:center; white-space:nowrap;">
-      Production (relative to 1913)
+      Production <span style="font-size:0.7em; font-weight:normal;">(relative to 1913)</span>
     </div>
-    <div style="padding:3px 8px; line-height:1.2; white-space:nowrap;"><b>Area cultivated</b><span style="float:right;">[+ area_cultivated +] dessiatines ([+ ag_land +]%)</span></div>
-    <div style="padding:3px 8px; line-height:1.2; background:rgba(215,205,180,0.12); white-space:nowrap;"><b>Labor</b><span style="float:right;">[+ ag_labor_number +] million people ([+ ag_labor_rounded +]%)</span></div>
-    <div style="padding:3px 8px; line-height:1.2; white-space:nowrap;"><b>Capital</b><span style="float:right;">[+ ag_capital_number +] million rubles ([+ ag_capital_rounded +]%)</span></div>
-    <div style="padding:3px 8px; line-height:1.2; background:rgba(215,205,180,0.12); white-space:nowrap;"><b>Inputs</b><span style="float:right;">[+ ag_inputs_number +] million rubles ([+ ag_inputs_rounded +]%)</span></div>
-    <div style="padding:3px 8px; line-height:1.2; white-space:nowrap;"><b>Productivity</b><span style="float:right;">[+ ag_productivity_rounded +]%</span></div>
-  <div style="padding:3px 8px; line-height:1.2; white-space:nowrap;"><b>Rural stability</b><span style="float:right;">[+ ag_stability : instability +]</span></div>
+    <table style="width:100%; border-collapse:collapse; table-layout:auto;">
+    <tr style=""><td style="padding:3px 8px; line-height:1.2; white-space:nowrap;"><b>Area cultivated</b></td><td style="padding:3px 8px; line-height:1.2; white-space:nowrap; text-align:right;">[+ area_cultivated +] dessiatines</td><td style="padding:3px 8px; line-height:1.2; white-space:nowrap;">&ndash; [+ ag_land +]%</td></tr>
+    <tr style="background:rgba(215,205,180,0.12);"><td style="padding:3px 8px; line-height:1.2; white-space:nowrap;"><b>Labor</b></td><td style="padding:3px 8px; line-height:1.2; white-space:nowrap; text-align:right;">[+ ag_labor_number +] million people</td><td style="padding:3px 8px; line-height:1.2; white-space:nowrap;">&ndash; [+ ag_labor_rounded +]%</td></tr>
+    <tr style=""><td style="padding:3px 8px; line-height:1.2; white-space:nowrap;"><b>Capital</b></td><td style="padding:3px 8px; line-height:1.2; white-space:nowrap; text-align:right;">[+ ag_capital_number +] million rubles</td><td style="padding:3px 8px; line-height:1.2; white-space:nowrap;">&ndash; [+ ag_capital_rounded +]%</td></tr>
+    <tr style="background:rgba(215,205,180,0.12);"><td style="padding:3px 8px; line-height:1.2; white-space:nowrap;"><b>Inputs</b></td><td style="padding:3px 8px; line-height:1.2; white-space:nowrap; text-align:right;">[+ ag_inputs_number +] million rubles</td><td style="padding:3px 8px; line-height:1.2; white-space:nowrap;">&ndash; [+ ag_inputs_rounded +]%</td></tr>
+    <tr style=""><td style="padding:3px 8px; line-height:1.2; white-space:nowrap;"><b>Productivity</b></td><td></td><td style="padding:3px 8px; line-height:1.2; white-space:nowrap;">[+ ag_productivity_rounded +]%</td></tr>
+    <tr><td style="padding:3px 8px; line-height:1.2; white-space:nowrap;"><b>Rural stability</b></td><td colspan="2" style="padding:3px 8px; line-height:1.2; white-space:nowrap; text-align:right;">[+ ag_stability : instability +]</td></tr>
+    </table>
   <div style="display:flex; gap:8px; margin:0; padding:0; border-top:2px solid #666;">
         <div style="flex:1; min-width:0; padding:3px 0; line-height:1.2; white-space:nowrap;">
   <div style="padding:3px 8px; line-height:1.2; white-space:nowrap;"><b>Total capacity</b><span style="float:right;">[+ ag_capacity_rounded +]%</span></div>
