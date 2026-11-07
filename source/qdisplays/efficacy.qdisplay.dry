@@ -1,11 +1,7 @@
-
-# Efficacy - also used for morale and equipment quality
-
-(..0.05) nonexistant
-(0.05..0.14) very low
-(0.14..0.34) low
-(0.34..0.45) medium-low
-(0.45..0.55) medium
-(0.55..0.69) medium-high
-(0.69..0.86) high
-(0.86..) very high
+(..0.25) <span style="color: var(--level7-color);">Nonexistent</span>
+(0.25..0.45) <span style="color: var(--level6-color);">Very Low</span>
+(0.45..0.65) <span style="color: var(--level5-color);">Low</span>
+(0.65..0.85) <span style="color: var(--level4-color);">Average</span>
+(0.85..1.05) <span style="color: var(--level3-color);">High</span>
+(1.05..1.25) <span style="color: var(--level2-color);">Very High</span>
+(1.25..) <span style="color: var(--level1-color);">Exceptional</span>
