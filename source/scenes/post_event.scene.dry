@@ -1,6 +1,7 @@
 title: Post Event
 new-page: true
 on-arrival: {!
+var newWeek = (Q.week_actions >= 1 && Q.current_player >= Q.n_players);
 Q.last_advisor_action = 0;
 Q.last_cabinet_action = 0;
 // make sure no stat is below 0.
@@ -460,6 +461,7 @@ if (Q.nonfactional_positions < Q.nonfactional_positions_previous)
 if (Q.nonfactional_positions > Q.nonfactional_positions_previous)
     Q.nonfactional_dissent -= (Q.nonfactional_positions - Q.nonfactional_positions_previous) * 2;
 
+if (newWeek) {
 Q.leninist_strength += Q.leninist_positions / 10;
 Q.leftcom_strength += Q.leftcom_positions / 10;
 Q.moderate_strength += Q.moderate_positions / 10;
@@ -492,6 +494,7 @@ for (var i = 0; i < faction_positions.length; i++) {
         else if (faction_positions[i][0] == "Non-Factional") Q.nonfactional_strength += 1;
         break;
     }
+}
 }
 
 // console.log("Leninist positions: " + Q.leninist_positions);
@@ -536,6 +539,7 @@ Q.transportation_production = Q.transportation_industry*Q.industry/100;
 Q.capital_production = Q.capital_industry*Q.industry/100;
 // military production -> supply quality (maybe this should be more sophisticated? nah)
 Q.supply_quality = Q.military_production/100;
+if (newWeek) {
 // agricultural industry effects on food acquisition
 if (Q.agricultural_industry_production >= 5) {
 	Q.food_production *= 1.001;
@@ -620,6 +624,7 @@ if (Q.transportation_production >= 5) {
 
 // industrial changes
 Q.industrial_changes = 0;
+}
 
 
 // Specialists
@@ -651,9 +656,11 @@ Q.industrial_output = Q.industry_gdp;
 // Agriculture
 Q.ag_labor = (Q.peasants * Q.ag_labor_participation / 100) / 75 * 100;
 Q.ag_labor = Math.max(0, Q.ag_labor);
-Q.ag_inputs -= Q.ag_inputs * 0.01;  // Natural depreciation
 Q.agricultural_industry_production = Q.agricultural_industry * Q.industry / 100;
-Q.ag_inputs += Q.agricultural_industry_production * 0.5;
+if (newWeek) {
+	Q.ag_inputs -= Q.ag_inputs * 0.01;  // Natural depreciation
+	Q.ag_inputs += Q.agricultural_industry_production * 0.5;
+}
 Q.ag_inputs = Math.max(0, Q.ag_inputs); 
 Q.ag_land = Math.max(0, Q.ag_land);
 Q.ag_capital = Math.max(0, Q.ag_capital);
@@ -665,8 +672,9 @@ Q.ag_capacity = (Q.ag_land/100)**0.40 * (Q.ag_labor/100)**0.25 * (Q.ag_capital/1
 Q.ag_output = Q.ag_capacity * (0.50 + 0.20*Q.ag_weather/100 + 0.20*Q.ag_transport/100 + 0.10*Q.ag_stability/100);
 Q.ag_gdp = Q.ag_output * 100;
 
-Q.food_sold += ((35 - Q.peasants_unrest)/50000) + ((35 - Q.kulaks_unrest)/40000);
+if (newWeek) { Q.food_sold += ((35 - Q.peasants_unrest)/50000) + ((35 - Q.kulaks_unrest)/40000); }
 
+if (newWeek) {
 if (Q.land_reform_progress < 10) {
 	Q.land_reform_progress += 0.5;
 	Q.ag_land -= 1; 
@@ -692,6 +700,7 @@ if (Q.land_reform_progress < 10) {
 	if (Q.state_land > 1.5) { Q.peasant_land += (Q.state_land * 0.1); Q.state_land *= 0.9; }
 	Q.cooperative_land += (Q.peasant_land * 0.001); Q.peasant_land *= 0.999;
 	Q.peasant_land += (Q.commune_land * 0.01); Q.commune_land *= 0.99; 
+}
 }
 
 // Trade
@@ -734,6 +743,7 @@ console.log("bagmen_strength: ", Q.bagmen_strength);
 Q.inflation = Math.pow(1+0.01*Q.monthly_inflation, 12);
 Q.inflation = Math.round(1000*(Q.inflation - 1))/10;
 
+if (newWeek) {
 if (Q.monthly_inflation <= 10) {
 	Q.unemployed -= (10-Q.monthly_inflation) * 0.2;
 	Q.workers_unrest -= Q.monthly_inflation / 10; 
@@ -751,6 +761,7 @@ Q.unemployed += ((Math.random() * 2 - 1) + (Q.instability / 50)) / 4;
 if (Q.unemployed >= 8) {
 	Q.workers_unrest += Q.unemployed / 20; 
 	Q.underclass_unrest += Q.unemployed / 20; 
+}
 }
 
 if (Q.unemployed <= 1) { Q.unemployed = 1; }
@@ -782,15 +793,16 @@ if (Q.food_supply_urban > Q.food_transport_capacity) { Q.food_supply_urban = Q.f
 Q.food_surplus = Math.max(0, Q.food_supply_urban - Q.food_demand_urban);
 
 Q.urban_stockpile = Q.urban_stockpile || 1500;
-Q.urban_stockpile += Q.food_surplus;
+if (newWeek) { Q.urban_stockpile += Q.food_surplus; }
 
 // Release stockpile to cover shortage
-Q.urban_stockpile_release = Math.min(
-    Q.urban_stockpile * Q.stockpile_release_multiplier,
-    Math.max(0, Q.food_demand_urban - Q.food_supply_urban)
-);
-
-Q.urban_stockpile -= Q.urban_stockpile_release;
+if (newWeek || Q.urban_stockpile_release === undefined) {
+    Q.urban_stockpile_release = Math.min(
+        Q.urban_stockpile * Q.stockpile_release_multiplier,
+        Math.max(0, Q.food_demand_urban - Q.food_supply_urban)
+    );
+    if (newWeek) { Q.urban_stockpile -= Q.urban_stockpile_release; }
+}
 Q.food_supply_urban += Q.urban_stockpile_release;
 
 // Hunger
@@ -839,6 +851,7 @@ console.log("food_surplus: ", Q.food_surplus);
 
 
 
+if (newWeek) {
 if (Q.hunger > 10) {
 	Q.disillusionment += (Q.hunger >= 50 ? 0.4 :
 						  Q.hunger >= 40 ? 0.2 :
@@ -880,13 +893,17 @@ if (Q.crime > 20) {
 	} else {
 		Q.disillusionment -= 0.5 + (Q.democraticity / 400);
 }
+}
 if (Q.disillusionment < 0) Q.disillusionment = 0;
 
 // Bagmen
+if (newWeek) {
 Q.bagmen_strength += (Q.hunger / 300) + (Q.instability / 200) + ((0.15 - Q.food_sold)*5) + ((1 - Q.discipline)/5) - (Q.food_price) + (0.75 - Q.efficacy_railways); 
+}
 
 
 
+if (newWeek) {
 for (var c of Q.classes) {
     var unrest = Q[c + "_unrest"];
     for (var party of Q.parties) {
@@ -929,6 +946,7 @@ for (var c of Q.classes) {
         }
     }
 }
+}
 
 Q.general_unrest = ((Q.elites_unrest * Q.elites) + (Q.middle_unrest * Q.middle) + (Q.clergy_unrest * Q.clergy) + (Q.workers_unrest * Q.workers) + (Q.peasants_unrest * Q.peasants) + (Q.kulaks_unrest * Q.kulaks) + (Q.intelligentsia_unrest * Q.intelligentsia) + (Q.soldiers_unrest * Q.soldiers) + (Q.underclass_unrest * Q.underclass) + (Q.students_unrest * Q.students)) / 100;
 
@@ -941,10 +959,12 @@ Q.migration = ((Q.workers_unrest - 50) * 0.0005
 			- (Q.industry_gdp - 90) * 0.002
 			- (100 - Q.industry_labor) * 0.002) / 5;
 
+if (newWeek) {
 Q.workers -= Q.migration;
 Q.peasants += Q.migration;
 Q.unemployed -= Q.migration; 
 Q.migration_modifier *= 0.5; 
+}
 
 
 for (var c of Q.classes) {
@@ -993,6 +1013,7 @@ for (var party of Q.parties) {
     Q[party+'_votes_display'] = Math.round(Q[party+'_normalized']*100);
 }
 
+if (newWeek) {
 if (Q.is_peace != 1 || Q.brest_signed != 1) {
 	Q.lsr_strength += 2; Q.left_m_strength += 1; Q.anarchist_strength += 0.2; Q.maximalist_strength += 0.5;
 	Q.workers_lsr += (Q.workers_sr * 0.05); Q.soldiers_lsr += (Q.soldiers_sr * 0.05);
@@ -1001,6 +1022,7 @@ if (Q.is_peace != 1 || Q.brest_signed != 1) {
 	Q.workers_m *= 0.98; Q.soldiers_m *= 0.98;
 	// Q.workers_lsr += 1; Q.workers_anarchist += 0.3; Q.workers_maximalist += 0.6; 
 	// Q.workers_b -= 0.5; Q.soldiers_b -= 0.5;
+}
 }
 
 
@@ -1296,7 +1318,7 @@ Q.business_tax =
 
 if (Q.bagmen_tax == 1) {
 	Q.business_tax += (Q.bagmen_strength / 200);
-	Q.bagmen_strength *= 0.98;
+	if (newWeek) Q.bagmen_strength *= 0.98;
 }
 
 
@@ -1342,11 +1364,13 @@ Q.publicdebt = Math.round(
 
 
 // EDUCATION
+if (newWeek) {
 Q.urban_schools += (Q.lower_school_funding / 10) + (Q.instability / 100) + Q.school_construction;
 Q.rural_schools += (Q.lower_school_funding / 10) + (Q.instability / 100) + Q.school_construction * 0.75;
 
 Q.urban_literacy += Q.urban_schools * 0.00007 * Q.lower_school_funding;
 Q.rural_literacy += Q.rural_schools * 0.00005 * Q.lower_school_funding;
+}
 Q.university_capacity = (Q.higher_schools * 0.0000007);
 
 Q.university_policy = {
@@ -1418,6 +1442,7 @@ while (Q.unused > 0) {
 }
 
 
+if (newWeek) {
 Q.elites -= Q.enrolled.elites;
 Q.middle -= Q.enrolled.middle; 
 Q.workers -= Q.enrolled.workers;
@@ -1439,6 +1464,7 @@ Q.red_graduates = Math.min(Q.graduates, Q.graduates * (Q.school_loyalty * 0.5));
 Q.red_specialists += Q.red_graduates;
 Q.bourgeois_specialists += Q.graduates - Q.red_graduates; 
 Q.red_specialists += (Q.students / 4) * Q.finalefficacy_enlightenment * Q.school_funding * Q.party_schools;
+}
 
 // console.log("=== UNIVERSITY ===");
 // console.log("Capacity:", Q.university_capacity);
@@ -1463,7 +1489,7 @@ Q.red_specialists += (Q.students / 4) * Q.finalefficacy_enlightenment * Q.school
 
 
 // 1. update dates
-if (Q.week_actions >= 1 && Q.current_player >= Q.n_players) {
+if (newWeek) {
 	window.mapPostTurn();
     Q.week_actions = 0;
     Q.time += 1;
