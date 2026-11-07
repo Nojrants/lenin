@@ -682,15 +682,15 @@ if (Q.land_reform_progress < 10) {
 	Q.peasant_land += (Q.state_land * 0.1); Q.state_land *= 0.9;
 	Q.peasant_land += (Q.commune_land * 0.1); Q.commune_land *= 0.9;
 
-	Q.cooperative_land += (Q.peasant_land * 0.005); Q.peasant_land *= 0.005;
+	Q.cooperative_land += (Q.peasant_land * 0.005); Q.peasant_land *= 0.995;
 
 	if (Q.land_reform_progress >= 10) { 
 		Q.state_land += Q.church_land; Q.church_land = 0; 
-		Q.state_land += Q.gentry_land; Q.state_land = 0; 
+		Q.state_land += Q.gentry_land; Q.gentry_land = 0; 
 	}
 } else {
 	if (Q.state_land > 1.5) { Q.peasant_land += (Q.state_land * 0.1); Q.state_land *= 0.9; }
-	Q.cooperative_land += (Q.peasant_land * 0.001); Q.peasant_land *= 0.001;
+	Q.cooperative_land += (Q.peasant_land * 0.001); Q.peasant_land *= 0.999;
 	Q.peasant_land += (Q.commune_land * 0.01); Q.commune_land *= 0.99; 
 }
 
