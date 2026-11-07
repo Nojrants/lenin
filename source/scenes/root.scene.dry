@@ -335,6 +335,12 @@ Q.welfare_corruption = 0;
 Q.agriculture_admin = 0.25;
 Q.state_farm_funding = 0.1;
 Q.agriculture_subsidies = 0.4; 
+Q.agriculture_loans = 0; 
+Q.extension_services = 0; 
+Q.land_improvement = 0; 
+Q.cooperative_credits = 0; 
+Q.agriculture_research = 0; 
+
 
 Q.sovnarkom_expend = 0.25;
 Q.internal_expend = 0.75;
