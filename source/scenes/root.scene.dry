@@ -316,6 +316,22 @@ Q.peasants_university_access = 0.2;
 
 // starting financials
 
+Q.sovnarkom_corruption = 0;
+Q.internal_corruption = 0.2;
+Q.foreignaffairs_corruption = 0;
+Q.military_corruption = 0.4;
+Q.enlightenment_corruption = 0;
+Q.railways_corruption = 0.3;
+Q.trade_corruption = 0.1;
+Q.finance_corruption = 0.1;
+Q.justice_corruption = 0.2;
+Q.labor_corruption = 0;
+Q.agriculture_corruption = 0.2;
+Q.foodsupply_corruption = 0.4;
+Q.posts_corruption = 0.1; 
+Q.nationalities_corruption = 0.1;
+Q.welfare_corruption = 0;
+
 Q.sovnarkom_expend = 0.25;
 Q.internal_expend = 0.75;
 Q.foreignaffairs_expend = 0.5;
@@ -365,21 +381,21 @@ Q.efficacy_posts = 0.5;
 Q.efficacy_nationalities = 0.5;
 Q.efficacy_welfare = 0.5;
 
-Q.finalefficacy_sovnarkom      = Q.efficacy_sovnarkom;   
-Q.finalefficacy_foreign        = Q.efficacy_foreign;       
-Q.finalefficacy_military       = Q.efficacy_military;      
-Q.finalefficacy_enlightenment  = Q.efficacy_enlightenment; 
-Q.finalefficacy_internal       = Q.efficacy_internal;      
-Q.finalefficacy_railways       = Q.efficacy_railways;      
-Q.finalefficacy_trade          = Q.efficacy_trade;         
-Q.finalefficacy_finance        = Q.efficacy_finance;       
-Q.finalefficacy_justice        = Q.efficacy_justice;       
-Q.finalefficacy_agriculture    = Q.efficacy_agriculture;   
-Q.finalefficacy_foodsupply     = Q.efficacy_foodsupply;    
-Q.finalefficacy_labor          = Q.efficacy_labor;         
-Q.finalefficacy_posts          = Q.efficacy_posts;         
-Q.finalefficacy_nationalities  = Q.efficacy_nationalities; 
-Q.finalefficacy_welfare        = Q.efficacy_welfare;       
+Q.finalefficacy_sovnarkom      = Q.efficacy_sovnarkom       - Q.sovnarkom_corruption; 
+Q.finalefficacy_foreign        = Q.efficacy_foreign         - Q.foreignaffairs_corruption;
+Q.finalefficacy_military       = Q.efficacy_military        - Q.military_corruption;     
+Q.finalefficacy_enlightenment  = Q.efficacy_enlightenment   - Q.enlightenment_corruption; 
+Q.finalefficacy_internal       = Q.efficacy_internal        - Q.internal_corruption;      
+Q.finalefficacy_railways       = Q.efficacy_railways        - Q.railways_corruption;      
+Q.finalefficacy_trade          = Q.efficacy_trade           - Q.trade_corruption;         
+Q.finalefficacy_finance        = Q.efficacy_finance         - Q.finance_corruption;       
+Q.finalefficacy_justice        = Q.efficacy_justice         - Q.justice_corruption;       
+Q.finalefficacy_agriculture    = Q.efficacy_agriculture     - Q.agriculture_corruption;   
+Q.finalefficacy_foodsupply     = Q.efficacy_foodsupply      - Q.foodsupply_corruption;    
+Q.finalefficacy_labor          = Q.efficacy_labor           - Q.labor_corruption;         
+Q.finalefficacy_posts          = Q.efficacy_posts           - Q.posts_corruption;         
+Q.finalefficacy_nationalities  = Q.efficacy_nationalities   - Q.nationalities_corruption; 
+Q.finalefficacy_welfare        = Q.efficacy_welfare         - Q.welfare_corruption;           
 
 Q.income_tax_rate_1 = 1.5;
 Q.income_tax_rate_2 = 1.25;
@@ -1450,7 +1466,7 @@ Q.timers = [//m_party
             'shuffle_cabinet', 'social_policy',
             'education_policy', 'economic_policy', 'coalition_affairs',
             'womens_rights', 'offensive',
-            'foreign_corruption', 'finance_corruption', 'military_corruption',
+            'foreignaffairs_corruption', 'finance_corruption', 'military_corruption',
             'internal_corruption', 'enlightenment_corruption', 'internal_corruption',
             'railways_corruption', 'trade_corruption', 'labor_corruption',
             'justice_corruption', 'agriculture_corruption', 'foodsupply_corruption',
