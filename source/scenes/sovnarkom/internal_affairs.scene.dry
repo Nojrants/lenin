@@ -42,6 +42,7 @@ on-arrival: {!
     Q.elites_strength -= 2;
     Q.internal_expend -= 0.25;
     Q.city_militia_k_loyalty *= 0.25; Q.city_militia_sr_loyalty *= 0.75; Q.city_militia_m_loyalty *= 0.75; Q.city_militia_b_loyalty *= 3; 
+    Q.internal_corruption = Math.max(0, Q.internal_corruption - 0.15); 
 !}
 
 We implement a series of reforms replacing the imperial police system fully and purging reactionary officers. 
@@ -61,6 +62,7 @@ on-arrival: {!
     Q.moderate_dissent += 5; Q.leftcom_dissent -= 10; Q.leninist_dissent -= 5;
     Q.leftcom_strength += 5; Q.leninist_strength += 2;
     Q.intelligentsia_unrest += 5; Q.elite_unrest += 5;
+    Q.internal_corruption += Math.max(0.01, (0.05 * (1 - Q.efficacy_internal))); 
 !}
 
 @anti_crime
@@ -72,6 +74,7 @@ view-if: crime >= 30
 on-arrival: {!
     Q.crime -= (Q.city_militias/2) * (1 + (Q.city_militia_strength / 5));
     Q.instability -= (Q.city_militia_strength / 10);
+    Q.internal_corruption += Math.max(0.01, (0.05 * (1 - Q.efficacy_internal))); 
 !}
 
 We have deployed the city militias to increase security and combat crime in Petrograd and other major cities.
@@ -117,6 +120,7 @@ on-arrival: {!
     Q.resources -= 1; Q.internal_expend += 0.1;
     Q.cheka_loyalty -= 0.2;
     Q.city_militia_b_loyalty *= 1.2; Q.city_militia_lsr_loyalty *= 1.5;
+    Q.internal_corruption += Math.max(0.1, (0.1 * (2 - Q.efficacy_internal))); 
 !}
 
 @recruit_chekists
@@ -132,6 +136,7 @@ on-arrival: {!
     Q.cheka_militancy += 0.02 * Q.efficacy_internal;
     Q.resources -= 1; Q.internal_expend += 0.1;
     Q.cheka_loyalty -= 0.05;
+    Q.internal_corruption += Math.max(0.01, (0.05 * (1 - Q.efficacy_internal))); 
 !}
 
 @strengthen_cheka
@@ -157,6 +162,7 @@ on-arrival: {!
     Q.city_militia_strength += 2*Q.efficacy_internal;
     Q.city_militia_militancy += 0.02*Q.efficacy_internal;
     Q.resources -= 1; Q.internal_expend += 0.1;
+    Q.internal_corruption += Math.max(0.01, (0.05 * (1 - Q.efficacy_internal))); 
 !}
 
 We have further strengthened the militias.
@@ -171,6 +177,7 @@ on-arrival: {!
     Q.city_militia_strength += 4*Q.efficacy_internal;
     Q.city_militia_militancy += 0.04*Q.efficacy_internal;
     Q.city_militia_b_loyalty += 6*Q.efficacy_internal;
+    Q.internal_corruption -= Math.max(0.05, (Q.efficacy_internal/10)); 
 !}
 
 
@@ -240,6 +247,7 @@ on-arrival: {!
     Q.workers_unrest -= 3; Q.peasants_unrest -= 5; Q.intelligentsia_unrest += 2; Q.underclass_unrest -= 5; Q.underclass_strength += 5;
     Q.cheka_militancy += 0.1;
     Q.elites -= 0.1; Q.prisoners += 0.1;
+    Q.internal_corruption += Math.max(0.05, (0.1 * (1 - Q.efficacy_internal))); 
 !}
 
 @on_sight
@@ -252,6 +260,7 @@ on-arrival: {!
     Q.elites_unrest += 10; Q.elites -= 0.05; Q.elite_strength -= 5;
     Q.peasants_strength -= 5; Q.intelligentsia_unrest += 2; Q.underclass_unrest -= 5; Q.underclass_strength += 5;
     Q.cheka_militancy += 0.1;
+    Q.internal_corruption += Math.max(0.1, (0.25 * (1 - Q.efficacy_internal))); 
 !}
 
 @concentration_camps
@@ -268,6 +277,7 @@ on-arrival: {!
     Q.underclass_unrest -= 5; Q.workers_strength -= 5; Q.peasants_strength -= 2; Q.kulaks_strength -= 1; Q.clergy_strength -= 5; 
     Q.cheka_militancy += 0.25;
     Q.elites -= 0.5; Q.prisoners += 0.6; 
+    Q.internal_corruption += Math.max(0.01, (0.05 * (1 - Q.efficacy_internal))); 
 !}
 
 
