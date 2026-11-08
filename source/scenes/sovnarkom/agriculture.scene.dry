@@ -452,7 +452,7 @@ on-arrival: {!
 
 We establish a number of collective farms out of existing estates, to be overseen by peasant committees.
 
-@encourage collectivization
+@encourage_collectivization
 title: Encourage peasants to combine their holdings into state farms. 
 subtitle: -0.5 resources
 choose-if: resources >= 0.5
