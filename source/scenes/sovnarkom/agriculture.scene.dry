@@ -266,7 +266,7 @@ on-arrival: {!
 !}
 
 @decrease_statefarm_funding
-title: Decrease lower school funding
+title: Decrease funding for state farms and collectives. 
 choose-if: state_farm_funding > 0
 unavailable-subtitle: Funding is already non-existent. 
 tags: agriculture_funding
