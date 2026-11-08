@@ -1680,6 +1680,10 @@ if (newWeek) {
 }
 
 
+if (Q.year == 1917 && Q.month == 11 && Q.week == 1) { Q.gdp_index = 53; Q.gdp_industry = 2.5; Q.gdp_government = 3; Q.gdp_trade = 1; Q.hunger = 25; }
+if (Q.year == 1917 && Q.month == 11 && Q.week == 2) { Q.gdp_index = 49; Q.gdp_industry = 2; Q.gdp_government = 5; Q.gdp_trade = 1; }
+
+
 // 1. update dates
 if (newWeek) {
 	window.mapPostTurn();
@@ -1695,9 +1699,6 @@ if (newWeek) {
         Q.month = 1;
         Q.year += 1;
     }
-
-if (Q.year == 1917 && Q.month == 11 && Q.week == 1) { Q.gdp_index = 53; Q.gdp_industry = 2.5; Q.gdp_government = 3; Q.gdp_trade = 1; Q.hunger = 25; }
-if (Q.year == 1917 && Q.month == 11 && Q.week == 2) { Q.gdp_index = 49; Q.gdp_industry = 2; Q.gdp_government = 5; Q.gdp_trade = 1; }
 
 
     // update records
