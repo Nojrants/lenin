@@ -1,15 +1,7 @@
 title: library
 new-page: true
 is-special: true
-go-to: menu
-
-@menu
-
-- @figures: Figures and charts
-- @backSpecialScene: Exit library.
-
-
-
+go-to: figures
 
 
 @figures
@@ -391,4 +383,6 @@ if (Q.economic_records && Q.economic_records.length >= 2) {
 = GDP
 
 {!<svg id="gdp_history" viewBox="0 0 900 460" style="width:100%; height:auto;"></svg>!}
+
+- @backSpecialScene: Exit library.
 
