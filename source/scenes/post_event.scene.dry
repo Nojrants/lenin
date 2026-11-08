@@ -542,16 +542,6 @@ Q.supply_quality = Q.military_production/100;
 if (newWeek) {
 // agricultural industry effects on food acquisition
 if (Q.agricultural_industry_production >= 5) {
-	Q.food_production *= 1.001;
-	if (Q.food_production < 140000) {
-		Q.food_production *= 1.005;
-	}
-	if (Q.agricultural_industry_production >= 10) {
-		Q.food_production *= 1.002;
-		if (Q.food_production < 155000) {
-			Q.food_production *= 1.005;
-		}
-	}
 	if (Q.food_sold < 0.07 + (Q.agricultural_industry_production - 3)/100 && Q.rural_hunger <= 0) {
 		Q.food_sold += 0.002;
 	}
@@ -655,7 +645,7 @@ Q.industrial_output = Q.industry_gdp;
 
 // AGRICULTURE
 if (newWeek) {
-	// Investments
+
 	// share of each land type (0-1); the allotments are percentages of all farmland
 	var land_types = ["state", "collective", "peasant", "cooperative", "commune", "cossack", "gentry", "church"];
 	var land_total = 0;
@@ -671,10 +661,10 @@ if (newWeek) {
 	};
 
 	// ---- Inherent productivity growth per week, per 100% of land of each type ----
-	// Cooperatives and private farms - modernize fast
-	// Communes and church lands - modernize slow 
-	// Gentry estates - best yields and capital but slow improvement 
-	// State and collective farms - held back unless funded 
+	// Cooperatives and private farms modernised fastest before the war; communes (repartitions,
+	// strip fields) and church lands (leased out, little investment) the slowest. Gentry estates
+	// had the best yields and capital but little room left to improve. State and collective
+	// farms are held back unless funded (see state_farm_funding below).
 	var base_growth = {
 		state: 0.020, collective: 0.025, peasant: 0.045, cooperative: 0.075,
 		commune: 0.020, cossack: 0.035, gentry: 0.050, church: 0.010
@@ -709,22 +699,37 @@ if (newWeek) {
 	var headroom = Math.max(0.2, 1 - Math.max(0, Q.ag_productivity - 100) / 300);
 
 	// ---- Purchasing power of the farming population ----
-	// AG_MONEY_SCALE - points of capital/inputs per week
+	// AG_MONEY_SCALE converts it into points of capital/inputs per week. Tune this one number:
+	// at the default, the starting population can afford about half of the goods on the market,
+	// so subsidies and loans matter. Raise it and peasants can buy everything available.
 	var AG_MONEY_SCALE = 0.67;
 	var base_money = (Q.peasants * Q.peasants_wealth + Q.kulaks * Q.kulaks_wealth) / 10000;
 	var subsidy_money = (Q.agriculture_subsidies / 20) * reach(subsidy_efficiency);
 	var loan_money = (Q.agriculture_loans / 5) * reach(loan_access);
 	var credit_money = (Q.cooperative_credits / 5) * share.cooperative * 1.2;
-	var ag_money = Math.max(0, base_money + subsidy_money + loan_money + credit_money - Q.monthly_inflation / 1000) * AG_MONEY_SCALE;
+	var ag_money = Math.max(0, base_money + subsidy_money + loan_money + credit_money) * AG_MONEY_SCALE;
 
 	// ---- Capital and inputs: bought with that money, limited by goods on the market ----
-	var capital_supply = (Q.agricultural_industry_production + Q.capital_production) / 200;
-	var inputs_supply = Q.agricultural_industry_production / 100;
-	var capital_bought = Math.min(capital_supply, ag_money * 0.4);
-	var inputs_bought = Math.min(inputs_supply, ag_money * 0.6);
+	// Peasants buy at a market price. Price rises when they want more than the market supplies
+	// (scarcity, or lots of money chasing few goods) and falls when goods are plentiful.
+	// Inflation raises it directly. Money buys money / price, limited by the goods available.
+	var capital_need = Q.ag_capital * 0.0005;   // what it takes to replace wear and tear
+	var inputs_need = Q.ag_inputs * 0.0008;     // what it takes to replace what was used
+	var capital_money = ag_money * 0.4;
+	var inputs_money = ag_money * 0.6;
+	var capital_supply = (Q.agricultural_industry_production + Q.capital_production) / 120;
+	var inputs_supply = Q.agricultural_industry_production / 40;
+	var price_of = function(want, supply) {
+		var ratio = Math.max(want, 0.000001) / Math.max(supply, 0.000001);
+		return Math.min(3, Math.max(0.15, ratio)) * (1 + Math.max(0, Q.monthly_inflation) / 100);
+	};
+	Q.ag_capital_price = price_of(Math.max(capital_need, capital_money), capital_supply);
+	Q.ag_inputs_price = price_of(Math.max(inputs_need, inputs_money), inputs_supply);
+	var capital_bought = Math.min(capital_supply, capital_money / Q.ag_capital_price);
+	var inputs_bought = Math.min(inputs_supply, inputs_money / Q.ag_inputs_price);
 
-	Q.ag_capital -= Q.ag_capital * 0.00025;   // natural depreciation
-	Q.ag_inputs -= Q.ag_inputs * 0.0004;     // used up each season
+	Q.ag_capital -= Q.ag_capital * 0.0005;    // wear and tear
+	Q.ag_inputs -= Q.ag_inputs * 0.0008;     // used up each season
 	Q.ag_capital += capital_bought;
 	Q.ag_inputs += inputs_bought;
 
@@ -749,13 +754,60 @@ if (newWeek) {
 	productivity_gain += state_farm * 0.10;
 	Q.ag_productivity += productivity_gain * stability * headroom;
 
-	// ---- Credits convert peasant farms ----
+	// ---- Cooperative credits slowly convert peasant farms into cooperatives ----
 	var converted = Q.peasant_land * 0.0004 * Q.cooperative_credits;
 	Q.peasant_land -= converted;
 	Q.cooperative_land += converted;
 	var converted = Q.peasant_land * 0.00002 * Q.state_farm_funding;
 	Q.peasant_land -= converted;
 	Q.collective_land += converted;
+
+
+	// ---- Peasant and kulak unrest ----
+	// Each programme lowers unrest in proportion to its level (0 = no effect) and to how much
+	// of the farmland it reaches. At the starting land mix, +0.1 subsidies is about -0.1 unrest
+	// for peasants and -0.2 for kulaks. Relief fades as unrest approaches 0.
+	var peasant_relief = 0, kulak_relief = 0, r;
+	// state farm funding: only peasants on state farms, in proportion to state land
+	r = Q.state_farm_funding * share.state * 1.0;
+	peasant_relief += r;
+	// subsidies: the biggest effect; kulaks feel twice as much
+	r = Q.agriculture_subsidies * reach(subsidy_efficiency) * 1.8;
+	peasant_relief += r; kulak_relief += r * 2.0;
+	// loans and cooperative credits: kulaks benefit more
+	r = Q.agriculture_loans * reach(loan_access) * 0.8;
+	peasant_relief += r; kulak_relief += r * 1.6;
+	r = Q.cooperative_credits * share.cooperative * 6;
+	peasant_relief += r; kulak_relief += r * 1.6;
+	// extension and land improvement: peasants benefit more
+	r = Q.extension_services * reach(extension_reach) * 0.5;
+	peasant_relief += r; kulak_relief += r * 0.6;
+	r = Q.land_improvement * reach(improvement_reach) * 0.4;
+	peasant_relief += r; kulak_relief += r * 0.6;
+	// research: both about the same
+	r = Q.agriculture_research * reach(research_reach) * 0.3;
+	peasant_relief += r; kulak_relief += r;
+
+	Q.peasants_unrest -= peasant_relief * Math.min(1, Math.max(0, Q.peasants_unrest) / 50);
+	Q.kulaks_unrest -= kulak_relief * Math.min(1, Math.max(0, Q.kulaks_unrest) / 50);
+	Q.peasants_unrest = Math.min(100, Math.max(0, Q.peasants_unrest));
+	Q.kulaks_unrest = Math.min(100, Math.max(0, Q.kulaks_unrest));
+
+	// ---- Peasant and kulak wealth ----
+	// Gains: legal trade (food_sold), black market sales when cities are hungry (kulaks gain
+	// the most), subsidies. Losses: inflation (kulaks hold more real assets), rural hunger.
+	var black_market = (Q.hunger / 100) * Math.min(2, 0.5 + Q.bagmen_strength / 100);
+	var subsidy_cash = Q.agriculture_subsidies * reach(subsidy_efficiency);
+	var rural_hunger_loss = Math.min(0.03, Math.max(0, Q.rural_hunger) / 100 * 0.05);
+
+	Q.peasants_wealth += Q.food_sold * 0.55 + black_market * 0.15 + subsidy_cash * 0.04
+		- Q.peasants_wealth * (Q.monthly_inflation / 100) * 0.15
+		- Q.peasants_wealth * rural_hunger_loss;
+	Q.kulaks_wealth += Q.food_sold * 0.20 + black_market * 0.30 + subsidy_cash * 0.03
+		- Q.kulaks_wealth * (Q.monthly_inflation / 100) * 0.08
+		- Q.kulaks_wealth * rural_hunger_loss;
+	Q.peasants_wealth = Math.min(100, Math.max(1, Q.peasants_wealth));
+	Q.kulaks_wealth = Math.min(100, Math.max(1, Q.kulaks_wealth));
 
 	Q.ag_productivity_gain = productivity_gain * stability * headroom;
 	console.log("ag growth: productivity +" + Q.ag_productivity_gain.toFixed(3) + ", money " + ag_money.toFixed(3) + ", capital bought " + capital_bought.toFixed(3) + ", inputs bought " + inputs_bought.toFixed(3));
@@ -765,10 +817,6 @@ if (newWeek) {
 Q.ag_labor = (Q.peasants * Q.ag_labor_participation / 100) / 75 * 100;
 Q.ag_labor = Math.max(0, Q.ag_labor);
 Q.agricultural_industry_production = Q.agricultural_industry * Q.industry / 100;
-if (newWeek) {
-	Q.ag_inputs -= Q.ag_inputs * 0.01;  // Natural depreciation
-	Q.ag_inputs += Q.agricultural_industry_production * 0.01;
-}
 Q.ag_inputs = Math.max(0, Q.ag_inputs); 
 Q.ag_land = Math.max(0, Q.ag_land);
 Q.ag_capital = Math.max(0, Q.ag_capital);
@@ -798,7 +846,7 @@ if (Q.land_reform_progress < 10) {
 	Q.peasant_land += (Q.state_land * 0.1); Q.state_land *= 0.9;
 	Q.peasant_land += (Q.commune_land * 0.1); Q.commune_land *= 0.9;
 
-	Q.cooperative_land += (Q.peasant_land * 0.005); Q.peasant_land *= 0.995;
+	Q.cooperative_land += (Q.peasant_land * 0.001); Q.peasant_land *= 0.999;
 
 	if (Q.land_reform_progress >= 10) { 
 		Q.state_land += Q.church_land; Q.church_land = 0; 
