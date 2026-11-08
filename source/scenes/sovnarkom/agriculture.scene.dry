@@ -186,6 +186,7 @@ on-arrival: {!
 	Q.extension_services = Math.round(10*Q.extension_services)/10;
 	Q.land_improvement = Math.round(10*Q.land_improvement)/10;
 	Q.agriculture_research = Math.round(10*Q.agriculture_research)/10;
+	Q.agricultural_expend = Math.round(100*Q.agricultural_expend)/100;
 !}
 
 = Agricultural Policy
