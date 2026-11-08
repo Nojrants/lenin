@@ -317,23 +317,23 @@ Q.dreamteam_score = Q.sovnarkom_minister_stats + Q.foreign_minister_stats + Q.mi
 
 // ACHIEVEMENTS CHECK
 
-console.log("===== DREAMTEAM SCORES =====");
-console.log("Sovnarkom:", Q.sovnarkom_minister_stats);
-console.log("Foreign Affairs:", Q.foreign_minister_stats);
-console.log("Military:", Q.military_minister_stats);
-console.log("Enlightenment:", Q.enlightenment_minister_stats);
-console.log("Internal Affairs:", Q.internal_minister_stats);
-console.log("Railways:", Q.railways_minister_stats);
-console.log("Trade:", Q.trade_minister_stats);
-console.log("Finance:", Q.finance_minister_stats);
-console.log("Justice:", Q.justice_minister_stats);
-console.log("Agriculture:", Q.agriculture_minister_stats);
-console.log("Food Supply:", Q.foodsupply_minister_stats);
-console.log("Labor:", Q.labor_minister_stats);
-console.log("Posts & Telegraphs:", Q.posts_minister_stats);
-console.log("Nationalities:", Q.nationalities_minister_stats);
-console.log("Welfare:", Q.welfare_minister_stats);
-console.log("Dreamteam Score:", Q.dreamteam_score);
+// console.log("===== DREAMTEAM SCORES =====");
+// console.log("Sovnarkom:", Q.sovnarkom_minister_stats);
+// console.log("Foreign Affairs:", Q.foreign_minister_stats);
+// console.log("Military:", Q.military_minister_stats);
+// console.log("Enlightenment:", Q.enlightenment_minister_stats);
+// console.log("Internal Affairs:", Q.internal_minister_stats);
+// console.log("Railways:", Q.railways_minister_stats);
+// console.log("Trade:", Q.trade_minister_stats);
+// console.log("Finance:", Q.finance_minister_stats);
+// console.log("Justice:", Q.justice_minister_stats);
+// console.log("Agriculture:", Q.agriculture_minister_stats);
+// console.log("Food Supply:", Q.foodsupply_minister_stats);
+// console.log("Labor:", Q.labor_minister_stats);
+// console.log("Posts & Telegraphs:", Q.posts_minister_stats);
+// console.log("Nationalities:", Q.nationalities_minister_stats);
+// console.log("Welfare:", Q.welfare_minister_stats);
+// console.log("Dreamteam Score:", Q.dreamteam_score);
 
 if (Q.dreamteam_score >= 14 && !window.unlockedAchievements?.includes('golden_age_of_the_peoples_commissars')) {
     this.achieve('golden_age_of_the_peoples_commissars');
