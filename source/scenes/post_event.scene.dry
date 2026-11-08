@@ -749,10 +749,13 @@ if (newWeek) {
 	productivity_gain += state_farm * 0.10;
 	Q.ag_productivity += productivity_gain * stability * headroom;
 
-	// ---- Cooperative credits slowly convert peasant farms into cooperatives ----
+	// ---- Credits convert peasant farms ----
 	var converted = Q.peasant_land * 0.0004 * Q.cooperative_credits;
 	Q.peasant_land -= converted;
 	Q.cooperative_land += converted;
+	var converted = Q.peasant_land * 0.00002 * Q.state_farm_funding;
+	Q.peasant_land -= converted;
+	Q.collective_land += converted;
 
 	Q.ag_productivity_gain = productivity_gain * stability * headroom;
 	console.log("ag growth: productivity +" + Q.ag_productivity_gain.toFixed(3) + ", money " + ag_money.toFixed(3) + ", capital bought " + capital_bought.toFixed(3) + ", inputs bought " + inputs_bought.toFixed(3));
