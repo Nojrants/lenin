@@ -1656,7 +1656,11 @@ Q.economic_records = [
         'unemployment': 2,
         'industry': 100,
         'hunger': 15,
-        'gdp': 82
+        'gdp': 82,
+        'gdp_ag': 48,
+        'gdp_industry': 20,
+	'gdp_trade': 3.5,
+	'gdp_government': 10.5
     },
     {
         'date': new Date(1917, 10, 4),
@@ -1665,6 +1669,10 @@ Q.economic_records = [
         'industry': 100,
         'hunger': Q.hunger,
         'gdp': 53
+        'gdp_ag': 40,
+        'gdp_industry': 7,
+	'gdp_trade': 1.5,
+	'gdp_government': 4.5
     }
 ];
 
