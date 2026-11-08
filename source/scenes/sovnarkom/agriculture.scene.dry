@@ -102,9 +102,6 @@ on-arrival: {!
 - @projects
 - @agriculture_null
 - @accelerate_land
-- @preserve_estates
-- @establish_communes
-- @promote_cooperatives
 - @root: Do not change policy
 - @easy_discard
 - @cancel_advisor_action
