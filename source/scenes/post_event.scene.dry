@@ -653,19 +653,124 @@ Q.industry_gdp = Q.industry * Q.industry_realization * (Q.specialist_capacity/10
 Q.factory_utilization = Q.industry_realization * (Q.specialist_capacity/100) * 100;
 Q.industrial_output = Q.industry_gdp;
 
-// Agriculture
+// AGRICULTURE
+if (newWeek) {
+	// Investments
+	// share of each land type (0-1); the allotments are percentages of all farmland
+	var land_types = ["state", "collective", "peasant", "cooperative", "commune", "cossack", "gentry", "church"];
+	var land_total = 0;
+	for (var t of land_types) { land_total += Math.max(0, Q[t + "_land"]); }
+	var share = {};
+	for (var t of land_types) { share[t] = land_total > 0 ? Math.max(0, Q[t + "_land"]) / land_total : 0; }
+
+	// weighted average of a per-land-type table: how well a policy "reaches" the farmland
+	var reach = function(table) {
+		var total = 0;
+		for (var t of land_types) { total += share[t] * (table[t] || 0); }
+		return total;
+	};
+
+	// ---- Inherent productivity growth per week, per 100% of land of each type ----
+	// Cooperatives and private farms - modernize fast
+	// Communes and church lands - modernize slow 
+	// Gentry estates - best yields and capital but slow improvement 
+	// State and collective farms - held back unless funded 
+	var base_growth = {
+		state: 0.020, collective: 0.025, peasant: 0.045, cooperative: 0.075,
+		commune: 0.020, cossack: 0.035, gentry: 0.050, church: 0.010
+	};
+
+	// ---- How much each policy reaches each land type (1 = average) ----
+	var extension_reach = {
+		state: 0.8, collective: 0.8, peasant: 1.2, cooperative: 1.5,
+		commune: 0.6, cossack: 0.9, gentry: 0.5, church: 0.3
+	};
+	var improvement_reach = {
+		state: 1.2, collective: 1.0, peasant: 0.9, cooperative: 1.1,
+		commune: 0.4, cossack: 0.8, gentry: 1.2, church: 0.4
+	};
+	var research_reach = {
+		state: 1.3, collective: 0.9, peasant: 0.8, cooperative: 1.0,
+		commune: 0.5, cossack: 0.7, gentry: 1.2, church: 0.4
+	};
+	// share of subsidy money that is actually spent on the farm (rest is lost or pocketed)
+	var subsidy_efficiency = {
+		state: 0, collective: 0, peasant: 0.70, cooperative: 0.60,
+		commune: 0.40, cossack: 0.65, gentry: 0.60, church: 0.30
+	};
+	// how easily each land type can borrow (communes have no collateral; cooperatives use credits)
+	var loan_access = {
+		state: 0, collective: 0, peasant: 1.0, cooperative: 0,
+		commune: 0.5, cossack: 0.8, gentry: 1.0, church: 0.2
+	};
+
+	// Unrest and disorder slow everything down; very productive farms improve more slowly.
+	var stability = 0.5 + 0.5 * Math.min(1, Math.max(0, Q.ag_stability) / 100);
+	var headroom = Math.max(0.2, 1 - Math.max(0, Q.ag_productivity - 100) / 300);
+
+	// ---- Purchasing power of the farming population ----
+	// AG_MONEY_SCALE - points of capital/inputs per week
+	var AG_MONEY_SCALE = 0.67;
+	var base_money = (Q.peasants * Q.peasants_wealth + Q.kulaks * Q.kulaks_wealth) / 10000;
+	var subsidy_money = (Q.agriculture_subsidies / 20) * reach(subsidy_efficiency);
+	var loan_money = (Q.agriculture_loans / 5) * reach(loan_access);
+	var credit_money = (Q.cooperative_credits / 5) * share.cooperative * 1.2;
+	var ag_money = Math.max(0, base_money + subsidy_money + loan_money + credit_money - Q.monthly_inflation / 1000) * AG_MONEY_SCALE;
+
+	// ---- Capital and inputs: bought with that money, limited by goods on the market ----
+	var capital_supply = (Q.agricultural_industry_production + Q.capital_production) / 200;
+	var inputs_supply = Q.agricultural_industry_production / 100;
+	var capital_bought = Math.min(capital_supply, ag_money * 0.4);
+	var inputs_bought = Math.min(inputs_supply, ag_money * 0.6);
+
+	Q.ag_capital -= Q.ag_capital * 0.00025;   // natural depreciation
+	Q.ag_inputs -= Q.ag_inputs * 0.0004;     // used up each season
+	Q.ag_capital += capital_bought;
+	Q.ag_inputs += inputs_bought;
+
+	// Direct effects of the other programmes
+	var extension = Q.extension_services * reach(extension_reach);
+	var improvement = Q.land_improvement * reach(improvement_reach);
+	var research = Q.agriculture_research * reach(research_reach);
+
+	Q.ag_inputs += extension * 0.010 * stability;
+	Q.ag_land += extension * 0.0005 + improvement * 0.004;
+	Q.ag_capital += research * 0.004;
+	Q.ag_inputs += research * 0.006;
+
+	// State farms: funding is a net gain for state land only, with diminishing returns
+	var state_farm = Math.pow(Math.max(0, Q.state_farm_funding), 0.7) * share.state;
+	Q.ag_capital += state_farm * 0.02;
+
+	// ---- Productivity ----
+	var productivity_gain = 0;
+	for (var t of land_types) { productivity_gain += share[t] * base_growth[t]; }
+	productivity_gain += extension * 0.015 + improvement * 0.012 + research * 0.020;
+	productivity_gain += state_farm * 0.10;
+	Q.ag_productivity += productivity_gain * stability * headroom;
+
+	// ---- Cooperative credits slowly convert peasant farms into cooperatives ----
+	var converted = Q.peasant_land * 0.0004 * Q.cooperative_credits;
+	Q.peasant_land -= converted;
+	Q.cooperative_land += converted;
+
+	Q.ag_productivity_gain = productivity_gain * stability * headroom;
+	console.log("ag growth: productivity +" + Q.ag_productivity_gain.toFixed(3) + ", money " + ag_money.toFixed(3) + ", capital bought " + capital_bought.toFixed(3) + ", inputs bought " + inputs_bought.toFixed(3));
+}
+
+
 Q.ag_labor = (Q.peasants * Q.ag_labor_participation / 100) / 75 * 100;
 Q.ag_labor = Math.max(0, Q.ag_labor);
 Q.agricultural_industry_production = Q.agricultural_industry * Q.industry / 100;
 if (newWeek) {
 	Q.ag_inputs -= Q.ag_inputs * 0.01;  // Natural depreciation
-	Q.ag_inputs += Q.agricultural_industry_production * 0.5;
+	Q.ag_inputs += Q.agricultural_industry_production * 0.01;
 }
 Q.ag_inputs = Math.max(0, Q.ag_inputs); 
 Q.ag_land = Math.max(0, Q.ag_land);
 Q.ag_capital = Math.max(0, Q.ag_capital);
 Q.ag_productivity = Math.max(0, Q.ag_productivity);
-Q.ag_stability = Math.max(0, 100 - Q.instability);
+Q.ag_stability = Math.max(0, 100 - Q.instability + Q.ag_stability_modifier);
 
 Q.ag_capacity = (Q.ag_land/100)**0.40 * (Q.ag_labor/100)**0.25 * (Q.ag_capital/100)**0.20
               * (Q.ag_inputs/100)**0.15 * (Q.ag_productivity/100) + (Q.finalefficacy_agriculture/25);
@@ -696,11 +801,7 @@ if (Q.land_reform_progress < 10) {
 		Q.state_land += Q.church_land; Q.church_land = 0; 
 		Q.state_land += Q.gentry_land; Q.gentry_land = 0; 
 	}
-} else {
-	if (Q.state_land > 1.5) { Q.peasant_land += (Q.state_land * 0.1); Q.state_land *= 0.9; }
-	Q.cooperative_land += (Q.peasant_land * 0.001); Q.peasant_land *= 0.999;
-	Q.peasant_land += (Q.commune_land * 0.01); Q.commune_land *= 0.99; 
-}
+} 
 }
 
 // Trade
