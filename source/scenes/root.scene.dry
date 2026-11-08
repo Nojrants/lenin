@@ -1668,11 +1668,11 @@ Q.economic_records = [
         'unemployment': 3.5,
         'industry': 100,
         'hunger': 20,
-        'gdp': 53,
+        'gdp': 60,
         'gdp_ag': 40,
-        'gdp_industry': 7,
-		'gdp_trade': 1.5,
-		'gdp_government': 4.5
+        'gdp_industry': 10,
+		'gdp_trade': 2.5,
+		'gdp_government': 7.5
     }
 ];
 
