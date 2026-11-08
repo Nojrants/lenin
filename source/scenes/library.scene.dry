@@ -492,6 +492,10 @@ Strength: [+ left_sr_strength : strength_2 +]
 Dissent: [+ left_sr_dissent : dissent +]
 
 
+
+
+
+
 @figures
 go-to: menu
 on-display: {!
