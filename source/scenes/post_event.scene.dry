@@ -1672,6 +1672,13 @@ Q.red_specialists += (Q.students / 4) * Q.finalefficacy_enlightenment * Q.school
 // });
 
 
+// Random variance
+if (newWeek) {
+	Q.hunger += (Math.random() * 2 - 1); 
+	Q.monthly_inflation += (Math.random() * 2 - 1); 
+	Q.unemployment += (Math.random() * 2 - 1)/2; 
+}
+
 
 // 1. update dates
 if (newWeek) {
