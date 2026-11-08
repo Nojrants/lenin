@@ -318,14 +318,25 @@ if (Q.soviet_support_records && Q.soviet_support_records.length >= 2) {
 if (Q.economic_records && Q.economic_records.length >= 2) {
     var erecs = Q.economic_records.filter(function(r) { return r && r.date; });
     var measures = [
-        { key: 'monthly_inflation', label: 'Inflation (monthly %)', color: '#2a5bd7', unit: '%', zero: true },
-        { key: 'hunger', label: 'Urban hunger (%)', color: '#c0399f', unit: '%', zero: true },
-        { key: 'unemployment', label: 'Unemployment (%)', color: '#d83b2d', unit: '%', zero: true }
+        { key: ['monthly_inflation'], derive: 'inflation', label: 'Inflation (monthly %)', color: '#2a5bd7', unit: '%', zero: true },
+        { key: ['hunger', 'urban_hunger'], label: 'Urban hunger (%)', color: '#c0399f', unit: '%', zero: true },
+        { key: ['unemployment'], label: 'Unemployment (%)', color: '#d83b2d', unit: '%', zero: true }
     ];
     var espan = timeSpan(erecs);
     var PH = 170, EH = measures.length * PH + 30, einner = '';
     measures.forEach(function(m, i) {
-        var pts = erecs.map(function(r) { return [toTime(r.date), num(r[m.key])]; });
+        var found = null;
+        m.key.forEach(function(kk) { if (!found && erecs.some(function(r) { return r[kk] !== undefined; })) { found = kk; } });
+        var pts = erecs.map(function(r) {
+            if (found) { return [toTime(r.date), num(r[found])]; }
+            // older saves only have annual inflation: convert it to the monthly rate
+            if (m.derive && r[m.derive] !== undefined) {
+                found = found || false;
+                return [toTime(r.date), (Math.pow(1 + num(r[m.derive]) / 100, 1 / 12) - 1) * 100];
+            }
+            return [toTime(r.date), 0];
+        });
+        if (!found && !m.derive && window.console) { console.log('figures: no record field for "' + m.label + '"; tried ' + m.key.join(', ') + '; record fields are: ' + Object.keys(erecs[erecs.length - 1]).join(', ')); }
         var lo = Math.min.apply(null, pts.map(function(p) { return p[1]; }));
         var hi = Math.max.apply(null, pts.map(function(p) { return p[1]; }));
         var y = i * PH;
@@ -341,10 +352,10 @@ if (Q.economic_records && Q.economic_records.length >= 2) {
     var grecs = Q.economic_records.filter(function(r) { return r && r.date; });
     // each sector may be stored under a few possible names; first one found is used
     var sectors = [
-        { keys: ['ag_gdp', 'gdp_ag', 'gdp_agriculture', 'agriculture_gdp'], weight: 0.45, label: 'Agriculture', color: '#8fae4b' },
-        { keys: ['industry_gdp', 'gdp_industry'], weight: 0.40, label: 'Industry', color: '#5b6c7d' },
-        { keys: ['trade_gdp', 'gdp_trade'], weight: 0.10, label: 'Trade', color: '#d9a441' },
-        { keys: ['government_gdp', 'gdp_government', 'gdp_gov', 'gov_gdp'], weight: 0.05, label: 'Government', color: '#a33a3a' }
+        { keys: ['gdp_ag'], label: 'Agriculture', color: '#8fae4b' },
+        { keys: ['gdp_industry'], label: 'Industry', color: '#5b6c7d' },
+        { keys: ['gdp_trade'], label: 'Trade', color: '#d9a441' },
+        { keys: ['gdp_government'], label: 'Government', color: '#a33a3a' }
     ];
     var sectorVal = function(r, s) {
         for (var i = 0; i < s.keys.length; i++) {
@@ -352,21 +363,21 @@ if (Q.economic_records && Q.economic_records.length >= 2) {
         }
         return undefined;
     };
-    var hasSectors = grecs.every(function(r) { return sectors.every(function(s) { return sectorVal(r, s) !== undefined; }); });
+    var hasSectors = grecs.some(function(r) { return sectors.some(function(s) { return sectorVal(r, s) !== undefined; }); });
+    if (!hasSectors && window.console) { console.log('figures: no GDP sector fields found; record fields are: ' + Object.keys(grecs[grecs.length - 1]).join(', ')); }
     var gspan = timeSpan(grecs), gmax = 0, stack, gdpNow = 0;
     if (hasSectors) {
         stack = sectors.map(function(s, si) { return { k: si, label: s.label, color: s.color, pts: [] }; });
         grecs.forEach(function(r) {
-            // GDP index = ag*0.45 + industry*0.40 + trade*0.10 + government*0.05,
-            // so each layer is that sector's weighted contribution
+            // the sector fields are already weighted contributions; scale them so the stack
+            // equals the recorded GDP index (covers manual overrides of gdp_index)
             var sum = 0;
-            sectors.forEach(function(s, i) {
-                var contrib = sectorVal(r, s) * s.weight;
-                stack[i].pts.push([toTime(r.date), contrib]);
-                sum += contrib;
-            });
-            gmax = Math.max(gmax, sum);
-            gdpNow = r.gdp_index !== undefined ? num(r.gdp_index) : sum;
+            sectors.forEach(function(s) { sum += num(sectorVal(r, s)); });
+            var total = r.gdp !== undefined ? num(r.gdp) : sum;
+            var scale = sum > 0 ? total / sum : 0;
+            sectors.forEach(function(s, i) { stack[i].pts.push([toTime(r.date), num(sectorVal(r, s)) * scale]); });
+            gmax = Math.max(gmax, total);
+            gdpNow = total;
         });
     } else {
         stack = [{ k: 0, label: 'GDP', color: '#5b6c7d', pts: grecs.map(function(r) {
