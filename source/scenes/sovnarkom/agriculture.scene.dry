@@ -188,7 +188,7 @@ on-arrival: {!
 	Q.agriculture_research = Math.round(10*Q.agriculture_research)/10;
 !}
 
-= Funding
+= Agricultural Policy
 
 <table style="width:100%; border-collapse:collapse; margin:10px 0;">
 <tr>
@@ -413,7 +413,7 @@ on-arrival: {!
 title: PROJECTS
 new-page: true
 
-= Projects
+= Agricultural Policy
 
 - #agriculture_projects
 - @agriculture_return
