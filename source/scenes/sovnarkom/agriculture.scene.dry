@@ -179,6 +179,14 @@ go-to: agriculture
 @funding
 title: FUNDING
 new-page: true
+on-arrival: {!
+	Q.state_farm_funding = Math.round(10*Q.state_farm_funding)/10;
+	Q.agriculture_subsidies = Math.round(10*Q.agriculture_subsidies)/10;
+	Q.agriculture_loans = Math.round(10*Q.agriculture_loans)/10;
+	Q.extension_services = Math.round(10*Q.extension_services)/10;
+	Q.land_improvement = Math.round(10*Q.land_improvement)/10;
+	Q.agriculture_research = Math.round(10*Q.agriculture_research)/10;
+!}
 
 = Funding
 
@@ -258,7 +266,7 @@ on-arrival: {!
 
 @decrease_statefarm_funding
 title: Decrease lower school funding
-choose-if: lower_school_funding > 0
+choose-if: state_farm_funding > 0
 unavailable-subtitle: Funding is already non-existent. 
 tags: agriculture_funding
 go-to: funding
