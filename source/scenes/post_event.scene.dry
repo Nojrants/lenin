@@ -1191,6 +1191,9 @@ for (var party of Q.parties) {
     Q[party + '_support'] = party_support;
     total_support += party_support; 
 }
+
+console.log("B debug", Q.year, Q.month, Q.week, Q.workers_b, Q.soldiers_b, Q.workers_petrograd, Q.soldiers_petrograd, Q.b_soviet_bonus, total_support);
+
 // 2. normalize support (fraction)
 for (var party of Q.parties) {
     Q[party+'_normalized'] = Q[party + '_support']/total_support;
