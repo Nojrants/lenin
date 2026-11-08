@@ -1669,8 +1669,8 @@ Q.economic_records = [
         'industry': 100,
         'hunger': 20,
         'gdp': 60,
-        'gdp_ag': 40,
-        'gdp_industry': 10,
+        'gdp_ag': 38,
+        'gdp_industry': 12,
 		'gdp_trade': 2.5,
 		'gdp_government': 7.5
     }
