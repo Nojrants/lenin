@@ -1744,7 +1744,11 @@ if (Q.year == 1917 && Q.month == 11 && Q.week == 2) Q.gdp_index = 49;
                              'unemployment': Q.unemployed,
                              'industry': Q.industry,
                              'hunger': Q.hunger,
-							 'gdp': Q.gdp_index
+							 'gdp': Q.gdp_index,
+							 'gdp_ag': Math.round(Q.ag_gdp*0.45*10)/10,
+							 'gdp_industry': Math.round(Q.industry_gdp*0.40*10)/10,
+							 'gdp_trade': Math.round(Q.trade_gdp*0.10*10)/10,
+							 'gdp_government': Math.round(Q.government_gdp*0.05*10)/10
 });
 window.economicRecords = Q.economic_records;
 
