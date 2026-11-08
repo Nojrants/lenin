@@ -810,7 +810,6 @@ if (newWeek) {
 	Q.kulaks_wealth = Math.min(100, Math.max(1, Q.kulaks_wealth));
 
 	Q.ag_productivity_gain = productivity_gain * stability * headroom;
-	console.log("ag growth: productivity +" + Q.ag_productivity_gain.toFixed(3) + ", money " + ag_money.toFixed(3) + ", capital bought " + capital_bought.toFixed(3) + ", inputs bought " + inputs_bought.toFixed(3));
 }
 
 
@@ -827,6 +826,28 @@ Q.ag_capacity = (Q.ag_land/100)**0.40 * (Q.ag_labor/100)**0.25 * (Q.ag_capital/1
               * (Q.ag_inputs/100)**0.15 * (Q.ag_productivity/100) + (Q.finalefficacy_agriculture/25);
 Q.ag_output = Q.ag_capacity * (0.50 + 0.20*Q.ag_weather/100 + 0.20*Q.ag_transport/100 + 0.10*Q.ag_stability/100);
 Q.ag_gdp = Q.ag_output * 100;
+
+// DEBUG: agricultural variables behind ag_output (prints once per week)
+if (newWeek) {
+	var r3 = function(v) { return Math.round(v * 1000) / 1000; };
+	console.log("AG inputs to output:", {
+		land: r3(Q.ag_land), labor: r3(Q.ag_labor), capital: r3(Q.ag_capital),
+		inputs: r3(Q.ag_inputs), productivity: r3(Q.ag_productivity),
+		weather: r3(Q.ag_weather), transport: r3(Q.ag_transport), stability: r3(Q.ag_stability),
+		capacity: r3(Q.ag_capacity), output: r3(Q.ag_output), gdp: r3(Q.ag_gdp)
+	});
+	console.log("AG weekly flows:", {
+		productivity_gain: r3(Q.ag_productivity_gain), ag_money: r3(ag_money),
+		capital_price: r3(Q.ag_capital_price), capital_supply: r3(capital_supply), capital_bought: r3(capital_bought),
+		inputs_price: r3(Q.ag_inputs_price), inputs_supply: r3(inputs_supply), inputs_bought: r3(inputs_bought),
+		ag_industry_production: r3(Q.agricultural_industry_production), capital_production: r3(Q.capital_production)
+	});
+	console.log("AG people:", {
+		peasants_wealth: r3(Q.peasants_wealth), kulaks_wealth: r3(Q.kulaks_wealth),
+		peasants_unrest: r3(Q.peasants_unrest), kulaks_unrest: r3(Q.kulaks_unrest),
+		food_sold: r3(Q.food_sold), land_reform_progress: Q.land_reform_progress, instability: r3(Q.instability)
+	});
+}
 
 if (newWeek) { Q.food_sold += ((35 - Q.peasants_unrest)/50000) + ((35 - Q.kulaks_unrest)/40000); }
 
@@ -852,7 +873,19 @@ if (Q.land_reform_progress < 10) {
 		Q.state_land += Q.church_land; Q.church_land = 0; 
 		Q.state_land += Q.gentry_land; Q.gentry_land = 0; 
 	}
-} 
+} else {
+	// Cultivated land recovers after the reform
+	if (Q.ag_land < 95) { Q.ag_land += Math.min(0.25, 95 - Q.ag_land); }
+
+	// Prosperous peasants slowly clear new land. Instability, unrest and rural hunger hinder it,
+	// and it tapers off as cultivated land approaches its ceiling (140).
+	var clearing_stability = Math.min(1, Math.max(0, 1 - Q.instability / 100));
+	var clearing_calm = Math.min(1, Math.max(0, 1 - Q.peasants_unrest / 200));
+	var clearing_means = (Q.peasants_wealth / 15) * (0.8 + 0.2 * (Q.kulaks_wealth / 5));
+	var clearing_room = Math.max(0, 1 - Q.ag_land / 140);
+	var clearing_hunger = Q.rural_hunger > 0 ? 0.5 : 1;
+	Q.ag_land += 0.012 * clearing_means * clearing_stability * clearing_calm * clearing_room * clearing_hunger;
+}
 }
 
 // Trade
