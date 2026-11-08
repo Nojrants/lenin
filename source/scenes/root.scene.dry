@@ -1664,10 +1664,10 @@ Q.economic_records = [
     },
     {
         'date': new Date(1917, 10, 4),
-        'inflation': Q.monthly_inflation,
-        'unemployment': Q.unemployed,
+        'inflation': 8.5,
+        'unemployment': 3.5,
         'industry': 100,
-        'hunger': Q.hunger,
+        'hunger': 20,
         'gdp': 53,
         'gdp_ag': 40,
         'gdp_industry': 7,
