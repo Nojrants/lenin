@@ -184,7 +184,7 @@ on-arrival: {!
 	Q.state_farm_funding = Math.round(10*Q.state_farm_funding)/10;
 	Q.agriculture_subsidies = Math.round(10*Q.agriculture_subsidies)/10;
 	Q.agriculture_loans = Math.round(10*Q.agriculture_loans)/10;
-	Q.cooperative_credits = Math.round(10*Q.cooperative_credits)/10);
+	Q.cooperative_credits = Math.round(10*Q.cooperative_credits)/10;
 	Q.extension_services = Math.round(10*Q.extension_services)/10;
 	Q.land_improvement = Math.round(10*Q.land_improvement)/10;
 	Q.agriculture_research = Math.round(10*Q.agriculture_research)/10;
