@@ -175,9 +175,10 @@ on-arrival: {!
 
 
 
+- @administration
+- @policy
 - @taxation
 - @banking
-- @administration
 - @finance_null
 - @seize_banks
 - @repudiate_loans
@@ -195,7 +196,7 @@ go-to: finance
 title: Seize the banks!
 subtitle: Nationalize banks to allow us full control over fiscal policy. 
 view-if: banks_seized = 0
-on-arrival: banks_seized = 1; resources += 4; elite_unrest += 5; middle_unrest += 5; instability += 5; capital_flight_progress += 0.5;
+on-arrival: banks_seized = 1; resources += 4; elites_unrest += 5; middle_unrest += 5; instability += 5; capital_flight_progress += 0.5;
 
 @repudiate_loans
 title: Repudiate all outstanding loans.
@@ -218,6 +219,33 @@ go-to: finance
 
   
 
+@policy
+title: POLICY
+new-page: true
+
+= Government Policy
+
+- @discipline
+- @raise_salaries
+- @finance_return
+
+@discipline
+title: Practice budget discipline
+subtitle: Cut salaries and benefits across the government. 
+unavailable-subtitle: There is nothing left to cut.
+choose-if: efficacy_finance > 0.25
+on-arrival: efficacy_finance -= 0.1; efficacy_foreign -= 0.1; efficacy_military -= 0.1; efficacy_enlightenment -= 0.1; efficacy_internal -= 0.1; efficacy_railways -= 0.1; efficacy_trade -= 0.1; efficacy_justice -= 0.1; efficacy_agriculture -= 0.1; efficacy_foodsupply -= 0.1; efficacy_nationalities -= 0.1; efficacy_welfare -= 0.1; foreignaffairs_expend -= 0.25; military_expend -= 0.25; enlightenment_expend -= 0.25; railways_expend -= 0.25; trade_expend -= 0.25; finance_expend -= 0.25; justice_expend -= 0.25; labor_expend -= 0.25; agriculture_expend -= 0.25; foodsupply_expend -= 0.25; nationalities_expend -= 0.25; welfare_expend -= 0.25; monthly_inflation -= 0.1; 
+
+Cutting the budget hurts the workers and middle class, and also reduces the morale of the soldiers and railroad workers, two of the largest groups of government employees. This makes them less effective at their jobs.
+
+@raise_salaries
+title: Raise salary rates
+subtitle: Raise salaries for government employees.
+on-arrival: efficacy_finance += 0.15 if efficacy_finance < 1; efficacy_foreign += 0.15 if efficacy_foreign < 1; efficacy_military += 0.15 if efficacy_military < 1; efficacy_enlightenment += 0.15 if efficacy_enlightenment < 1; efficacy_internal += 0.15 if efficacy_internal < 1; efficacy_railways += 0.15 if efficacy_railways < 1; efficacy_trade += 0.15 if efficacy_trade < 1; efficacy_justice += 0.15 if efficacy_justice < 1; efficacy_agriculture += 0.15 if efficacy_agriculture < 1; efficacy_foodsupply += 0.15 if efficacy_foodsupply < 1; efficacy_nationalities += 0.15 if efficacy_nationalities < 1; efficacy_welfare += 0.15 if efficacy_welfare < 1; foreignaffairs_expend += 0.25; military_expend += 0.25; enlightenment_expend += 0.25; railways_expend += 0.25; trade_expend += 0.25; finance_expend += 0.25; justice_expend += 0.25; labor_expend += 0.25; agriculture_expend += 0.25; foodsupply_expend += 0.25; nationalities_expend += 0.25; welfare_expend += 0.25; monthly_inflation += 0.05; capital_flight_progress -= 0.5;
+
+
+
+
 @taxation
 title: TAXATION
 new-page: true
@@ -232,7 +260,8 @@ on-arrival: {!
   Q.income_tax_estimate = Math.round(100 * Q.income_tax_estimate)/100;
   Q.property_tax_estimate = Math.round(100 * (Q.property_tax_yield || 0) * Q.wealth_tax_rate)/100;
   Q.business_tax_estimate = Math.round(100 * (Q.business_tax_yield || 0) * Q.business_tax_rate)/100;
-  Q.taxation_estimate = Math.round(100 * (Q.income_tax_estimate + Q.property_tax_estimate + Q.business_tax_estimate))/100;
+  Q.syndicate_levy_estimate = Math.round(100 * (Q.syndicate_levy_yield || 0) * Q.syndicate_levy_rate)/100;
+  Q.taxation_estimate = Math.round(100 * (Q.income_tax_estimate + Q.property_tax_estimate + Q.business_tax_estimate + Q.syndicate_levy_estimate))/100;
 !}
 
 = Taxation
@@ -250,7 +279,18 @@ on-arrival: {!
 </tr>
 <tr>
 <td style="text-align:left; padding:5px 5px 5px 15px; border-bottom:1px solid rgba(128,128,128,0.25);">
-	<span style="color: var(--bolshevik-color); font-weight:bold;">Income Tax – Bracket One</span>
+	<span style="color: var(--bolshevik-color); font-weight:bold;">Income Tax</span>
+	</td>
+    <td style="text-align:center; padding:5px; border-bottom:1px solid rgba(128,128,128,0.25);">
+        
+    </td>
+    <td style="text-align:center; padding:5px; border-bottom:1px solid rgba(128,128,128,0.25);">
+        <span style="color: var(--level1-color);">+[+ income_tax_estimate +]</span>
+    </td>
+</tr>
+<tr>
+<td style="text-align:left; padding:5px 5px 5px 35px; border-bottom:1px solid rgba(128,128,128,0.25);">
+	– Bracket One
 	</td>
     <td style="text-align:center; padding:5px; border-bottom:1px solid rgba(128,128,128,0.25);">
         [+ income_tax_rate_1 +]
@@ -260,8 +300,8 @@ on-arrival: {!
     </td>
 </tr>
 <tr>
-<td style="text-align:left; padding:5px 5px 5px 15px; border-bottom:1px solid rgba(128,128,128,0.25);">
-	<span style="color: var(--bolshevik-color); font-weight:bold;">Income Tax – Bracket Two</span>
+<td style="text-align:left; padding:5px 5px 5px 35px; border-bottom:1px solid rgba(128,128,128,0.25);">
+	– Bracket Two
 	</td>
     <td style="text-align:center; padding:5px; border-bottom:1px solid rgba(128,128,128,0.25);">
         [+ income_tax_rate_2 +]
@@ -271,8 +311,8 @@ on-arrival: {!
     </td>
 </tr>
 <tr>
-<td style="text-align:left; padding:5px 5px 5px 15px; border-bottom:1px solid rgba(128,128,128,0.25);">
-	<span style="color: var(--bolshevik-color); font-weight:bold;">Income Tax – Bracket Three</span>
+<td style="text-align:left; padding:5px 5px 5px 35px; border-bottom:1px solid rgba(128,128,128,0.25);">
+	– Bracket Three
 	</td>
     <td style="text-align:center; padding:5px; border-bottom:1px solid rgba(128,128,128,0.25);">
         [+ income_tax_rate_3 +]
@@ -282,8 +322,8 @@ on-arrival: {!
     </td>
 </tr>
 <tr>
-<td style="text-align:left; padding:5px 5px 5px 15px; border-bottom:1px solid rgba(128,128,128,0.25);">
-	<span style="color: var(--bolshevik-color); font-weight:bold;">Income Tax – Bracket Four</span>
+<td style="text-align:left; padding:5px 5px 5px 35px; border-bottom:1px solid rgba(128,128,128,0.25);">
+	– Bracket Four
 	</td>
     <td style="text-align:center; padding:5px; border-bottom:1px solid rgba(128,128,128,0.25);">
         [+ income_tax_rate_4 +]
@@ -293,25 +333,14 @@ on-arrival: {!
     </td>
 </tr>
 <tr>
-<td style="text-align:left; padding:5px 5px 5px 15px; border-bottom:1px solid rgba(128,128,128,0.25);">
-	<span style="color: var(--bolshevik-color); font-weight:bold;">Income Tax – Bracket Five</span>
+<td style="text-align:left; padding:5px 5px 5px 35px; border-bottom:1px solid rgba(128,128,128,0.25);">
+	– Bracket Five
 	</td>
     <td style="text-align:center; padding:5px; border-bottom:1px solid rgba(128,128,128,0.25);">
         [+ income_tax_rate_5 +]
     </td>
     <td style="text-align:center; padding:5px; border-bottom:1px solid rgba(128,128,128,0.25);">
         <span style="color: var(--level1-color);">+[+ income_tax_5_display +]</span>
-    </td>
-</tr>
-<tr>
-<td style="text-align:left; padding:5px 5px 5px 15px; border-bottom:1px solid rgba(128,128,128,0.25);">
-	<span style="color: var(--bolshevik-color); font-weight:bold;">Income Tax – Total</span>
-	</td>
-    <td style="text-align:center; padding:5px; border-bottom:1px solid rgba(128,128,128,0.25);">
-        
-    </td>
-    <td style="text-align:center; padding:5px; border-bottom:1px solid rgba(128,128,128,0.25);">
-        <span style="color: var(--level1-color);">+[+ income_tax_estimate +]</span>
     </td>
 </tr>
 <tr>
@@ -326,14 +355,25 @@ on-arrival: {!
     </td>
 </tr>
 <tr>
-<td style="text-align:left; padding:5px 5px 5px 15px; border-bottom:2px solid rgba(128,128,128,0.6);">
+<td style="text-align:left; padding:5px 5px 5px 15px; border-bottom:1px solid rgba(128,128,128,0.25);">
 	<span style="color: var(--bolshevik-color); font-weight:bold;">Business Tax</span>
 	</td>
-    <td style="text-align:center; padding:5px; border-bottom:2px solid rgba(128,128,128,0.6);">
+    <td style="text-align:center; padding:5px; border-bottom:1px solid rgba(128,128,128,0.25);">
         [+ business_tax_rate +]
     </td>
-    <td style="text-align:center; padding:5px; border-bottom:2px solid rgba(128,128,128,0.6);">
+    <td style="text-align:center; padding:5px; border-bottom:1px solid rgba(128,128,128,0.25);">
         <span style="color: var(--level1-color);">+[+ business_tax_estimate +]</span>
+    </td>
+</tr>
+<tr>
+<td style="text-align:left; padding:5px 5px 5px 15px; border-bottom:2px solid rgba(128,128,128,0.6);">
+	<span style="color: var(--bolshevik-color); font-weight:bold;">Syndicate Levy</span>
+	</td>
+    <td style="text-align:center; padding:5px; border-bottom:2px solid rgba(128,128,128,0.6);">
+        [+ syndicate_levy_rate +]%
+    </td>
+    <td style="text-align:center; padding:5px; border-bottom:2px solid rgba(128,128,128,0.6);">
+        <span style="color: var(--level1-color);">+[+ syndicate_levy_estimate +]</span>
     </td>
 </tr>
 <tr>
@@ -348,117 +388,137 @@ on-arrival: {!
 </tr>
 </table>
 
-- #finance_taxation
+- @income_tax_header
+- @increase_bracket1
+- @decrease_bracket1
+- @increase_bracket2
+- @decrease_bracket2
+- @increase_bracket3
+- @decrease_bracket3
+- @increase_bracket4
+- @decrease_bracket4
+- @increase_bracket5
+- @decrease_bracket5
+- @increase_property_tax
+- @decrease_property_tax
+- @increase_business_tax
+- @decrease_business_tax
+- @increase_syndicate_levy
+- @decrease_syndicate_levy
 - @finance_return
 
 
+@income_tax_header
+title: Income tax
+go-to: taxation
+
 @increase_bracket1
-title: Increase income tax bracket one.
-tags: finance_taxation
+title: – Increase bracket one.
 go-to: taxation
 choose-if: income_tax_rate_1 < 5
 unavailable-subtitle: The tax rate is already at the maximum.
-on-arrival: income_tax_rate_1 += 0.25; capital_flight_progress += 0.25; elite_unrest += 2.5; middle_unrest += 2.5; monthly_inflation -= 0.05;
+on-arrival: income_tax_rate_1 += 0.25; capital_flight_progress += 0.25; elites_unrest += 2.5; middle_unrest += 2.5; monthly_inflation -= 0.05;
 
 @decrease_bracket1
-title: Decrease income tax bracket one.
-tags: finance_taxation
+title: – Decrease bracket one.
 go-to: taxation
 choose-if: income_tax_rate_1 >= 0.25
 unavailable-subtitle: The tax rate is already at zero.
-on-arrival: income_tax_rate_1 -= 0.25; capital_flight_progress -= 0.25; elite_unrest -= 2.5; middle_unrest -= 2.5; monthly_inflation += 0.05;
+on-arrival: income_tax_rate_1 -= 0.25; capital_flight_progress -= 0.25; elites_unrest -= 2.5; middle_unrest -= 2.5; monthly_inflation += 0.05;
 
 @increase_bracket2
-title: Increase income tax bracket two.
-tags: finance_taxation
+title: – Increase bracket two.
 go-to: taxation
 choose-if: income_tax_rate_2 < 5
 unavailable-subtitle: The tax rate is already at the maximum.
-on-arrival: income_tax_rate_2 += 0.25; capital_flight_progress += 0.25; elite_unrest += 2.5; middle_unrest += 2.5; monthly_inflation -= 0.05;
+on-arrival: income_tax_rate_2 += 0.25; capital_flight_progress += 0.25; elites_unrest += 2.5; middle_unrest += 2.5; monthly_inflation -= 0.05;
 
 @decrease_bracket2
-title: Decrease income tax bracket two.
-tags: finance_taxation
+title: – Decrease bracket two.
 go-to: taxation
 choose-if: income_tax_rate_2 >= 0.25
 unavailable-subtitle: The tax rate is already at zero.
-on-arrival: income_tax_rate_2 -= 0.25; capital_flight_progress -= 0.25; elite_unrest -= 2.5; middle_unrest -= 2.5; monthly_inflation += 0.05;
+on-arrival: income_tax_rate_2 -= 0.25; capital_flight_progress -= 0.25; elites_unrest -= 2.5; middle_unrest -= 2.5; monthly_inflation += 0.05;
 
 @increase_bracket3
-title: Increase income tax bracket three.
-tags: finance_taxation
+title: – Increase bracket three.
 go-to: taxation
 choose-if: income_tax_rate_3 < 5
 unavailable-subtitle: The tax rate is already at the maximum.
-on-arrival: income_tax_rate_3 += 0.25; capital_flight_progress += 0.25; middle_unrest += 2.5; kulak_unrest += 1; monthly_inflation -= 0.05;
+on-arrival: income_tax_rate_3 += 0.25; capital_flight_progress += 0.25; middle_unrest += 2.5; kulaks_unrest += 1; monthly_inflation -= 0.05;
 
 @decrease_bracket3
-title: Decrease income tax bracket three.
-tags: finance_taxation
+title: – Decrease bracket three.
 go-to: taxation
 choose-if: income_tax_rate_3 >= 0.25
 unavailable-subtitle: The tax rate is already at zero.
-on-arrival: income_tax_rate_3 -= 0.25; capital_flight_progress -= 0.25; middle_unrest -= 2.5; kulak_unrest -= 1; monthly_inflation += 0.05;
+on-arrival: income_tax_rate_3 -= 0.25; capital_flight_progress -= 0.25; middle_unrest -= 2.5; kulaks_unrest -= 1; monthly_inflation += 0.05;
 
 @increase_bracket4
-title: Increase income tax bracket four.
-tags: finance_taxation
+title: – Increase bracket four.
 go-to: taxation
 choose-if: income_tax_rate_4 < 5
 unavailable-subtitle: The tax rate is already at the maximum.
-on-arrival: income_tax_rate_4 += 0.25; middle_unrest += 2.5; labor_unrest += 10; monthly_inflation -= 0.05;
+on-arrival: income_tax_rate_4 += 0.25; middle_unrest += 2.5; workers_unrest += 10; monthly_inflation -= 0.05;
 
 @decrease_bracket4
-title: Decrease income tax bracket four.
-tags: finance_taxation
+title: – Decrease bracket four.
 go-to: taxation
 choose-if: income_tax_rate_4 >= 0.25
 unavailable-subtitle: The tax rate is already at zero.
-on-arrival: income_tax_rate_4 -= 0.25; middle_unrest -= 2.5; labor_unrest -= 10; monthly_inflation += 0.05;
+on-arrival: income_tax_rate_4 -= 0.25; middle_unrest -= 2.5; workers_unrest -= 10; monthly_inflation += 0.05;
 
 @increase_bracket5
-title: Increase income tax bracket five.
-tags: finance_taxation
+title: – Increase bracket five.
 go-to: taxation
 choose-if: income_tax_rate_5 < 5
 unavailable-subtitle: The tax rate is already at the maximum.
-on-arrival: income_tax_rate_5 += 0.25; labor_unrest += 5; peasant_unrest += 5; monthly_inflation -= 0.05;
+on-arrival: income_tax_rate_5 += 0.25; workers_unrest += 5; peasants_unrest += 5; monthly_inflation -= 0.05;
 
 @decrease_bracket5
-title: Decrease income tax bracket five.
-tags: finance_taxation
+title: – Decrease bracket five.
 go-to: taxation
 choose-if: income_tax_rate_5 >= 0.25
 unavailable-subtitle: The tax rate is already at zero.
-on-arrival: income_tax_rate_5 -= 0.25; labor_unrest -= 5; peasant_unrest -= 5; monthly_inflation += 0.05;
+on-arrival: income_tax_rate_5 -= 0.25; workers_unrest -= 5; peasants_unrest -= 5; monthly_inflation += 0.05;
 
 @increase_property_tax
 title: Increase the property tax.
-tags: finance_taxation
 go-to: taxation
-on-arrival: wealth_tax_rate += 0.5; capital_flight_progress += 0.5; capital_flight_progress += 1 if wealth_tax_rate >= 2; elite_unrest += 10; middle_unrest += 5; labor_unrest -= 5; monthly_inflation -= 0.2;
+on-arrival: wealth_tax_rate += 0.5; capital_flight_progress += 0.5; capital_flight_progress += 1 if wealth_tax_rate >= 2; elites_unrest += 10; middle_unrest += 5; workers_unrest -= 5; monthly_inflation -= 0.2;
 
 @decrease_property_tax
 title: Decrease the property tax.
-tags: finance_taxation
 go-to: taxation
 choose-if: wealth_tax_rate >= 0.5
 unavailable-subtitle: The tax rate is already at zero.
-on-arrival: wealth_tax_rate -= 0.5; capital_flight_progress -= 0.5; elite_unrest -= 10; middle_unrest -= 5; labor_unrest += 5; monthly_inflation += 0.2;
+on-arrival: wealth_tax_rate -= 0.5; capital_flight_progress -= 0.5; elites_unrest -= 10; middle_unrest -= 5; workers_unrest += 5; monthly_inflation += 0.2;
 
 @increase_business_tax
 title: Increase the business tax.
-tags: finance_taxation
 go-to: taxation
-on-arrival: business_tax_rate += 0.5; capital_flight_progress += 0.5; capital_flight_progress += 1 if business_tax_rate >= 2; elite_unrest += 5; middle_unrest += 5; labor_unrest -= 5; monthly_inflation -= 0.2;
+on-arrival: business_tax_rate += 0.5; capital_flight_progress += 0.5; capital_flight_progress += 1 if business_tax_rate >= 2; elites_unrest += (10 * (trade_marketization/100)); middle_unrest += (10 * (trade_marketization/100)); workers_unrest -= 5; monthly_inflation -= 0.2;
 
 @decrease_business_tax
 title: Decrease the business tax.
-tags: finance_taxation
 go-to: taxation
 choose-if: business_tax_rate >= 0.5
 unavailable-subtitle: The tax rate is already at zero.
-on-arrival: business_tax_rate -= 0.5; capital_flight_progress -= 0.5; elite_unrest -= 5; middle_unrest -= 5; labor_unrest += 5; monthly_inflation += 0.2;
+on-arrival: business_tax_rate -= 0.5; capital_flight_progress -= 0.5; elites_unrest -= (10 * (trade_marketization/100)); middle_unrest -= (10 * (trade_marketization/100)); workers_unrest += 5; monthly_inflation += 0.2;
+
+@increase_syndicate_levy
+title: Increase the levy on syndicalized enterprises.
+go-to: taxation
+choose-if: syndicate_levy_rate < 50
+unavailable-subtitle: The levy is already at the maximum.
+on-arrival: syndicate_levy_rate += 5; workers_unrest += (7.5 * (industries_syndicalized/100)); monthly_inflation -= 0.05;
+
+@decrease_syndicate_levy
+title: Decrease the levy on syndicalized enterprises.
+go-to: taxation
+choose-if: syndicate_levy_rate >= 5
+unavailable-subtitle: The levy is already at zero.
+on-arrival: syndicate_levy_rate -= 5; workers_unrest -= (7.5 * (industries_syndicalized/100)); monthly_inflation += 0.05;
 
 
 
@@ -542,8 +602,6 @@ new-page: true
 - @improve_admin
 - @hire_staff
 - @corruption
-- @discipline
-- @raise_salaries
 - @finance_return
 
 @improve_admin
@@ -570,17 +628,3 @@ on-arrival: {!
   Q.efficacy_finance = Math.min(1, Q.efficacy_finance + 0.1);
   Q.finance_corruption = Math.max(0, Q.finance_corruption - (0.2 * Q.efficacy_finance)); 
 !}
-
-@discipline
-title: Practice budget discipline
-subtitle: Cut salaries and benefits across the government. 
-unavailable-subtitle: There is nothing left to cut.
-choose-if: efficacy_finance > 0.25
-on-arrival: efficacy_finance -= 0.1; efficacy_foreign -= 0.1; efficacy_military -= 0.1; efficacy_enlightenment -= 0.1; efficacy_internal -= 0.1; efficacy_railways -= 0.1; efficacy_trade -= 0.1; efficacy_justice -= 0.1; efficacy_agriculture -= 0.1; efficacy_foodsupply -= 0.1; efficacy_nationalities -= 0.1; efficacy_welfare -= 0.1; foreignaffairs_expend -= 0.25; military_expend -= 0.25; enlightenment_expend -= 0.25; railways_expend -= 0.25; trade_expend -= 0.25; finance_expend -= 0.25; justice_expend -= 0.25; labor_expend -= 0.25; agriculture_expend -= 0.25; foodsupply_expend -= 0.25; nationalities_expend -= 0.25; welfare_expend -= 0.25; monthly_inflation -= 0.1; 
-
-Cutting the budget hurts the workers and middle class, and also reduces the morale of the soldiers and railroad workers, two of the largest groups of government employees. This makes them less effective at their jobs.
-
-@raise_salaries
-title: Raise salary rates
-subtitle: Raise salaries for government employees.
-on-arrival: efficacy_finance += 0.15 if efficacy_finance < 1; efficacy_foreign += 0.15 if efficacy_foreign < 1; efficacy_military += 0.15 if efficacy_military < 1; efficacy_enlightenment += 0.15 if efficacy_enlightenment < 1; efficacy_internal += 0.15 if efficacy_internal < 1; efficacy_railways += 0.15 if efficacy_railways < 1; efficacy_trade += 0.15 if efficacy_trade < 1; efficacy_justice += 0.15 if efficacy_justice < 1; efficacy_agriculture += 0.15 if efficacy_agriculture < 1; efficacy_foodsupply += 0.15 if efficacy_foodsupply < 1; efficacy_nationalities += 0.15 if efficacy_nationalities < 1; efficacy_welfare += 0.15 if efficacy_welfare < 1; foreignaffairs_expend += 0.25; military_expend += 0.25; enlightenment_expend += 0.25; railways_expend += 0.25; trade_expend += 0.25; finance_expend += 0.25; justice_expend += 0.25; labor_expend += 0.25; agriculture_expend += 0.25; foodsupply_expend += 0.25; nationalities_expend += 0.25; welfare_expend += 0.25; monthly_inflation += 0.05; capital_flight_progress -= 0.5;
