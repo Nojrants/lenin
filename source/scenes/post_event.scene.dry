@@ -1301,6 +1301,7 @@ Q.government_functions = (
     Q.trade_expend +
     Q.finance_expend +
     Q.justice_expend +
+    Q.labor_expend +
     Q.agriculture_expend +
     Q.foodsupply_expend +
     Q.nationalities_expend +
@@ -1914,6 +1915,15 @@ if (Q.player_party == "m") {
     Q.player_in_gov = Q.k_in_gov;
     Q.player_in_soviet = Q.k_in_soviet;
 }
+
+// FINANCE
+Q.budget_balance = Math.round((Q.income - Q.expenditure) * 100) / 100;
+if (Q.gdp_growth === undefined) Q.gdp_growth = 0;
+if (newWeek && Q.gdp_last > 0) {
+    Q.gdp_growth = Math.round((Q.gdp_index / Q.gdp_last - 1) * 1000) / 10;
+}
+if (newWeek || !Q.gdp_last) Q.gdp_last = Q.gdp_index;
+
 !}
 on-departure: {!
 // TODO: set historical/international events
