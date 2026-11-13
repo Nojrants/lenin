@@ -1514,7 +1514,7 @@ Q.timers = [//m_party
             'k_organizing', 'k_party_unity', 'k_shuffle_leadership',
             'k_international', 'k_war_policy', 'k_industrial_policy',
             // prov_gov
-            'agricultural_policy', 'food_policy', 'fiscal_policy',
+            'agricultural_policy', 'food_policy', 'fiscal_policy', 'trade_policy',
             'foreign_policy', 'judiciary', 'labor_policy', 'labor_affairs',
             'military_policy', 'education_policy', 'posts_policy',
             'internal_security', 'transport_policy',
