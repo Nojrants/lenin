@@ -5217,6 +5217,25 @@ window.facSyndicalize = function(sector, share) {
 		window.facMoveShare(s, 'nationalized', 'syndicalized', share);
 	});
 };
+// closed plants are remembered as capacity so they can reopen under any owner
+window.facClose = function(owner, share) {
+	var I = engineQ().ind;
+	I.closed = I.closed || {};
+	each(sectors, function(s) {
+		var cap = struct(I, s, owner) * clamp(share, 0, 1);
+		I.n[s][owner] -= cap / (own[owner].w * I.scale[s]);
+		I.closed[s] = (I.closed[s] || 0) + cap;
+	});
+};
+window.facReopen = function(owner, share) {
+	var I = engineQ().ind;
+	if (!I.closed) return;
+	each(sectors, function(s) {
+		var cap = (I.closed[s] || 0) * clamp(share, 0, 1);
+		I.n[s][owner] += cap / (own[owner].w * I.scale[s]);
+		I.closed[s] -= cap;
+	});
+};
 window.facDamage = function(sector, share) {
 	var I = engineQ().ind;
 	each(owners, function(o) { I.n[sector][o] *= 1 - clamp(share, 0, 1); });
