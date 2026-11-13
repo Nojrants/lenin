@@ -43,24 +43,29 @@ title: ADMINISTRATION
   
 @found_admin_department
 title: Found a Sovnarkom Admin Department. 
-subtitle: -1 resources - We need a permanent staff seeing to administrative matters. 
+subtitle: -0.25 resources - We need a permanent staff seeing to administrative matters. 
+choose-if: resources >= 0.25
+unavailable-subtitle: -0.25 resources - We lack the resources. 
 view-if: admin_founded = 0
-on-arrival: admin_founded = 1; resources -= 1; sovnarkom_expend += 0.25; efficacy_sovnarkom += 0.2 if efficacy_sovnarkom < 1; efficacy_finance += 0.1 if efficacy_finance < 1; efficacy_foreign += 0.1 if efficacy_foreign < 1; efficacy_military += 0.1 if efficacy_military < 1; efficacy_enlightenment += 0.1 if efficacy_enlightenment < 1; efficacy_internal += 0.1 if efficacy_internal < 1; efficacy_railways += 0.1 if efficacy_railways < 1; efficacy_trade += 0.1 if efficacy_trade < 1; efficacy_justice += 0.1 if efficacy_justice < 1; efficacy_agriculture += 0.1 if efficacy_agriculture < 1; efficacy_foodsupply += 0.1 if efficacy_foodsupply < 1; efficacy_nationalities += 0.1 if efficacy_nationalities < 1; efficacy_welfare += 0.1 if efficacy_welfare < 1; 
+on-arrival: admin_founded = 1; resources -= 0.25; sovnarkom_expend += 0.1; efficacy_sovnarkom += 0.2 if efficacy_sovnarkom < 1; efficacy_finance += 0.1 if efficacy_finance < 1; efficacy_foreign += 0.1 if efficacy_foreign < 1; efficacy_military += 0.1 if efficacy_military < 1; efficacy_enlightenment += 0.1 if efficacy_enlightenment < 1; efficacy_internal += 0.1 if efficacy_internal < 1; efficacy_railways += 0.1 if efficacy_railways < 1; efficacy_trade += 0.1 if efficacy_trade < 1; efficacy_justice += 0.1 if efficacy_justice < 1; efficacy_agriculture += 0.1 if efficacy_agriculture < 1; efficacy_foodsupply += 0.1 if efficacy_foodsupply < 1; efficacy_nationalities += 0.1 if efficacy_nationalities < 1; efficacy_welfare += 0.1 if efficacy_welfare < 1; 
 
 @found_littlesov
 title: Found a "Little Sovnarkom" council
-subtitle: -0.5 resources - We need an auxiliary council to oversee minor issues. 
+subtitle: We need an auxiliary council to oversee minor issues. 
 view-if: littlesov_founded = 0
-on-arrival: littlesov_founded = 1; resources -= 0.5; 
+on-arrival: littlesov_founded = 1; efficacy_sovnarkom += 0.1 if efficacy_sovnarkom < 1;
 
 @sovnarkom_hirestaff
 title: Hire administrative staff. 
-subtitle: -0.5 resources
-choose-if: admin_founded = 1
-unavailable-subtitle: We lack an administrative department. 
-on-arrival: resources -= 0.5; efficacy_sovnarkom += 0.1 if efficacy_sovnarkom < 1;
+subtitle: -0.25 resources
+choose-if: resources >= 0.25 and admin_founded = 1
+unavailable-subtitle: [?if admin_founded != 1 : We lack an administrative department. ?] [?if admin_founded = 1: -0.25 resources - We lack the resources. ?]
+on-arrival: resources -= 0.25; efficacy_sovnarkom += 0.1 if efficacy_sovnarkom < 1;
 
 
+@change_sovnarkom_composition
+title: APPOINT/REMOVE COMMISSARS
+go-to: sovnarkom_composition
 
 
 @cut_officialdom
@@ -132,24 +137,4 @@ on-arrival: {!
   	Q.ag_transport * 0.9; 
   }
 !}
-
-
-
-
-
-
-@change_sovnarkom_composition
-title: APPOINT/REMOVE COMMISSARS
-go-to: sovnarkom_composition
-
-
-
-
-
-
-
-
-
-
-
 
