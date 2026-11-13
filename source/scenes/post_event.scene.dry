@@ -1479,9 +1479,20 @@ Q.business_tax =
     )
 )
 *
+Q.business_tax_rate
+*
 (
     ((Q.business_tax_efficacy / 4 * 3) + (Q.finalefficacy_finance / 4))
 );
+
+// revenue per point of rate, for the estimates on the finance page
+for (var bracket = 1; bracket <= 5; bracket++) {
+    if (Q['income_tax_rate_' + bracket] > 0) {
+        Q['income_tax_yield_' + bracket] = Q['income_tax_' + bracket] / Q['income_tax_rate_' + bracket];
+    }
+}
+if (Q.wealth_tax_rate > 0) Q.property_tax_yield = Q.property_tax / Q.wealth_tax_rate;
+if (Q.business_tax_rate > 0) Q.business_tax_yield = Q.business_tax / Q.business_tax_rate;
 
 if (Q.bagmen_tax == 1) {
 	Q.business_tax += (Q.bagmen_strength / 200);
