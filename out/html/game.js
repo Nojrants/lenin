@@ -5240,6 +5240,8 @@ window.industryMirror = function(Q) {
 		var x = I.last.exports ? I.last.exports[g] : I.o0[g] * trade0[g].x;
 		Q['ind_imp_' + g] = Math.round(m * 100) / 100;
 		Q['ind_exp_' + g] = Math.round(x * 100) / 100;
+		Q['ind_imp_value_' + g] = Math.round(m * I.world[g] * k * 1000) / 1000;
+		Q['ind_exp_value_' + g] = Math.round(x * I.world[g] * k * 1000) / 1000;
 		impValue += m * I.world[g] * k;
 		expValue += x * I.world[g] * k;
 	});
