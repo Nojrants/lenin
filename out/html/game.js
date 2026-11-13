@@ -4541,6 +4541,15 @@ var tariff0 = {
 	arms: [0.05, 0], consumer: [0.30, 0], agri: [0.10, 0], machinery: [0.10, 0], transport: [0.10, 0]
 };
 
+// average workforce of one enterprise
+var jobsPer = { large: 750, medium: 70, small: 6, coop: 40, nationalized: 750, syndicalized: 450 };
+// urban wage earners, turns jobs lost or filled into points of unemployment
+var LABOUR_FORCE = 10000000;
+var HIRE_RATE = 0.25;
+// how fast enterprises turn over compared with plain wear and tear
+var churn = { large: 2.5, medium: 2.5, small: 3, coop: 2.5, nationalized: 1, syndicalized: 2 };
+var UNEMPLOYED_FLOOR = 1;
+
 var BUILD = 10;
 var SIGMA = 2.5;
 var K_GOV = 0.25;
@@ -4656,6 +4665,51 @@ function efficacy(Q, I, s, o, grade) {
 }
 
 function structEff(I, s, o) { return own[o].eff * (I.tech[s] || 1); }
+
+// LABOUR
+function jobsTotal(I) {
+	var jobs = 0;
+	each(sectors, function(s) { each(owners, function(o) { jobs += I.n[s][o] * jobsPer[o] * (0.6 + 0.4 * clamp(I.util[s][o], 0, 1.05)); }); });
+	return jobs;
+}
+// closures lay workers off at once, new jobs fill gradually from the unemployed
+function labourStep(Q, I) {
+	var jobs = jobsTotal(I);
+	if (I.employed === undefined) I.employed = jobs;
+	var rate = num(Q.unemployed);
+	if (I.employed > jobs) {
+		rate += (I.employed - jobs) / LABOUR_FORCE * 100;
+		I.employed = jobs;
+	} else {
+		var pool = Math.max(0, rate - UNEMPLOYED_FLOOR) / 100 * LABOUR_FORCE;
+		var hires = Math.min((jobs - I.employed) * HIRE_RATE, pool);
+		rate -= hires / LABOUR_FORCE * 100;
+		I.employed += hires;
+	}
+	Q.unemployed = Math.round(rate * 100) / 100;
+	I.jobs = jobs;
+	return jobs > 0 ? I.employed / jobs : 1;
+}
+
+// BUSINESS CLIMATE
+// multipliers on the weekly rate of openings and closures for one group of enterprises
+function climate(Q, I, s, o, m, m0) {
+	if (o === 'nationalized') {
+		var fund = I.fund[s] || 0;
+		return { open: 1 + 0.9 * fund, close: Math.max(0.4, 1 - 0.3 * fund) * (1 + Math.max(0, num(Q.instability) - 30) / 200) };
+	}
+	var squeeze = m0 === undefined ? 0 : (m - m0) / 0.1;
+	var last = I.last.groups && I.last.groups[s] && I.last.groups[s][o];
+	var shortage = last ? 1 - last.sat : 0;
+	var instab = (num(Q.instability) - 30) / 40;
+	var inflation = Math.max(0, num(Q.monthly_inflation) - 5) / 20;
+	var tax = (o === 'large' || o === 'medium' || o === 'small') ? 0.3 * (num(Q.business_tax_rate, 1) - 1) : 0;
+	var machinery = I.price.machinery / P0.machinery - 1;
+	var flight = o === 'large' ? 0.05 * num(Q.capital_flight_progress) : 0;
+	var close = 1 + 1.5 * Math.max(0, -squeeze) + 2 * shortage + instab + inflation + tax + flight + (Math.random() - 0.5) * 0.6;
+	var open = 1 + 1.2 * clamp(squeeze, -1, 1.5) - instab * 0.66 - tax - 0.5 * machinery - flight + (Math.random() - 0.5) * 0.6;
+	return { open: clamp(open, 0, 3), close: clamp(close, 0.3, 6) };
+}
 
 // OWNERSHIP SHIFTS
 function moveCapacity(I, s, from, to, cap) {
@@ -4875,6 +4929,8 @@ window.industryWeek = function(Q) {
 	if (eTot > 0) each(fuelNames, function(f) { grade += I.lastFuel[f] * fuels[f].energy * fuels[f].grade / eTot; });
 	else grade = I.base.grade;
 
+	var staff = labourStep(Q, I);
+
 	// utilisation from last week's margins
 	var rows = [];
 	each(sectors, function(s) {
@@ -4892,10 +4948,8 @@ window.industryWeek = function(Q) {
 			var cap = struct(I, s, o);
 			var nd = recipeNeeds(I, s, o);
 			var eff = efficacy(Q, I, s, o, grade);
-			var rate = own[o].dep;
-			if (o === 'nationalized') rate *= 1 + 0.9 * (I.fund[s] || 0);
-			else if (m0 !== undefined) rate *= 1 + 1.2 * clamp((m - m0) / 0.1, -1, 1.5);
-			rows.push({ s: s, o: o, cap: cap, t: cap * u, u: u, eff: eff, nd: nd, build: cap * Math.max(0, rate) * BUILD });
+			var cl = climate(Q, I, s, o, m, m0);
+			rows.push({ s: s, o: o, cap: cap, t: cap * u, u: u, eff: eff * staff, nd: nd, build: cap * own[o].dep * cl.open * BUILD, close: cl.close });
 		});
 	});
 
@@ -4948,7 +5002,7 @@ window.industryWeek = function(Q) {
 
 	// production and money
 	var used = {}, out = {}, groups = {}, cls = { elites: 0, middle: 0, workers: 0, state: 0 };
-	var ent = { revenue: 0, wages: 0, inputs: 0, investment: 0, admin: 0, funding: 0 }, levyTotal = 0;
+	var ent = { revenue: 0, wages: 0, inputs: 0, investment: 0, admin: 0, funding: 0 }, levyTotal = 0, opened = {}, closed = {};
 	var wageTotal = 0, subsidyTotal = 0, fuelUsed = { timber: 0, coal: 0, oil: 0 }, energyUsed = 0;
 	var potential = 0, actual = 0;
 	each(goods, function(g) { used[g] = 0; out[g] = 0; });
@@ -4991,8 +5045,11 @@ window.industryWeek = function(Q) {
 		if (I.margin0[mkey] === undefined) { I.margin0[mkey] = margin; I.margin[r.s][r.o] = margin; }
 		else I.margin[r.s][r.o] = I.margin[r.s][r.o] * 0.7 + margin * 0.3;
 		// capacity change
-		I.n[r.s][r.o] += buildUnits / BUILD / (own[r.o].w * I.scale[r.s]);
-		I.n[r.s][r.o] -= I.n[r.s][r.o] * own[r.o].dep * (1 + Math.max(0, num(Q.instability) - I.base.instab) / 200) * (r.o === 'nationalized' ? Math.max(0.4, 1 - 0.3 * (I.fund[r.s] || 0)) : 1);
+		var opening = buildUnits / BUILD / (own[r.o].w * I.scale[r.s]) * churn[r.o];
+		var closing = I.n[r.s][r.o] * own[r.o].dep * churn[r.o] * r.close;
+		I.n[r.s][r.o] += opening - closing;
+		opened[r.o] = (opened[r.o] || 0) + opening;
+		closed[r.o] = (closed[r.o] || 0) + closing;
 		wageTotal += wages;
 		subsidyTotal += sub;
 		if (finSectors.indexOf(r.s) >= 0) { potential += r.cap * structEff(I, r.s, r.o); actual += r.cap * structEff(I, r.s, r.o) * sat * r.u; }
@@ -5066,7 +5123,7 @@ window.industryWeek = function(Q) {
 	I.fillAvg = potential > 0 ? actual / potential : 1;
 	I.last = {
 		out: out, imports: imports, exports: exports, groups: groups, wages: wageTotal,
-		fill: {}, price: {}, energyFill: energyFill, duty: dutyTotal
+		fill: {}, price: {}, energyFill: energyFill, duty: dutyTotal, opened: opened, closed: closed
 	};
 	each(goods, function(g) { I.last.fill[g] = mk[g].fill; I.last.price[g] = mk[g].p; });
 	window.industryMirror(Q);
@@ -5169,6 +5226,17 @@ window.industryMirror = function(Q) {
 	Q.ind_exports = Math.round(expValue * 100) / 100;
 	Q.ind_trade_balance = Math.round((expValue - impValue) * 100) / 100;
 	Q.ind_access = I.access;
+	var jobs = jobsTotal(I), employed = I.employed === undefined ? jobs : Math.min(I.employed, jobs);
+	Q.ind_jobs = Math.round(jobs / 1000);
+	Q.ind_employed = Math.round(employed / 1000);
+	Q.ind_vacancies = Math.round((jobs - employed) / 1000);
+	Q.ind_opened = 0; Q.ind_closed = 0;
+	each(owners, function(o) {
+		Q['ind_opened_' + o] = Math.round(I.last.opened ? I.last.opened[o] || 0 : 0);
+		Q['ind_closed_' + o] = Math.round(I.last.closed ? I.last.closed[o] || 0 : 0);
+		Q.ind_opened += Q['ind_opened_' + o];
+		Q.ind_closed += Q['ind_closed_' + o];
+	});
 };
 
 // AGRICULTURE LINK
