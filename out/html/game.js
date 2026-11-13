@@ -4439,3 +4439,788 @@ function metric_color(value, positive_is_good = true) {
         ? "var(--level7-color)"
         : "var(--level1-color)";
 }
+
+
+
+
+// INDUSTRY SECTION
+
+(function() {
+
+var goods = ['timber', 'coal', 'oil', 'ore', 'materials', 'arms', 'consumer', 'agri', 'machinery', 'transport'];
+var sectors = ['military', 'civilian', 'agricultural', 'capital', 'transportation', 'timber', 'coal', 'oil', 'ore', 'materials'];
+var finSectors = sectors.slice(0, 5);
+var owners = ['large', 'medium', 'small', 'coop', 'nationalized', 'syndicalized'];
+var fuelNames = ['timber', 'coal', 'oil'];
+
+var outGood = {
+	military: 'arms', civilian: 'consumer', agricultural: 'agri', capital: 'machinery', transportation: 'transport',
+	timber: 'timber', coal: 'coal', oil: 'oil', ore: 'ore', materials: 'materials'
+};
+var legacyShare = {
+	military: 'military_industry', civilian: 'civilian_industry', agricultural: 'agricultural_industry',
+	capital: 'capital_industry', transportation: 'transportation_industry'
+};
+var legacyProd = {
+	military: 'military_production', civilian: 'civilian_production', agricultural: 'agricultural_industry_production',
+	capital: 'capital_production', transportation: 'transportation_production'
+};
+
+// price of one unit at game start
+var P0 = {
+	timber: 0.4, coal: 1, oil: 2, ore: 1, materials: 1,
+	arms: 1, consumer: 1, agri: 1, machinery: 1, transport: 1
+};
+
+// timber is cheap and weak, oil is expensive and strong
+var fuels = {
+	timber: { energy: 0.5, grade: 0, share: 0.25 },
+	coal: { energy: 1.4, grade: 1, share: 0.55 },
+	oil: { energy: 3.0, grade: 2, share: 0.20 }
+};
+
+// inputs as a share of output value at start prices
+var recipe = {
+	military: { raw: { ore: 0.30, materials: 0.06 }, energy: 0.14, goods: { machinery: 0.010, consumer: 0.05 } },
+	civilian: { raw: { materials: 0.34, ore: 0.04 }, energy: 0.08, goods: { machinery: 0.008 } },
+	agricultural: { raw: { ore: 0.20, materials: 0.18 }, energy: 0.10, goods: { machinery: 0.010 } },
+	capital: { raw: { ore: 0.30, materials: 0.07 }, energy: 0.14, goods: { machinery: 0.010 } },
+	transportation: { raw: { ore: 0.24, materials: 0.12 }, energy: 0.10, goods: { machinery: 0.010 } },
+	timber: { raw: {}, energy: 0.03, goods: { machinery: 0.006 } },
+	coal: { raw: {}, energy: 0.05, goods: { machinery: 0.012 } },
+	oil: { raw: {}, energy: 0.04, goods: { machinery: 0.025 } },
+	ore: { raw: {}, energy: 0.06, goods: { machinery: 0.014 } },
+	materials: { raw: {}, energy: 0.03, goods: { machinery: 0.008 } }
+};
+
+var own = {
+	large: { eff: 1.00, w: 1.00, labour: 0.27, vert: 0.5, free: 0, strike: 1.0, spec: 0.6, dep: 0.0008 },
+	medium: { eff: 0.93, w: 0.09, labour: 0.24, vert: 0, free: 0.04, strike: 0.5, spec: 0.3, dep: 0.0010 },
+	small: { eff: 0.88, w: 0.008, labour: 0.12, vert: 0, free: 0.30, strike: 0.1, spec: 0, dep: 0.0015 },
+	coop: { eff: 0.90, w: 0.05, labour: 0.27, vert: 0, free: 0.08, strike: 0.3, spec: 0.3, dep: 0.0010 },
+	nationalized: { eff: 0.90, w: 1.00, labour: 0.27, vert: 0.4, free: 0, strike: 0.6, spec: 1.0, dep: 0.0012 },
+	syndicalized: { eff: 0.88, w: 0.60, labour: 0.28, vert: 0.3, free: 0, strike: 0.3, spec: 0.8, dep: 0.0010 }
+};
+
+// extraction pays much more of its value out as wages
+var labourMult = { timber: 3.1, coal: 3.0, oil: 2.7, ore: 3.0, materials: 3.1 };
+
+// number of factories at start
+var counts = {
+	military: { large: 150, medium: 300, small: 0, coop: 0, nationalized: 120, syndicalized: 0 },
+	civilian: { large: 1000, medium: 9000, small: 60000, coop: 2500, nationalized: 30, syndicalized: 0 },
+	agricultural: { large: 40, medium: 700, small: 5000, coop: 200, nationalized: 5, syndicalized: 0 },
+	capital: { large: 220, medium: 900, small: 2500, coop: 100, nationalized: 50, syndicalized: 0 },
+	transportation: { large: 80, medium: 500, small: 1500, coop: 60, nationalized: 300, syndicalized: 0 },
+	timber: { large: 150, medium: 4000, small: 30000, coop: 600, nationalized: 40, syndicalized: 0 },
+	coal: { large: 250, medium: 150, small: 200, coop: 20, nationalized: 30, syndicalized: 0 },
+	oil: { large: 300, medium: 200, small: 100, coop: 0, nationalized: 15, syndicalized: 0 },
+	ore: { large: 120, medium: 120, small: 300, coop: 20, nationalized: 40, syndicalized: 0 },
+	materials: { large: 350, medium: 2500, small: 20000, coop: 800, nationalized: 20, syndicalized: 0 }
+};
+
+// m and x are the import and export share at start, ic and ec the import and export capacity as a share of output
+var trade0 = {
+	timber: { m: 0, x: 0.10, ic: 0.10, ec: 0.35 },
+	coal: { m: 0.12, x: 0, ic: 0.35, ec: 0.05 },
+	oil: { m: 0, x: 0.10, ic: 0.10, ec: 0.40 },
+	ore: { m: 0.03, x: 0, ic: 0.20, ec: 0.20 },
+	materials: { m: 0.10, x: 0, ic: 0.35, ec: 0.25 },
+	arms: { m: 0.06, x: 0, ic: 0.20, ec: 0.10 },
+	consumer: { m: 0.07, x: 0, ic: 0.30, ec: 0.10 },
+	agri: { m: 0.10, x: 0, ic: 0.30, ec: 0.05 },
+	machinery: { m: 0.18, x: 0, ic: 0.50, ec: 0.05 },
+	transport: { m: 0.05, x: 0, ic: 0.20, ec: 0.05 }
+};
+
+var tariff0 = {
+	timber: [0, 0], coal: [0, 0], oil: [0, 0], ore: [0.05, 0], materials: [0.10, 0],
+	arms: [0.05, 0], consumer: [0.30, 0], agri: [0.10, 0], machinery: [0.10, 0], transport: [0.10, 0]
+};
+
+var BUILD = 10;
+var SIGMA = 2.5;
+var K_GOV = 0.25;
+
+function clamp(x, a, b) { return Math.max(a, Math.min(b, x)); }
+function num(v, d) { v = Number(v); return isFinite(v) ? v : (d === undefined ? 0 : d); }
+function engineQ() { return window.dendryUI.dendryEngine.state.qualities; }
+function each(list, f) { for (var i = 0; i < list.length; i++) f(list[i], i); }
+
+function struct(I, s, o) { return I.n[s][o] * own[o].w * I.scale[s]; }
+
+// per-unit input quantities for sector s at owner o
+function recipeNeeds(I, s, o) {
+	var r = recipe[s], ow = own[o];
+	var pout = P0[outGood[s]];
+	var rawAdj = 1 + ow.vert * 0.5;
+	var need = { raw: {}, goods: {}, free: {}, energy: r.energy * pout * rawAdj / I.ep0 };
+	for (var g in r.raw) {
+		var q = r.raw[g] * pout * rawAdj / P0[g];
+		need.raw[g] = q * (1 - ow.free);
+		need.free[g] = q * ow.free;
+	}
+	for (var h in r.goods) need.goods[h] = r.goods[h] * pout * (1 - ow.vert) / P0[h];
+	return need;
+}
+
+function fuelShares(I, prices, avail, energyTotal) {
+	var share = {}, total = 0, f;
+	each(fuelNames, function(f) {
+		share[f] = I.theta[f] * Math.pow(fuels[f].energy / prices[f], SIGMA);
+		total += share[f];
+	});
+	var qty = {}, left = energyTotal, open = fuelNames.slice();
+	each(fuelNames, function(f) { qty[f] = 0; });
+	for (var pass = 0; pass < 4 && left > 1e-9 && open.length; pass++) {
+		var sum = 0;
+		each(open, function(f) { sum += share[f]; });
+		var next = [], used = 0;
+		each(open, function(f) {
+			var want = left * share[f] / sum / fuels[f].energy;
+			var room = Math.max(0, avail[f] - qty[f]);
+			var take = Math.min(want, room);
+			qty[f] += take;
+			used += take * fuels[f].energy;
+			if (room > want + 1e-9) next.push(f);
+		});
+		left -= used;
+		open = next;
+	}
+	return qty;
+}
+
+// find price, trade and fill for one good
+function clearGood(I, g, S0, fixed, spend, tar) {
+	var p = I.price[g], T = trade0[g];
+	var pimp = I.world[g] * (1 + tar.imp[g]) * (1 + I.freight);
+	var pexp = I.world[g] * (1 - tar.exp[g]) * (1 - I.freight);
+	var capI = T.ic * I.o0[g] * I.access, capX = T.ec * I.o0[g] * I.access;
+	// regular trade follows the price gap, extra trade only covers shortages and gluts
+	var Ms = T.m > 0 ? Math.min(capI, T.m * I.o0[g] * Math.pow(clamp(p / pimp, 0.3, 2.5), 2)) : 0;
+	var Xs = T.x > 0 ? Math.min(capX, T.x * I.o0[g] * Math.pow(clamp(pexp / p, 0.3, 2.5), 2)) : 0;
+	var S = S0 + Ms - Xs;
+	capI -= Ms;
+	capX -= Xs;
+	var dem = function(x) { return fixed + spend / x; };
+	var ratio = dem(p) / Math.max(S, 1e-6);
+	var pu = clamp(p * (1 + 0.25 * (ratio - 1)), p * 0.88, p * 1.12);
+	pu = clamp(pu, P0[g] * 0.2, P0[g] * 6);
+	var np = pu;
+	if (capI > 0 && pu > pimp) {
+		np = (dem(pimp) - S <= capI) ? pimp : pu;
+	} else if (capX > 0 && pu < pexp) {
+		np = (S - dem(pexp) <= capX) ? pexp : pu;
+	}
+	var M = 0, X = 0;
+	if (capI > 0 && np >= pimp * 0.999) M = Math.min(capI, Math.max(0, dem(np) - S));
+	if (capX > 0 && np <= pexp * 1.001) X = Math.min(capX, Math.max(0, S - dem(np)));
+	M += Ms;
+	X += Xs;
+	var d = dem(np);
+	var supply = S0 + M - X;
+	return {
+		p: np, M: M, X: X, demand: d, supply: supply,
+		fill: d > 1e-9 ? Math.min(1, supply / d) : 1,
+		duty: M * I.world[g] * tar.imp[g] + X * I.world[g] * tar.exp[g]
+	};
+}
+
+function tariffs(Q) {
+	var t = { imp: {}, exp: {} };
+	each(goods, function(g) {
+		t.imp[g] = Math.max(0, num(Q['tariff_imp_' + g]));
+		t.exp[g] = clamp(num(Q['tariff_exp_' + g]), 0, 0.9);
+	});
+	return t;
+}
+
+function strikeFactor(Q, o) {
+	return 1 - 0.35 * (num(Q.workers_unrest) / 100) * (num(Q.workers_strength) / 100) * own[o].strike;
+}
+function specFactor(Q, o) {
+	var s = own[o].spec;
+	return (1 - s) + s * num(Q.specialist_capacity, 70) / 100;
+}
+
+function efficacy(Q, I, s, o, grade) {
+	var real = clamp(num(Q.industry_realization, I.base.real) / I.base.real, 0.3, 1.5);
+	var e = own[o].eff * real * (strikeFactor(Q, o) / I.base.strike[o]) * (specFactor(Q, o) / I.base.spec[o]);
+	e *= 1 + 0.05 * (grade - I.base.grade);
+	e *= I.tech[s] || 1;
+	if (o === 'nationalized') e *= 1 + 0.04 * (I.fund[s] || 0);
+	return e;
+}
+
+function structEff(I, s, o) { return own[o].eff * (I.tech[s] || 1); }
+
+// OWNERSHIP SHIFTS
+function moveCapacity(I, s, from, to, cap) {
+	var have = struct(I, s, from);
+	cap = Math.min(cap, have);
+	if (cap <= 0) return 0;
+	I.n[s][from] -= cap / (own[from].w * I.scale[s]);
+	I.n[s][to] += cap / (own[to].w * I.scale[s]);
+	return cap;
+}
+
+function percentOwned(I, o) {
+	var a = 0, b = 0;
+	each(finSectors, function(s) {
+		each(owners, function(x) { var c = struct(I, s, x); b += c; if (x === o) a += c; });
+	});
+	return b > 0 ? 100 * a / b : 0;
+}
+
+function shiftPercent(I, o, target) {
+	var cur = percentOwned(I, o), delta = target - cur;
+	if (Math.abs(delta) < 0.001) return;
+	var total = 0;
+	each(finSectors, function(s) { each(owners, function(x) { total += struct(I, s, x); }); });
+	if (delta < 0) {
+		var keep = Math.max(0, target) / cur;
+		each(finSectors, function(s) {
+			var c = struct(I, s, o) * (1 - keep);
+			moveCapacity(I, s, o, 'large', c * 0.7);
+			moveCapacity(I, s, o, 'medium', c * 0.3);
+		});
+		return;
+	}
+	var src = o === 'nationalized' ? { large: 0.6, medium: 0.3, small: 0.1 } : { large: 0.7, medium: 0.3 };
+	var pool = {}, poolTotal = 0;
+	each(finSectors, function(s) {
+		pool[s] = 0;
+		for (var k in src) pool[s] += struct(I, s, k);
+		poolTotal += pool[s];
+	});
+	var want = Math.min(delta / 100 * total, poolTotal);
+	each(finSectors, function(s) {
+		var take = want * pool[s] / poolTotal;
+		for (var k in src) moveCapacity(I, s, k, o, take * struct(I, s, k) / pool[s]);
+	});
+}
+
+// state enterprise accounts at start prices, same formulas as the weekly step
+function natAccounts(I, Q) {
+	var e = { revenue: 0, wages: 0, inputs: 0, investment: 0, admin: 0, funding: 0 };
+	each(sectors, function(s) {
+		var cap = struct(I, s, 'nationalized');
+		if (cap <= 0) return;
+		var nd = recipeNeeds(I, s, 'nationalized'), pout = P0[outGood[s]];
+		var rev = cap * structEff(I, s, 'nationalized') * pout;
+		var inp = nd.energy * I.ep0;
+		for (var g in nd.raw) inp += nd.raw[g] * P0[g];
+		for (var h in nd.goods) inp += nd.goods[h] * P0[h];
+		e.revenue += rev;
+		e.wages += cap * own.nationalized.labour * (labourMult[s] || 1) * pout;
+		e.inputs += cap * inp;
+		e.investment += cap * own.nationalized.dep * BUILD * P0.machinery;
+		e.admin += rev * 0.04 * (1 + num(Q.sovnarkom_corruption));
+	});
+	return e;
+}
+
+// INIT
+window.industryInit = function(Q) {
+	Q = Q || engineQ();
+	var I = { n: {}, util: {}, margin: {}, margin0: {}, scale: {}, price: {}, world: {}, stock: {}, o0: {}, v0: {}, spend: {}, tech: {}, fund: {}, subsidy: {}, plan: {}, mult: {}, theta: {}, inc: {}, inc0: null, last: {}, base: { strike: {}, spec: {} } };
+
+	var share = {}, shareTotal = 0;
+	each(finSectors, function(s) { share[s] = num(Q[legacyShare[s]]); shareTotal += share[s]; });
+	if (shareTotal <= 0) { share = { military: 38, civilian: 42, agricultural: 1, capital: 3, transportation: 16 }; shareTotal = 100; }
+	var industry0 = num(Q.industry, 100) || 100;
+
+	each(sectors, function(s) {
+		I.n[s] = {}; I.util[s] = {}; I.margin[s] = {};
+		each(owners, function(o) { I.n[s][o] = counts[s][o]; I.util[s][o] = 1; I.margin[s][o] = 0; });
+		I.tech[s] = 1; I.fund[s] = 0; I.subsidy[s] = 0; I.plan[s] = 1;
+		I.scale[s] = 1;
+	});
+	each(goods, function(g) { I.price[g] = P0[g]; I.mult[g] = 1; });
+
+	// energy price per unit at start
+	var ep = 0;
+	each(fuelNames, function(f) { ep += fuels[f].share * P0[f] / fuels[f].energy; });
+	I.ep0 = ep;
+	var tsum = 0;
+	each(fuelNames, function(f) {
+		I.theta[f] = fuels[f].share / Math.pow(fuels[f].energy / P0[f], SIGMA);
+		tsum += I.theta[f];
+	});
+	each(fuelNames, function(f) { I.theta[f] /= tsum; });
+
+	I.freight = 0.05;
+	I.access = 1;
+	I.wage = 1;
+
+	// finished sector scales so that capacity matches the old industry index
+	each(finSectors, function(s) {
+		var c = share[s] / shareTotal * industry0, w = 0;
+		each(owners, function(o) { w += counts[s][o] * own[o].w * structEff(I, s, o); });
+		I.scale[s] = w > 0 ? c / w : 0;
+	});
+	each(['nationalized', 'syndicalized'], function(o) {
+		var key = o === 'nationalized' ? 'industries_nationalized' : 'industries_syndicalized';
+		if (Q[key] !== undefined) shiftPercent(I, o, num(Q[key]));
+	});
+	each(finSectors, function(s) {
+		var c = share[s] / shareTotal * industry0, w = 0;
+		each(owners, function(o) { w += struct(I, s, o) * structEff(I, s, o); });
+		if (w > 0) I.scale[s] *= c / w;
+	});
+
+	// extraction scales come from what the factories need
+	var rawSectors = sectors.slice(5), pass;
+	each(rawSectors, function(s) { I.scale[s] = 0.01; });
+	for (pass = 0; pass < 60; pass++) {
+		var d = initialDemand(I);
+		each(rawSectors, function(s) {
+			var g = outGood[s], T = trade0[g], w = 0;
+			each(owners, function(o) { w += counts[s][o] * own[o].w * structEff(I, s, o); });
+			var target = d.D[g] * (1 - T.m + T.x);
+			I.scale[s] = w > 0 ? target / w : 0;
+		});
+	}
+	var d0 = initialDemand(I);
+	each(goods, function(g) {
+		var o = 0, s;
+		for (s in outGood) if (outGood[s] === g) {
+			each(owners, function(x) { o += struct(I, s, x) * structEff(I, s, x); });
+		}
+		I.o0[g] = o;
+		var T = trade0[g];
+		var total = o * (1 + T.m - T.x);
+		I.v0[g] = Math.max(0, total - d0.D[g]) * P0[g];
+		if (g === 'timber' || g === 'coal' || g === 'oil' || g === 'ore' || g === 'materials') I.v0[g] = 0;
+		I.stock[g] = o;
+		var imp = tariff0[g][0], exp = tariff0[g][1];
+		I.world[g] = T.x > 0 ? P0[g] / ((1 - exp) * (1 - I.freight)) : P0[g] / ((1 + imp) * (1 + I.freight));
+		if (Q['tariff_imp_' + g] === undefined) Q['tariff_imp_' + g] = tariff0[g][0];
+		if (Q['tariff_exp_' + g] === undefined) Q['tariff_exp_' + g] = tariff0[g][1];
+	});
+
+	I.base.real = num(Q.industry_realization, 0.75) || 0.75;
+	I.base.instab = num(Q.instability);
+	each(owners, function(o) {
+		I.base.strike[o] = strikeFactor(Q, o);
+		I.base.spec[o] = specFactor(Q, o);
+	});
+	var grade = 0, etot = 0;
+	each(fuelNames, function(f) { grade += fuels[f].share * fuels[f].grade; });
+	I.base.grade = grade;
+	I.base.customs = num(Q.customs);
+	I.base.enterprises = num(Q.enterprises_revenue);
+	I.base.elites_business = num(Q.elites_business, 25);
+	I.base.middle_business = num(Q.middle_business, 75);
+	I.base.military_expend = Math.max(0.25, num(Q.military_expend, 1));
+	I.base.railways_expend = Math.max(0.25, num(Q.railways_expend, 1));
+	I.base.income = 0;
+	I.base.ag = null;
+	I.duty0 = null;
+	I.ent = natAccounts(I, Q);
+	I.entK = I.base.enterprises > 0 && I.ent.revenue > 0 ? I.base.enterprises / I.ent.revenue : K_GOV;
+	I.levy = 0;
+	I.subsidyPaid = 0;
+	I.conv = { agri: 0, machinery: 0 };
+	I.spendAg = null;
+
+	// conversion so agriculture sees the same supply as before at start
+	var agProd = share.agricultural / shareTotal * industry0;
+	var capProd = share.capital / shareTotal * industry0;
+	var vAgri = I.v0.agri / P0.agri, vMach = I.v0.machinery / P0.machinery;
+	I.conv.agri = vAgri > 0 ? (agProd / 40) / vAgri : 0;
+	I.conv.machinery = vMach > 0 ? ((agProd + capProd) / 120) / vMach : 0;
+	I.ref = industry0;
+	I.deliver = { agri: vAgri, machinery: vMach };
+
+	I.last_nat = num(Q.industries_nationalized);
+	I.last_synd = num(Q.industries_syndicalized);
+	Q.ind = I;
+	window.industryMirror(Q);
+	return I;
+};
+
+// demand at full utilisation, used for calibration
+function initialDemand(I) {
+	var D = {}, energy = 0;
+	each(goods, function(g) { D[g] = 0; });
+	each(sectors, function(s) {
+		each(owners, function(o) {
+			var t = struct(I, s, o);
+			if (t <= 0) return;
+			var nd = recipeNeeds(I, s, o);
+			for (var g in nd.raw) D[g] += t * nd.raw[g];
+			for (var h in nd.goods) D[h] += t * nd.goods[h];
+			energy += t * nd.energy;
+			D.machinery += t * own[o].dep * BUILD;
+		});
+	});
+	each(fuelNames, function(f) { D[f] += fuels[f].share * energy / fuels[f].energy; });
+	return { D: D, energy: energy };
+}
+
+// WEEKLY STEP
+window.industryWeek = function(Q) {
+	Q = Q || engineQ();
+	if (!Q.ind) window.industryInit(Q);
+	var I = Q.ind;
+	var tar = tariffs(Q);
+	var s, o, g, f;
+
+	var grade = 0, eTot = 0;
+	each(fuelNames, function(f) { eTot += (I.lastFuel ? I.lastFuel[f] : 0) * fuels[f].energy; });
+	if (eTot > 0) each(fuelNames, function(f) { grade += I.lastFuel[f] * fuels[f].energy * fuels[f].grade / eTot; });
+	else grade = I.base.grade;
+
+	// utilisation from last week's margins
+	var rows = [];
+	each(sectors, function(s) {
+		each(owners, function(o) {
+			var n = I.n[s][o];
+			if (n <= 0) return;
+			var key = s + o, u = I.util[s][o], m = I.margin[s][o], m0 = I.margin0[key];
+			if (o === 'nationalized') u = I.plan[s];
+			else {
+				var floor = o === 'small' ? 0.7 : (o === 'coop' || o === 'syndicalized') ? 0.6 : 0.3;
+				var goal = m0 === undefined ? 1 : clamp(1 + (m - m0), floor, o === 'small' ? 1 : 1.05);
+				u += 0.2 * (goal - u);
+			}
+			I.util[s][o] = u;
+			var cap = struct(I, s, o);
+			var nd = recipeNeeds(I, s, o);
+			var eff = efficacy(Q, I, s, o, grade);
+			var rate = own[o].dep;
+			if (o === 'nationalized') rate *= 1 + 0.9 * (I.fund[s] || 0);
+			else if (m0 !== undefined) rate *= 1 + 1.2 * clamp((m - m0) / 0.1, -1, 1.5);
+			rows.push({ s: s, o: o, cap: cap, t: cap * u, u: u, eff: eff, nd: nd, build: cap * Math.max(0, rate) * BUILD });
+		});
+	});
+
+	// fuel allocation
+	var energyTotal = 0;
+	each(rows, function(r) { energyTotal += r.t * r.nd.energy; });
+	var avail = {};
+	each(fuelNames, function(f) { avail[f] = I.stock[f] + trade0[f].ic * I.o0[f] * I.access; });
+	var fuelQty = fuelShares(I, I.price, avail, energyTotal);
+
+	// demand per good
+	var fixedD = {};
+	each(goods, function(g) { fixedD[g] = 0; });
+	each(rows, function(r) {
+		for (var g in r.nd.raw) fixedD[g] += r.t * r.nd.raw[g];
+		for (var h in r.nd.goods) fixedD[h] += r.t * r.nd.goods[h];
+		fixedD.machinery += r.build;
+	});
+	each(fuelNames, function(f) { fixedD[f] += fuelQty[f]; });
+
+	var spend = {};
+	each(goods, function(g) { spend[g] = I.v0[g] * (I.mult[g] || 1); });
+	spend.arms *= Math.max(0.25, num(Q.military_expend, 1)) / I.base.military_expend;
+	spend.transport *= Math.max(0.25, num(Q.railways_expend, 1)) / I.base.railways_expend;
+	spend.consumer *= Math.sqrt(incomeIndex(Q, I));
+	if (I.spendAg) {
+		if (!I.base.ag) I.base.ag = { agri: Math.max(I.spendAg.agri, 1e-9), machinery: Math.max(I.spendAg.machinery, 1e-9) };
+		spend.agri *= I.spendAg.agri / I.base.ag.agri;
+		spend.machinery *= I.spendAg.machinery / I.base.ag.machinery;
+	}
+
+	// markets
+	var mk = {}, dutyTotal = 0, imports = {}, exports = {};
+	each(goods, function(g) {
+		mk[g] = clearGood(I, g, I.stock[g], fixedD[g], spend[g], tar);
+		dutyTotal += mk[g].duty;
+		imports[g] = mk[g].M;
+		exports[g] = mk[g].X;
+	});
+
+	// energy fill and average energy price
+	var eAsk = 0, eGot = 0, eCost = 0;
+	each(fuelNames, function(f) {
+		eAsk += fuelQty[f] * fuels[f].energy;
+		eGot += fuelQty[f] * mk[f].fill * fuels[f].energy;
+		eCost += fuelQty[f] * mk[f].p;
+	});
+	var energyFill = eAsk > 0 ? eGot / eAsk : 1;
+	var energyPrice = eAsk > 0 ? eCost / eAsk : I.ep0;
+
+	// production and money
+	var used = {}, out = {}, groups = {}, cls = { elites: 0, middle: 0, workers: 0, state: 0 };
+	var ent = { revenue: 0, wages: 0, inputs: 0, investment: 0, admin: 0, funding: 0 }, levyTotal = 0;
+	var wageTotal = 0, subsidyTotal = 0, fuelUsed = { timber: 0, coal: 0, oil: 0 }, energyUsed = 0;
+	var potential = 0, actual = 0;
+	each(goods, function(g) { used[g] = 0; out[g] = 0; });
+	each(rows, function(r) {
+		var sat = 1, g;
+		for (g in r.nd.raw) {
+			var tot = r.nd.raw[g] + r.nd.free[g];
+			var fr = tot > 0 ? (r.nd.free[g] + r.nd.raw[g] * mk[g].fill) / tot : 1;
+			sat = Math.min(sat, fr);
+		}
+		for (g in r.nd.goods) sat = Math.min(sat, mk[g].fill);
+		if (r.nd.energy > 0) sat = Math.min(sat, energyFill);
+		r.sat = sat;
+		var production = r.t * r.eff * sat;
+		var og = outGood[r.s];
+		out[og] += production;
+		var cost = 0;
+		for (g in r.nd.raw) { var q = r.t * r.nd.raw[g] * sat; used[g] += q; cost += q * mk[g].p; }
+		for (g in r.nd.goods) { var q2 = r.t * r.nd.goods[g] * sat; used[g] += q2; cost += q2 * mk[g].p; }
+		var eUse = r.t * r.nd.energy * sat;
+		energyUsed += eUse;
+		cost += eUse * energyPrice;
+		var fillM = mk.machinery.fill;
+		var buildUnits = r.build * fillM;
+		used.machinery += buildUnits;
+		var buildCost = buildUnits * mk.machinery.p;
+		var wages = r.t * own[r.o].labour * (labourMult[r.s] || 1) * P0[og] * I.wage;
+		var revenue = production * mk[og].p;
+		var sub = r.o === 'nationalized' ? 0 : (I.subsidy[r.s] || 0) * revenue;
+		var admin = r.o === 'nationalized' ? revenue * 0.04 * (1 + num(Q.sovnarkom_corruption)) : 0;
+		var funding = r.o === 'nationalized' ? revenue * 0.02 * (I.fund[r.s] || 0) : 0;
+		var profit = revenue + sub - cost - wages - buildCost - admin - funding;
+		if (r.o === 'nationalized') {
+			ent.revenue += revenue; ent.wages += wages; ent.inputs += cost;
+			ent.investment += buildCost; ent.admin += admin; ent.funding += funding;
+		}
+		var base = Math.max(1e-9, r.t * P0[og]);
+		var margin = profit / base;
+		var mkey = r.s + r.o;
+		if (I.margin0[mkey] === undefined) { I.margin0[mkey] = margin; I.margin[r.s][r.o] = margin; }
+		else I.margin[r.s][r.o] = I.margin[r.s][r.o] * 0.7 + margin * 0.3;
+		// capacity change
+		I.n[r.s][r.o] += buildUnits / BUILD / (own[r.o].w * I.scale[r.s]);
+		I.n[r.s][r.o] -= I.n[r.s][r.o] * own[r.o].dep * (1 + Math.max(0, num(Q.instability) - I.base.instab) / 200) * (r.o === 'nationalized' ? Math.max(0.4, 1 - 0.3 * (I.fund[r.s] || 0)) : 1);
+		wageTotal += wages;
+		subsidyTotal += sub;
+		if (finSectors.indexOf(r.s) >= 0) { potential += r.cap * structEff(I, r.s, r.o); actual += r.cap * structEff(I, r.s, r.o) * sat * r.u; }
+		var key = r.s;
+		groups[key] = groups[key] || {};
+		groups[key][r.o] = { out: production, revenue: revenue, cost: cost + buildCost + admin + funding, wages: wages, profit: profit, sat: sat, u: r.u };
+		if (r.o === 'large') cls.elites += profit;
+		else if (r.o === 'medium' || r.o === 'small') cls.middle += profit;
+		else if (r.o === 'coop') cls.workers += profit;
+		else if (r.o === 'syndicalized') {
+			var levy = Math.max(0, profit) * 0.15;
+			levyTotal += levy;
+			cls.workers += profit - levy;
+		}
+		else cls.state += profit;
+		cls.workers += wages;
+	});
+
+	// fuel use by type
+	each(fuelNames, function(f) {
+		var q = eAsk > 0 ? fuelQty[f] * Math.min(1, energyUsed / eAsk) : 0;
+		used[f] += q;
+		fuelUsed[f] = q;
+	});
+
+	// final consumption and stocks
+	var consumed = {};
+	each(goods, function(g) {
+		var m = mk[g];
+		var fin = spend[g] > 0 ? m.fill * spend[g] / m.p : 0;
+		consumed[g] = fin;
+		var left = Math.max(0, m.supply - used[g] - fin);
+		var keep = g === 'timber' || g === 'coal' || g === 'oil' || g === 'ore' || g === 'materials' ? 0.6 : 0.5;
+		I.stock[g] = left * keep + out[g];
+		I.price[g] = m.p;
+	});
+	I.lastFuel = fuelUsed;
+
+	// wages and prices
+	var pc = I.price.consumer / P0.consumer;
+	I.wage = clamp(I.wage + 0.08 * (pc - I.wage) + 0.0004 * (num(Q.workers_unrest) * num(Q.workers_strength) / 2500 - 0.8), 0.5, 4);
+
+	// incomes
+	var real = { elites: cls.elites / pc, middle: cls.middle / pc, workers: cls.workers / pc, state: cls.state };
+	if (!I.inc0) {
+		I.inc0 = { elites: Math.max(real.elites, 1e-6), middle: Math.max(real.middle, 1e-6), workers: Math.max(real.workers, 1e-6) };
+		I.inc = { elites: real.elites, middle: real.middle, workers: real.workers };
+		I.duty0 = dutyTotal;
+	}
+	each(['elites', 'middle', 'workers'], function(c) {
+		I.inc[c] = I.inc[c] * 0.85 + real[c] * 0.15;
+		var rel = I.inc[c] / I.inc0[c];
+		var key = c + '_wealth';
+		if (Q[key] !== undefined) Q[key] *= 1 + 0.004 * clamp(rel - 1, -1.5, 1.5);
+	});
+	I.ent = ent;
+	I.levy = levyTotal;
+	I.duty = dutyTotal;
+	I.subsidyPaid = subsidyTotal;
+
+	// shortages hurt
+	var cf = mk.consumer.fill;
+	if (cf < 0.9) {
+		Q.workers_unrest = Math.min(100, num(Q.workers_unrest) + (0.9 - cf) * 1.5);
+		Q.middle_unrest = Math.min(100, num(Q.middle_unrest) + (0.9 - cf) * 1.0);
+	}
+
+	// ag delivery in goods units
+	I.deliver = { agri: consumed.agri, machinery: consumed.machinery };
+
+	I.fillAvg = potential > 0 ? actual / potential : 1;
+	I.last = {
+		out: out, imports: imports, exports: exports, groups: groups, wages: wageTotal,
+		fill: {}, price: {}, energyFill: energyFill, duty: dutyTotal
+	};
+	each(goods, function(g) { I.last.fill[g] = mk[g].fill; I.last.price[g] = mk[g].p; });
+	window.industryMirror(Q);
+};
+
+function incomeIndex(Q, I) {
+	var classes = ['elites', 'middle', 'workers', 'intelligentsia', 'peasants', 'kulaks'];
+	var now = 0;
+	each(classes, function(c) { now += num(Q[c]) * Math.max(0, num(Q[c + '_wealth'])); });
+	if (!I.base.income) I.base.income = Math.max(now, 1e-9);
+	return clamp(now / I.base.income, 0.3, 3);
+}
+
+// LEGACY VARIABLES
+window.industryDerive = function(Q) {
+	Q = Q || engineQ();
+	if (!Q.ind) window.industryInit(Q);
+	var I = Q.ind;
+
+	// events that still change these two directly are treated as orders
+	var nat = num(Q.industries_nationalized), syn = num(Q.industries_syndicalized);
+	if (Math.abs(nat - I.last_nat) > 0.005) shiftPercent(I, 'nationalized', nat);
+	if (Math.abs(syn - I.last_synd) > 0.005) shiftPercent(I, 'syndicalized', syn);
+
+	var cap = 0, total = {};
+	each(finSectors, function(s) {
+		total[s] = 0;
+		each(owners, function(o) { total[s] += struct(I, s, o) * structEff(I, s, o); });
+		cap += total[s];
+	});
+	var fill = I.fillAvg === undefined ? 1 : I.fillAvg;
+	Q.industry = cap * fill;
+	each(finSectors, function(s) {
+		Q[legacyShare[s]] = cap > 0 ? total[s] / cap * 100 : 0;
+		var g = outGood[s];
+		Q[legacyProd[s]] = I.last.out ? I.last.out[g] : I.o0[g];
+	});
+	Q.industries_nationalized = Math.round(percentOwned(I, 'nationalized') * 100) / 100;
+	Q.industries_syndicalized = Math.round(percentOwned(I, 'syndicalized') * 100) / 100;
+	I.last_nat = Q.industries_nationalized;
+	I.last_synd = Q.industries_syndicalized;
+
+	// state income and enterprise accounts
+	var k = I.entK, e = I.ent, r3 = function(x) { return Math.round(x * 1000) / 1000; };
+	if (I.duty0 === null) {
+		Q.customs = I.base.customs;
+	} else {
+		Q.customs = I.duty0 > 1e-9 && I.base.customs > 0 ? I.base.customs * (I.duty / I.duty0) : I.duty * K_GOV;
+		Q.elites_business = I.base.elites_business * clamp(I.inc.elites / I.inc0.elites, 0, 3);
+		Q.middle_business = I.base.middle_business * clamp(I.inc.middle / I.inc0.middle, 0, 3);
+	}
+	Q.enterprises_revenue = r3(Math.max(0, k * e.revenue));
+	Q.enterprises_wages = r3(k * e.wages);
+	Q.enterprises_inputs = r3(k * e.inputs);
+	Q.enterprises_investment = r3(k * e.investment);
+	Q.enterprises_admin = r3(k * e.admin);
+	Q.enterprises_funding = r3(k * e.funding);
+	Q.enterprises_expenditure = r3(Q.enterprises_wages + Q.enterprises_inputs + Q.enterprises_investment + Q.enterprises_admin + Q.enterprises_funding);
+	Q.enterprises_net = r3(Q.enterprises_revenue - Q.enterprises_expenditure);
+	Q.syndicate_levy = r3(k * (I.levy || 0));
+	Q.ind_subsidies = r3(k * (I.subsidyPaid || 0));
+	Q.customs = r3(Q.customs);
+};
+
+window.industryMirror = function(Q) {
+	Q = Q || engineQ();
+	var I = Q.ind;
+	each(goods, function(g) {
+		Q['ind_price_' + g] = Math.round(I.price[g] / P0[g] * 100) / 100;
+		Q['ind_fill_' + g] = I.last.fill ? Math.round(I.last.fill[g] * 100) / 100 : 1;
+		Q['ind_out_' + g] = I.last.out ? Math.round(I.last.out[g] * 100) / 100 : Math.round(I.o0[g] * 100) / 100;
+	});
+	Q.ind_energy_fill = I.last.energyFill === undefined ? 1 : Math.round(I.last.energyFill * 100) / 100;
+	Q.ind_access = I.access;
+};
+
+// AGRICULTURE LINK
+// agriculture reads what the industry delivered and reports what it spent
+window.industrySupplyToAg = function(Q) {
+	Q = Q || engineQ();
+	var I = Q.ind;
+	return {
+		inputs: I.deliver.agri * I.conv.agri,
+		capital: I.deliver.machinery * I.conv.machinery,
+		inputs_price: I.price.agri / P0.agri,
+		capital_price: I.price.machinery / P0.machinery
+	};
+};
+window.industryAgSpend = function(Q, inputsMoney, capitalMoney) {
+	Q = Q || engineQ();
+	Q.ind.spendAg = { agri: Math.max(inputsMoney, 1e-9), machinery: Math.max(capitalMoney, 1e-9) };
+};
+
+// EVENT HELPERS
+window.facAdd = function(sector, owner, count) {
+	var I = engineQ().ind;
+	I.n[sector][owner] = Math.max(0, I.n[sector][owner] + count);
+};
+window.facMove = function(sector, from, to, count) {
+	var I = engineQ().ind;
+	count = Math.min(count, I.n[sector][from]);
+	var cap = count * own[from].w * I.scale[sector];
+	moveCapacity(I, sector, from, to, cap);
+};
+window.facMoveShare = function(sector, from, to, share) {
+	var I = engineQ().ind;
+	moveCapacity(I, sector, from, to, struct(I, sector, from) * clamp(share, 0, 1));
+};
+window.facNationalize = function(sector, share) {
+	var list = sector === 'all' ? sectors : [sector];
+	each(list, function(s) {
+		window.facMoveShare(s, 'large', 'nationalized', share);
+		window.facMoveShare(s, 'medium', 'nationalized', share * 0.5);
+	});
+};
+window.facSyndicalize = function(sector, share) {
+	var list = sector === 'all' ? sectors : [sector];
+	each(list, function(s) {
+		window.facMoveShare(s, 'large', 'syndicalized', share);
+		window.facMoveShare(s, 'nationalized', 'syndicalized', share);
+	});
+};
+window.facDamage = function(sector, share) {
+	var I = engineQ().ind;
+	each(owners, function(o) { I.n[sector][o] *= 1 - clamp(share, 0, 1); });
+};
+window.indSubsidy = function(sector, rate) { engineQ().ind.subsidy[sector] = clamp(rate, 0, 0.5); };
+window.indFund = function(sector, level) { engineQ().ind.fund[sector] = clamp(Math.round(level), 0, 2); };
+window.indPlan = function(sector, mult) { engineQ().ind.plan[sector] = clamp(mult, 0.2, 1.2); };
+window.indTech = function(sector, mult) { engineQ().ind.tech[sector] = clamp(mult, 0.5, 2); };
+window.indDemand = function(good, mult) { engineQ().ind.mult[good] = Math.max(0, mult); };
+window.indAccess = function(x) { engineQ().ind.access = clamp(x, 0, 1.5); };
+window.indFreight = function(x) { engineQ().ind.freight = clamp(x, 0, 0.8); };
+window.indWorldPrice = function(good, mult) {
+	var I = engineQ().ind;
+	I.world[good] *= mult;
+};
+window.indTariff = function(good, imp, exp) {
+	var Q = engineQ();
+	if (imp !== undefined && imp !== null) Q['tariff_imp_' + good] = imp;
+	if (exp !== undefined && exp !== null) Q['tariff_exp_' + good] = exp;
+};
+window.indTariffAll = function(imp, exp) {
+	each(goods, function(g) { window.indTariff(g, imp, exp); });
+};
+
+window.industryLog = function(Q) {
+	Q = Q || engineQ();
+	var I = Q.ind;
+	if (!I.last.out) return;
+	var row = {};
+	each(goods, function(g) {
+		row[g] = { out: +I.last.out[g].toFixed(2), price: +(I.price[g] / P0[g]).toFixed(2), fill: +I.last.fill[g].toFixed(2), imp: +I.last.imports[g].toFixed(2), exp: +I.last.exports[g].toFixed(2) };
+	});
+	console.table(row);
+};
+
+window.INDUSTRY = { goods: goods, sectors: sectors, owners: owners, own: own, recipe: recipe, counts: counts, fuels: fuels, trade: trade0, P0: P0 };
+
+})();
