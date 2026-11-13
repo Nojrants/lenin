@@ -29,7 +29,7 @@ subtitle: There's a legitimate argument to be made that this is necessary regard
 unavailable-subtitle: We've already pushed back opening day. 
 max-visits: 1
 go-to: protest_menu
-choose-if: constituent_assembly_timer <= 2
+choose-if: rescheduled_ca != 1
 on-arrival:{!
 	Q.constituent_assembly_timer = 10;
 	Q.ca_week = Q.week + (Q.constituent_assembly_timer % 4);
@@ -40,6 +40,7 @@ on-arrival:{!
     Q.ca_year = Q.year + 1;
 	Q.instability += 1;
 	Q.democraticity -= 1;
+	Q.rescheduled_ca = 1; 
 	}
 !}
 
