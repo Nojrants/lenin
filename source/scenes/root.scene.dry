@@ -991,6 +991,9 @@ Q.cheka_loyalty = 0;
 Q.b_threat = 0;
 // coup progress basically determines whether the Kornilov affair is a fake coup or a real coup attempt.
 Q.coup_progress = 0;
+// builds up from taxes and seizures, triggers the capital flight event at 10
+Q.capital_flight_progress = 0;
+Q.capital_flight_timer = 0;
 
 // revolutionary preparations...
 Q.rev_progress = 0;
@@ -1517,7 +1520,7 @@ Q.timers = [//m_party
             'internal_security', 'transport_policy',
             'industrial_policy', 'civil_rights',
             'shuffle_cabinet', 'social_policy',
-            'education_policy', 'economic_policy', 'coalition_affairs',
+            'education_policy', 'economic_policy', 'coalition_affairs', 'capital_flight',
             'womens_rights', 'offensive',
             'foreignaffairs_corruption', 'finance_corruption', 'military_corruption',
             'internal_corruption', 'enlightenment_corruption', 'internal_corruption',
