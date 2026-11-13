@@ -281,6 +281,7 @@ on-arrival:{!
 	if (Q.ca_month >= 13) {
     Q.ca_month = Q.ca_month % 12;
     Q.ca_year = Q.year + 1;
+	Q.rescheduled_ca = 1;
 	}
 !}
 
