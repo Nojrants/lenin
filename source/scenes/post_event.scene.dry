@@ -1493,6 +1493,7 @@ for (var bracket = 1; bracket <= 5; bracket++) {
 }
 if (Q.wealth_tax_rate > 0) Q.property_tax_yield = Q.property_tax / Q.wealth_tax_rate;
 if (Q.business_tax_rate > 0) Q.business_tax_yield = Q.business_tax / Q.business_tax_rate;
+if (Q.syndicate_levy_rate > 0) Q.syndicate_levy_yield = Q.syndicate_levy / Q.syndicate_levy_rate;
 
 if (Q.bagmen_tax == 1) {
 	Q.business_tax += (Q.bagmen_strength / 200);
