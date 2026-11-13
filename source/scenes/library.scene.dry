@@ -100,40 +100,32 @@ var toTime = function(d) { return new Date(d).getTime(); };
 var num = function(v) { return Number(v) || 0; };
 var esc = function(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;'); };
 var fmt = function(v, dec) { return (Math.round(v * Math.pow(10, dec)) / Math.pow(10, dec)).toFixed(dec); };
+var W = 900;
+var START = new Date(1917, 2, 1).getTime();   // every chart starts in March 1917
 
-// every chart starts at the beginning of March 1917 and zooms out as weeks are added
-var CHART_START = new Date(1917, 2, 1).getTime();
-
-// round tick spacing: 1, 2, 5 times a power of ten
 var niceStep = function(range, count) {
     var raw = Math.max(range, 1e-9) / count;
     var p = Math.pow(10, Math.floor(Math.log(raw) / Math.LN10));
     var f = raw / p;
     return (f < 1.5 ? 1 : f < 3 ? 2 : f < 7 ? 5 : 10) * p;
 };
-
-// y range that fits the data: lo/hi padded and rounded to nice ticks
 var yRange = function(lo, hi, forceZero) {
     if (forceZero) { lo = Math.min(0, lo); }
     if (hi - lo < 1e-9) { hi = lo + 1; }
     var pad = (hi - lo) * 0.08;
-    var ytop = hi + pad;
-    var ybottom = forceZero && lo >= 0 ? 0 : lo - pad;
-    if (ybottom < 0 && lo >= 0) { ybottom = 0; }
-    var step = niceStep(ytop - ybottom, 4);
-    return { lo: Math.floor(ybottom / step) * step, hi: Math.ceil(ytop / step) * step, step: step };
+    var top = hi + pad;
+    var bottom = forceZero && lo >= 0 ? 0 : lo - pad;
+    if (bottom < 0 && lo >= 0) { bottom = 0; }
+    var step = niceStep(top - bottom, 4);
+    return { lo: Math.floor(bottom / step) * step, hi: Math.ceil(top / step) * step, step: step };
 };
-
-// month ticks across [t0, t1]; the step widens as time accumulates
+// month ticks from March 1917 onward; the spacing widens as time accumulates
 var timeTicks = function(t0, t1) {
     var months = (t1 - t0) / (30.44 * 86400000);
     var step = months <= 8 ? 1 : months <= 16 ? 2 : months <= 30 ? 3 : months <= 60 ? 6 : 12;
-    var d = new Date(t0);
-    var m = d.getMonth() + (d.getDate() > 1 ? 1 : 0);
-    var cur = new Date(d.getFullYear(), m - (m % step), 1);
-    var out = [];
+    var out = [], cur = new Date(t0);
     while (cur.getTime() <= t1) {
-        if (cur.getTime() >= t0) { out.push(cur.getTime()); }
+        out.push(cur.getTime());
         cur = new Date(cur.getFullYear(), cur.getMonth() + step, 1);
     }
     return out;
@@ -142,33 +134,36 @@ var tickLabel = function(t) {
     var d = new Date(t);
     return monthNames[d.getMonth()] + " '" + String(d.getFullYear()).slice(2);
 };
+// x range: always starts at March 1917, grows as weeks are added
+var timeSpan = function(records) {
+    var t1 = START + 56 * 86400000;
+    records.forEach(function(r) { t1 = Math.max(t1, toTime(r.date) + 3 * 86400000); });
+    return { t0: START, t1: t1 };
+};
 
-// one chart panel: grid, axes, and either lines or stacked areas.
-// data-k marks which series an element belongs to (used for hover highlighting)
+// one panel: grid, thick left/bottom axes, and lines or stacked areas.
+// Every series element carries data-s="<id>" so hovering can highlight it.
 var panel = function(o) {
     var x0 = o.x, y0 = o.y, w = o.w, h = o.h;
     var left = 46, right = 14, top = 6, bottom = o.xLabels ? 24 : 6;
     var pw = w - left - right, ph = h - top - bottom;
     var t0 = o.t0, t1 = o.t1;
-    var sx = function(t) { return x0 + left + (t1 > t0 ? (t - t0) / (t1 - t0) : 0.5) * pw; };
+    var sx = function(t) { return x0 + left + (t - t0) / (t1 - t0) * pw; };
     var sy = function(v) { return y0 + top + (1 - (v - o.yr.lo) / (o.yr.hi - o.yr.lo)) * ph; };
     var s = '';
     for (var v = o.yr.lo; v <= o.yr.hi + o.yr.step * 0.001; v += o.yr.step) {
         var yy = sy(v);
         s += '<line x1="' + (x0 + left) + '" x2="' + (x0 + left + pw) + '" y1="' + yy + '" y2="' + yy + '" style="stroke:currentColor;opacity:0.15"/>';
-        s += '<text x="' + (x0 + left - 6) + '" y="' + (yy + 4) + '" text-anchor="end" style="' + chartText + 'font-size:12px">' + fmt(v, o.yr.step < 1 ? 1 : 0) + (o.unit || '') + '</text>';
+        s += '<text x="' + (x0 + left - 8) + '" y="' + (yy + 4) + '" text-anchor="end" style="' + chartText + 'font-size:12px">' + fmt(v, o.yr.step < 1 ? 1 : 0) + (o.unit || '') + '</text>';
     }
-    var ticks = timeTicks(t0, t1);
-    ticks.forEach(function(t) {
-        s += '<line x1="' + sx(t) + '" x2="' + sx(t) + '" y1="' + (y0 + top) + '" y2="' + (y0 + top + ph) + '" style="stroke:currentColor;opacity:0.08"/>';
+    timeTicks(t0, t1).forEach(function(t) {
+        s += '<line x1="' + sx(t) + '" x2="' + sx(t) + '" y1="' + (y0 + top) + '" y2="' + (y0 + top + ph) + '" style="stroke:currentColor;opacity:0.10"/>';
         if (o.xLabels) {
             s += '<text x="' + sx(t) + '" y="' + (y0 + h - 6) + '" text-anchor="middle" style="' + chartText + 'font-size:12px">' + tickLabel(t) + '</text>';
         }
     });
-    s += '<rect x="' + (x0 + left) + '" y="' + (y0 + top) + '" width="' + pw + '" height="' + ph + '" style="fill:none;stroke:currentColor;opacity:0.3"/>';
 
     if (o.stack) {
-        // o.stack: [{k,label,color,pts:[[t,v],...]}], bottom first, all with the same times
         var n = o.stack[0].pts.length, base = [], i;
         for (i = 0; i < n; i++) { base.push(0); }
         o.stack.forEach(function(layer) {
@@ -180,87 +175,78 @@ var panel = function(o) {
             }
             var path = upper.map(function(p, j) { return (j ? 'L' : 'M') + sx(p[0]) + ' ' + sy(p[1]); }).join(' ')
                 + ' ' + lower.reverse().map(function(p) { return 'L' + sx(p[0]) + ' ' + sy(p[1]); }).join(' ') + ' Z';
-            var last = layer.pts[n - 1][1];
-            s += '<path data-k="' + layer.k + '" data-role="area" d="' + path + '" style="fill:' + layer.color + ';fill-opacity:0.85;stroke:' + layer.color + ';stroke-width:1"><title>' + esc(layer.label + ': ' + fmt(last, 1)) + '</title></path>';
+            s += '<path data-s="' + layer.id + '" data-kind="area" d="' + path + '" style="fill:' + layer.color + ';fill-opacity:0.9;stroke:' + layer.color + ';stroke-width:1"><title>' + esc(layer.label) + '</title></path>';
         });
-        var totalPath = base.map(function(v2, j) { return (j ? 'L' : 'M') + sx(o.stack[0].pts[j][0]) + ' ' + sy(v2); }).join(' ');
-        s += '<path d="' + totalPath + '" style="fill:none;stroke:currentColor;stroke-width:2;pointer-events:none"/>';
+        s += '<path d="' + base.map(function(v, j) { return (j ? 'L' : 'M') + sx(o.stack[0].pts[j][0]) + ' ' + sy(v); }).join(' ') + '" style="fill:none;stroke:currentColor;stroke-width:2;pointer-events:none"/>';
+        base.forEach(function(v, j) {
+            var t = o.stack[0].pts[j][0];
+            var tip = tickLabel(t) + ': ' + fmt(v, 1) + ' (' + o.stack.map(function(l) { return l.label + ' ' + fmt(l.pts[j][1], 1); }).join(', ') + ')';
+            s += '<circle cx="' + sx(t) + '" cy="' + sy(v) + '" r="5" style="fill:currentColor;fill-opacity:0"><title>' + esc(tip) + '</title></circle>';
+        });
     } else {
         o.series.forEach(function(ser) {
             var path = ser.pts.map(function(p, j) { return (j ? 'L' : 'M') + sx(p[0]) + ' ' + sy(p[1]); }).join(' ');
-            s += '<path data-k="' + ser.k + '" data-role="line" d="' + path + '" style="fill:none;stroke:' + ser.color + ';stroke-width:2.5;stroke-linejoin:round"/>';
+            s += '<g data-s="' + ser.id + '" data-kind="line">';
+            s += '<path d="' + path + '" style="fill:none;stroke:' + ser.color + ';stroke-width:2.5;stroke-linejoin:round"/>';
+            // wide invisible stroke so thin lines are easy to hover
+            s += '<path d="' + path + '" style="fill:none;stroke:transparent;stroke-width:14;pointer-events:stroke"><title>' + esc(ser.label) + '</title></path>';
             ser.pts.forEach(function(p, j) {
                 var last = j === ser.pts.length - 1;
                 if (ser.pts.length <= 60 || last) {
-                    s += '<circle data-k="' + ser.k + '" data-role="dot" cx="' + sx(p[0]) + '" cy="' + sy(p[1]) + '" r="' + (last ? 4 : 3) + '" style="fill:' + ser.color + '"><title>' + esc(ser.label + ', ' + tickLabel(p[0]) + ': ' + fmt(p[1], 1) + (o.unit || '')) + '</title></circle>';
+                    s += '<circle cx="' + sx(p[0]) + '" cy="' + sy(p[1]) + '" r="' + (last ? 4 : 3) + '" style="fill:' + ser.color + '"><title>' + esc(ser.label + ', ' + tickLabel(p[0]) + ': ' + fmt(p[1], 1) + (o.unit || '')) + '</title></circle>';
                 }
             });
-            // wide invisible stroke so thin lines are easy to hover
-            s += '<path data-k="' + ser.k + '" data-role="hit" d="' + path + '" style="fill:none;stroke:transparent;stroke-width:14;pointer-events:stroke"/>';
+            s += '</g>';
         });
     }
-    // thick main axes on the left and bottom edges
-    s += '<line x1="' + (x0 + left) + '" x2="' + (x0 + left) + '" y1="' + (y0 + top) + '" y2="' + (y0 + top + ph) + '" style="stroke:currentColor;stroke-width:3.5;stroke-linecap:square"/>';
-    s += '<line x1="' + (x0 + left) + '" x2="' + (x0 + left + pw) + '" y1="' + (y0 + top + ph) + '" y2="' + (y0 + top + ph) + '" style="stroke:currentColor;stroke-width:3.5;stroke-linecap:square"/>';
+    // thick main axes on the left and bottom edges (drawn last, on top)
+    s += '<line x1="' + (x0 + left) + '" x2="' + (x0 + left) + '" y1="' + (y0 + top) + '" y2="' + (y0 + top + ph) + '" style="stroke:currentColor;stroke-width:3;stroke-linecap:square"/>';
+    s += '<line x1="' + (x0 + left) + '" x2="' + (x0 + left + pw) + '" y1="' + (y0 + top + ph) + '" y2="' + (y0 + top + ph) + '" style="stroke:currentColor;stroke-width:3;stroke-linecap:square"/>';
     return s;
 };
 
-// legend placed below the chart; wraps onto more rows if needed
-var legendBlock = function(items, W, y0) {
-    var s = '', x = 52, row = 0, rowH = 22;
+// legend: laid out in rows underneath the chart; returns {svg, height}
+var legendBelow = function(items, y) {
+    var s = '', x = 52, row = 0;
     items.forEach(function(it) {
-        var w = 34 + it.label.length * 8;
-        if (x + w > W - 14 && x > 52) { x = 52; row++; }
-        var y = y0 + row * rowH;
-        s += '<g data-k="' + it.k + '" data-role="legend" style="cursor:default">';
-        s += '<rect x="' + x + '" y="' + y + '" width="14" height="14" style="fill:' + it.color + '"/>';
-        s += '<text data-k="' + it.k + '" data-role="label" data-bw="normal" x="' + (x + 20) + '" y="' + (y + 12) + '" style="' + chartText + 'font-size:14px">' + esc(it.label) + '</text>';
-        s += '<rect x="' + x + '" y="' + (y - 2) + '" width="' + w + '" height="20" style="fill:transparent"/>';
-        s += '</g>';
-        x += w;
+        var wid = 36 + it.label.length * 8;
+        if (x + wid > W - 10) { x = 52; row++; }
+        s += '<g data-s="' + it.id + '" data-legend="1" style="cursor:default">';
+        s += '<rect x="' + x + '" y="' + (y + row * 24) + '" width="14" height="14" style="fill:' + it.color + '"/>';
+        s += '<text x="' + (x + 20) + '" y="' + (y + row * 24 + 12) + '" style="' + chartText + 'font-size:14px">' + esc(it.label) + '</text></g>';
+        x += wid;
     });
-    return { svg: s, h: (row + 1) * rowH + 6 };
+    return { svg: s, height: (row + 1) * 24 + 6 };
 };
 
-var timeSpan = function(records) {
-    var t1 = CHART_START;
-    records.forEach(function(r) { t1 = Math.max(t1, toTime(r.date)); });
-    if (t1 - CHART_START < 28 * 86400000) { t1 = CHART_START + 28 * 86400000; }
-    return { t0: CHART_START, t1: t1 };
-};
-
-// hover: highlight the series under the cursor and its legend entry (dim = fade the others)
-var wireHover = function(el, dim) {
-    var apply = function(k) {
-        var nodes = el.querySelectorAll('[data-k]');
-        for (var i = 0; i < nodes.length; i++) {
-            var n = nodes[i];
-            var role = n.getAttribute('data-role');
-            var on = k !== null && n.getAttribute('data-k') === k;
-            var off = k !== null && !on && dim;
-            if (role === 'line') {
-                n.style.strokeWidth = on ? '5' : '2.5';
-                n.style.opacity = off ? '0.2' : '1';
-            } else if (role === 'dot') {
-                n.style.opacity = off ? '0.2' : '1';
-            } else if (role === 'area') {
-                n.style.fillOpacity = on ? '1' : (off ? '0.3' : '0.85');
-                n.style.strokeWidth = on ? '2.5' : '1';
-            } else if (role === 'legend') {
-                n.style.opacity = off ? '0.35' : '1';
-            } else if (role === 'label') {
-                n.style.fontWeight = on ? 'bold' : (n.getAttribute('data-bw') || 'normal');
+// hovering a line / area / legend entry highlights it and its name, and dims the rest
+var wireHover = function(el) {
+    var all = el.querySelectorAll('[data-s]');
+    var apply = function(id) {
+        for (var i = 0; i < all.length; i++) {
+            var e = all[i], on = !id || e.getAttribute('data-s') === id;
+            var kind = e.getAttribute('data-kind');
+            e.style.opacity = on ? '1' : '0.2';
+            if (kind === 'line') {
+                var p = e.querySelector('path');
+                if (p) { p.style.strokeWidth = (id && on) ? '5' : '2.5'; }
+            } else if (kind === 'area') {
+                e.style.fillOpacity = (id && on) ? '1' : '0.9';
+            } else if (e.getAttribute('data-legend')) {
+                var t = e.querySelector('text');
+                if (t) { t.style.fontWeight = (id && on) ? 'bold' : 'normal'; }
             }
         }
     };
-    el.onmouseover = function(e) {
-        var n = e.target && e.target.closest ? e.target.closest('[data-k]') : null;
-        apply(n ? n.getAttribute('data-k') : null);
-    };
-    el.onmouseleave = function() { apply(null); };
+    for (var i = 0; i < all.length; i++) {
+        (function(e) {
+            e.addEventListener('mouseenter', function() { apply(e.getAttribute('data-s')); });
+            e.addEventListener('mouseleave', function() { apply(null); });
+        })(all[i]);
+    }
 };
 
-var drawSvg = function(id, W, H, inner, dim) {
+var drawSvg = function(id, H, inner) {
     var el = document.getElementById(id);
     if (!el) { return; }
     el.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
@@ -270,14 +256,11 @@ var drawSvg = function(id, W, H, inner, dim) {
     el.style.width = '100%';
     el.style.height = 'auto';
     el.innerHTML = inner;
-    wireHover(el, dim);
+    wireHover(el);
 };
 
-var W = 900;
-
-// ---- Soviet support: Bolsheviks, Mensheviks (all wings), SRs, Left-SRs, Others ----
-// colors come from the :root variables in game.css
-if (Q.soviet_support_records && Q.soviet_support_records.length >= 2) {
+// ---- Soviet support (colors come from game.css) ----
+if (Q.soviet_support_records && Q.soviet_support_records.length >= 1) {
     var recs = Q.soviet_support_records.filter(function(r) { return r && r.date; });
     var sumKeys = function(r, keys) {
         var t = 0;
@@ -285,18 +268,18 @@ if (Q.soviet_support_records && Q.soviet_support_records.length >= 2) {
         return t;
     };
     var groups = [
-        { label: 'Bolsheviks', color: 'var(--b)', keys: ['b'] },
-        { label: 'Mensheviks', color: 'var(--m)', keys: ['m', 'left_m', 'right_m', 'left_m2', 'right_m2', 'sdi', 'internationalist', 'defensist'] },
-        { label: 'SRs', color: 'var(--sr)', keys: ['sr', 'right_sr'] },
-        { label: 'Left-SRs', color: 'var(--lsr)', keys: ['lsr', 'left_sr'] }
+        { id: 'b', label: 'Bolsheviks', color: 'var(--b)', keys: ['b'] },
+        { id: 'm', label: 'Mensheviks', color: 'var(--m)', keys: ['m', 'left_m', 'right_m', 'internationalist', 'defensist'] },
+        { id: 'sr', label: 'SRs', color: 'var(--sr)', keys: ['sr', 'right_sr'] },
+        { id: 'lsr', label: 'Left-SRs', color: 'var(--lsr)', keys: ['lsr', 'left_sr'] }
     ];
     var used = {};
     groups.forEach(function(g) { g.keys.forEach(function(k) { used[k] = true; }); });
-    var series = groups.map(function(g, gi) {
-        return { k: gi, label: g.label, color: g.color, pts: recs.map(function(r) { return [toTime(r.date), sumKeys(r, g.keys)]; }) };
+    var series = groups.map(function(g) {
+        return { id: g.id, label: g.label, color: g.color, pts: recs.map(function(r) { return [toTime(r.date), sumKeys(r, g.keys)]; }) };
     });
     series.push({
-        k: groups.length, label: 'Others', color: 'var(--other)',
+        id: 'other', label: 'Others', color: 'var(--other)',
         pts: recs.map(function(r) {
             var t = 0;
             Object.keys(r).forEach(function(k) { if (k !== 'date' && !used[k]) { t += num(r[k]); } });
@@ -305,106 +288,86 @@ if (Q.soviet_support_records && Q.soviet_support_records.length >= 2) {
     });
     var span = timeSpan(recs), lo = 1e9, hi = -1e9;
     series.forEach(function(s) { s.pts.forEach(function(p) { lo = Math.min(lo, p[1]); hi = Math.max(hi, p[1]); }); });
-    var PH1 = 400;
-    var inner = panel({ x: 0, y: 0, w: W, h: PH1, t0: span.t0, t1: span.t1, yr: yRange(lo, hi, true), series: series, unit: '%', xLabels: true });
-    var lg1 = legendBlock(series.map(function(s) {
-        return { k: s.k, label: s.label + ' ' + fmt(s.pts[s.pts.length - 1][1], 1) + '%', color: s.color };
-    }), W, PH1 + 8);
-    inner += lg1.svg;
-    drawSvg('soviet_support_history', W, PH1 + 8 + lg1.h, inner, true);
+    var H1 = 420;
+    var inner = panel({ x: 0, y: 0, w: W, h: H1, t0: span.t0, t1: span.t1, yr: yRange(lo, hi, true), series: series, unit: '%', xLabels: true });
+    var lg = legendBelow(series.map(function(s) {
+        return { id: s.id, label: s.label + ' ' + fmt(s.pts[s.pts.length - 1][1], 1) + '%', color: s.color };
+    }), H1 + 8);
+    drawSvg('soviet_support_history', H1 + 8 + lg.height, inner + lg.svg);
 }
 
 // ---- Economy: one panel per measure, each with its own scale ----
-if (Q.economic_records && Q.economic_records.length >= 2) {
+if (Q.economic_records && Q.economic_records.length >= 1) {
     var erecs = Q.economic_records.filter(function(r) { return r && r.date; });
+    // monthly inflation; older records without it are converted from the annual multiplier
+    var monthly = function(r) {
+        if (r.monthly_inflation !== undefined) { return num(r.monthly_inflation); }
+        return r.inflation > 0 ? (Math.pow(num(r.inflation), 1 / 12) - 1) * 100 : 0;
+    };
     var measures = [
-        { key: ['monthly_inflation'], derive: 'inflation', label: 'Inflation (monthly %)', color: '#2a5bd7', unit: '%', zero: true },
-        { key: ['hunger', 'urban_hunger'], label: 'Urban hunger (%)', color: '#c0399f', unit: '%', zero: true },
-        { key: ['unemployment'], label: 'Unemployment (%)', color: '#d83b2d', unit: '%', zero: true }
+        { id: 'inflation', label: 'Monthly inflation (%)', color: '#2a5bd7', unit: '%', zero: true, get: monthly },
+        { id: 'hunger', label: 'Urban hunger (%)', color: '#c0399f', unit: '%', zero: true, get: function(r) { return num(r.hunger); } },
+        { id: 'unemployment', label: 'Unemployment (%)', color: '#d83b2d', unit: '%', zero: true, get: function(r) { return num(r.unemployment); } }
     ];
     var espan = timeSpan(erecs);
-    var PH = 170, EH = measures.length * PH + 30, einner = '';
+    var PH = 170, EH = measures.length * PH + 10, einner = '';
     measures.forEach(function(m, i) {
-        var found = null;
-        m.key.forEach(function(kk) { if (!found && erecs.some(function(r) { return r[kk] !== undefined; })) { found = kk; } });
-        var pts = erecs.map(function(r) {
-            if (found) { return [toTime(r.date), num(r[found])]; }
-            // older saves only have annual inflation: convert it to the monthly rate
-            if (m.derive && r[m.derive] !== undefined) {
-                found = found || false;
-                return [toTime(r.date), (Math.pow(1 + num(r[m.derive]) / 100, 1 / 12) - 1) * 100];
-            }
-            return [toTime(r.date), 0];
-        });
-        if (!found && !m.derive && window.console) { console.log('figures: no record field for "' + m.label + '"; tried ' + m.key.join(', ') + '; record fields are: ' + Object.keys(erecs[erecs.length - 1]).join(', ')); }
+        var pts = erecs.map(function(r) { return [toTime(r.date), m.get(r)]; });
         var lo = Math.min.apply(null, pts.map(function(p) { return p[1]; }));
         var hi = Math.max.apply(null, pts.map(function(p) { return p[1]; }));
         var y = i * PH;
-        einner += '<text data-k="' + i + '" data-role="label" data-bw="bold" x="52" y="' + (y + 18) + '" style="' + chartText + 'font-size:15px;font-weight:bold">' + esc(m.label) + '</text>';
+        einner += '<text x="52" y="' + (y + 18) + '" style="' + chartText + 'font-size:15px;font-weight:bold">' + esc(m.label) + '</text>';
         einner += '<text x="' + (W - 14) + '" y="' + (y + 18) + '" text-anchor="end" style="' + chartText + 'font-size:15px;font-weight:bold;fill:' + m.color + '">' + fmt(pts[pts.length - 1][1], 1) + m.unit + '</text>';
-        einner += panel({ x: 0, y: y + 22, w: W, h: PH - 22, t0: espan.t0, t1: espan.t1, yr: yRange(lo, hi, m.zero), series: [{ k: i, label: m.label, color: m.color, pts: pts }], unit: m.unit, xLabels: i === measures.length - 1 });
+        einner += panel({ x: 0, y: y + 22, w: W, h: PH - 22, t0: espan.t0, t1: espan.t1, yr: yRange(lo, hi, m.zero), series: [{ id: m.id, label: m.label, color: m.color, pts: pts }], unit: m.unit, xLabels: i === measures.length - 1 });
     });
-    drawSvg('economic_history', W, EH, einner, false);
+    drawSvg('economic_history', EH, einner);
 }
 
-// ---- GDP: stacked sectors adding up to the GDP index ----
-if (Q.economic_records && Q.economic_records.length >= 2) {
+// ---- GDP: stacked sector areas that add up to the GDP index ----
+if (Q.economic_records && Q.economic_records.length >= 1) {
     var grecs = Q.economic_records.filter(function(r) { return r && r.date; });
-    // each sector may be stored under a few possible names; first one found is used
     var sectors = [
-        { keys: ['gdp_ag'], label: 'Agriculture', color: '#8fae4b' },
-        { keys: ['gdp_industry'], label: 'Industry', color: '#5b6c7d' },
-        { keys: ['gdp_trade'], label: 'Trade', color: '#d9a441' },
-        { keys: ['gdp_government'], label: 'Government', color: '#a33a3a' }
+        { id: 'ag', key: 'gdp_ag', label: 'Agriculture', color: '#8fae4b' },
+        { id: 'ind', key: 'gdp_industry', label: 'Industry', color: '#5b6c7d' },
+        { id: 'trade', key: 'gdp_trade', label: 'Trade', color: '#d9a441' },
+        { id: 'gov', key: 'gdp_government', label: 'Government', color: '#a33a3a' }
     ];
-    var sectorVal = function(r, s) {
-        for (var i = 0; i < s.keys.length; i++) {
-            if (r[s.keys[i]] !== undefined) { return num(r[s.keys[i]]); }
-        }
-        return undefined;
-    };
-    var hasSectors = grecs.some(function(r) { return sectors.some(function(s) { return sectorVal(r, s) !== undefined; }); });
-    if (!hasSectors && window.console) { console.log('figures: no GDP sector fields found; record fields are: ' + Object.keys(grecs[grecs.length - 1]).join(', ')); }
-    var gspan = timeSpan(grecs), gmax = 0, stack, gdpNow = 0;
-    if (hasSectors) {
-        stack = sectors.map(function(s, si) { return { k: si, label: s.label, color: s.color, pts: [] }; });
-        grecs.forEach(function(r) {
-            // the sector fields are already weighted contributions; scale them so the stack
-            // equals the recorded GDP index (covers manual overrides of gdp_index)
-            var sum = 0;
-            sectors.forEach(function(s) { sum += num(sectorVal(r, s)); });
-            var total = r.gdp !== undefined ? num(r.gdp) : sum;
-            var scale = sum > 0 ? total / sum : 0;
-            sectors.forEach(function(s, i) { stack[i].pts.push([toTime(r.date), num(sectorVal(r, s)) * scale]); });
-            gmax = Math.max(gmax, total);
-            gdpNow = total;
+    var hasSec = function(r) { return sectors.every(function(s) { return r[s.key] !== undefined; }); };
+    // records saved before sector data existed borrow the first known sector split
+    var ref = null;
+    grecs.forEach(function(r) { if (!ref && hasSec(r)) { ref = r; } });
+    var gtop = 0;
+    var stack = sectors.map(function(s) { return { id: s.id, label: s.label, color: s.color, pts: [] }; });
+    grecs.forEach(function(r) {
+        var src = hasSec(r) ? r : ref;
+        var sum = 0;
+        if (src) { sectors.forEach(function(s) { sum += num(src[s.key]); }); }
+        var gdp = num(r.gdp);
+        sectors.forEach(function(s, i) {
+            // sector values are rescaled so the layers always add up to this week's gdp_index
+            stack[i].pts.push([toTime(r.date), (src && sum > 0) ? num(src[s.key]) / sum * gdp : (i === 0 ? gdp : 0)]);
         });
-    } else {
-        stack = [{ k: 0, label: 'GDP', color: '#5b6c7d', pts: grecs.map(function(r) {
-            var total = r.gdp_index !== undefined ? num(r.gdp_index) : num(r.gdp);
-            gmax = Math.max(gmax, total); gdpNow = total;
-            return [toTime(r.date), total];
-        }) }];
-    }
-    var GPH = 380;
-    var ginner = '<text x="' + (W - 14) + '" y="16" text-anchor="end" style="' + chartText + 'font-size:15px;font-weight:bold">GDP index ' + fmt(gdpNow, 1) + '</text>';
-    ginner += panel({ x: 0, y: 24, w: W, h: GPH, t0: gspan.t0, t1: gspan.t1, yr: yRange(0, gmax, true), stack: stack, xLabels: true });
-    var lg3 = legendBlock(stack.map(function(l) { return { k: l.k, label: l.label + ' ' + fmt(l.pts[l.pts.length - 1][1], 1), color: l.color }; }), W, GPH + 32);
-    ginner += lg3.svg;
-    drawSvg('gdp_history', W, GPH + 32 + lg3.h, ginner, true);
+        gtop = Math.max(gtop, gdp);
+    });
+    var gspan = timeSpan(grecs), GH = 400;
+    var ginner = panel({ x: 0, y: 0, w: W, h: GH, t0: gspan.t0, t1: gspan.t1, yr: yRange(0, gtop, true), stack: stack, xLabels: true });
+    var glg = legendBelow(stack.map(function(l) { return { id: l.id, label: l.label + ' ' + fmt(l.pts[l.pts.length - 1][1], 1), color: l.color }; }), GH + 8);
+    glg.svg += '<text x="' + (W - 14) + '" y="' + (GH + 20) + '" text-anchor="end" style="' + chartText + 'font-size:15px;font-weight:bold">GDP index ' + fmt(grecs[grecs.length - 1].gdp, 1) + '</text>';
+    drawSvg('gdp_history', GH + 8 + glg.height, ginner + glg.svg);
 }
 !}
 
 
+
 = Soviet support history
 
-{!<svg id="soviet_support_history" viewBox="0 0 900 460" style="width:100%; height:auto;"></svg>!}
+{!<svg id="soviet_support_history" viewBox="0 0 900 500" style="width:100%; height:auto;"></svg>!}
 
 
 = Economic history
 
-{!<svg id="economic_history" viewBox="0 0 900 540" style="width:100%; height:auto;"></svg>!}
+{!<svg id="economic_history" viewBox="0 0 900 500" style="width:100%; height:auto;"></svg>!}
 
 = GDP
 
-{!<svg id="gdp_history" viewBox="0 0 900 420" style="width:100%; height:auto;"></svg>!}
+{!<svg id="gdp_history" viewBox="0 0 900 500" style="width:100%; height:auto;"></svg>!}
