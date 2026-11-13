@@ -414,6 +414,8 @@ Q.income_tax_rate_4 = 0.75;
 Q.income_tax_rate_5 = 0.5;
 Q.wealth_tax_rate = 1;
 Q.business_tax_rate = 1;
+// percent of syndicalized profit taken by the state
+Q.syndicate_levy_rate = 15;
 
 Q.income_tax_efficacy = 0.3; 
 Q.wealth_tax_efficacy = 0.5; 
@@ -513,6 +515,8 @@ Q.enterprises_expenditure = 0;
 Q.enterprises_net = 0;
 Q.syndicate_levy = 0;
 Q.extraction = 100;
+Q.gdp_growth = 0;
+Q.gdp_last = 0;
 Q.ind_subsidies = 0;
 // tariffs, import and export duty per good
 Q.tariff_imp_timber = 0;
