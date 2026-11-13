@@ -512,6 +512,7 @@ Q.enterprises_funding = 0;
 Q.enterprises_expenditure = 0;
 Q.enterprises_net = 0;
 Q.syndicate_levy = 0;
+Q.extraction = 100;
 Q.ind_subsidies = 0;
 // tariffs, import and export duty per good
 Q.tariff_imp_timber = 0;
