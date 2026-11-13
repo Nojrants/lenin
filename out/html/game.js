@@ -5003,7 +5003,7 @@ window.industryWeek = function(Q) {
 		else if (r.o === 'medium' || r.o === 'small') cls.middle += profit;
 		else if (r.o === 'coop') cls.workers += profit;
 		else if (r.o === 'syndicalized') {
-			var levy = Math.max(0, profit) * 0.15;
+			var levy = Math.max(0, profit) * clamp(num(Q.syndicate_levy_rate, 15) / 100, 0, 0.9);
 			levyTotal += levy;
 			cls.workers += profit - levy;
 		}
@@ -5147,6 +5147,27 @@ window.industryMirror = function(Q) {
 		Q['ind_out_' + g] = I.last.out ? Math.round(I.last.out[g] * 100) / 100 : Math.round(I.o0[g] * 100) / 100;
 	});
 	Q.ind_energy_fill = I.last.energyFill === undefined ? 1 : Math.round(I.last.energyFill * 100) / 100;
+	// trade is shown in budget units so it lines up with customs
+	var duty0 = I.duty0;
+	if (!(duty0 > 1e-9)) {
+		duty0 = 0;
+		each(goods, function(g) {
+			duty0 += I.o0[g] * I.world[g] * (trade0[g].m * num(Q['tariff_imp_' + g]) + trade0[g].x * num(Q['tariff_exp_' + g]));
+		});
+	}
+	var k = duty0 > 1e-9 && I.base.customs > 0 ? I.base.customs / duty0 : K_GOV;
+	var impValue = 0, expValue = 0;
+	each(goods, function(g) {
+		var m = I.last.imports ? I.last.imports[g] : I.o0[g] * trade0[g].m;
+		var x = I.last.exports ? I.last.exports[g] : I.o0[g] * trade0[g].x;
+		Q['ind_imp_' + g] = Math.round(m * 100) / 100;
+		Q['ind_exp_' + g] = Math.round(x * 100) / 100;
+		impValue += m * I.world[g] * k;
+		expValue += x * I.world[g] * k;
+	});
+	Q.ind_imports = Math.round(impValue * 100) / 100;
+	Q.ind_exports = Math.round(expValue * 100) / 100;
+	Q.ind_trade_balance = Math.round((expValue - impValue) * 100) / 100;
 	Q.ind_access = I.access;
 };
 
