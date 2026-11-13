@@ -626,7 +626,7 @@ if (Q.vikzhel_strike != 1) { Q.ag_transport = Q.civilian_transport; }
 Q.industry_labor = Math.max(0, 100 - Q.unemployed * 2);
 Q.industry_stability = Math.max(0, 100 - Q.instability);
 Q.industry_realization = 0.35 + 0.30*(Q.industry_labor/100) + 0.20*(Q.civilian_transport/100) + 0.15*(Q.industry_stability/100);
-Q.industry_gdp = Q.industry * Q.industry_realization * (Q.specialist_capacity/100); 
+Q.industry_gdp = (0.85 * Q.industry + 0.15 * Q.extraction) * Q.industry_realization * (Q.specialist_capacity/100); 
 Q.factory_utilization = Q.industry_realization * (Q.specialist_capacity/100) * 100;
 Q.industrial_output = Q.industry_gdp;
 
