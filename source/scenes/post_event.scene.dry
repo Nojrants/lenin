@@ -532,11 +532,9 @@ Q.resources = Math.round(Q.resources * 10) /10;
 
 
 // industrial production ////////////////////////////////////////
-Q.military_production = Q.military_industry*Q.industry/100;
-Q.civilian_production = Q.civilian_industry*Q.industry/100;
-Q.agricultural_industry_production = Q.agricultural_industry*Q.industry/100;
-Q.transportation_production = Q.transportation_industry*Q.industry/100;
-Q.capital_production = Q.capital_industry*Q.industry/100;
+// INDUSTRY SECTION
+if (newWeek) { window.industryWeek(Q); }
+window.industryDerive(Q);
 // military production -> supply quality (maybe this should be more sophisticated? nah)
 Q.supply_quality = Q.military_production/100;
 if (newWeek) {
@@ -588,17 +586,6 @@ if (Q.civilian_production >= 50) {
 }
 if (Q.civilian_production < 40 && Q.monthly_inflation <= 6.5) {
 	Q.monthly_inflation += 0.1;
-}
-// capital production can either lower or raise total capacity
-if (Q.capital_production < 0.01*Q.industry) {
-	Q.industry *= 0.995;
-}
-if (Q.capital_production > 0.05*Q.industry) {
-	if (Q.industry < 100) {
-		Q.industry *= 1.007;
-	} else {
-		Q.industry *= 1.001;
-	}
 }
 // transport capacity can be expanded with transport industry (but degrades under some circumstances)
 if (Q.transportation_production < 1) {
@@ -713,20 +700,15 @@ if (newWeek) {
 	// Peasants buy at a market price. Price rises when they want more than the market supplies
 	// (scarcity, or lots of money chasing few goods) and falls when goods are plentiful.
 	// Inflation raises it directly. Money buys money / price, limited by the goods available.
-	var capital_need = Q.ag_capital * 0.0005;   // what it takes to replace wear and tear
-	var inputs_need = Q.ag_inputs * 0.0008;     // what it takes to replace what was used
 	var capital_money = ag_money * 0.4;
 	var inputs_money = ag_money * 0.6;
-	var capital_supply = (Q.agricultural_industry_production + Q.capital_production) / 120;
-	var inputs_supply = Q.agricultural_industry_production / 40;
-	var price_of = function(want, supply) {
-		var ratio = Math.max(want, 0.000001) / Math.max(supply, 0.000001);
-		return Math.min(3, Math.max(0.15, ratio)) * (1 + Math.max(0, Q.monthly_inflation) / 100);
-	};
-	Q.ag_capital_price = price_of(Math.max(capital_need, capital_money), capital_supply);
-	Q.ag_inputs_price = price_of(Math.max(inputs_need, inputs_money), inputs_supply);
-	var capital_bought = Math.min(capital_supply, capital_money / Q.ag_capital_price);
-	var inputs_bought = Math.min(inputs_supply, inputs_money / Q.ag_inputs_price);
+	var ind_supply = window.industrySupplyToAg(Q);
+	var ag_inflation = 1 + Math.max(0, Q.monthly_inflation) / 100;
+	Q.ag_capital_price = ind_supply.capital_price * ag_inflation;
+	Q.ag_inputs_price = ind_supply.inputs_price * ag_inflation;
+	var capital_bought = Math.min(ind_supply.capital, capital_money / Q.ag_capital_price);
+	var inputs_bought = Math.min(ind_supply.inputs, inputs_money / Q.ag_inputs_price);
+	window.industryAgSpend(Q, inputs_money, capital_money);
 
 	Q.ag_capital -= Q.ag_capital * 0.0005;    // wear and tear
 	Q.ag_inputs -= Q.ag_inputs * 0.0008;     // used up each season
@@ -815,7 +797,6 @@ if (newWeek) {
 
 Q.ag_labor = (Q.peasants * Q.ag_labor_participation / 100) / 75 * 100;
 Q.ag_labor = Math.max(0, Q.ag_labor);
-Q.agricultural_industry_production = Q.agricultural_industry * Q.industry / 100;
 Q.ag_inputs = Math.max(0, Q.ag_inputs); 
 Q.ag_land = Math.max(0, Q.ag_land);
 Q.ag_capital = Math.max(0, Q.ag_capital);
@@ -838,8 +819,8 @@ if (newWeek) {
 	});
 	console.log("AG weekly flows:", {
 		productivity_gain: r3(Q.ag_productivity_gain), ag_money: r3(ag_money),
-		capital_price: r3(Q.ag_capital_price), capital_supply: r3(capital_supply), capital_bought: r3(capital_bought),
-		inputs_price: r3(Q.ag_inputs_price), inputs_supply: r3(inputs_supply), inputs_bought: r3(inputs_bought),
+		capital_price: r3(Q.ag_capital_price), capital_supply: r3(ind_supply.capital), capital_bought: r3(capital_bought),
+		inputs_price: r3(Q.ag_inputs_price), inputs_supply: r3(ind_supply.inputs), inputs_bought: r3(inputs_bought),
 		ag_industry_production: r3(Q.agricultural_industry_production), capital_production: r3(Q.capital_production)
 	});
 	console.log("AG people:", {
@@ -1191,9 +1172,6 @@ for (var party of Q.parties) {
     Q[party + '_support'] = party_support;
     total_support += party_support; 
 }
-
-console.log("B debug", Q.year, Q.month, Q.week, Q.workers_b, Q.soldiers_b, Q.workers_petrograd, Q.soldiers_petrograd, Q.b_soviet_bonus, total_support);
-
 // 2. normalize support (fraction)
 for (var party of Q.parties) {
     Q[party+'_normalized'] = Q[party + '_support']/total_support;
@@ -1524,7 +1502,9 @@ Q.expenditure = Math.round(
     (
     Q.interest +
     Q.indemnities +
-    Q.government_functions
+    Q.government_functions +
+    Q.enterprises_expenditure +
+    Q.ind_subsidies
     ) * 100
 ) / 100;
 
@@ -1537,7 +1517,8 @@ Q.income = Math.round(
     Q.monopolies +
     Q.customs +
     Q.railway_revenue +
-    Q.enterprises_revenue
+    Q.enterprises_revenue +
+    Q.syndicate_levy
     ) * 100
 ) / 100;
 
@@ -1675,17 +1656,6 @@ Q.red_specialists += (Q.students / 4) * Q.finalefficacy_enlightenment * Q.school
 // });
 
 
-// Random variance
-if (newWeek) {
-	Q.hunger += (Math.random() * 2 - 1); 
-	Q.monthly_inflation += (Math.random() * 2 - 1); 
-	Q.unemployment += (Math.random() * 2 - 1)/2; 
-}
-
-
-if (Q.year == 1917 && Q.month == 11 && Q.week == 1) { Q.gdp_index = 53; Q.gdp_industry = 2.5; Q.gdp_government = 3; Q.gdp_trade = 1; Q.hunger = 25; }
-if (Q.year == 1917 && Q.month == 11 && Q.week == 2) { Q.gdp_index = 49; Q.gdp_industry = 2; Q.gdp_government = 5; Q.gdp_trade = 1; }
-
 
 // 1. update dates
 if (newWeek) {
@@ -1702,6 +1672,9 @@ if (newWeek) {
         Q.month = 1;
         Q.year += 1;
     }
+
+if (Q.year == 1917 && Q.month == 11 && Q.week == 1) Q.gdp_index = 53; 
+if (Q.year == 1917 && Q.month == 11 && Q.week == 2) Q.gdp_index = 49; 
 
 
     // update records
@@ -1750,16 +1723,20 @@ if (newWeek) {
     Q.soviet_support_records.push(party_support_results);
 
 
+    // sector GDP, scaled so the sectors add up to gdp_index (keeps your manual overrides consistent)
+    var gsum = Q.ag_gdp*0.45 + Q.industry_gdp*0.40 + Q.trade_gdp*0.10 + Q.government_gdp*0.05;
+    var gk = gsum > 0 ? Q.gdp_index / gsum : 1;
     Q.economic_records.push({'date': new Date(Q.year, Q.month - 1, 1+Q.week*7),
                              'inflation': Q.inflation,
                              'unemployment': Q.unemployed,
                              'industry': Q.industry,
                              'hunger': Q.hunger,
 							 'gdp': Q.gdp_index,
-							 'gdp_ag': Math.round(Q.ag_gdp*0.45*10)/10,
-							 'gdp_industry': Math.round(Q.industry_gdp*0.40*10)/10,
-							 'gdp_trade': Math.round(Q.trade_gdp*0.10*10)/10,
-							 'gdp_government': Math.round(Q.government_gdp*0.05*10)/10
+							 'monthly_inflation': Q.monthly_inflation,
+							 'gdp_ag': Math.round(Q.ag_gdp*0.45*10*gk)/10,
+							 'gdp_industry': Math.round(Q.industry_gdp*0.40*10*gk)/10,
+							 'gdp_trade': Math.round(Q.trade_gdp*0.10*10*gk)/10,
+							 'gdp_government': Math.round(Q.government_gdp*0.05*10*gk)/10
 });
 window.economicRecords = Q.economic_records;
 
