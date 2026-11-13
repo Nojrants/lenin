@@ -4481,11 +4481,11 @@ var fuels = {
 
 // inputs as a share of output value at start prices
 var recipe = {
-	military: { raw: { ore: 0.30, materials: 0.06 }, energy: 0.14, goods: { machinery: 0.010, consumer: 0.05 } },
-	civilian: { raw: { materials: 0.34, ore: 0.04 }, energy: 0.08, goods: { machinery: 0.008 } },
-	agricultural: { raw: { ore: 0.20, materials: 0.18 }, energy: 0.10, goods: { machinery: 0.010 } },
-	capital: { raw: { ore: 0.30, materials: 0.07 }, energy: 0.14, goods: { machinery: 0.010 } },
-	transportation: { raw: { ore: 0.24, materials: 0.12 }, energy: 0.10, goods: { machinery: 0.010 } },
+	military: { raw: { ore: 0.07, materials: 0.06 }, energy: 0.07, goods: { machinery: 0.010, consumer: 0.05 } },
+	civilian: { raw: { materials: 0.34, ore: 0.01 }, energy: 0.045, goods: { machinery: 0.008 } },
+	agricultural: { raw: { ore: 0.05, materials: 0.18 }, energy: 0.05, goods: { machinery: 0.010 } },
+	capital: { raw: { ore: 0.08, materials: 0.07 }, energy: 0.07, goods: { machinery: 0.010 } },
+	transportation: { raw: { ore: 0.06, materials: 0.12 }, energy: 0.05, goods: { machinery: 0.010 } },
 	timber: { raw: {}, energy: 0.03, goods: { machinery: 0.006 } },
 	coal: { raw: {}, energy: 0.05, goods: { machinery: 0.012 } },
 	oil: { raw: {}, energy: 0.04, goods: { machinery: 0.025 } },
@@ -4502,8 +4502,11 @@ var own = {
 	syndicalized: { eff: 0.88, w: 0.60, labour: 0.28, vert: 0.3, free: 0, strike: 0.3, spec: 0.8, dep: 0.0010 }
 };
 
-// extraction pays much more of its value out as wages
-var labourMult = { timber: 3.1, coal: 3.0, oil: 2.7, ore: 3.0, materials: 3.1 };
+// wage bill multiplier per sector
+var labourMult = {
+	military: 2.2, civilian: 1.25, agricultural: 1.8, capital: 2.2, transportation: 2.0,
+	timber: 3.1, coal: 3.0, oil: 2.7, ore: 3.0, materials: 3.1
+};
 
 // number of factories at start
 var counts = {
@@ -5101,6 +5104,13 @@ window.industryDerive = function(Q) {
 		var g = outGood[s];
 		Q[legacyProd[s]] = I.last.out ? I.last.out[g] : I.o0[g];
 	});
+	// mining only, timber and materials are counted under agriculture
+	var ex = 0, ex0 = 0;
+	each(['coal', 'oil', 'ore'], function(g) {
+		ex += (I.last.out ? I.last.out[g] : I.o0[g]) * P0[g];
+		ex0 += I.o0[g] * P0[g];
+	});
+	Q.extraction = ex0 > 0 ? Math.round(ex / ex0 * 1000) / 10 : 100;
 	Q.industries_nationalized = Math.round(percentOwned(I, 'nationalized') * 100) / 100;
 	Q.industries_syndicalized = Math.round(percentOwned(I, 'syndicalized') * 100) / 100;
 	I.last_nat = Q.industries_nationalized;
