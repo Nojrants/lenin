@@ -4661,7 +4661,7 @@ function efficacy(Q, I, s, o, grade) {
 	e *= 1 + 0.05 * (grade - I.base.grade);
 	e *= I.tech[s] || 1;
 	if (o === 'nationalized') e *= 1 + 0.04 * (I.fund[s] || 0);
-	return e;
+	return e * disruptFactor(I, s, o);
 }
 
 function structEff(I, s, o) { return own[o].eff * (I.tech[s] || 1); }
@@ -4689,6 +4689,26 @@ function labourStep(Q, I) {
 	Q.unemployed = Math.round(rate * 100) / 100;
 	I.jobs = jobs;
 	return jobs > 0 ? I.employed / jobs : 1;
+}
+
+// DISRUPTION
+// temporary loss of efficacy that fades out over a number of weeks
+function disrupt(I, s, o, amount, weeks) {
+	if (!(amount > 0) || !(weeks > 0)) return;
+	I.disrupt = I.disrupt || [];
+	I.disrupt.push({ s: s, o: o, amount: clamp(amount, 0, 0.95), weeks: weeks, left: weeks });
+}
+// only the capacity that changed hands is disrupted, so the hit is diluted across the group
+function disruptMoved(I, s, o, moved, amount, weeks) {
+	var have = struct(I, s, o);
+	if (have > 0 && moved > 0) disrupt(I, s, o, amount * Math.min(1, moved / have), weeks);
+}
+function disruptFactor(I, s, o) {
+	var f = 1;
+	each(I.disrupt || [], function(d) {
+		if (d.s === s && d.o === o) f *= 1 - d.amount * d.left / d.weeks;
+	});
+	return f;
 }
 
 // BUSINESS CLIMATE
@@ -5126,6 +5146,7 @@ window.industryWeek = function(Q) {
 		fill: {}, price: {}, energyFill: energyFill, duty: dutyTotal, opened: opened, closed: closed
 	};
 	each(goods, function(g) { I.last.fill[g] = mk[g].fill; I.last.price[g] = mk[g].p; });
+	I.disrupt = (I.disrupt || []).filter(function(d) { d.left -= 1; return d.left > 0; });
 	window.industryMirror(Q);
 };
 
@@ -5267,22 +5288,23 @@ window.facMove = function(sector, from, to, count) {
 	var cap = count * own[from].w * I.scale[sector];
 	moveCapacity(I, sector, from, to, cap);
 };
-window.facMoveShare = function(sector, from, to, share) {
+window.facMoveShare = function(sector, from, to, share, amount, weeks) {
 	var I = engineQ().ind;
-	moveCapacity(I, sector, from, to, struct(I, sector, from) * clamp(share, 0, 1));
+	var moved = moveCapacity(I, sector, from, to, struct(I, sector, from) * clamp(share, 0, 1));
+	disruptMoved(I, sector, to, moved, amount, weeks);
 };
-window.facNationalize = function(sector, share) {
+window.facNationalize = function(sector, share, amount, weeks) {
 	var list = sector === 'all' ? sectors : [sector];
 	each(list, function(s) {
-		window.facMoveShare(s, 'large', 'nationalized', share);
-		window.facMoveShare(s, 'medium', 'nationalized', share * 0.5);
+		window.facMoveShare(s, 'large', 'nationalized', share, amount, weeks);
+		window.facMoveShare(s, 'medium', 'nationalized', share * 0.5, amount, weeks);
 	});
 };
-window.facSyndicalize = function(sector, share) {
+window.facSyndicalize = function(sector, share, amount, weeks) {
 	var list = sector === 'all' ? sectors : [sector];
 	each(list, function(s) {
-		window.facMoveShare(s, 'large', 'syndicalized', share);
-		window.facMoveShare(s, 'nationalized', 'syndicalized', share);
+		window.facMoveShare(s, 'large', 'syndicalized', share, amount, weeks);
+		window.facMoveShare(s, 'nationalized', 'syndicalized', share, amount, weeks);
 	});
 };
 // closed plants are remembered as capacity so they can reopen under any owner
@@ -5295,13 +5317,20 @@ window.facClose = function(owner, share) {
 		I.closed[s] = (I.closed[s] || 0) + cap;
 	});
 };
-window.facReopen = function(owner, share) {
+window.facReopen = function(owner, share, amount, weeks) {
 	var I = engineQ().ind;
 	if (!I.closed) return;
 	each(sectors, function(s) {
 		var cap = (I.closed[s] || 0) * clamp(share, 0, 1);
 		I.n[s][owner] += cap / (own[owner].w * I.scale[s]);
 		I.closed[s] -= cap;
+		disruptMoved(I, s, owner, cap, amount, weeks);
+	});
+};
+window.indDisrupt = function(sector, owner, amount, weeks) {
+	var I = engineQ().ind;
+	each(sector === 'all' ? sectors : [sector], function(s) {
+		each(owner === 'all' ? owners : [owner], function(o) { disrupt(I, s, o, amount, weeks); });
 	});
 };
 window.facDamage = function(sector, share) {
