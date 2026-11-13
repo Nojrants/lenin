@@ -504,6 +504,36 @@ Q.monopolies = 2;
 Q.customs = 2;
 Q.railway_revenue = 1;
 Q.enterprises_revenue = 1;
+Q.enterprises_wages = 0;
+Q.enterprises_inputs = 0;
+Q.enterprises_investment = 0;
+Q.enterprises_admin = 0;
+Q.enterprises_funding = 0;
+Q.enterprises_expenditure = 0;
+Q.enterprises_net = 0;
+Q.syndicate_levy = 0;
+Q.ind_subsidies = 0;
+// tariffs, import and export duty per good
+Q.tariff_imp_timber = 0;
+Q.tariff_exp_timber = 0;
+Q.tariff_imp_coal = 0;
+Q.tariff_exp_coal = 0;
+Q.tariff_imp_oil = 0;
+Q.tariff_exp_oil = 0;
+Q.tariff_imp_ore = 0.05;
+Q.tariff_exp_ore = 0;
+Q.tariff_imp_materials = 0.1;
+Q.tariff_exp_materials = 0;
+Q.tariff_imp_arms = 0.05;
+Q.tariff_exp_arms = 0;
+Q.tariff_imp_consumer = 0.3;
+Q.tariff_exp_consumer = 0;
+Q.tariff_imp_agri = 0.1;
+Q.tariff_exp_agri = 0;
+Q.tariff_imp_machinery = 0.1;
+Q.tariff_exp_machinery = 0;
+Q.tariff_imp_transport = 0.1;
+Q.tariff_exp_transport = 0;
 
 
 Q.b_war_policy = 2;
@@ -1676,9 +1706,10 @@ Q.economic_records = [
     }
 ];
 
+
+// INDUSTRY SECTION
+window.industryInit(Q);
+window.industryDerive(Q);
+
 !}
 go-to: intros
-
-
-
-
