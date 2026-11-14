@@ -4,7 +4,7 @@ view-if: german_negotiations = 9 and german_waiting_timer = 0
 max-visits: 1
 tags: event
 on-arrival: {!
-  Q.brest_signed = 1;
+  Q.brest_signed = 1; Q.is_peace = 1; 
   if (Q.war_weariness > 30) { Q.war_weariness -= 30; } else { Q.war_weariness = 0; }
   Q.soldiers_unrest -= 15; 
   Q.indemnities = 2; 
