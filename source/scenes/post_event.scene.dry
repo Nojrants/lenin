@@ -1201,25 +1201,25 @@ if (newWeek) {
 	if (Q.is_peace != 1 || Q.brest_signed != 1) {
 		Q.lsr_strength += 4; Q.left_m_strength += 1; Q.anarchist_strength += 0.2; Q.maximalist_strength += 0.5; 
 		
-		Q.workers_lsr += (Q.workers_sr * 0.05) + (Q.workers_b * 0.02); Q.soldiers_lsr += (Q.soldiers_sr * 0.05) + (Q.soldiers_b * 0.02);
+		Q.workers_lsr += (Q.workers_sr * 0.05) + (Q.workers_b * 0.005); Q.soldiers_lsr += (Q.soldiers_sr * 0.05) + (Q.soldiers_b * 0.005);
 		Q.workers_sr *= 0.95; Q.soldiers_sr *= 0.95;
 		
 		Q.workers_left_m += (Q.workers_m * 0.02); Q.soldiers_left_m += (Q.soldiers_m * 0.02);
 		Q.workers_m *= 0.98; Q.soldiers_m *= 0.98;
 		
-		Q.workers_lsr += 1; 
-		Q.workers_b *= 0.98; Q.soldiers_b *= 0.98;
+		Q.workers_lsr += 0.25; 
+		Q.workers_b *= 0.995; Q.soldiers_b *= 0.995;
 		
 		if (Q.year == 1917 && Q.month == 12) { 
-			Q.workers_lsr += (Q.workers_b * 0.02) + (Q.soldiers_b * 0.02);
-			Q.workers_left_m += (Q.workers_b * 0.005); Q.workers_m += (Q.workers_b * 0.005); 
-			Q.workers_b *= 0.97; Q.soldiers_b *= 0.98; 
+			Q.workers_lsr += (Q.workers_b * 0.006); Q.soldiers_lsr += (Q.soldiers_b * 0.006);
+			Q.workers_left_m += (Q.workers_b * 0.002); Q.workers_m += (Q.workers_b * 0.002); 
+			Q.workers_b *= 0.99; Q.soldiers_b *= 0.994; 
 		}
 		
 		if (Q.year == 1918) { 
-			Q.workers_lsr += (Q.workers_b * 0.03) + (Q.soldiers_b * 0.03);
-			Q.workers_left_m += (Q.workers_b * 0.01); Q.workers_m += (Q.workers_b * 0.01); 
-			Q.workers_b *= 0.95; Q.soldiers_b *= 0.97; 
+			Q.workers_lsr += (Q.workers_b * 0.009); Q.soldiers_lsr += (Q.soldiers_b * 0.009);
+			Q.workers_left_m += (Q.workers_b * 0.003); Q.workers_m += (Q.workers_b * 0.003); 
+			Q.workers_b *= 0.985; Q.soldiers_b *= 0.991; 
 		}
 	}
 	
@@ -1234,7 +1234,6 @@ if (newWeek) {
 		Q.workers_b *= 0.8625; Q.peasants_b *= 0.925;
 	}
 }
-
 
 
 // console.log("Disillusionment:", Q.disillusionment);
@@ -1853,19 +1852,15 @@ window.economicRecords = Q.economic_records;
         Q[party+'_soviet_votes'] = Math.round(Q[party+'_soviet_normalized']*100);
         Q[party + '_soviet_votes_disp'] = Q[party+'_soviet_votes_dec'].toFixed(1);
     }
-    Q.m_soviet = Q.m_soviet_votes_dec;
-    Q.sr_soviet = Q.sr_soviet_votes_dec;
-    Q.b_soviet = Q.b_soviet_votes_dec;
-    Q.anarchist_soviet = Q.anarchist_soviet_votes_dec;
-    Q.other_soviet = Math.round(10*(Q.popular_socialist_soviet_votes_dec + Q.other_soviet_votes_dec + Q.k_soviet_votes_dec + Q.conservative_soviet_votes_dec))/10;
+    for (var party of Q.soviet_parties) {
+        if (party != "other" && Q[party + '_soviet_votes_dec'] !== undefined) Q[party + '_soviet'] = Q[party + '_soviet_votes_dec'];
+    }
+    Q.other_soviet = Math.round(10*((Q.popular_socialist_soviet_votes_dec || 0) + (Q.other_soviet_votes_dec || 0) + (Q.k_soviet_votes_dec || 0) + (Q.conservative_soviet_votes_dec || 0)))/10;
     if (Q.internationalist_split) {
         Q.internationalist_soviet = Q.internationalist_soviet_votes_dec;
     }
     if (Q.defensist_split) {
         Q.defensist_soviet = Q.defensist_soviet_votes_dec;
-    }
-    if (Q.left_sr_split) {
-        Q.left_sr_soviet = Q.left_sr_soviet_votes_dec;
     }
     if (Q.right_sr_split) {
         Q.right_sr_soviet = Q.right_sr_soviet_votes_dec;
