@@ -905,6 +905,22 @@ console.log("bagmen_strength: ", Q.bagmen_strength);
 
 
 
+// small weekly wobble that averages out to nothing, so the charts never flat-line
+var wobble = function(name, size) {
+    var old = Q['noise_' + name] || 0;
+    Q['noise_' + name] = 0.5 * old + (Math.random() * 2 - 1) * size;
+    return Q['noise_' + name] - old;
+};
+if (newWeek) {
+    Q.monthly_inflation = Math.round((Q.monthly_inflation + wobble('inflation', 0.3)) * 100) / 100;
+    Q.unemployed += wobble('unemployed', 0.2);
+    for (var c of ['workers', 'soldiers']) {
+        for (var party of Q.parties) {
+            if (party != "none" && Q[c + '_' + party] > 2) Q[c + '_' + party] += wobble(c + '_' + party, 0.6);
+        }
+    }
+}
+
 // inflation
 Q.inflation = Math.pow(1+0.01*Q.monthly_inflation, 12);
 Q.inflation = Math.round(1000*(Q.inflation - 1))/10;
@@ -972,6 +988,9 @@ Q.food_supply_urban += Q.urban_stockpile_release;
 Q.hunger = 100 * (
     Q.food_demand_urban - Q.food_supply_urban
 ) / Q.food_demand_urban;
+
+if (newWeek) { wobble('hunger', 0.7); }
+if (Q.hunger > 0.5) { Q.hunger += Q.noise_hunger || 0; }
 
 if (Q.hunger < 0) {
     Q.hunger = 0;
@@ -1687,6 +1706,11 @@ if (newWeek) {
 
 if (Q.year == 1917 && Q.month == 11 && Q.week == 1) Q.gdp_index = 53; 
 if (Q.year == 1917 && Q.month == 11 && Q.week == 2) Q.gdp_index = 49; 
+if (Q.year == 1917 && Q.month == 11 && Q.week == 2) Q.hunger = 25; 
+if (Q.year == 1917 && Q.month == 11 && Q.week == 2) {
+    Q.monthly_inflation = 15;
+    Q.inflation = Math.round(1000*(Math.pow(1+0.01*Q.monthly_inflation, 12) - 1))/10;
+}
 
 
     // update records
@@ -1732,10 +1756,10 @@ if (Q.year == 1917 && Q.month == 11 && Q.week == 2) Q.gdp_index = 49;
 		//	console.log("party_support_results.anarchist:", party_support_results.anarchist);
 		//	console.log("party_support_results.maximalist:", party_support_results.maximalist);
     }
-    Q.soviet_support_records.push(party_support_results);
+    if (Q.b_soviet !== undefined) Q.soviet_support_records.push(party_support_results);
 
 
-    // sector GDP, scaled so the sectors add up to gdp_index (keeps your manual overrides consistent)
+    // sector shares of gdp
     var gsum = Q.ag_gdp*0.45 + Q.industry_gdp*0.40 + Q.trade_gdp*0.10 + Q.government_gdp*0.05;
     var gk = gsum > 0 ? Q.gdp_index / gsum : 1;
     Q.economic_records.push({'date': new Date(Q.year, Q.month - 1, 1+Q.week*7),
