@@ -4450,7 +4450,13 @@ function metric_color(value, positive_is_good = true) {
 var goods = ['timber', 'coal', 'oil', 'ore', 'materials', 'arms', 'consumer', 'agri', 'machinery', 'transport'];
 var sectors = ['military', 'civilian', 'agricultural', 'capital', 'transportation', 'timber', 'coal', 'oil', 'ore', 'materials'];
 var finSectors = sectors.slice(0, 5);
-var owners = ['large', 'medium', 'small', 'coop', 'nationalized', 'syndicalized'];
+var sizes = ['large', 'medium', 'small'];
+var controls = ['private', 'coop', 'nationalized', 'syndicalized'];
+// an owner is a size and a control, like large_private or small_coop
+var owners = [], sizeOf = {}, ctrlOf = {};
+each(sizes, function(z) {
+	each(controls, function(c) { var o = z + '_' + c; owners.push(o); sizeOf[o] = z; ctrlOf[o] = c; });
+});
 var fuelNames = ['timber', 'coal', 'oil'];
 
 var outGood = {
@@ -4493,14 +4499,28 @@ var recipe = {
 	materials: { raw: {}, energy: 0.03, goods: { machinery: 0.008 } }
 };
 
-var own = {
-	large: { eff: 1.00, w: 1.00, labour: 0.27, vert: 0.5, free: 0, strike: 1.0, spec: 0.6, dep: 0.0008 },
-	medium: { eff: 0.93, w: 0.09, labour: 0.24, vert: 0, free: 0.04, strike: 0.5, spec: 0.3, dep: 0.0010 },
-	small: { eff: 0.88, w: 0.008, labour: 0.12, vert: 0, free: 0.30, strike: 0.1, spec: 0, dep: 0.0015 },
-	coop: { eff: 0.90, w: 0.05, labour: 0.27, vert: 0, free: 0.08, strike: 0.3, spec: 0.3, dep: 0.0010 },
-	nationalized: { eff: 0.90, w: 1.00, labour: 0.27, vert: 0.4, free: 0, strike: 0.6, spec: 1.0, dep: 0.0012 },
-	syndicalized: { eff: 0.88, w: 0.60, labour: 0.28, vert: 0.3, free: 0, strike: 0.3, spec: 0.8, dep: 0.0010 }
+// w is output per firm against a large one, jobs the average workforce
+var size = {
+	large: { w: 1.00, jobs: 750, eff: 1.00, labour: 0.27, vert: 0.5, free: 0, strike: 1.0, spec: 0.6, dep: 0.0008, churn: 2.5 },
+	medium: { w: 0.09, jobs: 70, eff: 0.93, labour: 0.24, vert: 0, free: 0.04, strike: 0.5, spec: 0.3, dep: 0.0010, churn: 2.5 },
+	small: { w: 0.008, jobs: 6, eff: 0.88, labour: 0.12, vert: 0, free: 0.30, strike: 0.1, spec: 0, dep: 0.0015, churn: 3 }
 };
+var control = {
+	private: { eff: 1.00, labour: 1.00, vert: 1.0, free: 0, strike: 1.0, spec: 0, dep: 1.0, churn: 1 },
+	coop: { eff: 0.97, labour: 1.10, vert: 1.0, free: 0.04, strike: 0.5, spec: 0.1, dep: 1.0, churn: 1 },
+	nationalized: { eff: 0.90, labour: 1.00, vert: 0.8, free: 0, strike: 0.6, spec: 0.4, dep: 1.5, churn: 0.4 },
+	syndicalized: { eff: 0.88, labour: 1.04, vert: 0.6, free: 0, strike: 0.3, spec: 0.2, dep: 1.25, churn: 0.8 }
+};
+var own = {}, jobsPer = {}, churn = {};
+each(owners, function(o) {
+	var z = size[sizeOf[o]], c = control[ctrlOf[o]];
+	own[o] = {
+		eff: z.eff * c.eff, w: z.w, labour: z.labour * c.labour, vert: z.vert * c.vert, free: Math.min(0.5, z.free + c.free),
+		strike: z.strike * c.strike, spec: Math.min(1, z.spec + c.spec), dep: z.dep * c.dep
+	};
+	jobsPer[o] = z.jobs;
+	churn[o] = z.churn * c.churn;
+});
 
 // wage bill multiplier per sector
 var labourMult = {
@@ -4508,19 +4528,20 @@ var labourMult = {
 	timber: 3.1, coal: 3.0, oil: 2.7, ore: 3.0, materials: 3.1
 };
 
-// number of factories at start
+// firms at start, each row is private, cooperative, nationalized, syndicalized
 var counts = {
-	military: { large: 150, medium: 300, small: 0, coop: 0, nationalized: 120, syndicalized: 0 },
-	civilian: { large: 1000, medium: 9000, small: 60000, coop: 2500, nationalized: 30, syndicalized: 0 },
-	agricultural: { large: 40, medium: 700, small: 5000, coop: 200, nationalized: 5, syndicalized: 0 },
-	capital: { large: 220, medium: 900, small: 2500, coop: 100, nationalized: 50, syndicalized: 0 },
-	transportation: { large: 80, medium: 500, small: 1500, coop: 60, nationalized: 300, syndicalized: 0 },
-	timber: { large: 150, medium: 4000, small: 30000, coop: 600, nationalized: 40, syndicalized: 0 },
-	coal: { large: 250, medium: 150, small: 200, coop: 20, nationalized: 30, syndicalized: 0 },
-	oil: { large: 300, medium: 200, small: 100, coop: 0, nationalized: 15, syndicalized: 0 },
-	ore: { large: 120, medium: 120, small: 300, coop: 20, nationalized: 40, syndicalized: 0 },
-	materials: { large: 350, medium: 2500, small: 20000, coop: 800, nationalized: 20, syndicalized: 0 }
+	military: { large: [150, 0, 120, 0], medium: [300, 0, 0, 0], small: [0, 0, 0, 0] },
+	civilian: { large: [1000, 0, 30, 0], medium: [9000, 400, 0, 0], small: [60000, 11000, 0, 0] },
+	agricultural: { large: [40, 0, 5, 0], medium: [700, 30, 0, 0], small: [5000, 900, 0, 0] },
+	capital: { large: [220, 0, 50, 0], medium: [900, 15, 0, 0], small: [2500, 450, 0, 0] },
+	transportation: { large: [80, 0, 300, 0], medium: [500, 10, 0, 0], small: [1500, 250, 0, 0] },
+	timber: { large: [150, 0, 40, 0], medium: [4000, 100, 0, 0], small: [30000, 2600, 0, 0] },
+	coal: { large: [250, 0, 30, 0], medium: [150, 5, 0, 0], small: [200, 70, 0, 0] },
+	oil: { large: [300, 0, 15, 0], medium: [200, 0, 0, 0], small: [100, 0, 0, 0] },
+	ore: { large: [120, 0, 40, 0], medium: [120, 5, 0, 0], small: [300, 70, 0, 0] },
+	materials: { large: [350, 0, 20, 0], medium: [2500, 130, 0, 0], small: [20000, 3500, 0, 0] }
 };
+function count0(s, o) { return counts[s][sizeOf[o]][controls.indexOf(ctrlOf[o])]; }
 
 // m and x are the import and export share at start, ic and ec the import and export capacity as a share of output
 var trade0 = {
@@ -4541,13 +4562,9 @@ var tariff0 = {
 	arms: [0.05, 0], consumer: [0.30, 0], agri: [0.10, 0], machinery: [0.10, 0], transport: [0.10, 0]
 };
 
-// average workforce of one enterprise
-var jobsPer = { large: 750, medium: 70, small: 6, coop: 40, nationalized: 750, syndicalized: 450 };
 // urban wage earners, turns jobs lost or filled into points of unemployment
 var LABOUR_FORCE = 10000000;
 var HIRE_RATE = 0.25;
-// how fast enterprises turn over compared with plain wear and tear
-var churn = { large: 2.5, medium: 2.5, small: 3, coop: 2.5, nationalized: 1, syndicalized: 2 };
 var UNEMPLOYED_FLOOR = 1;
 
 // wartime start: the blockade limits imports, demand runs ahead of supply and the mines are short of hands
@@ -4672,7 +4689,7 @@ function efficacy(Q, I, s, o, grade) {
 	var e = own[o].eff * real * (strikeFactor(Q, o) / I.base.strike[o]) * (specFactor(Q, o) / I.base.spec[o]);
 	e *= 1 + 0.05 * (grade - I.base.grade);
 	e *= I.tech[s] || 1;
-	if (o === 'nationalized') e *= 1 + 0.04 * (I.fund[s] || 0);
+	if (ctrlOf[o] === 'nationalized') e *= 1 + 0.04 * (I.fund[s] || 0);
 	return e * disruptFactor(I, s, o);
 }
 
@@ -4726,7 +4743,7 @@ function disruptFactor(I, s, o) {
 // BUSINESS CLIMATE
 // multipliers on the weekly rate of openings and closures for one group of enterprises
 function climate(Q, I, s, o, m, m0) {
-	if (o === 'nationalized') {
+	if (ctrlOf[o] === 'nationalized') {
 		var fund = I.fund[s] || 0;
 		return { open: 1 + 0.9 * fund, close: Math.max(0.4, 1 - 0.3 * fund) * (1 + Math.max(0, num(Q.instability) - 30) / 200) };
 	}
@@ -4735,9 +4752,9 @@ function climate(Q, I, s, o, m, m0) {
 	var shortage = last ? 1 - last.sat : 0;
 	var instab = (num(Q.instability) - 30) / 40;
 	var inflation = Math.max(0, num(Q.monthly_inflation) - 5) / 20;
-	var tax = (o === 'large' || o === 'medium' || o === 'small') ? 0.3 * (num(Q.business_tax_rate, 1) - 1) : 0;
+	var tax = ctrlOf[o] === 'private' ? 0.3 * (num(Q.business_tax_rate, 1) - 1) : 0;
 	var machinery = I.price.machinery / P0.machinery - 1;
-	var flight = o === 'large' ? 0.05 * num(Q.capital_flight_progress) : 0;
+	var flight = o === 'large_private' ? 0.05 * num(Q.capital_flight_progress) : 0;
 	var close = 1 + 1.5 * Math.max(0, -squeeze) + 2 * shortage + instab + inflation + tax + flight + (Math.random() - 0.5) * 0.6;
 	var open = 1 + 1.2 * clamp(squeeze, -1, 1.5) - instab * 0.66 - tax - 0.5 * machinery - flight + (Math.random() - 0.5) * 0.6;
 	return { open: clamp(open, 0, 3), close: clamp(close, 0.3, 6) };
@@ -4753,39 +4770,37 @@ function moveCapacity(I, s, from, to, cap) {
 	return cap;
 }
 
-function percentOwned(I, o) {
+function percentOwned(I, c) {
 	var a = 0, b = 0;
 	each(finSectors, function(s) {
-		each(owners, function(x) { var c = struct(I, s, x); b += c; if (x === o) a += c; });
+		each(owners, function(o) { var cap = struct(I, s, o); b += cap; if (ctrlOf[o] === c) a += cap; });
 	});
 	return b > 0 ? 100 * a / b : 0;
 }
 
-function shiftPercent(I, o, target) {
-	var cur = percentOwned(I, o), delta = target - cur;
+// firms keep their size when control changes
+function shiftPercent(I, c, target) {
+	var cur = percentOwned(I, c), delta = target - cur;
 	if (Math.abs(delta) < 0.001) return;
-	var total = 0;
-	each(finSectors, function(s) { each(owners, function(x) { total += struct(I, s, x); }); });
 	if (delta < 0) {
 		var keep = Math.max(0, target) / cur;
 		each(finSectors, function(s) {
-			var c = struct(I, s, o) * (1 - keep);
-			moveCapacity(I, s, o, 'large', c * 0.7);
-			moveCapacity(I, s, o, 'medium', c * 0.3);
+			each(sizes, function(z) { moveCapacity(I, s, z + '_' + c, z + '_private', struct(I, s, z + '_' + c) * (1 - keep)); });
 		});
 		return;
 	}
-	var src = o === 'nationalized' ? { large: 0.6, medium: 0.3, small: 0.1 } : { large: 0.7, medium: 0.3 };
-	var pool = {}, poolTotal = 0;
+	var src = c === 'nationalized' ? sizes : ['large', 'medium'];
+	var total = 0, pool = {}, poolTotal = 0;
 	each(finSectors, function(s) {
+		each(owners, function(o) { total += struct(I, s, o); });
 		pool[s] = 0;
-		for (var k in src) pool[s] += struct(I, s, k);
+		each(src, function(z) { pool[s] += struct(I, s, z + '_private'); });
 		poolTotal += pool[s];
 	});
-	var want = Math.min(delta / 100 * total, poolTotal);
+	if (poolTotal <= 0) return;
+	var share = Math.min(1, delta / 100 * total / poolTotal);
 	each(finSectors, function(s) {
-		var take = want * pool[s] / poolTotal;
-		for (var k in src) moveCapacity(I, s, k, o, take * struct(I, s, k) / pool[s]);
+		each(src, function(z) { moveCapacity(I, s, z + '_private', z + '_' + c, struct(I, s, z + '_private') * share); });
 	});
 }
 
@@ -4793,18 +4808,20 @@ function shiftPercent(I, o, target) {
 function natAccounts(I, Q) {
 	var e = { revenue: 0, wages: 0, inputs: 0, investment: 0, admin: 0, funding: 0 };
 	each(sectors, function(s) {
-		var cap = struct(I, s, 'nationalized');
-		if (cap <= 0) return;
-		var nd = recipeNeeds(I, s, 'nationalized'), pout = P0[outGood[s]];
-		var rev = cap * structEff(I, s, 'nationalized') * pout;
-		var inp = nd.energy * I.ep0;
-		for (var g in nd.raw) inp += nd.raw[g] * P0[g];
-		for (var h in nd.goods) inp += nd.goods[h] * P0[h];
-		e.revenue += rev;
-		e.wages += cap * own.nationalized.labour * (labourMult[s] || 1) * pout;
-		e.inputs += cap * inp;
-		e.investment += cap * own.nationalized.dep * BUILD * P0.machinery;
-		e.admin += rev * 0.04 * (1 + num(Q.sovnarkom_corruption));
+		each(sizes, function(z) {
+			var o = z + '_nationalized', cap = struct(I, s, o);
+			if (cap <= 0) return;
+			var nd = recipeNeeds(I, s, o), pout = P0[outGood[s]];
+			var rev = cap * structEff(I, s, o) * pout;
+			var inp = nd.energy * I.ep0;
+			for (var g in nd.raw) inp += nd.raw[g] * P0[g];
+			for (var h in nd.goods) inp += nd.goods[h] * P0[h];
+			e.revenue += rev;
+			e.wages += cap * own[o].labour * (labourMult[s] || 1) * pout;
+			e.inputs += cap * inp;
+			e.investment += cap * own[o].dep * BUILD * P0.machinery;
+			e.admin += rev * 0.04 * (1 + num(Q.sovnarkom_corruption));
+		});
 	});
 	return e;
 }
@@ -4821,7 +4838,7 @@ window.industryInit = function(Q) {
 
 	each(sectors, function(s) {
 		I.n[s] = {}; I.util[s] = {}; I.margin[s] = {};
-		each(owners, function(o) { I.n[s][o] = counts[s][o]; I.util[s][o] = 1; I.margin[s][o] = 0; });
+		each(owners, function(o) { I.n[s][o] = count0(s, o); I.util[s][o] = 1; I.margin[s][o] = 0; });
 		I.tech[s] = 1; I.fund[s] = 0; I.subsidy[s] = 0; I.plan[s] = 1;
 		I.scale[s] = 1;
 	});
@@ -4845,7 +4862,7 @@ window.industryInit = function(Q) {
 	// finished sector scales so that capacity matches the old industry index
 	each(finSectors, function(s) {
 		var c = share[s] / shareTotal * industry0, w = 0;
-		each(owners, function(o) { w += counts[s][o] * own[o].w * structEff(I, s, o); });
+		each(owners, function(o) { w += count0(s, o) * own[o].w * structEff(I, s, o); });
 		I.scale[s] = w > 0 ? c / w : 0;
 	});
 	each(['nationalized', 'syndicalized'], function(o) {
@@ -4865,7 +4882,7 @@ window.industryInit = function(Q) {
 		var d = initialDemand(I);
 		each(rawSectors, function(s) {
 			var g = outGood[s], T = trade0[g], w = 0;
-			each(owners, function(o) { w += counts[s][o] * own[o].w * structEff(I, s, o); });
+			each(owners, function(o) { w += count0(s, o) * own[o].w * structEff(I, s, o); });
 			var target = d.D[g] * (1 - T.m + T.x);
 			I.scale[s] = w > 0 ? target / w : 0;
 		});
@@ -4973,10 +4990,10 @@ window.industryWeek = function(Q) {
 			var n = I.n[s][o];
 			if (n <= 0) return;
 			var key = s + o, u = I.util[s][o], m = I.margin[s][o], m0 = I.margin0[key];
-			if (o === 'nationalized') u = I.plan[s];
+			if (ctrlOf[o] === 'nationalized') u = I.plan[s];
 			else {
-				var floor = o === 'small' ? 0.7 : (o === 'coop' || o === 'syndicalized') ? 0.6 : 0.3;
-				var goal = m0 === undefined ? 1 : clamp(1 + (m - m0), floor, o === 'small' ? 1 : 1.05);
+				var floor = sizeOf[o] === 'small' ? 0.7 : ctrlOf[o] === 'private' ? 0.3 : 0.6;
+				var goal = m0 === undefined ? 1 : clamp(1 + (m - m0), floor, sizeOf[o] === 'small' ? 1 : 1.05);
 				u += 0.2 * (goal - u);
 			}
 			I.util[s][o] = u;
@@ -5066,11 +5083,12 @@ window.industryWeek = function(Q) {
 		var buildCost = buildUnits * mk.machinery.p;
 		var wages = r.t * own[r.o].labour * (labourMult[r.s] || 1) * P0[og] * I.wage;
 		var revenue = production * mk[og].p;
-		var sub = r.o === 'nationalized' ? 0 : (I.subsidy[r.s] || 0) * revenue;
-		var admin = r.o === 'nationalized' ? revenue * 0.04 * (1 + num(Q.sovnarkom_corruption)) : 0;
-		var funding = r.o === 'nationalized' ? revenue * 0.02 * (I.fund[r.s] || 0) : 0;
+		var c = ctrlOf[r.o];
+		var sub = c === 'nationalized' ? 0 : (I.subsidy[r.s] || 0) * revenue;
+		var admin = c === 'nationalized' ? revenue * 0.04 * (1 + num(Q.sovnarkom_corruption)) : 0;
+		var funding = c === 'nationalized' ? revenue * 0.02 * (I.fund[r.s] || 0) : 0;
 		var profit = revenue + sub - cost - wages - buildCost - admin - funding;
-		if (r.o === 'nationalized') {
+		if (c === 'nationalized') {
 			ent.revenue += revenue; ent.wages += wages; ent.inputs += cost;
 			ent.investment += buildCost; ent.admin += admin; ent.funding += funding;
 		}
@@ -5091,10 +5109,10 @@ window.industryWeek = function(Q) {
 		var key = r.s;
 		groups[key] = groups[key] || {};
 		groups[key][r.o] = { out: production, revenue: revenue, cost: cost + buildCost + admin + funding, wages: wages, profit: profit, sat: sat, u: r.u };
-		if (r.o === 'large') cls.elites += profit;
-		else if (r.o === 'medium' || r.o === 'small') cls.middle += profit;
-		else if (r.o === 'coop') cls.workers += profit;
-		else if (r.o === 'syndicalized') {
+		if (r.o === 'large_private') cls.elites += profit;
+		else if (c === 'private') cls.middle += profit;
+		else if (c === 'coop') cls.workers += profit;
+		else if (c === 'syndicalized') {
 			var levy = Math.max(0, profit) * clamp(num(Q.syndicate_levy_rate, 15) / 100, 0, 0.9);
 			levyTotal += levy;
 			cls.workers += profit - levy;
@@ -5276,11 +5294,23 @@ window.industryMirror = function(Q) {
 	Q.ind_jobs = Math.round(jobs / 1000);
 	Q.ind_employed = Math.round(employed / 1000);
 	Q.ind_vacancies = Math.round((jobs - employed) / 1000);
+	var capTotal = 0, capBy = {};
+	each(finSectors, function(s) { each(owners, function(o) { var cap = struct(I, s, o); capTotal += cap; capBy[o] = (capBy[o] || 0) + cap; }); });
+	each(sizes.concat(controls), function(k) { Q['ind_count_' + k] = 0; Q['ind_share_' + k] = 0; });
 	each(owners, function(o) {
 		var count = 0;
 		each(sectors, function(s) { count += I.n[s][o]; });
+		var pct = capTotal > 0 ? 100 * capBy[o] / capTotal : 0;
 		Q['ind_count_' + o] = Math.round(count);
-		Q['ind_share_' + o] = Math.round(percentOwned(I, o) * 10) / 10;
+		Q['ind_share_' + o] = Math.round(pct * 10) / 10;
+		Q['ind_count_' + sizeOf[o]] += count;
+		Q['ind_count_' + ctrlOf[o]] += count;
+		Q['ind_share_' + sizeOf[o]] += pct;
+		Q['ind_share_' + ctrlOf[o]] += pct;
+	});
+	each(sizes.concat(controls), function(k) {
+		Q['ind_count_' + k] = Math.round(Q['ind_count_' + k]);
+		Q['ind_share_' + k] = Math.round(Q['ind_share_' + k] * 10) / 10;
 	});
 	Q.ind_opened = 0; Q.ind_closed = 0;
 	each(owners, function(o) {
@@ -5325,37 +5355,42 @@ window.facMoveShare = function(sector, from, to, share, amount, weeks) {
 	disruptMoved(I, sector, to, moved, amount, weeks);
 };
 window.facNationalize = function(sector, share, amount, weeks) {
-	var list = sector === 'all' ? sectors : [sector];
-	each(list, function(s) {
-		window.facMoveShare(s, 'large', 'nationalized', share, amount, weeks);
-		window.facMoveShare(s, 'medium', 'nationalized', share * 0.5, amount, weeks);
+	each(sector === 'all' ? sectors : [sector], function(s) {
+		window.facMoveShare(s, 'large_private', 'large_nationalized', share, amount, weeks);
+		window.facMoveShare(s, 'medium_private', 'medium_nationalized', share * 0.5, amount, weeks);
 	});
 };
 window.facSyndicalize = function(sector, share, amount, weeks) {
-	var list = sector === 'all' ? sectors : [sector];
-	each(list, function(s) {
-		window.facMoveShare(s, 'large', 'syndicalized', share, amount, weeks);
-		window.facMoveShare(s, 'nationalized', 'syndicalized', share, amount, weeks);
+	each(sector === 'all' ? sectors : [sector], function(s) {
+		window.facMoveShare(s, 'large_private', 'large_syndicalized', share, amount, weeks);
+		window.facMoveShare(s, 'large_nationalized', 'large_syndicalized', share, amount, weeks);
+		window.facMoveShare(s, 'medium_private', 'medium_syndicalized', share * 0.5, amount, weeks);
 	});
 };
 // closed plants are remembered as capacity so they can reopen under any owner
 window.facClose = function(owner, share) {
-	var I = engineQ().ind;
+	var I = engineQ().ind, z = sizeOf[owner];
 	I.closed = I.closed || {};
 	each(sectors, function(s) {
 		var cap = struct(I, s, owner) * clamp(share, 0, 1);
 		I.n[s][owner] -= cap / (own[owner].w * I.scale[s]);
-		I.closed[s] = (I.closed[s] || 0) + cap;
+		I.closed[s] = I.closed[s] || {};
+		I.closed[s][z] = (I.closed[s][z] || 0) + cap;
 	});
 };
-window.facReopen = function(owner, share, amount, weeks) {
+// control is private, coop, nationalized or syndicalized, the plants come back at the size they had
+window.facReopen = function(ctrl, share, amount, weeks) {
 	var I = engineQ().ind;
 	if (!I.closed) return;
 	each(sectors, function(s) {
-		var cap = (I.closed[s] || 0) * clamp(share, 0, 1);
-		I.n[s][owner] += cap / (own[owner].w * I.scale[s]);
-		I.closed[s] -= cap;
-		disruptMoved(I, s, owner, cap, amount, weeks);
+		each(sizes, function(z) {
+			var cap = ((I.closed[s] || {})[z] || 0) * clamp(share, 0, 1);
+			if (cap <= 0) return;
+			var o = z + '_' + ctrl;
+			I.n[s][o] += cap / (own[o].w * I.scale[s]);
+			I.closed[s][z] -= cap;
+			disruptMoved(I, s, o, cap, amount, weeks);
+		});
 	});
 };
 window.indDisrupt = function(sector, owner, amount, weeks) {
