@@ -577,6 +577,14 @@ Q.inflation = Math.round(1000*(Q.inflation - 1))/10;
 Q.industries_nationalized = 15;
 // percentage of industries controlled by workers
 Q.industries_syndicalized = 35;
+// multiplier on workers seizing private firms: 0 stops it, 1 is normal, 2 encourages it
+Q.workers_control_policy = 1;
+// percent of private firms of each size nationalized per week, 10 is a mass nationalization
+Q.nationalization_policy_large = 0;
+Q.nationalization_policy_medium = 0;
+Q.nationalization_policy_small = 0;
+// credits and subsidies for cooperatives, each point triples the rate private firms convert
+Q.cooperative_policy = 0;
 
 // availability of consumer goods (out of 100 - pre-war levels)
 // TODO: this is currently unused
