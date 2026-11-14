@@ -1768,9 +1768,9 @@ if (Q.year == 1917 && Q.month == 11 && Q.week == 2) {
 		}
 		party_support_results.other =
 	        (party_support_results.other || 0) +
+	        (party_support_results.sdi || 0) +
 			(party_support_results.maximalist || 0) + 
 			(party_support_results.anarchist || 0);
-		party_support_results.m = (party_support_results.m || 0) + (party_support_results.sdi || 0);
 		party_support_results.sdi = 0;
 		party_support_results.maximalist = 0;
 		party_support_results.anarchist = 0;
