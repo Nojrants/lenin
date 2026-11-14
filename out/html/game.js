@@ -4812,13 +4812,13 @@ function shiftPercent(I, c, target) {
 
 // CONTROL DRIFT
 // weekly share of private firms taken over by their workers or turned into cooperatives, before policy
-var seizeRate = { large: 0.004, medium: 0.0015, small: 0.0003 };
+var seizeRate = { large: 0.012, medium: 0.003, small: 0.000075 };
 var artelRate = { large: 0, medium: 0.0001, small: 0.0002 };
 // a nationalization drive stops once this few private firms are left
 var minPrivate = { large: 50, medium: 300, small: 2000 };
 
 function controlDrift(Q, I) {
-	var mood = Math.max(0, num(Q.workers_control_policy, 1)) * (num(Q.workers_strength, 50) / 50) * (0.5 + num(Q.workers_unrest, 40) / 80);
+	var mood = Math.max(0, num(Q.workers_control_policy, 2)) * (num(Q.workers_strength, 50) / 50) * (0.5 + num(Q.workers_unrest, 40) / 80);
 	var credit = 1 + 2 * Math.max(0, num(Q.cooperative_subsidies));
 	var moved = { nationalized: {}, syndicalized: {}, coop: {} };
 	each(sizes, function(z) {
