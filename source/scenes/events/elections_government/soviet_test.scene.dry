@@ -1,0 +1,169 @@
+title: Congress of Soviets (test)
+new-page: true
+view-if: soviet_congress_test_seen != 1
+tags: event
+go-to: run_election
+
+@run_election
+go-to: election_algorithm.all_russian_soviet_overhaul
+set-jump: election_results
+
+@election_results
+new-page: true
+on-display: {!
+var data = [];
+var rows = '<tr><th>Party</th><th>Delegates</th><th>Vote Share</th></tr>';
+var kinds = [['workers', "Workers' soviets"], ['soldiers', "Soldiers' soviets"], ['peasants', "Peasants' soviets"], ['unions', 'Trade unions'], ['city', 'City soviets']];
+var soviets = '<tr><th>Party</th>';
+for (var kind of kinds) {
+    soviets += '<th>' + kind[1] + '</th>';
+}
+soviets += '<th>Total</th></tr>';
+var parties = Q.parties.filter(function(party) { return party != "none" && Q[party + '_congress_seats'] > 0; });
+parties.sort(function(a, b) { return Q[b + '_congress_seats'] - Q[a + '_congress_seats']; });
+for (var party of parties) {
+    var label = window.electionNames[party];
+    var box = label.box || party;
+    var name = '<td><div class="party-box box ' + box + '"></div>' + label.table + '</td>';
+    data.push({"id": party, "legend": label.legend, "name": label.legend, "seats": Q[party + '_congress_seats']});
+    rows += '<tr>' + name + '<td>' + Q[party + '_congress_seats'] + '</td><td>' + Q[party + '_soviet_votes_disp'] + '%</td></tr>';
+    soviets += '<tr>' + name;
+    for (var kind of kinds) {
+        soviets += '<td>' + Math.round(Q[party + '_soviets_' + kind[0]] || 0) + '</td>';
+    }
+    soviets += '<td>' + Math.round(Q[party + '_soviets']) + '</td></tr>';
+}
+rows += '<tr><td><b>Total</b></td><td><b>' + Q.congress_seats + '</b></td><td></td></tr>';
+soviets += '<tr><td><b>Taking part</b></td>';
+for (var kind of kinds) {
+    soviets += '<td><b>' + (Q['soviets_' + kind[0]] || 0) + '</b></td>';
+}
+soviets += '<td><b>' + Q.soviets_total + '</b></td></tr>';
+document.getElementById("election_table").innerHTML = rows;
+document.getElementById("soviets_table").innerHTML = soviets;
+if (window && d3) {
+    var width = 625;
+    var height = 625;
+    var screenWidth = document.getElementById('content').offsetWidth;
+    if (screenWidth < width - 50) {
+        width = screenWidth - 50;
+        height = width;
+        document.getElementById("election_chart").style.height = width + "px";
+    }
+    var parliament = d3.parliament();
+    parliament.width(width).height(height).innerRadiusCoef(0.4);
+    parliament.enter.fromCenter(true).smallToBig(true);
+    parliament.exit.toCenter(false).bigToSmall(true);
+    d3.select("#election_chart").datum(data).call(parliament);
+}
+!}
+
+= All-Russian Congress of Soviets
+
+{!<svg id="election_chart" viewBox="0 0 625 310"> </svg>!}
+
+{!<table id="election_table" class="soviet-table"></table>!}
+
+**[+ soviets_total +]** soviets and unions are sending **[+ congress_seats +]** delegates to the congress.
+
+{!<table id="soviets_table" class="soviet-table"></table>!}
+
+- @add_workers
+- @remove_workers
+- @add_soldiers
+- @remove_soldiers
+- @add_peasants
+- @remove_peasants
+- @add_unions
+- @remove_unions
+- @add_city
+- @remove_city
+- @close_congress
+
+@add_workers
+title: Add 25 workers' soviets.
+go-to: run_election
+on-arrival: {!
+  Q.soviets_workers += 25;
+!}
+
+@remove_workers
+title: Remove 25 workers' soviets.
+choose-if: soviets_workers >= 25
+unavailable-subtitle: There are none left to remove.
+go-to: run_election
+on-arrival: {!
+  Q.soviets_workers -= 25;
+!}
+
+@add_soldiers
+title: Add 25 soldiers' soviets.
+go-to: run_election
+on-arrival: {!
+  Q.soviets_soldiers += 25;
+!}
+
+@remove_soldiers
+title: Remove 25 soldiers' soviets.
+choose-if: soviets_soldiers >= 25
+unavailable-subtitle: There are none left to remove.
+go-to: run_election
+on-arrival: {!
+  Q.soviets_soldiers -= 25;
+!}
+
+@add_peasants
+title: Add 25 peasants' soviets.
+go-to: run_election
+on-arrival: {!
+  Q.soviets_peasants += 25;
+!}
+
+@remove_peasants
+title: Remove 25 peasants' soviets.
+choose-if: soviets_peasants >= 25
+unavailable-subtitle: There are none left to remove.
+go-to: run_election
+on-arrival: {!
+  Q.soviets_peasants -= 25;
+!}
+
+@add_unions
+title: Add 25 trade unions.
+go-to: run_election
+on-arrival: {!
+  Q.soviets_unions += 25;
+!}
+
+@remove_unions
+title: Remove 25 trade unions.
+choose-if: soviets_unions >= 25
+unavailable-subtitle: There are none left to remove.
+go-to: run_election
+on-arrival: {!
+  Q.soviets_unions -= 25;
+!}
+
+@add_city
+title: Add 25 city soviets.
+go-to: run_election
+on-arrival: {!
+  Q.soviets_city += 25;
+!}
+
+@remove_city
+title: Remove 25 city soviets.
+choose-if: soviets_city >= 25
+unavailable-subtitle: There are none left to remove.
+go-to: run_election
+on-arrival: {!
+  Q.soviets_city -= 25;
+!}
+
+@close_congress
+title: Close the congress.
+on-arrival: {!
+  Q.soviet_congress_test_seen = 1;
+!}
+
+The congress is closed.
