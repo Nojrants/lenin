@@ -3571,17 +3571,6 @@ window.closeMapView = function() {
     setMapHover(null);
 };
 
-// backSpecialScene returns to state.prevSpecialSceneId. The engine can leave that
-// pointing at an old scene (e.g. a scene that opened the map with go-to: map), so
-// before opening the map or library from the normal game we point it at the scene
-// we are actually in.
-window.syncSpecialReturn = function(engine) {
-    var id = engine.state.sceneId;
-    if (id && !/^(map|library|status)/.test(id)) {
-        engine.state.prevSpecialSceneId = id;
-    }
-};
-
 var mapClosing = false;
 
 window.syncMapView = function() {
@@ -3616,13 +3605,16 @@ window.showMap = function() {
             mapFromButton = false;
             engine.goToScene('backSpecialScene');
         } else {
+            // The map was opened by a scene's go-to (not the sidebar button), so the
+            // engine's stored return point still names that scene. Reset it to root
+            // so the library's "Exit" can never bounce back into the map.
+            engine.state.prevSpecialSceneId = 'root';
             engine.goToScene('root');
         }
         return;
     }
 
     mapFromButton = true;
-    window.syncSpecialReturn(engine);
     engine.goToScene('map');
     setTimeout(function() {
         if (!mapIsOpen()) {
@@ -3651,7 +3643,6 @@ if (
 
 } else {
 
-    window.syncSpecialReturn(engine);
     engine.goToScene(
         'library'
     );
