@@ -4530,16 +4530,16 @@ var labourMult = {
 
 // firms at start, each row is private, cooperative, nationalized, syndicalized
 var counts = {
-	military: { large: [150, 0, 120, 0], medium: [300, 0, 0, 0], small: [0, 0, 0, 0] },
-	civilian: { large: [1000, 0, 30, 0], medium: [9000, 400, 0, 0], small: [60000, 11000, 0, 400] },
-	agricultural: { large: [40, 0, 5, 0], medium: [700, 30, 0, 0], small: [5000, 900, 0, 30] },
-	capital: { large: [220, 0, 50, 0], medium: [900, 15, 0, 0], small: [2500, 450, 0, 20] },
-	transportation: { large: [80, 0, 300, 0], medium: [500, 10, 0, 0], small: [1500, 250, 0, 10] },
-	timber: { large: [150, 0, 40, 0], medium: [4000, 100, 0, 0], small: [30000, 2600, 0, 150] },
-	coal: { large: [250, 0, 30, 0], medium: [150, 5, 0, 0], small: [200, 70, 0, 0] },
+	military: { large: [150, 0, 120, 0], medium: [300, 0, 58, 0], small: [0, 0, 0, 0] },
+	civilian: { large: [1000, 30, 30, 0], medium: [9000, 400, 15, 0], small: [60000, 11000, 0, 400] },
+	agricultural: { large: [40, 5, 5, 0], medium: [700, 30, 0, 0], small: [5000, 900, 0, 30] },
+	capital: { large: [220, 0, 50, 0], medium: [900, 15, 15, 0], small: [2500, 450, 0, 20] },
+	transportation: { large: [80, 0, 300, 0], medium: [500, 10, 58, 0], small: [1500, 250, 0, 10] },
+	timber: { large: [150, 5, 40, 0], medium: [4000, 100, 5, 0], small: [30000, 2600, 0, 150] },
+	coal: { large: [250, 0, 30, 0], medium: [150, 5, 5, 0], small: [200, 70, 0, 0] },
 	oil: { large: [300, 0, 15, 0], medium: [200, 0, 0, 0], small: [100, 0, 0, 0] },
 	ore: { large: [120, 0, 40, 0], medium: [120, 5, 0, 0], small: [300, 70, 0, 0] },
-	materials: { large: [350, 0, 20, 0], medium: [2500, 130, 0, 0], small: [20000, 3500, 0, 150] }
+	materials: { large: [350, 10, 20, 0], medium: [2500, 130, 0, 0], small: [20000, 3500, 0, 150] }
 };
 function count0(s, o) { return counts[s][sizeOf[o]][controls.indexOf(ctrlOf[o])]; }
 
