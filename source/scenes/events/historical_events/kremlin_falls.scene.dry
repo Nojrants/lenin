@@ -14,17 +14,13 @@ on-arrival: {!
 = Fall of the Kremlin
 
 <div style="text-align:center;">
-    <img src="img/down_with_eagle.png" style="display:block; margin:0 auto; max-width:100%; height:auto; border:3px solid `#8b0000`; box-shadow:0 0 0 2px `#d4af37` inset;">
+    <img src="img/down_with_eagle.png" style="display:block; margin:0 auto; max-width:100%; height:auto; border:3px solid #8b0000; box-shadow:0 0 0 2px #d4af37 inset;">
 </div>
 
-While the arrest of the Provisional Government in Petrograd went off relatively easily, the same could not be said for Moscow. There counterrevolutionary forces managed to hold their positions, leading to protracted fighting in the streets, especially in the vicinity of the Kremlin. But after a week of fighting, the remaining defenders have surrendered, giving us control over the historic capital of Russia! The capture of the city has also freed-up several prominent Bolsheviks for new assignments.
+While the arrest of the Provisional Government in Petrograd went off relatively easily, the same could not be said for Moscow. There counterrevolutionary forces managed to hold their positions, leading to protracted fighting in the streets, especially in the vicinity of the Kremlin. But after a week of fighting, the remaining defenders have surrendered, giving us control over the historic capital of Russia! The capture of the city has also freed-up several prominent Bolsheviks for new assignments. 
 
 - @goto_map
 
 @goto_map
 title: See on Map...
-on-arrival: {!
-    Q.kremlin_map_seen = (Q.kremlin_map_seen || 0) + 1;
-    if (Q.kremlin_map_seen == 1) { window.mapReturnOnClose(); }
-!}
-go-to: map if kremlin_map_seen = 1; root if kremlin_map_seen > 1
+go-to: map
