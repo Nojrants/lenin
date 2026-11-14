@@ -543,19 +543,7 @@ on-arrival: {!
   if (Q.property_minister_party != "Bolshevik") { Q.property_minister = "Vacant"; Q.property_minister_party = ""; }
   if (Q.local_minister_party != "Bolshevik") { Q.local_minister = "Vacant"; Q.local_minister_party = ""; }
 
-  Q.vikzhel_unrest += 20; 
-  if (Q.vikzhel_unrest >= 50 && Q.vikzhel_strength >= 25) {
-    Q.vikzhel_strike = 1;
-    Q.workers_unrest += 10;
-    Q.railroad_strike_seen = 1;
-
-    Q.previous_military_trains = Q.military_trains;
-    Q.military_trains *= 0.1;
-    Q.ag_transport *= 0.9;
-
-    window.indShock('rail_strike', 0.35, 'manufacturing');
-    window.indShock('rail_strike_yards', 0.5, 'transportation');
-  }
+  Q.vikzhel_unrest += 20;
   !}
  
 We force through the plan to restructure the CEC, without the approval of any other parties. The opposition immediately lodges its protests and breaks off any agreements with us. 
