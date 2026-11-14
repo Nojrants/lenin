@@ -1742,6 +1742,13 @@ if (Q.year == 1917 && Q.month == 11 && Q.week == 2) {
     Q.inflation = Math.round(1000*(Math.pow(1+0.01*Q.monthly_inflation, 12) - 1))/10;
 }
 
+if (!Q._prev_raw) Q._prev_raw = {};
+for (var c of ['workers','soldiers']) for (var p of Q.parties) {
+  if (p == 'none') continue;
+  var k = c + '_' + p, v = Q[k] || 0, o = Q._prev_raw[k];
+  if (o !== undefined && Math.abs(v - o) > 5) console.log('RAW JUMP', Q.year, Q.month, Q.week, k, o, '->', v);
+  Q._prev_raw[k] = v;
+}
 
     // update records
     if (Q.time > 0) {
