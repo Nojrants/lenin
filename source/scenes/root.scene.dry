@@ -1110,6 +1110,16 @@ Q.classes = ['elites', 'middle', 'clergy', 'workers', 'peasants', 'kulaks', 'sol
 Q.minorities = ['ukrainians', 'kyrgyz_kazakh', 'tatar', 'other_turkic', 'jews', 'latvians', 'estonians', 'georgians', 'armenians', 'others'];
 Q.major_parties = ['m', 'b', 'sr', 'k'];
 // parties represented in the soviets
+// soviets taking part in the All-Russian Congress, by kind
+Q.soviets_workers = 310;
+Q.soviets_soldiers = 110;
+Q.soviets_peasants = 0;
+Q.soviets_unions = 0;
+Q.soviets_city = 0;
+// 720 delegates for 420 soviets, grows in step with the soviets. set congress_seats_fixed to force a size
+Q.congress_seats_base = 720;
+Q.congress_soviets_base = 420;
+Q.congress_seats_fixed = 0;
 Q.soviet_parties = ['left_m', 'm', 'right_m', 'sdi', 'b', 'lsr', 'sr', 'anarchist', 'maximalist', 'other'];
 Q.parties = ['anarchist', 'maximalist', 'b', 'sdi', 'left_m', 'm', 'right_m', 'lsr', 'sr', 'right_sr', 'popular_socialist', 'k', 'rightist', 'other', 'none'];
 Q.minority_parties = ['ukrainian_sr', 'alash', 'musavat', 'dashnak', 'jewish_socialists', 'jewish_national_list', 'muslim_socialists', 'turkic_muslim_parties', 'cossacks'];
