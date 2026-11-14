@@ -272,6 +272,7 @@ subtitle: There's a legitimate argument to be made that this is necessary regard
 max-visits: 1
 go-to: post_election_menu
 on-arrival:{!
+	Q.rescheduled_ca = 1;
 	Q.instability += 1;
 	Q.democraticity -= 1;
 	Q.constituent_assembly_timer = 6;
@@ -279,9 +280,8 @@ on-arrival:{!
 	Q.ca_month = Q.month + (Q.constituent_assembly_timer / 4);
 	Q.ca_year = Q.year;
 	if (Q.ca_month >= 13) {
-    Q.ca_month = Q.ca_month % 12;
-    Q.ca_year = Q.year + 1;
-	Q.rescheduled_ca = 1;
+	    Q.ca_month = Q.ca_month % 12;
+	    Q.ca_year = Q.year + 1;
 	}
 !}
 
