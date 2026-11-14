@@ -4632,11 +4632,17 @@ function fuelShares(I, prices, avail, energyTotal) {
 }
 
 // find price, trade and fill for one good
+// PORTS
+// port investment builds up slowly, cheapens freight and opens some trade capacity
+function freightNow(I) { return I.freight * (1 - 0.25 * clamp(I.ports || 0, 0, 2)); }
+function accessNow(I) { return clamp(I.access + 0.1 * (I.ports || 0), 0, 1); }
+
 function clearGood(I, g, S0, fixed, spend, tar) {
 	var p = I.price[g], T = trade0[g];
-	var pimp = I.world[g] * (1 + tar.imp[g]) * (1 + I.freight);
-	var pexp = I.world[g] * (1 - tar.exp[g]) * (1 - I.freight);
-	var capI = T.ic * I.o0[g] * I.access, capX = T.ec * I.o0[g] * I.access;
+	var freight = freightNow(I), access = accessNow(I);
+	var pimp = I.world[g] * (1 + tar.imp[g]) * (1 + freight);
+	var pexp = I.world[g] * (1 - tar.exp[g]) * (1 - freight);
+	var capI = T.ic * I.o0[g] * access, capX = T.ec * I.o0[g] * access;
 	// regular trade follows the price gap, extra trade only covers shortages and gluts
 	var Ms = T.m > 0 ? Math.min(capI, T.m * I.o0[g] * Math.pow(clamp(p / pimp, 0.3, 2.5), 2)) : 0;
 	var Xs = T.x > 0 ? Math.min(capX, T.x * I.o0[g] * Math.pow(clamp(pexp / p, 0.3, 2.5), 2)) : 0;
@@ -4813,7 +4819,7 @@ var minPrivate = { large: 50, medium: 300, small: 2000 };
 
 function controlDrift(Q, I) {
 	var mood = Math.max(0, num(Q.workers_control_policy, 1)) * (num(Q.workers_strength, 50) / 50) * (0.5 + num(Q.workers_unrest, 40) / 80);
-	var credit = 1 + 2 * Math.max(0, num(Q.cooperative_policy));
+	var credit = 1 + 2 * Math.max(0, num(Q.cooperative_subsidies));
 	var moved = { nationalized: {}, syndicalized: {}, coop: {} };
 	each(sizes, function(z) {
 		var from = z + '_private', left = 0;
@@ -5014,6 +5020,7 @@ window.industryWeek = function(Q) {
 	if (eTot > 0) each(fuelNames, function(f) { grade += I.lastFuel[f] * fuels[f].energy * fuels[f].grade / eTot; });
 	else grade = I.base.grade;
 
+	I.ports = (I.ports || 0) + 0.1 * (Math.max(0, num(Q.freight_investment)) - (I.ports || 0));
 	controlDrift(Q, I);
 	var staff = labourStep(Q, I);
 
@@ -5043,7 +5050,7 @@ window.industryWeek = function(Q) {
 	var energyTotal = 0;
 	each(rows, function(r) { energyTotal += r.t * r.nd.energy; });
 	var avail = {};
-	each(fuelNames, function(f) { avail[f] = I.stock[f] + trade0[f].ic * I.o0[f] * I.access; });
+	each(fuelNames, function(f) { avail[f] = I.stock[f] + trade0[f].ic * I.o0[f] * accessNow(I); });
 	var fuelQty = fuelShares(I, I.price, avail, energyTotal);
 
 	// demand per good
@@ -5089,6 +5096,11 @@ window.industryWeek = function(Q) {
 	// production and money
 	var used = {}, out = {}, groups = {}, cls = { elites: 0, middle: 0, workers: 0, state: 0 };
 	var ent = { revenue: 0, wages: 0, inputs: 0, investment: 0, admin: 0, funding: 0 }, levyTotal = 0, opened = {}, closed = {};
+	// cooperative subsidies are paid from the trade budget, shared out by output
+	var coopValue = 0;
+	each(rows, function(r) { if (ctrlOf[r.o] === 'coop') coopValue += r.t * r.eff * P0[outGood[r.s]]; });
+	var coopGrant = I.entK > 0 ? Math.max(0, num(Q.cooperative_subsidies)) / I.entK : 0;
+
 	var wageTotal = 0, subsidyTotal = 0, fuelUsed = { timber: 0, coal: 0, oil: 0 }, energyUsed = 0;
 	var potential = 0, actual = 0;
 	each(goods, function(g) { used[g] = 0; out[g] = 0; });
@@ -5121,7 +5133,8 @@ window.industryWeek = function(Q) {
 		var sub = c === 'nationalized' ? 0 : (I.subsidy[r.s] || 0) * revenue;
 		var admin = c === 'nationalized' ? revenue * 0.04 * (1 + num(Q.sovnarkom_corruption)) : 0;
 		var funding = c === 'nationalized' ? revenue * 0.02 * (I.fund[r.s] || 0) : 0;
-		var profit = revenue + sub - cost - wages - buildCost - admin - funding;
+		var grant = c === 'coop' && coopValue > 0 ? coopGrant * r.t * r.eff * P0[outGood[r.s]] / coopValue : 0;
+		var profit = revenue + sub + grant - cost - wages - buildCost - admin - funding;
 		if (c === 'nationalized') {
 			ent.revenue += revenue; ent.wages += wages; ent.inputs += cost;
 			ent.investment += buildCost; ent.admin += admin; ent.funding += funding;
@@ -5323,7 +5336,8 @@ window.industryMirror = function(Q) {
 	Q.ind_imports = Math.round(impValue * 100) / 100;
 	Q.ind_exports = Math.round(expValue * 100) / 100;
 	Q.ind_trade_balance = Math.round((expValue - impValue) * 100) / 100;
-	Q.ind_access = I.access;
+	Q.ind_access = Math.round(accessNow(I) * 1000) / 1000;
+	Q.ind_freight = Math.round(freightNow(I) * 1000) / 1000;
 	var jobs = jobsTotal(I), employed = I.employed === undefined ? jobs : Math.min(I.employed, jobs);
 	Q.ind_jobs = Math.round(jobs / 1000);
 	Q.ind_employed = Math.round(employed / 1000);
