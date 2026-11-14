@@ -1273,20 +1273,21 @@ Q.garrison_independent = 100*(100-non_independent)/total_garrison_loyalty;
 // EXPENDITURE
 
 if (Q.sovnarkom_expend < 0.1) Q.sovnarkom_expend = 0.1;
-if (Q.internal_expend < 0.25) Q.internal_expend = 0.25;
-if (Q.foreignaffairs_expend < 0.25) Q.foreignaffairs_expend = 0.25;
-if (Q.military_expend < 0.25) Q.military_expend = 0.25;
-if (Q.enlightenment_expend < 0.25) Q.enlightenment_expend = 0.25;
-if (Q.railways_expend < 0.25) Q.railways_expend = 0.25;
-if (Q.trade_expend < 0.25) Q.trade_expend = 0.25;
-if (Q.finance_expend < 0.25) Q.finance_expend = 0.25;
-if (Q.justice_expend < 0.25) Q.justice_expend = 0.25;
-if (Q.agriculture_expend < 0.25) Q.agriculture_expend = 0.25;
-if (Q.foodsupply_expend < 0.25) Q.foodsupply_expend = 0.25;
-if (Q.labor_expend < 0.25) Q.labor_expend = 0.25;
-if (Q.nationalities_expend < 0.25) Q.nationalities_expend = 0.25;
-if (Q.welfare_expend < 0.25 && Q.welfare_founded != 1) Q.welfare_expend = 0;
-if (Q.welfare_expend < 0.25 && Q.welfare_founded == 1) Q.welfare_expend = 0.25;
+if (Q.internal_expend < 0.1) Q.internal_expend = 0.1;
+if (Q.foreignaffairs_expend < 0.1) Q.foreignaffairs_expend = 0.1;
+if (Q.military_expend < 0.1) Q.military_expend = 0.1;
+if (Q.enlightenment_expend < 0.1) Q.enlightenment_expend = 0.1;
+if (Q.railways_expend < 0.1) Q.railways_expend = 0.1;
+if (Q.trade_expend < 0.1) Q.trade_expend = 0.1;
+if (Q.finance_expend < 0.1) Q.finance_expend = 0.1;
+if (Q.justice_expend < 0.1) Q.justice_expend = 0.1;
+if (Q.labor_expend < 0.1) Q.labor_expend = 0.1;
+if (Q.agriculture_expend < 0.1) Q.agriculture_expend = 0.1;
+if (Q.foodsupply_expend < 0.1) Q.foodsupply_expend = 0.1;
+if (Q.posts_expend < 0.1) Q.posts_expend = 0.1;
+if (Q.nationalities_expend < 0.1) Q.nationalities_expend = 0.1;
+if (Q.welfare_expend < 0.1 && Q.welfare_founded != 1) Q.welfare_expend = 0;
+if (Q.welfare_expend < 0.1 && Q.welfare_founded == 1) Q.welfare_expend = 0.1;
 
 Q.government_functions = (
     Q.sovnarkom_expend +
@@ -1301,6 +1302,7 @@ Q.government_functions = (
     Q.labor_expend +
     Q.agriculture_expend +
     Q.foodsupply_expend +
+    Q.posts_expend +
     Q.nationalities_expend +
     Q.welfare_expend
 );
