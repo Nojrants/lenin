@@ -29,7 +29,8 @@ title: Agree to talks with the Left-SRs.
 go-to: menu
 new-page: true
 on-arrival: {!
-  Q.influence = (10 + (Q.lsr_relation / 2) + (Q.lsr_strength / 5) - (Q.instability / 10));
+  Q.lsr_relation += 5; 
+  Q.influence = (20 + (Q.lsr_relation / 2) - (Q.lsr_strength / 20) - (Q.instability / 10));
   Q.drop_foreign = 0; Q.drop_military = 0; Q.drop_enlightenment = 0; Q.drop_internal = 0; Q.drop_railways = 0; Q.drop_trade = 0; Q.drop_finance = 0; Q.drop_labor = 0; Q.drop_justice = 0; Q.drop_agriculture = 0; Q.drop_foodsupply = 0; Q.drop_posts = 0; Q.drop_nationalities = 0; Q.drop_welfare = 0; Q.drop_property = 0; Q.drop_local = 0; 
   Q.commissariats_held = 14; 
 !}
