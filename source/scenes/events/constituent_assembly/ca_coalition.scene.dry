@@ -1234,7 +1234,7 @@ go-to: cabinet_negotiations4
 
 @local_vacant
 title: Cancel the proposed commissariat.
-tags: local_candidates3
+tags: local_candidates4
 on-arrival: {!
   if (Q.local_minister_party == "Left-SR") { Q.commissariats_held += 1; }
   Q.local_minister = "None"; Q.local_minister_party = ""; 
