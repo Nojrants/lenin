@@ -6,17 +6,13 @@ on-arrival: {!
     Q.vikzhel_strike = 1;
     Q.workers_unrest += 10;
     Q.railroad_strike_seen = 1;
-             
-  	Q.previous_military_trains = Q.military_trains;
-  	Q.previous_civilian_transport = Q.civilian_transport; 
-  	Q.previous_transportation_industry = Q.transportation_industry;
-  	Q.previous_industry = Q.industry; 
-  
-  	Q.military_trains *= 0.1;
-  	Q.civilian_transport *= 0.5;
-  	Q.transportation_industry = 0.5; 
-  	Q.industry = Q.previous_industry * 0.5; 
-  	Q.ag_transport *= 0.9; 
+
+    Q.previous_military_trains = Q.military_trains;
+    Q.military_trains *= 0.1;
+    Q.ag_transport *= 0.9;
+
+    window.indShock('rail_strike', 0.35, 'manufacturing');
+    window.indShock('rail_strike_yards', 0.5, 'transportation');
 !}
 
 = Railroad Strike
