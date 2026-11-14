@@ -3571,6 +3571,17 @@ window.closeMapView = function() {
     setMapHover(null);
 };
 
+// backSpecialScene returns to state.prevSpecialSceneId. The engine can leave that
+// pointing at an old scene (e.g. a scene that opened the map with go-to: map), so
+// before opening the map or library from the normal game we point it at the scene
+// we are actually in.
+window.syncSpecialReturn = function(engine) {
+    var id = engine.state.sceneId;
+    if (id && !/^(map|library|status)/.test(id)) {
+        engine.state.prevSpecialSceneId = id;
+    }
+};
+
 var mapClosing = false;
 
 window.syncMapView = function() {
@@ -3588,14 +3599,6 @@ window.syncMapView = function() {
 
 var mapFromButton = false;
 
-// Lets a scene that opens the map with go-to: map make closing it behave like
-// the Map button (return via backSpecialScene). Unlike mapFromButton, the sidebar
-// sync code never resets this, so it survives the scene change into the map.
-var mapReturnBack = false;
-window.mapReturnOnClose = function() {
-    mapReturnBack = true;
-};
-
 window.showMap = function() {
     var engine = window.dendryUI.dendryEngine;
     var inMapScene = engine.state.sceneId.startsWith('map');
@@ -3609,9 +3612,8 @@ window.showMap = function() {
     if (inMapScene) {
         mapClosing = true;
         window.closeMapView();
-        if (mapFromButton || mapReturnBack) {
+        if (mapFromButton) {
             mapFromButton = false;
-            mapReturnBack = false;
             engine.goToScene('backSpecialScene');
         } else {
             engine.goToScene('root');
@@ -3620,6 +3622,7 @@ window.showMap = function() {
     }
 
     mapFromButton = true;
+    window.syncSpecialReturn(engine);
     engine.goToScene('map');
     setTimeout(function() {
         if (!mapIsOpen()) {
@@ -3648,6 +3651,7 @@ if (
 
 } else {
 
+    window.syncSpecialReturn(engine);
     engine.goToScene(
         'library'
     );
