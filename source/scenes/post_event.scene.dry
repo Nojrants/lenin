@@ -1286,7 +1286,7 @@ for (var party of Q.parties) {
 
 if (newWeek) {
 	if (Q.is_peace != 1 || Q.brest_signed != 1) {
-		Q.lsr_strength += 4; Q.left_m_strength += 1; Q.anarchist_strength += 0.2; Q.maximalist_strength += 0.5; Q.right_m_strength -= 0.5; Q.sr_strength -= 0.5; Q.right_sr_strength -= 0.5;
+		Q.lsr_strength += 2; Q.left_m_strength += 1; Q.anarchist_strength += 0.2; Q.maximalist_strength += 0.5; Q.right_m_strength -= 0.5; Q.sr_strength -= 0.5; Q.right_sr_strength -= 0.5;
 		
 		Q.workers_lsr += (Q.workers_sr * 0.1) + (Q.workers_right_sr * 0.05) + (Q.peasants_sr * 0.05); Q.soldiers_lsr += (Q.soldiers_sr * 0.05) + (Q.soldiers_right_sr * 0.1);
 		Q.workers_sr *= 0.9; Q.soldiers_sr *= 0.95; Q.peasants_sr * 0.95;
@@ -1316,7 +1316,7 @@ if (newWeek) {
 	}
 	
 	if (Q.is_peace == 1 && Q.brest_signed == 1) {
-		Q.lsr_strength += 4; Q.sr_strength += 1; Q.right_sr_strength += 2; Q.left_m_strength += 1; Q.m_strength += 1; Q.right_m_strength += 1; 
+		Q.lsr_strength += 4; Q.sr_strength += 1; Q.right_sr_strength += 1; Q.left_m_strength += 1; Q.m_strength += 1; Q.right_m_strength += 1; 
 		
 		Q.workers_lsr += (Q.workers_b * 0.05); Q.peasants_lsr += (Q.peasants_b * 0.05); 
 		Q.workers_sr += (Q.workers_b * 0.025); Q.peasants_sr += (Q.peasants_b * 0.0125); 
