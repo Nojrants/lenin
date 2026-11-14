@@ -486,6 +486,13 @@ var campaign_bonus = {
 
 var campaign_level = Q.campaign_against_vikzhel;
 
+// the campaign bonuses only apply to this election: remember the real
+// worker support so it can be restored afterwards
+var saved_workers = {};
+for (var party of Q.parties) {
+    if (party != "none") { saved_workers[party] = Q['workers_' + party]; }
+}
+
 if (campaign_level >= 0 && campaign_level <= 2) {
     for (var party of Q.parties) {
         if (party == "none" || campaign_bonus[party] == null) {
@@ -564,6 +571,11 @@ for (var party of Q.parties) {
 
     Q[party + '_rail_votes_disp'] =
         Q[party + '_rail_votes_dec'].toFixed(1);
+}
+
+// undo the temporary campaign bonuses
+for (var party in saved_workers) {
+    Q['workers_' + party] = saved_workers[party];
 }
 !}
 go-to: jumpScene
