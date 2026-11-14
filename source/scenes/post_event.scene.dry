@@ -840,6 +840,8 @@ if (Q.land_reform_progress < 10) {
 	Q.ag_productivity -= 0.5; 
 	Q.instability += 0.25;
 	Q.food_sold *= 0.99;
+	Q.peasants_strength += 0.5; Q.kulaks_strength += 1; 
+	Q.peasants_b += 1; Q.kulaks_b += 0.5; 
 
 	Q.peasant_land += (Q.gentry_land * 0.1); Q.gentry_land *= 0.9;
 	Q.peasant_land += (Q.cossack_land * 0.1); Q.cossack_land *= 0.9;
@@ -1199,17 +1201,16 @@ for (var party of Q.parties) {
 
 if (newWeek) {
 	if (Q.is_peace != 1 || Q.brest_signed != 1) {
-		Q.lsr_strength += 4; Q.left_m_strength += 1; Q.anarchist_strength += 0.2; Q.maximalist_strength += 0.5; 
+		Q.lsr_strength += 4; Q.left_m_strength += 1; Q.anarchist_strength += 0.2; Q.maximalist_strength += 0.5; Q.right_m_strength -= 0.5; Q.sr_strength -= 0.5; Q.right_sr_strength -= 0.5;
 		
-		Q.workers_lsr += (Q.workers_sr * 0.05) + (Q.workers_right_sr * 0.05) + (Q.workers_b * 0.005); Q.soldiers_lsr += (Q.soldiers_sr * 0.05) + (Q.soldiers_right_sr * 0.1) + (Q.soldiers_b * 0.005);
+		Q.workers_lsr += (Q.workers_sr * 0.05) + (Q.workers_right_sr * 0.05); Q.soldiers_lsr += (Q.soldiers_sr * 0.05) + (Q.soldiers_right_sr * 0.1);
 		Q.workers_sr *= 0.95; Q.soldiers_sr *= 0.95;
 		Q.workers_right_sr *= 0.95; Q.soldiers_right_sr *= 0.9;
 		
-		Q.workers_left_m += (Q.workers_m * 0.02); Q.soldiers_left_m += (Q.soldiers_m * 0.02);
+		Q.workers_left_m += (Q.workers_m * 0.02) + (Q.workers_right_m *0.025); Q.soldiers_left_m += (Q.soldiers_m * 0.02) + (Q.soldiers_right_m *0.025);
 		Q.workers_m *= 0.98; Q.soldiers_m *= 0.98;
-		
-		Q.workers_lsr += 0.25; 
-		Q.workers_b *= 0.995; Q.soldiers_b *= 0.995;
+		Q.workers_right_m *= 0.975; Q.soldiers_right_m *= 0.975; 
+
 		
 		if (Q.year == 1917 && Q.month == 12) { 
 			Q.workers_lsr += (Q.workers_b * 0.006); Q.soldiers_lsr += (Q.soldiers_b * 0.006);
