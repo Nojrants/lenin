@@ -57,6 +57,7 @@ go-to: restructure_menu
 on-arrival: {!
 	Q.peasants_compromise = 1;
  	 Q.new_peasant_seats += 108;
+ 	 Q.soviets_peasants += 108;
 	
 	Q.cec_seats += 108;
 	Q.anarchist_cec += 1;
@@ -89,6 +90,7 @@ go-to: restructure_menu
 on-arrival: {!
 	Q.peasants_compromise = 0;
   	Q.new_peasant_seats -= 108;
+  	Q.soviets_peasants -= 108;
 	
 	Q.cec_seats -= 108;
 	Q.anarchist_cec -= 1;
@@ -122,6 +124,7 @@ go-to: restructure_menu
 on-arrival: {!
 	Q.neutral_peasants = 1;
 	Q.new_peasant_seats += 160;
+	Q.soviets_peasants += 160;
 
 	Q.cec_seats += 160;
 	Q.anarchist_cec += 4;
@@ -154,6 +157,7 @@ go-to: restructure_menu
 on-arrival: {!
 	Q.neutral_peasants = 0;
 	Q.new_peasant_seats -= 160;
+	Q.soviets_peasants -= 160;
 
 	Q.cec_seats -= 160;
 	Q.anarchist_cec -= 4;
@@ -186,10 +190,11 @@ go-to: restructure_menu
 on-arrival: {!
 	Q.add_peasants += 1;
 	Q.new_peasant_seats += 25;
+	Q.soviets_peasants += 25;
 
 	Q.cec_seats += 25;
 	
-	if (coalition_government == 1) {
+	if (Q.coalition_government == 1) {
 		Q.anarchist_cec += 2;
 		Q.maximalist_cec += 1;	
 		Q.b_cec += 3;
@@ -203,7 +208,7 @@ on-arrival: {!
 		Q.other_cec += 2;
 	}
 	
-	if (coalition_government != 1) {
+	if (Q.coalition_government != 1) {
 		Q.anarchist_cec += 2;
 		Q.maximalist_cec += 1;	
 		Q.b_cec += 5;
@@ -235,10 +240,11 @@ go-to: restructure_menu
 on-arrival: {!
 	Q.add_peasants -= 1;
 	Q.new_peasant_seats -= 25;
+	Q.soviets_peasants -= 25;
 
 	Q.cec_seats -= 25;
 	
-	if (coalition_government == 1) {
+	if (Q.coalition_government == 1) {
 		Q.anarchist_cec -= 2;
 		Q.maximalist_cec -= 1;	
 		Q.b_cec -= 3;
@@ -252,7 +258,7 @@ on-arrival: {!
 		Q.other_cec -= 2;
 	}
 	
-	if (coalition_government != 1) {
+	if (Q.coalition_government != 1) {
 		Q.anarchist_cec -= 2;
 		Q.maximalist_cec -= 1;	
 		Q.b_cec -= 5;
@@ -284,6 +290,7 @@ go-to: restructure_menu
 on-arrival: {!
 	Q.add_soldiers += 1;
   Q.new_soldier_seats += 25;
+  Q.soviets_soldiers += 25;
 
 	
 	Q.cec_seats += 25;
@@ -318,6 +325,7 @@ go-to: restructure_menu
 on-arrival: {!
 	Q.add_soldiers -= 1;
   Q.new_soldier_seats -= 25;
+  Q.soviets_soldiers -= 25;
 	
 	Q.cec_seats -= 25;
 	
@@ -352,6 +360,7 @@ go-to: restructure_menu
 on-arrival: {!
 	Q.add_unions += 1;
   Q.new_union_seats += 25;
+  Q.soviets_unions += 25;
 	
 	Q.cec_seats += 25;
 	
@@ -385,6 +394,7 @@ go-to: restructure_menu
 on-arrival: {!
 	Q.add_unions -= 1;
   Q.new_union_seats -= 25;
+  Q.soviets_unions -= 25;
 	
 	Q.cec_seats -= 25;
 	
@@ -395,7 +405,7 @@ on-arrival: {!
 	Q.left_m_cec -= 2;
 	Q.m_cec -= 2;
 	Q.right_m_cec -= 1;
-	Q.lsr_cec -= 3;
+	Q.lsr_cec -= 4;
 	Q.sr_cec -= 2;
 	Q.popular_socialist_cec -= 0;
 	Q.other_cec -= 2;
@@ -418,6 +428,7 @@ go-to: restructure_menu
 on-arrival: {!
 	Q.add_duma += 1;
   Q.new_duma_seats += 25;
+  Q.soviets_city += 25;
 	
 	Q.cec_seats += 25;
 	
@@ -451,6 +462,7 @@ go-to: restructure_menu
 on-arrival: {!
 	Q.add_duma -= 1;
   Q.new_duma_seats -= 25;
+  Q.soviets_city -= 25;
 	
 	Q.cec_seats -= 25;
 	
@@ -535,20 +547,17 @@ on-arrival: {!
   if (Q.vikzhel_unrest >= 50 && Q.vikzhel_strength >= 25) {
     Q.vikzhel_strike = 1;
     Q.workers_unrest += 10;
+    Q.railroad_strike_seen = 1;
 
-  	Q.previous_military_trains = Q.military_trains;
-  	Q.previous_civilian_transport = Q.civilian_transport; 
-  	Q.previous_transportation_industry = Q.transportation_industry;
-  	Q.previous_industry = Q.industry; 
-  
-  	Q.military_trains *= 0.1;
-  	Q.civilian_transport *= 0.5;
-  	Q.transportation_industry = 0.5; 
-  	Q.industry = Q.previous_industry * 0.5; 
-  	Q.ag_transport * 0.9; 
+    Q.previous_military_trains = Q.military_trains;
+    Q.military_trains *= 0.1;
+    Q.ag_transport *= 0.9;
+
+    window.indShock('rail_strike', 0.35, 'manufacturing');
+    window.indShock('rail_strike_yards', 0.5, 'transportation');
   }
   !}
  
 We force through the plan to restructure the CEC, without the approval of any other parties. The opposition immediately lodges its protests and breaks off any agreements with us. 
   
-[?if vikzhel_strike == 1 : Worse, Vikzhel has declared they are launching their promised railroad strike, bringing industry to a standstill. ?]  
+[?if vikzhel_strike == 1 : Worse, Vikzhel has declared they are launching their promised railroad strike, bringing industry to a standstill. ?]
