@@ -202,6 +202,134 @@ for (var party of Q.parties) {
 !}
 go-to: jumpScene
 
+######################################### All-Russian Soviet (overhaul)
+@all_russian_soviet_overhaul
+title: All-Russian Soviet Elections
+on-arrival: {!
+// which classes vote in each kind of soviet, and how much each class counts
+var soviet_groups = {
+    workers: { workers: 1 },
+    soldiers: { soldiers: 1 },
+    peasants: { peasants: 1, kulaks: 1 },
+    unions: { workers: 1 },
+    city: { workers: 1, soldiers: 0.1, middle: 0.5, intelligentsia: 1 }
+};
+
+// normalized class voting amounts (0 to 100)
+var congress_classes = ["workers", "soldiers", "peasants", "kulaks", "middle", "intelligentsia"];
+for (var c of congress_classes) {
+    var class_votes = 0;
+    for (var party of Q.parties) {
+        if (party == "none") {
+            continue;
+        }
+        if (!Q[c+'_'+party] || Q[c+'_'+party] < 0) {
+            Q[c+'_'+party] = 0;
+        }
+        class_votes += Q[c+'_'+party];
+    }
+    if (class_votes <= 0) { class_votes = 1; }
+    for (var party of Q.parties) {
+        Q[c + '_' + party + '_normalized'] = 100*Q[c+'_'+party]/class_votes;
+        Q[c + '_' + party + '_display'] = Math.round(100*Q[c+'_'+party]/class_votes);
+    }
+}
+
+// organized unions lean away from the Bolsheviks and toward the Mensheviks, more so the stronger and angrier they are
+var union_independence = (Q.unionists_strength / 100) * (0.5 + Q.unionists_unrest / 100);
+var union_lean = {
+    b: 1 - 0.5 * union_independence,
+    left_m: 1 + 2 * union_independence, m: 1 + 2 * union_independence, right_m: 1 + 2 * union_independence, sdi: 1 + 2 * union_independence,
+    sr: 1 + union_independence, right_sr: 1 + union_independence,
+    anarchist: 1 - union_independence, maximalist: 1 - union_independence
+};
+
+var excluded_to = { other: 0.60, right_m: 0.25, right_sr: 0.10, popular_socialist: 0.05 };
+
+// 1. share of each party inside each kind of soviet, then the number of soviets it holds
+var total_soviets = 0;
+for (var party of Q.parties) {
+    Q[party + '_soviets'] = 0;
+}
+for (var group in soviet_groups) {
+    var group_soviets = Math.max(0, Q['soviets_' + group] || 0);
+    var group_total = 0;
+    var group_support = {};
+    for (var party of Q.parties) {
+        if (party == "none") {
+            continue;
+        }
+        var support = 0;
+        for (var c in soviet_groups[group]) {
+            support += Q[c] * soviet_groups[group][c] * Q[c + '_' + party + '_normalized'];
+        }
+        if (group == "unions" && union_lean[party] != null) {
+            support *= Math.max(0, union_lean[party]);
+        }
+        group_support[party] = Math.max(0, support);
+        group_total += group_support[party];
+    }
+    // the Kadets and the right do not sit in the soviets, their voters go elsewhere
+    var excluded = group_support.k + group_support.rightist;
+    for (var party in excluded_to) {
+        group_support[party] += excluded * excluded_to[party];
+    }
+    group_support.k = 0;
+    group_support.rightist = 0;
+    if (group_total <= 0) { group_total = 1; }
+    for (var party of Q.parties) {
+        if (party == "none") {
+            continue;
+        }
+        Q[party + '_soviets_' + group] = Math.round(10 * group_soviets * group_support[party] / group_total) / 10;
+        Q[party + '_soviets'] += group_soviets * group_support[party] / group_total;
+    }
+    total_soviets += group_soviets;
+}
+Q.soviets_total = total_soviets;
+if (total_soviets <= 0) { total_soviets = 1; }
+
+// small top-ups for legal parties that would otherwise vanish, same sizes as the old algorithm
+var unit = total_soviets / 1300;
+if (Q.mensheviks_legal == 1 && Q.left_m_soviets < 33 * unit) { Q.left_m_soviets += 3 * unit; Q.m_soviets += 2 * unit; }
+if (Q.mensheviks_legal == 1 && Q.sdi_soviets < 1 * unit) { Q.sdi_soviets += 1 * unit; }
+if (Q.lsr_legal == 1 && Q.lsr_soviets < 3 * unit) { Q.lsr_soviets += 3 * unit; }
+if (Q.sr_legal == 1 && Q.sr_soviets < 2 * unit) { Q.sr_soviets += 2 * unit; }
+if (Q.anarchists_legal == 1 && Q.maximalist_soviets < 2 * unit) { Q.maximalist_soviets += 2 * unit; Q.anarchist_soviets += 1 * unit; }
+var held = 0;
+for (var party of Q.parties) {
+    if (party != "none") { held += Q[party + '_soviets']; }
+}
+if (held <= 0) { held = 1; }
+
+// 2. size of the congress, grows with the number of soviets unless it has been fixed
+Q.congress_seats = Q.congress_seats_fixed > 0 ? Q.congress_seats_fixed : Math.round(Q.congress_seats_base * total_soviets / Q.congress_soviets_base);
+
+// 3. delegates in proportion to soviets held, largest remainders get the leftover seats
+var seated = 0;
+var remainders = [];
+for (var party of Q.parties) {
+    if (party == "none") {
+        continue;
+    }
+    Q[party + '_soviet_normalized'] = Q[party + '_soviets'] / held;
+    Q[party + '_soviet_votes_dec'] = Math.round(Q[party + '_soviet_normalized'] * 1000) / 10;
+    Q[party + '_soviet_votes'] = Math.round(Q[party + '_soviet_normalized'] * 100);
+    Q[party + '_soviet_votes_disp'] = Q[party + '_soviet_votes_dec'].toFixed(1);
+    Q[party + '_soviets'] = Math.round(10 * Q[party + '_soviets']) / 10;
+
+    var exact = Q[party + '_soviet_normalized'] * Q.congress_seats;
+    Q[party + '_congress_seats'] = Math.floor(exact);
+    seated += Q[party + '_congress_seats'];
+    remainders.push({ party: party, left: exact - Math.floor(exact) });
+}
+remainders.sort(function(a, b) { return b.left - a.left; });
+for (var i = 0; i < Q.congress_seats - seated && i < remainders.length; i++) {
+    Q[remainders[i].party + '_congress_seats'] += 1;
+}
+!}
+go-to: jumpScene
+
 ######################################### Petrograd City Duma
 @petrograd_duma
 title: Petrograd Duma Elections
