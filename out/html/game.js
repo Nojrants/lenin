@@ -4804,6 +4804,39 @@ function shiftPercent(I, c, target) {
 	});
 }
 
+// CONTROL DRIFT
+// weekly share of private firms taken over by their workers or turned into cooperatives, before policy
+var seizeRate = { large: 0.004, medium: 0.0015, small: 0.0003 };
+var artelRate = { large: 0, medium: 0.0001, small: 0.0002 };
+// a nationalization drive stops once this few private firms are left
+var minPrivate = { large: 50, medium: 300, small: 2000 };
+
+function controlDrift(Q, I) {
+	var mood = Math.max(0, num(Q.workers_control_policy, 1)) * (num(Q.workers_strength, 50) / 50) * (0.5 + num(Q.workers_unrest, 40) / 80);
+	var credit = 1 + 2 * Math.max(0, num(Q.cooperative_policy));
+	var moved = { nationalized: {}, syndicalized: {}, coop: {} };
+	each(sizes, function(z) {
+		var from = z + '_private', left = 0;
+		each(sectors, function(s) { left += I.n[s][from]; });
+		var rates = {
+			nationalized: left > minPrivate[z] ? clamp(0.01 * num(Q['nationalization_policy_' + z]), 0, 0.5) : 0,
+			syndicalized: clamp(seizeRate[z] * mood, 0, 0.2),
+			coop: clamp(artelRate[z] * credit, 0, 0.1)
+		};
+		each(['nationalized', 'syndicalized', 'coop'], function(c) {
+			moved[c][z] = 0;
+			if (rates[c] <= 0) return;
+			each(sectors, function(s) {
+				var before = I.n[s][from];
+				var cap = moveCapacity(I, s, from, z + '_' + c, struct(I, s, from) * rates[c]);
+				disruptMoved(I, s, z + '_' + c, cap, 0.2, 4);
+				moved[c][z] += before - I.n[s][from];
+			});
+		});
+	});
+	I.drift = moved;
+}
+
 // state enterprise accounts at start prices, same formulas as the weekly step
 function natAccounts(I, Q) {
 	var e = { revenue: 0, wages: 0, inputs: 0, investment: 0, admin: 0, funding: 0 };
@@ -4981,6 +5014,7 @@ window.industryWeek = function(Q) {
 	if (eTot > 0) each(fuelNames, function(f) { grade += I.lastFuel[f] * fuels[f].energy * fuels[f].grade / eTot; });
 	else grade = I.base.grade;
 
+	controlDrift(Q, I);
 	var staff = labourStep(Q, I);
 
 	// utilisation from last week's margins
@@ -5311,6 +5345,15 @@ window.industryMirror = function(Q) {
 	each(sizes.concat(controls), function(k) {
 		Q['ind_count_' + k] = Math.round(Q['ind_count_' + k]);
 		Q['ind_share_' + k] = Math.round(Q['ind_share_' + k] * 10) / 10;
+	});
+	var names = { nationalized: 'ind_nationalized', syndicalized: 'ind_seized', coop: 'ind_cooperated' };
+	each(['nationalized', 'syndicalized', 'coop'], function(c) {
+		Q[names[c]] = 0;
+		each(sizes, function(z) {
+			var count = Math.round(I.drift ? I.drift[c][z] || 0 : 0);
+			Q[names[c] + '_' + z] = count;
+			Q[names[c]] += count;
+		});
 	});
 	Q.ind_opened = 0; Q.ind_closed = 0;
 	each(owners, function(o) {
