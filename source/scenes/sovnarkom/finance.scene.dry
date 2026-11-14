@@ -613,18 +613,18 @@ on-arrival: finance_expend -= 0.25; efficacy_finance += 0.1 if efficacy_finance 
 
 @hire_staff
 title: Hire administrative personnel
-subtitle: -0.5 resources
-choose-if: resources >= 0.5
-unavailable-subtitle: -0.5 resources – We lack the resources. 
-on-arrival: efficacy_finance += 0.2 if efficacy_finance < 1; finance_expend += 0.25; resources -= 0.5;
+subtitle: -0.25 resources
+choose-if: resources >= 0.25
+unavailable-subtitle: -0.25 resources – We lack the resources. 
+on-arrival: efficacy_finance += 0.2 if efficacy_finance < 1; finance_expend += 0.125; resources -= 0.25;
 
 @corruption
 title: Root-out departmental corruption. 
-subtitle: -0.5 resources
-choose-if: finance_corruption_timer = 0 and resources >= 0.5
-unavailable-subtitle: -0.5 resources – [?if resources < 0.5 : We lack the resources. ?][?if finance_corruption_timer != 0 : We've already initiated an anti-corruption campaign. ?]
+subtitle: -0.25 resources
+choose-if: finance_corruption_timer = 0 and resources >= 0.25
+unavailable-subtitle: -0.25 resources – [?if resources < 0.25 : We lack the resources. ?][?if finance_corruption_timer != 0 : We've already initiated an anti-corruption campaign. ?]
 on-arrival: {!
-  Q.resources -= 0.5; Q.finance_corruption_timer = 8;
+  Q.resources -= 0.25; Q.finance_corruption_timer = 8;
   Q.efficacy_finance = Math.min(1, Q.efficacy_finance + 0.1);
   Q.finance_corruption = Math.max(0, Q.finance_corruption - (0.2 * Q.efficacy_finance)); 
 !}
