@@ -4550,6 +4550,18 @@ var HIRE_RATE = 0.25;
 var churn = { large: 2.5, medium: 2.5, small: 3, coop: 2.5, nationalized: 1, syndicalized: 2 };
 var UNEMPLOYED_FLOOR = 1;
 
+// wartime start: the blockade limits imports, demand runs ahead of supply and the mines are short of hands
+var start0 = {
+	access: 0.35,
+	demand: { arms: 1.10, consumer: 1.08, agri: 1.05, machinery: 1.08, transport: 1.08 },
+	capacity: { timber: 0.96, coal: 0.92, oil: 0.96, ore: 0.94, materials: 0.94 }
+};
+// start prices against 1913, shown on the trade page
+var price1913 = {
+	timber: 2.6, coal: 3.2, oil: 2.8, ore: 3.0, materials: 3.0,
+	arms: 4.0, consumer: 3.2, agri: 3.0, machinery: 3.5, transport: 3.3
+};
+
 var BUILD = 10;
 var SIGMA = 2.5;
 var K_GOV = 0.25;
@@ -4913,6 +4925,9 @@ window.industryInit = function(Q) {
 	I.last_nat = num(Q.industries_nationalized);
 	I.last_synd = num(Q.industries_syndicalized);
 	Q.ind = I;
+	I.access = start0.access;
+	each(goods, function(g) { if (start0.demand[g]) I.mult[g] = start0.demand[g]; });
+	each(sectors, function(s) { if (start0.capacity[s]) I.scale[s] *= start0.capacity[s]; });
 	window.industryMirror(Q);
 	return I;
 };
@@ -5145,7 +5160,13 @@ window.industryWeek = function(Q) {
 		out: out, imports: imports, exports: exports, groups: groups, wages: wageTotal,
 		fill: {}, price: {}, energyFill: energyFill, duty: dutyTotal, opened: opened, closed: closed
 	};
-	each(goods, function(g) { I.last.fill[g] = mk[g].fill; I.last.price[g] = mk[g].p; });
+	// share of normal requirements met, what would be bought at start prices
+	I.last.met = {};
+	each(goods, function(g) {
+		I.last.fill[g] = mk[g].fill; I.last.price[g] = mk[g].p;
+		var need = fixedD[g] + spend[g] / P0[g];
+		I.last.met[g] = need > 1e-9 ? Math.min(1, mk[g].supply / need) : 1;
+	});
 	I.disrupt = (I.disrupt || []).filter(function(d) { d.left -= 1; return d.left > 0; });
 	window.industryMirror(Q);
 };
@@ -5221,6 +5242,8 @@ window.industryMirror = function(Q) {
 	var I = Q.ind;
 	each(goods, function(g) {
 		Q['ind_price_' + g] = Math.round(I.price[g] / P0[g] * 100) / 100;
+		Q['ind_supply_' + g] = Math.round(100 * (I.last.met ? I.last.met[g] : (start0.capacity[g] || 1) / (start0.demand[g] || 1)));
+		Q['ind_price1913_' + g] = Math.round(I.price[g] / P0[g] * price1913[g] * 100);
 		Q['ind_fill_' + g] = I.last.fill ? Math.round(I.last.fill[g] * 100) / 100 : 1;
 		Q['ind_out_' + g] = I.last.out ? Math.round(I.last.out[g] * 100) / 100 : Math.round(I.o0[g] * 100) / 100;
 	});
@@ -5253,6 +5276,12 @@ window.industryMirror = function(Q) {
 	Q.ind_jobs = Math.round(jobs / 1000);
 	Q.ind_employed = Math.round(employed / 1000);
 	Q.ind_vacancies = Math.round((jobs - employed) / 1000);
+	each(owners, function(o) {
+		var count = 0;
+		each(sectors, function(s) { count += I.n[s][o]; });
+		Q['ind_count_' + o] = Math.round(count);
+		Q['ind_share_' + o] = Math.round(percentOwned(I, o) * 10) / 10;
+	});
 	Q.ind_opened = 0; Q.ind_closed = 0;
 	each(owners, function(o) {
 		Q['ind_opened_' + o] = Math.round(I.last.opened ? I.last.opened[o] || 0 : 0);
