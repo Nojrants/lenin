@@ -1308,7 +1308,7 @@ if (newWeek) {
 			Q.workers_b *= 0.99; Q.soldiers_b *= 0.994; 
 		}
 		
-		if (Q.year == 1918) { 
+		if (Q.year == 1918 && Q.month > 1) { 
 			Q.workers_lsr += (Q.workers_b * 0.009); Q.soldiers_lsr += (Q.soldiers_b * 0.009);
 			Q.workers_left_m += (Q.workers_b * 0.003); Q.workers_m += (Q.workers_b * 0.003); 
 			Q.workers_b *= 0.985; Q.soldiers_b *= 0.991; 
