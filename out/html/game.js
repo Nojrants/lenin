@@ -3588,6 +3588,14 @@ window.syncMapView = function() {
 
 var mapFromButton = false;
 
+// Lets a scene that opens the map with go-to: map make closing it behave like
+// the Map button (return via backSpecialScene). Unlike mapFromButton, the sidebar
+// sync code never resets this, so it survives the scene change into the map.
+var mapReturnBack = false;
+window.mapReturnOnClose = function() {
+    mapReturnBack = true;
+};
+
 window.showMap = function() {
     var engine = window.dendryUI.dendryEngine;
     var inMapScene = engine.state.sceneId.startsWith('map');
@@ -3601,8 +3609,9 @@ window.showMap = function() {
     if (inMapScene) {
         mapClosing = true;
         window.closeMapView();
-        if (mapFromButton) {
+        if (mapFromButton || mapReturnBack) {
             mapFromButton = false;
+            mapReturnBack = false;
             engine.goToScene('backSpecialScene');
         } else {
             engine.goToScene('root');
