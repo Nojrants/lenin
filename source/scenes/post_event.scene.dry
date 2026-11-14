@@ -619,6 +619,7 @@ Q.train_capacity = Math.round(Q.train_capacity);
 Q.civilian_rail_throughput = Q.train_capacity * Q.civilian_trains / 100;
 Q.effective_rail_throughput = Q.civilian_rail_throughput * (1 + (Q.finalefficacy_railways - 0.5)) * (Q.specialist_capacity/100);
 Q.civilian_transport = Math.min(100, Q.effective_rail_throughput / 1000);  
+if (Q.vikzhel_strike == 1) { Q.civilian_transport *= 0.5; }
 if (Q.vikzhel_strike != 1) { Q.ag_transport = Q.civilian_transport; }
 
 
@@ -966,6 +967,7 @@ Q.food_supply_urban = Q.food_production * (Q.food_sold + (Q.bagmen_strength / 40
 
 // Transportation limits urban supply
 Q.food_transport_capacity = Math.max(0, (Q.effective_rail_throughput * 0.15) - Math.min(0.5, (Q.bagmen_strength / 500)));
+if (Q.vikzhel_strike == 1) { Q.food_transport_capacity *= 0.9; }
 if (Q.food_supply_urban > Q.food_transport_capacity) { Q.food_supply_urban = Q.food_transport_capacity; }
 
 // Calculate surplus before stockpile release
