@@ -4696,7 +4696,7 @@ function efficacy(Q, I, s, o, grade) {
 	e *= 1 + 0.05 * (grade - I.base.grade);
 	e *= I.tech[s] || 1;
 	if (ctrlOf[o] === 'nationalized') e *= 1 + 0.04 * (I.fund[s] || 0);
-	return e * disruptFactor(I, s, o);
+	return e * disruptFactor(I, s, o) * shockFactor(I, s);
 }
 
 function structEff(I, s, o) { return own[o].eff * (I.tech[s] || 1); }
@@ -4746,6 +4746,16 @@ function disruptFactor(I, s, o) {
 	return f;
 }
 
+// lasting loss of efficacy under a name, stays until it is set back to 0
+function shockFactor(I, s) {
+	var f = 1;
+	for (var name in I.shock || {}) {
+		var k = I.shock[name];
+		if (k.sector === 'all' || k.sector === s || (k.sector === 'manufacturing' && finSectors.indexOf(s) >= 0)) f *= 1 - k.amount;
+	}
+	return f;
+}
+
 // BUSINESS CLIMATE
 // multipliers on the weekly rate of openings and closures for one group of enterprises
 function climate(Q, I, s, o, m, m0) {
@@ -4756,6 +4766,8 @@ function climate(Q, I, s, o, m, m0) {
 	var squeeze = m0 === undefined ? 0 : (m - m0) / 0.1;
 	var last = I.last.groups && I.last.groups[s] && I.last.groups[s][o];
 	var shortage = last ? 1 - last.sat : 0;
+	// a strike idles firms, it does not bankrupt them, and they get a few weeks to recover after it
+	if (shockFactor(I, s) < 1 || I.grace > 0) { squeeze = Math.max(squeeze, -0.3); shortage = Math.min(shortage, 0.1); }
 	var instab = (num(Q.instability) - 30) / 40;
 	var inflation = Math.max(0, num(Q.monthly_inflation) - 5) / 20;
 	var tax = ctrlOf[o] === 'private' ? 0.3 * (num(Q.business_tax_rate, 1) - 1) : 0;
@@ -5232,6 +5244,7 @@ window.industryWeek = function(Q) {
 		var need = fixedD[g] + spend[g] / P0[g];
 		I.last.met[g] = need > 1e-9 ? Math.min(1, mk[g].supply / need) : 1;
 	});
+	if (I.grace > 0) I.grace -= 1;
 	I.disrupt = (I.disrupt || []).filter(function(d) { d.left -= 1; return d.left > 0; });
 	window.industryMirror(Q);
 };
@@ -5455,6 +5468,12 @@ window.indDisrupt = function(sector, owner, amount, weeks) {
 	each(sector === 'all' ? sectors : [sector], function(s) {
 		each(owner === 'all' ? owners : [owner], function(o) { disrupt(I, s, o, amount, weeks); });
 	});
+};
+window.indShock = function(name, amount, sector) {
+	var I = engineQ().ind;
+	I.shock = I.shock || {};
+	if (amount > 0) I.shock[name] = { amount: clamp(amount, 0, 0.95), sector: sector || 'all' };
+	else if (I.shock[name]) { delete I.shock[name]; I.grace = 6; }
 };
 window.facDamage = function(sector, share) {
 	var I = engineQ().ind;
