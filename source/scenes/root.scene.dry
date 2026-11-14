@@ -583,8 +583,9 @@ Q.workers_control_policy = 1;
 Q.nationalization_policy_large = 0;
 Q.nationalization_policy_medium = 0;
 Q.nationalization_policy_small = 0;
-// credits and subsidies for cooperatives, each point triples the rate private firms convert
-Q.cooperative_policy = 0;
+// trade commissariat funding, each step of 0.1 is also added to trade_expend
+Q.cooperative_subsidies = 0;
+Q.freight_investment = 0;
 
 // availability of consumer goods (out of 100 - pre-war levels)
 // TODO: this is currently unused
