@@ -8,13 +8,14 @@ on-arrival: {!
     Q.workers_unrest -= 10;
     Q.railroad_strike_seen = 0; 
 
-  	Q.military_trains = Math.max(Q.previous_military_trains + Q.military_trains, Q.previous_military_trains);
-  	Q.civilian_transport = Math.max(Q.previous_civilian_transport + Q.civilian_transport, previous_civilian_transport);
-  	Q.transportation_industry = Math.max(Q.previous_transportation_industry + Q.transportation_industry, Q.transportation_industry);
-  	Q.industry = Math.max(Q.previous_industry + Q.industry, Q.industry);
-    Q.ag_transport * 1.1; 
+    Q.military_trains = Math.max(Q.military_trains, Q.previous_military_trains);
+
+    window.indShock('rail_strike', 0);
+    window.indShock('rail_strike_yards', 0);
+    window.indDisrupt('all', 'all', 0.1, 3);
 !}
 
 = Railroad Strike Ends
 
 Satisfied by our recent efforts, Vikzhel has announced that they are lifting their strike, bringing the railways back to working order. 
+ 
