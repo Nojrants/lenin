@@ -2,6 +2,91 @@ title: Post Event
 new-page: true
 on-arrival: {!
 var newWeek = (Q.week_actions >= 1 && Q.current_player >= Q.n_players);
+
+// Pure: reads Q, writes nothing. Returns what an all-Russian Congress election
+// would produce from the current state.
+window.computeAllRussianSoviet = function(Q) {
+    var soviet_groups = {
+        workers: { workers: 1 },
+        soldiers: { soldiers: 1 },
+        peasants: { peasants: 1, kulaks: 1 },
+        unions: { workers: 1 },
+        city: { workers: 1, soldiers: 0.1, middle: 0.5, intelligentsia: 1 }
+    };
+    var congress_classes = ["workers", "soldiers", "peasants", "kulaks", "middle", "intelligentsia"];
+    var parties = Q.parties.filter(function(p) { return p != "none"; });
+    var val = function(x) { var v = Number(x); return (isFinite(v) && v > 0) ? v : 0; };
+
+    // each class's normalized party support (0 to 100), on local copies
+    var norm = {};
+    congress_classes.forEach(function(c) {
+        var votes = 0;
+        parties.forEach(function(p) { votes += val(Q[c + '_' + p]); });
+        if (votes <= 0) { votes = 1; }
+        norm[c] = {};
+        parties.forEach(function(p) { norm[c][p] = 100 * val(Q[c + '_' + p]) / votes; });
+    });
+
+    // organized unions lean away from the Bolsheviks and toward the Mensheviks
+    var ui = ((Q.unionists_strength || 0) / 100) * (0.5 + (Q.unionists_unrest || 0) / 100);
+    var union_lean = {
+        b: 1 - 0.5 * ui,
+        left_m: 1 + 2 * ui, m: 1 + 2 * ui, right_m: 1 + 2 * ui, sdi: 1 + 2 * ui,
+        sr: 1 + ui, right_sr: 1 + ui,
+        anarchist: 1 - ui, maximalist: 1 - ui
+    };
+    var excluded_to = { other: 0.60, right_m: 0.25, right_sr: 0.10, popular_socialist: 0.05 };
+
+    var soviets = {};
+    var byGroup = {};
+    parties.forEach(function(p) { soviets[p] = 0; });
+    var total_raw = 0;
+    for (var group in soviet_groups) {
+        var group_soviets = Math.max(0, Q['soviets_' + group] || 0);
+        var gs = {};
+        var group_total = 0;
+        parties.forEach(function(p) {
+            var support = 0;
+            for (var c in soviet_groups[group]) {
+                support += (Q[c] || 0) * soviet_groups[group][c] * norm[c][p];
+            }
+            if (group == "unions" && union_lean[p] != null) { support *= Math.max(0, union_lean[p]); }
+            gs[p] = Math.max(0, support);
+            group_total += gs[p];
+        });
+        // the Kadets and the right do not sit in the soviets, their voters go elsewhere
+        var excluded = (gs.k || 0) + (gs.rightist || 0);
+        for (var p in excluded_to) {
+            if (gs[p] !== undefined) { gs[p] += excluded * excluded_to[p]; }
+        }
+        gs.k = 0;
+        gs.rightist = 0;
+        if (group_total <= 0) { group_total = 1; }
+        byGroup[group] = {};
+        parties.forEach(function(p) {
+            byGroup[group][p] = group_soviets * (gs[p] || 0) / group_total;
+            soviets[p] += byGroup[group][p];
+        });
+        total_raw += group_soviets;
+    }
+    var total = total_raw > 0 ? total_raw : 1;
+
+    // small top-ups for legal parties that would otherwise vanish
+    var unit = total / 1300;
+    if (Q.mensheviks_legal == 1 && soviets.left_m < 33 * unit) { soviets.left_m += 3 * unit; soviets.m += 2 * unit; }
+    if (Q.mensheviks_legal == 1 && soviets.sdi < 1 * unit) { soviets.sdi += 1 * unit; }
+    if (Q.lsr_legal == 1 && soviets.lsr < 3 * unit) { soviets.lsr += 3 * unit; }
+    if (Q.sr_legal == 1 && soviets.sr < 2 * unit) { soviets.sr += 2 * unit; }
+    if (Q.anarchists_legal == 1 && soviets.maximalist < 2 * unit) { soviets.maximalist += 2 * unit; soviets.anarchist += 1 * unit; }
+
+    var held = 0;
+    parties.forEach(function(p) { held += soviets[p]; });
+    if (held <= 0) { held = 1; }
+    var shares = {};
+    parties.forEach(function(p) { shares[p] = soviets[p] / held; });
+    return { shares: shares, soviets: soviets, byGroup: byGroup, held: held, total_raw: total_raw, total: total };
+};
+
 Q.last_advisor_action = 0;
 Q.last_cabinet_action = 0;
 // make sure no stat is below 0.
