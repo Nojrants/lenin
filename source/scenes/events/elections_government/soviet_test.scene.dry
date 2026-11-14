@@ -1,7 +1,5 @@
 title: Congress of Soviets (test)
 new-page: true
-view-if: soviet_congress_test_seen != 1
-tags: event
 go-to: run_election
 
 @run_election
