@@ -10,7 +10,7 @@ on-arrival: {!
   Q.soldiers_unrest -= 15; Q.peasants_unrest += 5; 
   Q.soldiers_b += 1; 
   Q.soldiers -= 4; Q.peasants += 3.5; Q.workers += 0.5;  
-  Q.military_expend -= 5;
+  Q.military_expend -= 6;
   Q.bagmen_strength += 5; 
 
   mapAddStat('upr', 'morale', -0.5);
