@@ -31,7 +31,7 @@ max-visits: 1
 go-to: protest_menu
 choose-if: rescheduled_ca != 1
 on-arrival:{!
-	Q.constituent_assembly_timer = 10;
+	Q.constituent_assembly_timer = 6;
 	Q.ca_week = Q.week + (Q.constituent_assembly_timer % 4);
 	Q.ca_month = Q.month + (Q.constituent_assembly_timer / 4);
 	Q.ca_year = Q.year;
