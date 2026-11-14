@@ -18,43 +18,39 @@ on-display: {!
 // Soviet graph
 // do the graphs
 var data = [
-{"id": "anarchist",
- "legend": "Anarchist",
- "name": "Anarchist",
- "seats": Math.round(Q.anarchist_soviet*10)},
 {"id": "b",
  "legend": "Bolshevik",
  "name": "Bolshevik",
  "seats": Math.round(Q.b_soviet*10)},
 ];
-if (Q.internationalist_soviet_votes_dec) {
+if (Q.left_m_soviet_votes_dec) {
     data.push({
             "id": "internationalist",
             "legend": "Menshevik-Internationalist",
             "name": "Menshevik-Internationalist",
-            "seats": Math.round(Q.internationalist_soviet_votes_dec*10)
+            "seats": Math.round(Q.left_m_soviet_votes_dec*10)
             });
 }
 data.push({
     "id": "m",
     "legend": "Menshevik",
     "name": "Menshevik",
-    "seats": Math.round(Q.m_soviet*10)
+    "seats": Math.round(((Q.m_soviet || 0) + (Q.sdi_soviet || 0))*10)
 });
-if (Q.defensist_soviet_votes_dec) {
+if (Q.right_m_soviet_votes_dec) {
     data.push({
             "id": "defensist",
             "legend": "Menshevik-Defensist",
             "name": "Menshevik-Defensist",
-            "seats": Math.round(Q.defensist_soviet_votes_dec*10)
+            "seats": Math.round(Q.right_m_soviet_votes_dec*10)
             });
 }
-if (Q.left_sr_soviet_votes_dec) {
+if (Q.lsr_soviet_votes_dec) {
     data.push({
             "id": "left_sr",
             "legend": "Left-SR",
             "name": "Left-SR",
-            "seats": Math.round(Q.left_sr_soviet_votes_dec*10)
+            "seats": Math.round(Q.lsr_soviet_votes_dec*10)
             });
 }
 data.push({
@@ -75,7 +71,7 @@ data.push({
     "id": "other",
     "legend": "Others",
     "name": "Others",
-    "seats": Math.round(Q.other_soviet*10)
+    "seats": Math.round(((Q.other_soviet || 0) + (Q.anarchist_soviet || 0) + (Q.maximalist_soviet || 0))*10)
 });
 if (window && d3) {
     var width = 500;
@@ -269,7 +265,7 @@ if (Q.soviet_support_records && Q.soviet_support_records.length >= 1) {
     };
     var groups = [
         { id: 'b', label: 'Bolsheviks', color: 'var(--b)', keys: ['b'] },
-        { id: 'm', label: 'Mensheviks', color: 'var(--m)', keys: ['m', 'left_m', 'right_m', 'internationalist', 'defensist'] },
+        { id: 'm', label: 'Mensheviks', color: 'var(--m)', keys: ['m', 'sdi', 'left_m', 'right_m', 'internationalist', 'defensist'] },
         { id: 'sr', label: 'SRs', color: 'var(--sr)', keys: ['sr', 'right_sr'] },
         { id: 'lsr', label: 'Left-SRs', color: 'var(--lsr)', keys: ['lsr', 'left_sr'] }
     ];
