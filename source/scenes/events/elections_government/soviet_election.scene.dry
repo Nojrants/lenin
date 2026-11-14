@@ -1,7 +1,7 @@
 title: All-Russian Congress of Soviets
 subtitle: The election results are in...
 view-if: soviet_congress_timer = 0 and ca_held = 1 and ca_progress != 1
-go-to: election_algorithm.all_russian_soviet
+go-to: election_algorithm.all_russian_soviet_overhaul
 set-jump: soviet_election.post_election
 new-page: true
 tags: event
