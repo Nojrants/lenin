@@ -35,12 +35,12 @@ on-arrival:{!
 	Q.ca_week = Q.week + (Q.constituent_assembly_timer % 4);
 	Q.ca_month = Q.month + (Q.constituent_assembly_timer / 4);
 	Q.ca_year = Q.year;
-	if (Q.ca_month >= 13) {
-    Q.ca_month = Q.ca_month % 12;
-    Q.ca_year = Q.year + 1;
 	Q.instability += 1;
 	Q.democraticity -= 1;
 	Q.rescheduled_ca = 1; 
+	if (Q.ca_month >= 13) {
+	    Q.ca_month = Q.ca_month % 12;
+	    Q.ca_year = Q.year + 1;
 	}
 !}
 
