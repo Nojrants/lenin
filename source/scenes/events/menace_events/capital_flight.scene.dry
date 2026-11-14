@@ -6,6 +6,7 @@ on-arrival: {!
   Q.capital_flight_timer += 24;
   window.facClose('large_private', 0.15);
   window.facClose('medium_private', 0.05);
+  Q.bourgeois_specialists *= 0.92;
   Q.coup_progress += 2;
   Q.elites_wealth *= 0.95;
   Q.instability += 1;
