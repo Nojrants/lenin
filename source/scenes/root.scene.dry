@@ -342,10 +342,10 @@ Q.cooperative_credits = 0;
 Q.agriculture_research = 0; 
 
 
-Q.sovnarkom_expend = 0.25;
+Q.sovnarkom_expend = 0.1;
 Q.internal_expend = 0.75;
 Q.foreignaffairs_expend = 0.5;
-Q.military_expend = 12.5;
+Q.military_expend = 14.5;
 Q.enlightenment_expend = 0.25 + Q.school_funding + Q.lower_school_funding;
 Q.railways_expend = 1.75;
 Q.trade_expend = 0.5;
