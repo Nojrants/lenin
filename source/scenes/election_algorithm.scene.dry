@@ -467,7 +467,13 @@ go-to: jumpScene
 @railways
 title: Railways
 on-arrival: {!
-var rail_classes = ["workers"];
+// Everything here works on a private copy of the workers' party support.
+// The real Q.workers_* values (and their _normalized/_display/_support
+// values) are only read, never written, so the soviet charts are unaffected.
+var rail_workers = {};
+for (var party of Q.parties) {
+    if (party != "none") { rail_workers[party] = Q['workers_' + party]; }
+}
 
 // Campaign bonuses to workers' party support
 var campaign_bonus = {
@@ -486,96 +492,44 @@ var campaign_bonus = {
 
 var campaign_level = Q.campaign_against_vikzhel;
 
-// the campaign bonuses only apply to this election: remember the real
-// worker support so it can be restored afterwards
-var saved_workers = {};
-for (var party of Q.parties) {
-    if (party != "none") { saved_workers[party] = Q['workers_' + party]; }
-}
-
 if (campaign_level >= 0 && campaign_level <= 2) {
-    for (var party of Q.parties) {
-        if (party == "none" || campaign_bonus[party] == null) {
+    for (var party in rail_workers) {
+        if (campaign_bonus[party] == null) {
             continue;
         }
-
-        Q['workers_' + party] += campaign_bonus[party][campaign_level];
+        rail_workers[party] += campaign_bonus[party][campaign_level];
     }
 }
 
-// Normalize each class's party support
-for (var c of rail_classes) {
-    var class_votes = 0;
-
-    for (var party of Q.parties) {
-        if (party == "none") {
-            continue;
-        }
-
-        if (Q[c + '_' + party] == null || Q[c + '_' + party] < 0) {
-            Q[c + '_' + party] = 1;
-        }
-
-        class_votes += Q[c + '_' + party];
+// Normalize the copied workers' support
+var rail_class_votes = 0;
+for (var party in rail_workers) {
+    if (rail_workers[party] == null || rail_workers[party] < 0) {
+        rail_workers[party] = 1;
     }
-
-    if (class_votes <= 0) {
-        class_votes = 1;
-    }
-
-    for (var party of Q.parties) {
-        Q[c + '_' + party + '_normalized'] =
-            100 * Q[c + '_' + party] / class_votes;
-
-        Q[c + '_' + party + '_display'] =
-            Math.round(100 * Q[c + '_' + party] / class_votes);
-    }
+    rail_class_votes += rail_workers[party];
+}
+if (rail_class_votes <= 0) {
+    rail_class_votes = 1;
 }
 
 // Calculate support for each party
+var rail_support = {};
 var total_support = 0;
-
-for (var party of Q.parties) {
-    if (party == "none") {
-        continue;
-    }
-
-    var party_support = 0;
-
-    for (var c of rail_classes) {
-        party_support += Q[c] * Q[c + '_' + party + '_normalized'];
-    }
-
-    Q[party + '_support'] = Math.max(0, party_support);
-    total_support += Q[party + '_support'];
+for (var party in rail_workers) {
+    rail_support[party] = Math.max(0, Q.workers * 100 * rail_workers[party] / rail_class_votes);
+    total_support += rail_support[party];
 }
-
-// Normalize party support and calculate vote shares
 if (total_support <= 0) {
     total_support = 1;
 }
 
-for (var party of Q.parties) {
-    if (party == "none") {
-        continue;
-    }
-
-    Q[party + '_rail_normalized'] =
-        Q[party + '_support'] / total_support;
-
-    Q[party + '_rail_votes_dec'] =
-        Math.round(Q[party + '_rail_normalized'] * 1000) / 10;
-
-    Q[party + '_rail_votes'] =
-        Math.round(Q[party + '_rail_normalized'] * 100);
-
-    Q[party + '_rail_votes_disp'] =
-        Q[party + '_rail_votes_dec'].toFixed(1);
-}
-
-// undo the temporary campaign bonuses
-for (var party in saved_workers) {
-    Q['workers_' + party] = saved_workers[party];
+// Normalize party support and calculate vote shares
+for (var party in rail_workers) {
+    Q[party + '_rail_normalized'] = rail_support[party] / total_support;
+    Q[party + '_rail_votes_dec'] = Math.round(Q[party + '_rail_normalized'] * 1000) / 10;
+    Q[party + '_rail_votes'] = Math.round(Q[party + '_rail_normalized'] * 100);
+    Q[party + '_rail_votes_disp'] = Q[party + '_rail_votes_dec'].toFixed(1);
 }
 !}
 go-to: jumpScene
