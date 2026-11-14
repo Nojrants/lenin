@@ -4,8 +4,8 @@ new-page: true
 view-if: capital_flight_progress >= 10 and capital_flight_timer = 0 and trade_marketization >= 25
 on-arrival: {!
   Q.capital_flight_timer += 24;
-  window.facClose('large', 0.15);
-  window.facClose('medium', 0.05);
+  window.facClose('large_private', 0.15);
+  window.facClose('medium_private', 0.05);
   Q.coup_progress += 2;
   Q.elites_wealth *= 0.95;
   Q.instability += 1;
@@ -76,7 +76,7 @@ subtitle: Use the city militias and loyal troops if we must. This will be danger
 choose-if: loyal_troops_strength + city_militia_strength > workers_militia_strength
 unavailable-subtitle: The city militias are not strong enough.
 on-arrival: {!
-  window.facReopen('large', 0.7);
+  window.facReopen('private', 0.7);
   Q.capital_flight_progress -= 10;
   Q.workers_unrest -= 10*Q.unrest_modifier;
   Q.labor_unrest_timer += 4;
@@ -99,7 +99,7 @@ title: Commit to budget austerity.
 choose-if: government_functions > 10
 unavailable-subtitle: There is nothing left to cut.
 on-arrival: {!
-  window.facReopen('large', 0.4);
+  window.facReopen('private', 0.4);
   Q.capital_flight_progress -= 5;
   for (var dept of ['foreignaffairs', 'military', 'enlightenment', 'internal', 'railways', 'trade', 'finance', 'justice', 'labor', 'agriculture', 'foodsupply', 'nationalities']) {
       Q[dept + '_expend'] -= 0.25;
@@ -123,7 +123,7 @@ subtitle: This will be dangerous.
 choose-if: loyal_troops_strength + city_militia_strength > workers_militia_strength and government_functions > 10
 unavailable-subtitle: [? if loyal_troops_strength + city_militia_strength <= workers_militia_strength : The city militias are not strong enough. ?][? if government_functions <= 10 : There is nothing left to cut. ?]
 on-arrival: {!
-  window.facReopen('large', 1);
+  window.facReopen('private', 1);
   Q.capital_flight_progress -= 10;
   Q.workers_unrest -= 10*Q.unrest_modifier;
   Q.labor_unrest_timer += 4;
