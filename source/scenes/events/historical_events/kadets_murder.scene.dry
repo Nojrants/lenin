@@ -32,7 +32,7 @@ on-arrival: {!
 
 Although an effort is made, the sailors resist handing over any suspects, making it difficult to proceed with the investigation. The other parties still accuse us of not doing enough to restrain the violence. 
 
-@action
+@ignore
 title: Ignore it and let the controversy die down. 
 unavailable-subtitle: [?if justice_minister != "Vacant" : Justice Commissar [+ justice_minister +] is insisting that action be taken! ?]
 choose-if: justice_minister_party != "Bolshevik" and justice_minister_party != ""
