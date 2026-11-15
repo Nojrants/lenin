@@ -187,6 +187,9 @@ Q.imperial_police = 0;
 Q.cheka_founded = 0;
 Q.banks_seized = 0; 
 Q.repudiation = 0;
+Q.safes_seized = 0;
+Q.currency_issued = 0;
+Q.contributions_timer = 0;
 Q.admin_founded = 0;
 Q.littlesov_founded = 0;
 Q.officialdom = 0;
@@ -202,7 +205,7 @@ Q.safety_standards = 1;
 Q.migration_modifier = 0; 
 Q.coalition_tension = 0;
 Q.campaign_against_vikzhel = 0; 
-Q.railway_congress_timer = 999; 
+Q.railway_congress_timer = 12; 
 
 
 Q.elites = 2;
@@ -1539,7 +1542,7 @@ Q.timers = [//m_party
             'internal_security', 'transport_policy',
             'industrial_policy', 'civil_rights',
             'shuffle_cabinet', 'social_policy',
-            'education_policy', 'economic_policy', 'coalition_affairs', 'capital_flight',
+            'education_policy', 'economic_policy', 'coalition_affairs', 'capital_flight', 'contributions',
             'womens_rights', 'offensive',
             'foreignaffairs_corruption', 'finance_corruption', 'military_corruption',
             'internal_corruption', 'enlightenment_corruption', 'internal_corruption',
@@ -1584,7 +1587,6 @@ Q.timers = [//m_party
             'railway_congress',
             'german_revolution',
             'ukrainian_congress',
-			'lenin_advisor', 'kamenev_advisor', 'sverdlov_advisor'
             ];
 Q.advisor_action_timer = 0;
 Q.labor_unrest_timer = 5;
