@@ -795,6 +795,7 @@ on-arrival: {!
   var creditors = { Britain: 'uk', France: 'france', USA: 'usa', Japan: 'japan', Italy: 'italy' };
   if (creditors[loan.lender]) Q[creditors[loan.lender] + '_relation'] += 2;
   Q.instability = Math.max(0, Q.instability - 0.5);
+  Q.capital_flight_progress -= loan.lender == "Russia" ? 0.25 : 0.1;
 !}
 
 @repay_loan_2
@@ -812,6 +813,7 @@ on-arrival: {!
   var creditors = { Britain: 'uk', France: 'france', USA: 'usa', Japan: 'japan', Italy: 'italy' };
   if (creditors[loan.lender]) Q[creditors[loan.lender] + '_relation'] += 2;
   Q.instability = Math.max(0, Q.instability - 0.5);
+  Q.capital_flight_progress -= loan.lender == "Russia" ? 0.25 : 0.1;
 !}
 
 @repay_loan_3
@@ -829,6 +831,7 @@ on-arrival: {!
   var creditors = { Britain: 'uk', France: 'france', USA: 'usa', Japan: 'japan', Italy: 'italy' };
   if (creditors[loan.lender]) Q[creditors[loan.lender] + '_relation'] += 2;
   Q.instability = Math.max(0, Q.instability - 0.5);
+  Q.capital_flight_progress -= loan.lender == "Russia" ? 0.25 : 0.1;
 !}
 
 @repay_loan_4
@@ -846,6 +849,7 @@ on-arrival: {!
   var creditors = { Britain: 'uk', France: 'france', USA: 'usa', Japan: 'japan', Italy: 'italy' };
   if (creditors[loan.lender]) Q[creditors[loan.lender] + '_relation'] += 2;
   Q.instability = Math.max(0, Q.instability - 0.5);
+  Q.capital_flight_progress -= loan.lender == "Russia" ? 0.25 : 0.1;
 !}
 
 @repay_loan_5
@@ -863,6 +867,7 @@ on-arrival: {!
   var creditors = { Britain: 'uk', France: 'france', USA: 'usa', Japan: 'japan', Italy: 'italy' };
   if (creditors[loan.lender]) Q[creditors[loan.lender] + '_relation'] += 2;
   Q.instability = Math.max(0, Q.instability - 0.5);
+  Q.capital_flight_progress -= loan.lender == "Russia" ? 0.25 : 0.1;
 !}
 
 @repay_loan_6
@@ -880,6 +885,7 @@ on-arrival: {!
   var creditors = { Britain: 'uk', France: 'france', USA: 'usa', Japan: 'japan', Italy: 'italy' };
   if (creditors[loan.lender]) Q[creditors[loan.lender] + '_relation'] += 2;
   Q.instability = Math.max(0, Q.instability - 0.5);
+  Q.capital_flight_progress -= loan.lender == "Russia" ? 0.25 : 0.1;
 !}
 
 @repay_loan_7
@@ -897,6 +903,7 @@ on-arrival: {!
   var creditors = { Britain: 'uk', France: 'france', USA: 'usa', Japan: 'japan', Italy: 'italy' };
   if (creditors[loan.lender]) Q[creditors[loan.lender] + '_relation'] += 2;
   Q.instability = Math.max(0, Q.instability - 0.5);
+  Q.capital_flight_progress -= loan.lender == "Russia" ? 0.25 : 0.1;
 !}
 
 @repay_loan_8
@@ -914,6 +921,7 @@ on-arrival: {!
   var creditors = { Britain: 'uk', France: 'france', USA: 'usa', Japan: 'japan', Italy: 'italy' };
   if (creditors[loan.lender]) Q[creditors[loan.lender] + '_relation'] += 2;
   Q.instability = Math.max(0, Q.instability - 0.5);
+  Q.capital_flight_progress -= loan.lender == "Russia" ? 0.25 : 0.1;
 !}
 
 @repay_loan_9
@@ -931,6 +939,7 @@ on-arrival: {!
   var creditors = { Britain: 'uk', France: 'france', USA: 'usa', Japan: 'japan', Italy: 'italy' };
   if (creditors[loan.lender]) Q[creditors[loan.lender] + '_relation'] += 2;
   Q.instability = Math.max(0, Q.instability - 0.5);
+  Q.capital_flight_progress -= loan.lender == "Russia" ? 0.25 : 0.1;
 !}
 
 @repay_loan_10
@@ -948,6 +957,7 @@ on-arrival: {!
   var creditors = { Britain: 'uk', France: 'france', USA: 'usa', Japan: 'japan', Italy: 'italy' };
   if (creditors[loan.lender]) Q[creditors[loan.lender] + '_relation'] += 2;
   Q.instability = Math.max(0, Q.instability - 0.5);
+  Q.capital_flight_progress -= loan.lender == "Russia" ? 0.25 : 0.1;
 !}
 
 @repay_loan_11
@@ -965,6 +975,7 @@ on-arrival: {!
   var creditors = { Britain: 'uk', France: 'france', USA: 'usa', Japan: 'japan', Italy: 'italy' };
   if (creditors[loan.lender]) Q[creditors[loan.lender] + '_relation'] += 2;
   Q.instability = Math.max(0, Q.instability - 0.5);
+  Q.capital_flight_progress -= loan.lender == "Russia" ? 0.25 : 0.1;
 !}
 
 @repay_loan_12
@@ -982,6 +993,7 @@ on-arrival: {!
   var creditors = { Britain: 'uk', France: 'france', USA: 'usa', Japan: 'japan', Italy: 'italy' };
   if (creditors[loan.lender]) Q[creditors[loan.lender] + '_relation'] += 2;
   Q.instability = Math.max(0, Q.instability - 0.5);
+  Q.capital_flight_progress -= loan.lender == "Russia" ? 0.25 : 0.1;
 !}
 
 @repay_loan_13
@@ -999,6 +1011,7 @@ on-arrival: {!
   var creditors = { Britain: 'uk', France: 'france', USA: 'usa', Japan: 'japan', Italy: 'italy' };
   if (creditors[loan.lender]) Q[creditors[loan.lender] + '_relation'] += 2;
   Q.instability = Math.max(0, Q.instability - 0.5);
+  Q.capital_flight_progress -= loan.lender == "Russia" ? 0.25 : 0.1;
 !}
 
 @repay_loan_14
@@ -1016,6 +1029,7 @@ on-arrival: {!
   var creditors = { Britain: 'uk', France: 'france', USA: 'usa', Japan: 'japan', Italy: 'italy' };
   if (creditors[loan.lender]) Q[creditors[loan.lender] + '_relation'] += 2;
   Q.instability = Math.max(0, Q.instability - 0.5);
+  Q.capital_flight_progress -= loan.lender == "Russia" ? 0.25 : 0.1;
 !}
 
 @repay_loan_15
@@ -1033,6 +1047,7 @@ on-arrival: {!
   var creditors = { Britain: 'uk', France: 'france', USA: 'usa', Japan: 'japan', Italy: 'italy' };
   if (creditors[loan.lender]) Q[creditors[loan.lender] + '_relation'] += 2;
   Q.instability = Math.max(0, Q.instability - 0.5);
+  Q.capital_flight_progress -= loan.lender == "Russia" ? 0.25 : 0.1;
 !}
 
 @repay_loan_16
@@ -1050,6 +1065,7 @@ on-arrival: {!
   var creditors = { Britain: 'uk', France: 'france', USA: 'usa', Japan: 'japan', Italy: 'italy' };
   if (creditors[loan.lender]) Q[creditors[loan.lender] + '_relation'] += 2;
   Q.instability = Math.max(0, Q.instability - 0.5);
+  Q.capital_flight_progress -= loan.lender == "Russia" ? 0.25 : 0.1;
 !}
 
 @levy_contributions
