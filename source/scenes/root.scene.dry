@@ -1584,6 +1584,7 @@ Q.timers = [//m_party
             'railway_congress',
             'german_revolution',
             'ukrainian_congress',
+			'lenin_advisor', 'kamenev_advisor', 'sverdlov_advisor'
             ];
 Q.advisor_action_timer = 0;
 Q.labor_unrest_timer = 5;
