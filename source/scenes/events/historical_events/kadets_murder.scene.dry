@@ -13,7 +13,7 @@ on-arrival: {!
 
 Since the Constituent Assembly election, we've arrested a number of leading <span style="color: var(--k); font-weight: bold;">Kadets</span> in the capital. Earlier this week, two of the arrestees – Andrei Shingarev and Fedor Kokoshkin – were transfered from the Peter and Paul Fortress to the Meriinsky Prison Hospital due to worsening health. Reportedly, in the late hours of 6 January, a mob of sailors and red guards stormed the hospital and strangled, stabbed, and shot the two men to death in their beds. 
 
-The other parties are absolutely furious, and blame us for the death of these two deputies. According to the <span style="color: var(--k); font-weight: bold;">Kadets</span>, the persecution of their party as "enemies of the people" has invited and implicitly sanctioned such acts of brutality. 
+The other parties are absolutely furious, and blame us for the death of these two deputies. According to the <span style="color: var(--k); font-weight: bold;">Kadets</span>, the persecution of their party as "enemies of the people" has invited and implicitly sanctioned such acts of brutality. Meanwhile, our supporters among the sailors call the attacks an act of just retribution for years of oppression by the bourgeois ministers.
 
 - @action
 - @ignore
@@ -41,4 +41,4 @@ on-arrival: {!
   Q.workers_unrest += 2; 
 !}
 
-The opposition press keeps the controversy alive in the press for some time, using it to rally support for the Constituent Assembly. 
+The opposition keeps the controversy alive in the press for some time, using it to rally support for the Constituent Assembly. 
