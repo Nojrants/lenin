@@ -7,11 +7,13 @@ new-page: true
 
 = Yakov Sverdlov
 
-Yakov Sverdlov is a Bolshevik revolutionary who had been exiled to Siberia.
+Yakov Sverdlov is a leading administrator of the party apparatus. 
 
 - @clear_agenda
 - @party_unity
 - @emergency_fundraising
+- @whip
+- @build_apparatus
 - @root: Return to main
 
 @clear_agenda
@@ -31,7 +33,7 @@ title: Party Unity
 subtitle: Reduce dissent across the party.
 choose-if: advisor_action_timer = 0
 unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] weeks before next advisor action. ?]
-on-arrival: advisor_action_timer = 4; leninist_dissent -= 5; center_dissent -= 10; moderate_dissent -= 10;
+on-arrival: advisor_action_timer = 4; leninist_dissent -= 5; moderate_dissent -= 10; leftcom_dissent -= 10; b_dissent -= 0.1; 
 
 We have enforced party discipline to reduce dissent across all factions.
 
@@ -43,3 +45,22 @@ unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +
 on-arrival: advisor_action_timer = 4; b_resources += b_dues
 
 We have gained +[+ b_dues +] resources.
+
+@whip
+title: Whip the Votes 
+subtitle: Enforce party discipline in the CEC and promote the Leninist line. 
+choose-if: advisor_action_timer = 0
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] weeks before next advisor action. ?]
+on-arrival: advisor_action_timer = 4; leninist_strength += 4; leftcom_strength -= 2; moderate_strength -= 4; b_strength += 0.5; workers_b += 1*(1-b_dissent);
+
+Through careful recruitment, monitoring, and cajoling of delegates, we're able to maintain a reliable fraction in the CEC. 
+
+@build_apparatus
+title: Build the Party Apparatus
+subtitle: Strengthen our party infrastructure, launch recruitment efforts, and foster greater ties to the provinces.  
+choose-if: advisor_action_timer = 0
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] weeks before next advisor action. ?]
+on-arrival: advisor_action_timer = 4; leninist_strength += 2; b_strength += 3; workers_b += 0.5*(1-b_dissent); peasants_b += 2*(1-b_dissent); peasants_unrest -= 5; apparatchiki_strength += 2; provincials_unrest -= 1; provincials_strength += 1; 
+
+The party organizations in the countryside are strengthened, allowing us to attract new talent and better disseminate party directives. 
+
