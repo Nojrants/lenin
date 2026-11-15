@@ -11,9 +11,9 @@ on-arrival: {!
 
 = Murder of Shingarev & Kokoshkin
 
-Since the Constituent Assembly election, we've arrested a number of leading <span style="color: var(--k); font-weight: bold;">Kadets</span> in the capital. Earlier this week, two of the arrestees – Andrei Shingarev and Fedor Kokoshkin – were transfered from the Peter and Paul Fortress to the Meriinsky Prison Hospital due to worsening health. Reportedly, in the late hours of 6 January, a mob of sailors and red guards stormed the hospital and strangled, stabbed, and shot the two men to death in their beds. 
+Since the Constituent Assembly election, we've arrested a number of leading <span style="color: var(--k); font-weight: bold;">Kadets</span> in the capital. Earlier this week, two of the arrestees – Andrei Shingarev and Fedor Kokoshkin – were transfered from the Peter and Paul Fortress to the Mariinsky Prison Hospital due to worsening health. Reportedly, in the late hours of 6/7 January, a mob of sailors and red guards stormed the hospital and strangled, stabbed, and shot the two men to death in their beds. 
 
-The other parties are absolutely furious, and blame us for the death of these two deputies. According to the <span style="color: var(--k); font-weight: bold;">Kadets</span>, the persecution of their party as "enemies of the people" has invited and implicitly sanctioned such acts of brutality. Meanwhile, our supporters among the sailors call the attacks an act of just retribution for years of oppression by the bourgeois ministers.
+The other parties are absolutely furious, and blame us for the death of these two deputies. According to the <span style="color: var(--k); font-weight: bold;">Kadets</span>, the persecution of their party as "enemies of the people" has only invited and implicitly sanctioned such acts of brutality. Meanwhile, our supporters among the sailors call the attacks an act of just retribution for years of oppression by the bourgeois ministers.
 
 - @action
 - @ignore
@@ -35,7 +35,7 @@ Although an effort is made, the sailors resist handing over any suspects, making
 @ignore
 title: Ignore it and let the controversy die down. 
 unavailable-subtitle: [?if justice_minister != "Vacant" : Justice Commissar [+ justice_minister +] is insisting that action be taken! ?][?if justice_minister == "Vacant" : We lack leadership over the Justice Commissariat. ?]
-choose-if: justice_minister_party != "Bolshevik" and justice_minister_party != ""
+choose-if: justice_minister_party = "Bolshevik"
 on-arrival: {!
   Q.k_strength += 2; Q.right_m_strength += 1; Q.right_sr_strength += 1; 
   Q.workers_unrest += 2; 
