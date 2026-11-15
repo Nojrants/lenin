@@ -560,20 +560,21 @@ on-arrival: {!
   Q.redeem_amount = Math.round(10 * Math.min(5, Q.bonds))/10;
   Q.redeem_price = Math.min(1, Math.max(0.3, Math.pow(5 / Math.max(1, Q.bond_rate), 0.75)));
   Q.redeem_cost = Math.round(10 * Q.redeem_amount * Q.redeem_price)/10;
-  Q.contribution_yield = Math.round(10 * (Q.elites_wealth * 0.04 + Q.middle_wealth * 0.03))/10;
+  var diminishing = 1 / (1 + 0.1 * (Q.contributions_levied || 0));
+  var waste = Math.min(0.9, 0.15 + 0.5 * Q.finance_corruption);
+  var elites_rate = 0.12 * Math.pow(Math.min(1, Math.max(0, Q.elites_wealth) / 50), 1.25);
+  var middle_rate = 0.06 * Math.pow(Math.min(1, Math.max(0, Q.middle_wealth) / 30), 1.25);
+  Q.contribution_elites = Math.round(100 * Q.elites_wealth * elites_rate * diminishing)/100;
+  Q.contribution_middle = Math.round(100 * Q.middle_wealth * middle_rate * diminishing)/100;
+  Q.contribution_yield = Math.round(10 * (Q.contribution_elites + Q.contribution_middle) * (1 - waste))/10;
 
-  var costly = null;
   var foreign_loans = 0;
   var domestic_loans = 0;
   for (var loan of Q.loans) {
-      if (!costly || loan.rate > costly.rate) costly = loan;
       if (loan.lender == "Russia") domestic_loans += loan.principal;
       else foreign_loans += loan.principal;
   }
   Q.loans_exist = Q.loans.length > 0;
-  Q.loan_repay_cost = costly ? Math.round(100 * costly.principal)/100 : 0;
-  Q.loan_repay_lender = costly ? costly.lender : "";
-  Q.loan_repay_rate = costly ? Math.round(100 * costly.rate) : 0;
 
   Q.bonds_display = Math.round(10 * Q.bonds)/10;
   Q.bond_rate_display = Math.round(100 * Q.bond_rate)/100;
@@ -695,7 +696,7 @@ on-arrival: {!
 
 @redeem_bonds
 title: Redeem government bonds.
-subtitle: -[+ redeem_cost +] resources – Retires [+ redeem_amount +] in bonds. Poor credit makes our own debt cheap to buy back. 
+subtitle: -[+ redeem_cost +] resources – Retires [+ redeem_amount +] bonds. Poor credit makes our own debt cheap to buy back. 
 choose-if: bonds > 0 and resources >= redeem_cost
 unavailable-subtitle: [? if bonds <= 0 : We have no bonds outstanding. ?][? if bonds > 0 : -[+ redeem_cost +] resources – We lack the resources. ?]
 on-arrival: {!
@@ -707,35 +708,299 @@ on-arrival: {!
 !}
 
 @pay_off_loans
-title: Repay our costliest outstanding loan.
-subtitle: -[+ loan_repay_cost +] resources – Owed to [+ loan_repay_lender +] at [+ loan_repay_rate +]% interest. 
-choose-if: loans_exist and resources >= loan_repay_cost
-unavailable-subtitle: [? if not loans_exist : We have no loans to repay. ?][? if loans_exist : -[+ loan_repay_cost +] resources – We lack the resources. ?]
+title: Pay off outstanding loans...
+choose-if: loans_exist
+unavailable-subtitle: We have no loans to repay. 
+new-page: true
 on-arrival: {!
-  var costly = null;
-  for (var loan of Q.loans) { if (!costly || loan.rate > costly.rate) costly = loan; }
-  if (costly) {
-      Q.resources -= costly.principal;
-      Q.loans.splice(Q.loans.indexOf(costly), 1);
-      var creditors = { Britain: 'uk', France: 'france', USA: 'usa', Japan: 'japan', Italy: 'italy' };
-      if (creditors[costly.lender]) Q[creditors[costly.lender] + '_relation'] += 2;
+  Q.loans.sort(function(a, b) { return b.rate - a.rate; });
+  for (var slot = 1; slot <= 16; slot++) {
+      var loan = Q.loans[slot - 1];
+      Q['loan_' + slot + '_exists'] = loan ? 1 : 0;
+      Q['loan_' + slot + '_lender'] = loan ? loan.lender : "";
+      Q['loan_' + slot + '_rate'] = loan ? Math.round(1000 * loan.rate)/10 : 0;
+      Q['loan_' + slot + '_cost'] = loan ? Math.round(100 * loan.principal)/100 : 0;
   }
   Q.loans_exist = Q.loans.length > 0;
+  Q.resources_display = Math.round(100 * Q.resources)/100;
+!}
+
+= Outstanding Loans
+
+[? if loans_exist : We have [+ resources_display +] resources on hand. ?][? if not loans_exist : We have no loans outstanding. ?]
+
+- #repay_loan
+- @banking: Cancel
+
+@repay_loan_1
+title: Owed to [+ loan_1_lender +] at [+ loan_1_rate +]% interest.
+subtitle: -[+ loan_1_cost +] resources
+view-if: loan_1_exists = 1
+choose-if: resources >= loan_1_cost
+unavailable-subtitle: -[+ loan_1_cost +] resources – We lack the resources. 
+tags: repay_loan
+go-to: pay_off_loans
+on-arrival: {!
+  var loan = Q.loans[0];
+  Q.resources -= loan.principal;
+  Q.loans.splice(0, 1);
+  var creditors = { Britain: 'uk', France: 'france', USA: 'usa', Japan: 'japan', Italy: 'italy' };
+  if (creditors[loan.lender]) Q[creditors[loan.lender] + '_relation'] += 2;
+!}
+
+@repay_loan_2
+title: Owed to [+ loan_2_lender +] at [+ loan_2_rate +]% interest.
+subtitle: -[+ loan_2_cost +] resources
+view-if: loan_2_exists = 1
+choose-if: resources >= loan_2_cost
+unavailable-subtitle: -[+ loan_2_cost +] resources – We lack the resources. 
+tags: repay_loan
+go-to: pay_off_loans
+on-arrival: {!
+  var loan = Q.loans[1];
+  Q.resources -= loan.principal;
+  Q.loans.splice(1, 1);
+  var creditors = { Britain: 'uk', France: 'france', USA: 'usa', Japan: 'japan', Italy: 'italy' };
+  if (creditors[loan.lender]) Q[creditors[loan.lender] + '_relation'] += 2;
+!}
+
+@repay_loan_3
+title: Owed to [+ loan_3_lender +] at [+ loan_3_rate +]% interest.
+subtitle: -[+ loan_3_cost +] resources
+view-if: loan_3_exists = 1
+choose-if: resources >= loan_3_cost
+unavailable-subtitle: -[+ loan_3_cost +] resources – We lack the resources. 
+tags: repay_loan
+go-to: pay_off_loans
+on-arrival: {!
+  var loan = Q.loans[2];
+  Q.resources -= loan.principal;
+  Q.loans.splice(2, 1);
+  var creditors = { Britain: 'uk', France: 'france', USA: 'usa', Japan: 'japan', Italy: 'italy' };
+  if (creditors[loan.lender]) Q[creditors[loan.lender] + '_relation'] += 2;
+!}
+
+@repay_loan_4
+title: Owed to [+ loan_4_lender +] at [+ loan_4_rate +]% interest.
+subtitle: -[+ loan_4_cost +] resources
+view-if: loan_4_exists = 1
+choose-if: resources >= loan_4_cost
+unavailable-subtitle: -[+ loan_4_cost +] resources – We lack the resources. 
+tags: repay_loan
+go-to: pay_off_loans
+on-arrival: {!
+  var loan = Q.loans[3];
+  Q.resources -= loan.principal;
+  Q.loans.splice(3, 1);
+  var creditors = { Britain: 'uk', France: 'france', USA: 'usa', Japan: 'japan', Italy: 'italy' };
+  if (creditors[loan.lender]) Q[creditors[loan.lender] + '_relation'] += 2;
+!}
+
+@repay_loan_5
+title: Owed to [+ loan_5_lender +] at [+ loan_5_rate +]% interest.
+subtitle: -[+ loan_5_cost +] resources
+view-if: loan_5_exists = 1
+choose-if: resources >= loan_5_cost
+unavailable-subtitle: -[+ loan_5_cost +] resources – We lack the resources. 
+tags: repay_loan
+go-to: pay_off_loans
+on-arrival: {!
+  var loan = Q.loans[4];
+  Q.resources -= loan.principal;
+  Q.loans.splice(4, 1);
+  var creditors = { Britain: 'uk', France: 'france', USA: 'usa', Japan: 'japan', Italy: 'italy' };
+  if (creditors[loan.lender]) Q[creditors[loan.lender] + '_relation'] += 2;
+!}
+
+@repay_loan_6
+title: Owed to [+ loan_6_lender +] at [+ loan_6_rate +]% interest.
+subtitle: -[+ loan_6_cost +] resources
+view-if: loan_6_exists = 1
+choose-if: resources >= loan_6_cost
+unavailable-subtitle: -[+ loan_6_cost +] resources – We lack the resources. 
+tags: repay_loan
+go-to: pay_off_loans
+on-arrival: {!
+  var loan = Q.loans[5];
+  Q.resources -= loan.principal;
+  Q.loans.splice(5, 1);
+  var creditors = { Britain: 'uk', France: 'france', USA: 'usa', Japan: 'japan', Italy: 'italy' };
+  if (creditors[loan.lender]) Q[creditors[loan.lender] + '_relation'] += 2;
+!}
+
+@repay_loan_7
+title: Owed to [+ loan_7_lender +] at [+ loan_7_rate +]% interest.
+subtitle: -[+ loan_7_cost +] resources
+view-if: loan_7_exists = 1
+choose-if: resources >= loan_7_cost
+unavailable-subtitle: -[+ loan_7_cost +] resources – We lack the resources. 
+tags: repay_loan
+go-to: pay_off_loans
+on-arrival: {!
+  var loan = Q.loans[6];
+  Q.resources -= loan.principal;
+  Q.loans.splice(6, 1);
+  var creditors = { Britain: 'uk', France: 'france', USA: 'usa', Japan: 'japan', Italy: 'italy' };
+  if (creditors[loan.lender]) Q[creditors[loan.lender] + '_relation'] += 2;
+!}
+
+@repay_loan_8
+title: Owed to [+ loan_8_lender +] at [+ loan_8_rate +]% interest.
+subtitle: -[+ loan_8_cost +] resources
+view-if: loan_8_exists = 1
+choose-if: resources >= loan_8_cost
+unavailable-subtitle: -[+ loan_8_cost +] resources – We lack the resources. 
+tags: repay_loan
+go-to: pay_off_loans
+on-arrival: {!
+  var loan = Q.loans[7];
+  Q.resources -= loan.principal;
+  Q.loans.splice(7, 1);
+  var creditors = { Britain: 'uk', France: 'france', USA: 'usa', Japan: 'japan', Italy: 'italy' };
+  if (creditors[loan.lender]) Q[creditors[loan.lender] + '_relation'] += 2;
+!}
+
+@repay_loan_9
+title: Owed to [+ loan_9_lender +] at [+ loan_9_rate +]% interest.
+subtitle: -[+ loan_9_cost +] resources
+view-if: loan_9_exists = 1
+choose-if: resources >= loan_9_cost
+unavailable-subtitle: -[+ loan_9_cost +] resources – We lack the resources. 
+tags: repay_loan
+go-to: pay_off_loans
+on-arrival: {!
+  var loan = Q.loans[8];
+  Q.resources -= loan.principal;
+  Q.loans.splice(8, 1);
+  var creditors = { Britain: 'uk', France: 'france', USA: 'usa', Japan: 'japan', Italy: 'italy' };
+  if (creditors[loan.lender]) Q[creditors[loan.lender] + '_relation'] += 2;
+!}
+
+@repay_loan_10
+title: Owed to [+ loan_10_lender +] at [+ loan_10_rate +]% interest.
+subtitle: -[+ loan_10_cost +] resources
+view-if: loan_10_exists = 1
+choose-if: resources >= loan_10_cost
+unavailable-subtitle: -[+ loan_10_cost +] resources – We lack the resources. 
+tags: repay_loan
+go-to: pay_off_loans
+on-arrival: {!
+  var loan = Q.loans[9];
+  Q.resources -= loan.principal;
+  Q.loans.splice(9, 1);
+  var creditors = { Britain: 'uk', France: 'france', USA: 'usa', Japan: 'japan', Italy: 'italy' };
+  if (creditors[loan.lender]) Q[creditors[loan.lender] + '_relation'] += 2;
+!}
+
+@repay_loan_11
+title: Owed to [+ loan_11_lender +] at [+ loan_11_rate +]% interest.
+subtitle: -[+ loan_11_cost +] resources
+view-if: loan_11_exists = 1
+choose-if: resources >= loan_11_cost
+unavailable-subtitle: -[+ loan_11_cost +] resources – We lack the resources. 
+tags: repay_loan
+go-to: pay_off_loans
+on-arrival: {!
+  var loan = Q.loans[10];
+  Q.resources -= loan.principal;
+  Q.loans.splice(10, 1);
+  var creditors = { Britain: 'uk', France: 'france', USA: 'usa', Japan: 'japan', Italy: 'italy' };
+  if (creditors[loan.lender]) Q[creditors[loan.lender] + '_relation'] += 2;
+!}
+
+@repay_loan_12
+title: Owed to [+ loan_12_lender +] at [+ loan_12_rate +]% interest.
+subtitle: -[+ loan_12_cost +] resources
+view-if: loan_12_exists = 1
+choose-if: resources >= loan_12_cost
+unavailable-subtitle: -[+ loan_12_cost +] resources – We lack the resources. 
+tags: repay_loan
+go-to: pay_off_loans
+on-arrival: {!
+  var loan = Q.loans[11];
+  Q.resources -= loan.principal;
+  Q.loans.splice(11, 1);
+  var creditors = { Britain: 'uk', France: 'france', USA: 'usa', Japan: 'japan', Italy: 'italy' };
+  if (creditors[loan.lender]) Q[creditors[loan.lender] + '_relation'] += 2;
+!}
+
+@repay_loan_13
+title: Owed to [+ loan_13_lender +] at [+ loan_13_rate +]% interest.
+subtitle: -[+ loan_13_cost +] resources
+view-if: loan_13_exists = 1
+choose-if: resources >= loan_13_cost
+unavailable-subtitle: -[+ loan_13_cost +] resources – We lack the resources. 
+tags: repay_loan
+go-to: pay_off_loans
+on-arrival: {!
+  var loan = Q.loans[12];
+  Q.resources -= loan.principal;
+  Q.loans.splice(12, 1);
+  var creditors = { Britain: 'uk', France: 'france', USA: 'usa', Japan: 'japan', Italy: 'italy' };
+  if (creditors[loan.lender]) Q[creditors[loan.lender] + '_relation'] += 2;
+!}
+
+@repay_loan_14
+title: Owed to [+ loan_14_lender +] at [+ loan_14_rate +]% interest.
+subtitle: -[+ loan_14_cost +] resources
+view-if: loan_14_exists = 1
+choose-if: resources >= loan_14_cost
+unavailable-subtitle: -[+ loan_14_cost +] resources – We lack the resources. 
+tags: repay_loan
+go-to: pay_off_loans
+on-arrival: {!
+  var loan = Q.loans[13];
+  Q.resources -= loan.principal;
+  Q.loans.splice(13, 1);
+  var creditors = { Britain: 'uk', France: 'france', USA: 'usa', Japan: 'japan', Italy: 'italy' };
+  if (creditors[loan.lender]) Q[creditors[loan.lender] + '_relation'] += 2;
+!}
+
+@repay_loan_15
+title: Owed to [+ loan_15_lender +] at [+ loan_15_rate +]% interest.
+subtitle: -[+ loan_15_cost +] resources
+view-if: loan_15_exists = 1
+choose-if: resources >= loan_15_cost
+unavailable-subtitle: -[+ loan_15_cost +] resources – We lack the resources. 
+tags: repay_loan
+go-to: pay_off_loans
+on-arrival: {!
+  var loan = Q.loans[14];
+  Q.resources -= loan.principal;
+  Q.loans.splice(14, 1);
+  var creditors = { Britain: 'uk', France: 'france', USA: 'usa', Japan: 'japan', Italy: 'italy' };
+  if (creditors[loan.lender]) Q[creditors[loan.lender] + '_relation'] += 2;
+!}
+
+@repay_loan_16
+title: Owed to [+ loan_16_lender +] at [+ loan_16_rate +]% interest.
+subtitle: -[+ loan_16_cost +] resources
+view-if: loan_16_exists = 1
+choose-if: resources >= loan_16_cost
+unavailable-subtitle: -[+ loan_16_cost +] resources – We lack the resources. 
+tags: repay_loan
+go-to: pay_off_loans
+on-arrival: {!
+  var loan = Q.loans[15];
+  Q.resources -= loan.principal;
+  Q.loans.splice(15, 1);
+  var creditors = { Britain: 'uk', France: 'france', USA: 'usa', Japan: 'japan', Italy: 'italy' };
+  if (creditors[loan.lender]) Q[creditors[loan.lender] + '_relation'] += 2;
 !}
 
 @levy_contributions
 title: Levy contributions on the propertied classes.
-subtitle: +[+ contribution_yield +] resources – Local soviets extract what they can from the bourgeoisie. 
-choose-if: contributions_timer = 0
-unavailable-subtitle: The last round of contributions is still being collected. 
+subtitle: +[+ contribution_yield +] resources – Each levy finds less than the last. 
+choose-if: contributions_timer = 0 and elites_wealth > 5
+unavailable-subtitle: [? if contributions_timer != 0 : The last round of contributions is still being collected. ?][? if contributions_timer = 0 : There is nothing left to expropriate. ?]
 on-arrival: {!
   Q.resources += Q.contribution_yield;
-  Q.elites_wealth -= Q.contribution_yield * 0.6;
-  Q.middle_wealth -= Q.contribution_yield * 0.4;
-  Q.elites_unrest += 8; Q.middle_unrest += 5;
-  Q.workers_unrest -= 1;
-  Q.instability += 1; Q.capital_flight_progress += 0.5;
+  Q.elites_wealth -= Q.contribution_elites;
+  Q.middle_wealth -= Q.contribution_middle;
+  Q.contributions_levied = (Q.contributions_levied || 0) + 1;
   Q.contributions_timer = 8;
+  Q.capital_flight_progress += 0.5; Q.monthly_inflation *= 0.95; Q.instability += 2;
+  Q.elites_unrest += 5; Q.middle_unrest += 2.5; Q.workers_unrest -= 5; Q.peasants_unrest -= 5; Q.kulaks_unrest -= 4; Q.intelligentsia_unrest += 3; 
 !}
 
 @seize_safe_deposits
