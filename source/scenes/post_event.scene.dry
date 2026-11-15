@@ -2032,6 +2032,16 @@ if (newWeek) {
     Q.deficit_inflation += deficit_step;
     Q.monthly_inflation = Math.max(0, Math.round((Q.monthly_inflation + deficit_step) * 100) / 100);
 }
+
+// inflation erodes debts fixed in roubles
+if (newWeek) {
+    var debt_erosion = 1 - 0.5 * (1 - Math.pow(1 + Math.max(0, Q.monthly_inflation) / 100, -12 / 52));
+    Q.bonds = Math.round(Q.bonds * debt_erosion * 100) / 100;
+    Q.bank_advances = Math.round(Q.bank_advances * debt_erosion * 100) / 100;
+    for (var loan of Q.loans) {
+        if (loan.lender == "Russia") loan.principal = Math.round(loan.principal * debt_erosion * 1000) / 1000;
+    }
+}
 if (Q.gdp_growth === undefined) Q.gdp_growth = 0;
 if (newWeek && Q.gdp_last > 0) {
     Q.gdp_growth = Math.round((Q.gdp_index / Q.gdp_last - 1) * 1000) / 10;
