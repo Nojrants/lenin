@@ -569,18 +569,30 @@ on-arrival: {!
   Q.contribution_yield = Math.round(10 * (Q.contribution_elites + Q.contribution_middle) * (1 - waste))/10;
 
   var foreign_loans = 0;
+  var foreign_interest = 0;
   var domestic_loans = 0;
+  var domestic_interest = 0;
   for (var loan of Q.loans) {
-      if (loan.lender == "Russia") domestic_loans += loan.principal;
-      else foreign_loans += loan.principal;
+      if (loan.lender == "Russia") { domestic_loans += loan.principal; domestic_interest += loan.principal * loan.rate; }
+      else { foreign_loans += loan.principal; foreign_interest += loan.principal * loan.rate; }
   }
   Q.loans_exist = Q.loans.length > 0;
 
-  Q.bonds_display = Math.round(10 * Q.bonds)/10;
-  Q.bond_rate_display = Math.round(100 * Q.bond_rate)/100;
-  Q.bank_advances_display = Math.round(10 * Q.bank_advances)/10;
-  Q.foreign_loans_display = Math.round(10 * foreign_loans)/10;
-  Q.domestic_loans_display = Math.round(10 * domestic_loans)/10;
+  var bond_interest = Q.bonds * (Q.bond_rate / 100);
+  var advance_interest = Q.bank_advances * 0.02;
+  var debt_total = Q.bank_advances + Q.bonds + foreign_loans + domestic_loans;
+  Q.interest = foreign_interest + domestic_interest + bond_interest + advance_interest;
+
+  Q.debt_advances_amount = Math.round(10 * Q.bank_advances)/10;
+  Q.debt_advances_rate = 2;
+  Q.debt_bonds_amount = Math.round(10 * Q.bonds)/10;
+  Q.debt_bonds_rate = Math.round(100 * Q.bond_rate)/100;
+  Q.debt_foreign_amount = Math.round(10 * foreign_loans)/10;
+  Q.debt_foreign_rate = foreign_loans > 0 ? Math.round(1000 * foreign_interest / foreign_loans)/10 : 0;
+  Q.debt_domestic_amount = Math.round(10 * domestic_loans)/10;
+  Q.debt_domestic_rate = domestic_loans > 0 ? Math.round(1000 * domestic_interest / domestic_loans)/10 : 0;
+  Q.debt_total_amount = Math.round(10 * debt_total)/10;
+  Q.debt_total_rate = debt_total > 0 ? Math.round(1000 * Q.interest / debt_total)/10 : 0;
   Q.interest_display = Math.round(100 * Q.interest)/100;
 !}
 
@@ -589,10 +601,12 @@ on-arrival: {!
 <table style="width:100%; border-collapse:collapse; margin:10px 0;">
 <tr>
 <td style="text-align:left; padding:5px 5px 5px 15px; border-bottom:1px solid rgba(128,128,128,0.25);">
-<span style="color: var(--bolshevik-color); font-weight:bold;">Government Bonds</span>
 </td>
 <td style="text-align:center; padding:5px; border-bottom:1px solid rgba(128,128,128,0.25);">
-[+ bonds_display +] at [+ bond_rate_display +]%
+<b>Amount</b>
+</td>
+<td style="text-align:center; padding:5px; border-bottom:1px solid rgba(128,128,128,0.25);">
+<b>Average Rate</b>
 </td>
 </tr>
 <tr>
@@ -600,7 +614,21 @@ on-arrival: {!
 <span style="color: var(--bolshevik-color); font-weight:bold;">State Bank Advances</span>
 </td>
 <td style="text-align:center; padding:5px; border-bottom:1px solid rgba(128,128,128,0.25);">
-[+ bank_advances_display +]
+[+ debt_advances_amount +]
+</td>
+<td style="text-align:center; padding:5px; border-bottom:1px solid rgba(128,128,128,0.25);">
+[? if debt_advances_amount > 0 : [+ debt_advances_rate +]% ?][? if debt_advances_amount <= 0 : – ?]
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding:5px 5px 5px 15px; border-bottom:1px solid rgba(128,128,128,0.25);">
+<span style="color: var(--bolshevik-color); font-weight:bold;">Government Bonds</span>
+</td>
+<td style="text-align:center; padding:5px; border-bottom:1px solid rgba(128,128,128,0.25);">
+[+ debt_bonds_amount +]
+</td>
+<td style="text-align:center; padding:5px; border-bottom:1px solid rgba(128,128,128,0.25);">
+[? if debt_bonds_amount > 0 : [+ debt_bonds_rate +]% ?][? if debt_bonds_amount <= 0 : – ?]
 </td>
 </tr>
 <tr>
@@ -608,7 +636,10 @@ on-arrival: {!
 <span style="color: var(--bolshevik-color); font-weight:bold;">Foreign Loans</span>
 </td>
 <td style="text-align:center; padding:5px; border-bottom:1px solid rgba(128,128,128,0.25);">
-[+ foreign_loans_display +]
+[+ debt_foreign_amount +]
+</td>
+<td style="text-align:center; padding:5px; border-bottom:1px solid rgba(128,128,128,0.25);">
+[? if debt_foreign_amount > 0 : [+ debt_foreign_rate +]% ?][? if debt_foreign_amount <= 0 : – ?]
 </td>
 </tr>
 <tr>
@@ -616,7 +647,21 @@ on-arrival: {!
 <span style="color: var(--bolshevik-color); font-weight:bold;">Domestic Loans</span>
 </td>
 <td style="text-align:center; padding:5px; border-bottom:2px solid rgba(128,128,128,0.6);">
-[+ domestic_loans_display +]
+[+ debt_domestic_amount +]
+</td>
+<td style="text-align:center; padding:5px; border-bottom:2px solid rgba(128,128,128,0.6);">
+[? if debt_domestic_amount > 0 : [+ debt_domestic_rate +]% ?][? if debt_domestic_amount <= 0 : – ?]
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding:5px 5px 5px 15px; border-bottom:1px solid rgba(128,128,128,0.25);">
+<span style="color: var(--bolshevik-color); font-weight:bold;">Total Debt</span>
+</td>
+<td style="text-align:center; padding:5px; border-bottom:1px solid rgba(128,128,128,0.25);">
+[+ debt_total_amount +]
+</td>
+<td style="text-align:center; padding:5px; border-bottom:1px solid rgba(128,128,128,0.25);">
+[? if debt_total_amount > 0 : [+ debt_total_rate +]% ?][? if debt_total_amount <= 0 : – ?]
 </td>
 </tr>
 <tr>
@@ -625,6 +670,9 @@ on-arrival: {!
 </td>
 <td style="text-align:center; padding:5px;">
 <span style="color: var(--level7-color);">-[+ interest_display +]</span>
+</td>
+<td style="text-align:center; padding:5px;">
+
 </td>
 </tr>
 </table>
@@ -696,7 +744,7 @@ on-arrival: {!
 
 @redeem_bonds
 title: Redeem government bonds.
-subtitle: -[+ redeem_cost +] resources – Retires [+ redeem_amount +] bonds. Poor credit makes our own debt cheap to buy back. 
+subtitle: -[+ redeem_cost +] resources – Retires [+ redeem_amount +] bonds.<br>Poor credit makes our own debt cheap to buy back. 
 choose-if: bonds > 0 and resources >= redeem_cost
 unavailable-subtitle: [? if bonds <= 0 : We have no bonds outstanding. ?][? if bonds > 0 : -[+ redeem_cost +] resources – We lack the resources. ?]
 on-arrival: {!
@@ -746,6 +794,7 @@ on-arrival: {!
   Q.loans.splice(0, 1);
   var creditors = { Britain: 'uk', France: 'france', USA: 'usa', Japan: 'japan', Italy: 'italy' };
   if (creditors[loan.lender]) Q[creditors[loan.lender] + '_relation'] += 2;
+  Q.instability = Math.max(0, Q.instability - 0.5);
 !}
 
 @repay_loan_2
@@ -762,6 +811,7 @@ on-arrival: {!
   Q.loans.splice(1, 1);
   var creditors = { Britain: 'uk', France: 'france', USA: 'usa', Japan: 'japan', Italy: 'italy' };
   if (creditors[loan.lender]) Q[creditors[loan.lender] + '_relation'] += 2;
+  Q.instability = Math.max(0, Q.instability - 0.5);
 !}
 
 @repay_loan_3
@@ -778,6 +828,7 @@ on-arrival: {!
   Q.loans.splice(2, 1);
   var creditors = { Britain: 'uk', France: 'france', USA: 'usa', Japan: 'japan', Italy: 'italy' };
   if (creditors[loan.lender]) Q[creditors[loan.lender] + '_relation'] += 2;
+  Q.instability = Math.max(0, Q.instability - 0.5);
 !}
 
 @repay_loan_4
@@ -794,6 +845,7 @@ on-arrival: {!
   Q.loans.splice(3, 1);
   var creditors = { Britain: 'uk', France: 'france', USA: 'usa', Japan: 'japan', Italy: 'italy' };
   if (creditors[loan.lender]) Q[creditors[loan.lender] + '_relation'] += 2;
+  Q.instability = Math.max(0, Q.instability - 0.5);
 !}
 
 @repay_loan_5
@@ -810,6 +862,7 @@ on-arrival: {!
   Q.loans.splice(4, 1);
   var creditors = { Britain: 'uk', France: 'france', USA: 'usa', Japan: 'japan', Italy: 'italy' };
   if (creditors[loan.lender]) Q[creditors[loan.lender] + '_relation'] += 2;
+  Q.instability = Math.max(0, Q.instability - 0.5);
 !}
 
 @repay_loan_6
@@ -826,6 +879,7 @@ on-arrival: {!
   Q.loans.splice(5, 1);
   var creditors = { Britain: 'uk', France: 'france', USA: 'usa', Japan: 'japan', Italy: 'italy' };
   if (creditors[loan.lender]) Q[creditors[loan.lender] + '_relation'] += 2;
+  Q.instability = Math.max(0, Q.instability - 0.5);
 !}
 
 @repay_loan_7
@@ -842,6 +896,7 @@ on-arrival: {!
   Q.loans.splice(6, 1);
   var creditors = { Britain: 'uk', France: 'france', USA: 'usa', Japan: 'japan', Italy: 'italy' };
   if (creditors[loan.lender]) Q[creditors[loan.lender] + '_relation'] += 2;
+  Q.instability = Math.max(0, Q.instability - 0.5);
 !}
 
 @repay_loan_8
@@ -858,6 +913,7 @@ on-arrival: {!
   Q.loans.splice(7, 1);
   var creditors = { Britain: 'uk', France: 'france', USA: 'usa', Japan: 'japan', Italy: 'italy' };
   if (creditors[loan.lender]) Q[creditors[loan.lender] + '_relation'] += 2;
+  Q.instability = Math.max(0, Q.instability - 0.5);
 !}
 
 @repay_loan_9
@@ -874,6 +930,7 @@ on-arrival: {!
   Q.loans.splice(8, 1);
   var creditors = { Britain: 'uk', France: 'france', USA: 'usa', Japan: 'japan', Italy: 'italy' };
   if (creditors[loan.lender]) Q[creditors[loan.lender] + '_relation'] += 2;
+  Q.instability = Math.max(0, Q.instability - 0.5);
 !}
 
 @repay_loan_10
@@ -890,6 +947,7 @@ on-arrival: {!
   Q.loans.splice(9, 1);
   var creditors = { Britain: 'uk', France: 'france', USA: 'usa', Japan: 'japan', Italy: 'italy' };
   if (creditors[loan.lender]) Q[creditors[loan.lender] + '_relation'] += 2;
+  Q.instability = Math.max(0, Q.instability - 0.5);
 !}
 
 @repay_loan_11
@@ -906,6 +964,7 @@ on-arrival: {!
   Q.loans.splice(10, 1);
   var creditors = { Britain: 'uk', France: 'france', USA: 'usa', Japan: 'japan', Italy: 'italy' };
   if (creditors[loan.lender]) Q[creditors[loan.lender] + '_relation'] += 2;
+  Q.instability = Math.max(0, Q.instability - 0.5);
 !}
 
 @repay_loan_12
@@ -922,6 +981,7 @@ on-arrival: {!
   Q.loans.splice(11, 1);
   var creditors = { Britain: 'uk', France: 'france', USA: 'usa', Japan: 'japan', Italy: 'italy' };
   if (creditors[loan.lender]) Q[creditors[loan.lender] + '_relation'] += 2;
+  Q.instability = Math.max(0, Q.instability - 0.5);
 !}
 
 @repay_loan_13
@@ -938,6 +998,7 @@ on-arrival: {!
   Q.loans.splice(12, 1);
   var creditors = { Britain: 'uk', France: 'france', USA: 'usa', Japan: 'japan', Italy: 'italy' };
   if (creditors[loan.lender]) Q[creditors[loan.lender] + '_relation'] += 2;
+  Q.instability = Math.max(0, Q.instability - 0.5);
 !}
 
 @repay_loan_14
@@ -954,6 +1015,7 @@ on-arrival: {!
   Q.loans.splice(13, 1);
   var creditors = { Britain: 'uk', France: 'france', USA: 'usa', Japan: 'japan', Italy: 'italy' };
   if (creditors[loan.lender]) Q[creditors[loan.lender] + '_relation'] += 2;
+  Q.instability = Math.max(0, Q.instability - 0.5);
 !}
 
 @repay_loan_15
@@ -970,6 +1032,7 @@ on-arrival: {!
   Q.loans.splice(14, 1);
   var creditors = { Britain: 'uk', France: 'france', USA: 'usa', Japan: 'japan', Italy: 'italy' };
   if (creditors[loan.lender]) Q[creditors[loan.lender] + '_relation'] += 2;
+  Q.instability = Math.max(0, Q.instability - 0.5);
 !}
 
 @repay_loan_16
@@ -986,6 +1049,7 @@ on-arrival: {!
   Q.loans.splice(15, 1);
   var creditors = { Britain: 'uk', France: 'france', USA: 'usa', Japan: 'japan', Italy: 'italy' };
   if (creditors[loan.lender]) Q[creditors[loan.lender] + '_relation'] += 2;
+  Q.instability = Math.max(0, Q.instability - 0.5);
 !}
 
 @levy_contributions
