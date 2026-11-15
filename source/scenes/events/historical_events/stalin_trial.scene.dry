@@ -16,7 +16,9 @@ With his honor and credibility on the line, Stalin has decided to sue Martov in 
 
 
 @reject
-title: Quietly order Stalin to drop the case. 
+title: Order Stalin to drop the matter and quietly barely the case. 
+unavailable-subtitle: We lack leadership over the Justice Commissariat. 
+choose-if: justice_minister_party != "Bolshevik" and justice_minister_party != ""
 on-arrival: {!
   Q.b_strength -= 2;
   Q.left_m_strength += 5; Q.m_strength += 2;
