@@ -1,0 +1,44 @@
+title: Murder of Shingarev & Kokoshkin
+new-page: true
+view-if: (ca_stance = 1 or kadets_legal = 1) and (year = 1918 and month = 1)
+max-visits: 1
+tags: event
+on-arrival: {!
+  Q.k_relation -= 10;
+  Q.democraticity -= 1;
+  Q.workers_b -= 0.5; Q.middle_b -= 1; 
+!}
+
+= Murder of Shingarev & Kokoshkin
+
+Since the Constituent Assembly election, we've arrested a number of leading <span style="color: var(--k); font-weight: bold;">Kadets</span> in the capital. Earlier this week, two of the arrestees – Andrei Shingarev and Fedor Kokoshkin – were transfered from the Peter and Paul Fortress to the Meriinsky Prison Hospital due to worsening health. Reportedly, in the late hours of 6 January, a mob of sailors and red guards stormed the hospital and strangled, stabbed, and shot the two men to death in their beds. 
+
+The other parties are absolutely furious, and blame us for the death of these two deputies. According to the <span style="color: var(--k); font-weight: bold;">Kadets</span>, the persecution of their party as "enemies of the people" has invited and implicitly sanctioned such acts of brutality. 
+
+- @action
+- @ignore
+
+@action
+title: Round up some sailors and allow an investigation into the matter. 
+on-arrival: {!
+  if (Q.justice_minister_party == "Left-SR") { Q.lsr_relation += 4; Q.lsr_strength += 1; }
+  if (Q.justice_minister_party == "SR") { Q.sr_relation += 4; Q.sr_strength += 1; }
+  if (Q.justice_minister_party == "Menshevik") { Q.m_relation += 4; Q.m_strength += 1; }
+  if (Q.justice_minister_party == "SD-Int") { Q.sdi_relation += 4; Q.sdi_strength += 1; }           
+  if (Q.justice_minister_party == "NS") { Q.ns_relation += 4; Q.popular_socialist_strength += 1; } 
+  Q.soldiers_b -= 0.5;
+  Q.democraticity += 0.5; 
+!}
+
+Although an effort is made, the sailors resist handing over any suspects, making it difficult to proceed with the investigation. The other parties still accuse us of not doing enough to restrain the violence. 
+
+@action
+title: Ignore it and let the controversy die down. 
+unavailable-subtitle: [?if justice_minister != "Vacant" : Justice Commissar [+ justice_minister +] is insisting that action be taken! ?]
+choose-if: justice_minister_party != "Bolshevik" and justice_minister_party != ""
+on-arrival: {!
+  Q.k_strength += 2; Q.right_m_strength += 1; Q.right_sr_strength += 1; 
+  Q.workers_unrest += 2; 
+!}
+
+The opposition press keeps the controversy alive in the press for some time, using it to rally support for the Constituent Assembly. 
