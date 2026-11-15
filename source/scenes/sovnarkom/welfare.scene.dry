@@ -12,8 +12,8 @@ on-arrival: {!
 
 = Welfare 
 
-- @welfare_programs
-- @welfare_administration
+- @administration
+- @funding
 - @welfare_null
 - @found_worker_insurance
 - @found_unemployment
@@ -37,31 +37,326 @@ go-to: welfare
 
   
 
-@welfare_programs
-title: CURRENT PROGRAMS
 
-@welfare_administration
+@administration
 title: ADMINISTRATION
+new-page: true
 
-- @welfare_improve_admin
-- @welfare_hire_staff
-- @welfare_corruption
+= Administration
+
+<table style="width:100%; border-collapse:collapse; margin:10px 0;">
+<tr>
+<td style="text-align:left; padding:5px 5px 5px 15px; border-bottom:1px solid rgba(128,128,128,0.25);">
+<span style="color: var(--bolshevik-color); font-weight:bold;">Spending</span>
+</td>
+<td style="text-align:center; padding:5px; border-bottom:1px solid rgba(128,128,128,0.25);">
+[+ welfare_expend +]
+</td>
+<tr>
+<td style="text-align:left; padding:5px 5px 5px 15px; border-bottom:1px solid rgba(128,128,128,0.25);">
+<span style="color: var(--bolshevik-color); font-weight:bold;">Efficacy</span>
+</td>
+<td style="text-align:center; padding:5px; border-bottom:1px solid rgba(128,128,128,0.25);">
+[+ efficacy_welfare : efficacy +]
+</td>
+<tr>
+<td style="text-align:left; padding:5px 5px 5px 15px; border-bottom:1px solid rgba(128,128,128,0.25);">
+<span style="color: var(--bolshevik-color); font-weight:bold;">Corruption</span>
+</td>
+<td style="text-align:center; padding:5px; border-bottom:1px solid rgba(128,128,128,0.25);">
+[+ welfare_corruption : corruption +]
+</td>
+</table>
+
+
+- @improve_admin
+- @hire_staff
+- @corruption
 - @welfare_return
 
-@welfare_improve_admin
-title: Streamline department
+@improve_admin
+title: Streamline the commissariat
 subtitle: Cut waste and inefficiencies, increase labor intensity
-on-arrival: efficacy_welfare += 0.1 if efficacy_welfare < 1; 
+choose-if: welfare_streamline_timer = 0
+unavailable-subtitle: There's nothing more to cut at the moment. 
+on-arrival: welfare_expend -= 0.25; efficacy_welfare += 0.1 if efficacy_welfare < 1; welfare_streamline_timer += 8; 
 
-@welfare_hire_staff
+@hire_staff
 title: Hire administrative personnel
-subtitle: -0.5 resources
-on-arrival: efficacy_welfare += 0.2 if efficacy_welfare < 1; welfare_expend += 0.25; resources -= 0.5;
+subtitle: -0.25 resources
+choose-if: resources >= 0.25
+unavailable-subtitle: -0.25 resources – We lack the resources. 
+on-arrival: efficacy_welfare += 0.2 if efficacy_welfare < 1; welfare_expend += 0.125; resources -= 0.25;
 
-@welfare_corruption
+@corruption
 title: Root-out departmental corruption. 
-subtitle: -0.5 resources 
-on-arrival: efficacy_welfare += 0.1 if efficacy_welfare < 1; resources -= 0.5;
+subtitle: -0.25 resources
+choose-if: welfare_corruption_timer = 0 and resources >= 0.25
+unavailable-subtitle: -0.25 resources – [?if resources < 0.25 : We lack the resources. ?][?if welfare_corruption_timer != 0 : We've already initiated an anti-corruption campaign. ?]
+on-arrival: {!
+  Q.resources -= 0.25; Q.welfare_corruption_timer = 8;
+  Q.efficacy_welfare = Math.min(1, Q.efficacy_welfare + 0.1);
+  Q.welfare_corruption = Math.max(0, Q.welfare_corruption - (0.2 * Q.efficacy_welfare)); 
+!}
+
+
+
+@funding
+title: FUNDING
+new-page: true
+on-arrival: {!
+  Q.worker_insurance_funding = Math.round(10*(Q.worker_insurance_funding || 0))/10;
+  Q.unemployment_funding = Math.round(10*(Q.unemployment_funding || 0))/10;
+  Q.invalids_funding = Math.round(10*(Q.invalids_funding || 0))/10;
+  Q.elderly_funding = Math.round(10*(Q.elderly_funding || 0))/10;
+  Q.maternity_funding = Math.round(10*(Q.maternity_funding || 0))/10;
+  Q.widows_funding = Math.round(10*(Q.widows_funding || 0))/10;
+  Q.nurseries_funding = Math.round(10*(Q.nurseries_funding || 0))/10;
+  Q.welfare_expend = Math.round(100*Q.welfare_expend)/100;
+!}
+
+= Welfare Funding
+
+<table style="width:100%; border-collapse:collapse; margin:10px 0;">
+<tr>
+<td style="text-align:left; padding:5px 5px 5px 15px; border-bottom:1px solid rgba(128,128,128,0.25);">
+<span style="color: var(--bolshevik-color); font-weight:bold;">Worker Insurance</span>
+</td>
+<td style="text-align:center; padding:5px; border-bottom:1px solid rgba(128,128,128,0.25);">
+[? if worker_insurance_founded = 1 : [+ worker_insurance_funding +] ?][? if worker_insurance_founded != 1 : Not founded ?]
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding:5px 5px 5px 15px; border-bottom:1px solid rgba(128,128,128,0.25);">
+<span style="color: var(--bolshevik-color); font-weight:bold;">Unemployment Assistance</span>
+</td>
+<td style="text-align:center; padding:5px; border-bottom:1px solid rgba(128,128,128,0.25);">
+[? if unemployment_founded = 1 : [+ unemployment_funding +] ?][? if unemployment_founded != 1 : Not founded ?]
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding:5px 5px 5px 15px; border-bottom:1px solid rgba(128,128,128,0.25);">
+<span style="color: var(--bolshevik-color); font-weight:bold;">War Invalids</span>
+</td>
+<td style="text-align:center; padding:5px; border-bottom:1px solid rgba(128,128,128,0.25);">
+[? if invalids_founded = 1 : [+ invalids_funding +] ?][? if invalids_founded != 1 : Not founded ?]
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding:5px 5px 5px 15px; border-bottom:1px solid rgba(128,128,128,0.25);">
+<span style="color: var(--bolshevik-color); font-weight:bold;">Old-Age Pensions</span>
+</td>
+<td style="text-align:center; padding:5px; border-bottom:1px solid rgba(128,128,128,0.25);">
+[? if elderly_founded = 1 : [+ elderly_funding +] ?][? if elderly_founded != 1 : Not founded ?]
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding:5px 5px 5px 15px; border-bottom:1px solid rgba(128,128,128,0.25);">
+<span style="color: var(--bolshevik-color); font-weight:bold;">Maternity Benefits</span>
+</td>
+<td style="text-align:center; padding:5px; border-bottom:1px solid rgba(128,128,128,0.25);">
+[? if maternity_founded = 1 : [+ maternity_funding +] ?][? if maternity_founded != 1 : Not founded ?]
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding:5px 5px 5px 15px; border-bottom:1px solid rgba(128,128,128,0.25);">
+<span style="color: var(--bolshevik-color); font-weight:bold;">Widows and Orphans</span>
+</td>
+<td style="text-align:center; padding:5px; border-bottom:1px solid rgba(128,128,128,0.25);">
+[? if widows_founded = 1 : [+ widows_funding +] ?][? if widows_founded != 1 : Not founded ?]
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding:5px 5px 5px 15px; border-bottom:2px solid rgba(128,128,128,0.6);">
+<span style="color: var(--bolshevik-color); font-weight:bold;">Nurseries and Childcare</span>
+</td>
+<td style="text-align:center; padding:5px; border-bottom:2px solid rgba(128,128,128,0.6);">
+[? if nurseries_founded = 1 : [+ nurseries_funding +] ?][? if nurseries_founded != 1 : Not founded ?]
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding:5px 5px 5px 15px;">
+<span style="color: var(--bolshevik-color); font-weight:bold;">Total Spending</span>
+</td>
+<td style="text-align:center; padding:5px;">
+[+ welfare_expend +]
+</td>
+</tr>
+</table>
+
+- #welfare_funding
+- @welfare_return
+
+
+@increase_worker_insurance_funding
+title: Increase funding for worker insurance.
+tags: welfare_funding
+go-to: funding
+view-if: worker_insurance_founded = 1
+choose-if: worker_insurance_funding < 2
+unavailable-subtitle: Funding is already maxed. 
+on-arrival: {!
+  Q.worker_insurance_funding += 0.1;
+  Q.welfare_expend += 0.1;
+!}
+
+@decrease_worker_insurance_funding
+title: Decrease funding for worker insurance.
+tags: welfare_funding
+go-to: funding
+view-if: worker_insurance_founded = 1
+choose-if: worker_insurance_funding > 0
+unavailable-subtitle: Funding is already non-existent. 
+on-arrival: {!
+  Q.worker_insurance_funding -= 0.1;
+  Q.welfare_expend -= 0.1;
+!}
+
+@increase_unemployment_funding
+title: Increase funding for unemployment assistance.
+tags: welfare_funding
+go-to: funding
+view-if: unemployment_founded = 1
+choose-if: unemployment_funding < 2
+unavailable-subtitle: Funding is already maxed. 
+on-arrival: {!
+  Q.unemployment_funding += 0.1;
+  Q.welfare_expend += 0.1;
+!}
+
+@decrease_unemployment_funding
+title: Decrease funding for unemployment assistance.
+tags: welfare_funding
+go-to: funding
+view-if: unemployment_founded = 1
+choose-if: unemployment_funding > 0
+unavailable-subtitle: Funding is already non-existent. 
+on-arrival: {!
+  Q.unemployment_funding -= 0.1;
+  Q.welfare_expend -= 0.1;
+!}
+
+@increase_invalids_funding
+title: Increase funding for assistance for war invalids.
+tags: welfare_funding
+go-to: funding
+view-if: invalids_founded = 1
+choose-if: invalids_funding < 2
+unavailable-subtitle: Funding is already maxed. 
+on-arrival: {!
+  Q.invalids_funding += 0.1;
+  Q.welfare_expend += 0.1;
+!}
+
+@decrease_invalids_funding
+title: Decrease funding for assistance for war invalids.
+tags: welfare_funding
+go-to: funding
+view-if: invalids_founded = 1
+choose-if: invalids_funding > 0
+unavailable-subtitle: Funding is already non-existent. 
+on-arrival: {!
+  Q.invalids_funding -= 0.1;
+  Q.welfare_expend -= 0.1;
+!}
+
+@increase_elderly_funding
+title: Increase funding for old-age pensions.
+tags: welfare_funding
+go-to: funding
+view-if: elderly_founded = 1
+choose-if: elderly_funding < 2
+unavailable-subtitle: Funding is already maxed. 
+on-arrival: {!
+  Q.elderly_funding += 0.1;
+  Q.welfare_expend += 0.1;
+!}
+
+@decrease_elderly_funding
+title: Decrease funding for old-age pensions.
+tags: welfare_funding
+go-to: funding
+view-if: elderly_founded = 1
+choose-if: elderly_funding > 0
+unavailable-subtitle: Funding is already non-existent. 
+on-arrival: {!
+  Q.elderly_funding -= 0.1;
+  Q.welfare_expend -= 0.1;
+!}
+
+@increase_maternity_funding
+title: Increase funding for maternity benefits.
+tags: welfare_funding
+go-to: funding
+view-if: maternity_founded = 1
+choose-if: maternity_funding < 2
+unavailable-subtitle: Funding is already maxed. 
+on-arrival: {!
+  Q.maternity_funding += 0.1;
+  Q.welfare_expend += 0.1;
+!}
+
+@decrease_maternity_funding
+title: Decrease funding for maternity benefits.
+tags: welfare_funding
+go-to: funding
+view-if: maternity_founded = 1
+choose-if: maternity_funding > 0
+unavailable-subtitle: Funding is already non-existent. 
+on-arrival: {!
+  Q.maternity_funding -= 0.1;
+  Q.welfare_expend -= 0.1;
+!}
+
+@increase_widows_funding
+title: Increase funding for assistance for widows and orphans.
+tags: welfare_funding
+go-to: funding
+view-if: widows_founded = 1
+choose-if: widows_funding < 2
+unavailable-subtitle: Funding is already maxed. 
+on-arrival: {!
+  Q.widows_funding += 0.1;
+  Q.welfare_expend += 0.1;
+!}
+
+@decrease_widows_funding
+title: Decrease funding for assistance for widows and orphans.
+tags: welfare_funding
+go-to: funding
+view-if: widows_founded = 1
+choose-if: widows_funding > 0
+unavailable-subtitle: Funding is already non-existent. 
+on-arrival: {!
+  Q.widows_funding -= 0.1;
+  Q.welfare_expend -= 0.1;
+!}
+
+@increase_nurseries_funding
+title: Increase funding for nurseries and childcare.
+tags: welfare_funding
+go-to: funding
+view-if: nurseries_founded = 1
+choose-if: nurseries_funding < 2
+unavailable-subtitle: Funding is already maxed. 
+on-arrival: {!
+  Q.nurseries_funding += 0.1;
+  Q.welfare_expend += 0.1;
+!}
+
+@decrease_nurseries_funding
+title: Decrease funding for nurseries and childcare.
+tags: welfare_funding
+go-to: funding
+view-if: nurseries_founded = 1
+choose-if: nurseries_funding > 0
+unavailable-subtitle: Funding is already non-existent. 
+on-arrival: {!
+  Q.nurseries_funding -= 0.1;
+  Q.welfare_expend -= 0.1;
+!}
+
+
 
 
 
@@ -70,58 +365,85 @@ title: Found a system of mandatory worker insurance.
 subtitle: Sick pay and disability - financed through employer and state contributions. 
 choose-if: worker_insurance_founded = 0 and efficacy_welfare > 0.3
 view-if: worker_insurance_founded = 0
-unavailable-subtitle: We lack the administrative capabilities and/or funds. 
-on-arrival: worker_insurance_founded = 1; welfare_expend += 0.25; labor_unrest -= 15; 
+unavailable-subtitle: We lack the administrative capabilities. 
+on-arrival: {!
+  Q.worker_insurance_founded = 1;
+  Q.worker_insurance_funding = 0.2; Q.welfare_expend += 0.2;
+  Q.workers_unrest -= 10;
+!}
 
 @found_unemployment
 title: Found an assistance program for the unemployed. 
 subtitle: -0.5 resources - Cash assistance for the unemployed.
 choose-if: unemployment_founded = 0 and resources >= 0.5 and efficacy_welfare > 0.5
-view-if: worker_insurance_founded = 0
-unavailable-subtitle: We lack the administrative capabilities and/or funds. 
-on-arrival: unemployment_founded = 1; resources -= 0.5; welfare_expend += 0.5; labor_unrest -= 15; underclass_unrest -= 10; 
+view-if: unemployment_founded = 0
+unavailable-subtitle: -0.5 resources – [?if resources < 0.5 : We lack the resources. ?][?if efficacy_welfare <= 0.5 : We lack the administrative capacities to implement this. ?]
+on-arrival: {!
+  Q.unemployment_founded = 1;
+  Q.resources -= 0.5;
+  Q.unemployment_funding = 0.5; Q.welfare_expend += 0.5;
+  Q.workers_unrest -= 10; Q.underclass_unrest -= 10;
+!}
 
 @found_war_invalids
 title: Found an assistance program for war invalids.   
-subtitle: -1 resources - Cash assistance for those wounded or disabled from war. 
-choose-if: invalids_founded = 0 and resources >= 1 and efficacy_welfare > 0.7
-view-if: worker_insurance_founded = 0
-unavailable-subtitle: We lack the administrative capabilities and/or funds. 
-on-arrival: invalids_founded = 1; resources -= 1; welfare_expend += 1; labor_unrest -= 5; underclass_unrest -= 5; soldiers_unrest -= 15;
+subtitle: -0.5 resources - Cash assistance for those wounded or disabled from war. 
+choose-if: invalids_founded = 0 and resources >= 0.5 and efficacy_welfare > 0.7
+view-if: invalids_founded = 0
+unavailable-subtitle: -0.5 resources – [?if resources < 0.5 : We lack the resources. ?][?if efficacy_welfare <= 0.7 : We lack the administrative capacities to implement this. ?]
+on-arrival: {!
+  Q.invalids_founded = 1;
+  Q.resources -= 0.5;
+  Q.invalids_funding = 0.5; Q.welfare_expend += 0.5;
+  Q.workers_unrest -= 5; Q.underclass_unrest -= 5; Q.soldiers_unrest -= 15;
+!}
 
 @found_elderly
 title: Found a system of pensions for the elderly 
 subtitle: -0.5 resources - Focusing on retired workers, veterans, and dependents. 
 choose-if: elderly_founded = 0 and resources >= 0.5 and efficacy_welfare > 0.7
 view-if: elderly_founded = 0
-unavailable-subtitle: We lack the administrative capabilities and/or funds. 
-on-arrival: elderly_founded = 1; resources -= 0.5; welfare_expend += 0.5; labor_unrest -= 5; underclass_unrest -= 5; soldiers_unrest -= 5; middle_unrest -= 5; intelligentsia_unrest -= 5; 
+unavailable-subtitle: -0.5 resources – [?if resources < 0.5 : We lack the resources. ?][?if efficacy_welfare <= 0.7 : We lack the administrative capacities to implement this. ?]
+on-arrival: {!
+  Q.elderly_founded = 1;
+  Q.resources -= 0.5;
+  Q.elderly_funding = 0.5; Q.welfare_expend += 0.5;
+  Q.workers_unrest -= 5; Q.underclass_unrest -= 5; Q.soldiers_unrest -= 5; Q.middle_unrest -= 5; Q.intelligentsia_unrest -= 5;
+!}
 
 @found_maternity
 title: Declare a series of new maternity benefits. 
 subtitle: Paid maternity leave, job protection, and expanded medical support.
 choose-if: maternity_founded = 0
 view-if: maternity_founded = 0
-on-arrival: maternity_founded = 1; welfare_expend += 0.25; labor_unrest -= 5; underclass_unrest -= 5; intelligentsia_unrest -= 5; 
+on-arrival: {!
+  Q.maternity_founded = 1;
+  Q.maternity_funding = 0.2; Q.welfare_expend += 0.2;
+  Q.workers_unrest -= 5; Q.underclass_unrest -= 5; Q.intelligentsia_unrest -= 5;
+!}
 
 @found_widows
 title: Found an assistance program for widows and orphans. 
 subtitle: -1 resources - Pensions and food assistance. 
-choose-if: widows_founded = 0 and resources >= 1 and efficacy_welfare > 0.7 
+choose-if: widows_founded = 0 and resources >= 0.5 and efficacy_welfare > 0.7 
 view-if: widows_founded = 0
-unavailable-subtitle: We lack the administrative capabilities and/or funds. 
-on-arrival: widows_founded = 1; welfare_expend += 0.25; labor_unrest -= 5; underclass_unrest -= 5; intelligentsia_unrest -= 5; 
+unavailable-subtitle: -0.5 resources – [?if resources < 0.5 : We lack the resources. ?][?if efficacy_welfare <= 0.7 : We lack the administrative capacities to implement this. ?]
+on-arrival: {!
+  Q.widows_founded = 1;
+  Q.resources -= 0.5;
+  Q.widows_funding = 0.5; Q.welfare_expend += 0.5;
+  Q.workers_unrest -= 5; Q.underclass_unrest -= 5; Q.intelligentsia_unrest -= 5;
+!}
 
 @found_nurseries
 title: Found a system of nurseries and childcare facilities. 
-subtitle: -2 resources 
-choose-if: nurseries_founded = 0 and resources >= 2 and efficacy_welfare > 0.9
+subtitle: -1 resources 
+choose-if: nurseries_founded = 0 and resources >= 1 and efficacy_welfare > 0.9
 view-if: nurseries_founded = 0
-unavailable-subtitle: We lack the administrative capabilities and/or funds. 
-on-arrival: nurseries_founded = 1; welfare_expend += 1; resources -= 2; labor_unrest -= 10; underclass_unrest -= 5; intelligentsia_unrest -= 5; middle_unrest -= 5; 
-
-
-
-
-
-
+unavailable-subtitle: -1 resources – [?if resources < 1 : We lack the resources. ?][?if efficacy_welfare <= 0.9 : We lack the administrative capacities to implement this. ?]
+on-arrival: {!
+  Q.nurseries_founded = 1;
+  Q.resources -= 1;
+  Q.nurseries_funding = 0.5; Q.welfare_expend += 0.5;
+  Q.workers_unrest -= 10; Q.underclass_unrest -= 5; Q.intelligentsia_unrest -= 5; Q.middle_unrest -= 5;
+!}
