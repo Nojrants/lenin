@@ -34,7 +34,7 @@ Although an effort is made, the sailors resist handing over any suspects, making
 
 @ignore
 title: Ignore it and let the controversy die down. 
-unavailable-subtitle: [?if justice_minister != "Vacant" : Justice Commissar [+ justice_minister +] is insisting that action be taken! ?]
+unavailable-subtitle: [?if justice_minister != "Vacant" : Justice Commissar [+ justice_minister +] is insisting that action be taken! ?][?if justice_minister == "Vacant" : We lack leadership over the Justice Commissariat. ?]
 choose-if: justice_minister_party != "Bolshevik" and justice_minister_party != ""
 on-arrival: {!
   Q.k_strength += 2; Q.right_m_strength += 1; Q.right_sr_strength += 1; 
