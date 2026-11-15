@@ -15,34 +15,34 @@ Lev Kamenev is a Bolshevik leader who has a more conciliatory position towards t
 @support_moderate
 title: Bolshevik Moderation
 subtitle: Promote the course of the Moderates to party members. 
-choose-if: advisor_action_timer = 0
-unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] weeks before next advisor action. ?]
-on-arrival: advisor_action_timer = 4; 
+choose-if: kamenev_advisor_timer = 0
+unavailable-subtitle: [? if kamenev_advisor_timer > 0 : [+ kamenev_advisor_timer +] weeks before next advisor action. ?]
+on-arrival: kamenev_advisor_timer = 6; 
 go-to: b_ideology.support_moderate 
 
 @moderate_relations
 title: Intra-party Outreach
 subtitle: Build cooperative relations with other parties in the CEC. 
-choose-if: advisor_action_timer = 0 
-unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] weeks before next advisor action. ?]
-on-arrival: advisor_action_timer = 4; 
+choose-if: kamenev_advisor_timer = 0 
+unavailable-subtitle: [? if kamenev_advisor_timer > 0 : [+ kamenev_advisor_timer +] weeks before next advisor action. ?]
+on-arrival: kamenev_advisor_timer = 6; 
 go-to: b_inter_party_relationships.moderates
 
 @soviet_campaigning
 title: Soviet Campaigning
 subtitle: Increase our vote share in the soviets.
-choose-if: advisor_action_timer = 0
-unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] weeks before next advisor action. ?]
-on-arrival: advisor_action_timer = 4; workers_b += 2*(1-b_dissent);
+choose-if: kamenev_advisor_timer = 0
+unavailable-subtitle: [? if kamenev_advisor_timer > 0 : [+ kamenev_advisor_timer +] weeks before next advisor action. ?]
+on-arrival: kamenev_advisor_timer = 6; workers_b += 2*(1-b_dissent);
 go-to: minority_party_soviet.s_campaign
 
 @ca_support
 title: Constituent Assembly Campaigning
 subtitle: [?if ca_election_held != 1 : Campaign in preparation of the Constituent Assembly elections. ?][?if ca_election_held == 1 : Campaign in support of the coming Constituent Assembly. ?]
 view-if: ca_held != 1
-choose-if: advisor_action_timer = 0 
-unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] weeks before next advisor action. ?]
-on-arrival: advisor_action_timer = 4; workers_b += 1*(1-b_dissent);
+choose-if: kamenev_advisor_timer = 0 
+unavailable-subtitle: [? if kamenev_advisor_timer > 0 : [+ kamenev_advisor_timer +] weeks before next advisor action. ?]
+on-arrival: kamenev_advisor_timer = 6; workers_b += 1*(1-b_dissent);
 go-to: b_media.support_ca
 
 
