@@ -196,21 +196,49 @@ go-to: finance
 title: Seize the banks!
 subtitle: Nationalize banks to allow us full control over fiscal policy. 
 view-if: banks_seized = 0
-on-arrival: banks_seized = 1; resources += 4; elites_unrest += 5; middle_unrest += 5; instability += 5; capital_flight_progress += 0.5;
+on-arrival: {!
+  Q.banks_seized = 1;
+  Q.resources += 4;
+  Q.elites_unrest += 5; Q.middle_unrest += 5;
+  Q.instability += 5; Q.capital_flight_progress += 0.5;
+  Q.efficacy_finance = Math.max(0, Q.efficacy_finance - 0.1);
+  Q.bourgeois_specialists *= 0.98;
+  Q.uk_relation -= 5; Q.france_relation -= 5;
+!}
 
 @repudiate_loans
-title: Repudiate all outstanding loans.
-subtitle: This will free-up resources but substantially impact our foreign relations. 
+title: Repudiate all outstanding debt and financial obligations. 
+subtitle: This will end our interest payments but ruin our credit at home and abroad. 
 view-if: repudiation = 0
-choose-if: loans_exist
-unavailable-subtitle: We have no outstanding loans. 
+choose-if: loans_exist or bonds > 0
+unavailable-subtitle: We have no outstanding debts. 
 on-arrival: {!
-  Q.repudiation = 1; 
-  Q.loans = Q.loans.filter(function(loan) { return loan.lender == "Russia"; });
-  Q.bonds *= 0.65;
-  Q.uk_relation -= 35; Q.france_relation -= 40; Q.usa_relation -= 35; Q.italy_relation -= 30;
-  Q.japan_relation -= 30; Q.germany_relation -= 5; Q.austria_relation -= 5; Q.ottoman_relation -= 5;
-  Q.instability += 10; Q.monthly_inflation += 0.5; Q.capital_flight_progress += 1; 
+  Q.repudiation = 1;
+
+  var owed = { Britain: 0, France: 0, USA: 0, Japan: 0, Italy: 0, Russia: 0 };
+  for (var loan of Q.loans) { owed[loan.lender] = (owed[loan.lender] || 0) + loan.principal; }
+  Q.loans = [];
+  Q.loans_exist = false;
+
+  var bonds_annulled = Q.bonds * 0.85;
+  Q.bonds = Math.round(100 * (Q.bonds - bonds_annulled))/100;
+  Q.bond_rate = 3;
+
+  Q.uk_relation -= 20 + 3 * owed.Britain;
+  Q.france_relation -= 20 + 3 * owed.France;
+  Q.usa_relation -= 20 + 3 * owed.USA;
+  Q.italy_relation -= 20 + 3 * owed.Italy;
+  Q.japan_relation -= 20 + 3 * owed.Japan;
+  Q.germany_relation -= 5; Q.austria_relation -= 5; Q.ottoman_relation -= 5;
+
+  var domestic_loss = bonds_annulled + owed.Russia;
+  Q.elites_wealth -= domestic_loss * 0.15;
+  Q.middle_wealth -= domestic_loss * 0.10;
+  Q.elites_unrest += 10; Q.middle_unrest += 10; Q.kulaks_unrest += 2;
+  Q.workers_unrest -= 2; Q.soldiers_unrest -= 2;
+
+  Q.instability += 4; Q.monthly_inflation += 0.5; Q.capital_flight_progress += 1;
+  Q.bourgeois_specialists *= 0.97;
 !}
 
 @finance_return
@@ -525,21 +553,107 @@ on-arrival: syndicate_levy_rate -= 5; workers_unrest -= (7.5 * (industries_syndi
 
 @banking
 title: BANKING
+new-page: true
+on-arrival: {!
+  Q.bond_sale = Math.max(1, Math.round((5 - (Q.bonds / 30)) * (Q.repudiation == 1 ? 0.4 : 1)));
+  Q.advance_yield = Math.max(1, Math.round(50 / (1 + Q.monthly_inflation / 30)) / 10);
+  Q.redeem_amount = Math.round(10 * Math.min(5, Q.bonds))/10;
+  Q.redeem_price = Math.min(1, Math.max(0.3, Math.pow(5 / Math.max(1, Q.bond_rate), 0.75)));
+  Q.redeem_cost = Math.round(10 * Q.redeem_amount * Q.redeem_price)/10;
+  Q.contribution_yield = Math.round(10 * (Q.elites_wealth * 0.04 + Q.middle_wealth * 0.03))/10;
+
+  var costly = null;
+  var foreign_loans = 0;
+  var domestic_loans = 0;
+  for (var loan of Q.loans) {
+      if (!costly || loan.rate > costly.rate) costly = loan;
+      if (loan.lender == "Russia") domestic_loans += loan.principal;
+      else foreign_loans += loan.principal;
+  }
+  Q.loans_exist = Q.loans.length > 0;
+  Q.loan_repay_cost = costly ? Math.round(100 * costly.principal)/100 : 0;
+  Q.loan_repay_lender = costly ? costly.lender : "";
+  Q.loan_repay_rate = costly ? Math.round(100 * costly.rate) : 0;
+
+  Q.bonds_display = Math.round(10 * Q.bonds)/10;
+  Q.bond_rate_display = Math.round(100 * Q.bond_rate)/100;
+  Q.bank_advances_display = Math.round(10 * Q.bank_advances)/10;
+  Q.foreign_loans_display = Math.round(10 * foreign_loans)/10;
+  Q.domestic_loans_display = Math.round(10 * domestic_loans)/10;
+  Q.interest_display = Math.round(100 * Q.interest)/100;
+!}
+
+= Banking
+
+<table style="width:100%; border-collapse:collapse; margin:10px 0;">
+<tr>
+<td style="text-align:left; padding:5px 5px 5px 15px; border-bottom:1px solid rgba(128,128,128,0.25);">
+<span style="color: var(--bolshevik-color); font-weight:bold;">Government Bonds</span>
+</td>
+<td style="text-align:center; padding:5px; border-bottom:1px solid rgba(128,128,128,0.25);">
+[+ bonds_display +] at [+ bond_rate_display +]%
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding:5px 5px 5px 15px; border-bottom:1px solid rgba(128,128,128,0.25);">
+<span style="color: var(--bolshevik-color); font-weight:bold;">State Bank Advances</span>
+</td>
+<td style="text-align:center; padding:5px; border-bottom:1px solid rgba(128,128,128,0.25);">
+[+ bank_advances_display +]
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding:5px 5px 5px 15px; border-bottom:1px solid rgba(128,128,128,0.25);">
+<span style="color: var(--bolshevik-color); font-weight:bold;">Foreign Loans</span>
+</td>
+<td style="text-align:center; padding:5px; border-bottom:1px solid rgba(128,128,128,0.25);">
+[+ foreign_loans_display +]
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding:5px 5px 5px 15px; border-bottom:2px solid rgba(128,128,128,0.6);">
+<span style="color: var(--bolshevik-color); font-weight:bold;">Domestic Loans</span>
+</td>
+<td style="text-align:center; padding:5px; border-bottom:2px solid rgba(128,128,128,0.6);">
+[+ domestic_loans_display +]
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding:5px 5px 5px 15px;">
+<span style="color: var(--bolshevik-color); font-weight:bold;">Interest Payments</span>
+</td>
+<td style="text-align:center; padding:5px;">
+<span style="color: var(--level7-color);">-[+ interest_display +]</span>
+</td>
+</tr>
+</table>
 
 - @finance_issue_currency
 - @finance_bank_advances
 - @finance_issue_bonds
+- @redeem_bonds
 - @pay_off_loans
+- @levy_contributions
+- @seize_safe_deposits
 - @finance_return
 
 @finance_issue_currency
 title: Issue additional currency. 
 choose-if: banks_seized = 1
 unavailable-subtitle: We lack control over the banks. 
-subtitle: +5 resources
+subtitle: +[+ advance_yield +] resources – Rising prices erode what each issue buys. 
 on-arrival: {!
-    Q.resources += 5;
-    Q.monthly_inflation += (1.2 * (Q.instability/12.5));
+    Q.resources += Q.advance_yield;
+    Q.currency_issued = (Q.currency_issued || 0) + 5;
+
+    var pressure = 1.2 * (Q.instability / 12.5);
+    pressure *= 1 + ((Q.bank_advances + Q.currency_issued) / 50);
+    pressure *= Math.max(1, 65 / Q.gdp_index);
+    if (Q.repudiation == 1) pressure *= 1.25;
+    Q.monthly_inflation += pressure;
+
+    Q.food_sold *= 0.98;
+    Q.middle_wealth *= 0.98; Q.middle_unrest += 2;
     Q.instability += 1;
 !}
 
@@ -547,23 +661,95 @@ on-arrival: {!
 title: Borrow from the State Bank.
 choose-if: banks_seized = 1
 unavailable-subtitle: We lack control over the banks. 
-subtitle: +5 resources
+subtitle: +[+ advance_yield +] resources – Rising prices erode what each advance buys. 
 on-arrival: {!
-    Q.resources += 5;
-    Q.bank_advances += 5; 
-    Q.monthly_inflation += (1.2 * (Q.instability/25));
+    Q.resources += Q.advance_yield;
+    Q.bank_advances += 5;
+
+    var pressure = 1.2 * (Q.instability / 25);
+    pressure *= 1 + ((Q.bank_advances + (Q.currency_issued || 0)) / 50);
+    pressure *= Math.max(1, 65 / Q.gdp_index);
+    if (Q.repudiation == 1) pressure *= 1.25;
+    Q.monthly_inflation += pressure;
+
+    Q.food_sold *= 0.99;
+    Q.middle_wealth *= 0.99; Q.middle_unrest += 1;
     Q.instability += 0.25;
 !}
 
 @finance_issue_bonds
-title: Issue government bonds.
-subtitle: +5 resources
-on-arrival: bonds += 5; resources += 5; instability += 0.5; monthly_inflation += (1.1 * (instability/50)); bond_rate += 1 if bonds > 90; bond_rate += 0.5 if ((bonds < 90) and (bonds > 60)); bond_rate += 0.25 if bonds < 60; 
+title: [? if repudiation = 0 : Issue government bonds. ?][? if repudiation = 1 : Impose a compulsory loan. ?]
+subtitle: +[+ bond_sale +] resources – [? if repudiation = 0 : Existing debt lowers bond sales. ?][? if repudiation = 1 : No one will lend to us willingly. ?]
+on-arrival: {!
+  Q.bonds += Q.bond_sale; Q.resources += Q.bond_sale;
+  Q.instability += 0.5;
+  Q.monthly_inflation += 1.1 * (Q.instability / 50);
+  if (Q.bonds > 90) Q.bond_rate += 1;
+  else if (Q.bonds > 60) Q.bond_rate += 0.5;
+  else Q.bond_rate += 0.25;
+  if (Q.repudiation == 1) {
+    Q.bond_rate += 1;
+    Q.elites_unrest += 3; Q.middle_unrest += 3; Q.kulaks_unrest += 1;
+  }
+!}
+
+@redeem_bonds
+title: Redeem government bonds.
+subtitle: -[+ redeem_cost +] resources – Retires [+ redeem_amount +] in bonds. Poor credit makes our own debt cheap to buy back. 
+choose-if: bonds > 0 and resources >= redeem_cost
+unavailable-subtitle: [? if bonds <= 0 : We have no bonds outstanding. ?][? if bonds > 0 : -[+ redeem_cost +] resources – We lack the resources. ?]
+on-arrival: {!
+  Q.resources -= Q.redeem_cost;
+  Q.bonds = Math.max(0, Q.bonds - Q.redeem_amount);
+  Q.bond_rate = Math.max(3, Q.bond_rate - 0.25);
+  Q.monthly_inflation = Math.max(0, Q.monthly_inflation - 0.1);
+  Q.elites_unrest -= 1; Q.middle_unrest -= 1;
+!}
 
 @pay_off_loans
-title: Repay our outstanding loans.
-choose-if: loans >= 1
-unavailable-subtitle: We have no loans to repay.
+title: Repay our costliest outstanding loan.
+subtitle: -[+ loan_repay_cost +] resources – Owed to [+ loan_repay_lender +] at [+ loan_repay_rate +]% interest. 
+choose-if: loans_exist and resources >= loan_repay_cost
+unavailable-subtitle: [? if not loans_exist : We have no loans to repay. ?][? if loans_exist : -[+ loan_repay_cost +] resources – We lack the resources. ?]
+on-arrival: {!
+  var costly = null;
+  for (var loan of Q.loans) { if (!costly || loan.rate > costly.rate) costly = loan; }
+  if (costly) {
+      Q.resources -= costly.principal;
+      Q.loans.splice(Q.loans.indexOf(costly), 1);
+      var creditors = { Britain: 'uk', France: 'france', USA: 'usa', Japan: 'japan', Italy: 'italy' };
+      if (creditors[costly.lender]) Q[creditors[costly.lender] + '_relation'] += 2;
+  }
+  Q.loans_exist = Q.loans.length > 0;
+!}
+
+@levy_contributions
+title: Levy contributions on the propertied classes.
+subtitle: +[+ contribution_yield +] resources – Local soviets extract what they can from the bourgeoisie. 
+choose-if: contributions_timer = 0
+unavailable-subtitle: The last round of contributions is still being collected. 
+on-arrival: {!
+  Q.resources += Q.contribution_yield;
+  Q.elites_wealth -= Q.contribution_yield * 0.6;
+  Q.middle_wealth -= Q.contribution_yield * 0.4;
+  Q.elites_unrest += 8; Q.middle_unrest += 5;
+  Q.workers_unrest -= 1;
+  Q.instability += 1; Q.capital_flight_progress += 0.5;
+  Q.contributions_timer = 8;
+!}
+
+@seize_safe_deposits
+title: Open the safe-deposit boxes.
+subtitle: +3 resources – Confiscate the gold and foreign currency held in private vaults. 
+view-if: banks_seized = 1 and safes_seized = 0
+on-arrival: {!
+  Q.safes_seized = 1;
+  Q.resources += 3;
+  Q.elites_wealth -= 2; Q.middle_wealth -= 1;
+  Q.elites_unrest += 10; Q.middle_unrest += 5;
+  Q.capital_flight_progress += 1;
+  Q.bourgeois_specialists *= 0.98;
+!}
 
 
 
