@@ -67,7 +67,7 @@ This galvanizes support for our party, though hindering relations with all other
 
 @support_ca
 title: Support the Constituent Assembly!
-subtitle: -1 resource – Promote the coming Constituent Assembly, and our position in it. 
+subtitle: -1 resource – Promote the Constituent Assembly, and our position in it. 
 choose-if: resources >= 1 and ca_held = 0
 view-if: ca_held = 0
 on-arrival: {!
