@@ -3605,10 +3605,6 @@ window.showMap = function() {
             mapFromButton = false;
             engine.goToScene('backSpecialScene');
         } else {
-            // The map was opened by a scene's go-to (not the sidebar button), so the
-            // engine's stored return point still names that scene. Reset it to root
-            // so the library's "Exit" can never bounce back into the map.
-            engine.state.prevSpecialSceneId = 'root';
             engine.goToScene('root');
         }
         return;
@@ -4762,6 +4758,16 @@ function shockFactor(I, s) {
 
 // BUSINESS CLIMATE
 // multipliers on the weekly rate of openings and closures for one group of enterprises
+var CONFIDENCE_NEUTRAL = 0.45;
+var confidenceWeight = { large: 1, medium: 0.8, small: 0.6 };
+
+function capitalAvailable(Q, z) {
+	var elites = Math.max(0, num(Q.elites_wealth, 40)) / 40;
+	var middle = Math.max(0, num(Q.middle_wealth, 25)) / 25;
+	var pool = z === 'large' ? elites : (z === 'medium' ? 0.6 * elites + 0.4 * middle : middle);
+	return clamp(0.4 + 0.6 * pool, 0.4, 1.5);
+}
+
 function climate(Q, I, s, o, m, m0) {
 	if (ctrlOf[o] === 'nationalized') {
 		var fund = I.fund[s] || 0;
@@ -4774,12 +4780,12 @@ function climate(Q, I, s, o, m, m0) {
 	if (shockFactor(I, s) < 1 || I.grace > 0) { squeeze = Math.max(squeeze, -0.3); shortage = Math.min(shortage, 0.1); }
 	var instab = (num(Q.instability) - 30) / 40;
 	var inflation = Math.max(0, num(Q.monthly_inflation) - 5) / 20;
-	var tax = ctrlOf[o] === 'private' ? 0.3 * (num(Q.business_tax_rate, 1) - 1) : 0;
+	var capital = ctrlOf[o] === 'private' ? capitalAvailable(Q, sizeOf[o]) : 1;
+	var confidence = ctrlOf[o] === 'private' ? confidenceWeight[sizeOf[o]] * (num(Q.investor_confidence, CONFIDENCE_NEUTRAL) - CONFIDENCE_NEUTRAL) / 0.2 : 0;
 	var machinery = I.price.machinery / P0.machinery - 1;
-	var flight = o === 'large_private' ? 0.05 * num(Q.capital_flight_progress) : 0;
-	var close = 1 + 1.5 * Math.max(0, -squeeze) + 2 * shortage + instab + inflation + tax + flight + (Math.random() - 0.5) * 0.6;
-	var open = 1 + 1.2 * clamp(squeeze, -1, 1.5) - instab * 0.66 - tax - 0.5 * machinery - flight + (Math.random() - 0.5) * 0.6;
-	return { open: clamp(open, 0, 3), close: clamp(close, 0.3, 6) };
+	var close = 1 + 1.5 * Math.max(0, -squeeze) + 2 * shortage + instab + inflation - 0.2 * confidence + (Math.random() - 0.5) * 0.6;
+	var open = 1 + 1.2 * clamp(squeeze, -1, 1.5) - instab * 0.66 + 0.2 * confidence - 0.5 * machinery + (Math.random() - 0.5) * 0.6;
+	return { open: clamp(open * capital, 0, 3), close: clamp(close, 0.3, 6) };
 }
 
 // OWNERSHIP SHIFTS
