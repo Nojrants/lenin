@@ -257,15 +257,16 @@ on-arrival: {!
   Q.tax_administration_display = Math.round(100 * Q.tax_administration);
   for (var tax of ['income_tax', 'wealth_tax', 'business_tax']) {
       Q[tax + '_efficacy_display'] = Math.round(100 * Q[tax + '_efficacy']);
-      Q[tax + '_target_display'] = Math.round(100 * (Q[tax + '_target'] !== undefined ? Q[tax + '_target'] : Q[tax + '_efficacy']));
+      var gap = (Q[tax + '_target'] !== undefined ? Q[tax + '_target'] : Q[tax + '_efficacy']) - Q[tax + '_efficacy'];
+      Q[tax + '_trend'] = gap > 0.005 ? 1 : (gap < -0.005 ? -1 : 0);
   }
-  Q.black_market_display = Math.round(Q.black_market);
+  Q.black_market_level = Math.min(1, Math.max(0, Q.black_market / 100));
   Q.cheka_collection_bonus = Q.cheka_founded == 1 ? Math.min(0.1, Math.max(0, Q.cheka * Q.cheka_militancy) / 100) : 0;
   Q.census_cost = Math.round(100 * (1 - Math.min(0.25, 0.125 * Q.tax_inspectors)))/100;
   Q.amnesty_yield = Math.round(10 * 0.5 * (Q.income_tax + Q.property_tax + Q.business_tax) / (1 + Q.tax_amnesties))/10;
 !}
 
-= Government Policy
+= Fiscal Policy
 
 <table style="width:100%; border-collapse:collapse; margin:10px 0;">
 <tr>
@@ -289,7 +290,7 @@ on-arrival: {!
 <span style="color: var(--bolshevik-color); font-weight:bold;">Income Tax Collection</span>
 </td>
 <td style="text-align:center; padding:5px; border-bottom:1px solid rgba(128,128,128,0.25);">
-[+ income_tax_efficacy_display +]% (trending to [+ income_tax_target_display +]%)
+[? if income_tax_trend = 1 : <span style="color: var(--level1-color);">&#9650;</span> ?][? if income_tax_trend = -1 : <span style="color: var(--level7-color);">&#9660;</span> ?][? if income_tax_trend = 0 : <span style="color: #5aa9e6;">&#9644;</span> ?] [+ income_tax_efficacy_display +]%
 </td>
 </tr>
 <tr>
@@ -297,7 +298,7 @@ on-arrival: {!
 <span style="color: var(--bolshevik-color); font-weight:bold;">Property Tax Collection</span>
 </td>
 <td style="text-align:center; padding:5px; border-bottom:1px solid rgba(128,128,128,0.25);">
-[+ wealth_tax_efficacy_display +]% (trending to [+ wealth_tax_target_display +]%)
+[? if wealth_tax_trend = 1 : <span style="color: var(--level1-color);">&#9650;</span> ?][? if wealth_tax_trend = -1 : <span style="color: var(--level7-color);">&#9660;</span> ?][? if wealth_tax_trend = 0 : <span style="color: #5aa9e6;">&#9644;</span> ?] [+ wealth_tax_efficacy_display +]%
 </td>
 </tr>
 <tr>
@@ -305,7 +306,7 @@ on-arrival: {!
 <span style="color: var(--bolshevik-color); font-weight:bold;">Business Tax Collection</span>
 </td>
 <td style="text-align:center; padding:5px; border-bottom:1px solid rgba(128,128,128,0.25);">
-[+ business_tax_efficacy_display +]% (trending to [+ business_tax_target_display +]%)
+[? if business_tax_trend = 1 : <span style="color: var(--level1-color);">&#9650;</span> ?][? if business_tax_trend = -1 : <span style="color: var(--level7-color);">&#9660;</span> ?][? if business_tax_trend = 0 : <span style="color: #5aa9e6;">&#9644;</span> ?] [+ business_tax_efficacy_display +]%
 </td>
 </tr>
 <tr>
@@ -329,7 +330,7 @@ on-arrival: {!
 <span style="color: var(--bolshevik-color); font-weight:bold;">Black Market</span>
 </td>
 <td style="text-align:center; padding:5px;">
-[+ black_market_display +]
+[+ black_market_level : corruption +]
 </td>
 </tr>
 </table>
@@ -373,7 +374,6 @@ title: Conduct a census of taxpayers.
 subtitle: -[+ census_cost +] resources – Register incomes and property across the country.[? if tax_inspectors > 0 : <br>Our tax inspectors have lowered the cost of the census. ?]
 choose-if: tax_census_timer = 0 and resources >= census_cost
 unavailable-subtitle: [? if tax_census_timer != 0 : The last census is still being compiled. ?][? if tax_census_timer = 0 : -[+ census_cost +] resources – We lack the resources. ?]
-go-to: policy
 on-arrival: {!
   Q.resources -= Q.census_cost;
   Q.tax_administration = Math.min(1, Q.tax_administration + 0.1 * (0.5 + Q.finalefficacy_finance / 2));
@@ -386,7 +386,6 @@ title: Hire tax inspectors.
 subtitle: -0.25 resources – Raises tax administration, at the cost of higher spending.
 choose-if: resources >= 0.25 and tax_inspectors < 8
 unavailable-subtitle: [? if tax_inspectors >= 8 : We cannot staff any more inspectorates. ?][? if tax_inspectors < 8 : -0.25 resources – We lack the resources. ?]
-go-to: policy
 on-arrival: {!
   Q.resources -= 0.25;
   Q.tax_inspectors += 1;
@@ -398,7 +397,6 @@ on-arrival: {!
 title: Dismiss tax inspectors.
 subtitle: Lowers spending, but weakens tax administration.
 view-if: tax_inspectors > 0
-go-to: policy
 on-arrival: {!
   Q.tax_inspectors -= 1;
   Q.finance_expend = Math.max(0.1, Q.finance_expend - 0.25);
@@ -411,7 +409,6 @@ subtitle: State enterprises will deduct taxes before paying their workers.
 view-if: tax_withholding = 0
 choose-if: industries_nationalized >= 20
 unavailable-subtitle: Too little of industry is in state hands to make this worthwhile.
-go-to: policy
 on-arrival: {!
   Q.tax_withholding = 1;
   Q.workers_unrest += 5 * (Q.industries_nationalized / 100) + 2;
@@ -420,7 +417,6 @@ on-arrival: {!
 @tax_withholding_off
 title: End withholding at source.
 view-if: tax_withholding = 1
-go-to: policy
 on-arrival: {!
   Q.tax_withholding = 0;
   Q.workers_unrest -= 2;
@@ -430,7 +426,6 @@ on-arrival: {!
 title: Index tax assessments to prices.
 subtitle: Taxes are reassessed as prices rise, halving the losses from inflation.
 view-if: tax_indexation = 0
-go-to: policy
 on-arrival: {!
   Q.tax_indexation = 1;
   Q.middle_unrest += 3; Q.elites_unrest += 3; Q.kulaks_unrest += 2;
@@ -439,7 +434,6 @@ on-arrival: {!
 @tax_indexation_off
 title: Return to fixed tax assessments.
 view-if: tax_indexation = 1
-go-to: policy
 on-arrival: {!
   Q.tax_indexation = 0;
   Q.middle_unrest -= 2; Q.elites_unrest -= 2; Q.kulaks_unrest -= 1;
@@ -450,7 +444,6 @@ title: [? if cheka_founded = 1 : Send the Cheka to collect arrears. ?][? if chek
 subtitle: By using force, we can ensure a temporary surge in collection.
 choose-if: tax_collection_timer = 0
 unavailable-subtitle: The last collection drive is still underway.
-go-to: policy
 on-arrival: {!
   Q.tax_enforcement = (Q.tax_enforcement || 0) + 0.1 + Q.cheka_collection_bonus;
   Q.tax_collection_timer = 8;
@@ -463,7 +456,6 @@ title: Declare an amnesty on unpaid taxes.
 subtitle: +[+ amnesty_yield +] resources – Evaders settle their arrears, but learn to wait for the next amnesty.
 choose-if: tax_amnesty_timer = 0
 unavailable-subtitle: An amnesty so soon would be meaningless.
-go-to: policy
 on-arrival: {!
   Q.resources += Q.amnesty_yield;
   Q.tax_amnesties += 1;
