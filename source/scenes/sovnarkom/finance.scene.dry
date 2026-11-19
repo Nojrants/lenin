@@ -45,6 +45,7 @@ on-arrival: {!
   Q.monthly_inflation_disp = Math.round(10 * Q.monthly_inflation)/10;
   Q.inflation_disp = Math.round(10 * Q.inflation)/10;
   Q.unemployment_display = Math.round(10 * Q.unemployed)/10;
+  Q.investor_confidence_display = Math.round(100 * Q.investor_confidence);
   Q.national_debt_display = Q.publicdebt;
   Q.industrial_output_display = Math.round(10 * Q.industrial_output)/10;
   Q.extraction_display = Math.round(10 * Q.extraction)/10;
@@ -75,6 +76,7 @@ on-arrival: {!
     <div style="padding:3px 8px; line-height:1.2; white-space:nowrap;"><b>Unemployment</b><span style="float:right;">[+ unemployment_display +]%</span></div>
     <div style="padding:3px 8px; line-height:1.2; background:rgba(215,205,180,0.12); white-space:nowrap;"><b>National Debt</b><span style="float:right;">[+ national_debt_display +]</span></div>
     <div style="padding:3px 8px; line-height:1.2; white-space:nowrap;"><b>Budget Balance</b><span style="float:right;">[? if budget_balance_display >= 0 : <span style="color: var(--level1-color);">+[+ budget_balance_display +]</span> ?][? if budget_balance_display < 0 : <span style="color: var(--level7-color);">[+ budget_balance_display +]</span> ?]</span></div>
+    <div style="padding:3px 8px; line-height:1.2; background:rgba(215,205,180,0.12); white-space:nowrap;"><b>Investor Confidence</b><span style="float:right;">[+ investor_confidence_display +]%</span></div>
   </div>
   <div style="border:3px solid #666; border-radius:6px; padding:0; margin-bottom:10px; font-size:0.85em; overflow:hidden;">
     <div style="background:#e8e8e8; border-bottom:1px solid #ccc; padding:5px 6px; margin-bottom:6px; font-size:1.2em; line-height:1.2; font-weight:bold; text-align:center; white-space:nowrap;">
@@ -207,6 +209,7 @@ on-arrival: {!
   Q.efficacy_finance = Math.max(0, Q.efficacy_finance - 0.1);
   Q.bourgeois_specialists *= 0.98;
   Q.uk_relation -= 5; Q.france_relation -= 5;
+  Q.investor_confidence = Math.min(1, Math.max(0, Q.investor_confidence - 0.1));
 !}
 
 @repudiate_loans
@@ -242,6 +245,7 @@ on-arrival: {!
 
   Q.instability += 4; Q.monthly_inflation += 0.5; Q.capital_flight_progress += 1;
   Q.bourgeois_specialists *= 0.97;
+  Q.investor_confidence = Math.min(1, Math.max(0, Q.investor_confidence - 0.15));
 !}
 
 @finance_return
@@ -358,7 +362,7 @@ title: Practice budget discipline
 subtitle: Cut salaries and benefits across the government. 
 unavailable-subtitle: There is nothing left to cut.
 choose-if: efficacy_finance > 0.25
-on-arrival: efficacy_finance -= 0.1; efficacy_foreign -= 0.1; efficacy_military -= 0.1; efficacy_enlightenment -= 0.1; efficacy_internal -= 0.1; efficacy_railways -= 0.1; efficacy_trade -= 0.1; efficacy_justice -= 0.1; efficacy_agriculture -= 0.1; efficacy_foodsupply -= 0.1; efficacy_nationalities -= 0.1; efficacy_welfare -= 0.1; foreignaffairs_expend -= 0.25; military_expend -= 0.25; enlightenment_expend -= 0.25; railways_expend -= 0.25; trade_expend -= 0.25; finance_expend -= 0.25; justice_expend -= 0.25; labor_expend -= 0.25; agriculture_expend -= 0.25; foodsupply_expend -= 0.25; nationalities_expend -= 0.25; welfare_expend -= 0.25; monthly_inflation -= 0.1; 
+on-arrival: efficacy_finance -= 0.1; efficacy_foreign -= 0.1; efficacy_military -= 0.1; efficacy_enlightenment -= 0.1; efficacy_internal -= 0.1; efficacy_railways -= 0.1; efficacy_trade -= 0.1; efficacy_justice -= 0.1; efficacy_agriculture -= 0.1; efficacy_foodsupply -= 0.1; efficacy_nationalities -= 0.1; efficacy_welfare -= 0.1; foreignaffairs_expend -= 0.25; military_expend -= 0.25; enlightenment_expend -= 0.25; railways_expend -= 0.25; trade_expend -= 0.25; finance_expend -= 0.25; justice_expend -= 0.25; labor_expend -= 0.25; agriculture_expend -= 0.25; foodsupply_expend -= 0.25; nationalities_expend -= 0.25; welfare_expend -= 0.25; monthly_inflation -= 0.1; investor_confidence += 0.02;
 
 Cutting the budget hurts the workers and middle class, and also reduces the morale of the soldiers and railroad workers, two of the largest groups of government employees. This makes them less effective at their jobs.
 
@@ -429,6 +433,7 @@ view-if: tax_indexation = 0
 on-arrival: {!
   Q.tax_indexation = 1;
   Q.middle_unrest += 3; Q.elites_unrest += 3; Q.kulaks_unrest += 2;
+  Q.investor_confidence = Math.min(1, Math.max(0, Q.investor_confidence - 0.02));
 !}
 
 @tax_indexation_off
@@ -437,6 +442,7 @@ view-if: tax_indexation = 1
 on-arrival: {!
   Q.tax_indexation = 0;
   Q.middle_unrest -= 2; Q.elites_unrest -= 2; Q.kulaks_unrest -= 1;
+  Q.investor_confidence = Math.min(1, Math.max(0, Q.investor_confidence + 0.01));
 !}
 
 @tax_collection_drive
@@ -449,6 +455,7 @@ on-arrival: {!
   Q.tax_collection_timer = 8;
   Q.elites_unrest += 5; Q.middle_unrest += 4; Q.kulaks_unrest += 4; Q.peasants_unrest += 2;
   Q.instability += 1; Q.capital_flight_progress += 0.25;
+  Q.investor_confidence = Math.min(1, Math.max(0, Q.investor_confidence - 0.04));
 !}
 
 @tax_amnesty
@@ -463,6 +470,7 @@ on-arrival: {!
   Q.tax_administration = Math.max(0, Q.tax_administration - 0.03);
   Q.middle_unrest -= 3; Q.elites_unrest -= 3; Q.kulaks_unrest -= 2;
   Q.workers_unrest += 1;
+  Q.investor_confidence = Math.min(1, Math.max(0, Q.investor_confidence + 0.03));
 !}
 
 
@@ -901,6 +909,7 @@ on-arrival: {!
     Q.food_sold *= 0.98;
     Q.middle_wealth *= 0.98; Q.middle_unrest += 2;
     Q.instability += 1;
+  Q.investor_confidence = Math.min(1, Math.max(0, Q.investor_confidence - 0.03));
 !}
 
 @finance_bank_advances
@@ -921,6 +930,7 @@ on-arrival: {!
     Q.food_sold *= 0.99;
     Q.middle_wealth *= 0.99; Q.middle_unrest += 1;
     Q.instability += 0.25;
+  Q.investor_confidence = Math.min(1, Math.max(0, Q.investor_confidence - 0.015));
 !}
 
 @finance_issue_bonds
@@ -937,6 +947,7 @@ on-arrival: {!
     Q.bond_rate += 1;
     Q.elites_unrest += 3; Q.middle_unrest += 3; Q.kulaks_unrest += 1;
   }
+  Q.investor_confidence = Math.min(1, Math.max(0, Q.investor_confidence - (Q.repudiation == 1 ? 0.03 : 0.005)));
 !}
 
 @redeem_bonds
@@ -950,6 +961,7 @@ on-arrival: {!
   Q.bond_rate = Math.max(3, Q.bond_rate - 0.25);
   Q.monthly_inflation = Math.max(0, Q.monthly_inflation - 0.1);
   Q.elites_unrest -= 1; Q.middle_unrest -= 1;
+  Q.investor_confidence = Math.min(1, Math.max(0, Q.investor_confidence + 0.02));
 !}
 
 @pay_off_loans
@@ -993,6 +1005,7 @@ on-arrival: {!
   if (creditors[loan.lender]) Q[creditors[loan.lender] + '_relation'] += 2;
   Q.instability = Math.max(0, Q.instability - 0.5);
   Q.capital_flight_progress -= loan.lender == "Russia" ? 0.25 : 0.1;
+  Q.investor_confidence = Math.min(1, Q.investor_confidence + (loan.lender == "Russia" ? 0.03 : 0.015));
 !}
 
 @repay_loan_2
@@ -1011,6 +1024,7 @@ on-arrival: {!
   if (creditors[loan.lender]) Q[creditors[loan.lender] + '_relation'] += 2;
   Q.instability = Math.max(0, Q.instability - 0.5);
   Q.capital_flight_progress -= loan.lender == "Russia" ? 0.25 : 0.1;
+  Q.investor_confidence = Math.min(1, Q.investor_confidence + (loan.lender == "Russia" ? 0.03 : 0.015));
 !}
 
 @repay_loan_3
@@ -1029,6 +1043,7 @@ on-arrival: {!
   if (creditors[loan.lender]) Q[creditors[loan.lender] + '_relation'] += 2;
   Q.instability = Math.max(0, Q.instability - 0.5);
   Q.capital_flight_progress -= loan.lender == "Russia" ? 0.25 : 0.1;
+  Q.investor_confidence = Math.min(1, Q.investor_confidence + (loan.lender == "Russia" ? 0.03 : 0.015));
 !}
 
 @repay_loan_4
@@ -1047,6 +1062,7 @@ on-arrival: {!
   if (creditors[loan.lender]) Q[creditors[loan.lender] + '_relation'] += 2;
   Q.instability = Math.max(0, Q.instability - 0.5);
   Q.capital_flight_progress -= loan.lender == "Russia" ? 0.25 : 0.1;
+  Q.investor_confidence = Math.min(1, Q.investor_confidence + (loan.lender == "Russia" ? 0.03 : 0.015));
 !}
 
 @repay_loan_5
@@ -1065,6 +1081,7 @@ on-arrival: {!
   if (creditors[loan.lender]) Q[creditors[loan.lender] + '_relation'] += 2;
   Q.instability = Math.max(0, Q.instability - 0.5);
   Q.capital_flight_progress -= loan.lender == "Russia" ? 0.25 : 0.1;
+  Q.investor_confidence = Math.min(1, Q.investor_confidence + (loan.lender == "Russia" ? 0.03 : 0.015));
 !}
 
 @repay_loan_6
@@ -1083,6 +1100,7 @@ on-arrival: {!
   if (creditors[loan.lender]) Q[creditors[loan.lender] + '_relation'] += 2;
   Q.instability = Math.max(0, Q.instability - 0.5);
   Q.capital_flight_progress -= loan.lender == "Russia" ? 0.25 : 0.1;
+  Q.investor_confidence = Math.min(1, Q.investor_confidence + (loan.lender == "Russia" ? 0.03 : 0.015));
 !}
 
 @repay_loan_7
@@ -1101,6 +1119,7 @@ on-arrival: {!
   if (creditors[loan.lender]) Q[creditors[loan.lender] + '_relation'] += 2;
   Q.instability = Math.max(0, Q.instability - 0.5);
   Q.capital_flight_progress -= loan.lender == "Russia" ? 0.25 : 0.1;
+  Q.investor_confidence = Math.min(1, Q.investor_confidence + (loan.lender == "Russia" ? 0.03 : 0.015));
 !}
 
 @repay_loan_8
@@ -1119,6 +1138,7 @@ on-arrival: {!
   if (creditors[loan.lender]) Q[creditors[loan.lender] + '_relation'] += 2;
   Q.instability = Math.max(0, Q.instability - 0.5);
   Q.capital_flight_progress -= loan.lender == "Russia" ? 0.25 : 0.1;
+  Q.investor_confidence = Math.min(1, Q.investor_confidence + (loan.lender == "Russia" ? 0.03 : 0.015));
 !}
 
 @repay_loan_9
@@ -1137,6 +1157,7 @@ on-arrival: {!
   if (creditors[loan.lender]) Q[creditors[loan.lender] + '_relation'] += 2;
   Q.instability = Math.max(0, Q.instability - 0.5);
   Q.capital_flight_progress -= loan.lender == "Russia" ? 0.25 : 0.1;
+  Q.investor_confidence = Math.min(1, Q.investor_confidence + (loan.lender == "Russia" ? 0.03 : 0.015));
 !}
 
 @repay_loan_10
@@ -1155,6 +1176,7 @@ on-arrival: {!
   if (creditors[loan.lender]) Q[creditors[loan.lender] + '_relation'] += 2;
   Q.instability = Math.max(0, Q.instability - 0.5);
   Q.capital_flight_progress -= loan.lender == "Russia" ? 0.25 : 0.1;
+  Q.investor_confidence = Math.min(1, Q.investor_confidence + (loan.lender == "Russia" ? 0.03 : 0.015));
 !}
 
 @repay_loan_11
@@ -1173,6 +1195,7 @@ on-arrival: {!
   if (creditors[loan.lender]) Q[creditors[loan.lender] + '_relation'] += 2;
   Q.instability = Math.max(0, Q.instability - 0.5);
   Q.capital_flight_progress -= loan.lender == "Russia" ? 0.25 : 0.1;
+  Q.investor_confidence = Math.min(1, Q.investor_confidence + (loan.lender == "Russia" ? 0.03 : 0.015));
 !}
 
 @repay_loan_12
@@ -1191,6 +1214,7 @@ on-arrival: {!
   if (creditors[loan.lender]) Q[creditors[loan.lender] + '_relation'] += 2;
   Q.instability = Math.max(0, Q.instability - 0.5);
   Q.capital_flight_progress -= loan.lender == "Russia" ? 0.25 : 0.1;
+  Q.investor_confidence = Math.min(1, Q.investor_confidence + (loan.lender == "Russia" ? 0.03 : 0.015));
 !}
 
 @repay_loan_13
@@ -1209,6 +1233,7 @@ on-arrival: {!
   if (creditors[loan.lender]) Q[creditors[loan.lender] + '_relation'] += 2;
   Q.instability = Math.max(0, Q.instability - 0.5);
   Q.capital_flight_progress -= loan.lender == "Russia" ? 0.25 : 0.1;
+  Q.investor_confidence = Math.min(1, Q.investor_confidence + (loan.lender == "Russia" ? 0.03 : 0.015));
 !}
 
 @repay_loan_14
@@ -1227,6 +1252,7 @@ on-arrival: {!
   if (creditors[loan.lender]) Q[creditors[loan.lender] + '_relation'] += 2;
   Q.instability = Math.max(0, Q.instability - 0.5);
   Q.capital_flight_progress -= loan.lender == "Russia" ? 0.25 : 0.1;
+  Q.investor_confidence = Math.min(1, Q.investor_confidence + (loan.lender == "Russia" ? 0.03 : 0.015));
 !}
 
 @repay_loan_15
@@ -1245,6 +1271,7 @@ on-arrival: {!
   if (creditors[loan.lender]) Q[creditors[loan.lender] + '_relation'] += 2;
   Q.instability = Math.max(0, Q.instability - 0.5);
   Q.capital_flight_progress -= loan.lender == "Russia" ? 0.25 : 0.1;
+  Q.investor_confidence = Math.min(1, Q.investor_confidence + (loan.lender == "Russia" ? 0.03 : 0.015));
 !}
 
 @repay_loan_16
@@ -1263,6 +1290,7 @@ on-arrival: {!
   if (creditors[loan.lender]) Q[creditors[loan.lender] + '_relation'] += 2;
   Q.instability = Math.max(0, Q.instability - 0.5);
   Q.capital_flight_progress -= loan.lender == "Russia" ? 0.25 : 0.1;
+  Q.investor_confidence = Math.min(1, Q.investor_confidence + (loan.lender == "Russia" ? 0.03 : 0.015));
 !}
 
 @levy_contributions
@@ -1278,6 +1306,7 @@ on-arrival: {!
   Q.contributions_timer = 8;
   Q.capital_flight_progress += 0.5; Q.monthly_inflation *= 0.95; Q.instability += 2;
   Q.elites_unrest += 5; Q.middle_unrest += 2.5; Q.workers_unrest -= 5; Q.peasants_unrest -= 5; Q.kulaks_unrest -= 4; Q.intelligentsia_unrest += 3; 
+  Q.investor_confidence = Math.min(1, Math.max(0, Q.investor_confidence - 0.05));
 !}
 
 @seize_safe_deposits
@@ -1291,6 +1320,7 @@ on-arrival: {!
   Q.elites_unrest += 10; Q.middle_unrest += 5;
   Q.capital_flight_progress += 1;
   Q.bourgeois_specialists *= 0.98;
+  Q.investor_confidence = Math.min(1, Math.max(0, Q.investor_confidence - 0.05));
 !}
 
 
