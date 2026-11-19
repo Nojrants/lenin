@@ -779,14 +779,14 @@ if (newWeek) {
 	// ---- Peasant and kulak wealth ----
 	// Gains: legal trade (food_sold), black market sales when cities are hungry (kulaks gain
 	// the most), subsidies. Losses: inflation (kulaks hold more real assets), rural hunger.
-	var black_market = (Q.hunger / 100) * Math.min(2, 0.5 + Q.bagmen_strength / 100);
+	var black_food = (Q.hunger / 100) * Math.min(2, 0.25 + Q.black_market / 100);
 	var subsidy_cash = Q.agriculture_subsidies * reach(subsidy_efficiency);
 	var rural_hunger_loss = Math.min(0.03, Math.max(0, Q.rural_hunger) / 100 * 0.05);
 
-	Q.peasants_wealth += Q.food_sold * 0.55 + black_market * 0.15 + subsidy_cash * 0.04
+	Q.peasants_wealth += Q.food_sold * 0.55 + black_food * 0.15 + subsidy_cash * 0.04
 		- Q.peasants_wealth * (Q.monthly_inflation / 100) * 0.15
 		- Q.peasants_wealth * rural_hunger_loss;
-	Q.kulaks_wealth += Q.food_sold * 0.20 + black_market * 0.30 + subsidy_cash * 0.03
+	Q.kulaks_wealth += Q.food_sold * 0.20 + black_food * 0.30 + subsidy_cash * 0.03
 		- Q.kulaks_wealth * (Q.monthly_inflation / 100) * 0.08
 		- Q.kulaks_wealth * rural_hunger_loss;
 	Q.peasants_wealth = Math.min(100, Math.max(1, Q.peasants_wealth));
@@ -876,7 +876,7 @@ Q.trade_stability = Math.max(0, 100 - Q.instability);
 
 Q.trade_capacity = ((Q.ag_gdp + Q.industry_gdp) / 200) * (1 + (Q.finalefficacy_trade - 0.5));
 Q.trade_realization = 0.30 + 0.30*(Q.trade_marketization/100) + 0.20*(Q.civilian_transport/100) + 0.20*(Q.trade_stability/100)
-                     - Math.min(0.15, Q.bagmen_strength/500);
+                     - Math.min(0.2, Math.max(0, Q.black_market - 20) / 400);
 Q.trade_gdp = Q.trade_capacity * 100 * Q.trade_realization * (0.5 + 0.5*(Q.specialist_capacity/100));
 
 
@@ -1002,7 +1002,7 @@ Q.food_demand_rural = Q.rural_population * 500 / 1000000;
 Q.food_demand_military = Q.soldiers_population * 700 / 1000000;
 
 // Urban food supply before stockpile
-Q.food_supply_urban = Q.food_production * (Q.food_sold + (Q.bagmen_strength / 400));
+Q.food_supply_urban = Q.food_production * (Q.food_sold + (Q.bagmen_strength / 400) + Math.max(0, Q.black_market - 25) / 1000);
 
 // Transportation limits urban supply
 Q.food_transport_capacity = Math.max(0, (Q.effective_rail_throughput * 0.15) - Math.min(0.5, (Q.bagmen_strength / 500)));
@@ -1397,6 +1397,72 @@ Q.government_functions = (
     Q.nationalities_expend +
     Q.welfare_expend
 );
+
+// BLACK MARKET
+if (Q.black_market === undefined) Q.black_market = 25;
+if (newWeek) {
+    var goods_fill = ((Q.ind_fill_consumer || 1) + (Q.ind_fill_agri || 1)) / 2;
+    var illicit_pressure = 5
+        + 0.6 * Math.max(0, Q.hunger)
+        + 40 * Math.max(0, 1 - goods_fill)
+        + Math.min(20, Math.max(0, Q.monthly_inflation))
+        + 20 * Math.max(0, 1 - Q.trade_marketization / 100)
+        + 0.5 * Math.max(0, Q.bagmen_strength)
+        + 0.5 * Math.max(0, Q.unemployed)
+        + 10 * (Q.price_controls || 0);
+    var policing = Math.min(0.6, 0.3 * Q.finalefficacy_internal
+        + (Q.cheka_founded == 1 ? Q.cheka * Q.cheka_militancy / 50 : 0));
+    Q.black_market_target = Math.min(150, illicit_pressure * (1 - policing));
+    Q.black_market += 0.1 * (Q.black_market_target - Q.black_market);
+    Q.black_market = Math.round(100 * Math.max(0, Q.black_market)) / 100;
+
+    var illicit_excess = Math.max(0, Q.black_market - 25);
+    Q.workers_unrest += illicit_excess / 200;
+    Q.underclass_unrest += illicit_excess / 300;
+    Q.kulaks_wealth += illicit_excess / 1000;
+    Q.finance_corruption = Math.min(1, Q.finance_corruption + illicit_excess / 20000);
+}
+
+// TAX EFFICACY
+if (Q.tax_administration === undefined) Q.tax_administration = 0.35;
+if (newWeek) {
+    var clamp01 = function(x) { return Math.min(1, Math.max(0, x)); };
+    var price_drag = Math.min(0.6, Q.monthly_inflation / 40) * (Q.tax_indexation == 1 ? 0.5 : 1);
+    var order = clamp01(1 - Q.instability / 250);
+    var evasion = function(classes) {
+        var total = 0;
+        for (var c of classes) total += Math.max(0, Q[c + '_unrest']);
+        return clamp01(1 - (total / classes.length) / 250);
+    };
+    var nationalized = clamp01(Q.industries_nationalized / 100);
+    var private_share = clamp01(Q.trade_marketization / 100);
+    var illicit = clamp01((Q.black_market || 0) / 100);
+    var hidden_wealth = clamp01(((Q.capital_flight_progress || 0) + (Q.contributions_levied || 0)) / 20);
+    var enforcement = Q.tax_enforcement || 0;
+
+    var income_target = (0.2 + 0.55 * Q.tax_administration + 0.15 * Q.finalefficacy_finance
+        + (Q.tax_withholding == 1 ? 0.5 * nationalized : 0))
+        * (1 - 0.6 * price_drag) * order * evasion(['elites', 'middle', 'workers', 'kulaks']) * (1 - 0.3 * illicit);
+
+    var property_target = (0.45 + 0.5 * Q.tax_administration + 0.15 * Q.finalefficacy_finance
+        + (Q.banks_seized == 1 ? 0.15 : 0))
+        * (1 - 0.3 * price_drag) * order * evasion(['elites', 'middle', 'kulaks']) * (1 - 0.5 * hidden_wealth);
+
+    var business_target = (0.75 + 0.3 * Q.tax_administration + 0.15 * Q.finalefficacy_finance
+        + (Q.banks_seized == 1 ? 0.05 : 0))
+        * (1 - 0.3 * price_drag) * order * (0.6 + 0.4 * private_share) * (1 - 0.6 * illicit);
+
+    Q.income_tax_target = clamp01(income_target + enforcement);
+    Q.wealth_tax_target = clamp01(property_target + enforcement);
+    Q.business_tax_target = clamp01(business_target + 0.5 * enforcement);
+
+    Q.income_tax_efficacy += 0.1 * (Q.income_tax_target - Q.income_tax_efficacy);
+    Q.wealth_tax_efficacy += 0.1 * (Q.wealth_tax_target - Q.wealth_tax_efficacy);
+    Q.business_tax_efficacy += 0.1 * (Q.business_tax_target - Q.business_tax_efficacy);
+
+    Q.tax_enforcement = Math.max(0, enforcement * 0.85 - 0.005);
+    Q.tax_administration = Math.max(0, Q.tax_administration - 0.002);
+}
 
 Q.income_tax_1 =
 (
@@ -2031,6 +2097,15 @@ if (newWeek) {
     var deficit_step = 0.1 * (deficit_target - Q.deficit_inflation);
     Q.deficit_inflation += deficit_step;
     Q.monthly_inflation = Math.max(0, Math.round((Q.monthly_inflation + deficit_step) * 100) / 100);
+}
+
+// black market prices pull official prices up
+if (Q.black_market_inflation === undefined) Q.black_market_inflation = 0;
+if (newWeek) {
+    var illicit_target = 0.04 * (Q.black_market - 25);
+    var illicit_step = 0.1 * (illicit_target - Q.black_market_inflation);
+    Q.black_market_inflation += illicit_step;
+    Q.monthly_inflation = Math.max(0, Math.round((Q.monthly_inflation + illicit_step) * 100) / 100);
 }
 
 // inflation erodes debts fixed in roubles
