@@ -296,6 +296,7 @@ Q.bagmen = 0;
 Q.bagmen_unrest = 0;
 Q.bagmen_strength = 0;
 Q.black_market = 25;
+Q.investor_confidence = 0.45;
 Q.price_controls = 0;
 Q.tax_administration = 0.35;
 Q.tax_enforcement = 0;
