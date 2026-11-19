@@ -273,7 +273,7 @@ on-arrival: {!
 <td style="text-align:left; padding:5px 5px 5px 15px; border-bottom:1px solid rgba(128,128,128,0.25);">
 <span style="color: var(--bolshevik-color); font-weight:bold;">Tax Administration</span>
 </td>
-<td style="text-align:center; padding:5px; border-bottom:1px solid rgba(128,128,128,0.25);">
+<td style="text-align:right; padding:5px; border-bottom:1px solid rgba(128,128,128,0.25);">
 [+ tax_administration_display +]%
 </td>
 </tr>
@@ -281,7 +281,7 @@ on-arrival: {!
 <td style="text-align:left; padding:5px 5px 5px 15px; border-bottom:1px solid rgba(128,128,128,0.25);">
 <span style="color: var(--bolshevik-color); font-weight:bold;">Tax Inspectors</span>
 </td>
-<td style="text-align:center; padding:5px; border-bottom:1px solid rgba(128,128,128,0.25);">
+<td style="text-align:right; padding:5px; border-bottom:1px solid rgba(128,128,128,0.25);">
 [+ tax_inspectors +]
 </td>
 </tr>
@@ -289,7 +289,7 @@ on-arrival: {!
 <td style="text-align:left; padding:5px 5px 5px 15px; border-bottom:1px solid rgba(128,128,128,0.25);">
 <span style="color: var(--bolshevik-color); font-weight:bold;">Income Tax Collection</span>
 </td>
-<td style="text-align:center; padding:5px; border-bottom:1px solid rgba(128,128,128,0.25);">
+<td style="text-align:right; padding:5px; border-bottom:1px solid rgba(128,128,128,0.25);">
 [? if income_tax_trend = 1 : <span style="color: var(--level1-color);">&#9650;</span> ?][? if income_tax_trend = -1 : <span style="color: var(--level7-color);">&#9660;</span> ?][? if income_tax_trend = 0 : <span style="color: #5aa9e6;">&#9644;</span> ?] [+ income_tax_efficacy_display +]%
 </td>
 </tr>
@@ -297,7 +297,7 @@ on-arrival: {!
 <td style="text-align:left; padding:5px 5px 5px 15px; border-bottom:1px solid rgba(128,128,128,0.25);">
 <span style="color: var(--bolshevik-color); font-weight:bold;">Property Tax Collection</span>
 </td>
-<td style="text-align:center; padding:5px; border-bottom:1px solid rgba(128,128,128,0.25);">
+<td style="text-align:right; padding:5px; border-bottom:1px solid rgba(128,128,128,0.25);">
 [? if wealth_tax_trend = 1 : <span style="color: var(--level1-color);">&#9650;</span> ?][? if wealth_tax_trend = -1 : <span style="color: var(--level7-color);">&#9660;</span> ?][? if wealth_tax_trend = 0 : <span style="color: #5aa9e6;">&#9644;</span> ?] [+ wealth_tax_efficacy_display +]%
 </td>
 </tr>
@@ -305,7 +305,7 @@ on-arrival: {!
 <td style="text-align:left; padding:5px 5px 5px 15px; border-bottom:1px solid rgba(128,128,128,0.25);">
 <span style="color: var(--bolshevik-color); font-weight:bold;">Business Tax Collection</span>
 </td>
-<td style="text-align:center; padding:5px; border-bottom:1px solid rgba(128,128,128,0.25);">
+<td style="text-align:right; padding:5px; border-bottom:1px solid rgba(128,128,128,0.25);">
 [? if business_tax_trend = 1 : <span style="color: var(--level1-color);">&#9650;</span> ?][? if business_tax_trend = -1 : <span style="color: var(--level7-color);">&#9660;</span> ?][? if business_tax_trend = 0 : <span style="color: #5aa9e6;">&#9644;</span> ?] [+ business_tax_efficacy_display +]%
 </td>
 </tr>
@@ -313,7 +313,7 @@ on-arrival: {!
 <td style="text-align:left; padding:5px 5px 5px 15px; border-bottom:1px solid rgba(128,128,128,0.25);">
 <span style="color: var(--bolshevik-color); font-weight:bold;">Withholding at Source</span>
 </td>
-<td style="text-align:center; padding:5px; border-bottom:1px solid rgba(128,128,128,0.25);">
+<td style="text-align:right; padding:5px; border-bottom:1px solid rgba(128,128,128,0.25);">
 [? if tax_withholding = 1 : In force ?][? if tax_withholding != 1 : None ?]
 </td>
 </tr>
@@ -321,7 +321,7 @@ on-arrival: {!
 <td style="text-align:left; padding:5px 5px 5px 15px; border-bottom:1px solid rgba(128,128,128,0.25);">
 <span style="color: var(--bolshevik-color); font-weight:bold;">Price Indexation</span>
 </td>
-<td style="text-align:center; padding:5px; border-bottom:1px solid rgba(128,128,128,0.25);">
+<td style="text-align:right; padding:5px; border-bottom:1px solid rgba(128,128,128,0.25);">
 [? if tax_indexation = 1 : In force ?][? if tax_indexation != 1 : None ?]
 </td>
 </tr>
@@ -329,7 +329,7 @@ on-arrival: {!
 <td style="text-align:left; padding:5px 5px 5px 15px;">
 <span style="color: var(--bolshevik-color); font-weight:bold;">Black Market</span>
 </td>
-<td style="text-align:center; padding:5px;">
+<td style="text-align:right; padding:5px;">
 [+ black_market_level : corruption +]
 </td>
 </tr>
@@ -633,108 +633,108 @@ title: Income tax
 go-to: taxation
 
 @increase_bracket1
-title: – Increase bracket one.
+title: – <span style="color: var(--level1-color);">&#9650;</span> Increase bracket one.
 go-to: taxation
 choose-if: income_tax_rate_1 < 5
 unavailable-subtitle: The tax rate is already at the maximum.
 on-arrival: income_tax_rate_1 += 0.25; capital_flight_progress += 0.25; elites_unrest += 2.5; middle_unrest += 2.5; monthly_inflation -= 0.05;
 
 @decrease_bracket1
-title: – Decrease bracket one.
+title: – <span style="color: var(--level7-color);">&#9660;</span> Decrease bracket one.
 go-to: taxation
 choose-if: income_tax_rate_1 >= 0.25
 unavailable-subtitle: The tax rate is already at zero.
 on-arrival: income_tax_rate_1 -= 0.25; capital_flight_progress -= 0.25; elites_unrest -= 2.5; middle_unrest -= 2.5; monthly_inflation += 0.05;
 
 @increase_bracket2
-title: – Increase bracket two.
+title: – <span style="color: var(--level1-color);">&#9650;</span> Increase bracket two.
 go-to: taxation
 choose-if: income_tax_rate_2 < 5
 unavailable-subtitle: The tax rate is already at the maximum.
 on-arrival: income_tax_rate_2 += 0.25; capital_flight_progress += 0.25; elites_unrest += 2.5; middle_unrest += 2.5; monthly_inflation -= 0.05;
 
 @decrease_bracket2
-title: – Decrease bracket two.
+title: – <span style="color: var(--level7-color);">&#9660;</span> Decrease bracket two.
 go-to: taxation
 choose-if: income_tax_rate_2 >= 0.25
 unavailable-subtitle: The tax rate is already at zero.
 on-arrival: income_tax_rate_2 -= 0.25; capital_flight_progress -= 0.25; elites_unrest -= 2.5; middle_unrest -= 2.5; monthly_inflation += 0.05;
 
 @increase_bracket3
-title: – Increase bracket three.
+title: – <span style="color: var(--level1-color);">&#9650;</span> Increase bracket three.
 go-to: taxation
 choose-if: income_tax_rate_3 < 5
 unavailable-subtitle: The tax rate is already at the maximum.
 on-arrival: income_tax_rate_3 += 0.25; capital_flight_progress += 0.25; middle_unrest += 2.5; kulaks_unrest += 1; monthly_inflation -= 0.05;
 
 @decrease_bracket3
-title: – Decrease bracket three.
+title: – <span style="color: var(--level7-color);">&#9660;</span> Decrease bracket three.
 go-to: taxation
 choose-if: income_tax_rate_3 >= 0.25
 unavailable-subtitle: The tax rate is already at zero.
 on-arrival: income_tax_rate_3 -= 0.25; capital_flight_progress -= 0.25; middle_unrest -= 2.5; kulaks_unrest -= 1; monthly_inflation += 0.05;
 
 @increase_bracket4
-title: – Increase bracket four.
+title: – <span style="color: var(--level1-color);">&#9650;</span> Increase bracket four.
 go-to: taxation
 choose-if: income_tax_rate_4 < 5
 unavailable-subtitle: The tax rate is already at the maximum.
 on-arrival: income_tax_rate_4 += 0.25; middle_unrest += 2.5; workers_unrest += 10; monthly_inflation -= 0.05;
 
 @decrease_bracket4
-title: – Decrease bracket four.
+title: – <span style="color: var(--level7-color);">&#9660;</span> Decrease bracket four.
 go-to: taxation
 choose-if: income_tax_rate_4 >= 0.25
 unavailable-subtitle: The tax rate is already at zero.
 on-arrival: income_tax_rate_4 -= 0.25; middle_unrest -= 2.5; workers_unrest -= 10; monthly_inflation += 0.05;
 
 @increase_bracket5
-title: – Increase bracket five.
+title: – <span style="color: var(--level1-color);">&#9650;</span> Increase bracket five.
 go-to: taxation
 choose-if: income_tax_rate_5 < 5
 unavailable-subtitle: The tax rate is already at the maximum.
 on-arrival: income_tax_rate_5 += 0.25; workers_unrest += 5; peasants_unrest += 5; monthly_inflation -= 0.05;
 
 @decrease_bracket5
-title: – Decrease bracket five.
+title: – <span style="color: var(--level7-color);">&#9660;</span> Decrease bracket five.
 go-to: taxation
 choose-if: income_tax_rate_5 >= 0.25
 unavailable-subtitle: The tax rate is already at zero.
 on-arrival: income_tax_rate_5 -= 0.25; workers_unrest -= 5; peasants_unrest -= 5; monthly_inflation += 0.05;
 
 @increase_property_tax
-title: Increase the property tax.
+title: <span style="color: var(--level1-color);">&#9650;</span> Increase the property tax.
 go-to: taxation
 on-arrival: wealth_tax_rate += 0.5; capital_flight_progress += 0.5; capital_flight_progress += 1 if wealth_tax_rate >= 2; elites_unrest += 10; middle_unrest += 5; workers_unrest -= 5; monthly_inflation -= 0.2;
 
 @decrease_property_tax
-title: Decrease the property tax.
+title: <span style="color: var(--level7-color);">&#9660;</span> Decrease the property tax.
 go-to: taxation
 choose-if: wealth_tax_rate >= 0.5
 unavailable-subtitle: The tax rate is already at zero.
 on-arrival: wealth_tax_rate -= 0.5; capital_flight_progress -= 0.5; elites_unrest -= 10; middle_unrest -= 5; workers_unrest += 5; monthly_inflation += 0.2;
 
 @increase_business_tax
-title: Increase the business tax.
+title: <span style="color: var(--level1-color);">&#9650;</span> Increase the business tax.
 go-to: taxation
 on-arrival: business_tax_rate += 0.5; capital_flight_progress += 0.5; capital_flight_progress += 1 if business_tax_rate >= 2; elites_unrest += (10 * (trade_marketization/100)); middle_unrest += (10 * (trade_marketization/100)); workers_unrest -= 5; monthly_inflation -= 0.2;
 
 @decrease_business_tax
-title: Decrease the business tax.
+title: <span style="color: var(--level7-color);">&#9660;</span> Decrease the business tax.
 go-to: taxation
 choose-if: business_tax_rate >= 0.5
 unavailable-subtitle: The tax rate is already at zero.
 on-arrival: business_tax_rate -= 0.5; capital_flight_progress -= 0.5; elites_unrest -= (10 * (trade_marketization/100)); middle_unrest -= (10 * (trade_marketization/100)); workers_unrest += 5; monthly_inflation += 0.2;
 
 @increase_syndicate_levy
-title: Increase the levy on syndicalized enterprises.
+title: <span style="color: var(--level1-color);">&#9650;</span> Increase the levy on syndicalized enterprises.
 go-to: taxation
 choose-if: syndicate_levy_rate < 50
 unavailable-subtitle: The levy is already at the maximum.
 on-arrival: syndicate_levy_rate += 5; workers_unrest += (7.5 * (industries_syndicalized/100)); monthly_inflation -= 0.05;
 
 @decrease_syndicate_levy
-title: Decrease the levy on syndicalized enterprises.
+title: <span style="color: var(--level7-color);">&#9660;</span> Decrease the levy on syndicalized enterprises.
 go-to: taxation
 choose-if: syndicate_levy_rate >= 5
 unavailable-subtitle: The levy is already at zero.
