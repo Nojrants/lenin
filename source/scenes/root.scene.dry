@@ -295,6 +295,18 @@ Q.provincials_strength = 40;
 Q.bagmen = 0;
 Q.bagmen_unrest = 0;
 Q.bagmen_strength = 0;
+Q.black_market = 25;
+Q.price_controls = 0;
+Q.tax_administration = 0.35;
+Q.tax_enforcement = 0;
+Q.tax_withholding = 0;
+Q.tax_indexation = 0;
+Q.tax_inspectors = 0;
+Q.tax_amnesties = 0;
+Q.tax_census_timer = 0;
+Q.tax_collection_timer = 0;
+Q.tax_amnesty_timer = 0;
+Q.black_market_inflation = 0;
 
 Q.general_unrest = ((Q.elites_unrest * Q.elites) + (Q.middle_unrest * Q.middle) + (Q.clergy_unrest * Q.clergy) + (Q.workers_unrest * Q.workers) + (Q.peasants_unrest * Q.peasants) + (Q.kulaks_unrest * Q.kulaks) + (Q.intelligentsia_unrest * Q.intelligentsia) + (Q.soldiers_unrest * Q.soldiers) + (Q.underclass_unrest * Q.underclass) + (Q.students_unrest * Q.students)) / 100;
 
@@ -1543,7 +1555,7 @@ Q.timers = [//m_party
             'internal_security', 'transport_policy',
             'industrial_policy', 'civil_rights',
             'shuffle_cabinet', 'social_policy',
-            'education_policy', 'economic_policy', 'coalition_affairs', 'capital_flight', 'contributions',
+            'education_policy', 'economic_policy', 'coalition_affairs', 'capital_flight', 'contributions', 'tax_census', 'tax_collection', 'tax_amnesty',
             'womens_rights', 'offensive',
             'foreignaffairs_corruption', 'finance_corruption', 'military_corruption',
             'internal_corruption', 'enlightenment_corruption', 'internal_corruption',
