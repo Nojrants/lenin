@@ -1267,12 +1267,14 @@ if (newWeek) {
 		}
 
 		if (Q.month == 11) { 
-			Q.workers_b += (Q.workers_sr * 0.05) + (Q.workers_right_m * 0.15) + (Q.workers_m * 0.1) + (Q.workers_left_m * 0.05) + (Q.workers_sdi * 0.1);
+			Q.workers_b += (Q.workers_sr * 0.025) + (Q.workers_right_m * 0.15) + (Q.workers_m * 0.1) + (Q.workers_left_m * 0.05) + (Q.workers_sdi * 0.1);
 			Q.workers_anarchist += (Q.workers_sr * 0.025); Q.workers_maximalist += (Q.workers_sr * 0.025);
+			Q.workers_lsr += (Q.workers_sr * 0.025);
 			Q.workers_sr *= 0.9; Q.workers_right_m *= 0.85; Q.workers_m *= 0.90; Q.workers_left_m *= 0.95; Q.workers_sdi *= 0.9; 
 			
 			Q.soldiers_b += (Q.soldiers_sr * 0.05) + (Q.soldiers_m * 0.05) + (Q.soldiers_other * 0.05); 
-			Q.soldiers_sr *= 0.95; Q.soldiers_m *= 0.95; Q.soldiers_other *= 0.95; 
+			Q.soldiers_lsr += (Q.soldiers_sr * 0.025);
+			Q.soldiers_sr *= 0.925; Q.soldiers_m *= 0.95; Q.soldiers_other *= 0.95; 
 		}
 		
 		if (Q.month == 12) { 
