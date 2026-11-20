@@ -1281,14 +1281,15 @@ if (newWeek) {
 			Q.workers_b += (Q.workers_right_m * 0.05) + (Q.workers_m * 0.05) + (Q.workers_sdi * 0.05); 
 			Q.workers_lsr += (Q.workers_b * 0.006); Q.soldiers_lsr += (Q.soldiers_b * 0.006);
 			Q.workers_left_m += (Q.workers_b * 0.002); Q.workers_m += (Q.workers_b * 0.002); 
+			Q.workers_b *= 0.99; Q.soldiers_b *= 0.994;
 			Q.workers_right_m *= 0.95; Q.workers_m *= 0.95; Q.workers_sdi *= 0.95;
 		}
 	}
-	if (Q.year == 1918 && brest_signed != 1) { 
+	if (Q.year == 1918 && Q.brest_signed != 1) { 
 		if (Q.month > 1) {
 			Q.workers_lsr += (Q.workers_b * 0.008); Q.soldiers_lsr += (Q.soldiers_b * 0.0045);
 			Q.workers_left_m += (Q.workers_b * 0.003); Q.workers_m += (Q.workers_b * 0.002); 
-			Q.workers_b *= 0.983; Q.soldiers_b *= 0.991; 
+			Q.workers_b *= 0.987; Q.soldiers_b *= 0.9955; 
 		}
 		if (Q.lsr_in_gov == 1) { 
 			if (Q.sr_in_gov != 1) {
@@ -1311,7 +1312,7 @@ if (newWeek) {
 		Q.workers_right_sr += (Q.workers_b * 0.0015); 
 		Q.workers_left_m += (Q.workers_b * 0.001); Q.workers_m += (Q.workers_b * 0.001); Q.workers_right_m += (Q.workers_b * 0.001); 
 
-		Q.workers_b *= 0.9695; Q.peasants_b *= 0.975;
+		Q.workers_b *= 0.979; Q.peasants_b *= 0.975;
 	}
 }
 
