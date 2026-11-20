@@ -478,10 +478,9 @@ on-arrival: {!
 title: TAXATION
 new-page: true
 on-arrival: {!
-  var income_efficacy = (Q.income_tax_efficacy / 4 * 3) + (Q.finalefficacy_finance / 4);
   Q.income_tax_estimate = 0;
   for (var bracket = 1; bracket <= 5; bracket++) {
-      var estimate = (Q['income_tax_yield_' + bracket] || 0) * Q['income_tax_rate_' + bracket] * income_efficacy;
+      var estimate = (Q['income_tax_yield_' + bracket] || 0) * Q['income_tax_rate_' + bracket];
       Q['income_tax_' + bracket + '_display'] = Math.round(100 * estimate)/100;
       Q.income_tax_estimate += estimate;
   }
