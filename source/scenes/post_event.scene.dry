@@ -1309,7 +1309,7 @@ if (newWeek) {
 		Q.workers_right_sr += (Q.workers_b * 0.005); 
 		Q.workers_left_m += (Q.workers_b * 0.001); Q.workers_m += (Q.workers_b * 0.001); Q.workers_right_m += (Q.workers_b * 0.001); 
 
-		Q.workers_b *= 0.9962; Q.peasants_b *= 0.9975;
+		Q.workers_b *= 0.962; Q.peasants_b *= 0.975;
 	}
 }
 
