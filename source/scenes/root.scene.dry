@@ -792,7 +792,7 @@ Q.sr_in_gov = 0;
 Q.b_in_gov = 1;
 Q.coalition_government = 0; 
 // splinter parties - Left-SR and Right-SR
-Q.left_sr_in_gov = 0;
+Q.lsr_in_gov = 0;
 Q.right_sr_in_gov = 0;
 // Social-Democratic Internationalists (left-Menshevik/right-Bolshevik split)
 Q.internationalist_in_gov = 0;
