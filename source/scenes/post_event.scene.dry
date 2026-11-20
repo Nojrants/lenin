@@ -1497,94 +1497,94 @@ if (newWeek) {
     Q.tax_administration = Math.max(0, Q.tax_administration - 0.002);
 }
 
-Q.income_tax_1 =
+Q.income_tax_base_1 =
 (
     (
         Q.elites *
-        (75 - ((Q.elites_unrest / 10) * (Q.elites_strength / 100))) / 100
+        (75 - ((Q.elites_unrest / 10) * (Q.elites_strength / 100))) / 102
     )
     +
     (
         Q.middle *
-        (6.25 - ((Q.middle_unrest / 10) * (Q.middle_strength / 100))) / 100
+        (6.25 - ((Q.middle_unrest / 10) * (Q.middle_strength / 100))) / 102
     )
-) * Q.income_tax_rate_1;
+);
 
-Q.income_tax_2 =
+Q.income_tax_base_2 =
 (
     (
         Q.elites *
-        (25 - ((Q.elites_unrest / 10) * (Q.elites_strength / 100))) / 400
+        (25 - ((Q.elites_unrest / 10) * (Q.elites_strength / 100))) / 253
     )
     +
     (
         Q.middle *
-        (25 - ((Q.middle_unrest / 10) * (Q.middle_strength / 100))) / 400
+        (25 - ((Q.middle_unrest / 10) * (Q.middle_strength / 100))) / 253
     )
     +
     (
         Q.intelligentsia *
-        (12.5 - ((Q.intelligentsia_unrest / 10) * (Q.intelligentsia_strength / 100))) / 400
+        (12.5 - ((Q.intelligentsia_unrest / 10) * (Q.intelligentsia_strength / 100))) / 253
     )
-) * Q.income_tax_rate_2;
+);
 
-Q.income_tax_3 =
+Q.income_tax_base_3 =
 (
     (
         Q.middle *
-        (68.75 - ((Q.middle_unrest / 10) * (Q.middle_strength / 100))) / 600
+        (68.75 - ((Q.middle_unrest / 10) * (Q.middle_strength / 100))) / 852
     )
     +
     (
         Q.intelligentsia *
-        (50 - ((Q.intelligentsia_unrest / 10) * (Q.intelligentsia_strength / 100))) / 600
+        (50 - ((Q.intelligentsia_unrest / 10) * (Q.intelligentsia_strength / 100))) / 852
     )
     +
     (
         Q.kulaks *
-        (25 - ((Q.kulaks_unrest / 10) * (Q.kulaks_strength / 100))) / 600
+        (25 - ((Q.kulaks_unrest / 10) * (Q.kulaks_strength / 100))) / 852
     )
-) * Q.income_tax_rate_3;
+);
 
-Q.income_tax_4 =
+Q.income_tax_base_4 =
 (
     (
         Q.kulaks *
-        (75 - ((Q.kulaks_unrest / 10) * (Q.kulaks_strength / 100))) / 1000
+        (75 - ((Q.kulaks_unrest / 10) * (Q.kulaks_strength / 100))) / 1709
     )
     +
     (
         Q.workers *
-        (75 - ((Q.workers_unrest / 10) * (Q.workers_strength / 100))) / 1000
+        (75 - ((Q.workers_unrest / 10) * (Q.workers_strength / 100))) / 1709
     )
-) * Q.income_tax_rate_4;
+);
 
-Q.income_tax_5 =
+Q.income_tax_base_5 =
 (
     (
         Q.peasants *
-        (75 - ((Q.peasants_unrest / 10) * (Q.peasants_strength / 100))) / 3000
+        (75 - ((Q.peasants_unrest / 10) * (Q.peasants_strength / 100))) / 28316
     )
     +
     (
         Q.workers *
-        (25 - ((Q.workers_unrest / 10) * (Q.workers_strength / 100))) / 3000
+        (25 - ((Q.workers_unrest / 10) * (Q.workers_strength / 100))) / 28316
     )
-) * Q.income_tax_rate_5;
-
-
-Q.income_tax =
-(
-    Q.income_tax_1
-    + Q.income_tax_2
-    + Q.income_tax_3
-    + Q.income_tax_4
-    + Q.income_tax_5
-)
-*
-(
-    ((Q.income_tax_efficacy / 4 * 3) + (Q.finalefficacy_finance / 4))
 );
+
+
+// harder brackets need far stronger tax administration to collect
+var income_collection = (Q.income_tax_efficacy / 4 * 3) + (Q.finalefficacy_finance / 4);
+var bracket_difficulty = [0.6, 0.85, 1.1, 1.5, 2.5];
+Q.income_tax_base_5 *= Math.min(1.5, Math.max(0.25, Q.food_sold / 0.135));
+Q.income_tax = 0;
+for (var bracket = 1; bracket <= 5; bracket++) {
+    var reach = Math.pow(Math.min(1, Math.max(0, income_collection)), bracket_difficulty[bracket - 1]);
+    Q['income_tax_collection_' + bracket] = reach;
+    Q['income_tax_yield_' + bracket] = Q['income_tax_base_' + bracket] * reach;
+    Q['income_tax_' + bracket] = Q['income_tax_yield_' + bracket] * Q['income_tax_rate_' + bracket];
+    Q.income_tax += Q['income_tax_' + bracket];
+}
 
 
 Q.property_tax =
@@ -1675,11 +1675,6 @@ Q.business_tax_rate
 );
 
 // revenue per point of rate, for the estimates on the finance page
-for (var bracket = 1; bracket <= 5; bracket++) {
-    if (Q['income_tax_rate_' + bracket] > 0) {
-        Q['income_tax_yield_' + bracket] = Q['income_tax_' + bracket] / Q['income_tax_rate_' + bracket];
-    }
-}
 if (Q.wealth_tax_rate > 0) Q.property_tax_yield = Q.property_tax / Q.wealth_tax_rate;
 if (Q.business_tax_rate > 0) Q.business_tax_yield = Q.business_tax / Q.business_tax_rate;
 if (Q.syndicate_levy_rate > 0) Q.syndicate_levy_yield = Q.syndicate_levy / Q.syndicate_levy_rate;
