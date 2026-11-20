@@ -428,7 +428,7 @@ Q.income_tax_rate_1 = 1.5;
 Q.income_tax_rate_2 = 1.25;
 Q.income_tax_rate_3 = 1;
 Q.income_tax_rate_4 = 0.75;
-Q.income_tax_rate_5 = 0.5;
+Q.income_tax_rate_5 = 0;
 Q.wealth_tax_rate = 1;
 Q.business_tax_rate = 1;
 // percent of syndicalized profit taken by the state
