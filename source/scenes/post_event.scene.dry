@@ -15,7 +15,6 @@ for (var c of Q.classes) {
 
 
 // LEADERS
-
 Q.leaders = {};
 // Bolsheviks
 Q.leaders.None = { auctoritas: 1, administration: 1, idealogism: 1, military: 1, economic: 1, partyorg: 1, diplomacy: 1, culture: 1, legalism: 1, nationalities: 1, sex: "male", ethnicity: "Russian", special: "no" };
